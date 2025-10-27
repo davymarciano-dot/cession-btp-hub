@@ -21,13 +21,13 @@ const Header = () => {
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-8">
-            <Link to="/" className="text-foreground hover:text-primary font-medium transition-colors">
+            <Link to="/vendre" className="text-foreground hover:text-primary font-medium transition-colors">
               Vendre
             </Link>
-            <Link to="/" className="text-foreground hover:text-primary font-medium transition-colors">
+            <Link to="/acheter" className="text-foreground hover:text-primary font-medium transition-colors">
               Acheter
             </Link>
-            <Link to="/" className="text-foreground hover:text-primary font-medium transition-colors">
+            <Link to="/entreprises" className="text-foreground hover:text-primary font-medium transition-colors">
               Entreprises
             </Link>
             <Link to="/" className="text-foreground hover:text-primary font-medium transition-colors">
@@ -60,13 +60,13 @@ const Header = () => {
         {/* Mobile Menu */}
         {mobileMenuOpen && (
           <div className="md:hidden mt-4 pb-4 space-y-4">
-            <Link to="/" className="block text-foreground hover:text-primary font-medium transition-colors">
+            <Link to="/vendre" className="block text-foreground hover:text-primary font-medium transition-colors">
               Vendre
             </Link>
-            <Link to="/" className="block text-foreground hover:text-primary font-medium transition-colors">
+            <Link to="/acheter" className="block text-foreground hover:text-primary font-medium transition-colors">
               Acheter
             </Link>
-            <Link to="/" className="block text-foreground hover:text-primary font-medium transition-colors">
+            <Link to="/entreprises" className="block text-foreground hover:text-primary font-medium transition-colors">
               Entreprises
             </Link>
             <Link to="/" className="block text-foreground hover:text-primary font-medium transition-colors">
