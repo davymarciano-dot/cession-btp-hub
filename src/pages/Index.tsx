@@ -1,12 +1,20 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Badge } from "@/components/ui/badge";
 import { Check } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import EntrepriseCard from "@/components/EntrepriseCard";
 import StatCounter from "@/components/StatCounter";
+import PricingCard from "@/components/PricingCard";
+import ComparisonTable from "@/components/ComparisonTable";
+import SuccessFeeSection from "@/components/SuccessFeeSection";
+import ProcessTimeline from "@/components/ProcessTimeline";
+import TestimonialSection from "@/components/TestimonialSection";
+import NewsletterSection from "@/components/NewsletterSection";
+import SecurityBadges from "@/components/SecurityBadges";
 
 const Index = () => {
   const navigate = useNavigate();
@@ -47,11 +55,14 @@ const Index = () => {
         <section className="bg-gradient-to-br from-blue-600 to-blue-700 text-white py-24 relative overflow-hidden">
           <div className="container mx-auto px-4">
             <div className="max-w-4xl mx-auto text-center">
+              <Badge className="bg-red-500 text-white mb-6 text-sm px-4 py-2">
+                🔴 LIVE - Entreprise d'Électricité vendue pour €1.2M à Nice (06) Il y a 6h
+              </Badge>
               <h1 className="text-5xl md:text-6xl font-bold mb-6">
-                La Plateforme N°1 pour Céder ou Reprendre une Entreprise BTP
+                Cédez ou Reprenez une Entreprise BTP en 45 Jours
               </h1>
               <p className="text-xl mb-8 text-white/90">
-                Matching IA • 95% de satisfaction • 2% de commission uniquement
+                Matching IA • 500+ Transactions • 95% Satisfaction • Success Fee 2%
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
@@ -196,10 +207,167 @@ const Index = () => {
           </div>
         </section>
 
+        {/* Buyer Subscriptions */}
+        <section className="py-20 bg-white">
+          <div className="container mx-auto px-4">
+            <div className="text-center mb-12">
+              <div className="text-6xl mb-4">🔍</div>
+              <h2 className="text-3xl font-bold mb-4">Abonnements Acheteurs</h2>
+              <p className="text-xl text-muted-foreground">
+                Accédez aux meilleures opportunités d'acquisition BTP
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
+              <PricingCard
+                title="Gratuit"
+                price="0€"
+                description="Consultation - Cible : 50 000€ - CA : 0"
+                features={[
+                  "Consultation des annonces",
+                  "Recherche basique",
+                  "Interface acheteur",
+                  "Inscription gratuite"
+                ]}
+                buttonText="S'inscrire gratuitement"
+              />
+              
+              <PricingCard
+                title="Contact"
+                price="49€"
+                period="/5 contacts"
+                description="Messages directs - Cible : 10 000€ - CA : 2,5M"
+                features={[
+                  "5 contacts directs",
+                  "Messages dirigés vers vendeurs",
+                  "Coordonnées complètes",
+                  "Historique des échanges",
+                  "Accès prioritaire"
+                ]}
+                buttonText="Acheter des contacts"
+              />
+              
+              <PricingCard
+                title="Pro"
+                price="99€"
+                period="/mois"
+                description="Illimité + alertes - Cible : 5 000€ - CA : 6M"
+                features={[
+                  "Contacts ILLIMITÉS",
+                  "Alertes personnalisées",
+                  "Coordonnées complètes",
+                  "Badge 'Acheteur Vérifié'",
+                  "Support prioritaire"
+                ]}
+                buttonText="Choisir Pro"
+                isPopular
+                variant="primary"
+              />
+              
+              <PricingCard
+                title="Entreprise"
+                price="299€"
+                period="/mois"
+                description="Multi-utilisateurs + API - Cible : 500€ - CA : 1,8M"
+                features={[
+                  "Accès multi-utilisateurs",
+                  "API d'intégration",
+                  "Rapports avancés",
+                  "Gestionnaire dédié",
+                  "Formation équipe"
+                ]}
+                buttonText="Choisir Entreprise"
+              />
+            </div>
+          </div>
+        </section>
+
+        {/* Comparison Table */}
+        <ComparisonTable />
+
+        {/* Seller Subscriptions */}
+        <section className="py-20 bg-white">
+          <div className="container mx-auto px-4">
+            <div className="text-center mb-12">
+              <div className="text-6xl mb-4">🏗️</div>
+              <h2 className="text-3xl font-bold mb-4">Abonnements Vendeurs</h2>
+              <p className="text-xl text-muted-foreground">
+                Choisissez la formule adaptée à vos besoins de transmission
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
+              <PricingCard
+                title="Découverte"
+                price="Gratuit"
+                period="30j"
+                description="Évaluation + 10 vues - Cible : 10 000€ - CA : 0"
+                features={[
+                  "Évaluation incluse",
+                  "10 vues d'annonce",
+                  "Interface spécialisée BTP",
+                  "Expert en soutien métier"
+                ]}
+                buttonText="Commencer gratuitement"
+              />
+              
+              <PricingCard
+                title="Essentiel"
+                price="290€"
+                period="/3 mois"
+                description="Annonce simple - Cible : 5 000€ - CA : 5,9M"
+                features={[
+                  "Annonce simple optimisée",
+                  "Contacts qualifiés BTP",
+                  "Interface professionnelle",
+                  "Expert en soutien",
+                  "Réseau artisans entrepreneurs"
+                ]}
+                buttonText="Choisir Essentiel"
+                isPopular
+                variant="primary"
+              />
+              
+              <PricingCard
+                title="Prime"
+                price="490€"
+                period="/3 mois"
+                description="Mise en avant + stats - Cible : 2 000€ - CA : 3,9M"
+                features={[
+                  "Mise en avant prioritaire",
+                  "Statistiques détaillées",
+                  "Valorisation BTP incluse",
+                  "Accompagnement expert dédié",
+                  "Vendez 2x plus vite"
+                ]}
+                buttonText="Choisir Premium"
+              />
+              
+              <PricingCard
+                title="Exclusif"
+                price="990€"
+                period="/3 mois"
+                description="Top position + agent - Cible : 500€ - CA : 2M"
+                features={[
+                  "Position top garantie",
+                  "Agent dédié personnel",
+                  "Mémorandum professionnel",
+                  "Garantie mise en relation",
+                  "Conciergerie complète"
+                ]}
+                buttonText="Choisir Exclusif"
+              />
+            </div>
+          </div>
+        </section>
+
         {/* Value Proposition */}
         <section className="py-20 bg-slate-50">
           <div className="container mx-auto px-4">
-            <h2 className="text-3xl font-bold text-center mb-12">Pourquoi Choisir CessionBTP</h2>
+            <h2 className="text-3xl font-bold text-center mb-4">Pourquoi Choisir CessionBTP</h2>
+            <p className="text-xl text-muted-foreground text-center mb-12">
+              La plateforme la plus complète pour vendre ou acheter une entreprise BTP
+            </p>
             
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
               <div className="bg-white p-8 rounded-xl shadow-lg text-center hover:shadow-xl transition-all duration-300">
@@ -237,58 +405,11 @@ const Index = () => {
           </div>
         </section>
 
+        {/* Success Fee Section */}
+        <SuccessFeeSection />
+
         {/* Process Timeline */}
-        <section className="py-20 bg-white">
-          <div className="container mx-auto px-4">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold mb-4">Comment ça Marche</h2>
-              <p className="text-xl text-muted-foreground">
-                Un processus simple en 3 étapes
-              </p>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-12 max-w-5xl mx-auto">
-              <div className="text-center">
-                <div className="w-20 h-20 bg-primary text-white rounded-full flex items-center justify-center text-3xl font-bold mx-auto mb-4">
-                  1
-                </div>
-                <div className="inline-block bg-secondary text-white px-4 py-1 rounded-full text-sm font-semibold mb-4">
-                  48h
-                </div>
-                <h3 className="text-xl font-bold mb-3">Valorisation Gratuite</h3>
-                <p className="text-muted-foreground">
-                  Obtenez une estimation précise de votre entreprise en 48h par nos experts BTP
-                </p>
-              </div>
-
-              <div className="text-center">
-                <div className="w-20 h-20 bg-primary text-white rounded-full flex items-center justify-center text-3xl font-bold mx-auto mb-4">
-                  2
-                </div>
-                <div className="inline-block bg-secondary text-white px-4 py-1 rounded-full text-sm font-semibold mb-4">
-                  1 semaine
-                </div>
-                <h3 className="text-xl font-bold mb-3">Mise en Relation</h3>
-                <p className="text-muted-foreground">
-                  Notre IA identifie les repreneurs parfaits parmi 2000+ acheteurs qualifiés
-                </p>
-              </div>
-
-              <div className="text-center">
-                <div className="w-20 h-20 bg-primary text-white rounded-full flex items-center justify-center text-3xl font-bold mx-auto mb-4">
-                  3
-                </div>
-                <div className="inline-block bg-secondary text-white px-4 py-1 rounded-full text-sm font-semibold mb-4">
-                  1 semaine
-                </div>
-                <h3 className="text-xl font-bold mb-3">Closing Sécurisé</h3>
-                <p className="text-muted-foreground">
-                  Finalisation juridique et transfert avec nos avocats spécialisés
-                </p>
-              </div>
-            </div>
-          </div>
-        </section>
+        <ProcessTimeline />
 
         {/* Social Proof */}
         <section className="py-20 bg-primary text-white">
@@ -301,6 +422,9 @@ const Index = () => {
             </div>
           </div>
         </section>
+
+        {/* Testimonials */}
+        <TestimonialSection />
 
         {/* Final CTA */}
         <section className="py-24 bg-gradient-to-br from-primary to-blue-700 text-white">
@@ -320,7 +444,12 @@ const Index = () => {
             </Button>
           </div>
         </section>
+
+        {/* Newsletter */}
+        <NewsletterSection />
       </main>
+
+      <SecurityBadges />
 
       <Footer />
     </div>
