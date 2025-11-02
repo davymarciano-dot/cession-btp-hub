@@ -6,6 +6,7 @@ import { Filter } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import EntrepriseCard from "@/components/EntrepriseCard";
+import { BTPMetiersSelect } from "@/data/btp-metiers";
 
 const Entreprises = () => {
   const [showFilters, setShowFilters] = useState(true);
@@ -44,38 +45,8 @@ const Entreprises = () => {
                       <SelectTrigger>
                         <SelectValue placeholder="Tous les secteurs" />
                       </SelectTrigger>
-                      <SelectContent className="max-h-[300px] overflow-y-auto">
-                        <SelectItem value="all">Tous les secteurs</SelectItem>
-                        <SelectItem value="plomberie">Plomberie</SelectItem>
-                        <SelectItem value="electricite">Électricité</SelectItem>
-                        <SelectItem value="maconnerie">Maçonnerie</SelectItem>
-                        <SelectItem value="chauffage">Chauffage & Climatisation</SelectItem>
-                        <SelectItem value="couverture">Couverture-Zinguerie</SelectItem>
-                        <SelectItem value="peinture">Peinture & Revêtements</SelectItem>
-                        <SelectItem value="menuiserie-bois">Menuiserie Bois</SelectItem>
-                        <SelectItem value="menuiserie-alu">Menuiserie Aluminium/PVC</SelectItem>
-                        <SelectItem value="isolation">Isolation Thermique</SelectItem>
-                        <SelectItem value="charpente">Charpente</SelectItem>
-                        <SelectItem value="carrelage">Carrelage</SelectItem>
-                        <SelectItem value="platerie">Plâtrerie & Cloisons sèches</SelectItem>
-                        <SelectItem value="facade">Façadier</SelectItem>
-                        <SelectItem value="etancheite">Étanchéité</SelectItem>
-                        <SelectItem value="terrassement">Terrassement & VRD</SelectItem>
-                        <SelectItem value="genie-civil">Génie Civil</SelectItem>
-                        <SelectItem value="demolition">Démolition</SelectItem>
-                        <SelectItem value="echafaudage">Échafaudage</SelectItem>
-                        <SelectItem value="nettoyage">Nettoyage de Chantier</SelectItem>
-                        <SelectItem value="metallerie">Métallerie & Serrurerie</SelectItem>
-                        <SelectItem value="parquets">Parquets</SelectItem>
-                        <SelectItem value="paysagisme">Espaces Verts & Paysagisme</SelectItem>
-                        <SelectItem value="assainissement">Assainissement</SelectItem>
-                        <SelectItem value="climatisation">Climatisation</SelectItem>
-                        <SelectItem value="pompes-chaleur">Pompes à Chaleur</SelectItem>
-                        <SelectItem value="photovoltaique">Panneaux Solaires / Photovoltaïque</SelectItem>
-                        <SelectItem value="amenagement">Aménagement Intérieur</SelectItem>
-                        <SelectItem value="renovation-energetique">Rénovation Énergétique</SelectItem>
-                        <SelectItem value="ascenseurs">Ascenseurs & Monte-charges</SelectItem>
-                        <SelectItem value="egb">Entreprise Générale du Bâtiment</SelectItem>
+                      <SelectContent className="max-h-[400px] overflow-y-auto">
+                        <BTPMetiersSelect />
                       </SelectContent>
                     </Select>
                   </div>
