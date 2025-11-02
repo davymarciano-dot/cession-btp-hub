@@ -1,18 +1,18 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Select, SelectContent, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Badge } from "@/components/ui/badge";
 import { Check, DollarSign, Users, Lock, Scale, TrendingUp, Award } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import PricingCard from "@/components/PricingCard";
 import ProcessStep from "@/components/ProcessStep";
-import { BTPMetiersSelect } from "@/data/btp-metiers";
 import { DepartementsSelect } from "@/data/departements";
 import EstimationDialog from "@/components/EstimationDialog";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
+import { SearchableSelect } from "@/components/SearchableSelect";
 
 const Vendre = () => {
   const [ca, setCa] = useState("");
@@ -98,14 +98,12 @@ const Vendre = () => {
                     value={ca}
                     onChange={(e) => setCa(e.target.value)}
                   />
-                  <Select value={secteur} onValueChange={setSecteur}>
-                    <SelectTrigger className="text-foreground">
-                      <SelectValue placeholder="Secteur d'activité" />
-                    </SelectTrigger>
-                    <SelectContent className="max-h-[400px] overflow-y-auto">
-                      <BTPMetiersSelect />
-                    </SelectContent>
-                  </Select>
+                  <SearchableSelect
+                    value={secteur}
+                    onValueChange={setSecteur}
+                    placeholder="Secteur d'activité"
+                    className="text-foreground"
+                  />
                   <Select value={departement} onValueChange={setDepartement}>
                     <SelectTrigger className="text-foreground">
                       <SelectValue placeholder="Département" />
