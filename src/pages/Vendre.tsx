@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
@@ -9,8 +10,67 @@ import PricingCard from "@/components/PricingCard";
 import ProcessStep from "@/components/ProcessStep";
 import { BTPMetiersSelect } from "@/data/btp-metiers";
 import { DepartementsSelect } from "@/data/departements";
+import EstimationDialog from "@/components/EstimationDialog";
+import { supabase } from "@/integrations/supabase/client";
+import { useToast } from "@/hooks/use-toast";
 
 const Vendre = () => {
+  const [ca, setCa] = useState("");
+  const [secteur, setSecteur] = useState("");
+  const [departement, setDepartement] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const [estimation, setEstimation] = useState<any>(null);
+  const [showDialog, setShowDialog] = useState(false);
+  const { toast } = useToast();
+
+  const handleEstimation = async () => {
+    // Validation
+    if (!ca || !secteur || !departement) {
+      toast({
+        title: "Informations manquantes",
+        description: "Veuillez remplir tous les champs du formulaire.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    const caNumber = parseInt(ca);
+    if (isNaN(caNumber) || caNumber <= 0) {
+      toast({
+        title: "Chiffre d'affaires invalide",
+        description: "Veuillez entrer un chiffre d'affaires valide.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    setIsLoading(true);
+    setShowDialog(true);
+
+    try {
+      const { data, error } = await supabase.functions.invoke('estimate-company', {
+        body: { ca: caNumber, secteur, departement }
+      });
+
+      if (error) throw error;
+
+      setEstimation(data);
+      toast({
+        title: "Estimation générée !",
+        description: "Votre estimation de valorisation est prête.",
+      });
+    } catch (error: any) {
+      console.error("Estimation error:", error);
+      toast({
+        title: "Erreur",
+        description: error.message || "Une erreur est survenue lors de l'estimation.",
+        variant: "destructive",
+      });
+      setShowDialog(false);
+    } finally {
+      setIsLoading(false);
+    }
+  };
   return (
     <div className="min-h-screen">
       <Header />
@@ -35,8 +95,10 @@ const Vendre = () => {
                     type="number" 
                     placeholder="CA annuel (€)" 
                     className="text-foreground"
+                    value={ca}
+                    onChange={(e) => setCa(e.target.value)}
                   />
-                  <Select>
+                  <Select value={secteur} onValueChange={setSecteur}>
                     <SelectTrigger className="text-foreground">
                       <SelectValue placeholder="Secteur d'activité" />
                     </SelectTrigger>
@@ -44,7 +106,7 @@ const Vendre = () => {
                       <BTPMetiersSelect />
                     </SelectContent>
                   </Select>
-                  <Select>
+                  <Select value={departement} onValueChange={setDepartement}>
                     <SelectTrigger className="text-foreground">
                       <SelectValue placeholder="Département" />
                     </SelectTrigger>
@@ -53,13 +115,24 @@ const Vendre = () => {
                     </SelectContent>
                   </Select>
                 </div>
-                <Button className="w-full bg-primary hover:bg-primary/90 text-white text-lg py-6">
-                  Obtenir mon estimation gratuite
+                <Button 
+                  className="w-full bg-primary hover:bg-primary/90 text-white text-lg py-6"
+                  onClick={handleEstimation}
+                  disabled={isLoading}
+                >
+                  {isLoading ? "Génération en cours..." : "Obtenir mon estimation gratuite"}
                 </Button>
                 <p className="text-sm text-muted-foreground text-center mt-4">
-                  ✅ Résultat en 48h • Sans engagement • 100% confidentiel
+                  ✅ Résultat immédiat par IA • Sans engagement • 100% confidentiel
                 </p>
               </div>
+
+              <EstimationDialog 
+                open={showDialog}
+                onOpenChange={setShowDialog}
+                estimation={estimation}
+                isLoading={isLoading}
+              />
             </div>
           </div>
         </section>

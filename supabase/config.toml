@@ -1,0 +1,4 @@
+project_id = "xfxfblhxdlzivowodpeg"
+
+[functions.estimate-company]
+verify_jwt = false
