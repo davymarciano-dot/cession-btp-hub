@@ -1,7 +1,34 @@
-import { useState, useMemo } from "react";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Input } from "@/components/ui/input";
-import { BTPMetiersSelect } from "@/data/btp-metiers";
+import { useState } from "react";
+import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem } from "@/components/ui/command";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import { Button } from "@/components/ui/button";
+import { Check, ChevronsUpDown } from "lucide-react";
+import { cn } from "@/lib/utils";
+
+// Data des secteurs BTP
+const btpSecteurs = [
+  // ÉLECTRICITÉ
+  { value: "electricien-installation", label: "Électricien d'installation du bâtiment", category: "ÉLECTRICITÉ" },
+  { value: "electricien-equipement", label: "Électricien d'équipement", category: "ÉLECTRICITÉ" },
+  { value: "electricien-piscines", label: "Électricien de piscines", category: "ÉLECTRICITÉ" },
+  { value: "plombier", label: "Plombier", category: "PLOMBERIE" },
+  { value: "plombier-chauffagiste", label: "Plombier-chauffagiste", category: "PLOMBERIE" },
+  { value: "chauffagiste", label: "Chauffagiste", category: "CHAUFFAGE" },
+  { value: "installateur-chauffage", label: "Installateur en chauffage", category: "CHAUFFAGE" },
+  { value: "climaticien", label: "Climaticien", category: "CLIMATISATION" },
+  { value: "installateur-climatisation", label: "Installateur de climatisation", category: "CLIMATISATION" },
+  { value: "macon", label: "Maçon", category: "MAÇONNERIE" },
+  { value: "macon-vrd", label: "Maçon VRD", category: "MAÇONNERIE" },
+  { value: "menuisier", label: "Menuisier", category: "MENUISERIE" },
+  { value: "menuisier-poseur", label: "Menuisier poseur", category: "MENUISERIE" },
+  { value: "couvreur", label: "Couvreur", category: "COUVERTURE" },
+  { value: "couvreur-zingueur", label: "Couvreur-zingueur", category: "COUVERTURE" },
+  { value: "peintre", label: "Peintre en bâtiment", category: "PEINTURE" },
+  { value: "platrier", label: "Plâtrier", category: "PLÂTRERIE" },
+  { value: "carreleur", label: "Carreleur", category: "CARRELAGE" },
+  { value: "parqueteur", label: "Parqueteur", category: "SOL" },
+  { value: "terrassier", label: "Terrassier", category: "TERRASSEMENT" },
+];
 
 interface SearchableSelectProps {
   value: string;
@@ -11,84 +38,49 @@ interface SearchableSelectProps {
 }
 
 export const SearchableSelect = ({ value, onValueChange, placeholder, className }: SearchableSelectProps) => {
-  const [search, setSearch] = useState("");
+  const [open, setOpen] = useState(false);
 
   return (
-    <Select value={value} onValueChange={onValueChange}>
-      <SelectTrigger className={className}>
-        <SelectValue placeholder={placeholder} />
-      </SelectTrigger>
-      <SelectContent className="max-h-[400px]">
-        <div className="sticky top-0 z-10 bg-background p-2 border-b">
-          <Input
-            placeholder="Rechercher un secteur..."
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-            className="h-8"
-            onClick={(e) => e.stopPropagation()}
-          />
-        </div>
-        <div className="overflow-y-auto max-h-[340px]">
-          <FilteredBTPMetiers search={search} />
-        </div>
-      </SelectContent>
-    </Select>
-  );
-};
-
-const FilteredBTPMetiers = ({ search }: { search: string }) => {
-  // Get all items from BTPMetiersSelect
-  const allItems = useMemo(() => {
-    const items: Array<{ value: string; label: string; disabled?: boolean }> = [];
-    const extractItems = (element: any): void => {
-      if (!element) return;
-      
-      if (Array.isArray(element)) {
-        element.forEach(extractItems);
-      } else if (element.type === SelectItem) {
-        items.push({
-          value: element.props.value,
-          label: element.props.children,
-          disabled: element.props.disabled
-        });
-      } else if (element.props?.children) {
-        if (Array.isArray(element.props.children)) {
-          element.props.children.forEach(extractItems);
-        } else {
-          extractItems(element.props.children);
-        }
-      }
-    };
-    
-    const btpElement = <BTPMetiersSelect />;
-    extractItems(btpElement);
-    return items;
-  }, []);
-
-  const filteredItems = useMemo(() => {
-    if (!search.trim()) return allItems;
-    
-    const searchLower = search.toLowerCase();
-    return allItems.filter(item => 
-      !item.disabled && item.label.toLowerCase().includes(searchLower)
-    );
-  }, [search, allItems]);
-
-  if (filteredItems.length === 0) {
-    return (
-      <div className="p-4 text-center text-muted-foreground text-sm">
-        Aucun secteur trouvé
-      </div>
-    );
-  }
-
-  return (
-    <>
-      {filteredItems.map(item => (
-        <SelectItem key={item.value} value={item.value} disabled={item.disabled}>
-          {item.label}
-        </SelectItem>
-      ))}
-    </>
+    <Popover open={open} onOpenChange={setOpen}>
+      <PopoverTrigger asChild>
+        <Button
+          variant="outline"
+          role="combobox"
+          aria-expanded={open}
+          className={cn("justify-between", className)}
+        >
+          {value
+            ? btpSecteurs.find((secteur) => secteur.value === value)?.label
+            : placeholder}
+          <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+        </Button>
+      </PopoverTrigger>
+      <PopoverContent className="w-[400px] p-0">
+        <Command>
+          <CommandInput placeholder="Rechercher un secteur..." />
+          <CommandEmpty>Aucun secteur trouvé.</CommandEmpty>
+          <CommandGroup className="max-h-[300px] overflow-y-auto">
+            {btpSecteurs.map((secteur) => (
+              <CommandItem
+                key={secteur.value}
+                value={secteur.value}
+                onSelect={(currentValue) => {
+                  onValueChange(currentValue === value ? "" : currentValue);
+                  setOpen(false);
+                }}
+              >
+                <Check
+                  className={cn(
+                    "mr-2 h-4 w-4",
+                    value === secteur.value ? "opacity-100" : "opacity-0"
+                  )}
+                />
+                {secteur.label}
+              </CommandItem>
+            ))}
+          </CommandGroup>
+        </Command>
+      </PopoverContent>
+    </Popover>
   );
 };
