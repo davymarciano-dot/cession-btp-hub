@@ -8,6 +8,7 @@ import Footer from "@/components/Footer";
 import PricingCard from "@/components/PricingCard";
 import ProcessStep from "@/components/ProcessStep";
 import { BTPMetiersSelect } from "@/data/btp-metiers";
+import { DepartementsSelect } from "@/data/departements";
 
 const Vendre = () => {
   return (
@@ -47,14 +48,8 @@ const Vendre = () => {
                     <SelectTrigger className="text-foreground">
                       <SelectValue placeholder="Département" />
                     </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="06">06 - Alpes-Maritimes</SelectItem>
-                      <SelectItem value="13">13 - Bouches-du-Rhône</SelectItem>
-                      <SelectItem value="31">31 - Haute-Garonne</SelectItem>
-                      <SelectItem value="33">33 - Gironde</SelectItem>
-                      <SelectItem value="59">59 - Nord</SelectItem>
-                      <SelectItem value="69">69 - Rhône</SelectItem>
-                      <SelectItem value="75">75 - Paris</SelectItem>
+                    <SelectContent className="max-h-[400px] overflow-y-auto">
+                      <DepartementsSelect />
                     </SelectContent>
                   </Select>
                 </div>
