@@ -12,6 +12,7 @@ import {
   Building2, MapPin, Calendar, TrendingUp, Users, Euro,
   Award, FileText, Phone, Mail, ArrowLeft, Eye, Loader2, MessageCircle
 } from "lucide-react";
+import { exempleAnnonces } from "@/data/exemple-annonces";
 
 const AnnonceDetail = () => {
   const { id } = useParams();
@@ -26,7 +27,9 @@ const AnnonceDetail = () => {
     checkUser();
     if (id) {
       fetchAnnonce();
-      incrementVues();
+      if (!id.startsWith("exemple-")) {
+        incrementVues();
+      }
     }
   }, [id]);
 
@@ -37,6 +40,17 @@ const AnnonceDetail = () => {
 
   const fetchAnnonce = async () => {
     try {
+      // Check if it's an example annonce
+      if (id && id.startsWith("exemple-")) {
+        const exampleData = exempleAnnonces[id];
+        if (exampleData) {
+          setAnnonce(exampleData);
+          setIsLoading(false);
+          return;
+        }
+      }
+
+      // Otherwise fetch from Supabase
       const { data, error } = await supabase
         .from('annonces')
         .select('*')
@@ -78,6 +92,16 @@ const AnnonceDetail = () => {
   };
 
   const handleContact = async () => {
+    // Pour les annonces d'exemple, rediriger vers l'inscription
+    if (id && id.startsWith("exemple-")) {
+      toast({
+        title: "Annonce d'exemple",
+        description: "Ceci est une annonce de démonstration. Créez un compte pour voir les vraies annonces.",
+      });
+      navigate("/auth");
+      return;
+    }
+
     if (!user) {
       toast({
         title: "Connexion requise",
