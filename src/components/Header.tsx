@@ -30,6 +30,9 @@ const Header = () => {
             <Link to="/entreprises" className="text-foreground hover:text-primary font-medium transition-colors">
               Entreprises
             </Link>
+            <Link to="/estimer" className="text-foreground hover:text-primary font-medium transition-colors">
+              Estimer
+            </Link>
             <Link to="/tarifs" className="text-foreground hover:text-primary font-medium transition-colors">
               Tarifs
             </Link>
@@ -49,7 +52,7 @@ const Header = () => {
             </Button>
             <Button 
               className="bg-secondary hover:bg-secondary/90 text-white"
-              onClick={() => window.location.href = '/vendre'}
+              onClick={() => window.location.href = '/estimer'}
             >
               Estimer Gratuitement
             </Button>
@@ -76,6 +79,9 @@ const Header = () => {
             <Link to="/entreprises" className="block text-foreground hover:text-primary font-medium transition-colors">
               Entreprises
             </Link>
+            <Link to="/estimer" className="block text-foreground hover:text-primary font-medium transition-colors">
+              Estimer
+            </Link>
             <Link to="/tarifs" className="block text-foreground hover:text-primary font-medium transition-colors">
               Tarifs
             </Link>
@@ -92,7 +98,7 @@ const Header = () => {
               </Button>
               <Button 
                 className="w-full bg-secondary hover:bg-secondary/90 text-white"
-                onClick={() => window.location.href = '/vendre'}
+                onClick={() => window.location.href = '/estimer'}
               >
                 Estimer Gratuitement
               </Button>

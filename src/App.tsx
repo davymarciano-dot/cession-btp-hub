@@ -7,6 +7,7 @@ import Index from "./pages/Index";
 import Vendre from "./pages/Vendre";
 import Acheter from "./pages/Acheter";
 import Entreprises from "./pages/Entreprises";
+import Estimer from "./pages/Estimer";
 import Auth from "./pages/Auth";
 import Tarifs from "./pages/Tarifs";
 import Ressources from "./pages/Ressources";
@@ -25,6 +26,7 @@ const App = () => (
           <Route path="/vendre" element={<Vendre />} />
           <Route path="/acheter" element={<Acheter />} />
           <Route path="/entreprises" element={<Entreprises />} />
+          <Route path="/estimer" element={<Estimer />} />
           <Route path="/auth" element={<Auth />} />
           <Route path="/tarifs" element={<Tarifs />} />
           <Route path="/ressources" element={<Ressources />} />
