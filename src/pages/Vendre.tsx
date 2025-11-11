@@ -71,7 +71,7 @@ const Vendre = () => {
     accompagnementVendeur: false,
     dureeAccompagnement: "",
     
-    // Section 6
+    // Section 6-14 (placeholders)
     situationLocaux: "locataire",
     loyerMensuel: "",
     dureeBail: "",
@@ -88,8 +88,6 @@ const Vendre = () => {
     valeurPortefeuille: "",
     contratsEnCours: "",
     marqueDeposee: false,
-    
-    // Section 7
     dettesTotales: "",
     detteURSSAF: "",
     detteTVA: "",
@@ -100,44 +98,30 @@ const Vendre = () => {
     creditsTransferables: false,
     litigesEnCours: false,
     natureLitiges: "",
-    
-    // Section 8
     motifVente: "",
     precisionsVente: "",
-    
-    // Section 9
     atoutsPrincipaux: "",
     potentielDeveloppement: "",
     clienteleFidelePct: "",
     reputationLocale: 3,
     presenceDigitale: [],
     elementsDifferenciants: "",
-    
-    // Section 10
     typeTransmission: "",
     accompagnementPropose: {},
     delaiVente: "",
     conditionsParticulieres: "",
-    
-    // Section 11
     niveauAnonymat: "semi-anonyme",
     documentsDisponibles: [],
     ndaRequis: false,
-    
-    // Section 12
     photosEntreprise: [],
     photosMateriel: [],
     photosRealisations: [],
     videoPresentation: "",
-    
-    // Section 13
     financementBancaire: "oui",
     complementVendeur: false,
     complementVendeurMontant: "",
     complementVendeurDuree: "",
     apportRequis: "",
-    
-    // Section 14
     infosComplementaires: "",
     commentairesAcheteurs: "",
     visitesPossibles: "sur-rdv",
@@ -145,6 +129,7 @@ const Vendre = () => {
     // Section 15
     formuleAbonnement: "essentiel",
     montantAbonnement: 290,
+    stripePriceId: "price_1SS7lN2ItaOC3ukRjM2C8ZTd",
     accepteCGU: false,
     accepteContact: false,
     certifieExactitude: false,
@@ -195,7 +180,7 @@ const Vendre = () => {
         return;
       }
 
-      // Calculer la date d'expiration basée sur la formule choisie
+      // Calculer la date d'expiration
       const dureeMap: Record<string, number> = {
         "decouverte": 30,
         "essentiel": 90,
@@ -206,7 +191,7 @@ const Vendre = () => {
       const dateExpiration = new Date();
       dateExpiration.setDate(dateExpiration.getDate() + dureeDays);
 
-      // Préparer les données pour la base de données
+      // Préparer les données
       const annonceData = {
         user_id: user.id,
         civilite: formData.civilite,
@@ -218,11 +203,11 @@ const Vendre = () => {
         forme_juridique: formData.formeJuridique,
         siret: formData.siret || null,
         secteur_activite: formData.secteurActivite,
-        annee_creation: parseInt(formData.anneeCreation),
+        annee_creation: parseInt(formData.anneeCreation) || 2020,
         departement: formData.departement,
         ville: formData.ville,
         code_postal: formData.codePostal,
-        description_activite: formData.descriptionActivite,
+        description_activite: formData.descriptionActivite || "Description à compléter",
         specialites: formData.specialites ? [formData.specialites] : null,
         certifications: formData.certifications.length > 0 ? formData.certifications : null,
         type_clientele: {
@@ -237,14 +222,14 @@ const Vendre = () => {
         },
         ca_n3: formData.caN3 ? parseFloat(formData.caN3) : null,
         ca_n2: formData.caN2 ? parseFloat(formData.caN2) : null,
-        ca_n1: parseFloat(formData.caN1),
+        ca_n1: parseFloat(formData.caN1) || 0,
         ca_previsionnel: formData.caPrevisionnel ? parseFloat(formData.caPrevisionnel) : null,
         ebe_n1: formData.ebeN1 ? parseFloat(formData.ebeN1) : null,
-        resultat_net_n1: parseFloat(formData.resultatNetN1),
-        prix_vente: parseFloat(formData.prixVente),
+        resultat_net_n1: parseFloat(formData.resultatNetN1) || 0,
+        prix_vente: parseFloat(formData.prixVente) || 0,
         prix_negociable: formData.prixNegociable,
         marge_negociation: formData.margeNegociation ? parseFloat(formData.margeNegociation) : null,
-        nombre_salaries: parseInt(formData.nombreSalaries),
+        nombre_salaries: parseInt(formData.nombreSalaries) || 0,
         nombre_cdi: formData.nombreCDI ? parseInt(formData.nombreCDI) : null,
         nombre_cdd: formData.nombreCDD ? parseInt(formData.nombreCDD) : null,
         nombre_apprentis: formData.nombreApprentis ? parseInt(formData.nombreApprentis) : null,
@@ -269,7 +254,7 @@ const Vendre = () => {
         valeur_portefeuille: formData.valeurPortefeuille ? parseFloat(formData.valeurPortefeuille) : null,
         contrats_en_cours: formData.contratsEnCours ? { data: formData.contratsEnCours } : null,
         marque_deposee: formData.marqueDeposee,
-        dettes_totales: parseFloat(formData.dettesTotales),
+        dettes_totales: parseFloat(formData.dettesTotales) || 0,
         dette_urssaf: formData.detteURSSAF ? parseFloat(formData.detteURSSAF) : null,
         dette_tva: formData.detteTVA ? parseFloat(formData.detteTVA) : null,
         dette_fournisseurs: formData.detteFournisseurs ? parseFloat(formData.detteFournisseurs) : null,
@@ -279,17 +264,17 @@ const Vendre = () => {
         credits_transferables: formData.creditsTransferables,
         litiges_en_cours: formData.litigesEnCours,
         nature_litiges: formData.natureLitiges || null,
-        motif_vente: formData.motifVente,
+        motif_vente: formData.motifVente || "Autre",
         precisions_vente: formData.precisionsVente || null,
-        atouts_principaux: formData.atoutsPrincipaux,
+        atouts_principaux: formData.atoutsPrincipaux || "À compléter",
         potentiel_developpement: formData.potentielDeveloppement || null,
         clientele_fidele_pct: formData.clienteleFidelePct ? parseFloat(formData.clienteleFidelePct) : null,
         reputation_locale: formData.reputationLocale,
         presence_digitale: formData.presenceDigitale.length > 0 ? formData.presenceDigitale : null,
         elements_differenciants: formData.elementsDifferenciants || null,
-        type_transmission: formData.typeTransmission,
+        type_transmission: formData.typeTransmission || "Cession de parts sociales",
         accompagnement_propose: Object.keys(formData.accompagnementPropose).length > 0 ? formData.accompagnementPropose : null,
-        delai_vente: formData.delaiVente,
+        delai_vente: formData.delaiVente || "Moyen terme (6-12 mois)",
         conditions_particulieres: formData.conditionsParticulieres || null,
         niveau_anonymat: formData.niveauAnonymat,
         documents_disponibles: formData.documentsDisponibles.length > 0 ? formData.documentsDisponibles : null,
@@ -313,31 +298,51 @@ const Vendre = () => {
         accepte_contact: formData.accepteContact,
         certifie_exactitude: formData.certifieExactitude,
         newsletter: formData.newsletter,
-        statut: 'publiee',
+        statut: 'brouillon',
       };
 
-      const { data, error } = await supabase
-        .from('annonces')
-        .insert(annonceData)
-        .select()
-        .single();
+      // If free plan, create annonce directly
+      if (formData.montantAbonnement === 0) {
+        annonceData.statut = 'publiee';
+        
+        const { data, error } = await supabase
+          .from('annonces')
+          .insert(annonceData)
+          .select()
+          .single();
 
-      if (error) throw error;
+        if (error) throw error;
 
-      toast({
-        title: "Annonce créée !",
-        description: "Votre annonce a été publiée avec succès.",
-      });
+        toast({
+          title: "Annonce créée !",
+          description: "Votre annonce gratuite a été publiée avec succès.",
+        });
 
-      navigate(`/entreprises`);
+        navigate(`/entreprises`);
+      } else {
+        // Paid plan - redirect to Stripe Checkout
+        const { data: paymentData, error: paymentError } = await supabase.functions.invoke('create-payment', {
+          body: { 
+            price_id: formData.stripePriceId,
+            annonce_data: annonceData
+          }
+        });
+
+        if (paymentError) throw paymentError;
+
+        if (paymentData?.url) {
+          window.location.href = paymentData.url;
+        } else {
+          throw new Error("No checkout URL received");
+        }
+      }
     } catch (error: any) {
-      console.error('Error creating annonce:', error);
+      console.error('Error:', error);
       toast({
         title: "Erreur",
-        description: error.message || "Une erreur est survenue lors de la création de l'annonce.",
+        description: error.message || "Une erreur est survenue.",
         variant: "destructive",
       });
-    } finally {
       setIsSubmitting(false);
     }
   };
@@ -382,7 +387,7 @@ const Vendre = () => {
               Vendre Votre Entreprise BTP
             </h1>
             <p className="text-xl text-white/90">
-              Formulaire complet • Publication rapide • Accompagnement expert
+              Formulaire complet • Publication rapide • Paiement sécurisé
             </p>
           </div>
         </div>
@@ -450,12 +455,12 @@ const Vendre = () => {
                     {isSubmitting ? (
                       <>
                         <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2" />
-                        Publication...
+                        {formData.montantAbonnement === 0 ? "Publication..." : "Redirection paiement..."}
                       </>
                     ) : (
                       <>
                         <Save className="w-4 h-4 mr-2" />
-                        Publier l'Annonce
+                        {formData.montantAbonnement === 0 ? "Publier Gratuitement" : `Payer ${formData.montantAbonnement}€ et Publier`}
                       </>
                     )}
                   </Button>

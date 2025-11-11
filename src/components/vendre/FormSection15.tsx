@@ -1,13 +1,20 @@
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Checkbox } from "@/components/ui/checkbox";
-import { CreditCard, Check } from "lucide-react";
+import { CreditCard, Check, Zap, Star, Crown } from "lucide-react";
 import { Card } from "@/components/ui/card";
 
 interface FormSection15Props {
   formData: any;
   handleInputChange: (field: string, value: any) => void;
 }
+
+// Stripe Price IDs
+const STRIPE_PRICES = {
+  essentiel: "price_1SS7lN2ItaOC3ukRjM2C8ZTd",
+  prime: "price_1SS7lf2ItaOC3ukRyxbpaDvi",
+  exclusif: "price_1SS7lt2ItaOC3ukRtBT2yFtM",
+};
 
 const FormSection15 = ({ formData, handleInputChange }: FormSection15Props) => {
   const formules = [
@@ -16,7 +23,9 @@ const FormSection15 = ({ formData, handleInputChange }: FormSection15Props) => {
       name: "Découverte",
       price: 0,
       duration: "30 jours",
-      features: ["10 vues maximum", "Annonce standard", "Support email"]
+      features: ["10 vues maximum", "Annonce standard", "Support email"],
+      icon: Check,
+      priceId: null,
     },
     {
       id: "essentiel",
@@ -24,21 +33,27 @@ const FormSection15 = ({ formData, handleInputChange }: FormSection15Props) => {
       price: 290,
       duration: "3 mois",
       features: ["Vues illimitées", "Mise en avant", "Support prioritaire", "Badge \"Recommandé\""],
-      recommended: true
+      recommended: true,
+      icon: Zap,
+      priceId: STRIPE_PRICES.essentiel,
     },
     {
       id: "prime",
       name: "Prime",
       price: 490,
       duration: "3 mois",
-      features: ["Toutes les fonctionnalités Essentiel", "Photos illimitées", "Top des résultats", "Statistiques avancées"]
+      features: ["Toutes les fonctionnalités Essentiel", "Photos illimitées", "Top des résultats", "Statistiques avancées"],
+      icon: Star,
+      priceId: STRIPE_PRICES.prime,
     },
     {
       id: "exclusif",
       name: "Exclusif",
       price: 990,
       duration: "3 mois",
-      features: ["Toutes les fonctionnalités Prime", "Agent dédié", "Promotion réseaux sociaux", "Valorisation gratuite"]
+      features: ["Toutes les fonctionnalités Prime", "Agent dédié", "Promotion réseaux sociaux", "Valorisation gratuite"],
+      icon: Crown,
+      priceId: STRIPE_PRICES.exclusif,
     }
   ];
 
@@ -61,50 +76,57 @@ const FormSection15 = ({ formData, handleInputChange }: FormSection15Props) => {
             }}
             className="space-y-4 mt-4"
           >
-            {formules.map((formule) => (
-              <Card 
-                key={formule.id} 
-                className={`p-6 cursor-pointer transition-all ${
-                  formData.formuleAbonnement === formule.id 
-                    ? 'border-primary border-2 bg-primary/5' 
-                    : 'hover:border-primary/50'
-                } ${formule.recommended ? 'border-secondary border-2' : ''}`}
-                onClick={() => {
-                  handleInputChange("formuleAbonnement", formule.id);
-                  handleInputChange("montantAbonnement", formule.price);
-                }}
-              >
-                <div className="flex items-start gap-4">
-                  <RadioGroupItem value={formule.id} id={`formule-${formule.id}`} />
-                  <div className="flex-1">
-                    <div className="flex items-center justify-between mb-2">
-                      <Label htmlFor={`formule-${formule.id}`} className="text-xl font-bold cursor-pointer">
-                        {formule.name}
-                        {formule.recommended && (
-                          <span className="ml-2 text-sm bg-secondary text-white px-3 py-1 rounded-full">
-                            Recommandé
-                          </span>
-                        )}
-                      </Label>
-                      <div className="text-right">
-                        <p className="text-2xl font-bold text-primary">
-                          {formule.price === 0 ? 'Gratuit' : `${formule.price}€`}
-                        </p>
-                        <p className="text-sm text-muted-foreground">{formule.duration}</p>
+            {formules.map((formule) => {
+              const IconComponent = formule.icon;
+              return (
+                <Card 
+                  key={formule.id} 
+                  className={`p-6 cursor-pointer transition-all ${
+                    formData.formuleAbonnement === formule.id 
+                      ? 'border-primary border-2 bg-primary/5' 
+                      : 'hover:border-primary/50'
+                  } ${formule.recommended ? 'border-secondary border-2' : ''}`}
+                  onClick={() => {
+                    handleInputChange("formuleAbonnement", formule.id);
+                    handleInputChange("montantAbonnement", formule.price);
+                    handleInputChange("stripePriceId", formule.priceId);
+                  }}
+                >
+                  <div className="flex items-start gap-4">
+                    <RadioGroupItem value={formule.id} id={`formule-${formule.id}`} />
+                    <div className="flex-1">
+                      <div className="flex items-center justify-between mb-2">
+                        <div className="flex items-center gap-2">
+                          <IconComponent className="w-5 h-5 text-primary" />
+                          <Label htmlFor={`formule-${formule.id}`} className="text-xl font-bold cursor-pointer">
+                            {formule.name}
+                          </Label>
+                          {formule.recommended && (
+                            <span className="text-sm bg-secondary text-white px-3 py-1 rounded-full">
+                              Recommandé
+                            </span>
+                          )}
+                        </div>
+                        <div className="text-right">
+                          <p className="text-2xl font-bold text-primary">
+                            {formule.price === 0 ? 'Gratuit' : `${formule.price}€`}
+                          </p>
+                          <p className="text-sm text-muted-foreground">{formule.duration}</p>
+                        </div>
                       </div>
+                      <ul className="space-y-2 mt-4">
+                        {formule.features.map((feature, index) => (
+                          <li key={index} className="flex items-center gap-2 text-sm">
+                            <Check className="w-4 h-4 text-green-600" />
+                            <span>{feature}</span>
+                          </li>
+                        ))}
+                      </ul>
                     </div>
-                    <ul className="space-y-2 mt-4">
-                      {formule.features.map((feature, index) => (
-                        <li key={index} className="flex items-center gap-2 text-sm">
-                          <Check className="w-4 h-4 text-green-600" />
-                          <span>{feature}</span>
-                        </li>
-                      ))}
-                    </ul>
                   </div>
-                </div>
-              </Card>
-            ))}
+                </Card>
+              );
+            })}
           </RadioGroup>
         </div>
 

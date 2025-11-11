@@ -10,6 +10,7 @@ import Entreprises from "./pages/Entreprises";
 import Estimer from "./pages/Estimer";
 import Estimation from "./pages/Estimation";
 import ResultatEstimation from "./pages/ResultatEstimation";
+import PaymentSuccess from "./pages/PaymentSuccess";
 import Auth from "./pages/Auth";
 import Tarifs from "./pages/Tarifs";
 import Ressources from "./pages/Ressources";
@@ -31,6 +32,7 @@ const App = () => (
           <Route path="/estimer" element={<Estimer />} />
           <Route path="/estimation" element={<Estimation />} />
           <Route path="/resultat-estimation" element={<ResultatEstimation />} />
+          <Route path="/payment-success" element={<PaymentSuccess />} />
           <Route path="/auth" element={<Auth />} />
           <Route path="/tarifs" element={<Tarifs />} />
           <Route path="/ressources" element={<Ressources />} />
