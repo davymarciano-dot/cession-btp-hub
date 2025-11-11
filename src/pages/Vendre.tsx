@@ -9,74 +9,17 @@ import Footer from "@/components/Footer";
 import PricingCard from "@/components/PricingCard";
 import ProcessStep from "@/components/ProcessStep";
 import { DepartementsSelect } from "@/data/departements";
-import EstimationDialog from "@/components/EstimationDialog";
-import { supabase } from "@/integrations/supabase/client";
-import { useToast } from "@/hooks/use-toast";
 import { SearchableSelect } from "@/components/SearchableSelect";
 
 const Vendre = () => {
-  const [ca, setCa] = useState("");
   const [secteur, setSecteur] = useState("");
   const [departement, setDepartement] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
-  const [estimation, setEstimation] = useState<any>(null);
-  const [showDialog, setShowDialog] = useState(false);
-  const { toast } = useToast();
-
-  const handleEstimation = async () => {
-    // Validation
-    if (!ca || !secteur || !departement) {
-      toast({
-        title: "Informations manquantes",
-        description: "Veuillez remplir tous les champs du formulaire.",
-        variant: "destructive",
-      });
-      return;
-    }
-
-    const caNumber = parseInt(ca);
-    if (isNaN(caNumber) || caNumber <= 0) {
-      toast({
-        title: "Chiffre d'affaires invalide",
-        description: "Veuillez entrer un chiffre d'affaires valide.",
-        variant: "destructive",
-      });
-      return;
-    }
-
-    setIsLoading(true);
-    setShowDialog(true);
-
-    try {
-      const { data, error } = await supabase.functions.invoke('estimate-company', {
-        body: { ca: caNumber, secteur, departement }
-      });
-
-      if (error) throw error;
-
-      setEstimation(data);
-      toast({
-        title: "Estimation générée !",
-        description: "Votre estimation de valorisation est prête.",
-      });
-    } catch (error: any) {
-      console.error("Estimation error:", error);
-      toast({
-        title: "Erreur",
-        description: error.message || "Une erreur est survenue lors de l'estimation.",
-        variant: "destructive",
-      });
-      setShowDialog(false);
-    } finally {
-      setIsLoading(false);
-    }
-  };
   return (
     <div className="min-h-screen">
       <Header />
 
       <main>
-        {/* Hero with Estimation Form */}
+        {/* Hero with Listing Form */}
         <section className="bg-gradient-to-br from-secondary to-orange-600 text-white py-24">
           <div className="container mx-auto px-4">
             <div className="max-w-5xl mx-auto">
@@ -84,53 +27,103 @@ const Vendre = () => {
                 Vendez Votre Entreprise BTP au Meilleur Prix
               </h1>
               <p className="text-xl mb-12 text-center text-white/90">
-                Estimation gratuite en 48h • Accompagnement expert • Commission uniquement si vente réussie
+                Créez votre annonce • Accompagnement expert • Commission uniquement si vente réussie
               </p>
 
-              {/* Quick Estimation Form */}
+              {/* Listing Creation Form */}
               <div className="bg-white rounded-2xl p-8 shadow-2xl">
-                <h2 className="text-2xl font-bold text-foreground mb-6">Estimation Gratuite en 2 Minutes</h2>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
-                  <Input 
-                    type="number" 
-                    placeholder="CA annuel (€)" 
-                    className="text-foreground"
-                    value={ca}
-                    onChange={(e) => setCa(e.target.value)}
-                  />
-                  <SearchableSelect
-                    value={secteur}
-                    onValueChange={setSecteur}
-                    placeholder="Secteur d'activité"
-                    className="text-foreground"
-                  />
-                  <Select value={departement} onValueChange={setDepartement}>
-                    <SelectTrigger className="text-foreground">
-                      <SelectValue placeholder="Département" />
-                    </SelectTrigger>
-                    <SelectContent className="max-h-[400px] overflow-y-auto">
-                      <DepartementsSelect />
-                    </SelectContent>
-                  </Select>
-                </div>
-                <Button 
-                  className="w-full bg-primary hover:bg-primary/90 text-white text-lg py-6"
-                  onClick={handleEstimation}
-                  disabled={isLoading}
-                >
-                  {isLoading ? "Génération en cours..." : "Obtenir mon estimation gratuite"}
-                </Button>
-                <p className="text-sm text-muted-foreground text-center mt-4">
-                  ✅ Résultat immédiat par IA • Sans engagement • 100% confidentiel
-                </p>
-              </div>
+                <h2 className="text-2xl font-bold text-foreground mb-6">Créez Votre Annonce</h2>
+                <div className="space-y-4">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                      <label className="text-sm font-medium text-foreground block mb-2">
+                        Chiffre d'affaires annuel (€)
+                      </label>
+                      <Input 
+                        type="number" 
+                        placeholder="Ex: 500000" 
+                        className="text-foreground"
+                      />
+                    </div>
+                    <div>
+                      <label className="text-sm font-medium text-foreground block mb-2">
+                        Prix de vente souhaité (€)
+                      </label>
+                      <Input 
+                        type="number" 
+                        placeholder="Ex: 750000" 
+                        className="text-foreground"
+                      />
+                    </div>
+                  </div>
 
-              <EstimationDialog 
-                open={showDialog}
-                onOpenChange={setShowDialog}
-                estimation={estimation}
-                isLoading={isLoading}
-              />
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                      <label className="text-sm font-medium text-foreground block mb-2">
+                        Secteur d'activité
+                      </label>
+                      <SearchableSelect 
+                        value={secteur}
+                        onValueChange={setSecteur}
+                        placeholder="Rechercher un secteur..."
+                      />
+                    </div>
+                    <div>
+                      <label className="text-sm font-medium text-foreground block mb-2">
+                        Département
+                      </label>
+                      <Select value={departement} onValueChange={setDepartement}>
+                        <SelectTrigger className="text-foreground">
+                          <SelectValue placeholder="Choisir département" />
+                        </SelectTrigger>
+                        <SelectContent className="max-h-[400px] overflow-y-auto">
+                          <DepartementsSelect />
+                        </SelectContent>
+                      </Select>
+                    </div>
+                  </div>
+
+                  <div>
+                    <label className="text-sm font-medium text-foreground block mb-2">
+                      Titre de l'annonce
+                    </label>
+                    <Input 
+                      type="text" 
+                      placeholder="Ex: Entreprise de Plomberie Prospère en Île-de-France" 
+                      className="text-foreground"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="text-sm font-medium text-foreground block mb-2">
+                      Description de l'entreprise
+                    </label>
+                    <textarea 
+                      className="w-full min-h-[120px] rounded-md border border-input bg-background px-3 py-2 text-sm text-foreground"
+                      placeholder="Décrivez votre entreprise : année de création, effectif, points forts, clientèle, équipements, certifications..."
+                    />
+                  </div>
+
+                  <div className="flex gap-4 mt-6">
+                    <Button 
+                      className="flex-1 bg-primary hover:bg-primary/90 text-white text-lg py-6"
+                    >
+                      📝 Publier Mon Annonce
+                    </Button>
+                    <Button 
+                      variant="outline"
+                      className="border-primary text-primary hover:bg-primary hover:text-white text-lg py-6"
+                      onClick={() => window.location.href = '/vendre?estimation=true'}
+                    >
+                      💰 Obtenir une estimation
+                    </Button>
+                  </div>
+                  
+                  <p className="text-sm text-muted-foreground text-center mt-4">
+                    ✅ Gratuit pendant 30 jours • Sans engagement • 100% confidentiel
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
         </section>
@@ -239,77 +232,6 @@ const Vendre = () => {
                 description="Finalisation juridique avec nos avocats spécialisés, transfert des actifs, formation du repreneur. Vous êtes accompagné jusqu'au bout."
                 isLast={true}
               />
-            </div>
-          </div>
-        </section>
-
-        {/* Pricing Vendeur */}
-        <section className="py-20 bg-slate-50">
-          <div className="container mx-auto px-4">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold mb-4">Choisissez Votre Formule</h2>
-              <p className="text-xl text-muted-foreground">
-                Des options adaptées à chaque type de cession
-              </p>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-              <PricingCard
-                title="DÉCOUVERTE"
-                price="Gratuit"
-                period="30 jours"
-                description="Idéal pour tester la plateforme"
-                features={[
-                  "Évaluation professionnelle incluse",
-                  "10 vues d'annonce maximum",
-                  "Interface spécialisée BTP",
-                  "Support email standard",
-                  "Accès ressources en ligne"
-                ]}
-                buttonText="Commencer gratuitement"
-              />
-
-              <PricingCard
-                title="ESSENTIEL"
-                price="290€"
-                period="/3 mois"
-                description="Le plus populaire pour vendre rapidement"
-                features={[
-                  "Annonce optimisée SEO",
-                  "Contacts qualifiés BTP illimités",
-                  "Interface professionnelle complète",
-                  "Expert dédié en support",
-                  "Accès réseau 2000+ entrepreneurs",
-                  "Statistiques de consultation"
-                ]}
-                buttonText="Choisir Essentiel"
-                isPopular={true}
-              />
-
-              <PricingCard
-                title="PREMIUM"
-                price="490€"
-                period="/3 mois"
-                description="Pour maximiser vos chances de vente"
-                features={[
-                  "Mise en avant prioritaire homepage",
-                  "Statistiques avancées détaillées",
-                  "Valorisation BTP expert incluse (500€)",
-                  "Accompagnement expert dédié",
-                  "Vendez 2x plus vite garantie",
-                  "Mémorandum professionnel offert"
-                ]}
-                buttonText="Choisir Premium"
-              />
-            </div>
-
-            <div className="text-center mt-12">
-              <p className="text-sm text-muted-foreground mb-4">
-                + Success Fee de 2% uniquement en cas de vente réussie
-              </p>
-              <Badge className="bg-success text-white">
-                Remboursement intégral si aucun contact qualifié après 30 jours
-              </Badge>
             </div>
           </div>
         </section>
