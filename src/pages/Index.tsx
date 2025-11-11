@@ -77,8 +77,7 @@ const Index = () => {
                 <Button 
                   size="lg" 
                   onClick={() => navigate("/acheter")}
-                  variant="outline" 
-                  className="border-2 border-white text-white hover:bg-white hover:text-primary text-lg px-8"
+                  className="bg-transparent border-2 border-white text-white hover:bg-white hover:text-primary text-lg px-8"
                 >
                   Trouver une entreprise
                 </Button>
