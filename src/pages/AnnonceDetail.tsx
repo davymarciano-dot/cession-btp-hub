@@ -4,13 +4,14 @@ import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import PhotoGallery from "@/components/PhotoGallery";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import {
   Building2, MapPin, Calendar, TrendingUp, Users, Euro,
-  Award, FileText, Phone, Mail, ArrowLeft, Eye, Loader2, MessageCircle
+  Award, FileText, Phone, Mail, ArrowLeft, Eye, Loader2, MessageCircle, Camera
 } from "lucide-react";
 import { exempleAnnonces } from "@/data/exemple-annonces";
 
@@ -275,21 +276,64 @@ const AnnonceDetail = () => {
                 annonce.photos_materiel?.length > 0 || 
                 annonce.photos_realisations?.length > 0) && (
                 <Card className="p-6">
-                  <h2 className="text-xl font-bold mb-4">Photos</h2>
-                  <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-                    {[
-                      ...(annonce.photos_entreprise || []),
-                      ...(annonce.photos_materiel || []),
-                      ...(annonce.photos_realisations || [])
-                    ].map((photo: string, idx: number) => (
-                      <img
-                        key={idx}
-                        src={photo}
-                        alt={`Photo ${idx + 1}`}
-                        className="w-full h-48 object-cover rounded-lg border"
+                  <h2 className="text-xl font-bold mb-6 flex items-center gap-2">
+                    <Camera className="w-6 h-6 text-primary" />
+                    Galerie Photos
+                  </h2>
+                  
+                  {/* Photos de l'entreprise */}
+                  {annonce.photos_entreprise?.length > 0 && (
+                    <div className="mb-8">
+                      <h3 className="text-lg font-semibold mb-3 text-muted-foreground">
+                        Entreprise & Locaux
+                      </h3>
+                      <PhotoGallery 
+                        photos={annonce.photos_entreprise} 
+                        title="Photos de l'entreprise"
                       />
-                    ))}
-                  </div>
+                    </div>
+                  )}
+
+                  {/* Photos du matériel */}
+                  {annonce.photos_materiel?.length > 0 && (
+                    <div className="mb-8">
+                      <h3 className="text-lg font-semibold mb-3 text-muted-foreground">
+                        Matériel & Véhicules
+                      </h3>
+                      <PhotoGallery 
+                        photos={annonce.photos_materiel} 
+                        title="Photos du matériel"
+                      />
+                    </div>
+                  )}
+
+                  {/* Photos des réalisations */}
+                  {annonce.photos_realisations?.length > 0 && (
+                    <div>
+                      <h3 className="text-lg font-semibold mb-3 text-muted-foreground">
+                        Réalisations
+                      </h3>
+                      <PhotoGallery 
+                        photos={annonce.photos_realisations} 
+                        title="Photos des réalisations"
+                      />
+                    </div>
+                  )}
+
+                  {/* Vidéo de présentation */}
+                  {annonce.video_presentation && (
+                    <div className="mt-8 pt-6 border-t">
+                      <h3 className="text-lg font-semibold mb-3">Vidéo de présentation</h3>
+                      <div className="aspect-video rounded-lg overflow-hidden bg-slate-100">
+                        <iframe
+                          src={annonce.video_presentation}
+                          className="w-full h-full"
+                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                          allowFullScreen
+                        />
+                      </div>
+                    </div>
+                  )}
                 </Card>
               )}
 
