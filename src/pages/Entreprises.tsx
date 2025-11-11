@@ -245,35 +245,132 @@ const Entreprises = () => {
                   <div className="col-span-full text-center py-12">
                     <p className="text-muted-foreground">Chargement des annonces...</p>
                   </div>
-                ) : annonces.length === 0 ? (
-                  <div className="col-span-full text-center py-12">
-                    <p className="text-muted-foreground">Aucune annonce ne correspond à vos critères</p>
-                  </div>
                 ) : (
-                  annonces.map((annonce) => {
-                    const certifications = annonce.certifications || [];
-                    const hasCertif = certifications.length > 0;
-                    
-                    return (
-                      <EntrepriseCard
-                        key={annonce.id}
-                        id={annonce.id}
-                        type="blue"
-                        certification={hasCertif ? certifications[0] : "ENTREPRISE BTP"}
-                        status="disponible"
-                        timeAgo={`Ajoutée le ${new Date(annonce.created_at).toLocaleDateString("fr-FR")}`}
-                        title={annonce.raison_sociale || "Entreprise anonyme"}
-                        location={`${annonce.ville}, ${annonce.departement}`}
-                        creation={annonce.annee_creation.toString()}
-                        ca={formatCurrency(annonce.ca_n1)}
-                        effectif={`${annonce.nombre_salaries} salarié${annonce.nombre_salaries > 1 ? "s" : ""}`}
-                        secteur={annonce.secteur_activite}
-                        description={annonce.description_activite}
-                        price={formatCurrency(annonce.prix_vente)}
-                        financement={true}
-                      />
-                    );
-                  })
+                  <>
+                    {/* Annonces réelles de la base de données */}
+                    {annonces.map((annonce) => {
+                      const certifications = annonce.certifications || [];
+                      const hasCertif = certifications.length > 0;
+                      
+                      return (
+                        <EntrepriseCard
+                          key={annonce.id}
+                          id={annonce.id}
+                          type="blue"
+                          certification={hasCertif ? certifications[0] : "ENTREPRISE BTP"}
+                          status="disponible"
+                          timeAgo={`Ajoutée le ${new Date(annonce.created_at).toLocaleDateString("fr-FR")}`}
+                          title={annonce.raison_sociale || "Entreprise anonyme"}
+                          location={`${annonce.ville}, ${annonce.departement}`}
+                          creation={annonce.annee_creation.toString()}
+                          ca={formatCurrency(annonce.ca_n1)}
+                          effectif={`${annonce.nombre_salaries} salarié${annonce.nombre_salaries > 1 ? "s" : ""}`}
+                          secteur={annonce.secteur_activite}
+                          description={annonce.description_activite}
+                          price={formatCurrency(annonce.prix_vente)}
+                          financement={true}
+                        />
+                      );
+                    })}
+
+                    {/* Annonces d'exemple (affichées si aucune annonce réelle ou si filtre "all") */}
+                    {(annonces.length === 0 || (secteurFilter === "all" && regionFilter === "all")) && (
+                      <>
+                        <EntrepriseCard
+                          id="exemple-1"
+                          type="blue"
+                          certification="QUALIBAT"
+                          status="disponible"
+                          timeAgo="Il y a 5h"
+                          title="Entreprise Générale du Bâtiment"
+                          location="Nice, PACA (06)"
+                          creation="2005"
+                          ca="2,8M€"
+                          effectif="22 salariés"
+                          secteur="Tous corps d'état"
+                          description="Entreprise générale tous corps d'état. Marchés publics 60%, privés 40%."
+                          price="1 850 000 €"
+                          financement={true}
+                        />
+
+                        <EntrepriseCard
+                          id="exemple-2"
+                          type="orange"
+                          certification="CERTIFIÉE RGE"
+                          status="vendu"
+                          title="Société d'Isolation Thermique"
+                          location="Lyon, Rhône (69)"
+                          creation="2020"
+                          ca="542K€"
+                          effectif="8 salariés"
+                          secteur="Isolation et ITE"
+                        />
+
+                        <EntrepriseCard
+                          id="exemple-3"
+                          type="orange"
+                          certification="RGE QUALIPAC"
+                          status="vendu"
+                          title="Entreprise Chauffage & Climatisation"
+                          location="Toulouse, Haute-Garonne (31)"
+                          creation="2018"
+                          ca="890K€"
+                          effectif="6 salariés"
+                          secteur="Pompes à chaleur"
+                        />
+
+                        <EntrepriseCard
+                          id="exemple-4"
+                          type="blue"
+                          certification="QUALIBAT"
+                          status="disponible"
+                          timeAgo="Il y a 2 jours"
+                          title="Entreprise de Plomberie"
+                          location="Paris, Île-de-France (75)"
+                          creation="2010"
+                          ca="1,2M€"
+                          effectif="12 salariés"
+                          secteur="Plomberie sanitaire"
+                          description="Clientèle fidèle, contrats d'entretien récurrents."
+                          price="980 000 €"
+                          financement={true}
+                        />
+
+                        <EntrepriseCard
+                          id="exemple-5"
+                          type="blue"
+                          certification="RGE"
+                          status="disponible"
+                          timeAgo="Il y a 1 semaine"
+                          title="Électricité Générale"
+                          location="Bordeaux, Nouvelle-Aquitaine (33)"
+                          creation="2015"
+                          ca="750K€"
+                          effectif="5 salariés"
+                          secteur="Électricité"
+                          description="Spécialisée en rénovation électrique et domotique."
+                          price="620 000 €"
+                        />
+
+                        <EntrepriseCard
+                          id="exemple-6"
+                          type="blue"
+                          certification="QUALIBAT"
+                          status="disponible"
+                          timeAgo="Il y a 3 jours"
+                          title="Maçonnerie Traditionnelle"
+                          location="Lille, Hauts-de-France (59)"
+                          creation="2008"
+                          ca="1,5M€"
+                          effectif="18 salariés"
+                          secteur="Maçonnerie & Gros Œuvre"
+                          description="Marchés publics et privés. Forte notoriété locale."
+                          price="1 250 000 €"
+                          financement={true}
+                        />
+                      </>
+                    )}
+                  </>
                 )}
               </div>
             </div>
