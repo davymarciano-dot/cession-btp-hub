@@ -14,6 +14,321 @@ export type Database = {
   }
   public: {
     Tables: {
+      annonces: {
+        Row: {
+          accepte_cgu: boolean
+          accepte_contact: boolean
+          accompagnement_propose: Json | null
+          accompagnement_vendeur: boolean
+          anciennete_moyenne: number | null
+          annee_creation: number
+          apport_requis: number | null
+          atouts_principaux: string
+          ca_n1: number
+          ca_n2: number | null
+          ca_n3: number | null
+          ca_previsionnel: number | null
+          certifications: Json | null
+          certifie_exactitude: boolean
+          civilite: string
+          clientele_fidele_pct: number | null
+          code_postal: string
+          commentaires_acheteurs: string | null
+          competences_equipe: string | null
+          complement_vendeur: boolean
+          complement_vendeur_duree: string | null
+          complement_vendeur_montant: number | null
+          conditions_particulieres: string | null
+          contrats_en_cours: Json | null
+          created_at: string
+          credits_en_cours: boolean
+          credits_transferables: boolean | null
+          date_expiration: string
+          delai_vente: string
+          departement: string
+          description_activite: string
+          dette_banques: number | null
+          dette_fournisseurs: number | null
+          dette_tva: number | null
+          dette_urssaf: number | null
+          dettes_totales: number
+          documents_disponibles: Json | null
+          duree_accompagnement: string | null
+          duree_bail: string | null
+          ebe_n1: number | null
+          elements_differenciants: string | null
+          email: string
+          etat_materiel: string | null
+          financement_bancaire: string
+          forme_juridique: string
+          formule_abonnement: string
+          id: string
+          infos_complementaires: string | null
+          litiges_en_cours: boolean
+          locaux_inclus_vente: boolean | null
+          loyer_mensuel: number | null
+          marge_negociation: number | null
+          marque_deposee: boolean | null
+          masse_salariale: number | null
+          materiel_principal: string | null
+          montant_abonnement: number
+          montant_credits: number | null
+          motif_vente: string
+          nature_litiges: string | null
+          nda_requis: boolean
+          newsletter: boolean | null
+          niveau_anonymat: string
+          nom_prenom: string
+          nombre_apprentis: number | null
+          nombre_cdd: number | null
+          nombre_cdi: number | null
+          nombre_clients_actifs: number | null
+          nombre_salaries: number
+          nombre_vehicules: number | null
+          nombre_vues: number | null
+          photos_entreprise: Json | null
+          photos_materiel: Json | null
+          photos_realisations: Json | null
+          potentiel_developpement: string | null
+          precisions_vente: string | null
+          preference_contact: string
+          presence_digitale: Json | null
+          prix_negociable: boolean
+          prix_vente: number
+          raison_sociale: string | null
+          reputation_locale: number | null
+          resultat_net_n1: number
+          secteur_activite: string
+          siret: string | null
+          site_web: boolean | null
+          situation_locaux: string
+          specialites: Json | null
+          statut: string
+          surface_locaux: number | null
+          telephone: string
+          type_clientele: Json | null
+          type_transmission: string
+          updated_at: string
+          user_id: string | null
+          valeur_locaux: number | null
+          valeur_materiel: number | null
+          valeur_portefeuille: number | null
+          valeur_stock: number | null
+          video_presentation: string | null
+          ville: string
+          visites_possibles: string
+          zone_intervention: Json | null
+        }
+        Insert: {
+          accepte_cgu?: boolean
+          accepte_contact?: boolean
+          accompagnement_propose?: Json | null
+          accompagnement_vendeur: boolean
+          anciennete_moyenne?: number | null
+          annee_creation: number
+          apport_requis?: number | null
+          atouts_principaux: string
+          ca_n1: number
+          ca_n2?: number | null
+          ca_n3?: number | null
+          ca_previsionnel?: number | null
+          certifications?: Json | null
+          certifie_exactitude?: boolean
+          civilite: string
+          clientele_fidele_pct?: number | null
+          code_postal: string
+          commentaires_acheteurs?: string | null
+          competences_equipe?: string | null
+          complement_vendeur: boolean
+          complement_vendeur_duree?: string | null
+          complement_vendeur_montant?: number | null
+          conditions_particulieres?: string | null
+          contrats_en_cours?: Json | null
+          created_at?: string
+          credits_en_cours: boolean
+          credits_transferables?: boolean | null
+          date_expiration: string
+          delai_vente: string
+          departement: string
+          description_activite: string
+          dette_banques?: number | null
+          dette_fournisseurs?: number | null
+          dette_tva?: number | null
+          dette_urssaf?: number | null
+          dettes_totales: number
+          documents_disponibles?: Json | null
+          duree_accompagnement?: string | null
+          duree_bail?: string | null
+          ebe_n1?: number | null
+          elements_differenciants?: string | null
+          email: string
+          etat_materiel?: string | null
+          financement_bancaire: string
+          forme_juridique: string
+          formule_abonnement: string
+          id?: string
+          infos_complementaires?: string | null
+          litiges_en_cours: boolean
+          locaux_inclus_vente?: boolean | null
+          loyer_mensuel?: number | null
+          marge_negociation?: number | null
+          marque_deposee?: boolean | null
+          masse_salariale?: number | null
+          materiel_principal?: string | null
+          montant_abonnement: number
+          montant_credits?: number | null
+          motif_vente: string
+          nature_litiges?: string | null
+          nda_requis: boolean
+          newsletter?: boolean | null
+          niveau_anonymat: string
+          nom_prenom: string
+          nombre_apprentis?: number | null
+          nombre_cdd?: number | null
+          nombre_cdi?: number | null
+          nombre_clients_actifs?: number | null
+          nombre_salaries: number
+          nombre_vehicules?: number | null
+          nombre_vues?: number | null
+          photos_entreprise?: Json | null
+          photos_materiel?: Json | null
+          photos_realisations?: Json | null
+          potentiel_developpement?: string | null
+          precisions_vente?: string | null
+          preference_contact: string
+          presence_digitale?: Json | null
+          prix_negociable: boolean
+          prix_vente: number
+          raison_sociale?: string | null
+          reputation_locale?: number | null
+          resultat_net_n1: number
+          secteur_activite: string
+          siret?: string | null
+          site_web?: boolean | null
+          situation_locaux: string
+          specialites?: Json | null
+          statut?: string
+          surface_locaux?: number | null
+          telephone: string
+          type_clientele?: Json | null
+          type_transmission: string
+          updated_at?: string
+          user_id?: string | null
+          valeur_locaux?: number | null
+          valeur_materiel?: number | null
+          valeur_portefeuille?: number | null
+          valeur_stock?: number | null
+          video_presentation?: string | null
+          ville: string
+          visites_possibles: string
+          zone_intervention?: Json | null
+        }
+        Update: {
+          accepte_cgu?: boolean
+          accepte_contact?: boolean
+          accompagnement_propose?: Json | null
+          accompagnement_vendeur?: boolean
+          anciennete_moyenne?: number | null
+          annee_creation?: number
+          apport_requis?: number | null
+          atouts_principaux?: string
+          ca_n1?: number
+          ca_n2?: number | null
+          ca_n3?: number | null
+          ca_previsionnel?: number | null
+          certifications?: Json | null
+          certifie_exactitude?: boolean
+          civilite?: string
+          clientele_fidele_pct?: number | null
+          code_postal?: string
+          commentaires_acheteurs?: string | null
+          competences_equipe?: string | null
+          complement_vendeur?: boolean
+          complement_vendeur_duree?: string | null
+          complement_vendeur_montant?: number | null
+          conditions_particulieres?: string | null
+          contrats_en_cours?: Json | null
+          created_at?: string
+          credits_en_cours?: boolean
+          credits_transferables?: boolean | null
+          date_expiration?: string
+          delai_vente?: string
+          departement?: string
+          description_activite?: string
+          dette_banques?: number | null
+          dette_fournisseurs?: number | null
+          dette_tva?: number | null
+          dette_urssaf?: number | null
+          dettes_totales?: number
+          documents_disponibles?: Json | null
+          duree_accompagnement?: string | null
+          duree_bail?: string | null
+          ebe_n1?: number | null
+          elements_differenciants?: string | null
+          email?: string
+          etat_materiel?: string | null
+          financement_bancaire?: string
+          forme_juridique?: string
+          formule_abonnement?: string
+          id?: string
+          infos_complementaires?: string | null
+          litiges_en_cours?: boolean
+          locaux_inclus_vente?: boolean | null
+          loyer_mensuel?: number | null
+          marge_negociation?: number | null
+          marque_deposee?: boolean | null
+          masse_salariale?: number | null
+          materiel_principal?: string | null
+          montant_abonnement?: number
+          montant_credits?: number | null
+          motif_vente?: string
+          nature_litiges?: string | null
+          nda_requis?: boolean
+          newsletter?: boolean | null
+          niveau_anonymat?: string
+          nom_prenom?: string
+          nombre_apprentis?: number | null
+          nombre_cdd?: number | null
+          nombre_cdi?: number | null
+          nombre_clients_actifs?: number | null
+          nombre_salaries?: number
+          nombre_vehicules?: number | null
+          nombre_vues?: number | null
+          photos_entreprise?: Json | null
+          photos_materiel?: Json | null
+          photos_realisations?: Json | null
+          potentiel_developpement?: string | null
+          precisions_vente?: string | null
+          preference_contact?: string
+          presence_digitale?: Json | null
+          prix_negociable?: boolean
+          prix_vente?: number
+          raison_sociale?: string | null
+          reputation_locale?: number | null
+          resultat_net_n1?: number
+          secteur_activite?: string
+          siret?: string | null
+          site_web?: boolean | null
+          situation_locaux?: string
+          specialites?: Json | null
+          statut?: string
+          surface_locaux?: number | null
+          telephone?: string
+          type_clientele?: Json | null
+          type_transmission?: string
+          updated_at?: string
+          user_id?: string | null
+          valeur_locaux?: number | null
+          valeur_materiel?: number | null
+          valeur_portefeuille?: number | null
+          valeur_stock?: number | null
+          video_presentation?: string | null
+          ville?: string
+          visites_possibles?: string
+          zone_intervention?: Json | null
+        }
+        Relationships: []
+      }
       estimations: {
         Row: {
           a_credits: boolean

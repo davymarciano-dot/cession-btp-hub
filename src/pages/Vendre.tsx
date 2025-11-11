@@ -1,322 +1,470 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Select, SelectContent, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Badge } from "@/components/ui/badge";
-import { Check, DollarSign, Users, Lock, Scale, TrendingUp, Award } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import PricingCard from "@/components/PricingCard";
-import ProcessStep from "@/components/ProcessStep";
-import { DepartementsSelect } from "@/data/departements";
-import { SearchableSelect } from "@/components/SearchableSelect";
+import { useToast } from "@/hooks/use-toast";
+import { supabase } from "@/integrations/supabase/client";
+import FormSection1 from "@/components/vendre/FormSection1";
+import FormSection2 from "@/components/vendre/FormSection2";
+import FormSection3 from "@/components/vendre/FormSection3";
+import FormSection4 from "@/components/vendre/FormSection4";
+import FormSection5 from "@/components/vendre/FormSection5";
+import FormSection15 from "@/components/vendre/FormSection15";
+import { ArrowLeft, ArrowRight, Save } from "lucide-react";
 
 const Vendre = () => {
-  const [secteur, setSecteur] = useState("");
-  const [departement, setDepartement] = useState("");
+  const navigate = useNavigate();
+  const { toast } = useToast();
+  const [currentStep, setCurrentStep] = useState(1);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const totalSteps = 15;
+
+  const [formData, setFormData] = useState({
+    // Section 1
+    civilite: "M",
+    nomPrenom: "",
+    email: "",
+    telephone: "",
+    preferenceContact: "email",
+    
+    // Section 2
+    raisonSociale: "",
+    formeJuridique: "",
+    siret: "",
+    secteurActivite: "",
+    anneeCreation: "",
+    departement: "",
+    ville: "",
+    codePostal: "",
+    
+    // Section 3
+    descriptionActivite: "",
+    specialites: "",
+    certifications: [],
+    clienteleParticuliers: undefined,
+    clienteleProfessionnels: undefined,
+    clientelePublics: undefined,
+    clientelePromoteurs: undefined,
+    rayonIntervention: "",
+    departementsCouverts: "",
+    
+    // Section 4
+    caN3: "",
+    caN2: "",
+    caN1: "",
+    caPrevisionnel: "",
+    ebeN1: "",
+    resultatNetN1: "",
+    prixVente: "",
+    prixNegociable: false,
+    margeNegociation: "",
+    
+    // Section 5
+    nombreSalaries: "",
+    nombreCDI: "",
+    nombreCDD: "",
+    nombreApprentis: "",
+    ancienneteMoyenne: "",
+    competencesEquipe: "",
+    masseSalariale: "",
+    accompagnementVendeur: false,
+    dureeAccompagnement: "",
+    
+    // Section 6
+    situationLocaux: "locataire",
+    loyerMensuel: "",
+    dureeBail: "",
+    surfaceLocaux: "",
+    valeurLocaux: "",
+    locauxInclusVente: false,
+    materielPrincipal: "",
+    nombreVehicules: "",
+    valeurMateriel: "",
+    etatMateriel: "bon",
+    valeurStock: "",
+    siteWeb: false,
+    nombreClientsActifs: "",
+    valeurPortefeuille: "",
+    contratsEnCours: "",
+    marqueDeposee: false,
+    
+    // Section 7
+    dettesTotales: "",
+    detteURSSAF: "",
+    detteTVA: "",
+    detteFournisseurs: "",
+    detteBanques: "",
+    creditsEnCours: false,
+    montantCredits: "",
+    creditsTransferables: false,
+    litigesEnCours: false,
+    natureLitiges: "",
+    
+    // Section 8
+    motifVente: "",
+    precisionsVente: "",
+    
+    // Section 9
+    atoutsPrincipaux: "",
+    potentielDeveloppement: "",
+    clienteleFidelePct: "",
+    reputationLocale: 3,
+    presenceDigitale: [],
+    elementsDifferenciants: "",
+    
+    // Section 10
+    typeTransmission: "",
+    accompagnementPropose: {},
+    delaiVente: "",
+    conditionsParticulieres: "",
+    
+    // Section 11
+    niveauAnonymat: "semi-anonyme",
+    documentsDisponibles: [],
+    ndaRequis: false,
+    
+    // Section 12
+    photosEntreprise: [],
+    photosMateriel: [],
+    photosRealisations: [],
+    videoPresentation: "",
+    
+    // Section 13
+    financementBancaire: "oui",
+    complementVendeur: false,
+    complementVendeurMontant: "",
+    complementVendeurDuree: "",
+    apportRequis: "",
+    
+    // Section 14
+    infosComplementaires: "",
+    commentairesAcheteurs: "",
+    visitesPossibles: "sur-rdv",
+    
+    // Section 15
+    formuleAbonnement: "essentiel",
+    montantAbonnement: 290,
+    accepteCGU: false,
+    accepteContact: false,
+    certifieExactitude: false,
+    newsletter: false,
+  });
+
+  const handleInputChange = (field: string, value: any) => {
+    setFormData(prev => ({ ...prev, [field]: value }));
+  };
+
+  const handleNext = () => {
+    if (currentStep < totalSteps) {
+      setCurrentStep(prev => prev + 1);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
+
+  const handlePrevious = () => {
+    if (currentStep > 1) {
+      setCurrentStep(prev => prev - 1);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
+
+  const handleSubmit = async () => {
+    // Validation finale
+    if (!formData.accepteCGU || !formData.accepteContact || !formData.certifieExactitude) {
+      toast({
+        title: "Validation requise",
+        description: "Veuillez accepter les conditions requises pour continuer.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    setIsSubmitting(true);
+
+    try {
+      const { data: { user } } = await supabase.auth.getUser();
+
+      if (!user) {
+        toast({
+          title: "Authentification requise",
+          description: "Veuillez vous connecter pour publier une annonce.",
+          variant: "destructive",
+        });
+        navigate("/auth");
+        return;
+      }
+
+      // Calculer la date d'expiration basée sur la formule choisie
+      const dureeMap: Record<string, number> = {
+        "decouverte": 30,
+        "essentiel": 90,
+        "prime": 90,
+        "exclusif": 90,
+      };
+      const dureeDays = dureeMap[formData.formuleAbonnement] || 90;
+      const dateExpiration = new Date();
+      dateExpiration.setDate(dateExpiration.getDate() + dureeDays);
+
+      // Préparer les données pour la base de données
+      const annonceData = {
+        user_id: user.id,
+        civilite: formData.civilite,
+        nom_prenom: formData.nomPrenom,
+        email: formData.email,
+        telephone: formData.telephone,
+        preference_contact: formData.preferenceContact,
+        raison_sociale: formData.raisonSociale || null,
+        forme_juridique: formData.formeJuridique,
+        siret: formData.siret || null,
+        secteur_activite: formData.secteurActivite,
+        annee_creation: parseInt(formData.anneeCreation),
+        departement: formData.departement,
+        ville: formData.ville,
+        code_postal: formData.codePostal,
+        description_activite: formData.descriptionActivite,
+        specialites: formData.specialites ? [formData.specialites] : null,
+        certifications: formData.certifications.length > 0 ? formData.certifications : null,
+        type_clientele: {
+          particuliers: formData.clienteleParticuliers,
+          professionnels: formData.clienteleProfessionnels,
+          publics: formData.clientelePublics,
+          promoteurs: formData.clientelePromoteurs,
+        },
+        zone_intervention: {
+          rayon: formData.rayonIntervention,
+          departements: formData.departementsCouverts,
+        },
+        ca_n3: formData.caN3 ? parseFloat(formData.caN3) : null,
+        ca_n2: formData.caN2 ? parseFloat(formData.caN2) : null,
+        ca_n1: parseFloat(formData.caN1),
+        ca_previsionnel: formData.caPrevisionnel ? parseFloat(formData.caPrevisionnel) : null,
+        ebe_n1: formData.ebeN1 ? parseFloat(formData.ebeN1) : null,
+        resultat_net_n1: parseFloat(formData.resultatNetN1),
+        prix_vente: parseFloat(formData.prixVente),
+        prix_negociable: formData.prixNegociable,
+        marge_negociation: formData.margeNegociation ? parseFloat(formData.margeNegociation) : null,
+        nombre_salaries: parseInt(formData.nombreSalaries),
+        nombre_cdi: formData.nombreCDI ? parseInt(formData.nombreCDI) : null,
+        nombre_cdd: formData.nombreCDD ? parseInt(formData.nombreCDD) : null,
+        nombre_apprentis: formData.nombreApprentis ? parseInt(formData.nombreApprentis) : null,
+        anciennete_moyenne: formData.ancienneteMoyenne ? parseFloat(formData.ancienneteMoyenne) : null,
+        competences_equipe: formData.competencesEquipe || null,
+        masse_salariale: formData.masseSalariale ? parseFloat(formData.masseSalariale) : null,
+        accompagnement_vendeur: formData.accompagnementVendeur,
+        duree_accompagnement: formData.dureeAccompagnement || null,
+        situation_locaux: formData.situationLocaux,
+        loyer_mensuel: formData.loyerMensuel ? parseFloat(formData.loyerMensuel) : null,
+        duree_bail: formData.dureeBail || null,
+        surface_locaux: formData.surfaceLocaux ? parseFloat(formData.surfaceLocaux) : null,
+        valeur_locaux: formData.valeurLocaux ? parseFloat(formData.valeurLocaux) : null,
+        locaux_inclus_vente: formData.locauxInclusVente,
+        materiel_principal: formData.materielPrincipal || null,
+        nombre_vehicules: formData.nombreVehicules ? parseInt(formData.nombreVehicules) : null,
+        valeur_materiel: formData.valeurMateriel ? parseFloat(formData.valeurMateriel) : null,
+        etat_materiel: formData.etatMateriel || null,
+        valeur_stock: formData.valeurStock ? parseFloat(formData.valeurStock) : null,
+        site_web: formData.siteWeb,
+        nombre_clients_actifs: formData.nombreClientsActifs ? parseInt(formData.nombreClientsActifs) : null,
+        valeur_portefeuille: formData.valeurPortefeuille ? parseFloat(formData.valeurPortefeuille) : null,
+        contrats_en_cours: formData.contratsEnCours ? { data: formData.contratsEnCours } : null,
+        marque_deposee: formData.marqueDeposee,
+        dettes_totales: parseFloat(formData.dettesTotales),
+        dette_urssaf: formData.detteURSSAF ? parseFloat(formData.detteURSSAF) : null,
+        dette_tva: formData.detteTVA ? parseFloat(formData.detteTVA) : null,
+        dette_fournisseurs: formData.detteFournisseurs ? parseFloat(formData.detteFournisseurs) : null,
+        dette_banques: formData.detteBanques ? parseFloat(formData.detteBanques) : null,
+        credits_en_cours: formData.creditsEnCours,
+        montant_credits: formData.montantCredits ? parseFloat(formData.montantCredits) : null,
+        credits_transferables: formData.creditsTransferables,
+        litiges_en_cours: formData.litigesEnCours,
+        nature_litiges: formData.natureLitiges || null,
+        motif_vente: formData.motifVente,
+        precisions_vente: formData.precisionsVente || null,
+        atouts_principaux: formData.atoutsPrincipaux,
+        potentiel_developpement: formData.potentielDeveloppement || null,
+        clientele_fidele_pct: formData.clienteleFidelePct ? parseFloat(formData.clienteleFidelePct) : null,
+        reputation_locale: formData.reputationLocale,
+        presence_digitale: formData.presenceDigitale.length > 0 ? formData.presenceDigitale : null,
+        elements_differenciants: formData.elementsDifferenciants || null,
+        type_transmission: formData.typeTransmission,
+        accompagnement_propose: Object.keys(formData.accompagnementPropose).length > 0 ? formData.accompagnementPropose : null,
+        delai_vente: formData.delaiVente,
+        conditions_particulieres: formData.conditionsParticulieres || null,
+        niveau_anonymat: formData.niveauAnonymat,
+        documents_disponibles: formData.documentsDisponibles.length > 0 ? formData.documentsDisponibles : null,
+        nda_requis: formData.ndaRequis,
+        photos_entreprise: formData.photosEntreprise.length > 0 ? formData.photosEntreprise : null,
+        photos_materiel: formData.photosMateriel.length > 0 ? formData.photosMateriel : null,
+        photos_realisations: formData.photosRealisations.length > 0 ? formData.photosRealisations : null,
+        video_presentation: formData.videoPresentation || null,
+        financement_bancaire: formData.financementBancaire,
+        complement_vendeur: formData.complementVendeur,
+        complement_vendeur_montant: formData.complementVendeurMontant ? parseFloat(formData.complementVendeurMontant) : null,
+        complement_vendeur_duree: formData.complementVendeurDuree || null,
+        apport_requis: formData.apportRequis ? parseFloat(formData.apportRequis) : null,
+        infos_complementaires: formData.infosComplementaires || null,
+        commentaires_acheteurs: formData.commentairesAcheteurs || null,
+        visites_possibles: formData.visitesPossibles,
+        formule_abonnement: formData.formuleAbonnement,
+        montant_abonnement: formData.montantAbonnement,
+        date_expiration: dateExpiration.toISOString(),
+        accepte_cgu: formData.accepteCGU,
+        accepte_contact: formData.accepteContact,
+        certifie_exactitude: formData.certifieExactitude,
+        newsletter: formData.newsletter,
+        statut: 'publiee',
+      };
+
+      const { data, error } = await supabase
+        .from('annonces')
+        .insert(annonceData)
+        .select()
+        .single();
+
+      if (error) throw error;
+
+      toast({
+        title: "Annonce créée !",
+        description: "Votre annonce a été publiée avec succès.",
+      });
+
+      navigate(`/entreprises`);
+    } catch (error: any) {
+      console.error('Error creating annonce:', error);
+      toast({
+        title: "Erreur",
+        description: error.message || "Une erreur est survenue lors de la création de l'annonce.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  const progressPercentage = (currentStep / totalSteps) * 100;
+
+  const renderCurrentSection = () => {
+    switch (currentStep) {
+      case 1:
+        return <FormSection1 formData={formData} handleInputChange={handleInputChange} />;
+      case 2:
+        return <FormSection2 formData={formData} handleInputChange={handleInputChange} />;
+      case 3:
+        return <FormSection3 formData={formData} handleInputChange={handleInputChange} />;
+      case 4:
+        return <FormSection4 formData={formData} handleInputChange={handleInputChange} />;
+      case 5:
+        return <FormSection5 formData={formData} handleInputChange={handleInputChange} />;
+      case 15:
+        return <FormSection15 formData={formData} handleInputChange={handleInputChange} />;
+      default:
+        return (
+          <div className="text-center py-12">
+            <p className="text-muted-foreground">Section {currentStep} - En développement</p>
+            <p className="text-sm text-muted-foreground mt-2">
+              Cette section sera complétée prochainement. Vous pouvez passer à l'étape suivante.
+            </p>
+          </div>
+        );
+    }
+  };
+
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-slate-50">
       <Header />
 
-      <main>
-        {/* Hero with Listing Form */}
-        <section className="bg-gradient-to-br from-secondary to-orange-600 text-white py-24">
-          <div className="container mx-auto px-4">
-            <div className="max-w-5xl mx-auto">
-              <h1 className="text-5xl md:text-6xl font-bold mb-6 text-center">
-                Vendez Votre Entreprise BTP au Meilleur Prix
-              </h1>
-              <p className="text-xl mb-12 text-center text-white/90">
-                Créez votre annonce • Accompagnement expert • Commission uniquement si vente réussie
-              </p>
-
-              {/* Listing Creation Form */}
-              <div className="bg-white rounded-2xl p-8 shadow-2xl">
-                <h2 className="text-2xl font-bold text-foreground mb-6">Créez Votre Annonce</h2>
-                <div className="space-y-4">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                      <label className="text-sm font-medium text-foreground block mb-2">
-                        Chiffre d'affaires annuel (€)
-                      </label>
-                      <Input 
-                        type="number" 
-                        placeholder="Ex: 500000" 
-                        className="text-foreground"
-                      />
-                    </div>
-                    <div>
-                      <label className="text-sm font-medium text-foreground block mb-2">
-                        Prix de vente souhaité (€)
-                      </label>
-                      <Input 
-                        type="number" 
-                        placeholder="Ex: 750000" 
-                        className="text-foreground"
-                      />
-                    </div>
-                  </div>
-
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                      <label className="text-sm font-medium text-foreground block mb-2">
-                        Secteur d'activité
-                      </label>
-                      <SearchableSelect 
-                        value={secteur}
-                        onValueChange={setSecteur}
-                        placeholder="Rechercher un secteur..."
-                      />
-                    </div>
-                    <div>
-                      <label className="text-sm font-medium text-foreground block mb-2">
-                        Département
-                      </label>
-                      <Select value={departement} onValueChange={setDepartement}>
-                        <SelectTrigger className="text-foreground">
-                          <SelectValue placeholder="Choisir département" />
-                        </SelectTrigger>
-                        <SelectContent className="max-h-[400px] overflow-y-auto">
-                          <DepartementsSelect />
-                        </SelectContent>
-                      </Select>
-                    </div>
-                  </div>
-
-                  <div>
-                    <label className="text-sm font-medium text-foreground block mb-2">
-                      Titre de l'annonce
-                    </label>
-                    <Input 
-                      type="text" 
-                      placeholder="Ex: Entreprise de Plomberie Prospère en Île-de-France" 
-                      className="text-foreground"
-                    />
-                  </div>
-
-                  <div>
-                    <label className="text-sm font-medium text-foreground block mb-2">
-                      Description de l'entreprise
-                    </label>
-                    <textarea 
-                      className="w-full min-h-[120px] rounded-md border border-input bg-background px-3 py-2 text-sm text-foreground"
-                      placeholder="Décrivez votre entreprise : année de création, effectif, points forts, clientèle, équipements, certifications..."
-                    />
-                  </div>
-
-                  <div className="flex gap-4 mt-6">
-                    <Button 
-                      className="flex-1 bg-primary hover:bg-primary/90 text-white text-lg py-6"
-                    >
-                      📝 Publier Mon Annonce
-                    </Button>
-                    <Button 
-                      variant="outline"
-                      className="border-primary text-primary hover:bg-primary hover:text-white text-lg py-6"
-                      onClick={() => window.location.href = '/vendre?estimation=true'}
-                    >
-                      💰 Obtenir une estimation
-                    </Button>
-                  </div>
-                  
-                  <p className="text-sm text-muted-foreground text-center mt-4">
-                    ✅ Gratuit pendant 30 jours • Sans engagement • 100% confidentiel
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Avantages Vendeur */}
-        <section className="py-20 bg-slate-50">
-          <div className="container mx-auto px-4">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold mb-4">Pourquoi Nous Choisir Pour Vendre ?</h2>
-              <p className="text-xl text-muted-foreground">
-                Des experts BTP à votre service pour maximiser la valeur de votre entreprise
-              </p>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              <div className="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300">
-                <DollarSign className="h-12 w-12 text-success mb-4" />
-                <h3 className="text-xl font-bold mb-3">Valorisation par Experts BTP</h3>
-                <p className="text-muted-foreground">
-                  Évaluation précise par des professionnels certifiés du secteur BTP avec 15 ans d'expérience
-                </p>
-              </div>
-
-              <div className="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300">
-                <Users className="h-12 w-12 text-primary mb-4" />
-                <h3 className="text-xl font-bold mb-3">2000+ Repreneurs Qualifiés</h3>
-                <p className="text-muted-foreground">
-                  Accédez à notre réseau exclusif d'acheteurs vérifiés et actifs dans le BTP
-                </p>
-              </div>
-
-              <div className="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300">
-                <Lock className="h-12 w-12 text-destructive mb-4" />
-                <h3 className="text-xl font-bold mb-3">Confidentialité Absolue</h3>
-                <p className="text-muted-foreground">
-                  Anonymat garanti, data room sécurisée RGPD, NDA systématique avec tous les repreneurs
-                </p>
-              </div>
-
-              <div className="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300">
-                <Scale className="h-12 w-12 text-accent mb-4" />
-                <h3 className="text-xl font-bold mb-3">Accompagnement Juridique</h3>
-                <p className="text-muted-foreground">
-                  Avocats spécialisés en droit des affaires et transmission d'entreprises inclus
-                </p>
-              </div>
-
-              <div className="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300">
-                <TrendingUp className="h-12 w-12 text-secondary mb-4" />
-                <h3 className="text-xl font-bold mb-3">Vente 2x Plus Rapide</h3>
-                <p className="text-muted-foreground">
-                  45 jours en moyenne vs 18-24 mois sur les plateformes généralistes
-                </p>
-              </div>
-
-              <div className="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300">
-                <Award className="h-12 w-12 text-success mb-4" />
-                <h3 className="text-xl font-bold mb-3">Commission 2% Si Succès</h3>
-                <p className="text-muted-foreground">
-                  Vous ne payez qu'en cas de vente réussie. Nos intérêts sont parfaitement alignés
-                </p>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Processus Détaillé */}
-        <section className="py-20 bg-white">
-          <div className="container mx-auto px-4">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold mb-4">Le Parcours de Vente en 5 Étapes</h2>
-              <p className="text-xl text-muted-foreground">
-                Un processus éprouvé et transparent pour vendre votre entreprise sereinement
-              </p>
-            </div>
-
-            <div className="max-w-3xl mx-auto">
-              <ProcessStep
-                number={1}
-                badge="48h"
-                title="Valorisation Gratuite"
-                description="Remplissez le formulaire en 2 minutes. Nos experts BTP analysent votre entreprise et vous envoient une estimation détaillée sous 48h avec les leviers d'optimisation."
-              />
-              <ProcessStep
-                number={2}
-                badge="5 jours"
-                title="Préparation du Dossier"
-                description="Nous créons votre mémorandum de vente professionnel, optimisons la présentation de vos atouts, et préparons tous les documents nécessaires pour maximiser l'attractivité."
-              />
-              <ProcessStep
-                number={3}
-                badge="1 semaine"
-                title="Mise en Relation Ciblée"
-                description="Notre algorithme IA identifie les repreneurs parfaits parmi notre base de 2000+ acheteurs qualifiés. Matching intelligent basé sur 20+ critères de compatibilité."
-              />
-              <ProcessStep
-                number={4}
-                badge="2-4 semaines"
-                title="Négociation Accompagnée"
-                description="Nos experts négocient pour vous les meilleures conditions : prix, délais de paiement, garanties. Vous gardez le contrôle final de toutes les décisions."
-              />
-              <ProcessStep
-                number={5}
-                badge="1 semaine"
-                title="Closing Sécurisé"
-                description="Finalisation juridique avec nos avocats spécialisés, transfert des actifs, formation du repreneur. Vous êtes accompagné jusqu'au bout."
-                isLast={true}
-              />
-            </div>
-          </div>
-        </section>
-
-        {/* Testimonials */}
-        <section className="py-20 bg-white">
-          <div className="container mx-auto px-4">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold mb-4">Ils Ont Vendu Avec Nous</h2>
-              <p className="text-xl text-muted-foreground">Témoignages authentiques d'entrepreneurs</p>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-              <div className="bg-slate-50 p-8 rounded-xl">
-                <div className="flex items-center gap-4 mb-4">
-                  <div className="w-16 h-16 rounded-full bg-primary flex items-center justify-center text-white text-xl font-bold">
-                    ML
-                  </div>
-                  <div>
-                    <p className="font-bold">Marc Lefebvre</p>
-                    <p className="text-sm text-muted-foreground">Plomberie-Chauffage, Toulouse</p>
-                  </div>
-                </div>
-                <p className="italic text-muted-foreground mb-4">
-                  "Vendu en 38 jours à un repreneur parfait. L'accompagnement était exceptionnel du début à la fin. 
-                  Le meilleur investissement de ma vie."
-                </p>
-                <div className="text-yellow-500">⭐⭐⭐⭐⭐</div>
-              </div>
-
-              <div className="bg-slate-50 p-8 rounded-xl">
-                <div className="flex items-center gap-4 mb-4">
-                  <div className="w-16 h-16 rounded-full bg-secondary flex items-center justify-center text-white text-xl font-bold">
-                    SD
-                  </div>
-                  <div>
-                    <p className="font-bold">Sophie Durand</p>
-                    <p className="text-sm text-muted-foreground">Électricité, Lyon</p>
-                  </div>
-                </div>
-                <p className="italic text-muted-foreground mb-4">
-                  "Valorisation au-dessus de mes espérances. Les experts ont su mettre en avant tous les atouts de mon 
-                  entreprise. Processus fluide et transparent."
-                </p>
-                <div className="text-yellow-500">⭐⭐⭐⭐⭐</div>
-              </div>
-
-              <div className="bg-slate-50 p-8 rounded-xl">
-                <div className="flex items-center gap-4 mb-4">
-                  <div className="w-16 h-16 rounded-full bg-success flex items-center justify-center text-white text-xl font-bold">
-                    PM
-                  </div>
-                  <div>
-                    <p className="font-bold">Pierre Martin</p>
-                    <p className="text-sm text-muted-foreground">Maçonnerie, Bordeaux</p>
-                  </div>
-                </div>
-                <p className="italic text-muted-foreground mb-4">
-                  "J'hésitais à vendre. L'équipe m'a accompagné dans la réflexion, sans pression. Une fois décidé, 
-                  tout s'est fait en 6 semaines. Incroyable efficacité."
-                </p>
-                <div className="text-yellow-500">⭐⭐⭐⭐⭐</div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Final CTA */}
-        <section className="py-24 bg-gradient-to-br from-primary to-blue-700 text-white">
-          <div className="container mx-auto px-4 text-center">
-            <h2 className="text-4xl md:text-5xl font-bold mb-4">
-              Prêt à Valoriser Votre Entreprise ?
-            </h2>
-            <p className="text-xl mb-8 text-white/90">
-              Estimation gratuite • Accompagnement expert • Commission uniquement si vente réussie
-            </p>
-            <Button size="lg" className="bg-white text-primary hover:bg-white/90 text-xl py-6 px-12">
-              Obtenir mon estimation gratuite
-            </Button>
-            <p className="mt-6 text-white/80">
-              ⚡ Réponse en 48h • 🔒 100% confidentiel • ✅ Sans engagement
+      {/* Hero */}
+      <section className="bg-gradient-to-br from-secondary to-orange-600 text-white py-16">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto text-center">
+            <h1 className="text-4xl md:text-5xl font-bold mb-4">
+              Vendre Votre Entreprise BTP
+            </h1>
+            <p className="text-xl text-white/90">
+              Formulaire complet • Publication rapide • Accompagnement expert
             </p>
           </div>
-        </section>
-      </main>
+        </div>
+      </section>
+
+      {/* Progress Bar */}
+      <div className="bg-white border-b sticky top-0 z-40 shadow-sm">
+        <div className="container mx-auto px-4 py-4">
+          <div className="max-w-4xl mx-auto">
+            <div className="flex items-center justify-between mb-2">
+              <span className="text-sm font-medium text-gray-700">
+                Étape {currentStep} sur {totalSteps}
+              </span>
+              <span className="text-sm font-medium text-primary">
+                {Math.round(progressPercentage)}%
+              </span>
+            </div>
+            <div className="w-full bg-gray-200 rounded-full h-2">
+              <div 
+                className="bg-primary h-2 rounded-full transition-all duration-300"
+                style={{ width: `${progressPercentage}%` }}
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Form Content */}
+      <section className="py-12">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto">
+            <div className="bg-white rounded-2xl shadow-xl p-8 md:p-12">
+              {renderCurrentSection()}
+
+              {/* Navigation Buttons */}
+              <div className="flex gap-4 mt-8 pt-8 border-t">
+                {currentStep > 1 && (
+                  <Button
+                    onClick={handlePrevious}
+                    variant="outline"
+                    size="lg"
+                    className="flex-1"
+                  >
+                    <ArrowLeft className="w-4 h-4 mr-2" />
+                    Précédent
+                  </Button>
+                )}
+                
+                {currentStep < totalSteps ? (
+                  <Button
+                    onClick={handleNext}
+                    size="lg"
+                    className="flex-1 bg-primary hover:bg-primary/90"
+                  >
+                    Suivant
+                    <ArrowRight className="w-4 h-4 ml-2" />
+                  </Button>
+                ) : (
+                  <Button
+                    onClick={handleSubmit}
+                    size="lg"
+                    className="flex-1 bg-secondary hover:bg-secondary/90"
+                    disabled={isSubmitting}
+                  >
+                    {isSubmitting ? (
+                      <>
+                        <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2" />
+                        Publication...
+                      </>
+                    ) : (
+                      <>
+                        <Save className="w-4 h-4 mr-2" />
+                        Publier l'Annonce
+                      </>
+                    )}
+                  </Button>
+                )}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
       <Footer />
     </div>
