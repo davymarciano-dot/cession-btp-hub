@@ -166,7 +166,9 @@ const Entreprises = () => {
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+                {/* Ces cartes sont des exemples - à remplacer par les vraies annonces depuis Supabase */}
                 <EntrepriseCard
+                  id="exemple-1"
                   type="blue"
                   certification="QUALIBAT"
                   status="disponible"
@@ -183,6 +185,7 @@ const Entreprises = () => {
                 />
 
                 <EntrepriseCard
+                  id="exemple-2"
                   type="orange"
                   certification="CERTIFIÉE RGE"
                   status="vendu"
@@ -195,6 +198,7 @@ const Entreprises = () => {
                 />
 
                 <EntrepriseCard
+                  id="exemple-3"
                   type="orange"
                   certification="RGE QUALIPAC"
                   status="vendu"
@@ -207,6 +211,7 @@ const Entreprises = () => {
                 />
 
                 <EntrepriseCard
+                  id="exemple-4"
                   type="blue"
                   certification="QUALIBAT"
                   status="disponible"
@@ -223,6 +228,7 @@ const Entreprises = () => {
                 />
 
                 <EntrepriseCard
+                  id="exemple-5"
                   type="blue"
                   certification="RGE"
                   status="disponible"
@@ -238,6 +244,7 @@ const Entreprises = () => {
                 />
 
                 <EntrepriseCard
+                  id="exemple-6"
                   type="blue"
                   certification="QUALIBAT"
                   status="disponible"

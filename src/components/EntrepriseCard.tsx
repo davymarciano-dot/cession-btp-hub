@@ -1,7 +1,9 @@
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { useNavigate } from "react-router-dom";
 
 interface EntrepriseCardProps {
+  id?: string;
   type: "orange" | "blue";
   certification: string;
   status: "vendu" | "disponible";
@@ -18,6 +20,7 @@ interface EntrepriseCardProps {
 }
 
 const EntrepriseCard = ({
+  id,
   type,
   certification,
   status,
@@ -32,6 +35,7 @@ const EntrepriseCard = ({
   financement,
   timeAgo,
 }: EntrepriseCardProps) => {
+  const navigate = useNavigate();
   const isOrange = type === "orange";
   const bgClass = isOrange
     ? "bg-gradient-to-br from-orange-400 to-orange-500"
@@ -103,6 +107,8 @@ const EntrepriseCard = ({
       {/* Button */}
       <Button 
         className={`w-full ${isOrange ? 'bg-white/10 hover:bg-white/20' : 'bg-secondary hover:bg-secondary/90'} text-white border-0`}
+        onClick={() => id && navigate(`/entreprises/${id}`)}
+        disabled={!id}
       >
         Voir détails →
       </Button>

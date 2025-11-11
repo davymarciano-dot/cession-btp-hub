@@ -1,10 +1,28 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { Building2, Menu, X } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Building2, Menu, X, LayoutDashboard } from "lucide-react";
+import { Link, useNavigate } from "react-router-dom";
+import { supabase } from "@/integrations/supabase/client";
+import { User } from "@supabase/supabase-js";
 
 const Header = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [user, setUser] = useState<User | null>(null);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setUser(session?.user ?? null);
+    });
+
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(
+      (_event, session) => {
+        setUser(session?.user ?? null);
+      }
+    );
+
+    return () => subscription.unsubscribe();
+  }, []);
 
   return (
     <header className="sticky top-0 bg-white shadow-sm z-50">
@@ -43,16 +61,27 @@ const Header = () => {
 
           {/* Desktop Actions */}
           <div className="hidden md:flex items-center gap-4">
-            <Button 
-              variant="outline" 
-              className="border-primary text-primary hover:bg-primary hover:text-white"
-              onClick={() => window.location.href = '/auth'}
-            >
-              Connexion
-            </Button>
+            {user ? (
+              <Button 
+                variant="outline" 
+                className="border-primary text-primary hover:bg-primary hover:text-white"
+                onClick={() => navigate('/dashboard')}
+              >
+                <LayoutDashboard className="w-4 h-4 mr-2" />
+                Mon Espace
+              </Button>
+            ) : (
+              <Button 
+                variant="outline" 
+                className="border-primary text-primary hover:bg-primary hover:text-white"
+                onClick={() => navigate('/auth')}
+              >
+                Connexion
+              </Button>
+            )}
             <Button 
               className="bg-secondary hover:bg-secondary/90 text-white"
-              onClick={() => window.location.href = '/estimer'}
+              onClick={() => navigate('/estimer')}
             >
               Estimer Gratuitement
             </Button>
@@ -89,16 +118,27 @@ const Header = () => {
               Ressources
             </Link>
             <div className="flex flex-col gap-2 pt-4">
-              <Button 
-                variant="outline" 
-                className="w-full border-primary text-primary hover:bg-primary hover:text-white"
-                onClick={() => window.location.href = '/auth'}
-              >
-                Connexion
-              </Button>
+              {user ? (
+                <Button 
+                  variant="outline" 
+                  className="w-full border-primary text-primary hover:bg-primary hover:text-white"
+                  onClick={() => navigate('/dashboard')}
+                >
+                  <LayoutDashboard className="w-4 h-4 mr-2" />
+                  Mon Espace
+                </Button>
+              ) : (
+                <Button 
+                  variant="outline" 
+                  className="w-full border-primary text-primary hover:bg-primary hover:text-white"
+                  onClick={() => navigate('/auth')}
+                >
+                  Connexion
+                </Button>
+              )}
               <Button 
                 className="w-full bg-secondary hover:bg-secondary/90 text-white"
-                onClick={() => window.location.href = '/estimer'}
+                onClick={() => navigate('/estimer')}
               >
                 Estimer Gratuitement
               </Button>
