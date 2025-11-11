@@ -10,6 +10,15 @@ import FormSection2 from "@/components/vendre/FormSection2";
 import FormSection3 from "@/components/vendre/FormSection3";
 import FormSection4 from "@/components/vendre/FormSection4";
 import FormSection5 from "@/components/vendre/FormSection5";
+import FormSection6 from "@/components/vendre/FormSection6";
+import FormSection7 from "@/components/vendre/FormSection7";
+import FormSection8 from "@/components/vendre/FormSection8";
+import FormSection9 from "@/components/vendre/FormSection9";
+import FormSection10 from "@/components/vendre/FormSection10";
+import FormSection11 from "@/components/vendre/FormSection11";
+import FormSection12 from "@/components/vendre/FormSection12";
+import FormSection13 from "@/components/vendre/FormSection13";
+import FormSection14 from "@/components/vendre/FormSection14";
 import FormSection15 from "@/components/vendre/FormSection15";
 import { ArrowLeft, ArrowRight, Save } from "lucide-react";
 
@@ -361,17 +370,28 @@ const Vendre = () => {
         return <FormSection4 formData={formData} handleInputChange={handleInputChange} />;
       case 5:
         return <FormSection5 formData={formData} handleInputChange={handleInputChange} />;
+      case 6:
+        return <FormSection6 formData={formData} handleInputChange={handleInputChange} />;
+      case 7:
+        return <FormSection7 formData={formData} handleInputChange={handleInputChange} />;
+      case 8:
+        return <FormSection8 formData={formData} handleInputChange={handleInputChange} />;
+      case 9:
+        return <FormSection9 formData={formData} handleInputChange={handleInputChange} />;
+      case 10:
+        return <FormSection10 formData={formData} handleInputChange={handleInputChange} />;
+      case 11:
+        return <FormSection11 formData={formData} handleInputChange={handleInputChange} />;
+      case 12:
+        return <FormSection12 formData={formData} handleInputChange={handleInputChange} />;
+      case 13:
+        return <FormSection13 formData={formData} handleInputChange={handleInputChange} />;
+      case 14:
+        return <FormSection14 formData={formData} handleInputChange={handleInputChange} />;
       case 15:
         return <FormSection15 formData={formData} handleInputChange={handleInputChange} />;
       default:
-        return (
-          <div className="text-center py-12">
-            <p className="text-muted-foreground">Section {currentStep} - En développement</p>
-            <p className="text-sm text-muted-foreground mt-2">
-              Cette section sera complétée prochainement. Vous pouvez passer à l'étape suivante.
-            </p>
-          </div>
-        );
+        return null;
     }
   };
 
