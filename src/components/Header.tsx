@@ -54,9 +54,11 @@ const Header = () => {
             <Link to="/tarifs" className="text-foreground hover:text-primary font-medium transition-colors">
               Tarifs
             </Link>
-            <Link to="/ressources" className="text-foreground hover:text-primary font-medium transition-colors">
-              Ressources
-            </Link>
+            {user && (
+              <Link to="/messages" className="text-foreground hover:text-primary font-medium transition-colors">
+                Messages
+              </Link>
+            )}
           </div>
 
           {/* Desktop Actions */}
@@ -114,9 +116,11 @@ const Header = () => {
             <Link to="/tarifs" className="block text-foreground hover:text-primary font-medium transition-colors">
               Tarifs
             </Link>
-            <Link to="/ressources" className="block text-foreground hover:text-primary font-medium transition-colors">
-              Ressources
-            </Link>
+            {user && (
+              <Link to="/messages" className="block text-foreground hover:text-primary font-medium transition-colors">
+                Messages
+              </Link>
+            )}
             <div className="flex flex-col gap-2 pt-4">
               {user ? (
                 <Button 

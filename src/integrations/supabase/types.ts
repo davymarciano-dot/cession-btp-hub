@@ -329,6 +329,41 @@ export type Database = {
         }
         Relationships: []
       }
+      conversations: {
+        Row: {
+          acheteur_id: string
+          annonce_id: string
+          created_at: string
+          id: string
+          updated_at: string
+          vendeur_id: string
+        }
+        Insert: {
+          acheteur_id: string
+          annonce_id: string
+          created_at?: string
+          id?: string
+          updated_at?: string
+          vendeur_id: string
+        }
+        Update: {
+          acheteur_id?: string
+          annonce_id?: string
+          created_at?: string
+          id?: string
+          updated_at?: string
+          vendeur_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "conversations_annonce_id_fkey"
+            columns: ["annonce_id"]
+            isOneToOne: false
+            referencedRelation: "annonces"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       estimations: {
         Row: {
           a_credits: boolean
@@ -457,6 +492,41 @@ export type Database = {
           valeur_stock?: number | null
         }
         Relationships: []
+      }
+      messages: {
+        Row: {
+          content: string
+          conversation_id: string
+          created_at: string
+          id: string
+          read: boolean
+          sender_id: string
+        }
+        Insert: {
+          content: string
+          conversation_id: string
+          created_at?: string
+          id?: string
+          read?: boolean
+          sender_id: string
+        }
+        Update: {
+          content?: string
+          conversation_id?: string
+          created_at?: string
+          id?: string
+          read?: boolean
+          sender_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "messages_conversation_id_fkey"
+            columns: ["conversation_id"]
+            isOneToOne: false
+            referencedRelation: "conversations"
+            referencedColumns: ["id"]
+          },
+        ]
       }
     }
     Views: {

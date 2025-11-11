@@ -10,7 +10,7 @@ import { Card } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import {
   Building2, MapPin, Calendar, TrendingUp, Users, Euro,
-  Award, FileText, Phone, Mail, ArrowLeft, Eye, Loader2
+  Award, FileText, Phone, Mail, ArrowLeft, Eye, Loader2, MessageCircle
 } from "lucide-react";
 
 const AnnonceDetail = () => {
@@ -19,13 +19,21 @@ const AnnonceDetail = () => {
   const { toast } = useToast();
   const [annonce, setAnnonce] = useState<any>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [user, setUser] = useState<any>(null);
+  const [isContacting, setIsContacting] = useState(false);
 
   useEffect(() => {
+    checkUser();
     if (id) {
       fetchAnnonce();
       incrementVues();
     }
   }, [id]);
+
+  const checkUser = async () => {
+    const { data: { user } } = await supabase.auth.getUser();
+    setUser(user);
+  };
 
   const fetchAnnonce = async () => {
     try {
@@ -69,11 +77,71 @@ const AnnonceDetail = () => {
     }
   };
 
-  const handleContact = () => {
-    if (annonce) {
-      const subject = `Intéressé par ${annonce.raison_sociale || 'votre entreprise'}`;
-      const body = `Bonjour,\n\nJe suis intéressé par votre annonce "${annonce.secteur_activite}" située dans le ${annonce.departement}.\n\nCordialement`;
-      window.location.href = `mailto:${annonce.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  const handleContact = async () => {
+    if (!user) {
+      toast({
+        title: "Connexion requise",
+        description: "Vous devez être connecté pour contacter le vendeur",
+      });
+      navigate("/auth");
+      return;
+    }
+
+    if (user.id === annonce.user_id) {
+      toast({
+        title: "Action impossible",
+        description: "Vous ne pouvez pas contacter votre propre annonce",
+        variant: "destructive"
+      });
+      return;
+    }
+
+    setIsContacting(true);
+
+    try {
+      // Check if conversation already exists
+      const { data: existingConv } = await supabase
+        .from("conversations")
+        .select("id")
+        .eq("annonce_id", annonce.id)
+        .eq("acheteur_id", user.id)
+        .eq("vendeur_id", annonce.user_id)
+        .single();
+
+      let conversationId = existingConv?.id;
+
+      if (!existingConv) {
+        // Create new conversation
+        const { data: newConv, error: createError } = await supabase
+          .from("conversations")
+          .insert({
+            annonce_id: annonce.id,
+            acheteur_id: user.id,
+            vendeur_id: annonce.user_id
+          })
+          .select()
+          .single();
+
+        if (createError) throw createError;
+        conversationId = newConv.id;
+
+        // Send initial message
+        await supabase.from("messages").insert({
+          conversation_id: conversationId,
+          sender_id: user.id,
+          content: `Bonjour, je suis intéressé par votre annonce "${annonce.raison_sociale || 'Entreprise anonyme'}".`
+        });
+      }
+
+      navigate(`/messages?conversation=${conversationId}`);
+    } catch (error: any) {
+      toast({
+        title: "Erreur",
+        description: "Impossible de contacter le vendeur",
+        variant: "destructive"
+      });
+    } finally {
+      setIsContacting(false);
     }
   };
 
@@ -285,8 +353,10 @@ const AnnonceDetail = () => {
                   onClick={handleContact}
                   className="w-full bg-secondary hover:bg-secondary/90"
                   size="lg"
+                  disabled={isContacting}
                 >
-                  Contacter le vendeur
+                  <MessageCircle className="w-4 h-4 mr-2" />
+                  {isContacting ? "Connexion..." : "Envoyer un message"}
                 </Button>
 
                 <div className="mt-6 p-4 bg-muted rounded-lg">
