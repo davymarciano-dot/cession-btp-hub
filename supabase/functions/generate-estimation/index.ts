@@ -20,49 +20,55 @@ serve(async (req) => {
       throw new Error("LOVABLE_API_KEY is not configured");
     }
 
-    // Construire le prompt pour l'IA
+    // Construire le prompt pour l'IA avec toutes les nouvelles données
     const prompt = `Tu es un expert en valorisation d'entreprises BTP. Analyse les données suivantes et fournis une estimation détaillée de la valeur de l'entreprise.
 
 DONNÉES DE L'ENTREPRISE:
 - Secteur: ${formData.secteur}
 - Département: ${formData.departement}
 - Année de création: ${formData.anneeCreation}
+- Type de clientèle: ${formData.typeClientele || 'Non renseigné'}
 
 CHIFFRE D'AFFAIRES:
 - CA N-2: ${formData.caN2 || 'Non renseigné'} €
 - CA N-1: ${formData.caN1} €
-- CA N: ${formData.caN || 'Non renseigné'} €
+${formData.caN ? `- CA N: ${formData.caN} €` : ''}
 
-RÉSULTATS:
+RÉSULTATS FINANCIERS:
 - Résultat N-1: ${formData.resultatN1Type} de ${formData.resultatN1} €
-- Résultat N-2: ${formData.resultatN2Type} de ${formData.resultatN2} €
 
 PERSONNEL:
 - Nombre total d'employés: ${formData.nombreEmployes}
-- CDI: ${formData.nombreCDI || 'Non renseigné'}
-- CDD: ${formData.nombreCDD || 'Non renseigné'}
-- Apprentis: ${formData.nombreApprentis || 'Non renseigné'}
-
-DETTES:
-- Dettes: ${formData.aDettes ? 'Oui' : 'Non'}
-- Montant total du passif: ${formData.montantPassif} €
-${formData.aDettes ? `- Dette URSSAF: ${formData.detteURSSAF || 0} €
-- Dette TVA: ${formData.detteTVA || 0} €
-- Dette Loyer: ${formData.detteLoyer || 0} €
-- Dette Fournisseurs: ${formData.detteFournisseurs || 0} €
-- Autres dettes: ${formData.detteAutres || 0} €` : ''}
-
-CRÉDITS:
-- Crédits en cours: ${formData.aCredits ? 'Oui' : 'Non'}
-${formData.aCredits ? `- Crédit professionnel: ${formData.creditProfessionnel || 0} €
-- Crédit matériel: ${formData.creditMateriel || 0} €
-- Crédit immobilier: ${formData.creditImmobilier || 0} €` : ''}
 
 ACTIFS:
 - Valeur matériel & véhicules: ${formData.valeurMateriel || 0} €
-- Valeur stock: ${formData.valeurStock || 0} €
-- Situation locaux: ${formData.situationLocaux}
-${formData.situationLocaux === 'proprietaire' ? `- Valeur locaux: ${formData.valeurLocaux || 0} €` : ''}
+
+PASSIF:
+- Dettes totales: ${formData.dettesTotales || 0} €
+
+CERTIFICATIONS & QUALIFICATIONS (IMPORTANT pour la valorisation):
+- Certification RGE: ${formData.certificationRGE}
+${formData.certificationRGE === 'oui' ? `  - Secteurs RGE: ${[
+  formData.rgeSecteursIsolation ? 'Isolation' : null,
+  formData.rgeSecteursPAC ? 'Pompes à chaleur' : null,
+  formData.rgeSecteursPhotovoltaique ? 'Photovoltaïque' : null,
+  formData.rgeSecteursChauffageBois ? 'Chauffage bois' : null,
+  formData.rgeSecteursFenetres ? 'Fenêtres' : null,
+  formData.rgeSecteursVentilation ? 'Ventilation' : null,
+  formData.rgeSecteursAudit ? 'Audit énergétique' : null
+].filter(Boolean).join(', ') || 'Non spécifié'}` : ''}
+
+PARTENARIATS FINANCIERS (IMPORTANT pour la valorisation):
+- Partenariat organismes de financement: ${formData.partenaireFinancement}
+${formData.partenaireFinancement === 'oui' && formData.partenairesListe?.length > 0 ? 
+  `  - Partenaires: ${formData.partenairesListe.join(', ')}` : ''}
+
+CONSIGNES D'ANALYSE:
+1. La certification RGE est un ATOUT MAJEUR qui augmente significativement la valeur (environ +10-15%) car elle permet l'accès aux aides MaPrimeRénov' et CEE
+2. Les partenariats avec des organismes de financement facilitent les ventes aux particuliers et augmentent la valeur (environ +5-10%)
+3. Considère la croissance du CA entre N-2 et N-1
+4. Analyse le type de clientèle (particuliers B2C = plus de volume, professionnels B2B = plus de marge)
+5. Prends en compte la solidité financière (résultat/CA, niveau de dettes)
 
 Fournis une estimation JSON structurée avec:
 {
@@ -70,12 +76,12 @@ Fournis une estimation JSON structurée avec:
   "estimationMoyenne": nombre (en euros),
   "estimationHaute": nombre (en euros),
   "multipleValorisation": nombre (multiple du CA),
-  "analyseDetaillee": "texte détaillé de 200-300 mots expliquant la valorisation",
+  "analyseDetaillee": "texte détaillé de 200-300 mots expliquant la valorisation, mentionne EXPLICITEMENT l'impact de la certification RGE et des partenariats si présents",
   "pointsForts": ["point 1", "point 2", "point 3", "point 4"],
   "recommandations": ["recommandation 1", "recommandation 2", "recommandation 3"]
 }
 
-Sois précis et professionnel dans ton analyse. Considère tous les facteurs financiers, le secteur BTP, et le marché local.`;
+Sois précis et professionnel dans ton analyse. Considère TOUS les facteurs : financiers, certifications RGE, partenariats, secteur BTP, et marché local.`;
 
     // Appel à Lovable AI
     const aiResponse = await fetch("https://ai.gateway.lovable.dev/v1/chat/completions", {
@@ -187,27 +193,27 @@ Sois précis et professionnel dans ton analyse. Considère tous les facteurs fin
         ca_n: formData.caN ? parseFloat(formData.caN) : null,
         resultat_n1_type: formData.resultatN1Type,
         resultat_n1: parseFloat(formData.resultatN1),
-        resultat_n2_type: formData.resultatN2Type,
-        resultat_n2: parseFloat(formData.resultatN2),
+        resultat_n2_type: formData.resultatN2Type || 'positif',
+        resultat_n2: formData.resultatN2 ? parseFloat(formData.resultatN2) : 0,
         nombre_employes: parseInt(formData.nombreEmployes),
         nombre_cdi: formData.nombreCDI ? parseInt(formData.nombreCDI) : null,
         nombre_cdd: formData.nombreCDD ? parseInt(formData.nombreCDD) : null,
         nombre_apprentis: formData.nombreApprentis ? parseInt(formData.nombreApprentis) : null,
-        a_dettes: formData.aDettes === 'oui',
+        a_dettes: formData.dettesTotales > 0,
         dette_urssaf: formData.detteURSSAF ? parseFloat(formData.detteURSSAF) : null,
         dette_tva: formData.detteTVA ? parseFloat(formData.detteTVA) : null,
         dette_loyer: formData.detteLoyer ? parseFloat(formData.detteLoyer) : null,
         dette_fournisseurs: formData.detteFournisseurs ? parseFloat(formData.detteFournisseurs) : null,
         dette_autres: formData.detteAutres ? parseFloat(formData.detteAutres) : null,
-        montant_passif: parseFloat(formData.montantPassif),
-        a_credits: formData.aCredits === 'oui',
-        credit_professionnel: formData.creditProfessionnel ? parseFloat(formData.creditProfessionnel) : null,
-        credit_materiel: formData.creditMateriel ? parseFloat(formData.creditMateriel) : null,
-        credit_immobilier: formData.creditImmobilier ? parseFloat(formData.creditImmobilier) : null,
+        montant_passif: parseFloat(formData.dettesTotales || 0),
+        a_credits: false,
+        credit_professionnel: null,
+        credit_materiel: null,
+        credit_immobilier: null,
         valeur_materiel: formData.valeurMateriel ? parseFloat(formData.valeurMateriel) : null,
-        valeur_stock: formData.valeurStock ? parseFloat(formData.valeurStock) : null,
-        situation_locaux: formData.situationLocaux,
-        valeur_locaux: formData.valeurLocaux ? parseFloat(formData.valeurLocaux) : null,
+        valeur_stock: null,
+        situation_locaux: formData.situationLocaux || 'locataire',
+        valeur_locaux: null,
         estimation_basse: estimation.estimationBasse,
         estimation_moyenne: estimation.estimationMoyenne,
         estimation_haute: estimation.estimationHaute,

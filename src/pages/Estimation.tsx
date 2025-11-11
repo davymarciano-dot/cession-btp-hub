@@ -5,12 +5,11 @@ import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Checkbox } from "@/components/ui/checkbox";
-import { Check, Calculator, TrendingUp, Users, FileText, CreditCard, AlertCircle } from "lucide-react";
+import { Calculator, TrendingUp, Check, Award, Building2 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { BTPMetiersSelect } from "@/data/btp-metiers";
-import { DepartementsSelect } from "@/data/departements";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 
@@ -18,746 +17,704 @@ const Estimation = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
   
-  // Form state
   const [formData, setFormData] = useState({
-    // Section 1: Informations Générales
     secteur: "",
     departement: "",
     anneeCreation: "",
-    
-    // Section 2: Chiffre d'Affaires
-    caN2: "",
     caN1: "",
-    caN: "",
-    
-    // Section 3: Résultats
+    caN2: "",
     resultatN1Type: "positif",
     resultatN1: "",
-    resultatN2Type: "positif",
-    resultatN2: "",
-    
-    // Section 4: Personnel
     nombreEmployes: "",
-    nombreCDI: "",
-    nombreCDD: "",
-    nombreApprentis: "",
-    
-    // Section 5: Dettes
-    aDettes: "non",
-    detteURSSAF: "",
-    detteTVA: "",
-    detteLoyer: "",
-    detteFournisseurs: "",
-    detteAutres: "",
-    montantPassif: "",
-    
-    // Section 6: Crédits
-    aCredits: "non",
-    creditProfessionnel: "",
-    creditMateriel: "",
-    creditImmobilier: "",
-    
-    // Section 7: Actifs
     valeurMateriel: "",
-    valeurStock: "",
-    situationLocaux: "locataire",
-    valeurLocaux: "",
+    dettesTotales: "",
+    typeClientele: "particuliers",
+    certificationRGE: "non",
+    rgeSecteursIsolation: false,
+    rgeSecteursPAC: false,
+    rgeSecteursPhotovoltaique: false,
+    rgeSecteursChauffageBois: false,
+    rgeSecteursFenetres: false,
+    rgeSecteursVentilation: false,
+    rgeSecteursAudit: false,
+    partenaireFinancement: "non",
+    partenairesListe: [] as string[],
   });
 
-  const [currentStep, setCurrentStep] = useState(1);
-  const totalSteps = 7;
+  const [showResults, setShowResults] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [estimation, setEstimation] = useState<{
+    min: number;
+    max: number;
+    moyenne: number;
+    analyse?: string;
+    pointsForts?: string[];
+    recommandations?: string[];
+  }>({ min: 0, max: 0, moyenne: 0 });
 
   const handleInputChange = (field: string, value: string) => {
     setFormData(prev => ({ ...prev, [field]: value }));
   };
 
-  const validateStep = () => {
-    switch (currentStep) {
-      case 1:
-        if (!formData.secteur || !formData.departement || !formData.anneeCreation) {
-          toast({
-            title: "Champs requis manquants",
-            description: "Veuillez remplir tous les champs obligatoires de cette étape.",
-            variant: "destructive",
-          });
-          return false;
-        }
-        const annee = parseInt(formData.anneeCreation);
-        if (isNaN(annee) || annee < 1900 || annee > new Date().getFullYear()) {
-          toast({
-            title: "Année invalide",
-            description: "Veuillez entrer une année de création valide.",
-            variant: "destructive",
-          });
-          return false;
-        }
-        break;
-      case 2:
-        if (!formData.caN1) {
-          toast({
-            title: "CA N-1 requis",
-            description: "Le chiffre d'affaires de l'année dernière est obligatoire.",
-            variant: "destructive",
-          });
-          return false;
-        }
-        break;
-      case 3:
-        if (!formData.resultatN1 || !formData.resultatN2) {
-          toast({
-            title: "Résultats requis",
-            description: "Les résultats N-1 et N-2 sont obligatoires.",
-            variant: "destructive",
-          });
-          return false;
-        }
-        break;
-      case 4:
-        if (!formData.nombreEmployes) {
-          toast({
-            title: "Nombre d'employés requis",
-            description: "Veuillez indiquer le nombre total d'employés.",
-            variant: "destructive",
-          });
-          return false;
-        }
-        break;
-      case 5:
-        if (!formData.montantPassif) {
-          toast({
-            title: "Montant du passif requis",
-            description: "Veuillez indiquer le montant total du passif.",
-            variant: "destructive",
-          });
-          return false;
-        }
-        break;
-    }
-    return true;
+  const handleCheckboxChange = (field: string, checked: boolean) => {
+    setFormData(prev => ({ ...prev, [field]: checked }));
   };
 
-  const handleNext = () => {
-    if (!validateStep()) {
-      return;
-    }
-    
-    if (currentStep < totalSteps) {
-      setCurrentStep(prev => prev + 1);
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
+  const handlePartenaireToggle = (partenaire: string) => {
+    setFormData(prev => {
+      const currentList = prev.partenairesListe;
+      const isSelected = currentList.includes(partenaire);
+      
+      return {
+        ...prev,
+        partenairesListe: isSelected
+          ? currentList.filter(p => p !== partenaire)
+          : [...currentList, partenaire]
+      };
+    });
   };
 
-  const handlePrevious = () => {
-    if (currentStep > 1) {
-      setCurrentStep(prev => prev - 1);
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-  };
-
-  const handleSubmit = async () => {
-    if (!validateStep()) {
-      return;
-    }
-
-    setIsLoading(true);
-    
+  const calculateEstimation = async () => {
     try {
+      toast({
+        title: "⏳ Analyse en cours...",
+        description: "Notre IA analyse votre entreprise (cela peut prendre 10-20 secondes)",
+      });
+
       const { data, error } = await supabase.functions.invoke('generate-estimation', {
         body: formData
       });
 
-      if (error) throw error;
+      if (error) {
+        throw error;
+      }
 
-      toast({
-        title: "✅ Estimation générée !",
-        description: "Votre estimation détaillée est prête.",
+      if (data.error) {
+        throw new Error(data.error);
+      }
+
+      const { estimation: aiEstimation } = data;
+      
+      setEstimation({ 
+        min: aiEstimation.estimationBasse, 
+        max: aiEstimation.estimationHaute, 
+        moyenne: aiEstimation.estimationMoyenne,
+        analyse: aiEstimation.analyseDetaillee,
+        pointsForts: aiEstimation.pointsForts,
+        recommandations: aiEstimation.recommandations
       });
-
-      // Rediriger vers la page de résultats
-      navigate(`/resultat-estimation?id=${data.estimationId}`);
-    } catch (error: any) {
-      console.error("Estimation error:", error);
+      setShowResults(true);
+      
       toast({
-        title: "Erreur",
-        description: error.message || "Une erreur est survenue lors de l'estimation.",
+        title: "✅ Estimation IA calculée !",
+        description: `Valeur estimée : ${aiEstimation.estimationMoyenne.toLocaleString('fr-FR')} €`,
+      });
+    } catch (error: any) {
+      console.error('Estimation error:', error);
+      toast({
+        title: "❌ Erreur",
+        description: error.message || "Impossible de générer l'estimation. Veuillez réessayer.",
         variant: "destructive",
       });
-    } finally {
-      setIsLoading(false);
     }
   };
 
-  const [isLoading, setIsLoading] = useState(false);
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    // Validation minimale
+    if (!formData.secteur || !formData.caN1 || !formData.resultatN1) {
+      toast({
+        title: "❌ Champs manquants",
+        description: "Veuillez remplir tous les champs obligatoires (*)",
+        variant: "destructive",
+      });
+      return;
+    }
 
-  const progressPercentage = (currentStep / totalSteps) * 100;
+    setIsLoading(true);
+    await calculateEstimation();
+    setIsLoading(false);
+  };
 
   return (
     <div className="min-h-screen bg-slate-50">
       <Header />
 
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-blue-600 to-blue-700 text-white py-16">
+      <section className="bg-gradient-to-br from-secondary to-orange-600 text-white py-16">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
             <Calculator className="w-16 h-16 mx-auto mb-4" />
             <h1 className="text-4xl md:text-5xl font-bold mb-4">
               Estimez la Valeur de Votre Entreprise BTP
             </h1>
-            <p className="text-xl text-white/90">
-              Estimation gratuite en 48h • Valorisation par IA • 100% confidentiel
+            <p className="text-xl text-white/90 mb-2">
+              Estimation gratuite par IA • Valorisation détaillée • 100% confidentiel
             </p>
+            <div className="flex items-center justify-center gap-2 text-sm">
+              <Check className="w-4 h-4" />
+              <span>Résultat en 2 minutes • Sans engagement • Confidentiel</span>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Progress Bar */}
-      <div className="bg-white border-b sticky top-0 z-40">
-        <div className="container mx-auto px-4 py-4">
-          <div className="max-w-4xl mx-auto">
-            <div className="flex items-center justify-between mb-2">
-              <span className="text-sm font-medium text-gray-700">
-                Étape {currentStep} sur {totalSteps}
-              </span>
-              <span className="text-sm font-medium text-primary">
-                {Math.round(progressPercentage)}%
-              </span>
-            </div>
-            <div className="w-full bg-gray-200 rounded-full h-2">
-              <div 
-                className="bg-primary h-2 rounded-full transition-all duration-300"
-                style={{ width: `${progressPercentage}%` }}
-              />
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Form Content */}
+      {/* Form Section */}
       <section className="py-12">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
-            <div className="bg-white rounded-2xl shadow-xl p-8 md:p-12">
-              
-              {/* Step 1: Informations Générales */}
-              {currentStep === 1 && (
-                <div className="space-y-6">
-                  <div className="flex items-center gap-3 mb-6">
-                    <FileText className="w-8 h-8 text-primary" />
-                    <h2 className="text-2xl font-bold">Informations Générales</h2>
+            
+            {!showResults ? (
+              <div className="bg-white rounded-2xl shadow-xl p-8 md:p-12">
+                <h2 className="text-2xl font-bold mb-6 flex items-center gap-3">
+                  <TrendingUp className="w-7 h-7 text-primary" />
+                  Estimation Gratuite par IA
+                </h2>
+
+                <form onSubmit={handleSubmit} className="space-y-6">
+                  
+                  {/* Question 1: Secteur */}
+                  <div>
+                    <Label htmlFor="secteur" className="text-base">
+                      1. Secteur d'activité BTP <span className="text-red-500">*</span>
+                    </Label>
+                    <Select value={formData.secteur} onValueChange={(value) => handleInputChange("secteur", value)}>
+                      <SelectTrigger className="mt-2">
+                        <SelectValue placeholder="Sélectionnez votre secteur" />
+                      </SelectTrigger>
+                      <SelectContent className="max-h-[300px] overflow-y-auto">
+                        <BTPMetiersSelect />
+                      </SelectContent>
+                    </Select>
                   </div>
 
-                  <div className="space-y-4">
-                    <div>
-                      <Label htmlFor="secteur">Secteur d'activité BTP *</Label>
-                      <Select value={formData.secteur} onValueChange={(value) => handleInputChange("secteur", value)}>
-                        <SelectTrigger>
-                          <SelectValue placeholder="Sélectionnez votre secteur" />
-                        </SelectTrigger>
-                        <SelectContent className="max-h-[300px] overflow-y-auto">
-                          <BTPMetiersSelect />
-                        </SelectContent>
-                      </Select>
-                    </div>
-
-                    <div>
-                      <Label htmlFor="departement">Département *</Label>
-                      <Select value={formData.departement} onValueChange={(value) => handleInputChange("departement", value)}>
-                        <SelectTrigger>
-                          <SelectValue placeholder="Sélectionnez votre département" />
-                        </SelectTrigger>
-                        <SelectContent className="max-h-[300px] overflow-y-auto">
-                          <DepartementsSelect />
-                        </SelectContent>
-                      </Select>
-                    </div>
-
-                    <div>
-                      <Label htmlFor="anneeCreation">Année de création de l'entreprise *</Label>
-                      <Input
-                        id="anneeCreation"
-                        type="number"
-                        placeholder="Ex: 2010"
-                        value={formData.anneeCreation}
-                        onChange={(e) => handleInputChange("anneeCreation", e.target.value)}
-                      />
-                    </div>
-                  </div>
-                </div>
-              )}
-
-              {/* Step 2: Chiffre d'Affaires */}
-              {currentStep === 2 && (
-                <div className="space-y-6">
-                  <div className="flex items-center gap-3 mb-6">
-                    <TrendingUp className="w-8 h-8 text-primary" />
-                    <h2 className="text-2xl font-bold">Chiffre d'Affaires</h2>
+                  {/* Question 2: Département */}
+                  <div>
+                    <Label htmlFor="departement" className="text-base">
+                      2. Département <span className="text-red-500">*</span>
+                    </Label>
+                    <Input
+                      id="departement"
+                      placeholder="Ex: 75, 69, 13..."
+                      value={formData.departement}
+                      onChange={(e) => handleInputChange("departement", e.target.value)}
+                      className="mt-2"
+                      required
+                    />
                   </div>
 
-                  <div className="space-y-4">
-                    <div>
-                      <Label htmlFor="caN2">CA année N-2 (il y a 2 ans) *</Label>
-                      <Input
-                        id="caN2"
-                        type="number"
-                        placeholder="Ex: 500000"
-                        value={formData.caN2}
-                        onChange={(e) => handleInputChange("caN2", e.target.value)}
-                      />
-                      <p className="text-sm text-gray-500 mt-1">En euros</p>
-                    </div>
+                  {/* Question 3: Année création */}
+                  <div>
+                    <Label htmlFor="anneeCreation" className="text-base">
+                      3. Année de création <span className="text-red-500">*</span>
+                    </Label>
+                    <Input
+                      id="anneeCreation"
+                      type="number"
+                      placeholder="Ex: 2010"
+                      value={formData.anneeCreation}
+                      onChange={(e) => handleInputChange("anneeCreation", e.target.value)}
+                      className="mt-2"
+                      required
+                    />
+                  </div>
 
-                    <div>
-                      <Label htmlFor="caN1">CA année N-1 (l'année dernière) *</Label>
+                  <div className="border-t pt-6">
+                    <h3 className="font-semibold text-lg mb-4">Données Financières</h3>
+                    
+                    {/* Question 4: CA N-1 */}
+                    <div className="mb-4">
+                      <Label htmlFor="caN1" className="text-base">
+                        4. Chiffre d'affaires année dernière (N-1) <span className="text-red-500">*</span>
+                      </Label>
                       <Input
                         id="caN1"
                         type="number"
                         placeholder="Ex: 650000"
                         value={formData.caN1}
                         onChange={(e) => handleInputChange("caN1", e.target.value)}
+                        className="mt-2"
+                        required
                       />
                       <p className="text-sm text-gray-500 mt-1">En euros</p>
                     </div>
 
-                    <div>
-                      <Label htmlFor="caN">CA année N (en cours ou estimé)</Label>
+                    {/* Question 5: CA N-2 */}
+                    <div className="mb-4">
+                      <Label htmlFor="caN2" className="text-base">
+                        5. Chiffre d'affaires il y a 2 ans (N-2) <span className="text-red-500">*</span>
+                      </Label>
                       <Input
-                        id="caN"
+                        id="caN2"
                         type="number"
-                        placeholder="Ex: 700000"
-                        value={formData.caN}
-                        onChange={(e) => handleInputChange("caN", e.target.value)}
+                        placeholder="Ex: 500000"
+                        value={formData.caN2}
+                        onChange={(e) => handleInputChange("caN2", e.target.value)}
+                        className="mt-2"
+                        required
                       />
-                      <p className="text-sm text-gray-500 mt-1">En euros (optionnel)</p>
+                      <p className="text-sm text-gray-500 mt-1">En euros (pour calculer la tendance)</p>
                     </div>
-                  </div>
-                </div>
-              )}
 
-              {/* Step 3: Résultats */}
-              {currentStep === 3 && (
-                <div className="space-y-6">
-                  <div className="flex items-center gap-3 mb-6">
-                    <Calculator className="w-8 h-8 text-primary" />
-                    <h2 className="text-2xl font-bold">Résultats Financiers</h2>
-                  </div>
-
-                  <div className="space-y-6">
-                    {/* Résultat N-1 */}
-                    <div className="p-4 bg-slate-50 rounded-lg space-y-4">
-                      <h3 className="font-semibold">Résultat net N-1 (l'année dernière)</h3>
+                    {/* Question 6: Résultat */}
+                    <div className="p-4 bg-slate-50 rounded-lg">
+                      <Label className="text-base mb-3 block">
+                        6. Résultat net année dernière (N-1) <span className="text-red-500">*</span>
+                      </Label>
                       
                       <RadioGroup 
                         value={formData.resultatN1Type} 
                         onValueChange={(value) => handleInputChange("resultatN1Type", value)}
+                        className="mb-3"
                       >
                         <div className="flex items-center space-x-2">
-                          <RadioGroupItem value="positif" id="resultatN1-positif" />
-                          <Label htmlFor="resultatN1-positif">Positif (bénéfice)</Label>
+                          <RadioGroupItem value="positif" id="resultat-positif" />
+                          <Label htmlFor="resultat-positif">Positif (bénéfice)</Label>
                         </div>
                         <div className="flex items-center space-x-2">
-                          <RadioGroupItem value="negatif" id="resultatN1-negatif" />
-                          <Label htmlFor="resultatN1-negatif">Négatif (perte)</Label>
+                          <RadioGroupItem value="negatif" id="resultat-negatif" />
+                          <Label htmlFor="resultat-negatif">Négatif (perte)</Label>
                         </div>
                       </RadioGroup>
 
-                      <div>
-                        <Label htmlFor="resultatN1">Montant *</Label>
-                        <Input
-                          id="resultatN1"
-                          type="number"
-                          placeholder="Ex: 50000"
-                          value={formData.resultatN1}
-                          onChange={(e) => handleInputChange("resultatN1", e.target.value)}
-                        />
-                        <p className="text-sm text-gray-500 mt-1">En euros (valeur absolue)</p>
-                      </div>
-                    </div>
-
-                    {/* Résultat N-2 */}
-                    <div className="p-4 bg-slate-50 rounded-lg space-y-4">
-                      <h3 className="font-semibold">Résultat net N-2 (il y a 2 ans)</h3>
-                      
-                      <RadioGroup 
-                        value={formData.resultatN2Type} 
-                        onValueChange={(value) => handleInputChange("resultatN2Type", value)}
-                      >
-                        <div className="flex items-center space-x-2">
-                          <RadioGroupItem value="positif" id="resultatN2-positif" />
-                          <Label htmlFor="resultatN2-positif">Positif (bénéfice)</Label>
-                        </div>
-                        <div className="flex items-center space-x-2">
-                          <RadioGroupItem value="negatif" id="resultatN2-negatif" />
-                          <Label htmlFor="resultatN2-negatif">Négatif (perte)</Label>
-                        </div>
-                      </RadioGroup>
-
-                      <div>
-                        <Label htmlFor="resultatN2">Montant *</Label>
-                        <Input
-                          id="resultatN2"
-                          type="number"
-                          placeholder="Ex: 45000"
-                          value={formData.resultatN2}
-                          onChange={(e) => handleInputChange("resultatN2", e.target.value)}
-                        />
-                        <p className="text-sm text-gray-500 mt-1">En euros (valeur absolue)</p>
-                      </div>
+                      <Input
+                        id="resultatN1"
+                        type="number"
+                        placeholder="Ex: 50000"
+                        value={formData.resultatN1}
+                        onChange={(e) => handleInputChange("resultatN1", e.target.value)}
+                        required
+                      />
+                      <p className="text-sm text-gray-500 mt-1">Montant en euros (valeur absolue)</p>
                     </div>
                   </div>
-                </div>
-              )}
 
-              {/* Step 4: Personnel */}
-              {currentStep === 4 && (
-                <div className="space-y-6">
-                  <div className="flex items-center gap-3 mb-6">
-                    <Users className="w-8 h-8 text-primary" />
-                    <h2 className="text-2xl font-bold">Personnel</h2>
-                  </div>
-
-                  <div className="space-y-4">
-                    <div>
-                      <Label htmlFor="nombreEmployes">Nombre total d'employés *</Label>
+                  <div className="border-t pt-6">
+                    <h3 className="font-semibold text-lg mb-4">Structure de l'Entreprise</h3>
+                    
+                    {/* Question 7: Nombre employés */}
+                    <div className="mb-4">
+                      <Label htmlFor="nombreEmployes" className="text-base">
+                        7. Nombre de salariés <span className="text-red-500">*</span>
+                      </Label>
                       <Input
                         id="nombreEmployes"
                         type="number"
                         placeholder="Ex: 8"
                         value={formData.nombreEmployes}
                         onChange={(e) => handleInputChange("nombreEmployes", e.target.value)}
+                        className="mt-2"
+                        required
                       />
                     </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                      <div>
-                        <Label htmlFor="nombreCDI">Dont CDI</Label>
-                        <Input
-                          id="nombreCDI"
-                          type="number"
-                          placeholder="Ex: 6"
-                          value={formData.nombreCDI}
-                          onChange={(e) => handleInputChange("nombreCDI", e.target.value)}
-                        />
-                      </div>
-
-                      <div>
-                        <Label htmlFor="nombreCDD">Dont CDD</Label>
-                        <Input
-                          id="nombreCDD"
-                          type="number"
-                          placeholder="Ex: 1"
-                          value={formData.nombreCDD}
-                          onChange={(e) => handleInputChange("nombreCDD", e.target.value)}
-                        />
-                      </div>
-
-                      <div>
-                        <Label htmlFor="nombreApprentis">Dont Apprentis</Label>
-                        <Input
-                          id="nombreApprentis"
-                          type="number"
-                          placeholder="Ex: 1"
-                          value={formData.nombreApprentis}
-                          onChange={(e) => handleInputChange("nombreApprentis", e.target.value)}
-                        />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              )}
-
-              {/* Step 5: Dettes */}
-              {currentStep === 5 && (
-                <div className="space-y-6">
-                  <div className="flex items-center gap-3 mb-6">
-                    <AlertCircle className="w-8 h-8 text-primary" />
-                    <h2 className="text-2xl font-bold">Dettes & Passif</h2>
-                  </div>
-
-                  <div className="space-y-6">
+                    {/* Question 8: Type clientèle */}
                     <div>
-                      <Label>Avez-vous des dettes ? *</Label>
+                      <Label className="text-base mb-3 block">
+                        8. Type de clientèle principale <span className="text-red-500">*</span>
+                      </Label>
                       <RadioGroup 
-                        value={formData.aDettes} 
-                        onValueChange={(value) => handleInputChange("aDettes", value)}
-                        className="mt-2"
+                        value={formData.typeClientele} 
+                        onValueChange={(value) => handleInputChange("typeClientele", value)}
                       >
                         <div className="flex items-center space-x-2">
-                          <RadioGroupItem value="oui" id="dettes-oui" />
-                          <Label htmlFor="dettes-oui">Oui</Label>
+                          <RadioGroupItem value="particuliers" id="client-particuliers" />
+                          <Label htmlFor="client-particuliers">Particuliers (B2C)</Label>
                         </div>
                         <div className="flex items-center space-x-2">
-                          <RadioGroupItem value="non" id="dettes-non" />
-                          <Label htmlFor="dettes-non">Non</Label>
+                          <RadioGroupItem value="professionnels" id="client-pro" />
+                          <Label htmlFor="client-pro">Professionnels / Entreprises (B2B)</Label>
+                        </div>
+                        <div className="flex items-center space-x-2">
+                          <RadioGroupItem value="public" id="client-public" />
+                          <Label htmlFor="client-public">Marchés publics</Label>
+                        </div>
+                        <div className="flex items-center space-x-2">
+                          <RadioGroupItem value="mixte" id="client-mixte" />
+                          <Label htmlFor="client-mixte">Mixte</Label>
                         </div>
                       </RadioGroup>
                     </div>
-
-                    {formData.aDettes === "oui" && (
-                      <div className="space-y-4 p-4 bg-slate-50 rounded-lg">
-                        <p className="text-sm text-gray-600 mb-4">Détaillez vos dettes :</p>
-                        
-                        <div>
-                          <Label htmlFor="detteURSSAF">URSSAF</Label>
-                          <Input
-                            id="detteURSSAF"
-                            type="number"
-                            placeholder="Montant en €"
-                            value={formData.detteURSSAF}
-                            onChange={(e) => handleInputChange("detteURSSAF", e.target.value)}
-                          />
-                        </div>
-
-                        <div>
-                          <Label htmlFor="detteTVA">TVA</Label>
-                          <Input
-                            id="detteTVA"
-                            type="number"
-                            placeholder="Montant en €"
-                            value={formData.detteTVA}
-                            onChange={(e) => handleInputChange("detteTVA", e.target.value)}
-                          />
-                        </div>
-
-                        <div>
-                          <Label htmlFor="detteLoyer">Loyer impayé</Label>
-                          <Input
-                            id="detteLoyer"
-                            type="number"
-                            placeholder="Montant en €"
-                            value={formData.detteLoyer}
-                            onChange={(e) => handleInputChange("detteLoyer", e.target.value)}
-                          />
-                        </div>
-
-                        <div>
-                          <Label htmlFor="detteFournisseurs">Fournisseurs</Label>
-                          <Input
-                            id="detteFournisseurs"
-                            type="number"
-                            placeholder="Montant en €"
-                            value={formData.detteFournisseurs}
-                            onChange={(e) => handleInputChange("detteFournisseurs", e.target.value)}
-                          />
-                        </div>
-
-                        <div>
-                          <Label htmlFor="detteAutres">Autres dettes</Label>
-                          <Input
-                            id="detteAutres"
-                            type="number"
-                            placeholder="Montant en €"
-                            value={formData.detteAutres}
-                            onChange={(e) => handleInputChange("detteAutres", e.target.value)}
-                          />
-                        </div>
-                      </div>
-                    )}
-
-                    <div>
-                      <Label htmlFor="montantPassif">Montant total du passif *</Label>
-                      <Input
-                        id="montantPassif"
-                        type="number"
-                        placeholder="Ex: 150000"
-                        value={formData.montantPassif}
-                        onChange={(e) => handleInputChange("montantPassif", e.target.value)}
-                      />
-                      <p className="text-sm text-gray-500 mt-1">Total de toutes vos dettes en euros</p>
-                    </div>
-                  </div>
-                </div>
-              )}
-
-              {/* Step 6: Crédits */}
-              {currentStep === 6 && (
-                <div className="space-y-6">
-                  <div className="flex items-center gap-3 mb-6">
-                    <CreditCard className="w-8 h-8 text-primary" />
-                    <h2 className="text-2xl font-bold">Crédits en Cours</h2>
                   </div>
 
-                  <div className="space-y-6">
-                    <div>
-                      <Label>Avez-vous des crédits en cours ? *</Label>
-                      <RadioGroup 
-                        value={formData.aCredits} 
-                        onValueChange={(value) => handleInputChange("aCredits", value)}
-                        className="mt-2"
-                      >
-                        <div className="flex items-center space-x-2">
-                          <RadioGroupItem value="oui" id="credits-oui" />
-                          <Label htmlFor="credits-oui">Oui</Label>
-                        </div>
-                        <div className="flex items-center space-x-2">
-                          <RadioGroupItem value="non" id="credits-non" />
-                          <Label htmlFor="credits-non">Non</Label>
-                        </div>
-                      </RadioGroup>
-                    </div>
-
-                    {formData.aCredits === "oui" && (
-                      <div className="space-y-4 p-4 bg-slate-50 rounded-lg">
-                        <p className="text-sm text-gray-600 mb-4">Montants restants dus :</p>
-                        
-                        <div>
-                          <Label htmlFor="creditProfessionnel">Crédit professionnel</Label>
-                          <Input
-                            id="creditProfessionnel"
-                            type="number"
-                            placeholder="Montant restant en €"
-                            value={formData.creditProfessionnel}
-                            onChange={(e) => handleInputChange("creditProfessionnel", e.target.value)}
-                          />
-                        </div>
-
-                        <div>
-                          <Label htmlFor="creditMateriel">Crédit matériel</Label>
-                          <Input
-                            id="creditMateriel"
-                            type="number"
-                            placeholder="Montant restant en €"
-                            value={formData.creditMateriel}
-                            onChange={(e) => handleInputChange("creditMateriel", e.target.value)}
-                          />
-                        </div>
-
-                        <div>
-                          <Label htmlFor="creditImmobilier">Crédit immobilier professionnel</Label>
-                          <Input
-                            id="creditImmobilier"
-                            type="number"
-                            placeholder="Montant restant en €"
-                            value={formData.creditImmobilier}
-                            onChange={(e) => handleInputChange("creditImmobilier", e.target.value)}
-                          />
-                        </div>
-                      </div>
-                    )}
-                  </div>
-                </div>
-              )}
-
-              {/* Step 7: Actifs */}
-              {currentStep === 7 && (
-                <div className="space-y-6">
-                  <div className="flex items-center gap-3 mb-6">
-                    <FileText className="w-8 h-8 text-primary" />
-                    <h2 className="text-2xl font-bold">Actifs de l'Entreprise</h2>
-                  </div>
-
-                  <div className="space-y-4">
-                    <div>
-                      <Label htmlFor="valeurMateriel">Valeur du matériel & véhicules</Label>
+                  <div className="border-t pt-6">
+                    <h3 className="font-semibold text-lg mb-4">Actifs & Passifs</h3>
+                    
+                    {/* Question 9: Valeur matériel */}
+                    <div className="mb-4">
+                      <Label htmlFor="valeurMateriel" className="text-base">
+                        9. Valeur du matériel & véhicules <span className="text-red-500">*</span>
+                      </Label>
                       <Input
                         id="valeurMateriel"
                         type="number"
-                        placeholder="Estimation en €"
+                        placeholder="Ex: 150000"
                         value={formData.valeurMateriel}
                         onChange={(e) => handleInputChange("valeurMateriel", e.target.value)}
-                      />
-                      <p className="text-sm text-gray-500 mt-1">Valeur actuelle du matériel, outillage, véhicules</p>
-                    </div>
-
-                    <div>
-                      <Label htmlFor="valeurStock">Valeur du stock</Label>
-                      <Input
-                        id="valeurStock"
-                        type="number"
-                        placeholder="Estimation en €"
-                        value={formData.valeurStock}
-                        onChange={(e) => handleInputChange("valeurStock", e.target.value)}
-                      />
-                      <p className="text-sm text-gray-500 mt-1">Marchandises, matières premières</p>
-                    </div>
-
-                    <div>
-                      <Label>Situation des locaux *</Label>
-                      <RadioGroup 
-                        value={formData.situationLocaux} 
-                        onValueChange={(value) => handleInputChange("situationLocaux", value)}
                         className="mt-2"
+                        required
+                      />
+                      <p className="text-sm text-gray-500 mt-1">Estimation en euros</p>
+                    </div>
+
+                    {/* Question 10: Dettes */}
+                    <div>
+                      <Label htmlFor="dettesTotales" className="text-base">
+                        10. Dettes totales <span className="text-red-500">*</span>
+                      </Label>
+                      <Input
+                        id="dettesTotales"
+                        type="number"
+                        placeholder="Ex: 80000"
+                        value={formData.dettesTotales}
+                        onChange={(e) => handleInputChange("dettesTotales", e.target.value)}
+                        className="mt-2"
+                        required
+                      />
+                      <p className="text-sm text-gray-500 mt-1">URSSAF, TVA, fournisseurs, crédits, etc.</p>
+                    </div>
+                  </div>
+
+                  {/* NOUVEAU: Question 11 - Certification RGE */}
+                  <div className="border-t pt-6">
+                    <h3 className="font-semibold text-lg mb-4 flex items-center gap-2">
+                      <Award className="w-6 h-6 text-green-600" />
+                      Certifications & Qualifications
+                    </h3>
+                    
+                    <div>
+                      <Label className="text-base mb-3 block">
+                        11. Êtes-vous certifié RGE ? <span className="text-red-500">*</span>
+                      </Label>
+                      <RadioGroup 
+                        value={formData.certificationRGE} 
+                        onValueChange={(value) => handleInputChange("certificationRGE", value)}
+                        className="mb-4"
                       >
                         <div className="flex items-center space-x-2">
-                          <RadioGroupItem value="proprietaire" id="locaux-proprio" />
-                          <Label htmlFor="locaux-proprio">Propriétaire</Label>
+                          <RadioGroupItem value="oui" id="rge-oui" />
+                          <Label htmlFor="rge-oui">Oui</Label>
                         </div>
                         <div className="flex items-center space-x-2">
-                          <RadioGroupItem value="locataire" id="locaux-locataire" />
-                          <Label htmlFor="locaux-locataire">Locataire</Label>
+                          <RadioGroupItem value="non" id="rge-non" />
+                          <Label htmlFor="rge-non">Non</Label>
                         </div>
                       </RadioGroup>
-                    </div>
 
-                    {formData.situationLocaux === "proprietaire" && (
-                      <div>
-                        <Label htmlFor="valeurLocaux">Valeur des locaux</Label>
-                        <Input
-                          id="valeurLocaux"
-                          type="number"
-                          placeholder="Estimation en €"
-                          value={formData.valeurLocaux}
-                          onChange={(e) => handleInputChange("valeurLocaux", e.target.value)}
-                        />
-                        <p className="text-sm text-gray-500 mt-1">Valeur immobilière estimée</p>
-                      </div>
-                    )}
+                      {formData.certificationRGE === "oui" && (
+                        <div className="p-4 bg-green-50 border border-green-200 rounded-lg space-y-3">
+                          <p className="text-sm font-medium text-gray-700 mb-2">Dans quel(s) secteur(s) RGE ?</p>
+                          
+                          <div className="space-y-2">
+                            <div className="flex items-center space-x-2">
+                              <Checkbox 
+                                id="rge-isolation"
+                                checked={formData.rgeSecteursIsolation}
+                                onCheckedChange={(checked) => handleCheckboxChange("rgeSecteursIsolation", checked as boolean)}
+                              />
+                              <Label htmlFor="rge-isolation" className="font-normal">
+                                RGE Isolation thermique (ITE, ITI)
+                              </Label>
+                            </div>
+
+                            <div className="flex items-center space-x-2">
+                              <Checkbox 
+                                id="rge-pac"
+                                checked={formData.rgeSecteursPAC}
+                                onCheckedChange={(checked) => handleCheckboxChange("rgeSecteursPAC", checked as boolean)}
+                              />
+                              <Label htmlFor="rge-pac" className="font-normal">
+                                RGE Pompes à chaleur (QualiPAC)
+                              </Label>
+                            </div>
+
+                            <div className="flex items-center space-x-2">
+                              <Checkbox 
+                                id="rge-pv"
+                                checked={formData.rgeSecteursPhotovoltaique}
+                                onCheckedChange={(checked) => handleCheckboxChange("rgeSecteursPhotovoltaique", checked as boolean)}
+                              />
+                              <Label htmlFor="rge-pv" className="font-normal">
+                                RGE Photovoltaïque (QualiPV)
+                              </Label>
+                            </div>
+
+                            <div className="flex items-center space-x-2">
+                              <Checkbox 
+                                id="rge-chauffage"
+                                checked={formData.rgeSecteursChauffageBois}
+                                onCheckedChange={(checked) => handleCheckboxChange("rgeSecteursChauffageBois", checked as boolean)}
+                              />
+                              <Label htmlFor="rge-chauffage" className="font-normal">
+                                RGE Chauffage bois (Qualibois)
+                              </Label>
+                            </div>
+
+                            <div className="flex items-center space-x-2">
+                              <Checkbox 
+                                id="rge-fenetres"
+                                checked={formData.rgeSecteursFenetres}
+                                onCheckedChange={(checked) => handleCheckboxChange("rgeSecteursFenetres", checked as boolean)}
+                              />
+                              <Label htmlFor="rge-fenetres" className="font-normal">
+                                RGE Fenêtres et menuiseries
+                              </Label>
+                            </div>
+
+                            <div className="flex items-center space-x-2">
+                              <Checkbox 
+                                id="rge-ventilation"
+                                checked={formData.rgeSecteursVentilation}
+                                onCheckedChange={(checked) => handleCheckboxChange("rgeSecteursVentilation", checked as boolean)}
+                              />
+                              <Label htmlFor="rge-ventilation" className="font-normal">
+                                RGE Ventilation (VMC)
+                              </Label>
+                            </div>
+
+                            <div className="flex items-center space-x-2">
+                              <Checkbox 
+                                id="rge-audit"
+                                checked={formData.rgeSecteursAudit}
+                                onCheckedChange={(checked) => handleCheckboxChange("rgeSecteursAudit", checked as boolean)}
+                              />
+                              <Label htmlFor="rge-audit" className="font-normal">
+                                RGE Audit énergétique
+                              </Label>
+                            </div>
+                          </div>
+
+                          <div className="mt-3 p-3 bg-white rounded border border-green-300">
+                            <p className="text-sm text-green-700 flex items-center gap-2">
+                              <Award className="w-4 h-4" />
+                              <span className="font-medium">Bonus valorisation : +10% pour certification RGE</span>
+                            </p>
+                          </div>
+                        </div>
+                      )}
+                    </div>
                   </div>
 
-                  <div className="mt-8 p-6 bg-green-50 border border-green-200 rounded-lg">
+                  {/* NOUVEAU: Question 12 - Partenariats Financement */}
+                  <div className="border-t pt-6">
+                    <h3 className="font-semibold text-lg mb-4 flex items-center gap-2">
+                      <Building2 className="w-6 h-6 text-blue-600" />
+                      Partenariats Financiers
+                    </h3>
+                    
+                    <div>
+                      <Label className="text-base mb-3 block">
+                        12. Êtes-vous en partenariat avec des organismes de financement ? <span className="text-red-500">*</span>
+                      </Label>
+                      <RadioGroup 
+                        value={formData.partenaireFinancement} 
+                        onValueChange={(value) => handleInputChange("partenaireFinancement", value)}
+                        className="mb-4"
+                      >
+                        <div className="flex items-center space-x-2">
+                          <RadioGroupItem value="oui" id="financement-oui" />
+                          <Label htmlFor="financement-oui">Oui</Label>
+                        </div>
+                        <div className="flex items-center space-x-2">
+                          <RadioGroupItem value="non" id="financement-non" />
+                          <Label htmlFor="financement-non">Non</Label>
+                        </div>
+                      </RadioGroup>
+
+                      {formData.partenaireFinancement === "oui" && (
+                        <div className="p-4 bg-blue-50 border border-blue-200 rounded-lg space-y-3">
+                          <p className="text-sm font-medium text-gray-700 mb-2">Avec quel(s) organisme(s) ?</p>
+                          
+                          <div className="space-y-2">
+                            {["Domofinance", "Sofinco", "Franfinance", "Cofidis", "Cetelem", "Financo", "Autre"].map((partenaire) => (
+                              <div key={partenaire} className="flex items-center space-x-2">
+                                <Checkbox 
+                                  id={`part-${partenaire.toLowerCase()}`}
+                                  checked={formData.partenairesListe.includes(partenaire)}
+                                  onCheckedChange={() => handlePartenaireToggle(partenaire)}
+                                />
+                                <Label htmlFor={`part-${partenaire.toLowerCase()}`} className="font-normal">
+                                  {partenaire === "Autre" ? "Autre organisme" : partenaire}
+                                </Label>
+                              </div>
+                            ))}
+                          </div>
+
+                          {formData.partenairesListe.length > 0 && (
+                            <div className="mt-3 p-3 bg-white rounded border border-blue-300">
+                              <p className="text-sm text-blue-700 flex items-center gap-2">
+                                <Building2 className="w-4 h-4" />
+                                <span className="font-medium">Bonus valorisation : +5% pour partenariats financement</span>
+                              </p>
+                            </div>
+                          )}
+                        </div>
+                      )}
+                    </div>
+                  </div>
+
+                  {/* Submit Button */}
+                  <div className="pt-6">
+                    <Button
+                      type="submit"
+                      size="lg"
+                      className="w-full bg-secondary hover:bg-secondary/90 text-white text-lg py-6"
+                      disabled={isLoading}
+                    >
+                      {isLoading ? (
+                        <>
+                          <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-2" />
+                          Analyse IA en cours...
+                        </>
+                      ) : (
+                        <>💰 Obtenir Mon Estimation Gratuite par IA</>
+                      )}
+                    </Button>
+                    
+                    <div className="mt-4 text-center">
+                      <div className="flex items-center justify-center gap-2 text-sm text-gray-600">
+                        <Check className="w-4 h-4 text-green-600" />
+                        <span>Powered by Lovable AI • Sans engagement • 100% confidentiel</span>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            ) : (
+              // Results Section
+              <div className="space-y-6">
+                <div className="bg-white rounded-2xl shadow-xl p-8 md:p-12">
+                  <div className="text-center mb-8">
+                    <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                      <Check className="w-10 h-10 text-green-600" />
+                    </div>
+                    <h2 className="text-3xl font-bold mb-2">Votre Estimation par IA</h2>
+                    <p className="text-gray-600">Basée sur notre IA et 500+ transactions BTP</p>
+                  </div>
+
+                  <div className="bg-gradient-to-br from-primary to-blue-700 text-white rounded-xl p-8 mb-6">
+                    <div className="text-center">
+                      <p className="text-lg mb-2 opacity-90">Valeur estimée</p>
+                      <div className="text-5xl font-bold mb-4">
+                        {estimation.moyenne.toLocaleString('fr-FR')} €
+                      </div>
+                      <div className="flex items-center justify-center gap-4 text-sm">
+                        <span className="opacity-90">
+                          Fourchette : {estimation.min.toLocaleString('fr-FR')} € - {estimation.max.toLocaleString('fr-FR')} €
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+                    <div className="bg-slate-50 p-4 rounded-lg text-center">
+                      <div className="text-2xl font-bold text-primary">
+                        {estimation.min.toLocaleString('fr-FR')} €
+                      </div>
+                      <p className="text-sm text-gray-600">Estimation basse</p>
+                    </div>
+                    <div className="bg-secondary/10 p-4 rounded-lg text-center border-2 border-secondary">
+                      <div className="text-2xl font-bold text-secondary">
+                        {estimation.moyenne.toLocaleString('fr-FR')} €
+                      </div>
+                      <p className="text-sm text-gray-600 font-semibold">Prix optimal</p>
+                    </div>
+                    <div className="bg-slate-50 p-4 rounded-lg text-center">
+                      <div className="text-2xl font-bold text-primary">
+                        {estimation.max.toLocaleString('fr-FR')} €
+                      </div>
+                      <p className="text-sm text-gray-600">Estimation haute</p>
+                    </div>
+                  </div>
+
+                  {estimation.analyse && (
+                    <div className="bg-blue-50 border border-blue-200 rounded-lg p-6 mb-6">
+                      <h3 className="font-semibold mb-3 flex items-center gap-2">
+                        <TrendingUp className="w-5 h-5 text-blue-600" />
+                        Analyse détaillée par IA
+                      </h3>
+                      <p className="text-sm text-gray-700 leading-relaxed mb-4 whitespace-pre-line">
+                        {estimation.analyse}
+                      </p>
+                      
+                      {estimation.pointsForts && estimation.pointsForts.length > 0 && (
+                        <div className="mt-4">
+                          <h4 className="font-medium text-sm mb-2">✅ Points forts identifiés</h4>
+                          <ul className="space-y-1">
+                            {estimation.pointsForts.map((point, idx) => (
+                              <li key={idx} className="text-sm text-gray-700 flex items-start gap-2">
+                                <Check className="w-4 h-4 text-green-600 mt-0.5 flex-shrink-0" />
+                                <span>{point}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
+
+                      {estimation.recommandations && estimation.recommandations.length > 0 && (
+                        <div className="mt-4 pt-4 border-t border-blue-200">
+                          <h4 className="font-medium text-sm mb-2">💡 Recommandations</h4>
+                          <ul className="space-y-1">
+                            {estimation.recommandations.map((reco, idx) => (
+                              <li key={idx} className="text-sm text-gray-700 flex items-start gap-2">
+                                <span className="text-blue-600 flex-shrink-0">→</span>
+                                <span>{reco}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
+                    </div>
+                  )}
+
+                  <div className="space-y-4">
+                    <Button
+                      onClick={() => navigate("/vendre")}
+                      size="lg"
+                      className="w-full bg-secondary hover:bg-secondary/90 text-white"
+                    >
+                      📝 Publier Mon Annonce Maintenant
+                    </Button>
+                    <Button
+                      onClick={() => setShowResults(false)}
+                      size="lg"
+                      variant="outline"
+                      className="w-full"
+                    >
+                      🔄 Faire Une Nouvelle Estimation
+                    </Button>
+                  </div>
+                </div>
+
+                <div className="bg-white rounded-xl shadow-lg p-6">
+                  <h3 className="font-semibold text-lg mb-4">💡 Prochaines Étapes</h3>
+                  <div className="space-y-3">
                     <div className="flex items-start gap-3">
-                      <Check className="w-6 h-6 text-green-600 mt-1" />
+                      <div className="w-8 h-8 bg-primary text-white rounded-full flex items-center justify-center flex-shrink-0 font-bold">1</div>
                       <div>
-                        <h3 className="font-semibold text-green-900 mb-2">Formulaire complété !</h3>
-                        <p className="text-sm text-green-700">
-                          Vous êtes prêt à recevoir votre estimation gratuite. Notre algorithme d'IA va analyser toutes les données et vous envoyer un rapport détaillé sous 48h.
-                        </p>
+                        <p className="font-medium">Créez votre annonce complète</p>
+                        <p className="text-sm text-gray-600">Ajoutez plus de détails pour attirer les meilleurs acheteurs</p>
+                      </div>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <div className="w-8 h-8 bg-primary text-white rounded-full flex items-center justify-center flex-shrink-0 font-bold">2</div>
+                      <div>
+                        <p className="font-medium">Recevez des contacts qualifiés</p>
+                        <p className="text-sm text-gray-600">Notre IA matche votre entreprise avec les bons repreneurs</p>
+                      </div>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <div className="w-8 h-8 bg-primary text-white rounded-full flex items-center justify-center flex-shrink-0 font-bold">3</div>
+                      <div>
+                        <p className="font-medium">Vendez en 45 jours</p>
+                        <p className="text-sm text-gray-600">Accompagnement expert jusqu'à la signature</p>
                       </div>
                     </div>
                   </div>
                 </div>
-              )}
-
-              {/* Navigation Buttons */}
-              <div className="flex gap-4 mt-8 pt-8 border-t">
-                {currentStep > 1 && (
-                  <Button
-                    onClick={handlePrevious}
-                    variant="outline"
-                    size="lg"
-                    className="flex-1"
-                  >
-                    ← Précédent
-                  </Button>
-                )}
-                
-                {currentStep < totalSteps ? (
-                  <Button
-                    onClick={handleNext}
-                    size="lg"
-                    className="flex-1 bg-primary hover:bg-primary/90"
-                  >
-                    Suivant →
-                  </Button>
-                ) : (
-                  <Button
-                    onClick={handleSubmit}
-                    size="lg"
-                    className="flex-1 bg-secondary hover:bg-secondary/90"
-                    disabled={isLoading}
-                  >
-                    {isLoading ? "Génération en cours..." : "💰 Obtenir Mon Estimation Gratuite"}
-                  </Button>
-                )}
               </div>
-
-              {/* Security Notice */}
-              <div className="mt-6 text-center">
-                <div className="flex items-center justify-center gap-2 text-sm text-gray-600">
-                  <Check className="w-4 h-4 text-green-600" />
-                  <span>Résultat immédiat par IA • Sans engagement • 100% confidentiel</span>
-                </div>
-              </div>
-            </div>
+            )}
           </div>
         </div>
       </section>
