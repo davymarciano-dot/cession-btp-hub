@@ -2,3 +2,6 @@ project_id = "xfxfblhxdlzivowodpeg"
 
 [functions.estimate-company]
 verify_jwt = false
+
+[functions.generate-estimation]
+verify_jwt = false

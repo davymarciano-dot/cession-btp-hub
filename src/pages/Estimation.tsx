@@ -10,7 +10,9 @@ import { useNavigate } from "react-router-dom";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { BTPMetiersSelect } from "@/data/btp-metiers";
+import { DepartementsSelect } from "@/data/departements";
 import { useToast } from "@/hooks/use-toast";
+import { supabase } from "@/integrations/supabase/client";
 
 const Estimation = () => {
   const navigate = useNavigate();
@@ -69,7 +71,76 @@ const Estimation = () => {
     setFormData(prev => ({ ...prev, [field]: value }));
   };
 
+  const validateStep = () => {
+    switch (currentStep) {
+      case 1:
+        if (!formData.secteur || !formData.departement || !formData.anneeCreation) {
+          toast({
+            title: "Champs requis manquants",
+            description: "Veuillez remplir tous les champs obligatoires de cette étape.",
+            variant: "destructive",
+          });
+          return false;
+        }
+        const annee = parseInt(formData.anneeCreation);
+        if (isNaN(annee) || annee < 1900 || annee > new Date().getFullYear()) {
+          toast({
+            title: "Année invalide",
+            description: "Veuillez entrer une année de création valide.",
+            variant: "destructive",
+          });
+          return false;
+        }
+        break;
+      case 2:
+        if (!formData.caN1) {
+          toast({
+            title: "CA N-1 requis",
+            description: "Le chiffre d'affaires de l'année dernière est obligatoire.",
+            variant: "destructive",
+          });
+          return false;
+        }
+        break;
+      case 3:
+        if (!formData.resultatN1 || !formData.resultatN2) {
+          toast({
+            title: "Résultats requis",
+            description: "Les résultats N-1 et N-2 sont obligatoires.",
+            variant: "destructive",
+          });
+          return false;
+        }
+        break;
+      case 4:
+        if (!formData.nombreEmployes) {
+          toast({
+            title: "Nombre d'employés requis",
+            description: "Veuillez indiquer le nombre total d'employés.",
+            variant: "destructive",
+          });
+          return false;
+        }
+        break;
+      case 5:
+        if (!formData.montantPassif) {
+          toast({
+            title: "Montant du passif requis",
+            description: "Veuillez indiquer le montant total du passif.",
+            variant: "destructive",
+          });
+          return false;
+        }
+        break;
+    }
+    return true;
+  };
+
   const handleNext = () => {
+    if (!validateStep()) {
+      return;
+    }
+    
     if (currentStep < totalSteps) {
       setCurrentStep(prev => prev + 1);
       window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -83,26 +154,40 @@ const Estimation = () => {
     }
   };
 
-  const handleSubmit = () => {
-    // Calcul simplifié de l'estimation
-    const ca = parseFloat(formData.caN1) || 0;
-    const resultat = parseFloat(formData.resultatN1) || 0;
-    const passif = parseFloat(formData.montantPassif) || 0;
-    const actifs = (parseFloat(formData.valeurMateriel) || 0) + (parseFloat(formData.valeurStock) || 0);
+  const handleSubmit = async () => {
+    if (!validateStep()) {
+      return;
+    }
+
+    setIsLoading(true);
     
-    // Formule simplifiée: (CA × 0.6) + Résultat - Passif + Actifs
-    const estimation = Math.round((ca * 0.6) + resultat - passif + actifs);
-    
-    toast({
-      title: "✅ Estimation calculée !",
-      description: `Valeur estimée : ${estimation.toLocaleString('fr-FR')} €`,
-    });
-    
-    // Rediriger vers la page de résultat ou vendre
-    setTimeout(() => {
-      navigate("/vendre");
-    }, 2000);
+    try {
+      const { data, error } = await supabase.functions.invoke('generate-estimation', {
+        body: formData
+      });
+
+      if (error) throw error;
+
+      toast({
+        title: "✅ Estimation générée !",
+        description: "Votre estimation détaillée est prête.",
+      });
+
+      // Rediriger vers la page de résultats
+      navigate(`/resultat-estimation?id=${data.estimationId}`);
+    } catch (error: any) {
+      console.error("Estimation error:", error);
+      toast({
+        title: "Erreur",
+        description: error.message || "Une erreur est survenue lors de l'estimation.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsLoading(false);
+    }
   };
+
+  const [isLoading, setIsLoading] = useState(false);
 
   const progressPercentage = (currentStep / totalSteps) * 100;
 
@@ -176,12 +261,14 @@ const Estimation = () => {
 
                     <div>
                       <Label htmlFor="departement">Département *</Label>
-                      <Input
-                        id="departement"
-                        placeholder="Ex: 75, 69, 13..."
-                        value={formData.departement}
-                        onChange={(e) => handleInputChange("departement", e.target.value)}
-                      />
+                      <Select value={formData.departement} onValueChange={(value) => handleInputChange("departement", value)}>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Sélectionnez votre département" />
+                        </SelectTrigger>
+                        <SelectContent className="max-h-[300px] overflow-y-auto">
+                          <DepartementsSelect />
+                        </SelectContent>
+                      </Select>
                     </div>
 
                     <div>
@@ -656,8 +743,9 @@ const Estimation = () => {
                     onClick={handleSubmit}
                     size="lg"
                     className="flex-1 bg-secondary hover:bg-secondary/90"
+                    disabled={isLoading}
                   >
-                    💰 Obtenir Mon Estimation Gratuite
+                    {isLoading ? "Génération en cours..." : "💰 Obtenir Mon Estimation Gratuite"}
                   </Button>
                 )}
               </div>

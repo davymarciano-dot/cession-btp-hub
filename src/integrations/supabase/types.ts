@@ -14,7 +14,135 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      estimations: {
+        Row: {
+          a_credits: boolean
+          a_dettes: boolean
+          analyse_detaillee: string | null
+          annee_creation: number
+          ca_n: number | null
+          ca_n1: number
+          ca_n2: number | null
+          created_at: string
+          credit_immobilier: number | null
+          credit_materiel: number | null
+          credit_professionnel: number | null
+          departement: string
+          dette_autres: number | null
+          dette_fournisseurs: number | null
+          dette_loyer: number | null
+          dette_tva: number | null
+          dette_urssaf: number | null
+          estimation_basse: number | null
+          estimation_haute: number | null
+          estimation_moyenne: number | null
+          id: string
+          montant_passif: number
+          multiple_valorisation: number | null
+          nombre_apprentis: number | null
+          nombre_cdd: number | null
+          nombre_cdi: number | null
+          nombre_employes: number
+          points_forts: Json | null
+          recommandations: Json | null
+          resultat_n1: number
+          resultat_n1_type: string
+          resultat_n2: number
+          resultat_n2_type: string
+          secteur: string
+          situation_locaux: string
+          updated_at: string
+          user_id: string | null
+          valeur_locaux: number | null
+          valeur_materiel: number | null
+          valeur_stock: number | null
+        }
+        Insert: {
+          a_credits: boolean
+          a_dettes: boolean
+          analyse_detaillee?: string | null
+          annee_creation: number
+          ca_n?: number | null
+          ca_n1: number
+          ca_n2?: number | null
+          created_at?: string
+          credit_immobilier?: number | null
+          credit_materiel?: number | null
+          credit_professionnel?: number | null
+          departement: string
+          dette_autres?: number | null
+          dette_fournisseurs?: number | null
+          dette_loyer?: number | null
+          dette_tva?: number | null
+          dette_urssaf?: number | null
+          estimation_basse?: number | null
+          estimation_haute?: number | null
+          estimation_moyenne?: number | null
+          id?: string
+          montant_passif: number
+          multiple_valorisation?: number | null
+          nombre_apprentis?: number | null
+          nombre_cdd?: number | null
+          nombre_cdi?: number | null
+          nombre_employes: number
+          points_forts?: Json | null
+          recommandations?: Json | null
+          resultat_n1: number
+          resultat_n1_type: string
+          resultat_n2: number
+          resultat_n2_type: string
+          secteur: string
+          situation_locaux: string
+          updated_at?: string
+          user_id?: string | null
+          valeur_locaux?: number | null
+          valeur_materiel?: number | null
+          valeur_stock?: number | null
+        }
+        Update: {
+          a_credits?: boolean
+          a_dettes?: boolean
+          analyse_detaillee?: string | null
+          annee_creation?: number
+          ca_n?: number | null
+          ca_n1?: number
+          ca_n2?: number | null
+          created_at?: string
+          credit_immobilier?: number | null
+          credit_materiel?: number | null
+          credit_professionnel?: number | null
+          departement?: string
+          dette_autres?: number | null
+          dette_fournisseurs?: number | null
+          dette_loyer?: number | null
+          dette_tva?: number | null
+          dette_urssaf?: number | null
+          estimation_basse?: number | null
+          estimation_haute?: number | null
+          estimation_moyenne?: number | null
+          id?: string
+          montant_passif?: number
+          multiple_valorisation?: number | null
+          nombre_apprentis?: number | null
+          nombre_cdd?: number | null
+          nombre_cdi?: number | null
+          nombre_employes?: number
+          points_forts?: Json | null
+          recommandations?: Json | null
+          resultat_n1?: number
+          resultat_n1_type?: string
+          resultat_n2?: number
+          resultat_n2_type?: string
+          secteur?: string
+          situation_locaux?: string
+          updated_at?: string
+          user_id?: string | null
+          valeur_locaux?: number | null
+          valeur_materiel?: number | null
+          valeur_stock?: number | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
