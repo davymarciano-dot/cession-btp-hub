@@ -49,10 +49,10 @@ const Entreprises = () => {
         .eq("statut", "publiee");
 
       // Apply filters
-      if (secteurFilter) {
+      if (secteurFilter && secteurFilter !== "all") {
         query = query.eq("secteur_activite", secteurFilter);
       }
-      if (regionFilter) {
+      if (regionFilter && regionFilter !== "all") {
         query = query.eq("departement", regionFilter);
       }
 
@@ -148,7 +148,7 @@ const Entreprises = () => {
                         <SelectValue placeholder="Tous les secteurs" />
                       </SelectTrigger>
                       <SelectContent className="max-h-[400px] overflow-y-auto">
-                        <SelectItem value="">Tous les secteurs</SelectItem>
+                        <SelectItem value="all">Tous les secteurs</SelectItem>
                         <BTPMetiersSelect />
                       </SelectContent>
                     </Select>
@@ -161,7 +161,7 @@ const Entreprises = () => {
                         <SelectValue placeholder="Tous les départements" />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="">Tous les départements</SelectItem>
+                        <SelectItem value="all">Tous les départements</SelectItem>
                         <SelectItem value="01">01 - Ain</SelectItem>
                         <SelectItem value="06">06 - Alpes-Maritimes</SelectItem>
                         <SelectItem value="13">13 - Bouches-du-Rhône</SelectItem>
