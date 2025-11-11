@@ -55,7 +55,8 @@ ${formData.certificationRGE === 'oui' ? `  - Secteurs RGE: ${[
   formData.rgeSecteursChauffageBois ? 'Chauffage bois' : null,
   formData.rgeSecteursFenetres ? 'Fenêtres' : null,
   formData.rgeSecteursVentilation ? 'Ventilation' : null,
-  formData.rgeSecteursAudit ? 'Audit énergétique' : null
+  formData.rgeSecteursAudit ? 'Audit énergétique' : null,
+  formData.rgeSecteursAutre ? 'Autre' : null
 ].filter(Boolean).join(', ') || 'Non spécifié'}` : ''}
 
 PARTENARIATS FINANCIERS (IMPORTANT pour la valorisation):

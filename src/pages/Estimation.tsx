@@ -37,6 +37,7 @@ const Estimation = () => {
     rgeSecteursFenetres: false,
     rgeSecteursVentilation: false,
     rgeSecteursAudit: false,
+    rgeSecteursAutre: false,
     partenaireFinancement: "non",
     partenairesListe: [] as string[],
   });
@@ -481,6 +482,17 @@ const Estimation = () => {
                               />
                               <Label htmlFor="rge-audit" className="font-normal">
                                 RGE Audit énergétique
+                              </Label>
+                            </div>
+
+                            <div className="flex items-center space-x-2">
+                              <Checkbox 
+                                id="rge-autre"
+                                checked={formData.rgeSecteursAutre}
+                                onCheckedChange={(checked) => handleCheckboxChange("rgeSecteursAutre", checked as boolean)}
+                              />
+                              <Label htmlFor="rge-autre" className="font-normal">
+                                Autre secteur RGE
                               </Label>
                             </div>
                           </div>
