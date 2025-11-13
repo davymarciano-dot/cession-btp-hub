@@ -10,7 +10,7 @@ const Footer = () => {
           {/* Column 1: Logo & Description */}
           <div>
             <div className="flex items-center mb-4">
-              <img src={logo} alt="CessionBTP" className="h-12" />
+              <img src={logo} alt="CessionBTP" className="h-16" />
             </div>
             <p className="text-slate-400 mb-6">
               La plateforme leader française de cession d'entreprises BTP et ENR
