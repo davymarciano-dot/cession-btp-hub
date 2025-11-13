@@ -111,6 +111,10 @@ const Entreprises = () => {
     return `${value}€`;
   };
 
+  const formatCurrencyDetailed = (value: number) => {
+    return `${value.toLocaleString('fr-FR')} €`;
+  };
+
   return (
     <div className="min-h-screen">
       <Header />
@@ -178,6 +182,9 @@ const Entreprises = () => {
                     <label className="block text-sm font-medium mb-2">
                       Chiffre d'affaires
                     </label>
+                    <div className="text-xs text-muted-foreground mb-2 font-medium">
+                      Min: {formatCurrencyDetailed(caRange[0])} - Max: {formatCurrencyDetailed(caRange[1])}
+                    </div>
                     <Slider 
                       value={caRange}
                       onValueChange={setCARange}
@@ -195,6 +202,9 @@ const Entreprises = () => {
                     <label className="block text-sm font-medium mb-2">
                       Prix de vente
                     </label>
+                    <div className="text-xs text-muted-foreground mb-2 font-medium">
+                      Min: {formatCurrencyDetailed(priceRange[0])} - Max: {formatCurrencyDetailed(priceRange[1])}
+                    </div>
                     <Slider 
                       value={priceRange}
                       onValueChange={setPriceRange}

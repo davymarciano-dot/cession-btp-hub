@@ -230,6 +230,14 @@ const Dashboard = () => {
                     <Plus className="w-4 h-4 mr-2" />
                     Créer ma première annonce
                   </Button>
+                  <div className="mt-4">
+                    <a 
+                      href="/blog/guide-vente-entreprise-btp" 
+                      className="text-sm text-muted-foreground hover:text-primary transition-colors"
+                    >
+                      Ou consultez notre guide de vente →
+                    </a>
+                  </div>
                 </div>
               ) : (
                 <Table>

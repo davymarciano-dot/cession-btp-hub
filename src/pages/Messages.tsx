@@ -352,8 +352,16 @@ const Messages = () => {
                   </form>
                 </>
               ) : (
-                <div className="flex-1 flex items-center justify-center text-muted-foreground">
-                  Sélectionnez une conversation pour commencer
+                <div className="flex-1 flex flex-col items-center justify-center text-center p-8">
+                  <p className="text-muted-foreground mb-6">
+                    Aucune conversation pour le moment. Consultez les entreprises disponibles pour contacter un vendeur.
+                  </p>
+                  <Button 
+                    onClick={() => navigate("/entreprises")}
+                    className="bg-primary hover:bg-primary/90"
+                  >
+                    Voir les entreprises disponibles
+                  </Button>
                 </div>
               )}
             </div>
