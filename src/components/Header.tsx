@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { Building2, Menu, X, LayoutDashboard } from "lucide-react";
+import { Menu, X, LayoutDashboard } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { User } from "@supabase/supabase-js";
+import logo from "@/assets/logo-cessionbtp.png";
 
 const Header = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -29,12 +30,8 @@ const Header = () => {
       <nav className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-2">
-            <Building2 className="h-8 w-8 text-primary" />
-            <span className="text-2xl font-bold">
-              <span className="text-primary">Cession</span>
-              <span className="text-secondary">BTP</span>
-            </span>
+          <Link to="/" className="flex items-center">
+            <img src={logo} alt="CessionBTP" className="h-12" />
           </Link>
 
           {/* Desktop Navigation */}
