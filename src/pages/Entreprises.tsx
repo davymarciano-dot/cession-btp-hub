@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Helmet } from "react-helmet-async";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
@@ -9,6 +10,7 @@ import Footer from "@/components/Footer";
 import EntrepriseCard from "@/components/EntrepriseCard";
 import { BTPMetiersSelect } from "@/data/btp-metiers";
 import { useToast } from "@/hooks/use-toast";
+import { analyticsEvents } from "@/lib/analytics";
 
 interface Annonce {
   id: string;
@@ -117,6 +119,10 @@ const Entreprises = () => {
 
   return (
     <div className="min-h-screen">
+      <Helmet>
+        <title>18 Entreprises BTP à Vendre | Plomberie Électricité Maçonnerie</title>
+        <meta name="description" content="Découvrez notre sélection d'entreprises BTP à reprendre : plomberie, électricité, maçonnerie, chauffage. Entreprises vérifiées, financement possible." />
+      </Helmet>
       <Header />
 
       <main className="py-12 bg-slate-50 min-h-screen">

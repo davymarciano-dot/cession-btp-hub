@@ -20,6 +20,7 @@ import {
   Award, FileText, Phone, Mail, ArrowLeft, Eye, Loader2, MessageCircle, Camera, Share2, Copy, Linkedin
 } from "lucide-react";
 import { exempleAnnonces } from "@/data/exemple-annonces";
+import { analyticsEvents } from "@/lib/analytics";
 
 const AnnonceDetail = () => {
   const { id } = useParams();
@@ -130,6 +131,9 @@ const AnnonceDetail = () => {
     setIsContacting(true);
 
     try {
+      // Track send message event
+      analyticsEvents.clickSendMessage(annonce.id);
+      
       // Check if conversation already exists
       const { data: existingConv } = await supabase
         .from("conversations")

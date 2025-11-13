@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Helmet } from "react-helmet-async";
 import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Badge } from "@/components/ui/badge";
@@ -16,6 +17,7 @@ import TestimonialSection from "@/components/TestimonialSection";
 import NewsletterSection from "@/components/NewsletterSection";
 import SecurityBadges from "@/components/SecurityBadges";
 import { BTPMetiersSelect } from "@/data/btp-metiers";
+import { analyticsEvents } from "@/lib/analytics";
 
 const Index = () => {
   const navigate = useNavigate();
@@ -49,6 +51,10 @@ const Index = () => {
 
   return (
     <div className="min-h-screen">
+      <Helmet>
+        <title>CessionBTP | Achat Vente Entreprise BTP en 45 Jours | Success Fee 2%</title>
+        <meta name="description" content="Plateforme n°1 de cession d'entreprises BTP. Matching IA, 2000+ repreneurs qualifiés, success fee uniquement 2%. Estimation gratuite en 48h." />
+      </Helmet>
       <Header />
 
       <main>
@@ -430,7 +436,10 @@ const Index = () => {
               Estimation gratuite • Accompagnement expert • Résultats garantis
             </p>
             <Button 
-              onClick={() => navigate("/vendre")}
+              onClick={() => {
+                analyticsEvents.clickEstimateButton();
+                navigate("/vendre");
+              }}
               size="lg" 
               className="bg-white text-primary hover:bg-white/90 hover:shadow-2xl text-xl py-6 px-12"
             >
