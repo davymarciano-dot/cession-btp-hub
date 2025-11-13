@@ -9,6 +9,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import EntrepriseCard from "@/components/EntrepriseCard";
 import StatCounter from "@/components/StatCounter";
+import AnimatedCounter from "@/components/AnimatedCounter";
 import PricingCard from "@/components/PricingCard";
 import ComparisonTable from "@/components/ComparisonTable";
 import SuccessFeeSection from "@/components/SuccessFeeSection";
@@ -108,7 +109,7 @@ const Index = () => {
         </section>
 
         {/* Search Bar */}
-        <section className="container mx-auto px-4 -mt-16 relative z-10 mb-20">
+        <section className="container mx-auto px-4 -mt-16 relative z-10 mb-12">
           <div className="bg-white shadow-2xl rounded-2xl p-8 max-w-5xl mx-auto">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <Select>
@@ -145,6 +146,16 @@ const Index = () => {
                 Rechercher
               </Button>
             </div>
+          </div>
+        </section>
+
+        {/* Compteur animé */}
+        <section className="container mx-auto px-4 mb-20">
+          <div className="max-w-md mx-auto">
+            <AnimatedCounter 
+              target={18} 
+              label="entreprises vendues ce mois-ci" 
+            />
           </div>
         </section>
 
