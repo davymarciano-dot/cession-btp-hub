@@ -19,6 +19,7 @@ const ComparisonTable = () => {
                 <th className="px-6 py-4 text-left font-bold">Critère</th>
                 <th className="px-6 py-4 text-left font-bold">Sites Généralistes</th>
                 <th className="px-6 py-4 text-left font-bold">CessionBTP ✅</th>
+                <th className="px-6 py-4 text-left font-bold">Exemples</th>
               </tr>
             </thead>
             <tbody>
@@ -26,11 +27,13 @@ const ComparisonTable = () => {
                 <td className="px-6 py-4 font-semibold">Prix</td>
                 <td className="px-6 py-4">250€/an (12 mois)</td>
                 <td className="px-6 py-4 font-semibold text-primary">290€ (3 mois)</td>
+                <td className="px-6 py-4 text-sm text-muted-foreground">BPI France Transmission, Fusacq</td>
               </tr>
               <tr className="border-b bg-slate-50">
                 <td className="px-6 py-4 font-semibold">Coût mensuel</td>
                 <td className="px-6 py-4">21€</td>
                 <td className="px-6 py-4 font-semibold text-primary">97€</td>
+                <td className="px-6 py-4 text-sm text-muted-foreground">-</td>
               </tr>
               <tr className="border-b bg-green-50">
                 <td className="px-6 py-4 font-bold">Délai moyen de vente</td>
@@ -40,34 +43,43 @@ const ComparisonTable = () => {
                 <td className="px-6 py-4">
                   <span className="font-bold text-success text-xl">45 jours</span> ⚡
                 </td>
+                <td className="px-6 py-4 text-sm text-muted-foreground">-</td>
               </tr>
               <tr className="border-b">
                 <td className="px-6 py-4 font-semibold">Spécialisation</td>
                 <td className="px-6 py-4">Tous secteurs</td>
                 <td className="px-6 py-4 font-semibold text-primary">100% BTP & ENR</td>
+                <td className="px-6 py-4 text-sm text-muted-foreground">-</td>
               </tr>
               <tr className="border-b bg-slate-50">
                 <td className="px-6 py-4 font-semibold">Repreneurs actifs</td>
                 <td className="px-6 py-4">Grand public</td>
                 <td className="px-6 py-4 font-semibold text-primary">2000+ qualifiés BTP</td>
+                <td className="px-6 py-4 text-sm text-muted-foreground">-</td>
               </tr>
               <tr className="border-b">
                 <td className="px-6 py-4 font-semibold">Valorisation</td>
                 <td className="px-6 py-4">Non incluse (+500€)</td>
                 <td className="px-6 py-4 font-semibold text-success">✅ Incluse</td>
+                <td className="px-6 py-4 text-sm text-muted-foreground">-</td>
               </tr>
               <tr className="border-b bg-slate-50">
                 <td className="px-6 py-4 font-semibold">Support</td>
                 <td className="px-6 py-4">Email générique</td>
                 <td className="px-6 py-4 font-semibold text-primary">Expert BTP dédié</td>
+                <td className="px-6 py-4 text-sm text-muted-foreground">-</td>
               </tr>
               <tr>
                 <td className="px-6 py-4 font-semibold">Success fee</td>
                 <td className="px-6 py-4">Forfait</td>
                 <td className="px-6 py-4 font-semibold text-primary">2% uniquement</td>
+                <td className="px-6 py-4 text-sm text-muted-foreground">-</td>
               </tr>
             </tbody>
           </table>
+          <p className="text-xs text-muted-foreground mt-4 text-right">
+            * Données issues d'une étude comparative interne - Janvier 2025
+          </p>
         </div>
 
         <div className="max-w-3xl mx-auto mt-12 bg-white p-8 rounded-xl shadow-lg">

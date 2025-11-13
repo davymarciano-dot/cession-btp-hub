@@ -10,8 +10,14 @@ import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import {
   Building2, MapPin, Calendar, TrendingUp, Users, Euro,
-  Award, FileText, Phone, Mail, ArrowLeft, Eye, Loader2, MessageCircle, Camera
+  Award, FileText, Phone, Mail, ArrowLeft, Eye, Loader2, MessageCircle, Camera, Share2, Copy, Linkedin
 } from "lucide-react";
 import { exempleAnnonces } from "@/data/exemple-annonces";
 
@@ -170,6 +176,27 @@ const AnnonceDetail = () => {
     }
   };
 
+  const handleShare = (method: 'copy' | 'email' | 'linkedin') => {
+    const url = window.location.href;
+    const title = `${annonce.raison_sociale || 'Entreprise BTP'} à vendre - ${annonce.prix_vente.toLocaleString('fr-FR')}€`;
+    
+    switch(method) {
+      case 'copy':
+        navigator.clipboard.writeText(url);
+        toast({
+          title: "Lien copié !",
+          description: "Le lien de l'annonce a été copié dans le presse-papier.",
+        });
+        break;
+      case 'email':
+        window.location.href = `mailto:?subject=${encodeURIComponent(title)}&body=${encodeURIComponent(`Découvrez cette opportunité : ${url}`)}`;
+        break;
+      case 'linkedin':
+        window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`, '_blank');
+        break;
+    }
+  };
+
   if (isLoading) {
     return (
       <div className="min-h-screen bg-slate-50">
@@ -225,13 +252,35 @@ const AnnonceDetail = () => {
                       </Badge>
                     </div>
                   </div>
-                  <div className="text-right">
+                  <div className="text-right flex flex-col items-end gap-2">
                     <div className="text-3xl font-bold text-primary">
                       {annonce.prix_vente.toLocaleString('fr-FR')} €
                     </div>
                     {annonce.prix_negociable && (
                       <span className="text-sm text-green-600">Prix négociable</span>
                     )}
+                    <DropdownMenu>
+                      <DropdownMenuTrigger asChild>
+                        <Button variant="outline" size="sm">
+                          <Share2 className="w-4 h-4 mr-2" />
+                          Partager
+                        </Button>
+                      </DropdownMenuTrigger>
+                      <DropdownMenuContent align="end">
+                        <DropdownMenuItem onClick={() => handleShare('copy')}>
+                          <Copy className="w-4 h-4 mr-2" />
+                          Copier le lien
+                        </DropdownMenuItem>
+                        <DropdownMenuItem onClick={() => handleShare('email')}>
+                          <Mail className="w-4 h-4 mr-2" />
+                          Partager par email
+                        </DropdownMenuItem>
+                        <DropdownMenuItem onClick={() => handleShare('linkedin')}>
+                          <Linkedin className="w-4 h-4 mr-2" />
+                          Partager sur LinkedIn
+                        </DropdownMenuItem>
+                      </DropdownMenuContent>
+                    </DropdownMenu>
                   </div>
                 </div>
 
