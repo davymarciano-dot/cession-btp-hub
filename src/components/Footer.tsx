@@ -1,5 +1,6 @@
-import { Building2, Facebook, Linkedin, Twitter } from "lucide-react";
+import { Facebook, Linkedin, Twitter } from "lucide-react";
 import { Link } from "react-router-dom";
+import logo from "@/assets/logo-cessionbtp.png";
 
 const Footer = () => {
   return (
@@ -8,12 +9,8 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
           {/* Column 1: Logo & Description */}
           <div>
-            <div className="flex items-center gap-2 mb-4">
-              <Building2 className="h-8 w-8 text-primary" />
-              <span className="text-2xl font-bold">
-                <span className="text-primary">Cession</span>
-                <span className="text-secondary">BTP</span>
-              </span>
+            <div className="flex items-center mb-4">
+              <img src={logo} alt="CessionBTP" className="h-12" />
             </div>
             <p className="text-slate-400 mb-6">
               La plateforme leader française de cession d'entreprises BTP et ENR
