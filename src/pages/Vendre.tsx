@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
 import Header from "@/components/Header";
@@ -20,14 +20,18 @@ import FormSection12 from "@/components/vendre/FormSection12";
 import FormSection13 from "@/components/vendre/FormSection13";
 import FormSection14 from "@/components/vendre/FormSection14";
 import FormSection15 from "@/components/vendre/FormSection15";
-import { ArrowLeft, ArrowRight, Save } from "lucide-react";
+import { ArrowLeft, ArrowRight, Save, Trash2 } from "lucide-react";
+
+const STORAGE_KEY = 'cessionBTP_form_draft';
 
 const Vendre = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
   const [currentStep, setCurrentStep] = useState(1);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [hasDraft, setHasDraft] = useState(false);
   const totalSteps = 15;
+  const autoSaveTimeout = useRef<NodeJS.Timeout | null>(null);
 
   const [formData, setFormData] = useState({
     // Section 1
@@ -145,8 +149,96 @@ const Vendre = () => {
     newsletter: false,
   });
 
+  // Restaurer le brouillon au chargement
+  useEffect(() => {
+    const savedDraft = localStorage.getItem(STORAGE_KEY);
+    if (savedDraft) {
+      try {
+        const parsedDraft = JSON.parse(savedDraft);
+        setHasDraft(true);
+        toast({
+          title: "Brouillon trouvé",
+          description: "Nous avons retrouvé votre brouillon. Cliquez sur 'Restaurer' pour continuer.",
+          duration: 10000,
+          action: (
+            <div className="flex gap-2">
+              <Button
+                size="sm"
+                variant="outline"
+                onClick={() => {
+                  localStorage.removeItem(STORAGE_KEY);
+                  setHasDraft(false);
+                }}
+              >
+                Ignorer
+              </Button>
+              <Button
+                size="sm"
+                onClick={() => {
+                  setFormData(parsedDraft.formData);
+                  setCurrentStep(parsedDraft.currentStep || 1);
+                  setHasDraft(false);
+                  toast({
+                    title: "Brouillon restauré",
+                    description: "Vous pouvez continuer là où vous vous étiez arrêté.",
+                  });
+                }}
+              >
+                Restaurer
+              </Button>
+            </div>
+          ),
+        });
+      } catch (error) {
+        console.error("Erreur lors de la lecture du brouillon:", error);
+        localStorage.removeItem(STORAGE_KEY);
+      }
+    }
+  }, []);
+
+  // Sauvegarde automatique
+  useEffect(() => {
+    // Ne pas sauvegarder si on vient de charger la page
+    if (hasDraft) return;
+
+    // Annuler le timeout précédent
+    if (autoSaveTimeout.current) {
+      clearTimeout(autoSaveTimeout.current);
+    }
+
+    // Déclencher la sauvegarde après 2 secondes d'inactivité
+    autoSaveTimeout.current = setTimeout(() => {
+      const draftData = {
+        formData,
+        currentStep,
+        savedAt: new Date().toISOString(),
+      };
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(draftData));
+      
+      // Toast discret
+      toast({
+        description: "✓ Brouillon sauvegardé",
+        duration: 2000,
+      });
+    }, 2000);
+
+    return () => {
+      if (autoSaveTimeout.current) {
+        clearTimeout(autoSaveTimeout.current);
+      }
+    };
+  }, [formData, currentStep, hasDraft]);
+
   const handleInputChange = (field: string, value: any) => {
     setFormData(prev => ({ ...prev, [field]: value }));
+  };
+
+  const clearDraft = () => {
+    localStorage.removeItem(STORAGE_KEY);
+    toast({
+      title: "Brouillon effacé",
+      description: "Votre brouillon a été supprimé.",
+    });
   };
 
   const handleNext = () => {
@@ -322,6 +414,9 @@ const Vendre = () => {
 
         if (error) throw error;
 
+        // Effacer le brouillon après succès
+        localStorage.removeItem(STORAGE_KEY);
+
         toast({
           title: "Annonce créée !",
           description: "Votre annonce gratuite a été publiée avec succès.",
@@ -340,6 +435,8 @@ const Vendre = () => {
         if (paymentError) throw paymentError;
 
         if (paymentData?.url) {
+          // Effacer le brouillon avant la redirection vers le paiement
+          localStorage.removeItem(STORAGE_KEY);
           window.location.href = paymentData.url;
         } else {
           throw new Error("No checkout URL received");
@@ -443,48 +540,63 @@ const Vendre = () => {
               {renderCurrentSection()}
 
               {/* Navigation Buttons */}
-              <div className="flex gap-4 mt-8 pt-8 border-t">
-                {currentStep > 1 && (
+              <div className="space-y-4 mt-8 pt-8 border-t">
+                {/* Bouton Effacer brouillon */}
+                <div className="flex justify-end">
                   <Button
-                    onClick={handlePrevious}
-                    variant="outline"
-                    size="lg"
-                    className="flex-1"
+                    onClick={clearDraft}
+                    variant="ghost"
+                    size="sm"
+                    className="text-muted-foreground hover:text-destructive"
                   >
-                    <ArrowLeft className="w-4 h-4 mr-2" />
-                    Précédent
+                    <Trash2 className="w-3 h-3 mr-2" />
+                    Effacer le brouillon
                   </Button>
-                )}
-                
-                {currentStep < totalSteps ? (
-                  <Button
-                    onClick={handleNext}
-                    size="lg"
-                    className="flex-1 bg-primary hover:bg-primary/90"
-                  >
-                    Suivant
-                    <ArrowRight className="w-4 h-4 ml-2" />
-                  </Button>
-                ) : (
-                  <Button
-                    onClick={handleSubmit}
-                    size="lg"
-                    className="flex-1 bg-secondary hover:bg-secondary/90"
-                    disabled={isSubmitting}
-                  >
-                    {isSubmitting ? (
-                      <>
-                        <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2" />
-                        {formData.montantAbonnement === 0 ? "Publication..." : "Redirection paiement..."}
-                      </>
-                    ) : (
-                      <>
-                        <Save className="w-4 h-4 mr-2" />
-                        {formData.montantAbonnement === 0 ? "Publier Gratuitement" : `Payer ${formData.montantAbonnement}€ et Publier`}
-                      </>
-                    )}
-                  </Button>
-                )}
+                </div>
+
+                <div className="flex gap-4">
+                  {currentStep > 1 && (
+                    <Button
+                      onClick={handlePrevious}
+                      variant="outline"
+                      size="lg"
+                      className="flex-1"
+                    >
+                      <ArrowLeft className="w-4 h-4 mr-2" />
+                      Précédent
+                    </Button>
+                  )}
+                  
+                  {currentStep < totalSteps ? (
+                    <Button
+                      onClick={handleNext}
+                      size="lg"
+                      className="flex-1 bg-primary hover:bg-primary/90"
+                    >
+                      Suivant
+                      <ArrowRight className="w-4 h-4 ml-2" />
+                    </Button>
+                  ) : (
+                    <Button
+                      onClick={handleSubmit}
+                      size="lg"
+                      className="flex-1 bg-secondary hover:bg-secondary/90"
+                      disabled={isSubmitting}
+                    >
+                      {isSubmitting ? (
+                        <>
+                          <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2" />
+                          {formData.montantAbonnement === 0 ? "Publication..." : "Redirection paiement..."}
+                        </>
+                      ) : (
+                        <>
+                          <Save className="w-4 h-4 mr-2" />
+                          {formData.montantAbonnement === 0 ? "Publier Gratuitement" : `Payer ${formData.montantAbonnement}€ et Publier`}
+                        </>
+                      )}
+                    </Button>
+                  )}
+                </div>
               </div>
             </div>
           </div>
