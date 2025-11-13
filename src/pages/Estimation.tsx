@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Helmet } from "react-helmet-async";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -12,6 +13,7 @@ import Footer from "@/components/Footer";
 import { BTPMetiersSelect } from "@/data/btp-metiers";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
+import { analyticsEvents } from "@/lib/analytics";
 
 const Estimation = () => {
   const navigate = useNavigate();
@@ -144,6 +146,9 @@ const Estimation = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
+    // Track estimation form completion
+    analyticsEvents.completeEstimationStep(1);
+    
     // Validation minimale
     if (!formData.secteur || !formData.caN1 || !formData.resultatN1) {
       toast({
@@ -171,6 +176,10 @@ const Estimation = () => {
 
   return (
     <div className="min-h-screen bg-slate-50">
+      <Helmet>
+        <title>Estimation Gratuite Entreprise BTP | Valorisation en 48h par IA</title>
+        <meta name="description" content="Estimez gratuitement la valeur de votre entreprise BTP avec notre IA. Résultat en 48h, méthode éprouvée sur 500+ transactions. 100% confidentiel." />
+      </Helmet>
       <Header />
 
       {/* Hero Section */}

@@ -12,6 +12,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Loader2, LogIn, UserPlus } from "lucide-react";
 import { z } from "zod";
+import { analyticsEvents } from "@/lib/analytics";
 
 // Validation schemas
 const emailSchema = z.string().email("Email invalide").max(255);
@@ -157,6 +158,9 @@ const Auth = () => {
         title: "✅ Inscription réussie !",
         description: "Vous pouvez maintenant vous connecter.",
       });
+
+      // Track signup event (assuming vendeur for now - can be updated based on form selection)
+      analyticsEvents.signUp('vendeur');
 
       setSignupEmail("");
       setSignupPassword("");

@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Check } from "lucide-react";
+import { analyticsEvents } from "@/lib/analytics";
 
 interface PricingCardProps {
   title: string;
@@ -11,6 +12,7 @@ interface PricingCardProps {
   buttonText: string;
   isPopular?: boolean;
   variant?: "default" | "primary";
+  userType?: "vendeur" | "acheteur";
 }
 
 const PricingCard = ({
@@ -22,8 +24,13 @@ const PricingCard = ({
   buttonText,
   isPopular,
   variant = "default",
+  userType = "acheteur",
 }: PricingCardProps) => {
   const isPrimary = variant === "primary" || isPopular;
+  
+  const handleClick = () => {
+    analyticsEvents.selectSubscription(title, userType);
+  };
   
   return (
     <div className={`rounded-xl p-8 ${isPrimary ? 'border-2 border-primary shadow-lg' : 'border border-border'} bg-card relative hover:shadow-xl transition-all duration-300`}>
@@ -52,6 +59,7 @@ const PricingCard = ({
       </ul>
       
       <Button 
+        onClick={handleClick}
         className={`w-full ${isPrimary ? 'bg-primary hover:bg-primary/90 text-white' : 'bg-secondary hover:bg-secondary/90 text-white'}`}
       >
         {buttonText}

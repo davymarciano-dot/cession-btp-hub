@@ -44,6 +44,7 @@ const Tarifs = () => {
                   "Inscription gratuite"
                 ]}
                 buttonText="S'inscrire gratuitement"
+                userType="acheteur"
               />
               
               <PricingCard
@@ -59,6 +60,7 @@ const Tarifs = () => {
                   "Accès prioritaire"
                 ]}
                 buttonText="Acheter des contacts"
+                userType="acheteur"
               />
               
               <PricingCard
@@ -76,6 +78,7 @@ const Tarifs = () => {
                 buttonText="Choisir Pro"
                 isPopular
                 variant="primary"
+                userType="acheteur"
               />
               
               <PricingCard
@@ -91,6 +94,7 @@ const Tarifs = () => {
                   "Formation équipe"
                 ]}
                 buttonText="Choisir Entreprise"
+                userType="acheteur"
               />
             </div>
           </div>
@@ -123,6 +127,7 @@ const Tarifs = () => {
                   "Expert en soutien métier"
                 ]}
                 buttonText="Commencer gratuitement"
+                userType="vendeur"
               />
               
               <PricingCard
@@ -140,6 +145,7 @@ const Tarifs = () => {
                 buttonText="Choisir Essentiel"
                 isPopular
                 variant="primary"
+                userType="vendeur"
               />
               
               <PricingCard
@@ -155,6 +161,7 @@ const Tarifs = () => {
                   "Vendez 2x plus vite"
                 ]}
                 buttonText="Choisir Premium"
+                userType="vendeur"
               />
               
               <PricingCard
@@ -170,6 +177,7 @@ const Tarifs = () => {
                   "Conciergerie complète"
                 ]}
                 buttonText="Choisir Exclusif"
+                userType="vendeur"
               />
             </div>
           </div>
