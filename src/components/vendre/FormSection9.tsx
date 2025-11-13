@@ -33,7 +33,7 @@ const FormSection9 = ({ formData, handleInputChange }: FormSection9Props) => {
     <div className="space-y-6">
       <div className="flex items-center gap-3 mb-6">
         <Star className="w-8 h-8 text-primary" />
-        <h2 className="text-2xl font-bold">Points Forts & Potentiel</h2>
+        <h2 className="text-2xl font-bold">Points forts et potentiel</h2>
       </div>
 
       <div className="space-y-6">

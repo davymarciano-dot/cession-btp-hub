@@ -79,7 +79,7 @@ const Estimer = () => {
           <div className="container mx-auto px-4">
             <div className="max-w-5xl mx-auto">
               <h1 className="text-5xl md:text-6xl font-bold mb-6 text-center">
-                Estimez la Valeur de Votre Entreprise BTP
+                Estimez la valeur de votre entreprise BTP
               </h1>
               <p className="text-xl mb-12 text-center text-white/90">
                 Estimation gratuite en 48h • Valorisation par IA • 100% confidentiel

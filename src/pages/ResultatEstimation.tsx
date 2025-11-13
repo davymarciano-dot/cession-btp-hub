@@ -194,7 +194,7 @@ const ResultatEstimation = () => {
             <Card className="p-8">
               <h2 className="text-2xl font-bold mb-4 flex items-center gap-2">
                 <Check className="w-6 h-6 text-green-600" />
-                Points Forts Identifiés
+                Points forts identifiés
               </h2>
               <ul className="space-y-3">
                 {estimation.pointsForts.map((point, index) => (

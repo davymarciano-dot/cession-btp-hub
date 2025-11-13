@@ -342,7 +342,7 @@ const AnnonceDetail = () => {
                 <Card className="p-6">
                   <h2 className="text-xl font-bold mb-4 flex items-center gap-2">
                     <Award className="w-6 h-6 text-primary" />
-                    Points Forts
+                    Points forts
                   </h2>
                   <p className="text-gray-700 leading-relaxed whitespace-pre-line">
                     {annonce.atouts_principaux}

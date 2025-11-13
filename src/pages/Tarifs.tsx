@@ -26,7 +26,7 @@ const Tarifs = () => {
           <div className="container mx-auto px-4">
             <div className="text-center mb-12">
               <div className="text-6xl mb-4">🔍</div>
-              <h2 className="text-3xl font-bold mb-4">Abonnements Acheteurs</h2>
+              <h2 className="text-3xl font-bold mb-4">Abonnements acheteurs</h2>
               <p className="text-xl text-muted-foreground">
                 Accédez aux meilleures opportunités d'acquisition BTP
               </p>
@@ -104,7 +104,7 @@ const Tarifs = () => {
           <div className="container mx-auto px-4">
             <div className="text-center mb-12">
               <div className="text-6xl mb-4">🏗️</div>
-              <h2 className="text-3xl font-bold mb-4">Abonnements Vendeurs</h2>
+              <h2 className="text-3xl font-bold mb-4">Abonnements vendeurs</h2>
               <p className="text-xl text-muted-foreground">
                 Choisissez la formule adaptée à vos besoins de transmission
               </p>
