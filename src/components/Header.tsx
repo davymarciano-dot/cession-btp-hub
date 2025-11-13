@@ -27,11 +27,11 @@ const Header = () => {
 
   return (
     <header className="sticky top-0 bg-white shadow-sm z-50">
-      <nav className="container mx-auto px-4 py-4">
+      <nav className="container mx-auto px-4 py-2">
         <div className="flex items-center justify-between">
           {/* Logo */}
           <Link to="/" className="flex items-center">
-            <img src={logo} alt="CessionBTP" className="h-16" />
+            <img src={logo} alt="CessionBTP" className="h-20" />
           </Link>
 
           {/* Desktop Navigation */}
