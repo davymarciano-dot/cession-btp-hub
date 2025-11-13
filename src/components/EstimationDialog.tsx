@@ -87,7 +87,7 @@ const EstimationDialog = ({ open, onOpenChange, estimation, isLoading }: Estimat
             <div>
               <h4 className="font-bold text-lg mb-3 flex items-center gap-2">
                 <CheckCircle className="h-5 w-5 text-success" />
-                Points Forts Identifiés
+                Points forts identifiés
               </h4>
               <ul className="space-y-2">
                 {estimation.points_forts.map((point, index) => (

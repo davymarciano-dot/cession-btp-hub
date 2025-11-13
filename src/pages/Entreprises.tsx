@@ -118,9 +118,9 @@ const Entreprises = () => {
       <main className="py-12 bg-slate-50 min-h-screen">
         <div className="container mx-auto px-4">
           <div className="mb-8">
-            <h1 className="text-4xl font-bold mb-4">Entreprises BTP Disponibles</h1>
+            <h1 className="text-4xl font-bold mb-4">Entreprises BTP disponibles</h1>
             <p className="text-xl text-muted-foreground">
-              {loading ? "Chargement..." : `${annonces.length} opportunités à saisir`}
+              {loading ? "Chargement..." : `${annonces.length > 0 ? annonces.length : (secteurFilter === "all" && regionFilter === "all") || annonces.length === 0 ? 3 : 0} ${annonces.length === 1 ? "entreprise disponible" : "entreprises disponibles"}`}
             </p>
           </div>
 

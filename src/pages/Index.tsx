@@ -60,7 +60,7 @@ const Index = () => {
                 🔴 LIVE - Entreprise d'Électricité vendue pour €1.2M à Nice (06) Il y a 6h
               </Badge>
               <h1 className="text-5xl md:text-6xl font-bold mb-6">
-                Cédez ou Reprenez une Entreprise BTP en 45 Jours
+                Cédez ou reprenez une entreprise BTP en 45 jours
               </h1>
               <p className="text-xl mb-8 text-white/90">
                 Matching IA • 500+ Transactions • 95% Satisfaction • Success Fee 2%
@@ -206,7 +206,7 @@ const Index = () => {
           <div className="container mx-auto px-4">
             <div className="text-center mb-12">
               <div className="text-6xl mb-4">🔍</div>
-              <h2 className="text-3xl font-bold mb-4">Abonnements Acheteurs</h2>
+              <h2 className="text-3xl font-bold mb-4">Abonnements acheteurs</h2>
               <p className="text-xl text-muted-foreground">
                 Accédez aux meilleures opportunités d'acquisition BTP
               </p>
@@ -284,7 +284,7 @@ const Index = () => {
           <div className="container mx-auto px-4">
             <div className="text-center mb-12">
               <div className="text-6xl mb-4">🏗️</div>
-              <h2 className="text-3xl font-bold mb-4">Abonnements Vendeurs</h2>
+              <h2 className="text-3xl font-bold mb-4">Abonnements vendeurs</h2>
               <p className="text-xl text-muted-foreground">
                 Choisissez la formule adaptée à vos besoins de transmission
               </p>
