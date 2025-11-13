@@ -15,6 +15,7 @@ import ComparisonTable from "@/components/ComparisonTable";
 import SuccessFeeSection from "@/components/SuccessFeeSection";
 import ProcessTimeline from "@/components/ProcessTimeline";
 import TestimonialSection from "@/components/TestimonialSection";
+import TrustBanner from "@/components/TrustBanner";
 import NewsletterSection from "@/components/NewsletterSection";
 import SecurityBadges from "@/components/SecurityBadges";
 import { BTPMetiersSelect } from "@/data/btp-metiers";
@@ -151,6 +152,9 @@ const Index = () => {
 
         {/* Section Statistiques */}
         <StatsSection />
+
+        {/* Bannière de confiance */}
+        <TrustBanner />
 
         {/* Featured Companies */}
         <section className="py-20 bg-slate-50">
