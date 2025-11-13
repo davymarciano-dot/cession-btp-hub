@@ -63,7 +63,7 @@ const Index = () => {
                 Cédez ou reprenez une entreprise BTP en 45 jours
               </h1>
               <p className="text-xl mb-8 text-white/90">
-                Matching IA • 500+ Transactions • 95% Satisfaction • Success Fee 2%
+                Matching IA • 500+ transactions réalisées • 95% satisfaction • 2000+ repreneurs qualifiés
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">

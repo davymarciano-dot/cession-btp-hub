@@ -43,7 +43,9 @@ const Estimation = () => {
   });
 
   const [showResults, setShowResults] = useState(false);
+  const [showTeaser, setShowTeaser] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [preliminaryEstimate, setPreliminaryEstimate] = useState({ min: 0, max: 0 });
   const [estimation, setEstimation] = useState<{
     min: number;
     max: number;
@@ -73,6 +75,25 @@ const Estimation = () => {
           : [...currentList, partenaire]
       };
     });
+  };
+
+  const calculatePreliminaryEstimate = () => {
+    const ca = parseFloat(formData.caN1) || 0;
+    const resultat = parseFloat(formData.resultatN1) || 0;
+    const valeurMateriel = parseFloat(formData.valeurMateriel) || 0;
+    const dettes = parseFloat(formData.dettesTotales) || 0;
+    
+    // Coefficients de bonus
+    const coeffRGE = formData.certificationRGE === "oui" ? 1.1 : 1;
+    const coeffFinancement = formData.partenaireFinancement === "oui" ? 1.05 : 1;
+    
+    // Calcul simplifié
+    const baseEstimate = (ca * 0.5 + resultat + valeurMateriel - dettes) * coeffRGE * coeffFinancement;
+    
+    const min = Math.round(baseEstimate * 0.85);
+    const max = Math.round(baseEstimate * 1.15);
+    
+    return { min, max };
   };
 
   const calculateEstimation = async () => {
@@ -133,6 +154,16 @@ const Estimation = () => {
       return;
     }
 
+    // Calculer l'estimation préliminaire
+    const preliminary = calculatePreliminaryEstimate();
+    setPreliminaryEstimate(preliminary);
+    
+    // Afficher le teaser
+    setShowTeaser(true);
+  };
+
+  const handleGetDetailedEstimate = async () => {
+    setShowTeaser(false);
     setIsLoading(true);
     await calculateEstimation();
     setIsLoading(false);
@@ -166,7 +197,7 @@ const Estimation = () => {
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
             
-            {!showResults ? (
+            {!showResults && !showTeaser ? (
               <div className="bg-white rounded-2xl shadow-xl p-8 md:p-12">
                 <h2 className="text-2xl font-bold mb-6 flex items-center gap-3">
                   <TrendingUp className="w-7 h-7 text-primary" />
@@ -592,6 +623,80 @@ const Estimation = () => {
                     </div>
                   </div>
                 </form>
+              </div>
+            ) : showTeaser ? (
+              // Teaser Section - Estimation préliminaire
+              <div className="bg-white rounded-2xl shadow-xl p-8 md:p-12">
+                <div className="text-center mb-8">
+                  <div className="w-20 h-20 bg-gradient-to-br from-secondary to-orange-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <TrendingUp className="w-10 h-10 text-white" />
+                  </div>
+                  <h2 className="text-3xl font-bold mb-2">Votre estimation préliminaire</h2>
+                  <p className="text-gray-600">Calcul simplifié basé sur vos données</p>
+                </div>
+
+                <div className="bg-gradient-to-br from-secondary to-orange-600 text-white rounded-xl p-8 mb-8">
+                  <div className="text-center">
+                    <p className="text-lg mb-2 opacity-90">Fourchette estimée</p>
+                    <div className="text-5xl font-bold mb-4">
+                      {preliminaryEstimate.min.toLocaleString('fr-FR')} € - {preliminaryEstimate.max.toLocaleString('fr-FR')} €
+                    </div>
+                  </div>
+                </div>
+
+                <div className="bg-blue-50 border border-blue-200 rounded-lg p-6 mb-8">
+                  <h3 className="font-bold text-lg mb-3 text-center">Recevez le rapport détaillé complet</h3>
+                  <p className="text-gray-700 text-center mb-4">
+                    Entrez votre email pour recevoir l'estimation complète par IA avec analyse comparative, points forts identifiés et conseils personnalisés pour maximiser la valeur de votre entreprise.
+                  </p>
+                  <ul className="space-y-2 mb-6">
+                    <li className="flex items-center gap-2 text-sm text-gray-700">
+                      <Check className="w-4 h-4 text-green-600 flex-shrink-0" />
+                      <span>Valorisation complète par IA (Google Gemini 2.5 Flash)</span>
+                    </li>
+                    <li className="flex items-center gap-2 text-sm text-gray-700">
+                      <Check className="w-4 h-4 text-green-600 flex-shrink-0" />
+                      <span>Analyse détaillée de votre marché et secteur BTP</span>
+                    </li>
+                    <li className="flex items-center gap-2 text-sm text-gray-700">
+                      <Check className="w-4 h-4 text-green-600 flex-shrink-0" />
+                      <span>Points forts et axes d'amélioration identifiés</span>
+                    </li>
+                    <li className="flex items-center gap-2 text-sm text-gray-700">
+                      <Check className="w-4 h-4 text-green-600 flex-shrink-0" />
+                      <span>Recommandations personnalisées pour maximiser la valeur</span>
+                    </li>
+                    <li className="flex items-center gap-2 text-sm text-gray-700">
+                      <Check className="w-4 h-4 text-green-600 flex-shrink-0" />
+                      <span>100% gratuit • Sans engagement • Confidentiel</span>
+                    </li>
+                  </ul>
+                </div>
+
+                <Button
+                  onClick={handleGetDetailedEstimate}
+                  size="lg"
+                  className="w-full bg-secondary hover:bg-secondary/90 text-white text-lg py-6"
+                  disabled={isLoading}
+                >
+                  {isLoading ? (
+                    <>
+                      <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-2" />
+                      Analyse IA en cours...
+                    </>
+                  ) : (
+                    <>🚀 Obtenir le Rapport Détaillé Gratuit</>
+                  )}
+                </Button>
+
+                <div className="mt-6 text-center">
+                  <button
+                    onClick={() => setShowTeaser(false)}
+                    className="text-sm text-muted-foreground hover:text-primary transition-colors"
+                  >
+                    ← Retour au formulaire
+                  </button>
+                </div>
               </div>
             ) : (
               // Results Section
