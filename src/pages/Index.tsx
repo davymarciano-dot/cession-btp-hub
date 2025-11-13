@@ -9,7 +9,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import EntrepriseCard from "@/components/EntrepriseCard";
 import StatCounter from "@/components/StatCounter";
-import AnimatedCounter from "@/components/AnimatedCounter";
+import StatsSection from "@/components/StatsSection";
 import PricingCard from "@/components/PricingCard";
 import ComparisonTable from "@/components/ComparisonTable";
 import SuccessFeeSection from "@/components/SuccessFeeSection";
@@ -149,15 +149,8 @@ const Index = () => {
           </div>
         </section>
 
-        {/* Compteur animé */}
-        <section className="container mx-auto px-4 mb-20">
-          <div className="max-w-md mx-auto">
-            <AnimatedCounter 
-              target={18} 
-              label="entreprises vendues ce mois-ci" 
-            />
-          </div>
-        </section>
+        {/* Section Statistiques */}
+        <StatsSection />
 
         {/* Featured Companies */}
         <section className="py-20 bg-slate-50">
