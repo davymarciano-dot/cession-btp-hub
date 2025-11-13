@@ -63,6 +63,7 @@ const FormSection10 = ({ formData, handleInputChange }: FormSection10Props) => {
 
         <div>
           <Label>Accompagnement proposé au repreneur</Label>
+          <p className="text-xs text-muted-foreground mt-1 mb-2">(sélection multiple possible)</p>
           <div className="grid grid-cols-1 gap-3 mt-2">
             {accompagnementOptions.map((option) => (
               <div key={option.id} className="flex items-start space-x-2">
