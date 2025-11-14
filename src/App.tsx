@@ -17,6 +17,7 @@ import AnnonceDetail from "./pages/AnnonceDetail";
 import Tarifs from "./pages/Tarifs";
 import Ressources from "./pages/Ressources";
 import Messages from "./pages/Messages";
+import ChatDemo from "./pages/ChatDemo";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -41,6 +42,7 @@ const App = () => (
           <Route path="/tarifs" element={<Tarifs />} />
           <Route path="/ressources" element={<Ressources />} />
           <Route path="/messages" element={<Messages />} />
+          <Route path="/chat-demo" element={<ChatDemo />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
