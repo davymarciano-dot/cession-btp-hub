@@ -3,13 +3,10 @@ import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { Checkbox } from "@/components/ui/checkbox";
-import { Building2, Search, Loader2 } from "lucide-react";
+import { Building2 } from "lucide-react";
 import { BTPMetiersSelect } from "@/data/btp-metiers";
 import { DepartementsSelect } from "@/data/departements";
-import { useState } from "react";
-import { supabase } from "@/integrations/supabase/client";
-import { useToast } from "@/hooks/use-toast";
-import { Button } from "@/components/ui/button";
+import SiretAutocomplete from "@/components/SiretAutocomplete";
 
 interface FormSection2CombinedProps {
   formData: any;
@@ -17,46 +14,16 @@ interface FormSection2CombinedProps {
 }
 
 const FormSection2Combined = ({ formData, handleInputChange }: FormSection2CombinedProps) => {
-  const [isLoadingSiret, setIsLoadingSiret] = useState(false);
-  const { toast } = useToast();
-  
   const certifications = [
     "RGE", "Qualibat", "Qualipac", "QualiPV", "Handibat", "Autre"
   ];
 
-  const fetchSiretData = async (siret: string) => {
-    if (siret.length !== 14) return;
-
-    setIsLoadingSiret(true);
-    try {
-      const { data, error } = await supabase.functions.invoke('fetch-siret-data', {
-        body: { siret }
-      });
-
-      if (error) throw error;
-
-      if (data) {
-        // Remplir automatiquement les champs
-        if (data.raisonSociale) handleInputChange("raisonSociale", data.raisonSociale);
-        if (data.anneeCreation) handleInputChange("anneeCreation", data.anneeCreation);
-        if (data.ville) handleInputChange("ville", data.ville);
-        if (data.codePostal) handleInputChange("codePostal", data.codePostal);
-        if (data.departement) handleInputChange("departement", data.departement);
-
-        toast({
-          title: "✓ Données récupérées",
-          description: "Les informations de l'entreprise ont été chargées automatiquement.",
-        });
-      }
-    } catch (error: any) {
-      toast({
-        title: "Erreur SIRET",
-        description: error.message || "Impossible de récupérer les données. Vérifiez le numéro SIRET.",
-        variant: "destructive",
-      });
-    } finally {
-      setIsLoadingSiret(false);
-    }
+  // Callback quand les données SIRET sont récupérées
+  const handleSiretData = (data: any) => {
+    // Remplir tous les champs du formulaire
+    Object.entries(data).forEach(([key, value]) => {
+      handleInputChange(key, value);
+    });
   };
 
   const toggleCertification = (cert: string) => {
@@ -111,36 +78,11 @@ const FormSection2Combined = ({ formData, handleInputChange }: FormSection2Combi
             </Select>
           </div>
 
-          <div>
-            <Label htmlFor="siret">Numéro SIRET (optionnel)</Label>
-            <div className="flex gap-2">
-              <Input
-                id="siret"
-                value={formData.siret}
-                onChange={(e) => {
-                  const value = e.target.value.replace(/\D/g, '').slice(0, 14);
-                  handleInputChange("siret", value);
-                }}
-                placeholder="123 456 789 00012"
-                maxLength={14}
-              />
-              <Button
-                type="button"
-                variant="outline"
-                size="icon"
-                onClick={() => fetchSiretData(formData.siret)}
-                disabled={formData.siret?.length !== 14 || isLoadingSiret}
-              >
-                {isLoadingSiret ? (
-                  <Loader2 className="h-4 w-4 animate-spin" />
-                ) : (
-                  <Search className="h-4 w-4" />
-                )}
-              </Button>
-            </div>
-            <p className="text-xs text-muted-foreground mt-1">
-              Cliquez sur la loupe pour remplir automatiquement les informations
-            </p>
+          <div className="md:col-span-2">
+            <SiretAutocomplete 
+              onDataFetched={handleSiretData}
+              initialValue={formData.siret || ''}
+            />
           </div>
 
           <div>
