@@ -13,9 +13,9 @@ serve(async (req) => {
       throw new Error("SIRET invalide. Le numéro doit contenir 14 chiffres.");
     }
 
-    // Appel à l'API publique Recherche d'entreprises (data.gouv.fr)
+    // Appel à l'API publique gratuite
     const response = await fetch(
-      `https://recherche-entreprises.api.gouv.fr/siret/${siret}`,
+      `https://api-siret.vercel.app/siret/${siret}`,
       {
         headers: {
           'Accept': 'application/json',
@@ -31,18 +31,22 @@ serve(async (req) => {
     }
 
     const data = await response.json();
+    
+    if (data.error) {
+      throw new Error("SIRET non trouvé");
+    }
 
     // Extraire et formater les données
     const companyData = {
-      raisonSociale: data.nom_complet || data.nom_raison_sociale,
-      formeJuridique: data.nature_juridique,
-      anneeCreation: data.date_creation?.substring(0, 4),
-      secteurActivite: data.libelle_activite_principale,
-      ville: data.libelle_commune,
-      codePostal: data.code_postal,
-      departement: data.code_postal?.substring(0, 2),
-      adresse: data.geo_adresse || `${data.numero_voie || ''} ${data.type_voie || ''} ${data.libelle_voie || ''}`.trim(),
-      nombreSalaries: data.tranche_effectif_salarie,
+      raisonSociale: data.denomination || data.nom_raison_sociale || '',
+      formeJuridique: data.categorie_juridique || '',
+      anneeCreation: data.date_creation ? new Date(data.date_creation).getFullYear().toString() : '',
+      secteurActivite: data.libelle_activite || data.activite_principale || '',
+      ville: data.libelle_commune || '',
+      codePostal: data.code_postal || '',
+      departement: data.code_postal ? data.code_postal.substring(0, 2) : '',
+      adresse: data.adresse ? `${data.adresse.numero_voie || ''} ${data.adresse.type_voie || ''} ${data.adresse.libelle_voie || ''}`.trim() : '',
+      nombreSalaries: data.tranche_effectifs || '',
     };
 
     return new Response(
