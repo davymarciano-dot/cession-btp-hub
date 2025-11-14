@@ -23,6 +23,7 @@ const Dashboard = lazy(() => import("./pages/Dashboard"));
 const VendorDashboard = lazy(() => import("./pages/VendorDashboard"));
 const AnnonceDetail = lazy(() => import("./pages/AnnonceDetail"));
 const Tarifs = lazy(() => import("./pages/Tarifs"));
+const Pricing = lazy(() => import("./pages/Pricing"));
 const Ressources = lazy(() => import("./pages/Ressources"));
 const Messages = lazy(() => import("./pages/Messages"));
 const ChatDemo = lazy(() => import("./pages/ChatDemo"));
@@ -71,6 +72,7 @@ const App = () => (
             <Route path="/payment-success" element={<PaymentSuccess />} />
             <Route path="/auth" element={<Auth />} />
             <Route path="/tarifs" element={<Tarifs />} />
+            <Route path="/pricing" element={<Pricing />} />
             <Route path="/ressources" element={<Ressources />} />
             <Route path="/messages" element={<Messages />} />
             <Route path="/chat-demo" element={<ChatDemo />} />
