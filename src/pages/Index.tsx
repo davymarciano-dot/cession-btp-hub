@@ -23,6 +23,7 @@ import NewsletterSection from "@/components/NewsletterSection";
 import SecurityBadges from "@/components/SecurityBadges";
 import { BTPMetiersSelect } from "@/data/btp-metiers";
 import { analyticsEvents } from "@/lib/analytics";
+import { IntelligentChatbot } from "@/components/chat/IntelligentChatbot";
 
 const Index = () => {
   const navigate = useNavigate();
@@ -424,6 +425,9 @@ const Index = () => {
       </main>
 
       <SecurityBadges />
+      
+      {/* Chatbot IA 24/7 */}
+      <IntelligentChatbot />
 
       <Footer />
     </div>
