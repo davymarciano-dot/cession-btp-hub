@@ -13,6 +13,7 @@ import { BTPMetiersSelect } from "@/data/btp-metiers";
 import { useToast } from "@/hooks/use-toast";
 import { analyticsEvents } from "@/lib/analytics";
 import { CompanyComparator } from "@/components/CompanyComparator";
+import ComparisonGuide from "@/components/ComparisonGuide";
 
 interface Annonce {
   id: string;
@@ -41,6 +42,26 @@ const Entreprises = () => {
   const [priceRange, setPriceRange] = useState<number[]>([0, 5000000]);
   const [sortBy, setSortBy] = useState<string>("recent");
   const [selectedForComparison, setSelectedForComparison] = useState<Annonce[]>([]);
+  const [showGuide, setShowGuide] = useState(true);
+
+  const toggleComparison = (listing: any) => {
+    if (selectedForComparison.find(item => item.id === listing.id)) {
+      setSelectedForComparison(selectedForComparison.filter(item => item.id !== listing.id));
+    } else if (selectedForComparison.length < 3) {
+      setSelectedForComparison([...selectedForComparison, listing]);
+      
+      // Première sélection : masquer le guide
+      if (selectedForComparison.length === 0) {
+        setShowGuide(false);
+      }
+    } else {
+      toast({
+        title: "Limite atteinte",
+        description: "Maximum 3 entreprises pour la comparaison",
+        variant: "destructive"
+      });
+    }
+  };
 
   useEffect(() => {
     fetchAnnonces();
@@ -237,6 +258,11 @@ const Entreprises = () => {
 
             {/* Main Content */}
             <div className="flex-1">
+              {/* Comparison Guide */}
+              {showGuide && selectedForComparison.length === 0 && (
+                <ComparisonGuide onClose={() => setShowGuide(false)} />
+              )}
+              
               <div className="flex items-center justify-between mb-6">
                 <div className="flex gap-2">
                   <Button
@@ -343,6 +369,10 @@ const Entreprises = () => {
                           description={annonce.description_activite}
                           price={formatCurrency(annonce.prix_vente)}
                           financement={true}
+                          certifications={certifications}
+                          onCompareToggle={toggleComparison}
+                          isSelected={selectedForComparison.some(item => item.id === annonce.id)}
+                          compareCount={selectedForComparison.length}
                         />
                       );
                     })}
@@ -365,6 +395,10 @@ const Entreprises = () => {
                           description="Entreprise générale tous corps d'état. Marchés publics 60%, privés 40%."
                           price="1 850 000 €"
                           financement={true}
+                          certifications={["QUALIBAT"]}
+                          onCompareToggle={toggleComparison}
+                          isSelected={selectedForComparison.some(item => item.id === "exemple-1")}
+                          compareCount={selectedForComparison.length}
                         />
 
                         <EntrepriseCard
@@ -408,6 +442,10 @@ const Entreprises = () => {
                           description="Clientèle fidèle, contrats d'entretien récurrents."
                           price="980 000 €"
                           financement={true}
+                          certifications={["QUALIBAT"]}
+                          onCompareToggle={toggleComparison}
+                          isSelected={selectedForComparison.some(item => item.id === "exemple-4")}
+                          compareCount={selectedForComparison.length}
                         />
 
                         <EntrepriseCard
@@ -424,6 +462,10 @@ const Entreprises = () => {
                           secteur="Électricité"
                           description="Spécialisée en rénovation électrique et domotique."
                           price="620 000 €"
+                          certifications={["RGE"]}
+                          onCompareToggle={toggleComparison}
+                          isSelected={selectedForComparison.some(item => item.id === "exemple-5")}
+                          compareCount={selectedForComparison.length}
                         />
 
                         <EntrepriseCard
@@ -441,6 +483,10 @@ const Entreprises = () => {
                           description="Marchés publics et privés. Forte notoriété locale."
                           price="1 250 000 €"
                           financement={true}
+                          certifications={["QUALIBAT"]}
+                          onCompareToggle={toggleComparison}
+                          isSelected={selectedForComparison.some(item => item.id === "exemple-6")}
+                          compareCount={selectedForComparison.length}
                         />
                       </>
                     )}
