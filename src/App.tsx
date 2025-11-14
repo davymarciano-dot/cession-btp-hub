@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { lazy, Suspense } from "react";
 import { Skeleton } from "@/components/ui/skeleton";
+import { FloatingChatWidget } from "@/components/chat/FloatingChatWidget";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 
@@ -77,6 +78,7 @@ const App = () => (
             <Route path="*" element={<NotFound />} />
           </Routes>
         </Suspense>
+        <FloatingChatWidget />
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>
