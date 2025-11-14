@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import { toast } from 'sonner';
+import { NotificationService } from '@/lib/notificationService';
 
 interface MatchingResult {
   success: boolean;
@@ -35,6 +36,33 @@ export const useAutoMatching = () => {
 
       setResults(data);
       toast.success(`${data.totalMatches} acheteurs correspondants trouvés !`);
+
+      // Send notifications for top 3 matches
+      if (data.matches && data.matches.length > 0) {
+        const { data: { user } } = await supabase.auth.getUser();
+        const { data: listing } = await supabase
+          .from('annonces')
+          .select('raison_sociale')
+          .eq('id', listingId)
+          .single();
+
+        if (user?.email && listing) {
+          // Send notification to seller for each top match
+          const topMatches = data.matches.slice(0, 3);
+          for (const match of topMatches) {
+            try {
+              await NotificationService.sendMatchNotification(
+                user.email,
+                'Acheteur qualifié',
+                match.score,
+                0 // Budget not available in current data
+              );
+            } catch (error) {
+              console.error('Error sending match notification:', error);
+            }
+          }
+        }
+      }
       
       return data;
     } catch (error: any) {
