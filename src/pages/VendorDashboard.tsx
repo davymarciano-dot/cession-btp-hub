@@ -338,20 +338,6 @@ const VendorDashboard = () => {
             companyName={listings[0]?.raison_sociale || "Mon Entreprise"}
           />
         </div>
-        
-        {/* Messages section */}
-        <div className="bg-muted/30 border-2 border-dashed rounded-lg p-8 text-center">
-          <h3 className="text-lg font-semibold mb-2">Messages reçus</h3>
-          <p className="text-muted-foreground mb-4">
-            Gérez vos conversations et répondez aux acheteurs directement depuis cette section.
-          </p>
-          <button
-            onClick={() => navigate("/messages")}
-            className="bg-primary text-primary-foreground px-6 py-2 rounded-lg font-semibold hover:bg-primary/90 transition-colors"
-          >
-            Voir mes messages
-          </button>
-        </div>
       </div>
       
       <Footer />

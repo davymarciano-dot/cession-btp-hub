@@ -5,6 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { User } from "@supabase/supabase-js";
 import logo from "@/assets/logo-cessionbtp.png";
+import { NotificationCenter } from "./notifications/NotificationCenter";
 
 const Header = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -67,7 +68,8 @@ const Header = () => {
           </div>
 
           {/* Desktop Actions */}
-          <div className="hidden md:flex items-center gap-4">
+          <div className="hidden md:flex items-center gap-2">
+            {user && <NotificationCenter />}
             {user ? (
               <Button 
                 variant="outline" 
