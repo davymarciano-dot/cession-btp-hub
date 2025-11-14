@@ -3,12 +3,13 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { lazy, Suspense } from "react";
+import { lazy, Suspense, useEffect } from "react";
 import { Skeleton } from "@/components/ui/skeleton";
 import AIAssistant from "@/components/chat/AIAssistant";
 import { ThirdPartyChat } from "@/components/chat/ThirdPartyChat";
 import ProactiveChat from "./components/ProactiveChat";
 import DarkModeToggle from "./components/DarkModeToggle";
+import CartTrackingService from "./services/cartTrackingService";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 
@@ -48,6 +49,7 @@ const AffiliateDashboard = lazy(() => import("./pages/AffiliateDashboard"));
 const BlogPost = lazy(() => import("./pages/blog/BlogPost"));
 const EntreprisesRGE = lazy(() => import("./pages/EntreprisesRGE"));
 const RevenueDashboard = lazy(() => import("./pages/RevenueDashboard"));
+const TestAutomations = lazy(() => import("./pages/TestAutomations"));
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -70,7 +72,13 @@ const PageLoader = () => (
   </div>
 );
 
-const App = () => (
+const App = () => {
+  useEffect(() => {
+    // Initialize cart tracking on mount
+    CartTrackingService.init();
+  }, []);
+
+  return (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
       <Toaster />
@@ -109,6 +117,7 @@ const App = () => (
           <Route path="/marketplace" element={<Marketplace />} />
           <Route path="/affiliation" element={<AffiliateDashboard />} />
           <Route path="/revenue-dashboard" element={<RevenueDashboard />} />
+          <Route path="/test-automations" element={<TestAutomations />} />
           
           {/* Pages énergies renouvelables RGE (ULTRA PRIORITAIRE) */}
           <Route path="/entreprise-:slug-a-vendre" element={<RenewableEnergyPage />} />
@@ -136,5 +145,6 @@ const App = () => (
     </TooltipProvider>
   </QueryClientProvider>
 );
+};
 
 export default App;

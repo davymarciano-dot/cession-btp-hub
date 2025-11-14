@@ -18,7 +18,9 @@ import FormSection7Combined from "@/components/vendre/FormSection7Combined";
 import FormSection8Combined from "@/components/vendre/FormSection8Combined";
 import FormSection9Combined from "@/components/vendre/FormSection9Combined";
 import FormSection15 from "@/components/vendre/FormSection15";
+import VendorOnboarding from "@/components/VendorOnboarding";
 import { ArrowLeft, ArrowRight, Save, Trash2 } from "lucide-react";
+import confetti from 'canvas-confetti';
 
 const STORAGE_KEY = 'cessionBTP_form_draft';
 const STORAGE_STEP_KEY = 'cessionBTP_step';
@@ -30,7 +32,9 @@ const Vendre = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [hasDraft, setHasDraft] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
-  const totalSteps = 10; // Réduit de 15 à 10
+  const [showOnboarding, setShowOnboarding] = useState(false);
+  const [userData, setUserData] = useState<any>(null);
+  const totalSteps = 10;
 
   const [formData, setFormData] = useState({
     // Section 1
@@ -193,6 +197,16 @@ const Vendre = () => {
         localStorage.removeItem(STORAGE_KEY);
       }
     }
+    
+    // Check onboarding
+    const hasSeenOnboarding = localStorage.getItem('onboardingComplete');
+    const isReturningUser = localStorage.getItem('userEmail');
+    
+    if (!hasSeenOnboarding && !isReturningUser && !savedDraft) {
+      setTimeout(() => {
+        setShowOnboarding(true);
+      }, 800);
+    }
   }, []);
 
   // Sauvegarde automatique avec debounce optimisé
@@ -232,6 +246,35 @@ const Vendre = () => {
     toast({
       title: "Brouillon effacé",
       description: "Votre brouillon a été supprimé.",
+    });
+  };
+  
+  const handleOnboardingComplete = (data: any) => {
+    setUserData(data);
+    localStorage.setItem('onboardingComplete', 'true');
+    localStorage.setItem('userData', JSON.stringify(data));
+    
+    // Celebration
+    confetti({
+      particleCount: 100,
+      spread: 70,
+      origin: { y: 0.6 }
+    });
+    
+    // Auto-remplir le formulaire
+    if (data.sector) {
+      setFormData(prev => ({ ...prev, secteurActivite: data.sector }));
+    }
+    if (data.hasRGE) {
+      setFormData(prev => ({ ...prev, certifications: ['RGE'] }));
+    }
+    if (data.timeline) {
+      setFormData(prev => ({ ...prev, delaiVente: data.timeline }));
+    }
+    
+    toast({
+      title: "🎉 Parfait !",
+      description: "Votre profil a été pré-rempli. Complétez le reste du formulaire.",
     });
   };
 
@@ -479,6 +522,13 @@ const Vendre = () => {
   return (
     <div className="min-h-screen bg-slate-50">
       <Header />
+      
+      {/* Onboarding Modal */}
+      {showOnboarding && (
+        <VendorOnboarding 
+          onComplete={handleOnboardingComplete}
+        />
+      )}
 
       {/* Hero */}
       <section className="bg-gradient-to-br from-secondary to-orange-600 text-white py-16">
