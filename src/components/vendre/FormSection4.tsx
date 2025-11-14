@@ -2,6 +2,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
 import { TrendingUp } from "lucide-react";
+import { PricePredictor } from "@/components/PricePredictor";
 
 interface FormSection4Props {
   formData: any;
@@ -131,6 +132,28 @@ const FormSection4 = ({ formData, handleInputChange }: FormSection4Props) => {
             </div>
           )}
         </div>
+
+        {/* AI Price Predictor */}
+        {formData.caN1 && formData.secteurActivite && (
+          <PricePredictor 
+            companyData={{
+              revenue: parseFloat(formData.caN1) || 0,
+              ebitda: parseFloat(formData.ebeN1) || undefined,
+              hasRGE: formData.certifications?.some((c: string) => 
+                c.toLowerCase().includes('quali') || c.toLowerCase().includes('rge')
+              ) || false,
+              location: formData.departement || '',
+              sector: formData.secteurActivite || '',
+              urgent: formData.delaiVente === 'immediat',
+              employees: parseInt(formData.nombreSalaries) || 0,
+              assetsValue: (parseFloat(formData.valeurMateriel) || 0) + 
+                          (parseFloat(formData.valeurStock) || 0) + 
+                          (parseFloat(formData.valeurLocaux) || 0),
+            }}
+            currentPrice={parseFloat(formData.prixVente) || undefined}
+            onPriceUpdate={(price) => handleInputChange("prixVente", price.toString())}
+          />
+        )}
       </div>
     </div>
   );
