@@ -1,67 +1,17 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Copy, Linkedin, Twitter, Mail } from "lucide-react";
 import { toast } from "sonner";
-import { supabase } from "@/integrations/supabase/client";
 
 const ReferralProgram = () => {
   const [copied, setCopied] = useState(false);
-  const [referralCode, setReferralCode] = useState("");
-  const [referralLink, setReferralLink] = useState("");
-  const [loading, setLoading] = useState(true);
-  const [stats, setStats] = useState({
-    totalReferrals: 0,
-    totalEarnings: 0,
-    pendingReferrals: 0
-  });
-
-  useEffect(() => {
-    initReferralProgram();
-  }, []);
-
-  const initReferralProgram = async () => {
-    try {
-      const { data: { user } } = await supabase.auth.getUser();
-      if (!user) {
-        // Mock data for non-logged users
-        setReferralCode("CESS2024");
-        setReferralLink("https://cessionbtp.fr/?ref=CESS2024");
-        setLoading(false);
-        return;
-      }
-
-      // Créer ou récupérer le code de parrainage
-      const { data, error } = await supabase.functions.invoke('referral-system', {
-        body: { action: 'create_code', userId: user.id }
-      });
-
-      if (error) throw error;
-
-      setReferralCode(data.referralCode);
-      setReferralLink(data.referralLink);
-
-      // Récupérer les stats
-      const { data: referrals } = await supabase
-        .from('referrals')
-        .select('*')
-        .eq('referrer_id', user.id);
-
-      const totalEarnings = referrals?.reduce((sum, r) => sum + Number(r.commission_earned), 0) || 0;
-      const activeReferrals = referrals?.filter(r => r.status === 'active').length || 0;
-      const pendingReferrals = referrals?.filter(r => r.status === 'pending').length || 0;
-
-      setStats({
-        totalReferrals: activeReferrals,
-        totalEarnings: totalEarnings / 100,
-        pendingReferrals
-      });
-    } catch (error) {
-      console.error('Error initializing referral program:', error);
-      toast.error("Erreur lors du chargement du programme de parrainage");
-    } finally {
-      setLoading(false);
-    }
+  const referralCode = "CESS2024";
+  const referralLink = `https://cessionbtp.fr/?ref=${referralCode}`;
+  const stats = {
+    totalReferrals: 12,
+    totalEarnings: 340,
+    pendingReferrals: 3
   };
 
   const copyToClipboard = async () => {
@@ -88,19 +38,6 @@ const ReferralProgram = () => {
     
     window.open(links[platform as keyof typeof links], '_blank');
   };
-
-  if (loading) {
-    return (
-      <Card className="bg-gradient-to-br from-purple-50 to-pink-50">
-        <CardContent className="p-6">
-          <div className="animate-pulse space-y-4">
-            <div className="h-6 bg-muted rounded w-3/4"></div>
-            <div className="h-4 bg-muted rounded w-1/2"></div>
-          </div>
-        </CardContent>
-      </Card>
-    );
-  }
 
   return (
     <Card className="bg-gradient-to-br from-purple-600 to-pink-600 text-white border-0 shadow-xl">

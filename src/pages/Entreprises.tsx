@@ -12,6 +12,7 @@ import ListingsMap from "@/components/ListingsMap";
 import { BTPMetiersSelect } from "@/data/btp-metiers";
 import { useToast } from "@/hooks/use-toast";
 import { analyticsEvents } from "@/lib/analytics";
+import { CompanyComparator } from "@/components/CompanyComparator";
 
 interface Annonce {
   id: string;
@@ -39,6 +40,7 @@ const Entreprises = () => {
   const [caRange, setCARange] = useState<number[]>([0, 5000000]);
   const [priceRange, setPriceRange] = useState<number[]>([0, 5000000]);
   const [sortBy, setSortBy] = useState<string>("recent");
+  const [selectedForComparison, setSelectedForComparison] = useState<Annonce[]>([]);
 
   useEffect(() => {
     fetchAnnonces();
@@ -451,9 +453,17 @@ const Entreprises = () => {
         </div>
       </main>
 
-      <Footer />
-    </div>
-  );
-};
+              <Footer />
+              
+              {/* Comparateur flottant */}
+              {selectedForComparison.length >= 2 && (
+                <CompanyComparator 
+                  companies={selectedForComparison as any[]} 
+                  onClose={() => setSelectedForComparison([])}
+                />
+              )}
+            </div>
+          );
+        };
 
 export default Entreprises;
