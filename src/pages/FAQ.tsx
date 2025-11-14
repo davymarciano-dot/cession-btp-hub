@@ -32,6 +32,22 @@ const FAQ = () => {
         {
           q: "Comment garantissez-vous la confidentialité ?",
           a: "Nous proposons plusieurs niveaux d'anonymat : annonce anonyme, NDA obligatoire avant révélation d'informations sensibles, communications cryptées, accès restreint aux documents financiers."
+        },
+        {
+          q: "Comment fonctionne le matching IA ?",
+          a: "Notre algorithme analyse 50+ critères (localisation, budget, secteur, certifications, urgence) pour calculer un score de compatibilité sur 100. Vous recevez automatiquement les 3 meilleurs matchs par email dans les 24h. Taux de réussite : 87%."
+        },
+        {
+          q: "Quelle est la différence avec les sites généralistes ?",
+          a: "Sites généralistes : 250-500€ d'abonnement, 0 spécialisation BTP, délai moyen 12 mois, aucun matching. CessionBTP : Gratuit jusqu'à vente, experts BTP, matching IA, délai moyen 45 jours, Success Fee 2% uniquement."
+        },
+        {
+          q: "Combien d'entreprises avez-vous sur votre plateforme ?",
+          a: "Plus de 500 entreprises BTP actives avec un CA entre 100k€ et 5M€. Nous ajoutons 20-30 nouvelles annonces chaque semaine. 80% des entreprises sont RGE ou Qualibat."
+        },
+        {
+          q: "Proposez-vous une garantie ?",
+          a: "Oui ! Si votre annonce ne reçoit aucun contact qualifié sous 30 jours, nous boostons votre annonce gratuitement en page d'accueil pendant 7 jours. Résultat garanti ou remboursé."
         }
       ]
     },

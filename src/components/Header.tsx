@@ -46,43 +46,63 @@ const Header = () => {
           <div className="hidden lg:flex items-center gap-6 xl:gap-8">
             <Link 
               to="/vendre" 
-              className={`font-semibold transition-colors ${
-                isActive('/vendre') ? 'text-blue-600' : 'text-gray-800 hover:text-blue-600'
+              className={`font-semibold transition-colors pb-1 border-b-2 ${
+                isActive('/vendre') 
+                  ? 'text-blue-600 border-blue-600' 
+                  : 'text-gray-800 hover:text-blue-600 border-transparent hover:border-blue-200'
               }`}
             >
               Vendre
             </Link>
             <Link 
               to="/acheter" 
-              className={`font-semibold transition-colors ${
-                isActive('/acheter') ? 'text-blue-600' : 'text-gray-800 hover:text-blue-600'
+              className={`font-semibold transition-colors pb-1 border-b-2 ${
+                isActive('/acheter') 
+                  ? 'text-blue-600 border-blue-600' 
+                  : 'text-gray-800 hover:text-blue-600 border-transparent hover:border-blue-200'
               }`}
             >
               Acheter
             </Link>
             <Link 
               to="/entreprises" 
-              className={`font-semibold transition-colors ${
-                isActive('/entreprises') ? 'text-blue-600' : 'text-gray-800 hover:text-blue-600'
+              className={`font-semibold transition-colors pb-1 border-b-2 ${
+                isActive('/entreprises') 
+                  ? 'text-blue-600 border-blue-600' 
+                  : 'text-gray-800 hover:text-blue-600 border-transparent hover:border-blue-200'
               }`}
             >
               Entreprises
             </Link>
             <Link 
               to="/estimer" 
-              className={`font-semibold transition-colors ${
-                isActive('/estimer') ? 'text-blue-600' : 'text-gray-800 hover:text-blue-600'
+              className={`font-semibold transition-colors pb-1 border-b-2 ${
+                isActive('/estimer') 
+                  ? 'text-blue-600 border-blue-600' 
+                  : 'text-gray-800 hover:text-blue-600 border-transparent hover:border-blue-200'
               }`}
             >
               Estimer
             </Link>
             <Link 
               to="/tarifs" 
-              className={`font-semibold transition-colors ${
-                isActive('/tarifs') ? 'text-blue-600' : 'text-gray-800 hover:text-blue-600'
+              className={`font-semibold transition-colors pb-1 border-b-2 ${
+                isActive('/tarifs') 
+                  ? 'text-blue-600 border-blue-600' 
+                  : 'text-gray-800 hover:text-blue-600 border-transparent hover:border-blue-200'
               }`}
             >
               Tarifs
+            </Link>
+            <Link 
+              to="/faq" 
+              className={`font-semibold transition-colors pb-1 border-b-2 ${
+                isActive('/faq') 
+                  ? 'text-blue-600 border-blue-600' 
+                  : 'text-gray-800 hover:text-blue-600 border-transparent hover:border-blue-200'
+              }`}
+            >
+              FAQ
             </Link>
             {user && (
               <>
