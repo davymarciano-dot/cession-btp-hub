@@ -92,7 +92,7 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* Column 4: Contact & Support */}
+          {/* Link au Footer */}
           <div>
             <h3 className="text-lg font-bold mb-4">Contact & Support</h3>
             <ul className="space-y-2 mb-4">
@@ -105,7 +105,7 @@ const Footer = () => {
             </ul>
             <ul className="space-y-2">
               <li>
-                <Link to="/" className="text-slate-400 hover:text-white transition-colors">
+                <Link to="/faq" className="text-slate-400 hover:text-white transition-colors">
                   FAQ
                 </Link>
               </li>

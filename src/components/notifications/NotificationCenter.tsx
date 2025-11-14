@@ -12,7 +12,7 @@ import { NotificationItem } from './NotificationItem';
 
 export interface Notification {
   id: string;
-  type: 'view_milestone' | 'new_match' | 'new_message' | 'reminder';
+  type: 'view_milestone' | 'new_match' | 'new_message' | 'reminder' | 'document_upload' | 'profile_complete' | 'listing_expiring' | 'payment_success' | 'new_inquiry';
   title: string;
   message: string;
   time: string;
@@ -27,40 +27,61 @@ export const NotificationCenter = () => {
       id: '1',
       type: 'view_milestone',
       title: '🎉 100 vues atteintes !',
-      message: 'Votre annonce a dépassé les 100 vues',
+      message: 'Votre annonce a dépassé les 100 vues cette semaine',
       time: 'Il y a 2h',
       read: false,
       action: 'Voir statistiques',
-      actionUrl: '/dashboard'
+      actionUrl: '/dashboard-vendeur'
     },
     {
       id: '2',
       type: 'new_match',
       title: '🎯 Nouvel acheteur matché',
-      message: 'Score de compatibilité : 94%',
+      message: 'Un acheteur très qualifié (Score: 94%) correspond à votre profil',
       time: 'Il y a 4h',
       read: false,
       action: 'Voir profil',
-      actionUrl: '/matches'
+      actionUrl: '/mes-matchs'
     },
     {
       id: '3',
       type: 'new_message',
       title: '💬 Nouveau message',
-      message: 'De : Groupe Immobilier Paris',
+      message: 'Groupe Immobilier Paris vous a envoyé un message',
       time: 'Hier',
-      read: true,
+      read: false,
       action: 'Répondre',
       actionUrl: '/messages'
     },
     {
       id: '4',
-      type: 'reminder',
-      title: '📅 Rappel',
-      message: 'Pensez à mettre à jour vos informations',
+      type: 'new_inquiry',
+      title: '📧 Nouvelle demande d\'information',
+      message: 'Un acheteur souhaite en savoir plus sur votre entreprise',
+      time: 'Hier',
+      read: true,
+      action: 'Consulter',
+      actionUrl: '/messages'
+    },
+    {
+      id: '5',
+      type: 'document_upload',
+      title: '📄 Documents manquants',
+      message: 'Ajoutez vos bilans pour augmenter la crédibilité de votre annonce',
       time: 'Il y a 2 jours',
       read: true,
-      actionUrl: '/dashboard'
+      action: 'Ajouter documents',
+      actionUrl: '/dashboard-vendeur'
+    },
+    {
+      id: '6',
+      type: 'listing_expiring',
+      title: '⏰ Annonce expire bientôt',
+      message: 'Votre annonce expire dans 7 jours. Renouvelez-la maintenant.',
+      time: 'Il y a 3 jours',
+      read: true,
+      action: 'Renouveler',
+      actionUrl: '/tarifs'
     }
   ]);
 
