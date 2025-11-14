@@ -7,6 +7,8 @@ import { lazy, Suspense } from "react";
 import { Skeleton } from "@/components/ui/skeleton";
 import AIAssistant from "@/components/chat/AIAssistant";
 import { ThirdPartyChat } from "@/components/chat/ThirdPartyChat";
+import ProactiveChat from "./components/ProactiveChat";
+import DarkModeToggle from "./components/DarkModeToggle";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 
@@ -75,6 +77,8 @@ const App = () => (
       <Sonner />
       <BrowserRouter>
         <Suspense fallback={<PageLoader />}>
+          <ProactiveChat />
+          <DarkModeToggle />
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/vendre" element={<Vendre />} />
