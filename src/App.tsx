@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { lazy, Suspense } from "react";
 import { Skeleton } from "@/components/ui/skeleton";
 import { FloatingChatWidget } from "@/components/chat/FloatingChatWidget";
+import { ThirdPartyChat } from "@/components/chat/ThirdPartyChat";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 
@@ -78,7 +79,8 @@ const App = () => (
             <Route path="*" element={<NotFound />} />
           </Routes>
         </Suspense>
-        <FloatingChatWidget />
+        {!(import.meta.env.VITE_CRISP_WEBSITE_ID || (import.meta.env.VITE_TAWK_PROPERTY_ID && import.meta.env.VITE_TAWK_WIDGET_ID)) && <FloatingChatWidget />}
+        <ThirdPartyChat />
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>
