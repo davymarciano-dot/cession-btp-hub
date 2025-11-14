@@ -30,6 +30,9 @@ const ChatDemo = lazy(() => import("./pages/ChatDemo"));
 const PerformanceDemo = lazy(() => import("./pages/PerformanceDemo"));
 const MyMatches = lazy(() => import("./pages/MyMatches"));
 const FAQ = lazy(() => import("./pages/FAQ"));
+const CertificationPage = lazy(() => import("./pages/seo/CertificationPage"));
+const MetierPage = lazy(() => import("./pages/seo/MetierPage"));
+const RegionPage = lazy(() => import("./pages/seo/RegionPage"));
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -79,6 +82,12 @@ const App = () => (
             <Route path="/performance-demo" element={<PerformanceDemo />} />
             <Route path="/mes-matchs" element={<MyMatches />} />
             <Route path="/faq" element={<FAQ />} />
+            {/* SEO Pages - Certifications */}
+            <Route path="/entreprise-:slug-a-vendre" element={<CertificationPage />} />
+            {/* SEO Pages - Métiers */}
+            <Route path="/:slug-entreprise-a-vendre" element={<MetierPage />} />
+            {/* SEO Pages - Régions */}
+            <Route path="/entreprise-btp-a-vendre-:slug" element={<RegionPage />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
