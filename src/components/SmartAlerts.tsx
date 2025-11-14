@@ -65,10 +65,10 @@ const SmartAlertsConfig = ({ userId }: SmartAlertsConfigProps) => {
   
   const loadPreferences = async () => {
     const { data } = await supabase
-      .from('alert_preferences')
+      .from('alert_preferences' as any)
       .select('*')
       .eq('user_id', userId)
-      .single();
+      .maybeSingle() as any;
     
     if (data && data.preferences) {
       try {
@@ -85,15 +85,13 @@ const SmartAlertsConfig = ({ userId }: SmartAlertsConfigProps) => {
   
   const savePreferences = async () => {
     const { error } = await supabase
-      .from('alert_preferences')
+      .from('alert_preferences' as any)
       .upsert({
         user_id: userId,
         preferences: preferences as any,
         phone_number: phoneNumber,
         updated_at: new Date().toISOString()
-      }, {
-        onConflict: 'user_id'
-      });
+      } as any);
     
     if (!error) {
       toast.success('✅ Préférences sauvegardées');
