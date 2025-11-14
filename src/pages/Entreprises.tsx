@@ -8,6 +8,7 @@ import { Filter } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import EntrepriseCard from "@/components/EntrepriseCard";
+import ListingsMap from "@/components/ListingsMap";
 import { BTPMetiersSelect } from "@/data/btp-metiers";
 import { useToast } from "@/hooks/use-toast";
 import { analyticsEvents } from "@/lib/analytics";
@@ -30,6 +31,7 @@ interface Annonce {
 const Entreprises = () => {
   const { toast } = useToast();
   const [showFilters, setShowFilters] = useState(true);
+  const [showMap, setShowMap] = useState(false);
   const [annonces, setAnnonces] = useState<Annonce[]>([]);
   const [loading, setLoading] = useState(true);
   const [secteurFilter, setSecteurFilter] = useState<string>("");
@@ -234,14 +236,23 @@ const Entreprises = () => {
             {/* Main Content */}
             <div className="flex-1">
               <div className="flex items-center justify-between mb-6">
-                <Button
-                  variant="outline"
-                  onClick={() => setShowFilters(!showFilters)}
-                  className="lg:hidden"
-                >
-                  <Filter className="mr-2 h-4 w-4" />
-                  Filtres
-                </Button>
+                <div className="flex gap-2">
+                  <Button
+                    variant="outline"
+                    onClick={() => setShowFilters(!showFilters)}
+                    className="lg:hidden"
+                  >
+                    <Filter className="mr-2 h-4 w-4" />
+                    Filtres
+                  </Button>
+
+                  <Button
+                    variant={showMap ? "default" : "outline"}
+                    onClick={() => setShowMap(!showMap)}
+                  >
+                    {showMap ? "📋 Vue Liste" : "🗺️ Vue Carte"}
+                  </Button>
+                </div>
 
                 <Select value={sortBy} onValueChange={setSortBy}>
                   <SelectTrigger className="w-48">
