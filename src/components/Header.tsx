@@ -75,6 +75,16 @@ const Header = () => {
               Entreprises
             </Link>
             <Link 
+              to="/entreprises-rge" 
+              className={`font-semibold transition-colors pb-1 border-b-2 ${
+                isActive('/entreprises-rge') 
+                  ? 'text-green-600 border-green-600' 
+                  : 'text-green-700 hover:text-green-600 border-transparent hover:border-green-200'
+              }`}
+            >
+              🌱 RGE
+            </Link>
+            <Link 
               to="/estimer" 
               className={`font-semibold transition-colors pb-1 border-b-2 ${
                 isActive('/estimer') 
@@ -198,6 +208,14 @@ const Header = () => {
               }`}
             >
               Entreprises
+            </Link>
+            <Link 
+              to="/entreprises-rge" 
+              className={`block py-2 font-semibold transition-colors ${
+                isActive('/entreprises-rge') ? 'text-green-600' : 'text-green-700'
+              }`}
+            >
+              🌱 Entreprises RGE
             </Link>
             <Link 
               to="/estimer" 

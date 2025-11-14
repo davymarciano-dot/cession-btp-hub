@@ -2,7 +2,7 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
-import { Briefcase } from "lucide-react";
+import { Briefcase, Shield } from "lucide-react";
 
 interface FormSection3Props {
   formData: any;
@@ -11,7 +11,18 @@ interface FormSection3Props {
 
 const FormSection3 = ({ formData, handleInputChange }: FormSection3Props) => {
   const certifications = [
-    "RGE", "Qualibat", "Qualipac", "QualiPV", "Handibat", "Autre"
+    "RGE",
+    "Qualibat",
+    "Qualipac",
+    "QualiPV",
+    "Qualipac+",
+    "Qualibois",
+    "Qualisol",
+    "QualiCharge IRVE",
+    "RGE Études",
+    "Eco-Artisan",
+    "Handibat",
+    "Autre"
   ];
 
   const toggleCertification = (cert: string) => {
@@ -56,8 +67,14 @@ const FormSection3 = ({ formData, handleInputChange }: FormSection3Props) => {
           />
         </div>
 
-        <div>
-          <Label>Certifications et labels</Label>
+        <div className="bg-green-50 border border-green-200 rounded-lg p-4">
+          <Label className="text-lg font-bold text-green-700 mb-3 flex items-center gap-2">
+            <Shield className="w-5 h-5" />
+            Certifications RGE et Labels (2026)
+          </Label>
+          <p className="text-sm text-green-600 mb-4">
+            Les certifications RGE valorisent votre entreprise de +30% en moyenne
+          </p>
           <div className="grid grid-cols-2 md:grid-cols-3 gap-3 mt-2">
             {certifications.map((cert) => (
               <div key={cert} className="flex items-center space-x-2">
@@ -66,7 +83,9 @@ const FormSection3 = ({ formData, handleInputChange }: FormSection3Props) => {
                   checked={(formData.certifications || []).includes(cert)}
                   onCheckedChange={() => toggleCertification(cert)}
                 />
-                <Label htmlFor={`cert-${cert}`} className="cursor-pointer">{cert}</Label>
+                <Label htmlFor={`cert-${cert}`} className="cursor-pointer text-sm">
+                  {cert}
+                </Label>
               </div>
             ))}
           </div>

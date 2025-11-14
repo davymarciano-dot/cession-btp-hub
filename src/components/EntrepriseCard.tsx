@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { useNavigate } from "react-router-dom";
 import { analyticsEvents } from "@/lib/analytics";
+import RGEBadge from "./RGEBadge";
 
 interface EntrepriseCardProps {
   id?: string;
@@ -18,6 +19,7 @@ interface EntrepriseCardProps {
   price?: string;
   financement?: boolean;
   timeAgo?: string;
+  certifications?: string[];
 }
 
 const EntrepriseCard = ({
@@ -35,6 +37,7 @@ const EntrepriseCard = ({
   price,
   financement,
   timeAgo,
+  certifications,
 }: EntrepriseCardProps) => {
   const navigate = useNavigate();
   const isOrange = type === "orange";
@@ -44,6 +47,9 @@ const EntrepriseCard = ({
 
   return (
     <div className={`${bgClass} rounded-xl p-6 text-white relative overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300`}>
+      {/* RGE Badge */}
+      {certifications && <RGEBadge certifications={certifications} />}
+      
       {/* Top Badges */}
       <div className="flex justify-between items-start mb-4">
         <Badge className="bg-white/20 text-white border-0 hover:bg-white/30">

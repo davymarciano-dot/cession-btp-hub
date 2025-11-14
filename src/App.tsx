@@ -43,6 +43,7 @@ const OutilsGratuits = lazy(() => import("./pages/OutilsGratuits").then(module =
 const AutomationDashboard = lazy(() => import("./pages/AutomationDashboard").then(module => ({ default: module.AutomationDashboard })));
 const Marketplace = lazy(() => import("./pages/Marketplace"));
 const AffiliateDashboard = lazy(() => import("./pages/AffiliateDashboard"));
+const EntreprisesRGE = lazy(() => import("./pages/EntreprisesRGE"));
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -77,6 +78,7 @@ const App = () => (
             <Route path="/vendre" element={<Vendre />} />
             <Route path="/acheter" element={<Acheter />} />
             <Route path="/entreprises" element={<Entreprises />} />
+            <Route path="/entreprises-rge" element={<EntreprisesRGE />} />
             <Route path="/entreprises/:id" element={<AnnonceDetail />} />
             <Route path="/estimer" element={<Estimation />} />
             <Route path="/resultat-estimation" element={<ResultatEstimation />} />
