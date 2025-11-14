@@ -75,7 +75,7 @@ const SiretAutocomplete = ({ onDataFetched, initialValue = '' }: SiretAutocomple
         throw new Error(fetchError.message || 'SIRET non trouvé');
       }
 
-      if (data) {
+      if (data && data.raisonSociale) {
         setCompanyData(data);
         
         // Passer les données au formulaire parent
@@ -97,14 +97,24 @@ const SiretAutocomplete = ({ onDataFetched, initialValue = '' }: SiretAutocomple
           title: "Entreprise trouvée !",
           description: "Les informations ont été récupérées avec succès.",
         });
+      } else {
+        throw new Error('Données incomplètes');
       }
     } catch (err: any) {
-      setError(err.message || 'Erreur lors de la récupération des données');
-      setIsValid(false);
+      console.log('SIRET not found, allowing manual entry:', err);
+      setError('SIRET non trouvé. Vous pouvez continuer en remplissant les champs manuellement.');
+      setIsValid(true); // Valide quand même pour permettre la saisie manuelle
+      setCompanyData(null);
+      
+      // Passer quand même le SIRET au parent
+      onDataFetched({
+        siret: siretNumber.replace(/\s/g, ''),
+      });
+      
       toast({
-        title: "Erreur",
-        description: err.message || 'SIRET non trouvé',
-        variant: "destructive",
+        title: "SIRET validé",
+        description: "Continuez en remplissant les champs manuellement.",
+        variant: "default",
       });
     } finally {
       setIsLoading(false);
@@ -167,9 +177,9 @@ const SiretAutocomplete = ({ onDataFetched, initialValue = '' }: SiretAutocomple
           </div>
         </div>
 
-        {/* Message d'erreur */}
+        {/* Message d'erreur ou info */}
         {error && (
-          <p className="mt-2 text-sm text-destructive">{error}</p>
+          <p className="mt-2 text-sm text-amber-600 dark:text-amber-400">{error}</p>
         )}
 
         {/* Infos récupérées */}
@@ -192,6 +202,7 @@ const SiretAutocomplete = ({ onDataFetched, initialValue = '' }: SiretAutocomple
 
       <div className="text-xs text-muted-foreground">
         <p>💡 Le SIRET sera vérifié automatiquement via l'API publique data.gouv.fr</p>
+        <p className="mt-1">Si l'entreprise n'est pas trouvée, vous pourrez remplir les champs manuellement.</p>
       </div>
     </div>
   );
