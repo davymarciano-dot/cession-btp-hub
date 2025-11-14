@@ -1,4 +1,5 @@
 import { useParams, Link } from 'react-router-dom';
+import { useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
@@ -9,10 +10,18 @@ import { certifications, faqByCertification } from '@/data/seo-data';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Check, TrendingUp, Award, Users, MapPin } from 'lucide-react';
+import { CTAIntermediate } from '@/components/seo/CTAIntermediate';
+import { trackPageView } from '@/utils/analytics';
 
 const CertificationPage = () => {
   const { slug } = useParams();
   const cert = certifications.find(c => c.slug === slug);
+
+  useEffect(() => {
+    if (cert) {
+      trackPageView(window.location.pathname, `Entreprises ${cert.name} à vendre`);
+    }
+  }, [cert]);
 
   if (!cert) {
     return <div>Certification non trouvée</div>;
@@ -121,6 +130,11 @@ const CertificationPage = () => {
           </div>
         </section>
 
+        {/* CTA Intermédiaire 1 */}
+        <div className="container mx-auto px-4">
+          <CTAIntermediate variant="listings" metier={cert.slug} location="after-benefits" />
+        </div>
+
         {/* Marchés accessibles */}
         <section className="py-16">
           <div className="container mx-auto px-4">
@@ -139,6 +153,11 @@ const CertificationPage = () => {
             </div>
           </div>
         </section>
+
+        {/* CTA Intermédiaire 2 */}
+        <div className="container mx-auto px-4">
+          <CTAIntermediate variant="alert" metier={cert.slug} location="after-markets" />
+        </div>
 
         {/* Guide complet */}
         <section className="py-16 bg-muted/30">
