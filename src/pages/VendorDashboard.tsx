@@ -10,6 +10,7 @@ import { RecentActivity } from "@/components/dashboard/RecentActivity";
 import { PeriodSelector } from "@/components/dashboard/PeriodSelector";
 import { MatchingWidget } from "@/components/dashboard/MatchingWidget";
 import { ExportWidget } from "@/components/dashboard/ExportWidget";
+import { GamificationWidget } from "@/components/dashboard/GamificationWidget";
 import { Loader2 } from "lucide-react";
 import { startOfDay, subDays, format } from "date-fns";
 
@@ -324,10 +325,11 @@ const VendorDashboard = () => {
         {/* Graphique d'évolution */}
         <ViewsChart data={chartData} />
         
-        {/* Activités récentes et Matching */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+        {/* Activités récentes, Matching et Gamification */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
           <RecentActivity activities={recentActivities} />
           <MatchingWidget />
+          <GamificationWidget />
         </div>
         
         {/* Actions rapides */}
