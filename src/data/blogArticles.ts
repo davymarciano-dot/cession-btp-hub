@@ -19,11 +19,11 @@ export interface BlogArticle {
 export const blogArticles: BlogArticle[] = [
   {
     id: 1,
-    slug: 'guide-vendre-entreprise-btp-2026',
-    title: 'Guide Complet 2026 : Vendre son Entreprise BTP',
-    excerpt: 'Tout ce qu\'il faut savoir pour vendre son entreprise BTP en 2026',
+    slug: 'guide-complet-vendre-entreprise-btp-2026',
+    title: 'Guide Complet 2026 : Vendre son Entreprise BTP en 45 jours',
+    excerpt: 'Découvrez la méthode complète pour vendre votre entreprise BTP rapidement et au meilleur prix en 2026.',
     category: 'vente',
-    readTime: 12,
+    readTime: 15,
     author: 'CessionBTP',
     publishedAt: '2025-11-14',
     featured: true,
@@ -131,6 +131,89 @@ export const blogArticles: BlogArticle[] = [
       metaTitle: 'Transfert Certification RGE Rachat Entreprise | CessionBTP',
       metaDescription: 'Guide pour transférer les certifications RGE lors du rachat d\'une entreprise.',
       keywords: ['transfert rge', 'certification rge rachat', 'rge reprise']
+    }
+  },
+  {
+    id: 6,
+    slug: 'valorisation-entreprise-pompe-chaleur-2026',
+    title: 'Entreprises de Pompe à Chaleur : Valorisation Record en 2026',
+    excerpt: 'Avec l\'interdiction des chaudières gaz, les entreprises PAC se vendent 40% plus cher.',
+    category: 'vente',
+    readTime: 10,
+    author: 'CessionBTP',
+    publishedAt: '2025-11-12',
+    content: `<h2>Le boom des pompes à chaleur</h2><p>Analyse complète du marché PAC en 2026...</p>`,
+    seo: {
+      metaTitle: 'Valorisation Entreprise Pompe à Chaleur 2026 | CessionBTP',
+      metaDescription: 'Les entreprises PAC atteignent des valorisations records en 2026.',
+      keywords: ['pompe à chaleur', 'valorisation PAC', 'entreprise chauffage']
+    }
+  },
+  {
+    id: 7,
+    slug: 'audit-entreprise-btp-avant-achat',
+    title: 'Check-list : 47 Points à Vérifier Avant d\'Acheter une Entreprise BTP',
+    excerpt: 'L\'audit complet pour sécuriser votre reprise d\'entreprise BTP',
+    category: 'reprendre',
+    readTime: 15,
+    author: 'CessionBTP',
+    publishedAt: '2025-11-08',
+    featured: true,
+    content: `<h2>L'audit pré-acquisition</h2><p>47 points de contrôle essentiels...</p>`,
+    seo: {
+      metaTitle: 'Audit Entreprise BTP : 47 Points à Vérifier | CessionBTP',
+      metaDescription: 'Check-list complète pour auditer une entreprise BTP avant rachat.',
+      keywords: ['audit entreprise btp', 'due diligence btp', 'check-list rachat']
+    }
+  },
+  {
+    id: 8,
+    slug: 'marche-cession-btp-2026-chiffres',
+    title: 'Marché de la Cession BTP 2026 : Chiffres et Tendances',
+    excerpt: 'Analyse complète du marché de la transmission d\'entreprises BTP en 2026',
+    category: 'marche',
+    readTime: 10,
+    author: 'CessionBTP',
+    publishedAt: '2025-11-05',
+    featured: true,
+    content: `<h2>État du marché 2026</h2><p>Statistiques et tendances du secteur...</p>`,
+    seo: {
+      metaTitle: 'Marché Cession BTP 2026 : Chiffres Clés | CessionBTP',
+      metaDescription: 'Données complètes sur le marché de la transmission d\'entreprises BTP.',
+      keywords: ['marché btp 2026', 'tendances construction', 'statistiques btp']
+    }
+  },
+  {
+    id: 9,
+    slug: 'erreurs-eviter-vente-entreprise-btp',
+    title: '10 Erreurs Fatales à Éviter lors de la Vente de votre Entreprise',
+    excerpt: 'Les pièges à éviter absolument pour réussir la vente de votre entreprise BTP',
+    category: 'conseils',
+    readTime: 8,
+    author: 'CessionBTP',
+    publishedAt: '2025-11-01',
+    featured: true,
+    content: `<h2>Les erreurs les plus coûteuses</h2><p>10 pièges à éviter absolument...</p>`,
+    seo: {
+      metaTitle: '10 Erreurs à Éviter Vente Entreprise BTP | CessionBTP',
+      metaDescription: 'Les erreurs fatales qui peuvent faire échouer la vente de votre entreprise.',
+      keywords: ['erreurs vente entreprise', 'pièges cession btp', 'conseils vente']
+    }
+  },
+  {
+    id: 10,
+    slug: 'vendre-entreprise-plomberie-2026',
+    title: 'Vendre son Entreprise de Plomberie : Guide Spécifique 2026',
+    excerpt: 'Tout ce qu\'il faut savoir pour vendre une entreprise de plomberie en 2026',
+    category: 'secteurs',
+    readTime: 12,
+    author: 'CessionBTP',
+    publishedAt: '2025-10-28',
+    content: `<h2>Spécificités du secteur plomberie</h2><p>Guide complet pour les plombiers...</p>`,
+    seo: {
+      metaTitle: 'Vendre Entreprise Plomberie 2026 : Guide Complet | CessionBTP',
+      metaDescription: 'Guide spécifique pour vendre une entreprise de plomberie en 2026.',
+      keywords: ['entreprise plomberie', 'vente plombier', 'cession plomberie']
     }
   }
 ];
