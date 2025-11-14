@@ -11,3 +11,13 @@ verify_jwt = true
 
 [functions.verify-payment]
 verify_jwt = false
+
+[functions.ai-chatbot]
+verify_jwt = false
+
+[functions.auto-matching-ai]
+verify_jwt = false
+
+[functions.auto-scoring]
+verify_jwt = false
+

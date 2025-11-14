@@ -40,6 +40,7 @@ const BuyerKeywordPage = lazy(() => import("./pages/seo/BuyerKeywordPage"));
 const RenewableEnergyPage = lazy(() => import("./pages/seo/RenewableEnergyPage").then(module => ({ default: module.RenewableEnergyPage })));
 const BacklinksManager = lazy(() => import("./pages/BacklinksManager").then(module => ({ default: module.BacklinksManager })));
 const OutilsGratuits = lazy(() => import("./pages/OutilsGratuits").then(module => ({ default: module.OutilsGratuits })));
+const AutomationDashboard = lazy(() => import("./pages/AutomationDashboard").then(module => ({ default: module.AutomationDashboard })));
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -93,6 +94,7 @@ const App = () => (
           <Route path="/seo-stats" element={<SeoStats />} />
           <Route path="/backlinks-manager" element={<BacklinksManager />} />
           <Route path="/outils-gratuits" element={<OutilsGratuits />} />
+          <Route path="/automation-dashboard" element={<AutomationDashboard />} />
           
           {/* Pages énergies renouvelables RGE (ULTRA PRIORITAIRE) */}
           <Route path="/entreprise-:slug-a-vendre" element={<RenewableEnergyPage />} />
