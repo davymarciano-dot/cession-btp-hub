@@ -6,6 +6,7 @@ import Footer from "@/components/Footer";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { debounce } from "lodash";
+import { FormCompletionProgress } from "@/components/FormCompletionProgress";
 import FormSection1 from "@/components/vendre/FormSection1";
 import FormSection2Combined from "@/components/vendre/FormSection2Combined";
 import FormSection4 from "@/components/vendre/FormSection4";
