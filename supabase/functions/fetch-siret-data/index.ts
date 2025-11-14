@@ -13,9 +13,9 @@ serve(async (req) => {
       throw new Error("SIRET invalide. Le numéro doit contenir 14 chiffres.");
     }
 
-    // Appel à l'API publique gratuite
+    // Appel à l'API publique gouvernementale (gratuite et fiable)
     const response = await fetch(
-      `https://api-siret.vercel.app/siret/${siret}`,
+      `https://recherche-entreprises.api.gouv.fr/search?q=${siret}&limite=1`,
       {
         headers: {
           'Accept': 'application/json',
@@ -24,29 +24,30 @@ serve(async (req) => {
     );
 
     if (!response.ok) {
-      if (response.status === 404) {
-        throw new Error("Entreprise non trouvée");
-      }
-      throw new Error("Erreur lors de la récupération des données");
+      console.error('API response not OK:', response.status);
+      throw new Error('Entreprise non trouvée');
     }
 
     const data = await response.json();
     
-    if (data.error) {
-      throw new Error("SIRET non trouvé");
+    if (!data.results || data.results.length === 0) {
+      console.log('No results found for SIRET:', siret);
+      throw new Error('SIRET non trouvé');
     }
 
+    const entreprise = data.results[0];
+    
     // Extraire et formater les données
     const companyData = {
-      raisonSociale: data.denomination || data.nom_raison_sociale || '',
-      formeJuridique: data.categorie_juridique || '',
-      anneeCreation: data.date_creation ? new Date(data.date_creation).getFullYear().toString() : '',
-      secteurActivite: data.libelle_activite || data.activite_principale || '',
-      ville: data.libelle_commune || '',
-      codePostal: data.code_postal || '',
-      departement: data.code_postal ? data.code_postal.substring(0, 2) : '',
-      adresse: data.adresse ? `${data.adresse.numero_voie || ''} ${data.adresse.type_voie || ''} ${data.adresse.libelle_voie || ''}`.trim() : '',
-      nombreSalaries: data.tranche_effectifs || '',
+      raisonSociale: entreprise.nom_complet || entreprise.nom_raison_sociale || '',
+      formeJuridique: entreprise.nature_juridique || '',
+      anneeCreation: entreprise.date_creation ? new Date(entreprise.date_creation).getFullYear().toString() : '',
+      secteurActivite: entreprise.activite_principale || '',
+      ville: entreprise.siege?.libelle_commune || '',
+      codePostal: entreprise.siege?.code_postal || '',
+      departement: entreprise.siege?.code_postal ? entreprise.siege.code_postal.substring(0, 2) : '',
+      adresse: entreprise.siege?.adresse || '',
+      nombreSalaries: entreprise.tranche_effectif_salarie || '',
     };
 
     return new Response(
@@ -60,13 +61,16 @@ serve(async (req) => {
   } catch (error) {
     console.error('Error in fetch-siret-data:', error);
     const errorMessage = error instanceof Error ? error.message : 'Erreur lors de la récupération des données SIRET';
+    
+    // Retourner une erreur plus claire
     return new Response(
       JSON.stringify({ 
-        error: errorMessage
+        error: errorMessage,
+        message: 'SIRET non trouvé dans la base. Vous pouvez continuer en remplissant les champs manuellement.'
       }),
       { 
         headers: { ...corsHeaders, 'Content-Type': 'application/json' },
-        status: 400 
+        status: 404
       }
     );
   }
