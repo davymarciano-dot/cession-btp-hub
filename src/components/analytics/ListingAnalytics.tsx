@@ -35,12 +35,12 @@ export const ListingAnalytics = ({ listingId }: ListingAnalyticsProps) => {
 
   const fetchStats = async () => {
     try {
-      // Fetch all views
+      // Fetch all views - using any to bypass type issues until Supabase regenerates types
       const { data: views, error } = await supabase
-        .from('listing_views')
+        .from('listing_views' as any)
         .select('*')
         .eq('listing_id', listingId)
-        .order('created_at', { ascending: false });
+        .order('created_at', { ascending: false }) as any;
 
       if (error) throw error;
 
