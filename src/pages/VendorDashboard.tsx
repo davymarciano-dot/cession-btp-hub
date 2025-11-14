@@ -7,6 +7,9 @@ import Footer from "@/components/Footer";
 import { MetricCard } from "@/components/dashboard/MetricCard";
 import { ViewsChart } from "@/components/dashboard/ViewsChart";
 import { RecentActivity } from "@/components/dashboard/RecentActivity";
+import { PeriodSelector } from "@/components/dashboard/PeriodSelector";
+import { MatchingWidget } from "@/components/dashboard/MatchingWidget";
+import { ExportWidget } from "@/components/dashboard/ExportWidget";
 import { Loader2 } from "lucide-react";
 import { startOfDay, subDays, format } from "date-fns";
 
@@ -41,6 +44,7 @@ const VendorDashboard = () => {
   });
   const [chartData, setChartData] = useState<Array<{ date: string; views: number }>>([]);
   const [recentActivities, setRecentActivities] = useState<any[]>([]);
+  const [selectedPeriod, setSelectedPeriod] = useState('30d');
 
   useEffect(() => {
     checkAuth();
@@ -260,17 +264,26 @@ const VendorDashboard = () => {
       
       <div className="container mx-auto px-4 py-8">
         <div className="mb-8">
-          <div className="flex items-center justify-between mb-4">
+          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-4">
             <div>
               <h1 className="text-3xl md:text-4xl font-bold mb-2">Tableau de bord vendeur</h1>
               <p className="text-muted-foreground">
                 Suivez les performances de vos annonces en temps réel • Dernière mise à jour : maintenant
               </p>
             </div>
-            <div className="hidden md:flex items-center gap-2">
-              <div className="px-4 py-2 bg-green-100 dark:bg-green-950 text-green-700 dark:text-green-300 rounded-lg font-medium flex items-center gap-2">
-                <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
-                En ligne
+            <div className="flex items-center gap-3">
+              <PeriodSelector 
+                onPeriodChange={(period) => {
+                  setSelectedPeriod(period);
+                  // TODO: Filtrer les données selon la période
+                }}
+                defaultPeriod={selectedPeriod}
+              />
+              <div className="hidden md:flex items-center gap-2">
+                <div className="px-4 py-2 bg-green-100 dark:bg-green-950 text-green-700 dark:text-green-300 rounded-lg font-medium flex items-center gap-2">
+                  <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+                  En ligne
+                </div>
               </div>
             </div>
           </div>
@@ -311,12 +324,22 @@ const VendorDashboard = () => {
         {/* Graphique d'évolution */}
         <ViewsChart data={chartData} />
         
-        {/* Dernières activités */}
-        <div className="mb-8">
+        {/* Activités récentes et Matching */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
           <RecentActivity activities={recentActivities} />
+          <MatchingWidget />
         </div>
         
-        {/* Messages section - à venir */}
+        {/* Actions rapides */}
+        <div className="mb-8">
+          <h3 className="text-lg font-semibold mb-4">Actions rapides</h3>
+          <ExportWidget 
+            dashboardData={metrics}
+            companyName={listings[0]?.raison_sociale || "Mon Entreprise"}
+          />
+        </div>
+        
+        {/* Messages section */}
         <div className="bg-muted/30 border-2 border-dashed rounded-lg p-8 text-center">
           <h3 className="text-lg font-semibold mb-2">Messages reçus</h3>
           <p className="text-muted-foreground mb-4">
