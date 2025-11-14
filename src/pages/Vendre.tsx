@@ -7,6 +7,7 @@ import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { debounce } from "lodash";
 import { FormCompletionProgress } from "@/components/FormCompletionProgress";
+import CompletionBar from "@/components/vendre/CompletionBar";
 import FormSection1 from "@/components/vendre/FormSection1";
 import FormSection2Combined from "@/components/vendre/FormSection2Combined";
 import FormSection4 from "@/components/vendre/FormSection4";
@@ -520,7 +521,7 @@ const Vendre = () => {
       </div>
 
       {/* Form Content */}
-      <section className="py-12">
+      <section className="py-12 pb-32">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
             <div className="bg-white rounded-2xl shadow-xl p-8 md:p-12">
@@ -589,6 +590,16 @@ const Vendre = () => {
           </div>
         </div>
       </section>
+
+      {/* Sticky Completion Bar */}
+      <CompletionBar 
+        currentStep={currentStep}
+        totalSteps={totalSteps}
+        canPublish={currentStep === totalSteps}
+        onPublish={handleSubmit}
+        isSubmitting={isSubmitting}
+        montantAbonnement={formData.montantAbonnement}
+      />
 
       <Footer />
     </div>
