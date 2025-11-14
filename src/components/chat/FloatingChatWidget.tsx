@@ -173,17 +173,26 @@ export const FloatingChatWidget = () => {
     }
   };
 
-  if (!user) return null;
+  const handleOpenChat = () => {
+    if (!user) {
+      toast({
+        title: "Connexion requise",
+        description: "Veuillez vous connecter pour utiliser le chat support",
+      });
+      // Optionally redirect to auth page
+      window.location.href = '/auth';
+      return;
+    }
+    setIsOpen(true);
+    setUnreadCount(0);
+  };
 
   return (
     <>
       {/* Floating Button */}
       {!isOpen && (
         <Button
-          onClick={() => {
-            setIsOpen(true);
-            setUnreadCount(0);
-          }}
+          onClick={handleOpenChat}
           className="fixed bottom-6 right-6 h-14 w-14 rounded-full shadow-2xl hover:scale-110 transition-transform z-50"
           size="icon"
         >
@@ -197,7 +206,7 @@ export const FloatingChatWidget = () => {
       )}
 
       {/* Chat Widget */}
-      {isOpen && (
+      {isOpen && user && (
         <div
           className={`fixed bottom-6 right-6 bg-background border rounded-lg shadow-2xl z-50 transition-all ${
             isMinimized ? 'h-14 w-80' : 'h-[500px] w-96'
