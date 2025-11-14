@@ -1,8 +1,10 @@
 import { Helmet } from 'react-helmet-async';
 
 interface SchemaMarkupProps {
-  type: 'certification' | 'metier' | 'region';
-  data: {
+  type: 'certification' | 'metier' | 'region' | 'RenewableEnergy';
+  title?: string;
+  description?: string;
+  data?: {
     name: string;
     price?: string;
     description: string;
@@ -12,26 +14,29 @@ interface SchemaMarkupProps {
   };
 }
 
-export const SchemaMarkup = ({ type, data }: SchemaMarkupProps) => {
+export const SchemaMarkup = ({ type, title, description, data }: SchemaMarkupProps) => {
+  const schemaName = title || (data ? `Entreprises BTP ${data.name} à vendre` : 'Entreprises BTP à vendre');
+  const schemaDescription = description || (data?.description || 'Entreprises BTP à vendre');
+  
   const schema = {
     "@context": "https://schema.org",
     "@type": "ItemList",
-    "name": `Entreprises BTP ${data.name} à vendre`,
-    "description": data.description,
-    "numberOfItems": data.count || 0,
+    "name": schemaName,
+    "description": schemaDescription,
+    "numberOfItems": data?.count || 0,
     "itemListElement": [
       {
         "@type": "ListItem",
         "position": 1,
         "item": {
           "@type": "BusinessForSale",
-          "name": `Entreprise ${data.name}`,
-          "description": data.description,
-          "price": data.price || "0",
+          "name": data ? `Entreprise ${data.name}` : schemaName,
+          "description": schemaDescription,
+          "price": data?.price || "0",
           "priceCurrency": "EUR",
           "category": "Construction BTP",
-          "certifications": data.certifications || [],
-          "location": data.location ? {
+          "certifications": data?.certifications || [],
+          "location": data?.location ? {
             "@type": "Place",
             "address": {
               "@type": "PostalAddress",

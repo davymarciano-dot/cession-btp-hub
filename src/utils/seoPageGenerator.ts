@@ -1,17 +1,29 @@
 import { metiersComplete, villesFrance } from '@/data/metiers-complete';
 import { certifications } from '@/data/seo-data';
 import { regions } from '@/data/seo-data';
+import { renewableEnergies } from '@/data/renewable-energy';
 
 export interface SeoPage {
   path: string;
   title: string;
   priority: number;
   changefreq: string;
-  type: 'metier' | 'metier-ville' | 'certification' | 'region' | 'keyword';
+  type: 'metier' | 'metier-ville' | 'certification' | 'region' | 'keyword' | 'renewable-energy';
 }
 
 export const generateAllSeoPages = (): SeoPage[] => {
   const pages: SeoPage[] = [];
+  
+  // 0. Pages énergies renouvelables RGE (ULTRA PRIORITAIRE)
+  renewableEnergies.forEach(energy => {
+    pages.push({
+      path: `/entreprise-${energy.slug}-a-vendre`,
+      title: `Entreprise ${energy.title} RGE à vendre`,
+      priority: 1.0,
+      changefreq: 'daily',
+      type: 'renewable-energy'
+    });
+  });
   
   // 1. Pages métier simple (ex: /entreprise-plomberie-a-vendre)
   metiersComplete.forEach(metier => {
@@ -79,6 +91,7 @@ export const getTotalSeoPages = () => {
   return {
     total: pages.length,
     byType: {
+      renewableEnergy: pages.filter(p => p.type === 'renewable-energy').length,
       metier: pages.filter(p => p.type === 'metier').length,
       metierVille: pages.filter(p => p.type === 'metier-ville').length,
       certification: pages.filter(p => p.type === 'certification').length,

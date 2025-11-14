@@ -21,6 +21,9 @@ export const trackPageView = (url: string, title: string) => {
   }
 };
 
+// Alias for compatibility
+export const trackPage = trackPageView;
+
 export const trackListing = {
   view: (metier: string, ville?: string, price?: string) => {
     trackEvent('view_listing', {
