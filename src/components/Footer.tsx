@@ -1,6 +1,6 @@
 import { Facebook, Linkedin, Twitter } from "lucide-react";
 import { Link } from "react-router-dom";
-import logo from "@/assets/logo-cessionbtp.png";
+import logo from "@/assets/logo-cessionbtp-hd.png";
 
 const Footer = () => {
   return (
@@ -33,23 +33,23 @@ const Footer = () => {
             <h3 className="text-lg font-bold mb-4">Services</h3>
             <ul className="space-y-2">
               <li>
-                <Link to="/" className="text-slate-400 hover:text-white transition-colors">
+                <Link to="/vendre" className="text-slate-400 hover:text-white transition-colors">
                   Vendre
                 </Link>
               </li>
               <li>
-                <Link to="/" className="text-slate-400 hover:text-white transition-colors">
+                <Link to="/acheter" className="text-slate-400 hover:text-white transition-colors">
                   Acheter
                 </Link>
               </li>
               <li>
-                <Link to="/" className="text-slate-400 hover:text-white transition-colors">
-                  Valorisation
+                <Link to="/estimer" className="text-slate-400 hover:text-white transition-colors">
+                  Estimation Gratuite
                 </Link>
               </li>
               <li>
-                <Link to="/" className="text-slate-400 hover:text-white transition-colors">
-                  Audit BTP
+                <Link to="/tarifs" className="text-slate-400 hover:text-white transition-colors">
+                  Tarifs
                 </Link>
               </li>
             </ul>
@@ -92,15 +92,18 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* Column 4: Support */}
+          {/* Column 4: Contact & Support */}
           <div>
-            <h3 className="text-lg font-bold mb-4">Support</h3>
-            <ul className="space-y-2">
-              <li>
-                <Link to="/" className="text-slate-400 hover:text-white transition-colors">
-                  Contact
-                </Link>
+            <h3 className="text-lg font-bold mb-4">Contact & Support</h3>
+            <ul className="space-y-2 mb-4">
+              <li className="text-slate-400">
+                📧 contact@cessionbtp.fr
               </li>
+              <li className="text-slate-400">
+                📞 01 23 45 67 89
+              </li>
+            </ul>
+            <ul className="space-y-2">
               <li>
                 <Link to="/" className="text-slate-400 hover:text-white transition-colors">
                   FAQ
@@ -108,12 +111,7 @@ const Footer = () => {
               </li>
               <li>
                 <Link to="/" className="text-slate-400 hover:text-white transition-colors">
-                  Blog
-                </Link>
-              </li>
-              <li>
-                <Link to="/" className="text-slate-400 hover:text-white transition-colors">
-                  Documentation
+                  Blog & Guides
                 </Link>
               </li>
             </ul>
