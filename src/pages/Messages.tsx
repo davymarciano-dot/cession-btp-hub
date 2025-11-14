@@ -10,6 +10,7 @@ import { Send, ArrowLeft } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { format } from "date-fns";
 import { fr } from "date-fns/locale";
+import { ChatWidget } from "@/components/chat/ChatWidget";
 
 interface Conversation {
   id: string;
@@ -368,6 +369,15 @@ const Messages = () => {
           </div>
         </div>
       </main>
+
+      {/* Floating Chat Widget - Alternative view */}
+      {selectedConversation && user && false && ( // Set to true to enable floating widget
+        <ChatWidget
+          conversationId={selectedConversation}
+          currentUserId={user.id}
+          onClose={() => setSelectedConversation(null)}
+        />
+      )}
 
       <Footer />
     </div>
