@@ -5,6 +5,7 @@ import { useToast } from "@/hooks/use-toast";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { MetricCard } from "@/components/dashboard/MetricCard";
+import { StatCard } from "@/components/dashboard/StatCard";
 import { ViewsChart } from "@/components/dashboard/ViewsChart";
 import { RecentActivity } from "@/components/dashboard/RecentActivity";
 import { PeriodSelector } from "@/components/dashboard/PeriodSelector";
