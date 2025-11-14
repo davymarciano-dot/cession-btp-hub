@@ -18,6 +18,7 @@ const ResultatEstimation = lazy(() => import("./pages/ResultatEstimation"));
 const PaymentSuccess = lazy(() => import("./pages/PaymentSuccess"));
 const Auth = lazy(() => import("./pages/Auth"));
 const Dashboard = lazy(() => import("./pages/Dashboard"));
+const VendorDashboard = lazy(() => import("./pages/VendorDashboard"));
 const AnnonceDetail = lazy(() => import("./pages/AnnonceDetail"));
 const Tarifs = lazy(() => import("./pages/Tarifs"));
 const Ressources = lazy(() => import("./pages/Ressources"));
@@ -63,6 +64,7 @@ const App = () => (
             <Route path="/estimer" element={<Estimation />} />
             <Route path="/resultat-estimation" element={<ResultatEstimation />} />
             <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/dashboard-vendeur" element={<VendorDashboard />} />
             <Route path="/payment-success" element={<PaymentSuccess />} />
             <Route path="/auth" element={<Auth />} />
             <Route path="/tarifs" element={<Tarifs />} />

@@ -59,6 +59,9 @@ const Header = () => {
                 <Link to="/mes-matchs" className="text-foreground hover:text-primary font-medium transition-colors">
                   Mes Matchs
                 </Link>
+                <Link to="/dashboard-vendeur" className="text-foreground hover:text-primary font-medium transition-colors">
+                  Dashboard
+                </Link>
               </>
             )}
           </div>
@@ -125,6 +128,9 @@ const Header = () => {
                 </Link>
                 <Link to="/mes-matchs" className="block text-foreground hover:text-primary font-medium transition-colors">
                   Mes Matchs
+                </Link>
+                <Link to="/dashboard-vendeur" className="block text-foreground hover:text-primary font-medium transition-colors">
+                  Dashboard
                 </Link>
               </>
             )}
