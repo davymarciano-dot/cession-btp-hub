@@ -4,7 +4,7 @@ import { Menu, X, LayoutDashboard } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { User } from "@supabase/supabase-js";
-import logo from "@/assets/logo-cessionbtp.png";
+import logo from "@/assets/logo-cessionbtp-hd.png";
 import { NotificationCenter } from "./notifications/NotificationCenter";
 
 const Header = () => {
@@ -29,10 +29,10 @@ const Header = () => {
   return (
     <header className="sticky top-0 bg-white shadow-md border-b border-gray-200 z-50">
       <nav className="max-w-7xl mx-auto px-4 py-3">
-        <div className="flex items-center justify-between h-16">
+        <div className="flex items-center justify-between h-20">
           {/* Logo */}
-          <Link to="/" className="flex items-center">
-            <img src={logo} alt="CessionBTP" className="h-12 w-auto" style={{ maxHeight: '48px' }} />
+          <Link to="/" className="flex items-center py-2">
+            <img src={logo} alt="CessionBTP" className="h-14 w-auto md:h-16" style={{ minHeight: '48px' }} />
           </Link>
 
           {/* Desktop Navigation */}
@@ -89,7 +89,7 @@ const Header = () => {
               </Button>
             )}
             <Button 
-              className="bg-orange-500 hover:bg-orange-600 text-white font-bold shadow-lg px-5 py-2.5"
+              className="bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white font-bold shadow-lg px-5 py-2.5 transition-all"
               onClick={() => navigate('/estimer')}
             >
               Estimer Gratuitement
@@ -156,7 +156,7 @@ const Header = () => {
                 </Button>
               )}
               <Button 
-                className="w-full bg-orange-500 hover:bg-orange-600 text-white font-bold shadow-lg"
+                className="w-full bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white font-bold shadow-lg transition-all"
                 onClick={() => navigate('/estimer')}
               >
                 Estimer Gratuitement
