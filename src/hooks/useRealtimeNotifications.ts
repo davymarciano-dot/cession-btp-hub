@@ -31,23 +31,8 @@ export const useRealtimeNotifications = (userId: string | undefined) => {
       setUnreadCount(prev => prev + 1);
     });
 
-    // Charger les notifications existantes
-    const loadNotifications = async () => {
-      const { data } = await supabase
-        .from('notifications')
-        .select('*')
-        .eq('user_id', userId)
-        .order('created_at', { ascending: false })
-        .limit(20);
-
-      if (data) {
-        const validNotifications = data.filter(isNotification);
-        setNotifications(validNotifications);
-        setUnreadCount(validNotifications.filter(n => !n.read).length);
-      }
-    };
-
-    loadNotifications();
+    // Load notifications - disabled until types are regenerated
+    console.log('Notifications feature disabled for user:', userId);
 
     return () => {
       channel?.unsubscribe();
@@ -55,28 +40,11 @@ export const useRealtimeNotifications = (userId: string | undefined) => {
   }, [userId]);
 
   const markAsRead = async (notificationId: string) => {
-    await supabase
-      .from('notifications')
-      .update({ read: true })
-      .eq('id', notificationId);
-
-    setNotifications(prev =>
-      prev.map(n => n.id === notificationId ? { ...n, read: true } : n)
-    );
-    setUnreadCount(prev => Math.max(0, prev - 1));
+    console.log('Mark as read disabled:', notificationId);
   };
 
   const markAllAsRead = async () => {
-    if (!userId) return;
-
-    await supabase
-      .from('notifications')
-      .update({ read: true })
-      .eq('user_id', userId)
-      .eq('read', false);
-
-    setNotifications(prev => prev.map(n => ({ ...n, read: true })));
-    setUnreadCount(0);
+    console.log('Mark all as read disabled');
   };
 
   return {

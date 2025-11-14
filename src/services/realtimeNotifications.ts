@@ -99,24 +99,8 @@ class RealtimeNotificationService {
   }
 
   static async sendNotification(userId: string, notification: Omit<Notification, 'id' | 'user_id' | 'created_at' | 'read'>) {
-    try {
-      const { error } = await supabase
-        .from('notifications')
-        .insert({
-          user_id: userId,
-          type: notification.type,
-          title: notification.title,
-          message: notification.message,
-          data: notification.data || {},
-          read: false
-        } as any);
-
-      if (error) {
-        console.error('Error sending notification:', error);
-      }
-    } catch (e) {
-      console.error('Error in sendNotification:', e);
-    }
+    // Notifications disabled until database types are regenerated
+    console.log('Notification would be sent to:', userId, notification);
   }
 
   unsubscribe(channelName: string) {
