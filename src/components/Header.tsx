@@ -27,40 +27,40 @@ const Header = () => {
   }, []);
 
   return (
-    <header className="sticky top-0 bg-white shadow-sm z-50">
-      <nav className="max-w-4xl mx-auto px-4 py-3">
+    <header className="sticky top-0 bg-white shadow-md border-b z-50">
+      <nav className="max-w-7xl mx-auto px-4 py-3">
         <div className="flex items-center justify-between">
           {/* Logo */}
           <Link to="/" className="flex items-center">
-            <img src={logo} alt="CessionBTP" className="h-20" />
+            <img src={logo} alt="CessionBTP" className="h-12 w-auto" style={{ maxHeight: '48px' }} />
           </Link>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-8">
-            <Link to="/vendre" className="text-foreground hover:text-primary font-medium transition-colors">
+            <Link to="/vendre" className="text-gray-700 hover:text-primary font-semibold transition-colors">
               Vendre
             </Link>
-            <Link to="/acheter" className="text-foreground hover:text-primary font-medium transition-colors">
+            <Link to="/acheter" className="text-gray-700 hover:text-primary font-semibold transition-colors">
               Acheter
             </Link>
-            <Link to="/entreprises" className="text-foreground hover:text-primary font-medium transition-colors">
+            <Link to="/entreprises" className="text-gray-700 hover:text-primary font-semibold transition-colors">
               Entreprises
             </Link>
-            <Link to="/estimer" className="text-foreground hover:text-primary font-medium transition-colors">
+            <Link to="/estimer" className="text-gray-700 hover:text-primary font-semibold transition-colors">
               Estimer
             </Link>
-            <Link to="/tarifs" className="text-foreground hover:text-primary font-medium transition-colors">
+            <Link to="/tarifs" className="text-gray-700 hover:text-primary font-semibold transition-colors">
               Tarifs
             </Link>
             {user && (
               <>
-                <Link to="/messages" className="text-foreground hover:text-primary font-medium transition-colors">
+                <Link to="/messages" className="text-gray-700 hover:text-primary font-semibold transition-colors">
                   Messages
                 </Link>
-                <Link to="/mes-matchs" className="text-foreground hover:text-primary font-medium transition-colors">
+                <Link to="/mes-matchs" className="text-gray-700 hover:text-primary font-semibold transition-colors">
                   Mes Matchs
                 </Link>
-                <Link to="/dashboard-vendeur" className="text-foreground hover:text-primary font-medium transition-colors">
+                <Link to="/dashboard-vendeur" className="text-gray-700 hover:text-primary font-semibold transition-colors">
                   Dashboard
                 </Link>
               </>
@@ -68,12 +68,12 @@ const Header = () => {
           </div>
 
           {/* Desktop Actions */}
-          <div className="hidden md:flex items-center gap-2">
+          <div className="hidden md:flex items-center gap-3">
             {user && <NotificationCenter />}
             {user ? (
               <Button 
                 variant="outline" 
-                className="border-primary text-primary hover:bg-primary hover:text-white"
+                className="border-2 border-primary text-primary hover:bg-primary hover:text-white font-semibold"
                 onClick={() => navigate('/dashboard')}
               >
                 <LayoutDashboard className="w-4 h-4 mr-2" />
@@ -82,14 +82,14 @@ const Header = () => {
             ) : (
               <Button 
                 variant="outline" 
-                className="border-primary text-primary hover:bg-primary hover:text-white"
+                className="border-2 border-primary text-primary hover:bg-primary hover:text-white font-semibold"
                 onClick={() => navigate('/auth')}
               >
                 Connexion
               </Button>
             )}
             <Button 
-              className="bg-secondary hover:bg-secondary/90 text-white"
+              className="bg-secondary hover:bg-secondary/90 text-white font-semibold shadow-md"
               onClick={() => navigate('/estimer')}
             >
               Estimer Gratuitement
@@ -108,30 +108,30 @@ const Header = () => {
         {/* Mobile Menu */}
         {mobileMenuOpen && (
           <div className="md:hidden mt-4 pb-4 space-y-4">
-            <Link to="/vendre" className="block text-foreground hover:text-primary font-medium transition-colors">
+            <Link to="/vendre" className="block text-gray-700 hover:text-primary font-semibold transition-colors">
               Vendre
             </Link>
-            <Link to="/acheter" className="block text-foreground hover:text-primary font-medium transition-colors">
+            <Link to="/acheter" className="block text-gray-700 hover:text-primary font-semibold transition-colors">
               Acheter
             </Link>
-            <Link to="/entreprises" className="block text-foreground hover:text-primary font-medium transition-colors">
+            <Link to="/entreprises" className="block text-gray-700 hover:text-primary font-semibold transition-colors">
               Entreprises
             </Link>
-            <Link to="/estimer" className="block text-foreground hover:text-primary font-medium transition-colors">
+            <Link to="/estimer" className="block text-gray-700 hover:text-primary font-semibold transition-colors">
               Estimer
             </Link>
-            <Link to="/tarifs" className="block text-foreground hover:text-primary font-medium transition-colors">
+            <Link to="/tarifs" className="block text-gray-700 hover:text-primary font-semibold transition-colors">
               Tarifs
             </Link>
             {user && (
               <>
-                <Link to="/messages" className="block text-foreground hover:text-primary font-medium transition-colors">
+                <Link to="/messages" className="block text-gray-700 hover:text-primary font-semibold transition-colors">
                   Messages
                 </Link>
-                <Link to="/mes-matchs" className="block text-foreground hover:text-primary font-medium transition-colors">
+                <Link to="/mes-matchs" className="block text-gray-700 hover:text-primary font-semibold transition-colors">
                   Mes Matchs
                 </Link>
-                <Link to="/dashboard-vendeur" className="block text-foreground hover:text-primary font-medium transition-colors">
+                <Link to="/dashboard-vendeur" className="block text-gray-700 hover:text-primary font-semibold transition-colors">
                   Dashboard
                 </Link>
               </>
@@ -140,7 +140,7 @@ const Header = () => {
               {user ? (
                 <Button 
                   variant="outline" 
-                  className="w-full border-primary text-primary hover:bg-primary hover:text-white"
+                  className="w-full border-2 border-primary text-primary hover:bg-primary hover:text-white font-semibold"
                   onClick={() => navigate('/dashboard')}
                 >
                   <LayoutDashboard className="w-4 h-4 mr-2" />
@@ -149,14 +149,14 @@ const Header = () => {
               ) : (
                 <Button 
                   variant="outline" 
-                  className="w-full border-primary text-primary hover:bg-primary hover:text-white"
+                  className="w-full border-2 border-primary text-primary hover:bg-primary hover:text-white font-semibold"
                   onClick={() => navigate('/auth')}
                 >
                   Connexion
                 </Button>
               )}
               <Button 
-                className="w-full bg-secondary hover:bg-secondary/90 text-white"
+                className="w-full bg-secondary hover:bg-secondary/90 text-white font-semibold shadow-md"
                 onClick={() => navigate('/estimer')}
               >
                 Estimer Gratuitement
