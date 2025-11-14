@@ -56,6 +56,7 @@ const BlogIndex = lazy(() => import("./pages/blog/BlogIndex"));
 const VendorListingAnalytics = lazy(() => import("./pages/dashboard/VendorListingAnalytics"));
 const Roadmap = lazy(() => import("./pages/Roadmap"));
 const LaunchChecklist = lazy(() => import("./pages/LaunchChecklist"));
+const MonitoringDashboard = lazy(() => import("./pages/admin/MonitoringDashboard"));
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -128,6 +129,7 @@ const App = () => {
           <Route path="/revenue-dashboard" element={<RevenueDashboard />} />
           <Route path="/test-automations" element={<TestAutomations />} />
           <Route path="/admin/cron-logs" element={<CronLogsAdmin />} />
+          <Route path="/admin/monitoring" element={<MonitoringDashboard />} />
           <Route path="/blog" element={<BlogIndex />} />
           
           {/* Pages énergies renouvelables RGE (ULTRA PRIORITAIRE) */}
