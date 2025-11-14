@@ -37,6 +37,7 @@ const MetierPage = lazy(() => import("./pages/seo/MetierPage"));
 const RegionPage = lazy(() => import("./pages/seo/RegionPage"));
 const SellerKeywordPage = lazy(() => import("./pages/seo/SellerKeywordPage"));
 const BuyerKeywordPage = lazy(() => import("./pages/seo/BuyerKeywordPage"));
+const RenewableEnergyPage = lazy(() => import("./pages/seo/RenewableEnergyPage").then(module => ({ default: module.RenewableEnergyPage })));
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -86,8 +87,11 @@ const App = () => (
             <Route path="/performance-demo" element={<PerformanceDemo />} />
             <Route path="/mes-matchs" element={<MyMatches />} />
             <Route path="/faq" element={<FAQ />} />
-            <Route path="/sitemap" element={<Sitemap />} />
-            <Route path="/seo-stats" element={<SeoStats />} />
+          <Route path="/sitemap" element={<Sitemap />} />
+          <Route path="/seo-stats" element={<SeoStats />} />
+          
+          {/* Pages énergies renouvelables RGE (ULTRA PRIORITAIRE) */}
+          <Route path="/entreprise-:slug-a-vendre" element={<RenewableEnergyPage />} />
             {/* SEO Pages - Buyer Keywords (before generic seller to match first) */}
             <Route path="/entreprise-:keyword-a-vendre" element={<BuyerKeywordPage />} />
             <Route path="/societe-:keyword-a-reprendre" element={<BuyerKeywordPage />} />
