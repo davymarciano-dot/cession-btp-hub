@@ -24,6 +24,7 @@ const Ressources = lazy(() => import("./pages/Ressources"));
 const Messages = lazy(() => import("./pages/Messages"));
 const ChatDemo = lazy(() => import("./pages/ChatDemo"));
 const PerformanceDemo = lazy(() => import("./pages/PerformanceDemo"));
+const MyMatches = lazy(() => import("./pages/MyMatches"));
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -69,6 +70,7 @@ const App = () => (
             <Route path="/messages" element={<Messages />} />
             <Route path="/chat-demo" element={<ChatDemo />} />
             <Route path="/performance-demo" element={<PerformanceDemo />} />
+            <Route path="/mes-matchs" element={<MyMatches />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>

@@ -2,9 +2,11 @@ import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
+import { useListingView } from "@/hooks/useListingView";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import PhotoGallery from "@/components/PhotoGallery";
+import { ListingAnalytics } from "@/components/analytics/ListingAnalytics";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
@@ -17,7 +19,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import {
   Building2, MapPin, Calendar, TrendingUp, Users, Euro,
-  Award, FileText, Phone, Mail, ArrowLeft, Eye, Loader2, MessageCircle, Camera, Share2, Copy, Linkedin
+  Award, FileText, Phone, Mail, ArrowLeft, Eye, Loader2, MessageCircle, Camera, Share2, Copy, Linkedin, BarChart3
 } from "lucide-react";
 import { exempleAnnonces } from "@/data/exemple-annonces";
 import { analyticsEvents } from "@/lib/analytics";
@@ -30,14 +32,20 @@ const AnnonceDetail = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [user, setUser] = useState<any>(null);
   const [isContacting, setIsContacting] = useState(false);
+  const [showAnalytics, setShowAnalytics] = useState(false);
+
+  // Track listing view (disabled for example listings and own listings)
+  const isRealListing = id && !id.startsWith("exemple-");
+  const isOwner = user && annonce && user.id === annonce.user_id;
+  useListingView({
+    listingId: id || "",
+    enabled: isRealListing && !isOwner,
+  });
 
   useEffect(() => {
     checkUser();
     if (id) {
       fetchAnnonce();
-      if (!id.startsWith("exemple-")) {
-        incrementVues();
-      }
     }
   }, [id]);
 
@@ -77,25 +85,6 @@ const AnnonceDetail = () => {
       navigate("/entreprises");
     } finally {
       setIsLoading(false);
-    }
-  };
-
-  const incrementVues = async () => {
-    try {
-      const { data: currentAnnonce } = await supabase
-        .from('annonces')
-        .select('nombre_vues')
-        .eq('id', id)
-        .single();
-
-      if (currentAnnonce) {
-        await supabase
-          .from('annonces')
-          .update({ nombre_vues: (currentAnnonce.nombre_vues || 0) + 1 })
-          .eq('id', id);
-      }
-    } catch (error) {
-      console.error("Error incrementing views:", error);
     }
   };
 
@@ -254,6 +243,17 @@ const AnnonceDetail = () => {
                         <Eye className="w-3 h-3" />
                         {annonce.nombre_vues || 0} vues
                       </Badge>
+                      {isOwner && (
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          onClick={() => setShowAnalytics(!showAnalytics)}
+                          className="h-6"
+                        >
+                          <BarChart3 className="w-3 h-3 mr-1" />
+                          {showAnalytics ? "Masquer" : "Voir"} les stats
+                        </Button>
+                      )}
                     </div>
                   </div>
                   <div className="text-right flex flex-col items-end gap-2">
@@ -312,6 +312,14 @@ const AnnonceDetail = () => {
                     <div className="text-xs text-muted-foreground">Forme</div>
                   </div>
                 </div>
+
+                {/* Analytics Section - Only visible to owner */}
+                {isOwner && showAnalytics && (
+                  <>
+                    <Separator className="my-6" />
+                    <ListingAnalytics listingId={annonce.id} />
+                  </>
+                )}
               </Card>
 
               {/* Description */}
