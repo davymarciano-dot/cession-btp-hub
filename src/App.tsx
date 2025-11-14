@@ -53,6 +53,7 @@ const TestAutomations = lazy(() => import("./pages/TestAutomations"));
 const VendorOnboarding = lazy(() => import("./components/VendorOnboarding"));
 const CronLogsAdmin = lazy(() => import("./pages/admin/CronLogs"));
 const BlogIndex = lazy(() => import("./pages/blog/BlogIndex"));
+const VendorListingAnalytics = lazy(() => import("./pages/dashboard/VendorListingAnalytics"));
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -102,6 +103,7 @@ const App = () => {
             <Route path="/resultat-estimation" element={<ResultatEstimation />} />
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/dashboard-vendeur" element={<VendorDashboard />} />
+            <Route path="/dashboard/analytics/:id" element={<VendorListingAnalytics />} />
             <Route path="/payment-success" element={<PaymentSuccess />} />
             <Route path="/auth" element={<Auth />} />
             <Route path="/tarifs" element={<Tarifs />} />

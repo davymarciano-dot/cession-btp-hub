@@ -74,17 +74,38 @@ const InsightCard = ({ type, message, action, severity }: InsightCardProps) => (
   </div>
 );
 
-const VendorAnalyticsDashboard = () => {
+interface VendorAnalyticsDashboardProps {
+  listingId?: string;
+}
+
+const VendorAnalyticsDashboard = ({ listingId }: VendorAnalyticsDashboardProps = {}) => {
   const [metrics, setMetrics] = useState<any>({});
   const [period, setPeriod] = useState('7d');
   const [loading, setLoading] = useState(true);
   const [listing, setListing] = useState<any>(null);
   
   useEffect(() => {
+    if (listingId) {
+      loadListing();
+    }
     fetchDashboardData();
     const interval = setInterval(fetchDashboardData, 60000);
     return () => clearInterval(interval);
-  }, [period]);
+  }, [period, listingId]);
+
+  const loadListing = async () => {
+    if (!listingId) return;
+    
+    const { data } = await supabase
+      .from('annonces')
+      .select('*')
+      .eq('id', listingId)
+      .single();
+    
+    if (data) {
+      setListing(data);
+    }
+  };
   
   const fetchDashboardData = async () => {
     setLoading(true);
@@ -151,7 +172,7 @@ const VendorAnalyticsDashboard = () => {
               📊 Analytics de votre annonce
             </h1>
             <p className="text-muted-foreground mt-2">
-              {listing?.title || 'Votre entreprise'} • Position #{metrics.performance?.position || '-'}
+              {listing?.raison_sociale || 'Votre entreprise'} • Position #{metrics.performance?.position || '-'}
             </p>
           </div>
           
