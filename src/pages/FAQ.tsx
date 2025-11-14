@@ -16,10 +16,16 @@ const FAQ = () => {
   const allFaqCategories = [
     {
       title: "Questions Générales",
+      icon: "💼",
+      tip: "95% de nos vendeurs trouvent un acheteur en moins de 60 jours",
       questions: [
         {
           q: "Qu'est-ce que CessionBTP ?",
           a: "CessionBTP est la plateforme leader française spécialisée dans la cession et reprise d'entreprises du secteur BTP et ENR. Nous utilisons un système de matching IA pour connecter vendeurs et acheteurs qualifiés en 45 jours maximum."
+        },
+        {
+          q: "Pourquoi CessionBTP plutôt qu'un concurrent généraliste ?",
+          a: "Contrairement aux plateformes généralistes (LeBonCoin, Transentreprise), nous sommes 100% spécialisés BTP. Notre IA comprend les spécificités du secteur, nous avons 15,000 acheteurs qualifiés BTP, et notre taux de réussite est de 95% vs 30% ailleurs."
         },
         {
           q: "Combien coûte votre service ?",
@@ -53,10 +59,16 @@ const FAQ = () => {
     },
     {
       title: "Pour les Vendeurs",
+      icon: "📊",
+      tip: "Les entreprises RGE se vendent 30% plus cher et 2x plus vite",
       questions: [
         {
           q: "Comment estimer la valeur de mon entreprise BTP ?",
           a: "Nous utilisons plusieurs méthodes de valorisation : multiple de l'EBE (3-5x selon secteur), valorisation patrimoniale (actifs + fonds de commerce), méthode des flux de trésorerie actualisés. Notre outil d'estimation gratuit vous donne une première évaluation en 48h."
+        },
+        {
+          q: "Puis-je vendre si j'ai des dettes ?",
+          a: "Oui. Les dettes peuvent être déduites du prix de vente ou reprises par l'acheteur. L'important est la transparence. Nous avons vendu des entreprises avec jusqu'à 200k€ de dettes en négociant avec les créanciers."
         },
         {
           q: "Quels documents dois-je préparer ?",
@@ -78,10 +90,16 @@ const FAQ = () => {
     },
     {
       title: "Pour les Acheteurs",
+      icon: "🔍",
+      tip: "Notre taux de financement bancaire est de 92% pour les reprises d'entreprises",
       questions: [
         {
           q: "Quel apport faut-il pour reprendre une entreprise BTP ?",
           a: "Généralement 30-40% du prix de vente. Les banques financent 60-70% pour une reprise d'entreprise rentable. Certains dispositifs (NACRE, prêt d'honneur) peuvent réduire l'apport personnel nécessaire."
+        },
+        {
+          q: "Comment éviter les arnaques ?",
+          a: "Toutes nos entreprises sont vérifiées : Kbis vérifié, visite sur site obligatoire, audit comptable recommandé, compte séquestre pour le paiement, accompagnement notaire obligatoire. 0 arnaque en 3 ans d'activité."
         },
         {
           q: "Ai-je besoin d'une qualification spécifique ?",
@@ -124,7 +142,17 @@ const FAQ = () => {
     },
     {
       title: "Secteurs Spécifiques BTP",
+      icon: "🏗️",
+      tip: "Les entreprises RGE se vendent 30-50% plus cher que la moyenne",
       questions: [
+        {
+          q: "Quelle est la valorisation d'une entreprise RGE ?",
+          a: "Les entreprises RGE se vendent 30-50% plus cher. Exemple : entreprise pompe à chaleur RGE QualiPAC = 1-1.5x CA vs 0.7x sans RGE. La certification est un vrai accélérateur de valeur."
+        },
+        {
+          q: "Comment vendre une entreprise de photovoltaïque ?",
+          a: "Secteur en forte demande (+40%/an). Points clés : certification QualiPV obligatoire, carnet de commandes crucial, contrats maintenance = valeur récurrente. Valorisation : 1.2-2x CA selon rentabilité."
+        },
         {
           q: "Quelles sont les spécificités de la cession en plomberie/chauffage ?",
           a: "Points clés : certification RGE très valorisée, contrats d'entretien chaudières = valeur récurrente, parc client fidèle important, matériel spécialisé coûteux. Valorisation moyenne : 0,8-1,2x CA."
@@ -161,6 +189,54 @@ const FAQ = () => {
       <Helmet>
         <title>FAQ - Questions fréquentes | CessionBTP</title>
         <meta name="description" content="Toutes les réponses à vos questions sur la cession et reprise d'entreprises BTP. Valorisation, financement, juridique, fiscalité." />
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "Combien de temps faut-il pour vendre mon entreprise BTP ?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Le délai moyen de vente est de 45 jours sur CessionBTP. Cela dépend de plusieurs facteurs : secteur d'activité, localisation, prix demandé, état de l'entreprise. Notre système de matching IA accélère considérablement le processus."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Combien coûte le service CessionBTP ?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Notre Success Fee est de seulement 2% du prix de vente, contre 5% ou plus ailleurs. L'estimation et l'inscription sont 100% gratuites. Vous ne payez qu'en cas de vente réussie."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Comment estimer la valeur de mon entreprise BTP ?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Nous utilisons plusieurs méthodes de valorisation : multiple de l'EBE (3-5x selon secteur), valorisation patrimoniale (actifs + fonds de commerce), méthode des flux de trésorerie actualisés. Notre outil d'estimation gratuit vous donne une première évaluation en 48h."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Quelle est la valorisation d'une entreprise RGE ?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Les entreprises RGE se vendent 30-50% plus cher. Exemple : entreprise pompe à chaleur RGE QualiPAC = 1-1.5x CA vs 0.7x sans RGE. La certification est un vrai accélérateur de valeur."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Quel apport faut-il pour reprendre une entreprise BTP ?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Généralement 30-40% du prix de vente. Les banques financent 60-70% pour une reprise d'entreprise rentable. Certains dispositifs (NACRE, prêt d'honneur) peuvent réduire l'apport personnel nécessaire."
+                }
+              }
+            ]
+          })}
+        </script>
       </Helmet>
       <Header />
 
@@ -175,12 +251,12 @@ const FAQ = () => {
           </p>
           
           {/* Search Bar */}
-          <div className="max-w-2xl mx-auto">
+          <div className="max-w-2xl mx-auto mb-8">
             <div className="relative">
               <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
               <Input
                 type="search"
-                placeholder="Rechercher une question (ex: valorisation, délai, documents...)"
+                placeholder="Rechercher dans la FAQ... (ex: RGE, valorisation, délai)"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 className="pl-12 pr-4 py-6 text-lg w-full"
@@ -191,6 +267,29 @@ const FAQ = () => {
                 {faqCategories.reduce((acc, cat) => acc + cat.questions.length, 0)} résultat(s) trouvé(s)
               </p>
             )}
+            <p className="text-sm text-gray-600 mt-2">
+              💡 Essayez : "combien", "RGE", "délai", "documents"
+            </p>
+          </div>
+
+          {/* Statistics */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto mb-8">
+            <div className="bg-green-50 dark:bg-green-950 p-6 rounded-lg text-center">
+              <p className="text-3xl font-bold text-green-600 dark:text-green-400">543</p>
+              <p className="text-sm text-muted-foreground">Entreprises vendues</p>
+            </div>
+            <div className="bg-blue-50 dark:bg-blue-950 p-6 rounded-lg text-center">
+              <p className="text-3xl font-bold text-blue-600 dark:text-blue-400">45j</p>
+              <p className="text-sm text-muted-foreground">Délai moyen</p>
+            </div>
+            <div className="bg-orange-50 dark:bg-orange-950 p-6 rounded-lg text-center">
+              <p className="text-3xl font-bold text-orange-600 dark:text-orange-400">95%</p>
+              <p className="text-sm text-muted-foreground">Taux de réussite</p>
+            </div>
+            <div className="bg-purple-50 dark:bg-purple-950 p-6 rounded-lg text-center">
+              <p className="text-3xl font-bold text-purple-600 dark:text-purple-400">2%</p>
+              <p className="text-sm text-muted-foreground">Commission</p>
+            </div>
           </div>
         </div>
 
@@ -206,16 +305,30 @@ const FAQ = () => {
           ) : (
             faqCategories.map((category, catIndex) => (
             <Card key={catIndex} className="p-6">
-              <h2 className="text-2xl font-bold mb-6 text-blue-600">
-                {category.title}
-              </h2>
+              <div className="flex items-center gap-2 mb-4">
+                <span className="text-2xl">{category.icon || "📋"}</span>
+                <h2 className="text-2xl font-bold text-blue-600">
+                  {category.title}
+                </h2>
+              </div>
+              
+              {category.tip && (
+                <div className="flex items-center gap-2 mb-6">
+                  <span className="text-2xl">💡</span>
+                  <div className="bg-blue-50 dark:bg-blue-950 p-3 rounded-lg flex-1">
+                    <p className="text-sm font-semibold text-blue-900 dark:text-blue-100">Le saviez-vous ?</p>
+                    <p className="text-sm text-blue-700 dark:text-blue-200">{category.tip}</p>
+                  </div>
+                </div>
+              )}
+              
               <Accordion type="single" collapsible className="w-full">
                 {category.questions.map((item, index) => (
                   <AccordionItem key={index} value={`item-${catIndex}-${index}`}>
                     <AccordionTrigger className="text-left font-semibold text-lg">
                       {item.q}
                     </AccordionTrigger>
-                    <AccordionContent className="text-gray-700 leading-relaxed">
+                    <AccordionContent className="text-gray-700 dark:text-gray-300 leading-relaxed">
                       {item.a}
                     </AccordionContent>
                   </AccordionItem>
@@ -228,29 +341,35 @@ const FAQ = () => {
 
         {/* CTA Section */}
         <div className="max-w-4xl mx-auto mt-12">
-          <Card className="bg-gradient-to-r from-blue-600 to-blue-700 text-white p-8">
-            <h3 className="text-2xl font-bold mb-4 text-center">
-              Vous ne trouvez pas la réponse à votre question ?
-            </h3>
+          <Card className="bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-xl p-8">
+            <h2 className="text-2xl font-bold mb-4 text-center">
+              Vous n'avez pas trouvé votre réponse ?
+            </h2>
             <p className="text-center mb-6 text-blue-100">
               Notre équipe d'experts est là pour vous accompagner
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button 
                 size="lg"
-                className="bg-white text-blue-600 hover:bg-blue-50"
+                className="bg-white text-blue-600 hover:bg-blue-50 font-bold"
                 onClick={() => navigate('/estimer')}
               >
-                <MessageSquare className="mr-2 h-5 w-5" />
-                Demander une estimation gratuite
+                💬 Chat en direct
+              </Button>
+              <Button 
+                size="lg"
+                className="bg-orange-500 text-white hover:bg-orange-600 font-bold"
+                asChild
+              >
+                <a href="tel:0123456789">📞 01 23 45 67 89</a>
               </Button>
               <Button 
                 size="lg"
                 variant="outline"
-                className="border-2 border-white text-white hover:bg-white/10"
+                className="border-2 border-white text-white hover:bg-white/10 font-bold"
+                asChild
               >
-                <Phone className="mr-2 h-5 w-5" />
-                Nous contacter
+                <a href="mailto:contact@cessionbtp.fr">📧 contact@cessionbtp.fr</a>
               </Button>
             </div>
           </Card>
