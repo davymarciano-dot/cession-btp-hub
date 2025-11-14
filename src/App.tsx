@@ -44,6 +44,7 @@ const AutomationDashboard = lazy(() => import("./pages/AutomationDashboard").the
 const Marketplace = lazy(() => import("./pages/Marketplace"));
 const AffiliateDashboard = lazy(() => import("./pages/AffiliateDashboard"));
 const EntreprisesRGE = lazy(() => import("./pages/EntreprisesRGE"));
+const RevenueDashboard = lazy(() => import("./pages/RevenueDashboard"));
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -102,6 +103,7 @@ const App = () => (
           <Route path="/automation-dashboard" element={<AutomationDashboard />} />
           <Route path="/marketplace" element={<Marketplace />} />
           <Route path="/affiliation" element={<AffiliateDashboard />} />
+          <Route path="/revenue-dashboard" element={<RevenueDashboard />} />
           
           {/* Pages énergies renouvelables RGE (ULTRA PRIORITAIRE) */}
           <Route path="/entreprise-:slug-a-vendre" element={<RenewableEnergyPage />} />
