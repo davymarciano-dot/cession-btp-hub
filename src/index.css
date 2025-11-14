@@ -92,3 +92,52 @@ All colors MUST be HSL.
     @apply bg-background text-foreground;
   }
 }
+
+/* FORCE LE MENU À ÊTRE VISIBLE - CSS CRITIQUE */
+@layer components {
+  header {
+    background: white !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08) !important;
+  }
+
+  /* TOUS LES LIENS DU MENU EN NOIR FONCÉ */
+  header nav a:not([class*="bg-gradient"]):not([class*="bg-orange"]):not([class*="bg-blue-"]):not([class*="border-blue"]) {
+    color: #111827 !important;
+    font-weight: 600 !important;
+    font-size: 16px !important;
+  }
+
+  header nav a:not([class*="bg-gradient"]):not([class*="bg-orange"]):not([class*="bg-blue-"]):not([class*="border-blue"]):hover {
+    color: #2563EB !important;
+  }
+
+  /* LOGO OPTIMISÉ */
+  header img[alt*="CessionBTP"] {
+    height: 56px !important;
+    min-height: 56px !important;
+    width: auto !important;
+  }
+
+  /* BOUTON ORANGE ULTRA VISIBLE */
+  header button[class*="bg-gradient"]:not([class*="border"]),
+  header a[class*="bg-gradient"]:not([class*="border"]) {
+    background: linear-gradient(135deg, #FF6B35 0%, #F97316 100%) !important;
+    font-weight: 700 !important;
+    box-shadow: 0 4px 14px rgba(255, 107, 53, 0.4) !important;
+    color: white !important;
+  }
+
+  /* BOUTON "MON ESPACE" VISIBLE */
+  header button[class*="border-blue"],
+  header a[class*="border-blue"] {
+    border: 2px solid #2563EB !important;
+    color: #2563EB !important;
+    background: white !important;
+    font-weight: 600 !important;
+  }
+
+  header button[class*="border-blue"]:hover,
+  header a[class*="border-blue"]:hover {
+    background: #EFF6FF !important;
+  }
+}
