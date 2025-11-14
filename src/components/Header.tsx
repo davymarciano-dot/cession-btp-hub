@@ -100,6 +100,14 @@ const Header = () => {
             >
               FAQ
             </Link>
+            <Link 
+              to="/roadmap" 
+              className={`font-semibold transition-colors ${
+                isActive('/roadmap') ? 'text-blue-600' : 'text-gray-800 hover:text-blue-600'
+              }`}
+            >
+              Roadmap
+            </Link>
             {user && (
               <>
                 <Link 
@@ -248,6 +256,17 @@ const Header = () => {
                   }`}
                 >
                   FAQ
+                </Link>
+                <Link 
+                  to="/roadmap"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className={`text-2xl font-bold transition-all py-3 px-4 rounded-lg ${
+                    isActive('/roadmap') 
+                      ? 'text-blue-600 bg-blue-50 border-l-4 border-blue-600' 
+                      : 'text-gray-800 hover:bg-gray-50'
+                  }`}
+                >
+                  Roadmap
                 </Link>
 
                 {user ? (
