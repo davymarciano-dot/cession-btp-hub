@@ -267,15 +267,58 @@ const Entreprises = () => {
                 </Select>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-                {loading ? (
-                  <div className="col-span-full text-center py-12">
-                    <p className="text-muted-foreground">Chargement des annonces...</p>
-                  </div>
-                ) : (
-                  <>
-                    {/* Annonces réelles de la base de données */}
-                    {annonces.map((annonce) => {
+              {/* Vue Carte */}
+              {showMap ? (
+                <div className="w-full">
+                  {loading ? (
+                    <div className="text-center py-12">
+                      <p className="text-muted-foreground">Chargement de la carte...</p>
+                    </div>
+                  ) : (
+                    <ListingsMap 
+                      listings={annonces.length > 0 ? annonces : [
+                        {
+                          id: "exemple-1",
+                          secteur_activite: "Tous corps d'état",
+                          ville: "Nice",
+                          departement: "06",
+                          prix_vente: 1850000,
+                          ca_n1: 2800000,
+                          nombre_salaries: 22
+                        },
+                        {
+                          id: "exemple-2",
+                          secteur_activite: "Isolation thermique",
+                          ville: "Lyon",
+                          departement: "69",
+                          prix_vente: 542000,
+                          ca_n1: 542000,
+                          nombre_salaries: 8
+                        },
+                        {
+                          id: "exemple-3",
+                          secteur_activite: "Plomberie sanitaire",
+                          ville: "Paris",
+                          departement: "75",
+                          prix_vente: 980000,
+                          ca_n1: 1200000,
+                          nombre_salaries: 12
+                        }
+                      ]} 
+                    />
+                  )}
+                </div>
+              ) : (
+                /* Vue Liste */
+                <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+                  {loading ? (
+                    <div className="col-span-full text-center py-12">
+                      <p className="text-muted-foreground">Chargement des annonces...</p>
+                    </div>
+                  ) : (
+                    <>
+                      {/* Annonces réelles de la base de données */}
+                      {annonces.map((annonce) => {
                       const certifications = annonce.certifications || [];
                       const hasCertif = certifications.length > 0;
                       
@@ -397,9 +440,10 @@ const Entreprises = () => {
                         />
                       </>
                     )}
-                  </>
-                )}
-              </div>
+                    </>
+                  )}
+                </div>
+              )}
             </div>
           </div>
         </div>
