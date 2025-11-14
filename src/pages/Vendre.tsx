@@ -500,8 +500,12 @@ const Vendre = () => {
               <span className="text-sm font-medium text-gray-700">
                 Étape {currentStep} sur {totalSteps}
               </span>
-              <span className="text-sm font-medium text-primary">
-                {Math.round(progressPercentage)}%
+              <span className="text-sm font-medium">
+                {isSaving ? (
+                  <span className="text-orange-600">⏳ Sauvegarde...</span>
+                ) : (
+                  <span className="text-green-600">✓ Sauvegardé</span>
+                )}
               </span>
             </div>
             <div className="w-full bg-gray-200 rounded-full h-2">
