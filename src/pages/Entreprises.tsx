@@ -254,17 +254,19 @@ const Entreprises = () => {
                   </Button>
                 </div>
 
-                <Select value={sortBy} onValueChange={setSortBy}>
-                  <SelectTrigger className="w-48">
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="recent">Plus récentes</SelectItem>
-                    <SelectItem value="price-asc">Prix croissant</SelectItem>
-                    <SelectItem value="price-desc">Prix décroissant</SelectItem>
-                    <SelectItem value="ca-desc">CA décroissant</SelectItem>
-                  </SelectContent>
-                </Select>
+                <div className="flex gap-2">
+                  <Select value={sortBy} onValueChange={setSortBy}>
+                    <SelectTrigger className="w-48">
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="recent">Plus récentes</SelectItem>
+                      <SelectItem value="price_asc">Prix croissant</SelectItem>
+                      <SelectItem value="price_desc">Prix décroissant</SelectItem>
+                      <SelectItem value="ca_desc">CA décroissant</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
               </div>
 
               {/* Vue Carte */}
