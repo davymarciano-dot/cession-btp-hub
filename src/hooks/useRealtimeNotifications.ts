@@ -13,6 +13,11 @@ interface Notification {
   created_at: string;
 }
 
+// Temporary type guard until Supabase types are regenerated
+const isNotification = (obj: any): obj is Notification => {
+  return obj && typeof obj.type === 'string' && typeof obj.title === 'string';
+};
+
 export const useRealtimeNotifications = (userId: string | undefined) => {
   const [notifications, setNotifications] = useState<Notification[]>([]);
   const [unreadCount, setUnreadCount] = useState(0);
@@ -36,8 +41,9 @@ export const useRealtimeNotifications = (userId: string | undefined) => {
         .limit(20);
 
       if (data) {
-        setNotifications(data);
-        setUnreadCount(data.filter(n => !n.read).length);
+        const validNotifications = data.filter(isNotification);
+        setNotifications(validNotifications);
+        setUnreadCount(validNotifications.filter(n => !n.read).length);
       }
     };
 
