@@ -33,6 +33,7 @@ const FAQ = lazy(() => import("./pages/FAQ"));
 const CertificationPage = lazy(() => import("./pages/seo/CertificationPage"));
 const MetierPage = lazy(() => import("./pages/seo/MetierPage"));
 const RegionPage = lazy(() => import("./pages/seo/RegionPage"));
+const SellerKeywordPage = lazy(() => import("./pages/seo/SellerKeywordPage"));
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -82,6 +83,8 @@ const App = () => (
             <Route path="/performance-demo" element={<PerformanceDemo />} />
             <Route path="/mes-matchs" element={<MyMatches />} />
             <Route path="/faq" element={<FAQ />} />
+            {/* SEO Pages - Seller Keywords */}
+            <Route path="/:slug" element={<SellerKeywordPage />} />
             {/* SEO Pages - Certifications */}
             <Route path="/entreprise-:slug-a-vendre" element={<CertificationPage />} />
             {/* SEO Pages - Métiers */}
