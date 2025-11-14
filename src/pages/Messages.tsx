@@ -2,15 +2,15 @@ import { useState, useEffect, useRef } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import Header from "@/components/Header";
-import Footer from "@/components/Footer";
-import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { Send, ArrowLeft } from "lucide-react";
+import { Search, Loader2 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
-import { format } from "date-fns";
-import { fr } from "date-fns/locale";
-import { ChatWidget } from "@/components/chat/ChatWidget";
+import { ConversationItem } from "@/components/messages/ConversationItem";
+import { ChatHeader } from "@/components/messages/ChatHeader";
+import { MessageBubble } from "@/components/messages/MessageBubble";
+import { MessageInput } from "@/components/messages/MessageInput";
+import { EmptyConversationState } from "@/components/messages/EmptyConversationState";
 
 interface Conversation {
   id: string;
@@ -30,6 +30,7 @@ interface Conversation {
     content: string;
     created_at: string;
   };
+  unreadCount?: number;
 }
 
 interface Message {
@@ -49,8 +50,8 @@ const Messages = () => {
   const [conversations, setConversations] = useState<Conversation[]>([]);
   const [selectedConversation, setSelectedConversation] = useState<string | null>(null);
   const [messages, setMessages] = useState<Message[]>([]);
-  const [newMessage, setNewMessage] = useState("");
   const [loading, setLoading] = useState(true);
+  const [searchQuery, setSearchQuery] = useState("");
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -88,6 +89,7 @@ const Messages = () => {
           },
           (payload) => {
             setMessages((prev) => [...prev, payload.new as Message]);
+            markMessagesAsRead(selectedConversation);
           }
         )
         .subscribe();
@@ -134,9 +136,10 @@ const Messages = () => {
 
       if (error) throw error;
 
-      // Fetch last message for each conversation
-      const conversationsWithMessages = await Promise.all(
+      // Fetch last message and unread count for each conversation
+      const conversationsWithData = await Promise.all(
         (data || []).map(async (conv) => {
+          // Last message
           const { data: lastMsg } = await supabase
             .from("messages")
             .select("content, created_at")
@@ -145,14 +148,23 @@ const Messages = () => {
             .limit(1)
             .single();
 
+          // Unread count
+          const { count } = await supabase
+            .from("messages")
+            .select("*", { count: 'exact', head: true })
+            .eq("conversation_id", conv.id)
+            .neq("sender_id", user.id)
+            .eq("read", false);
+
           return {
             ...conv,
-            lastMessage: lastMsg
+            lastMessage: lastMsg || undefined,
+            unreadCount: count || 0
           };
         })
       );
 
-      setConversations(conversationsWithMessages);
+      setConversations(conversationsWithData);
     } catch (error: any) {
       toast({
         title: "Erreur",
@@ -191,14 +203,16 @@ const Messages = () => {
         .eq("conversation_id", conversationId)
         .neq("sender_id", user.id)
         .eq("read", false);
+      
+      // Refresh conversations to update unread counts
+      fetchConversations();
     } catch (error) {
       console.error("Error marking messages as read:", error);
     }
   };
 
-  const sendMessage = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!newMessage.trim() || !selectedConversation) return;
+  const sendMessage = async (content: string) => {
+    if (!content.trim() || !selectedConversation) return;
 
     try {
       const { error } = await supabase
@@ -206,7 +220,7 @@ const Messages = () => {
         .insert({
           conversation_id: selectedConversation,
           sender_id: user.id,
-          content: newMessage.trim()
+          content: content.trim()
         });
 
       if (error) throw error;
@@ -217,7 +231,6 @@ const Messages = () => {
         .update({ updated_at: new Date().toISOString() })
         .eq("id", selectedConversation);
 
-      setNewMessage("");
     } catch (error: any) {
       toast({
         title: "Erreur",
@@ -228,158 +241,108 @@ const Messages = () => {
   };
 
   const selectedConv = conversations.find(c => c.id === selectedConversation);
+  
+  // Filtrer les conversations selon la recherche
+  const filteredConversations = conversations.filter(conv => {
+    const searchLower = searchQuery.toLowerCase();
+    return (
+      conv.annonce.raison_sociale?.toLowerCase().includes(searchLower) ||
+      conv.annonce.secteur_activite?.toLowerCase().includes(searchLower) ||
+      conv.annonce.ville?.toLowerCase().includes(searchLower)
+    );
+  });
 
   if (loading) {
     return (
       <div className="min-h-screen">
         <Header />
         <div className="flex items-center justify-center h-[60vh]">
-          <p>Chargement...</p>
+          <Loader2 className="w-8 h-8 animate-spin text-primary" />
         </div>
-        <Footer />
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col bg-background">
       <Header />
 
-      <main className="flex-1 py-8 bg-slate-50">
-        <div className="container mx-auto px-4 h-[calc(100vh-200px)]">
-          <div className="bg-white rounded-xl shadow-lg h-full flex overflow-hidden">
-            {/* Conversations List */}
-            <div className="w-80 border-r border-border flex flex-col">
-              <div className="p-4 border-b border-border">
-                <h2 className="text-xl font-bold">Messages</h2>
+      <main className="flex-1">
+        <div className="h-[calc(100vh-4rem)] flex">
+          {/* Sidebar - Liste des conversations */}
+          <div className={`${
+            selectedConversation ? 'hidden lg:flex' : 'flex'
+          } w-full lg:w-96 border-r flex-col bg-background`}>
+            <div className="p-4 border-b">
+              <h2 className="text-2xl font-bold mb-4">Messages</h2>
+              <div className="relative">
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+                <Input
+                  type="search"
+                  placeholder="Rechercher..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="pl-10"
+                />
               </div>
-              
-              <ScrollArea className="flex-1">
-                {conversations.length === 0 ? (
-                  <div className="p-4 text-center text-muted-foreground">
-                    Aucune conversation
-                  </div>
-                ) : (
-                  conversations.map((conv) => (
-                    <button
-                      key={conv.id}
-                      onClick={() => setSelectedConversation(conv.id)}
-                      className={`w-full p-4 text-left hover:bg-slate-50 border-b border-border transition-colors ${
-                        selectedConversation === conv.id ? "bg-slate-100" : ""
-                      }`}
-                    >
-                      <div className="font-semibold mb-1 line-clamp-1">
-                        {conv.annonce.raison_sociale || "Entreprise anonyme"}
-                      </div>
-                      <div className="text-sm text-muted-foreground mb-1">
-                        {conv.annonce.secteur_activite} - {conv.annonce.departement}
-                      </div>
-                      {conv.lastMessage && (
-                        <div className="text-xs text-muted-foreground line-clamp-1">
-                          {conv.lastMessage.content}
-                        </div>
-                      )}
-                    </button>
-                  ))
-                )}
-              </ScrollArea>
             </div>
-
-            {/* Messages Area */}
-            <div className="flex-1 flex flex-col">
-              {selectedConv ? (
-                <>
-                  {/* Header */}
-                  <div className="p-4 border-b border-border">
-                    <Button
-                      variant="ghost"
-                      size="sm"
-                      onClick={() => setSelectedConversation(null)}
-                      className="mb-2 lg:hidden"
-                    >
-                      <ArrowLeft className="h-4 w-4 mr-2" />
-                      Retour
-                    </Button>
-                    <h3 className="font-bold text-lg">
-                      {selectedConv.annonce.raison_sociale || "Entreprise anonyme"}
-                    </h3>
-                    <p className="text-sm text-muted-foreground">
-                      {selectedConv.annonce.secteur_activite} - {selectedConv.annonce.ville}
-                    </p>
-                  </div>
-
-                  {/* Messages */}
-                  <ScrollArea className="flex-1 p-4">
-                    <div className="space-y-4">
-                      {messages.map((msg) => {
-                        const isOwnMessage = msg.sender_id === user.id;
-                        return (
-                          <div
-                            key={msg.id}
-                            className={`flex ${isOwnMessage ? "justify-end" : "justify-start"}`}
-                          >
-                            <div
-                              className={`max-w-[70%] rounded-lg p-3 ${
-                                isOwnMessage
-                                  ? "bg-primary text-primary-foreground"
-                                  : "bg-muted"
-                              }`}
-                            >
-                              <p className="text-sm">{msg.content}</p>
-                              <p className={`text-xs mt-1 ${isOwnMessage ? "text-primary-foreground/70" : "text-muted-foreground"}`}>
-                                {format(new Date(msg.created_at), "HH:mm", { locale: fr })}
-                              </p>
-                            </div>
-                          </div>
-                        );
-                      })}
-                      <div ref={messagesEndRef} />
-                    </div>
-                  </ScrollArea>
-
-                  {/* Input */}
-                  <form onSubmit={sendMessage} className="p-4 border-t border-border">
-                    <div className="flex gap-2">
-                      <Input
-                        value={newMessage}
-                        onChange={(e) => setNewMessage(e.target.value)}
-                        placeholder="Écrivez votre message..."
-                        className="flex-1"
-                      />
-                      <Button type="submit" disabled={!newMessage.trim()}>
-                        <Send className="h-4 w-4" />
-                      </Button>
-                    </div>
-                  </form>
-                </>
-              ) : (
-                <div className="flex-1 flex flex-col items-center justify-center text-center p-8">
-                  <p className="text-muted-foreground mb-6">
-                    Aucune conversation pour le moment. Consultez les entreprises disponibles pour contacter un vendeur.
-                  </p>
-                  <Button 
-                    onClick={() => navigate("/entreprises")}
-                    className="bg-primary hover:bg-primary/90"
-                  >
-                    Voir les entreprises disponibles
-                  </Button>
+            
+            <ScrollArea className="flex-1">
+              {filteredConversations.length === 0 ? (
+                <div className="p-8 text-center text-muted-foreground">
+                  {searchQuery ? 'Aucune conversation trouvée' : 'Aucune conversation'}
                 </div>
+              ) : (
+                filteredConversations.map((conv) => (
+                  <ConversationItem
+                    key={conv.id}
+                    conversation={conv}
+                    isSelected={selectedConversation === conv.id}
+                    onClick={() => setSelectedConversation(conv.id)}
+                  />
+                ))
               )}
-            </div>
+            </ScrollArea>
+          </div>
+
+          {/* Zone de chat */}
+          <div className={`${
+            !selectedConversation ? 'hidden lg:flex' : 'flex'
+          } flex-1 flex-col bg-background`}>
+            {selectedConv ? (
+              <>
+                <ChatHeader 
+                  conversation={selectedConv}
+                  onBack={() => setSelectedConversation(null)}
+                />
+                
+                <ScrollArea className="flex-1 p-4 bg-muted/10">
+                  <div className="max-w-4xl mx-auto">
+                    {messages.length === 0 ? (
+                      <div className="flex items-center justify-center h-full text-muted-foreground py-12">
+                        Aucun message pour le moment. Commencez la conversation !
+                      </div>
+                    ) : (
+                      messages.map((message) => (
+                        <MessageBubble
+                          key={message.id}
+                          message={message}
+                          isOwn={message.sender_id === user?.id}
+                        />
+                      ))
+                    )}
+                    <div ref={messagesEndRef} />
+                  </div>
+                </ScrollArea>
+
+                <MessageInput onSend={sendMessage} />
+              </>
+            ) : (
+              <EmptyConversationState />
+            )}
           </div>
         </div>
       </main>
-
-      {/* Floating Chat Widget - Alternative view */}
-      {selectedConversation && user && false && ( // Set to true to enable floating widget
-        <ChatWidget
-          conversationId={selectedConversation}
-          currentUserId={user.id}
-          onClose={() => setSelectedConversation(null)}
-        />
-      )}
-
-      <Footer />
     </div>
   );
 };
