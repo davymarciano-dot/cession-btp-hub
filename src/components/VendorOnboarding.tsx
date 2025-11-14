@@ -4,9 +4,10 @@ import { Button } from '@/components/ui/button';
 
 interface VendorOnboardingProps {
   onComplete: (data: any) => void;
+  onSkip: () => void;
 }
 
-const VendorOnboarding = ({ onComplete }: VendorOnboardingProps) => {
+const VendorOnboarding = ({ onComplete, onSkip }: VendorOnboardingProps) => {
   const [step, setStep] = useState(0);
   const [data, setData] = useState<any>({});
   const [showOnboarding, setShowOnboarding] = useState(true);
@@ -166,7 +167,12 @@ const VendorOnboarding = ({ onComplete }: VendorOnboardingProps) => {
         <div className="mb-8">
           <div className="flex justify-between text-sm text-muted-foreground mb-2">
             <span>Étape {step + 1} sur {steps.length}</span>
-            <span>{Math.round(((step + 1) / steps.length) * 100)}%</span>
+            <button 
+              onClick={onSkip}
+              className="text-muted-foreground hover:text-foreground transition-colors"
+            >
+              Passer →
+            </button>
           </div>
           <div className="h-2 bg-muted rounded-full overflow-hidden">
             <div 

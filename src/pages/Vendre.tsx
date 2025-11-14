@@ -1,6 +1,10 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
+import confetti from 'canvas-confetti';
+import { useOnboarding } from "@/hooks/useOnboarding";
+import VendorOnboarding from "@/components/VendorOnboarding";
+import OnboardingTrigger from "@/components/OnboardingTrigger";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { useToast } from "@/hooks/use-toast";
@@ -18,9 +22,7 @@ import FormSection7Combined from "@/components/vendre/FormSection7Combined";
 import FormSection8Combined from "@/components/vendre/FormSection8Combined";
 import FormSection9Combined from "@/components/vendre/FormSection9Combined";
 import FormSection15 from "@/components/vendre/FormSection15";
-import VendorOnboarding from "@/components/VendorOnboarding";
 import { ArrowLeft, ArrowRight, Save, Trash2 } from "lucide-react";
-import confetti from 'canvas-confetti';
 
 const STORAGE_KEY = 'cessionBTP_form_draft';
 const STORAGE_STEP_KEY = 'cessionBTP_step';
@@ -28,12 +30,11 @@ const STORAGE_STEP_KEY = 'cessionBTP_step';
 const Vendre = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
+  const { shouldShowOnboarding, completeOnboarding, skipOnboarding } = useOnboarding();
   const [currentStep, setCurrentStep] = useState(1);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [hasDraft, setHasDraft] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
-  const [showOnboarding, setShowOnboarding] = useState(false);
-  const [userData, setUserData] = useState<any>(null);
   const totalSteps = 10;
 
   const [formData, setFormData] = useState({
@@ -197,16 +198,6 @@ const Vendre = () => {
         localStorage.removeItem(STORAGE_KEY);
       }
     }
-    
-    // Check onboarding
-    const hasSeenOnboarding = localStorage.getItem('onboardingComplete');
-    const isReturningUser = localStorage.getItem('userEmail');
-    
-    if (!hasSeenOnboarding && !isReturningUser && !savedDraft) {
-      setTimeout(() => {
-        setShowOnboarding(true);
-      }, 800);
-    }
   }, []);
 
   // Sauvegarde automatique avec debounce optimisé
@@ -250,18 +241,9 @@ const Vendre = () => {
   };
   
   const handleOnboardingComplete = (data: any) => {
-    setUserData(data);
-    localStorage.setItem('onboardingComplete', 'true');
-    localStorage.setItem('userData', JSON.stringify(data));
+    completeOnboarding(data);
     
-    // Celebration
-    confetti({
-      particleCount: 100,
-      spread: 70,
-      origin: { y: 0.6 }
-    });
-    
-    // Auto-remplir le formulaire
+    // Auto-fill form
     if (data.sector) {
       setFormData(prev => ({ ...prev, secteurActivite: data.sector }));
     }
@@ -524,11 +506,15 @@ const Vendre = () => {
       <Header />
       
       {/* Onboarding Modal */}
-      {showOnboarding && (
+      {shouldShowOnboarding && (
         <VendorOnboarding 
           onComplete={handleOnboardingComplete}
+          onSkip={skipOnboarding}
         />
       )}
+      
+      {/* Onboarding Trigger Button */}
+      <OnboardingTrigger />
 
       {/* Hero */}
       <section className="bg-gradient-to-br from-secondary to-orange-600 text-white py-16">
