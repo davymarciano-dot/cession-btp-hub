@@ -114,16 +114,22 @@ All colors MUST be HSL.
     color: #2563EB !important;
   }
 
-  /* INDICATEUR DE PAGE ACTIVE - Ligne bleue sous le lien */
+  /* INDICATEUR DE PAGE ACTIVE - Ligne bleue sous le lien + style renforcé */
+  header nav a[class*="text-blue-600"]:not([class*="bg-gradient"]):not([class*="bg-orange"]):not([class*="bg-blue-"]):not([class*="border-blue"]) {
+    position: relative;
+    font-weight: 700 !important;
+  }
+  
   header nav a[class*="text-blue-600"]:not([class*="bg-gradient"]):not([class*="bg-orange"]):not([class*="bg-blue-"]):not([class*="border-blue"])::after {
     content: '';
     position: absolute;
-    bottom: 0;
+    bottom: -8px;
     left: 0;
     right: 0;
     height: 3px;
     background: #2563EB;
     border-radius: 2px 2px 0 0;
+    box-shadow: 0 2px 4px rgba(37, 99, 235, 0.3);
   }
 
   /* LOGO OPTIMISÉ */

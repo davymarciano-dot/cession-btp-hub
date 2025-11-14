@@ -168,113 +168,151 @@ const Header = () => {
           </button>
         </div>
 
-        {/* Mobile Menu */}
-        {mobileMenuOpen && (
-          <div className="lg:hidden border-t py-4 space-y-3">
-            <Link 
-              to="/vendre" 
-              className={`block py-2 font-semibold transition-colors ${
-                isActive('/vendre') ? 'text-blue-600' : 'text-gray-800'
-              }`}
-            >
-              Vendre
-            </Link>
-            <Link 
-              to="/acheter" 
-              className={`block py-2 font-semibold transition-colors ${
-                isActive('/acheter') ? 'text-blue-600' : 'text-gray-800'
-              }`}
-            >
-              Acheter
-            </Link>
-            <Link 
-              to="/entreprises" 
-              className={`block py-2 font-semibold transition-colors ${
-                isActive('/entreprises') ? 'text-blue-600' : 'text-gray-800'
-              }`}
-            >
-              Entreprises
-            </Link>
-            <Link 
-              to="/entreprises-rge" 
-              className={`block py-2 font-semibold transition-colors ${
-                isActive('/entreprises-rge') ? 'text-green-600' : 'text-green-700'
-              }`}
-            >
-              🌱 Entreprises RGE
-            </Link>
-            <Link 
-              to="/estimer" 
-              className={`block py-2 font-semibold transition-colors ${
-                isActive('/estimer') ? 'text-blue-600' : 'text-gray-800'
-              }`}
-            >
-              Estimer
-            </Link>
-            <Link 
-              to="/tarifs" 
-              className={`block py-2 font-semibold transition-colors ${
-                isActive('/tarifs') ? 'text-blue-600' : 'text-gray-800'
-              }`}
-            >
-              Tarifs
-            </Link>
-            {user && (
-              <>
+          {/* Mobile Menu */}
+          {mobileMenuOpen && (
+            <div className="lg:hidden fixed inset-0 top-20 bg-white z-50 overflow-y-auto animate-fade-in">
+              <div className="flex flex-col px-6 py-8 space-y-6">
                 <Link 
-                  to="/messages" 
-                  className={`block py-2 font-semibold transition-colors ${
-                    isActive('/messages') ? 'text-blue-600' : 'text-gray-800'
+                  to="/vendre" 
+                  onClick={() => setMobileMenuOpen(false)}
+                  className={`text-2xl font-bold transition-all py-3 px-4 rounded-lg ${
+                    isActive('/vendre') 
+                      ? 'text-blue-600 bg-blue-50 border-l-4 border-blue-600' 
+                      : 'text-gray-800 hover:bg-gray-50'
                   }`}
                 >
-                  Messages
+                  Vendre
                 </Link>
                 <Link 
-                  to="/mes-matchs" 
-                  className={`block py-2 font-semibold transition-colors ${
-                    isActive('/mes-matchs') ? 'text-blue-600' : 'text-gray-800'
+                  to="/acheter"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className={`text-2xl font-bold transition-all py-3 px-4 rounded-lg ${
+                    isActive('/acheter') 
+                      ? 'text-blue-600 bg-blue-50 border-l-4 border-blue-600' 
+                      : 'text-gray-800 hover:bg-gray-50'
                   }`}
                 >
-                  Mes Matchs
+                  Acheter
                 </Link>
                 <Link 
-                  to="/dashboard-vendeur" 
-                  className={`block py-2 font-semibold transition-colors ${
-                    isActive('/dashboard-vendeur') ? 'text-blue-600' : 'text-gray-800'
+                  to="/entreprises"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className={`text-2xl font-bold transition-all py-3 px-4 rounded-lg ${
+                    isActive('/entreprises') 
+                      ? 'text-blue-600 bg-blue-50 border-l-4 border-blue-600' 
+                      : 'text-gray-800 hover:bg-gray-50'
                   }`}
                 >
-                  Dashboard
+                  Entreprises
                 </Link>
-              </>
-            )}
-            <div className="flex flex-col gap-2 pt-4">
-              {user ? (
-                <Button 
-                  variant="outline" 
-                  className="w-full border-2 border-blue-600 text-blue-600 hover:bg-blue-50 font-bold"
-                  onClick={() => navigate('/dashboard')}
+                <Link 
+                  to="/entreprises-rge"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className={`text-2xl font-bold transition-all py-3 px-4 rounded-lg ${
+                    isActive('/entreprises-rge') 
+                      ? 'text-green-600 bg-green-50 border-l-4 border-green-600' 
+                      : 'text-green-700 hover:bg-green-50'
+                  }`}
                 >
-                  <LayoutDashboard className="w-4 h-4 mr-2" />
-                  Mon Espace
-                </Button>
-              ) : (
-                <Button 
-                  variant="outline" 
-                  className="w-full border-2 border-blue-600 text-blue-600 hover:bg-blue-50 font-bold"
-                  onClick={() => navigate('/auth')}
+                  🌱 RGE
+                </Link>
+                <Link 
+                  to="/estimer"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className={`text-2xl font-bold transition-all py-3 px-4 rounded-lg ${
+                    isActive('/estimer') 
+                      ? 'text-blue-600 bg-blue-50 border-l-4 border-blue-600' 
+                      : 'text-gray-800 hover:bg-gray-50'
+                  }`}
                 >
-                  Connexion
-                </Button>
-              )}
-              <Button 
-                className="w-full bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white font-bold shadow-lg transition-all"
-                onClick={() => navigate('/estimer')}
-              >
-                Estimer Gratuitement
-              </Button>
+                  Estimer
+                </Link>
+                <Link 
+                  to="/tarifs"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className={`text-2xl font-bold transition-all py-3 px-4 rounded-lg ${
+                    isActive('/tarifs') 
+                      ? 'text-blue-600 bg-blue-50 border-l-4 border-blue-600' 
+                      : 'text-gray-800 hover:bg-gray-50'
+                  }`}
+                >
+                  Tarifs
+                </Link>
+                <Link 
+                  to="/faq"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className={`text-2xl font-bold transition-all py-3 px-4 rounded-lg ${
+                    isActive('/faq') 
+                      ? 'text-blue-600 bg-blue-50 border-l-4 border-blue-600' 
+                      : 'text-gray-800 hover:bg-gray-50'
+                  }`}
+                >
+                  FAQ
+                </Link>
+
+                {user ? (
+                  <div className="space-y-6 pt-6 border-t border-gray-200">
+                    <Link 
+                      to="/messages"
+                      onClick={() => setMobileMenuOpen(false)}
+                      className={`text-xl font-semibold flex items-center gap-3 py-3 px-4 rounded-lg ${
+                        isActive('/messages') 
+                          ? 'text-blue-600 bg-blue-50' 
+                          : 'text-gray-700 hover:bg-gray-50'
+                      }`}
+                    >
+                      Messages
+                    </Link>
+                    <Link 
+                      to="/dashboard"
+                      onClick={() => setMobileMenuOpen(false)}
+                      className={`text-xl font-semibold flex items-center gap-3 py-3 px-4 rounded-lg ${
+                        isActive('/dashboard') 
+                          ? 'text-blue-600 bg-blue-50' 
+                          : 'text-gray-700 hover:bg-gray-50'
+                      }`}
+                    >
+                      <LayoutDashboard className="w-5 h-5" />
+                      Mon Espace
+                    </Link>
+                    <Button 
+                      onClick={async () => {
+                        await supabase.auth.signOut();
+                        navigate('/');
+                        setMobileMenuOpen(false);
+                      }}
+                      variant="outline"
+                      className="w-full text-lg py-6"
+                    >
+                      Déconnexion
+                    </Button>
+                  </div>
+                ) : (
+                  <div className="space-y-4 pt-6 border-t border-gray-200">
+                    <Button 
+                      onClick={() => {
+                        navigate('/auth');
+                        setMobileMenuOpen(false);
+                      }}
+                      variant="outline"
+                      className="w-full text-lg py-6"
+                    >
+                      Connexion
+                    </Button>
+                    <Button 
+                      onClick={() => {
+                        navigate('/vendre');
+                        setMobileMenuOpen(false);
+                      }}
+                      className="w-full bg-gradient-to-r from-orange-500 to-orange-600 text-white text-lg py-6"
+                    >
+                      Publier une annonce
+                    </Button>
+                  </div>
+                )}
+              </div>
             </div>
-          </div>
-        )}
+          )}
       </nav>
     </header>
   );
