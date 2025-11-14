@@ -1,28 +1,25 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
+import { debounce } from "lodash";
 import FormSection1 from "@/components/vendre/FormSection1";
-import FormSection2 from "@/components/vendre/FormSection2";
-import FormSection3 from "@/components/vendre/FormSection3";
+import FormSection2Combined from "@/components/vendre/FormSection2Combined";
 import FormSection4 from "@/components/vendre/FormSection4";
 import FormSection5 from "@/components/vendre/FormSection5";
-import FormSection6 from "@/components/vendre/FormSection6";
-import FormSection7 from "@/components/vendre/FormSection7";
+import FormSection5Combined from "@/components/vendre/FormSection5Combined";
 import FormSection8 from "@/components/vendre/FormSection8";
-import FormSection9 from "@/components/vendre/FormSection9";
-import FormSection10 from "@/components/vendre/FormSection10";
-import FormSection11 from "@/components/vendre/FormSection11";
-import FormSection12 from "@/components/vendre/FormSection12";
-import FormSection13 from "@/components/vendre/FormSection13";
-import FormSection14 from "@/components/vendre/FormSection14";
+import FormSection7Combined from "@/components/vendre/FormSection7Combined";
+import FormSection8Combined from "@/components/vendre/FormSection8Combined";
+import FormSection9Combined from "@/components/vendre/FormSection9Combined";
 import FormSection15 from "@/components/vendre/FormSection15";
 import { ArrowLeft, ArrowRight, Save, Trash2 } from "lucide-react";
 
 const STORAGE_KEY = 'cessionBTP_form_draft';
+const STORAGE_STEP_KEY = 'cessionBTP_step';
 
 const Vendre = () => {
   const navigate = useNavigate();
@@ -30,8 +27,8 @@ const Vendre = () => {
   const [currentStep, setCurrentStep] = useState(1);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [hasDraft, setHasDraft] = useState(false);
-  const totalSteps = 15;
-  const autoSaveTimeout = useRef<NodeJS.Timeout | null>(null);
+  const [isSaving, setIsSaving] = useState(false);
+  const totalSteps = 10; // Réduit de 15 à 10
 
   const [formData, setFormData] = useState({
     // Section 1
@@ -196,38 +193,33 @@ const Vendre = () => {
     }
   }, []);
 
-  // Sauvegarde automatique
-  useEffect(() => {
-    // Ne pas sauvegarder si on vient de charger la page
-    if (hasDraft) return;
-
-    // Annuler le timeout précédent
-    if (autoSaveTimeout.current) {
-      clearTimeout(autoSaveTimeout.current);
-    }
-
-    // Déclencher la sauvegarde après 2 secondes d'inactivité
-    autoSaveTimeout.current = setTimeout(() => {
+  // Sauvegarde automatique avec debounce optimisé
+  const autoSave = useCallback(
+    debounce((data: any, step: number) => {
+      setIsSaving(true);
       const draftData = {
-        formData,
-        currentStep,
+        formData: data,
+        currentStep: step,
         savedAt: new Date().toISOString(),
       };
       localStorage.setItem(STORAGE_KEY, JSON.stringify(draftData));
+      localStorage.setItem(STORAGE_STEP_KEY, step.toString());
       
-      // Toast discret
       toast({
-        description: "✓ Brouillon sauvegardé",
-        duration: 2000,
+        description: "✓ Sauvegarde automatique",
+        duration: 1500,
       });
-    }, 2000);
+      
+      setTimeout(() => setIsSaving(false), 1000);
+    }, 1000),
+    []
+  );
 
-    return () => {
-      if (autoSaveTimeout.current) {
-        clearTimeout(autoSaveTimeout.current);
-      }
-    };
-  }, [formData, currentStep, hasDraft]);
+  useEffect(() => {
+    if (!hasDraft) {
+      autoSave(formData, currentStep);
+    }
+  }, [formData, currentStep, hasDraft, autoSave]);
 
   const handleInputChange = (field: string, value: any) => {
     setFormData(prev => ({ ...prev, [field]: value }));
@@ -460,32 +452,22 @@ const Vendre = () => {
       case 1:
         return <FormSection1 formData={formData} handleInputChange={handleInputChange} />;
       case 2:
-        return <FormSection2 formData={formData} handleInputChange={handleInputChange} />;
+        return <FormSection2Combined formData={formData} handleInputChange={handleInputChange} />;
       case 3:
-        return <FormSection3 formData={formData} handleInputChange={handleInputChange} />;
-      case 4:
         return <FormSection4 formData={formData} handleInputChange={handleInputChange} />;
-      case 5:
+      case 4:
         return <FormSection5 formData={formData} handleInputChange={handleInputChange} />;
+      case 5:
+        return <FormSection5Combined formData={formData} handleInputChange={handleInputChange} />;
       case 6:
-        return <FormSection6 formData={formData} handleInputChange={handleInputChange} />;
-      case 7:
-        return <FormSection7 formData={formData} handleInputChange={handleInputChange} />;
-      case 8:
         return <FormSection8 formData={formData} handleInputChange={handleInputChange} />;
+      case 7:
+        return <FormSection7Combined formData={formData} handleInputChange={handleInputChange} />;
+      case 8:
+        return <FormSection8Combined formData={formData} handleInputChange={handleInputChange} />;
       case 9:
-        return <FormSection9 formData={formData} handleInputChange={handleInputChange} />;
+        return <FormSection9Combined formData={formData} handleInputChange={handleInputChange} />;
       case 10:
-        return <FormSection10 formData={formData} handleInputChange={handleInputChange} />;
-      case 11:
-        return <FormSection11 formData={formData} handleInputChange={handleInputChange} />;
-      case 12:
-        return <FormSection12 formData={formData} handleInputChange={handleInputChange} />;
-      case 13:
-        return <FormSection13 formData={formData} handleInputChange={handleInputChange} />;
-      case 14:
-        return <FormSection14 formData={formData} handleInputChange={handleInputChange} />;
-      case 15:
         return <FormSection15 formData={formData} handleInputChange={handleInputChange} />;
       default:
         return null;
