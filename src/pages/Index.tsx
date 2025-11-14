@@ -7,6 +7,9 @@ import { Check } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import { HeroSection } from "@/components/HeroSection";
+import { TrustBadges } from "@/components/TrustBadges";
+import { LiveNotification } from "@/components/LiveNotification";
 import EntrepriseCard from "@/components/EntrepriseCard";
 import StatCounter from "@/components/StatCounter";
 import StatsSection from "@/components/StatsSection";
@@ -60,69 +63,14 @@ const Index = () => {
       <Header />
 
       <main>
-        {/* Hero Section */}
-        <section className="bg-gradient-to-br from-blue-600 to-blue-700 text-white py-24 relative overflow-hidden">
-          <div className="container mx-auto px-4">
-            <div className="max-w-4xl mx-auto text-center">
-              <Badge className="bg-red-500 text-white mb-6 text-sm px-4 py-2">
-                🔴 LIVE - Entreprise d'Électricité vendue pour €1.2M à Nice (06) Il y a 6h
-              </Badge>
-              <h1 className="text-5xl md:text-6xl font-bold mb-6">
-                Cédez ou reprenez une entreprise BTP en 45 jours
-              </h1>
-              <p className="text-xl mb-8 text-white/90">
-                Matching IA • 500+ transactions réalisées • 95% satisfaction • 2000+ repreneurs qualifiés
-              </p>
-
-              <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
-                <Button 
-                  size="lg" 
-                  onClick={() => navigate("/vendre")}
-                  className="bg-secondary hover:bg-secondary/90 text-white text-lg px-8"
-                >
-                  Vendre mon entreprise
-                </Button>
-                <Button 
-                  size="lg" 
-                  onClick={() => navigate("/acheter")}
-                  className="bg-transparent border-2 border-white text-white hover:bg-white hover:text-primary text-lg px-8"
-                >
-                  Trouver une entreprise
-                </Button>
-              </div>
-
-              <div className="flex flex-wrap justify-center gap-8 mb-8">
-                <div className="text-center">
-                  <div className="text-4xl md:text-5xl font-bold mb-1">543</div>
-                  <div className="text-sm text-white/75">Entreprises vendues</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-4xl md:text-5xl font-bold mb-1">45j</div>
-                  <div className="text-sm text-white/75">Délai moyen</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-4xl md:text-5xl font-bold mb-1">95%</div>
-                  <div className="text-sm text-white/75">Taux de réussite</div>
-                </div>
-              </div>
-
-              <div className="flex flex-col sm:flex-row gap-6 justify-center text-sm">
-                <div className="flex items-center gap-2">
-                  <Check className="h-5 w-5" />
-                  <span>Résultat en 48h</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <Check className="h-5 w-5" />
-                  <span>100% confidentiel</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <Check className="h-5 w-5" />
-                  <span>Sans engagement</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
+        {/* Optimized Hero Section */}
+        <HeroSection />
+        
+        {/* Trust Badges */}
+        <TrustBadges />
+        
+        {/* Live Notifications */}
+        <LiveNotification />
 
         {/* Search Bar */}
         <section className="container mx-auto px-4 -mt-16 relative z-10 mb-12">
