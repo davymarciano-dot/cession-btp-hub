@@ -50,6 +50,9 @@ const BlogPost = lazy(() => import("./pages/blog/BlogPost"));
 const EntreprisesRGE = lazy(() => import("./pages/EntreprisesRGE"));
 const RevenueDashboard = lazy(() => import("./pages/RevenueDashboard"));
 const TestAutomations = lazy(() => import("./pages/TestAutomations"));
+const VendorOnboarding = lazy(() => import("./components/VendorOnboarding"));
+const CronLogsAdmin = lazy(() => import("./pages/admin/CronLogs"));
+const BlogIndex = lazy(() => import("./pages/blog/BlogIndex"));
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -118,6 +121,8 @@ const App = () => {
           <Route path="/affiliation" element={<AffiliateDashboard />} />
           <Route path="/revenue-dashboard" element={<RevenueDashboard />} />
           <Route path="/test-automations" element={<TestAutomations />} />
+          <Route path="/admin/cron-logs" element={<CronLogsAdmin />} />
+          <Route path="/blog" element={<BlogIndex />} />
           
           {/* Pages énergies renouvelables RGE (ULTRA PRIORITAIRE) */}
           <Route path="/entreprise-:slug-a-vendre" element={<RenewableEnergyPage />} />
