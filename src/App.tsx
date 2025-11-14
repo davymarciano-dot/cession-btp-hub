@@ -30,6 +30,7 @@ const ChatDemo = lazy(() => import("./pages/ChatDemo"));
 const PerformanceDemo = lazy(() => import("./pages/PerformanceDemo"));
 const MyMatches = lazy(() => import("./pages/MyMatches"));
 const FAQ = lazy(() => import("./pages/FAQ"));
+const Sitemap = lazy(() => import("./pages/Sitemap"));
 const CertificationPage = lazy(() => import("./pages/seo/CertificationPage"));
 const MetierPage = lazy(() => import("./pages/seo/MetierPage"));
 const RegionPage = lazy(() => import("./pages/seo/RegionPage"));
@@ -84,6 +85,7 @@ const App = () => (
             <Route path="/performance-demo" element={<PerformanceDemo />} />
             <Route path="/mes-matchs" element={<MyMatches />} />
             <Route path="/faq" element={<FAQ />} />
+            <Route path="/sitemap" element={<Sitemap />} />
             {/* SEO Pages - Buyer Keywords (before generic seller to match first) */}
             <Route path="/entreprise-:keyword-a-vendre" element={<BuyerKeywordPage />} />
             <Route path="/societe-:keyword-a-reprendre" element={<BuyerKeywordPage />} />

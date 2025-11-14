@@ -2,6 +2,8 @@ import { useParams, Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import { Breadcrumb } from '@/components/Breadcrumb';
+import { InternalLinks } from '@/components/seo/InternalLinks';
 import { SchemaMarkup } from '@/components/seo/SchemaMarkup';
 import { certifications, faqByCertification } from '@/data/seo-data';
 import { Button } from '@/components/ui/button';
@@ -39,6 +41,16 @@ const CertificationPage = () => {
       <Header />
 
       <main className="min-h-screen bg-background">
+        <div className="container mx-auto px-4">
+          <Breadcrumb 
+            items={[
+              { label: 'Acheter', href: '/acheter' },
+              { label: 'Entreprises certifiées', href: '/acheter' },
+              { label: `Certification ${cert.name}` }
+            ]}
+          />
+        </div>
+
         {/* Hero Section */}
         <section className="bg-gradient-to-br from-primary via-primary/90 to-primary/80 text-primary-foreground py-20">
           <div className="container mx-auto px-4">
@@ -192,6 +204,17 @@ const CertificationPage = () => {
             </div>
           </section>
         )}
+
+        {/* Internal Links */}
+        <InternalLinks
+          title="Découvrez aussi"
+          links={[
+            { label: `Plombiers ${cert.name}`, href: '/plombier-chauffagiste-entreprise-a-vendre', description: `Entreprises de plomberie avec certification ${cert.name}` },
+            { label: `Électriciens ${cert.name}`, href: '/electricien-entreprise-a-vendre', description: `Sociétés d'électricité certifiées ${cert.name}` },
+            { label: 'Estimer mon entreprise', href: '/estimer', description: 'Valorisation gratuite en 48h' },
+            { label: 'Toutes les certifications', href: '/acheter', description: 'Explorer toutes les entreprises certifiées' }
+          ]}
+        />
 
         {/* CTA Final */}
         <section className="py-16 bg-primary text-primary-foreground">
