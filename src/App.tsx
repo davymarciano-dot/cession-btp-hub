@@ -55,6 +55,7 @@ const CronLogsAdmin = lazy(() => import("./pages/admin/CronLogs"));
 const BlogIndex = lazy(() => import("./pages/blog/BlogIndex"));
 const VendorListingAnalytics = lazy(() => import("./pages/dashboard/VendorListingAnalytics"));
 const Roadmap = lazy(() => import("./pages/Roadmap"));
+const LaunchChecklist = lazy(() => import("./pages/LaunchChecklist"));
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -117,6 +118,7 @@ const App = () => {
             <Route path="/faq" element={<FAQ />} />
           <Route path="/sitemap" element={<Sitemap />} />
           <Route path="/roadmap" element={<Roadmap />} />
+          <Route path="/launch-checklist" element={<LaunchChecklist />} />
           <Route path="/seo-stats" element={<SeoStats />} />
           <Route path="/backlinks-manager" element={<BacklinksManager />} />
           <Route path="/outils-gratuits" element={<OutilsGratuits />} />
