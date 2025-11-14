@@ -52,9 +52,14 @@ const Header = () => {
               Tarifs
             </Link>
             {user && (
-              <Link to="/messages" className="text-foreground hover:text-primary font-medium transition-colors">
-                Messages
-              </Link>
+              <>
+                <Link to="/messages" className="text-foreground hover:text-primary font-medium transition-colors">
+                  Messages
+                </Link>
+                <Link to="/mes-matchs" className="text-foreground hover:text-primary font-medium transition-colors">
+                  Mes Matchs
+                </Link>
+              </>
             )}
           </div>
 
@@ -114,9 +119,14 @@ const Header = () => {
               Tarifs
             </Link>
             {user && (
-              <Link to="/messages" className="block text-foreground hover:text-primary font-medium transition-colors">
-                Messages
-              </Link>
+              <>
+                <Link to="/messages" className="block text-foreground hover:text-primary font-medium transition-colors">
+                  Messages
+                </Link>
+                <Link to="/mes-matchs" className="block text-foreground hover:text-primary font-medium transition-colors">
+                  Mes Matchs
+                </Link>
+              </>
             )}
             <div className="flex flex-col gap-2 pt-4">
               {user ? (

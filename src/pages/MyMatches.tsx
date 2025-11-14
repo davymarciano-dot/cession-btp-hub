@@ -35,8 +35,9 @@ const MyMatches = () => {
 
   const fetchMatches = async () => {
     try {
+      // Using any to bypass type issues until Supabase regenerates types
       const { data, error } = await supabase
-        .from('matches')
+        .from('matches' as any)
         .select(`
           *,
           listing:annonces!matches_listing_id_fkey (
@@ -50,7 +51,7 @@ const MyMatches = () => {
           )
         `)
         .eq('buyer_id', user.id)
-        .order('score', { ascending: false });
+        .order('score', { ascending: false }) as any;
 
       if (error) throw error;
       setMatches(data || []);
