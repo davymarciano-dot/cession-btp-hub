@@ -20,10 +20,17 @@ const FormSection2Combined = ({ formData, handleInputChange }: FormSection2Combi
 
   // Callback quand les données SIRET sont récupérées
   const handleSiretData = (data: any) => {
-    // Remplir tous les champs du formulaire
+    // Remplir tous les champs du formulaire et marquer comme vérifié
     Object.entries(data).forEach(([key, value]) => {
       handleInputChange(key, value);
     });
+    // Marquer que les données SIRET ont été vérifiées
+    handleInputChange("siretVerified", true);
+  };
+
+  // Vérifier si les champs sont auto-remplis via SIRET
+  const isFieldAutoFilled = (fieldName: string) => {
+    return formData.siretVerified && formData[fieldName];
   };
 
   const toggleCertification = (cert: string) => {
@@ -48,12 +55,19 @@ const FormSection2Combined = ({ formData, handleInputChange }: FormSection2Combi
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
-            <Label htmlFor="raisonSociale">Raison sociale (optionnel)</Label>
+            <Label htmlFor="raisonSociale">
+              Raison sociale (optionnel)
+              {isFieldAutoFilled("raisonSociale") && (
+                <span className="ml-2 text-xs text-green-600 font-medium">✓ Vérifié</span>
+              )}
+            </Label>
             <Input
               id="raisonSociale"
               value={formData.raisonSociale}
               onChange={(e) => handleInputChange("raisonSociale", e.target.value)}
               placeholder="Mon Entreprise BTP SARL"
+              readOnly={isFieldAutoFilled("raisonSociale")}
+              className={isFieldAutoFilled("raisonSociale") ? "bg-muted cursor-not-allowed" : ""}
             />
           </div>
 
@@ -86,7 +100,12 @@ const FormSection2Combined = ({ formData, handleInputChange }: FormSection2Combi
           </div>
 
           <div>
-            <Label htmlFor="anneeCreation">Année de création *</Label>
+            <Label htmlFor="anneeCreation">
+              Année de création *
+              {isFieldAutoFilled("anneeCreation") && (
+                <span className="ml-2 text-xs text-green-600 font-medium">✓ Vérifié</span>
+              )}
+            </Label>
             <Input
               id="anneeCreation"
               type="number"
@@ -95,6 +114,8 @@ const FormSection2Combined = ({ formData, handleInputChange }: FormSection2Combi
               placeholder="2010"
               min="1900"
               max={new Date().getFullYear()}
+              readOnly={isFieldAutoFilled("anneeCreation")}
+              className={isFieldAutoFilled("anneeCreation") ? "bg-muted cursor-not-allowed" : ""}
             />
           </div>
 
@@ -129,23 +150,37 @@ const FormSection2Combined = ({ formData, handleInputChange }: FormSection2Combi
           </div>
 
           <div>
-            <Label htmlFor="ville">Ville *</Label>
+            <Label htmlFor="ville">
+              Ville *
+              {isFieldAutoFilled("ville") && (
+                <span className="ml-2 text-xs text-green-600 font-medium">✓ Vérifié</span>
+              )}
+            </Label>
             <Input
               id="ville"
               value={formData.ville}
               onChange={(e) => handleInputChange("ville", e.target.value)}
               placeholder="Paris"
+              readOnly={isFieldAutoFilled("ville")}
+              className={isFieldAutoFilled("ville") ? "bg-muted cursor-not-allowed" : ""}
             />
           </div>
 
           <div>
-            <Label htmlFor="codePostal">Code postal *</Label>
+            <Label htmlFor="codePostal">
+              Code postal *
+              {isFieldAutoFilled("codePostal") && (
+                <span className="ml-2 text-xs text-green-600 font-medium">✓ Vérifié</span>
+              )}
+            </Label>
             <Input
               id="codePostal"
               value={formData.codePostal}
               onChange={(e) => handleInputChange("codePostal", e.target.value)}
               placeholder="75001"
               maxLength={5}
+              readOnly={isFieldAutoFilled("codePostal")}
+              className={isFieldAutoFilled("codePostal") ? "bg-muted cursor-not-allowed" : ""}
             />
           </div>
         </div>
