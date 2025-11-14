@@ -10,6 +10,7 @@ interface Activity {
   device_type: string;
   duration: number;
   referrer?: string;
+  viewer_location?: string;
 }
 
 interface RecentActivityProps {
@@ -55,19 +56,27 @@ export const RecentActivity = ({ activities }: RecentActivityProps) => {
                 key={activity.id}
                 className="flex items-center justify-between p-4 border rounded-lg hover:bg-muted/50 transition-colors"
               >
-                <div className="flex items-center gap-4">
+                <div className="flex items-center gap-4 flex-1">
                   <div className="text-muted-foreground">
                     {getDeviceIcon(activity.device_type)}
                   </div>
-                  <div>
+                  <div className="flex-1">
                     <div className="font-medium">
                       Nouvelle visite
                     </div>
-                    <div className="text-sm text-muted-foreground">
-                      {formatDistanceToNow(new Date(activity.created_at), {
-                        addSuffix: true,
-                        locale: fr,
-                      })}
+                    <div className="text-sm text-muted-foreground flex items-center gap-2">
+                      <span>
+                        {formatDistanceToNow(new Date(activity.created_at), {
+                          addSuffix: true,
+                          locale: fr,
+                        })}
+                      </span>
+                      {activity.viewer_location && (
+                        <>
+                          <span>•</span>
+                          <span>📍 {activity.viewer_location}</span>
+                        </>
+                      )}
                     </div>
                   </div>
                 </div>
@@ -78,8 +87,10 @@ export const RecentActivity = ({ activities }: RecentActivityProps) => {
                       {formatDuration(activity.duration)}
                     </Badge>
                   )}
-                  <Badge variant="secondary">
-                    {activity.device_type}
+                  <Badge variant="secondary" className="capitalize">
+                    {activity.device_type === 'desktop' ? '💻 Desktop' : 
+                     activity.device_type === 'mobile' ? '📱 Mobile' : 
+                     '📱 Tablette'}
                   </Badge>
                 </div>
               </div>
