@@ -1,6 +1,9 @@
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Label } from "@/components/ui/label";
 import { Search, Shield, Users, FileCheck, Wrench, Zap, Home, Droplet, Palette, TreeDeciduous } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import Header from "@/components/Header";
@@ -10,6 +13,7 @@ import { BTPMetiersSelect } from "@/data/btp-metiers";
 
 const Acheter = () => {
   const navigate = useNavigate();
+  const [showOnlyRGE, setShowOnlyRGE] = useState(false);
 
   const secteurs = [
     { name: "Plomberie", icon: Droplet, count: 12 },
@@ -39,6 +43,25 @@ const Acheter = () => {
               {/* Advanced Search Form */}
               <div className="bg-white rounded-2xl p-8 shadow-2xl">
                 <h2 className="text-2xl font-bold text-foreground mb-6">Recherche Avancée</h2>
+                
+                {/* RGE Filter */}
+                <div className="mb-6 p-4 bg-green-50 rounded-lg border border-green-200">
+                  <div className="flex items-center gap-3">
+                    <Checkbox
+                      id="rge-filter"
+                      checked={showOnlyRGE}
+                      onCheckedChange={(checked) => setShowOnlyRGE(checked as boolean)}
+                    />
+                    <Label htmlFor="rge-filter" className="flex items-center gap-2 font-semibold text-green-700 cursor-pointer">
+                      <Shield className="w-5 h-5" />
+                      <span>Entreprises RGE uniquement (certifications vérifiées)</span>
+                    </Label>
+                  </div>
+                  <p className="text-sm text-green-600 mt-2 ml-8">
+                    Accès aux aides MaPrimeRénov' • Valorisation +30% • Marchés publics
+                  </p>
+                </div>
+                
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                   <Select>
                     <SelectTrigger className="text-foreground">
@@ -93,6 +116,31 @@ const Acheter = () => {
                 >
                   <Search className="mr-2 h-5 w-5" />
                   Rechercher les entreprises disponibles
+                </Button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* CTA RGE - Highlighted */}
+        <section className="py-8 bg-white">
+          <div className="container mx-auto px-4">
+            <div className="bg-gradient-to-r from-green-600 to-green-700 text-white rounded-2xl p-8 shadow-xl max-w-5xl mx-auto">
+              <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+                <div className="flex-1">
+                  <h3 className="text-2xl font-bold mb-2 flex items-center gap-2">
+                    <Shield className="w-8 h-8" />
+                    Entreprises RGE Certifiées
+                  </h3>
+                  <p className="text-white/90 text-lg">
+                    Accès exclusif aux aides MaPrimeRénov' • Valorisation +30% • Marchés publics garantis
+                  </p>
+                </div>
+                <Button 
+                  onClick={() => navigate("/entreprises-rge")}
+                  className="bg-white text-green-700 hover:bg-green-50 font-bold px-8 py-6 text-lg shadow-lg whitespace-nowrap"
+                >
+                  Voir les entreprises RGE →
                 </Button>
               </div>
             </div>
