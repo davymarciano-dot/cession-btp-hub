@@ -28,7 +28,19 @@ export const ThirdPartyChat = () => {
         const s = document.createElement("script");
         s.src = "https://client.crisp.chat/l.js";
         s.async = true;
-        s.onload = () => setLoaded(true);
+        s.onload = () => {
+          setLoaded(true);
+          // Configuration du chat après chargement
+          setTimeout(() => {
+            if (window.$crisp) {
+              window.$crisp.push(["set", "message:text", [
+                "👋 Bonjour ! Besoin d'aide pour vendre votre entreprise BTP en 45 jours ? Je suis là pour vous accompagner."
+              ]]);
+              window.$crisp.push(["config", "color:theme", ["blue"]]);
+              window.$crisp.push(["config", "position:reverse", [false]]);
+            }
+          }, 1000);
+        };
         s.onerror = () => console.error("Crisp script failed to load");
         document.head.appendChild(s);
         return;
