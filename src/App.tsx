@@ -43,6 +43,7 @@ const OutilsGratuits = lazy(() => import("./pages/OutilsGratuits").then(module =
 const AutomationDashboard = lazy(() => import("./pages/AutomationDashboard").then(module => ({ default: module.AutomationDashboard })));
 const Marketplace = lazy(() => import("./pages/Marketplace"));
 const AffiliateDashboard = lazy(() => import("./pages/AffiliateDashboard"));
+const BlogPost = lazy(() => import("./pages/blog/BlogPost"));
 const EntreprisesRGE = lazy(() => import("./pages/EntreprisesRGE"));
 const RevenueDashboard = lazy(() => import("./pages/RevenueDashboard"));
 
@@ -119,6 +120,8 @@ const App = () => (
             <Route path="/:slug-entreprise-a-vendre" element={<MetierPage />} />
             {/* SEO Pages - Régions */}
             <Route path="/entreprise-btp-a-vendre-:slug" element={<RegionPage />} />
+            {/* Blog */}
+            <Route path="/blog/:slug" element={<BlogPost />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
