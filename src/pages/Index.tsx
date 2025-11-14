@@ -91,6 +91,21 @@ const Index = () => {
                 </Button>
               </div>
 
+              <div className="flex flex-wrap justify-center gap-8 mb-8">
+                <div className="text-center">
+                  <div className="text-4xl md:text-5xl font-bold mb-1">543</div>
+                  <div className="text-sm text-white/75">Entreprises vendues</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-4xl md:text-5xl font-bold mb-1">45j</div>
+                  <div className="text-sm text-white/75">Délai moyen</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-4xl md:text-5xl font-bold mb-1">95%</div>
+                  <div className="text-sm text-white/75">Taux de réussite</div>
+                </div>
+              </div>
+
               <div className="flex flex-col sm:flex-row gap-6 justify-center text-sm">
                 <div className="flex items-center gap-2">
                   <Check className="h-5 w-5" />
