@@ -99,19 +99,23 @@ class RealtimeNotificationService {
   }
 
   static async sendNotification(userId: string, notification: Omit<Notification, 'id' | 'user_id' | 'created_at' | 'read'>) {
-    const { error } = await supabase
-      .from('notifications')
-      .insert({
-        user_id: userId,
-        type: notification.type,
-        title: notification.title,
-        message: notification.message,
-        data: notification.data,
-        read: false
-      });
+    try {
+      const { error } = await supabase
+        .from('notifications')
+        .insert({
+          user_id: userId,
+          type: notification.type,
+          title: notification.title,
+          message: notification.message,
+          data: notification.data || {},
+          read: false
+        } as any);
 
-    if (error) {
-      console.error('Error sending notification:', error);
+      if (error) {
+        console.error('Error sending notification:', error);
+      }
+    } catch (e) {
+      console.error('Error in sendNotification:', e);
     }
   }
 
