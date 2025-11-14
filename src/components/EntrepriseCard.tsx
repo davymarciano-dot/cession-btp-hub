@@ -3,6 +3,7 @@ import { Badge } from "@/components/ui/badge";
 import { useNavigate } from "react-router-dom";
 import { analyticsEvents } from "@/lib/analytics";
 import RGEBadge from "./RGEBadge";
+import { useState } from "react";
 
 interface EntrepriseCardProps {
   id?: string;
@@ -20,6 +21,9 @@ interface EntrepriseCardProps {
   financement?: boolean;
   timeAgo?: string;
   certifications?: string[];
+  onCompareToggle?: (listing: any) => void;
+  isSelected?: boolean;
+  compareCount?: number;
 }
 
 const EntrepriseCard = ({
@@ -38,15 +42,74 @@ const EntrepriseCard = ({
   financement,
   timeAgo,
   certifications,
+  onCompareToggle,
+  isSelected = false,
+  compareCount = 0,
 }: EntrepriseCardProps) => {
   const navigate = useNavigate();
+  const [isHovered, setIsHovered] = useState(false);
   const isOrange = type === "orange";
   const bgClass = isOrange
     ? "bg-gradient-to-br from-orange-400 to-orange-500"
     : "bg-gradient-to-br from-blue-500 to-blue-600";
 
+  const handleCompareClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (onCompareToggle && id) {
+      onCompareToggle({
+        id,
+        title,
+        location,
+        ca,
+        effectif,
+        secteur,
+        price,
+        certifications
+      });
+    }
+  };
+
   return (
-    <div className={`${bgClass} rounded-xl p-6 text-white relative overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300`}>
+    <div 
+      className={`${bgClass} rounded-xl p-6 text-white relative overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 ${
+        isSelected ? 'ring-4 ring-white' : ''
+      }`}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
+      {/* Comparison Checkbox */}
+      {onCompareToggle && (
+        <div className={`absolute top-3 right-3 z-10 transition-opacity ${
+          isHovered || isSelected ? 'opacity-100' : 'opacity-0'
+        }`}>
+          <button
+            onClick={handleCompareClick}
+            className={`w-10 h-10 rounded-lg border-2 flex items-center justify-center transition-all ${
+              isSelected 
+                ? 'bg-white border-white scale-110' 
+                : 'bg-white/20 border-white/50 hover:border-white hover:bg-white/30 hover:scale-105'
+            } ${compareCount >= 3 && !isSelected ? 'cursor-not-allowed opacity-50' : ''}`}
+            disabled={compareCount >= 3 && !isSelected}
+            title={
+              compareCount >= 3 && !isSelected 
+                ? 'Max 3 entreprises' 
+                : isSelected 
+                ? 'Retirer de la comparaison' 
+                : 'Ajouter à la comparaison'
+            }
+          >
+            {isSelected ? (
+              <svg className="w-6 h-6 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/>
+              </svg>
+            ) : (
+              <span className="text-white text-sm font-semibold">VS</span>
+            )}
+          </button>
+        </div>
+      )}
+      
       {/* RGE Badge */}
       {certifications && <RGEBadge certifications={certifications} />}
       

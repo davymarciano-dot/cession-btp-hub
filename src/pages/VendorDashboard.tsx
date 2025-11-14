@@ -12,6 +12,7 @@ import { PeriodSelector } from "@/components/dashboard/PeriodSelector";
 import { MatchingWidget } from "@/components/dashboard/MatchingWidget";
 import { ExportWidget } from "@/components/dashboard/ExportWidget";
 import { GamificationWidget } from "@/components/dashboard/GamificationWidget";
+import ReferralWidget from "@/components/dashboard/ReferralWidget";
 import { Loader2 } from "lucide-react";
 import { startOfDay, subDays, format } from "date-fns";
 
@@ -326,11 +327,12 @@ const VendorDashboard = () => {
         {/* Graphique d'évolution */}
         <ViewsChart data={chartData} />
         
-        {/* Activités récentes, Matching et Gamification */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+        {/* Activités récentes, Matching, Gamification et Parrainage */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-4 gap-6 mb-8">
           <RecentActivity activities={recentActivities} />
           <MatchingWidget />
           <GamificationWidget />
+          <ReferralWidget userId={user?.id || ''} />
         </div>
         
         {/* Actions rapides */}
