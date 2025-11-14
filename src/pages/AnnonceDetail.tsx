@@ -3,6 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 import { useListingView } from "@/hooks/useListingView";
+import { useAutoMatching } from "@/hooks/useAutoMatching";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import PhotoGallery from "@/components/PhotoGallery";
@@ -19,7 +20,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import {
   Building2, MapPin, Calendar, TrendingUp, Users, Euro,
-  Award, FileText, Phone, Mail, ArrowLeft, Eye, Loader2, MessageCircle, Camera, Share2, Copy, Linkedin, BarChart3
+  Award, FileText, Phone, Mail, ArrowLeft, Eye, Loader2, MessageCircle, Camera, Share2, Copy, Linkedin, BarChart3, Sparkles
 } from "lucide-react";
 import { exempleAnnonces } from "@/data/exemple-annonces";
 import { analyticsEvents } from "@/lib/analytics";
@@ -33,6 +34,7 @@ const AnnonceDetail = () => {
   const [user, setUser] = useState<any>(null);
   const [isContacting, setIsContacting] = useState(false);
   const [showAnalytics, setShowAnalytics] = useState(false);
+  const { runMatching, isLoading: isMatchingLoading, results: matchingResults } = useAutoMatching();
 
   // Track listing view (disabled for example listings and own listings)
   const isRealListing = id && !id.startsWith("exemple-");
@@ -190,6 +192,26 @@ const AnnonceDetail = () => {
     }
   };
 
+  const handleRunMatching = async () => {
+    if (!id || id.startsWith("exemple-")) {
+      toast({
+        title: "Non disponible",
+        description: "Le matching automatique n'est pas disponible pour les annonces d'exemple.",
+      });
+      return;
+    }
+
+    try {
+      await runMatching(id);
+      toast({
+        title: "Matching terminé !",
+        description: matchingResults ? `${matchingResults.totalMatches} acheteurs correspondants trouvés` : "Matching effectué avec succès",
+      });
+    } catch (error) {
+      // Error already handled in hook
+    }
+  };
+
   if (isLoading) {
     return (
       <div className="min-h-screen bg-slate-50">
@@ -244,15 +266,31 @@ const AnnonceDetail = () => {
                         {annonce.nombre_vues || 0} vues
                       </Badge>
                       {isOwner && (
-                        <Button
-                          variant="ghost"
-                          size="sm"
-                          onClick={() => setShowAnalytics(!showAnalytics)}
-                          className="h-6"
-                        >
-                          <BarChart3 className="w-3 h-3 mr-1" />
-                          {showAnalytics ? "Masquer" : "Voir"} les stats
-                        </Button>
+                        <>
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            onClick={() => setShowAnalytics(!showAnalytics)}
+                            className="h-6"
+                          >
+                            <BarChart3 className="w-3 h-3 mr-1" />
+                            {showAnalytics ? "Masquer" : "Voir"} les stats
+                          </Button>
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            onClick={handleRunMatching}
+                            disabled={isMatchingLoading}
+                            className="h-6"
+                          >
+                            {isMatchingLoading ? (
+                              <Loader2 className="w-3 h-3 mr-1 animate-spin" />
+                            ) : (
+                              <Sparkles className="w-3 h-3 mr-1" />
+                            )}
+                            Lancer le matching
+                          </Button>
+                        </>
                       )}
                     </div>
                   </div>
@@ -318,6 +356,60 @@ const AnnonceDetail = () => {
                   <>
                     <Separator className="my-6" />
                     <ListingAnalytics listingId={annonce.id} />
+                  </>
+                )}
+
+                {/* Matching Results - Only visible to owner */}
+                {isOwner && matchingResults && (
+                  <>
+                    <Separator className="my-6" />
+                    <div className="bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-950 dark:to-purple-950 p-6 rounded-lg">
+                      <div className="flex items-center gap-3 mb-4">
+                        <Sparkles className="w-6 h-6 text-primary" />
+                        <div>
+                          <h3 className="text-lg font-bold">Résultats du Matching</h3>
+                          <p className="text-sm text-muted-foreground">
+                            {matchingResults.totalMatches} acheteur{matchingResults.totalMatches > 1 ? 's' : ''} correspondant{matchingResults.totalMatches > 1 ? 's' : ''} trouvé{matchingResults.totalMatches > 1 ? 's' : ''}
+                          </p>
+                        </div>
+                      </div>
+                      {matchingResults.matches.length > 0 && (
+                        <div className="space-y-3">
+                          {matchingResults.matches.map((match, index) => (
+                            <div key={index} className="bg-background p-4 rounded-lg border">
+                              <div className="flex items-center justify-between mb-2">
+                                <span className="font-semibold">{match.email}</span>
+                                <Badge variant="secondary" className="ml-2">
+                                  Score: {match.score}/100
+                                </Badge>
+                              </div>
+                              <div className="flex flex-wrap gap-2">
+                                {match.criteria.location && (
+                                  <Badge variant="outline" className="text-xs">
+                                    📍 Zone géographique
+                                  </Badge>
+                                )}
+                                {match.criteria.budget && (
+                                  <Badge variant="outline" className="text-xs">
+                                    💰 Budget
+                                  </Badge>
+                                )}
+                                {match.criteria.sector && (
+                                  <Badge variant="outline" className="text-xs">
+                                    🏗️ Secteur
+                                  </Badge>
+                                )}
+                                {match.criteria.size && (
+                                  <Badge variant="outline" className="text-xs">
+                                    👥 Taille
+                                  </Badge>
+                                )}
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      )}
+                    </div>
                   </>
                 )}
               </Card>
