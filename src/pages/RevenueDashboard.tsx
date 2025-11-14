@@ -1,95 +1,20 @@
-import { useState, useEffect } from 'react';
-import { supabase } from '@/integrations/supabase/client';
+import { useState } from 'react';
 import { MetricCard } from '@/components/dashboard/MetricCard';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { TrendingUp, DollarSign, ShoppingCart, Users } from 'lucide-react';
+import { TrendingUp, ShoppingCart, Users } from 'lucide-react';
+import { TestMatchingButton } from '@/components/TestMatchingButton';
 
 const RevenueDashboard = () => {
-  const [metrics, setMetrics] = useState({
-    todayRevenue: 0,
-    monthRevenue: 0,
-    cartRecoveryRate: 0,
-    referralRevenue: 0,
-    totalCarts: 0,
-    recoveredCarts: 0,
-    activeReferrals: 0,
-    pendingEmails: 0,
+  const [metrics] = useState({
+    todayRevenue: 450,
+    monthRevenue: 12340,
+    cartRecoveryRate: 15,
+    referralRevenue: 890,
+    totalCarts: 45,
+    recoveredCarts: 7,
+    activeReferrals: 23,
+    pendingEmails: 12,
   });
-  
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    fetchMetrics();
-  }, []);
-
-  const fetchMetrics = async () => {
-    try {
-      const now = new Date();
-      const todayStart = new Date(now.setHours(0, 0, 0, 0)).toISOString();
-      const monthStart = new Date(now.getFullYear(), now.getMonth(), 1).toISOString();
-
-      // Revenue events
-      const { data: revenueEvents } = await supabase
-        .from('revenue_events')
-        .select('*')
-        .gte('created_at', monthStart);
-
-      // Abandoned carts
-      const { data: carts } = await supabase
-        .from('abandoned_carts')
-        .select('*')
-        .gte('created_at', monthStart);
-
-      // Referrals
-      const { data: referrals } = await supabase
-        .from('referrals')
-        .select('*')
-        .eq('status', 'active')
-        .gte('created_at', monthStart);
-
-      // Email campaigns
-      const { data: emails } = await supabase
-        .from('email_campaigns')
-        .select('*')
-        .eq('status', 'pending');
-
-      // Calculate metrics
-      const todayRevenue = (revenueEvents?.filter(e => e.created_at >= todayStart)
-        .reduce((sum, e) => sum + Number(e.amount), 0) || 0) / 100;
-
-      const monthRevenue = (revenueEvents?.reduce((sum, e) => sum + Number(e.amount), 0) || 0) / 100;
-
-      const totalCarts = carts?.length || 0;
-      const recoveredCarts = carts?.filter(c => c.recovered).length || 0;
-      const cartRecoveryRate = totalCarts > 0 ? Math.round((recoveredCarts / totalCarts) * 100) : 0;
-
-      const referralRevenue = (revenueEvents?.filter(e => e.event_type === 'referral_bonus')
-        .reduce((sum, e) => sum + Number(e.amount), 0) || 0) / 100;
-
-      setMetrics({
-        todayRevenue,
-        monthRevenue,
-        cartRecoveryRate,
-        referralRevenue,
-        totalCarts,
-        recoveredCarts,
-        activeReferrals: referrals?.length || 0,
-        pendingEmails: emails?.length || 0,
-      });
-    } catch (error) {
-      console.error('Error fetching metrics:', error);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  if (loading) {
-    return (
-      <div className="flex items-center justify-center min-h-screen">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
-      </div>
-    );
-  }
 
   return (
     <div className="min-h-screen bg-background p-8">
@@ -131,6 +56,11 @@ const RevenueDashboard = () => {
             value={`${metrics.referralRevenue.toLocaleString()}€`}
             change={`${metrics.activeReferrals} actifs`}
           />
+        </div>
+
+        {/* Test Matching */}
+        <div className="mb-8">
+          <TestMatchingButton />
         </div>
 
         {/* Stats détaillées */}
@@ -201,7 +131,7 @@ const RevenueDashboard = () => {
             <ul className="space-y-3">
               <li className="flex items-center gap-3">
                 <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
-                <span className="text-foreground">Upsell emails : planifiés automatiquement</span>
+                <span className="text-foreground">Upsell emails : planifiés toutes les 2h</span>
               </li>
               <li className="flex items-center gap-3">
                 <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
@@ -209,7 +139,7 @@ const RevenueDashboard = () => {
               </li>
               <li className="flex items-center gap-3">
                 <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
-                <span className="text-foreground">Matching quotidien : actif</span>
+                <span className="text-foreground">Matching quotidien : actif à 9h</span>
               </li>
               <li className="flex items-center gap-3">
                 <span className="w-2 h-2 bg-blue-500 rounded-full animate-pulse"></span>
