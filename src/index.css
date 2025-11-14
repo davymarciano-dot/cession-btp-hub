@@ -161,4 +161,11 @@ All colors MUST be HSL.
   header a[class*="border-blue"]:hover {
     background: #EFF6FF !important;
   }
+
+  /* Background grid pattern */
+  .bg-grid-pattern {
+    background-image: linear-gradient(hsl(var(--border)) 1px, transparent 1px),
+      linear-gradient(90deg, hsl(var(--border)) 1px, transparent 1px);
+    background-size: 50px 50px;
+  }
 }
