@@ -59,30 +59,30 @@ export const AutomationDashboard = () => {
 
       // Matches créés dans les 24h
       const { count: matchCount } = await supabase
-        .from('matches')
+        .from('matches' as any)
         .select('*', { count: 'exact', head: true })
         .gte('created_at', yesterday.toISOString());
 
       // Alertes actives (acheteurs actifs)
       const { count: buyersCount } = await supabase
-        .from('buyer_alerts')
+        .from('buyer_alerts' as any)
         .select('*', { count: 'exact', head: true })
         .eq('active', true);
 
       // Annonces actives (vendeurs actifs)
       const { count: sellersCount } = await supabase
-        .from('annonces')
+        .from('annonces' as any)
         .select('*', { count: 'exact', head: true })
         .eq('statut', 'publiee');
 
       // Moyenne score matches
       const { data: matchScores } = await supabase
-        .from('matches')
+        .from('matches' as any)
         .select('score')
         .gte('created_at', yesterday.toISOString());
 
       const avgScore = matchScores && matchScores.length > 0
-        ? Math.round(matchScores.reduce((sum, m) => sum + m.score, 0) / matchScores.length)
+        ? Math.round((matchScores as any[]).reduce((sum: number, m: any) => sum + m.score, 0) / matchScores.length)
         : 0;
 
       setMetrics({
@@ -102,7 +102,7 @@ export const AutomationDashboard = () => {
   const loadAutomationLogs = async () => {
     try {
       const { data, error } = await supabase
-        .from('automation_logs')
+        .from('automation_logs' as any)
         .select('*')
         .order('created_at', { ascending: false })
         .limit(50);

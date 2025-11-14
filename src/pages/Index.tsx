@@ -17,7 +17,7 @@ import PricingCard from "@/components/PricingCard";
 import ComparisonTable from "@/components/ComparisonTable";
 import SuccessFeeSection from "@/components/SuccessFeeSection";
 import ProcessTimeline from "@/components/ProcessTimeline";
-import TestimonialSection from "@/components/TestimonialSection";
+import TestimonialSectionEnhanced from "@/components/TestimonialSectionEnhanced";
 import TrustBanner from "@/components/TrustBanner";
 import NewsletterSection from "@/components/NewsletterSection";
 import SecurityBadges from "@/components/SecurityBadges";
@@ -396,7 +396,7 @@ const Index = () => {
         </section>
 
         {/* Testimonials */}
-        <TestimonialSection />
+        <TestimonialSectionEnhanced />
 
         {/* Final CTA */}
         <section className="py-24 bg-gradient-to-br from-primary to-blue-700 text-white">
