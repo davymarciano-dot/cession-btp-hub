@@ -4,7 +4,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Slider } from "@/components/ui/slider";
-import { Filter } from "lucide-react";
+import { Filter, ChevronLeft, ChevronRight } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import EntrepriseCard from "@/components/EntrepriseCard";
@@ -14,6 +14,8 @@ import { useToast } from "@/hooks/use-toast";
 import { analyticsEvents } from "@/lib/analytics";
 import { CompanyComparator } from "@/components/CompanyComparator";
 import ComparisonGuide from "@/components/ComparisonGuide";
+import { ListingSkeletonGrid } from "@/components/ListingSkeleton";
+import SEO from "@/components/SEO";
 
 interface Annonce {
   id: string;
@@ -30,6 +32,8 @@ interface Annonce {
   created_at: string;
 }
 
+const ITEMS_PER_PAGE = 9;
+
 const Entreprises = () => {
   const { toast } = useToast();
   const [showFilters, setShowFilters] = useState(true);
@@ -43,6 +47,7 @@ const Entreprises = () => {
   const [sortBy, setSortBy] = useState<string>("recent");
   const [selectedForComparison, setSelectedForComparison] = useState<Annonce[]>([]);
   const [showGuide, setShowGuide] = useState(true);
+  const [currentPage, setCurrentPage] = useState(1);
 
   const toggleComparison = (listing: any) => {
     if (selectedForComparison.find(item => item.id === listing.id)) {
@@ -66,6 +71,10 @@ const Entreprises = () => {
   useEffect(() => {
     fetchAnnonces();
   }, []);
+
+  useEffect(() => {
+    setCurrentPage(1); // Reset to page 1 when filters change
+  }, [secteurFilter, regionFilter, caRange, priceRange, sortBy]);
 
   const fetchAnnonces = async () => {
     try {
@@ -114,14 +123,26 @@ const Entreprises = () => {
 
       setAnnonces(filtered);
     } catch (error: any) {
+      console.error("Error fetching annonces:", error);
       toast({
-        title: "Erreur",
-        description: "Impossible de charger les annonces",
-        variant: "destructive"
+        title: "Erreur de chargement",
+        description: "Nous n'avons pas pu charger les annonces. Veuillez réessayer.",
+        variant: "destructive",
       });
     } finally {
       setLoading(false);
     }
+  };
+
+  // Pagination calculations
+  const totalPages = Math.ceil(annonces.length / ITEMS_PER_PAGE);
+  const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+  const endIndex = startIndex + ITEMS_PER_PAGE;
+  const currentAnnonces = annonces.slice(startIndex, endIndex);
+
+  const goToPage = (page: number) => {
+    setCurrentPage(page);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const applyFilters = () => {
@@ -144,10 +165,12 @@ const Entreprises = () => {
 
   return (
     <div className="min-h-screen">
-      <Helmet>
-        <title>18 Entreprises BTP à Vendre | Plomberie Électricité Maçonnerie</title>
-        <meta name="description" content="Découvrez notre sélection d'entreprises BTP à reprendre : plomberie, électricité, maçonnerie, chauffage. Entreprises vérifiées, financement possible." />
-      </Helmet>
+      <SEO
+        title="Entreprises BTP à vendre - Trouvez votre opportunité"
+        description={`Découvrez ${annonces.length} entreprises BTP à vendre en France. Filtres avancés par secteur, région, prix et CA. Carte interactive et comparateur intégré pour faire le bon choix.`}
+        keywords="entreprise BTP à vendre, rachat entreprise construction, cession société bâtiment, reprise PME BTP, vente fonds de commerce BTP"
+        url="https://cessionbtp.fr/entreprises"
+      />
       <Header />
 
       <main className="py-12 bg-slate-50 min-h-screen">
@@ -340,15 +363,31 @@ const Entreprises = () => {
                 </div>
               ) : (
                 /* Vue Liste */
-                <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+                <div>
                   {loading ? (
-                    <div className="col-span-full text-center py-12">
-                      <p className="text-muted-foreground">Chargement des annonces...</p>
+                    <ListingSkeletonGrid count={9} />
+                  ) : annonces.length === 0 ? (
+                    <div className="text-center py-12">
+                      <p className="text-muted-foreground text-lg">
+                        Aucune entreprise ne correspond à vos critères.
+                      </p>
+                      <Button
+                        variant="outline"
+                        className="mt-4"
+                        onClick={() => {
+                          setSecteurFilter("");
+                          setRegionFilter("");
+                          setCARange([0, 5000000]);
+                          setPriceRange([0, 5000000]);
+                        }}
+                      >
+                        Réinitialiser les filtres
+                      </Button>
                     </div>
                   ) : (
                     <>
-                      {/* Annonces réelles de la base de données */}
-                      {annonces.map((annonce) => {
+                      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+                        {currentAnnonces.map((annonce) => {
                       const certifications = annonce.certifications || [];
                       const hasCertif = certifications.length > 0;
                       
@@ -488,8 +527,47 @@ const Entreprises = () => {
                           isSelected={selectedForComparison.some(item => item.id === "exemple-6")}
                           compareCount={selectedForComparison.length}
                         />
-                      </>
-                    )}
+                        })}
+                      </div>
+
+                      {/* Pagination */}
+                      {totalPages > 1 && (
+                        <div className="flex items-center justify-center gap-2 mt-12">
+                          <Button
+                            variant="outline"
+                            size="sm"
+                            onClick={() => goToPage(currentPage - 1)}
+                            disabled={currentPage === 1}
+                          >
+                            <ChevronLeft className="h-4 w-4" />
+                            Précédent
+                          </Button>
+                          
+                          <div className="flex gap-1">
+                            {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+                              <Button
+                                key={page}
+                                variant={currentPage === page ? "default" : "outline"}
+                                size="sm"
+                                onClick={() => goToPage(page)}
+                                className="w-10"
+                              >
+                                {page}
+                              </Button>
+                            ))}
+                          </div>
+
+                          <Button
+                            variant="outline"
+                            size="sm"
+                            onClick={() => goToPage(currentPage + 1)}
+                            disabled={currentPage === totalPages}
+                          >
+                            Suivant
+                            <ChevronRight className="h-4 w-4" />
+                          </Button>
+                        </div>
+                      )}
                     </>
                   )}
                 </div>
@@ -499,17 +577,17 @@ const Entreprises = () => {
         </div>
       </main>
 
-              <Footer />
-              
-              {/* Comparateur flottant */}
-              {selectedForComparison.length >= 2 && (
-                <CompanyComparator 
-                  companies={selectedForComparison as any[]} 
-                  onClose={() => setSelectedForComparison([])}
-                />
-              )}
-            </div>
-          );
-        };
+      <Footer />
+      
+      {/* Comparateur flottant */}
+      {selectedForComparison.length >= 2 && (
+        <CompanyComparator 
+          companies={selectedForComparison as any[]} 
+          onClose={() => setSelectedForComparison([])}
+        />
+      )}
+    </div>
+  );
+};
 
 export default Entreprises;
