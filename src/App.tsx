@@ -14,7 +14,7 @@ import CartTrackingService from "./services/cartTrackingService";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import { queryClient } from "./lib/queryClient";
-import { TanStackCacheDebugger } from "./components/debug/TanStackCacheDebugger";
+import TanStackCacheDebugger from "./components/debug/TanStackCacheDebugger";
 
 // Lazy load heavy pages
 const Vendre = lazy(() => import("./pages/Vendre"));
