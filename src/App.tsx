@@ -64,6 +64,7 @@ const VendorListingAnalytics = lazy(() => import("./pages/dashboard/VendorListin
 const Roadmap = lazy(() => import("./pages/Roadmap"));
 const LaunchChecklist = lazy(() => import("./pages/LaunchChecklist"));
 const MonitoringDashboard = lazy(() => import("./pages/admin/MonitoringDashboard"));
+const Admin = lazy(() => import("./pages/Admin"));
 
 // Loading fallback component
 const PageLoader = () => (
@@ -140,6 +141,7 @@ const App = () => {
           <Route path="/test-automations" element={<TestAutomations />} />
           <Route path="/admin/cron-logs" element={<CronLogsAdmin />} />
           <Route path="/admin/monitoring" element={<MonitoringDashboard />} />
+          <Route path="/admin" element={<Admin />} />
           <Route path="/blog" element={<BlogIndex />} />
           
           {/* Pages énergies renouvelables RGE (ULTRA PRIORITAIRE) */}
