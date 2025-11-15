@@ -1,7 +1,7 @@
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { lazy, Suspense, useEffect } from "react";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -12,6 +12,7 @@ import DarkModeToggle from "./components/DarkModeToggle";
 import CartTrackingService from "./services/cartTrackingService";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
+import { queryClient } from "./lib/queryClient";
 
 // Lazy load heavy pages
 const Vendre = lazy(() => import("./pages/Vendre"));
@@ -57,16 +58,6 @@ const VendorListingAnalytics = lazy(() => import("./pages/dashboard/VendorListin
 const Roadmap = lazy(() => import("./pages/Roadmap"));
 const LaunchChecklist = lazy(() => import("./pages/LaunchChecklist"));
 const MonitoringDashboard = lazy(() => import("./pages/admin/MonitoringDashboard"));
-
-const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      staleTime: 5 * 60 * 1000, // 5 minutes
-      gcTime: 10 * 60 * 1000, // 10 minutes (formerly cacheTime)
-      refetchOnWindowFocus: false,
-    },
-  },
-});
 
 // Loading fallback component
 const PageLoader = () => (
