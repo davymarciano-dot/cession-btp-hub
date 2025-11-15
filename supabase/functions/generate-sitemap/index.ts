@@ -14,9 +14,12 @@ const metiersSlugs = [
   'serrurerie', 'metallerie', 'vitrerie', 'parqueteur', 'sols-souples'
 ];
 
+// Grandes villes françaises pour pages dédiées
 const villesSlugs = [
   'paris', 'marseille', 'lyon', 'toulouse', 'nice',
-  'nantes', 'strasbourg', 'montpellier', 'bordeaux', 'lille'
+  'nantes', 'strasbourg', 'montpellier', 'bordeaux', 'lille',
+  'rennes', 'reims', 'saint-etienne', 'toulon', 'grenoble',
+  'dijon', 'angers', 'nimes', 'villeurbanne', 'clermont-ferrand'
 ];
 
 const regionsSlugs = [
@@ -62,7 +65,9 @@ const handler = async (req: Request): Promise<Response> => {
     ];
 
     let sitemap = `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">`;
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:news="http://www.google.com/schemas/sitemap-news/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">`;
 
     let urlCount = 0;
 
@@ -104,6 +109,18 @@ const handler = async (req: Request): Promise<Response> => {
     }
 
     console.log('📄 Adding SEO pages...');
+
+    // Add SEO pages - Pages villes dédiées
+    villesSlugs.forEach((ville) => {
+      sitemap += `
+  <url>
+    <loc>${baseUrl}/entreprises-btp-a-vendre-${ville}</loc>
+    <lastmod>${currentDate}</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>`;
+      urlCount++;
+    });
 
     // Add SEO pages - Énergies renouvelables
     energiesSlugs.forEach((energie) => {
