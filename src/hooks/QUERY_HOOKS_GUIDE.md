@@ -219,6 +219,16 @@ const stats = getCacheStats();
 console.log(stats.hitRate); // "75.5%"
 ```
 
+**Cache Debugger Visuel** (Dev uniquement)
+
+Un composant visual est disponible en développement qui affiche:
+- ✅ Stats en temps réel (total, fresh, stale, active)
+- 📊 Métriques de performance (hit rate, avg age, cache size)
+- 🔍 Détails de chaque query
+- 🛠️ Actions (invalidate, clear cache)
+
+Le debugger apparaît en bas à droite et peut être minimisé. Il se met à jour automatiquement chaque seconde.
+
 ## 📊 Métriques & Performance
 
 ### Hit Rate
