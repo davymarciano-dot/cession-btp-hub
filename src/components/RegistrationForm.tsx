@@ -122,7 +122,11 @@ export default function RegistrationForm({ userType = 'buyer' }: RegistrationFor
         navigate('/acheter');
       }
     } catch (error) {
-      console.error('Registration error:', error);
+      // Log only the error message, not the full error object
+      if (error instanceof Error) {
+        console.error('Registration error:', error.message);
+      }
+      
       if (error instanceof z.ZodError) {
         toast({
           variant: 'destructive',
