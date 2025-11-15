@@ -13,7 +13,7 @@ import DarkModeToggle from "./components/DarkModeToggle";
 import CartTrackingService from "./services/cartTrackingService";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
-import { queryClient } from "./lib/queryClient";
+import { queryClient, prefetchCriticalData } from "./lib/queryClient";
 import TanStackCacheDebugger from "./components/debug/TanStackCacheDebugger";
 
 // Lazy load heavy pages
@@ -76,6 +76,15 @@ const App = () => {
   useEffect(() => {
     // Initialize cart tracking on mount
     CartTrackingService.init();
+    
+    // Prefetch critical data
+    prefetchCriticalData();
+    
+    // Log performance in dev
+    if (import.meta.env.DEV) {
+      console.log('🚀 CessionBTP loaded');
+      console.log('📊 Cache initialized');
+    }
   }, []);
 
   return (
@@ -151,10 +160,11 @@ const App = () => {
         {/* Debug tools - Dev only */}
         {import.meta.env.DEV && (
           <>
+            {/* DevTools officiels - COMPLETS */}
             <ReactQueryDevtools 
               initialIsOpen={false}
-              position="bottom"
             />
+            {/* Notre widget léger - APERÇU RAPIDE */}
             <TanStackCacheDebugger />
           </>
         )}
