@@ -16,6 +16,7 @@ import NotFound from "./pages/NotFound";
 import { queryClient, prefetchCriticalData } from "./lib/queryClient";
 import TanStackCacheDebugger from "./components/debug/TanStackCacheDebugger";
 import Analytics from "./components/Analytics";
+import CrispWidget from "./components/chat/CrispWidget";
 
 // Lazy load heavy pages
 const Vendre = lazy(() => import("./pages/Vendre"));
@@ -95,6 +96,7 @@ const App = () => {
       <Sonner />
       <BrowserRouter>
         <Analytics />
+        <CrispWidget />
         <Suspense fallback={<PageLoader />}>
           <ProactiveChat />
           <DarkModeToggle />
