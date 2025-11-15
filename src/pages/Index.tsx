@@ -26,9 +26,30 @@ import { analyticsEvents } from "@/lib/analytics";
 import { IntelligentChatbot } from "@/components/chat/IntelligentChatbot";
 import { ConversionPopup } from "@/components/ConversionPopup";
 import { demoListings, platformStats } from "@/data/demo-listings";
+import { supabase } from "@/integrations/supabase/client";
 
 const Index = () => {
   const navigate = useNavigate();
+  const [annonces, setAnnonces] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchAnnonces = async () => {
+      const { data, error } = await supabase
+        .from('annonces')
+        .select('*')
+        .eq('statut', 'publiee')
+        .order('created_at', { ascending: false })
+        .limit(10);
+      
+      if (data) {
+        setAnnonces(data);
+      }
+      setLoading(false);
+    };
+
+    fetchAnnonces();
+  }, []);
 
   return (
     <div className="min-h-screen">
@@ -106,24 +127,34 @@ const Index = () => {
             </div>
             
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
-              {demoListings.slice(0, 3).map((listing) => (
-                <EntrepriseCard
-                  key={listing.id}
-                  type={listing.badge === "Coup de cœur" ? "orange" : "blue"}
-                  certification="QUALIBAT"
-                  status="disponible"
-                  timeAgo="Récent"
-                  title={listing.title}
-                  location={listing.location}
-                  creation="2015"
-                  ca={`${(listing.revenue / 1000).toFixed(0)}K€`}
-                  effectif={`${listing.employees} salariés`}
-                  secteur={listing.sector}
-                  description={listing.description}
-                  price={`${(listing.price / 1000).toFixed(0)}K€`}
-                  financement={true}
-                />
-              ))}
+              {loading ? (
+                <div className="col-span-3 text-center py-12">
+                  <p className="text-muted-foreground">Chargement des annonces...</p>
+                </div>
+              ) : annonces.length === 0 ? (
+                <div className="col-span-3 text-center py-12">
+                  <p className="text-muted-foreground">Aucune annonce disponible</p>
+                </div>
+              ) : (
+                annonces.slice(0, 3).map((annonce) => (
+                  <EntrepriseCard
+                    key={annonce.id}
+                    type="blue"
+                    certification="QUALIBAT"
+                    status="disponible"
+                    timeAgo="Récent"
+                    title={annonce.raison_sociale || `Entreprise ${annonce.secteur_activite}`}
+                    location={`${annonce.ville} (${annonce.departement})`}
+                    creation={annonce.annee_creation.toString()}
+                    ca={`${(annonce.ca_n1 / 1000).toFixed(0)}K€`}
+                    effectif={`${annonce.nombre_salaries} salariés`}
+                    secteur={annonce.secteur_activite}
+                    description={annonce.description_activite}
+                    price={`${(annonce.prix_vente / 1000).toFixed(0)}K€`}
+                    financement={true}
+                  />
+                ))
+              )}
             </div>
 
             <div className="text-center">
@@ -132,7 +163,7 @@ const Index = () => {
                 variant="outline" 
                 size="lg"
               >
-                Voir toutes les annonces ({platformStats.totalListings} disponibles)
+                Voir toutes les annonces ({annonces.length} disponibles)
               </Button>
             </div>
           </div>
