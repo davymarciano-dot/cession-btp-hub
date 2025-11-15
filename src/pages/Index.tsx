@@ -24,6 +24,7 @@ import SecurityBadges from "@/components/SecurityBadges";
 import { BTPMetiersSelect } from "@/data/btp-metiers";
 import { analyticsEvents } from "@/lib/analytics";
 import { IntelligentChatbot } from "@/components/chat/IntelligentChatbot";
+import { ConversionPopup } from "@/components/ConversionPopup";
 
 const Index = () => {
   const navigate = useNavigate();
@@ -428,6 +429,9 @@ const Index = () => {
       
       {/* Chatbot IA 24/7 */}
       <IntelligentChatbot />
+      
+      {/* Conversion Popup - Shows after 30s */}
+      <ConversionPopup />
 
       <Footer />
     </div>
