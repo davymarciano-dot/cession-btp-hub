@@ -108,6 +108,14 @@ const Header = () => {
             >
               Roadmap
             </Link>
+            <Link 
+              to="/admin" 
+              className={`font-semibold transition-colors ${
+                isActive('/admin') ? 'text-orange-600' : 'text-orange-700 hover:text-orange-600'
+              }`}
+            >
+              🔧 Admin
+            </Link>
             {user && (
               <>
                 <Link 
