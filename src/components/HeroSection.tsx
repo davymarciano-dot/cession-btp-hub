@@ -1,8 +1,10 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import CountUp from "react-countup";
 import { Clock, Users, TrendingUp } from "lucide-react";
 
 export const HeroSection = () => {
+  const navigate = useNavigate();
+  
   return (
     <section className="bg-gradient-to-br from-blue-600 via-blue-700 to-blue-800 text-white py-20 relative overflow-hidden">
       {/* Background Animation */}
@@ -49,8 +51,8 @@ export const HeroSection = () => {
           
           {/* Double CTA with Urgency */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-6">
-            <Link 
-              to="/vendre" 
+            <button 
+              onClick={() => navigate('/vendre?type=seller')}
               className="group bg-orange-500 hover:bg-orange-600 text-white px-8 py-4 rounded-xl text-lg font-bold shadow-2xl transform hover:scale-105 transition-all inline-flex items-center justify-center relative"
             >
               Je vends maintenant
@@ -58,13 +60,13 @@ export const HeroSection = () => {
               <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs px-2 py-1 rounded-full animate-pulse">
                 -50% frais
               </span>
-            </Link>
-            <Link 
-              to="/acheter" 
+            </button>
+            <button 
+              onClick={() => navigate('/acheter?type=buyer')}
               className="bg-white text-blue-700 hover:bg-gray-100 px-8 py-4 rounded-xl text-lg font-bold shadow-xl transform hover:scale-105 transition-all inline-flex items-center justify-center"
             >
               Je cherche à reprendre
-            </Link>
+            </button>
           </div>
           
           {/* Urgency Timer */}
