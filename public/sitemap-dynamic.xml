@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- This is a placeholder. The real sitemap is generated dynamically by the generate-sitemap edge function -->
+<!-- Access it at: https://xfxfblhxdlzivowodpeg.supabase.co/functions/v1/generate-sitemap -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://cessionbtp.fr/</loc>
+    <lastmod>2025-01-15</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+  </url>
+</urlset>
