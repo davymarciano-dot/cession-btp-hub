@@ -1,9 +1,17 @@
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
+import { z } from "https://deno.land/x/zod@v3.22.4/mod.ts";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
   "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
 };
+
+// Input validation schema
+const estimateSchema = z.object({
+  ca: z.number().positive().max(100000000, "CA must be less than 100M€"),
+  secteur: z.string().min(1).max(100).regex(/^[a-zA-Z0-9\s\-éèêëàâäôöùûüçîï]+$/, "Invalid sector format"),
+  departement: z.string().regex(/^[0-9]{2,3}$/, "Invalid department format")
+});
 
 serve(async (req) => {
   // Handle CORS preflight requests
@@ -12,7 +20,19 @@ serve(async (req) => {
   }
 
   try {
-    const { ca, secteur, departement } = await req.json();
+    const body = await req.json();
+    
+    // Validate input
+    const validationResult = estimateSchema.safeParse(body);
+    if (!validationResult.success) {
+      console.error("Validation error:", validationResult.error);
+      return new Response(
+        JSON.stringify({ error: "Invalid input data", details: validationResult.error.issues }),
+        { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+      );
+    }
+    
+    const { ca, secteur, departement } = validationResult.data;
     
     console.log("Estimation request:", { ca, secteur, departement });
 
@@ -113,7 +133,7 @@ Fournis une estimation professionnelle et détaillée au format JSON strict dema
       console.error("JSON parsing error:", parseError, "Response:", aiResponse);
       
       // Fallback : créer une estimation basique si l'IA ne retourne pas du JSON valide
-      const caNum = parseInt(ca) || 0;
+      const caNum = ca;
       const multiple = caNum < 500000 ? 0.4 : caNum < 2000000 ? 0.65 : caNum < 5000000 ? 1.0 : 1.25;
       
       estimation = {

@@ -1,5 +1,6 @@
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
+import { z } from "https://deno.land/x/zod@v3.22.4/mod.ts";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -11,13 +12,32 @@ interface ChatMessage {
   content: string;
 }
 
+// Input validation schema
+const chatbotSchema = z.object({
+  message: z.string().min(1).max(5000, "Message must be less than 5000 characters"),
+  sessionId: z.string().uuid("Invalid session ID format"),
+  userId: z.string().uuid("Invalid user ID format").optional()
+});
+
 serve(async (req) => {
   if (req.method === "OPTIONS") {
     return new Response(null, { headers: corsHeaders });
   }
 
   try {
-    const { message, sessionId, userId } = await req.json();
+    const body = await req.json();
+    
+    // Validate input
+    const validationResult = chatbotSchema.safeParse(body);
+    if (!validationResult.success) {
+      console.error("Validation error:", validationResult.error);
+      return new Response(
+        JSON.stringify({ error: "Invalid input data", details: validationResult.error.issues }),
+        { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+      );
+    }
+    
+    const { message, sessionId, userId } = validationResult.data;
     
     const LOVABLE_API_KEY = Deno.env.get("LOVABLE_API_KEY");
     if (!LOVABLE_API_KEY) {
