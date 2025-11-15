@@ -1,0 +1,24 @@
+{
+  "name": "CessionBTP - Cession d'entreprises BTP",
+  "short_name": "CessionBTP",
+  "description": "Plateforme n°1 pour acheter et vendre des entreprises du BTP en France",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#1e40af",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/favicon.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/logo-hd.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
