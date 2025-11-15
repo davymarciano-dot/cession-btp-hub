@@ -527,7 +527,8 @@ const Entreprises = () => {
                           isSelected={selectedForComparison.some(item => item.id === "exemple-6")}
                           compareCount={selectedForComparison.length}
                         />
-                        })}
+                      </>
+                    )}
                       </div>
 
                       {/* Pagination */}

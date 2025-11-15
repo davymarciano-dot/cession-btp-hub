@@ -65,6 +65,10 @@ const Roadmap = lazy(() => import("./pages/Roadmap"));
 const LaunchChecklist = lazy(() => import("./pages/LaunchChecklist"));
 const MonitoringDashboard = lazy(() => import("./pages/admin/MonitoringDashboard"));
 const Admin = lazy(() => import("./pages/Admin"));
+const CommentCaMarche = lazy(() => import("./pages/CommentCaMarche"));
+const Contact = lazy(() => import("./pages/Contact"));
+const MentionsLegales = lazy(() => import("./pages/MentionsLegales"));
+const CGV = lazy(() => import("./pages/CGV"));
 
 // Loading fallback component
 const PageLoader = () => (
@@ -127,7 +131,11 @@ const App = () => {
             <Route path="/chat-demo" element={<ChatDemo />} />
             <Route path="/performance-demo" element={<PerformanceDemo />} />
             <Route path="/mes-matchs" element={<MyMatches />} />
-            <Route path="/faq" element={<FAQ />} />
+          <Route path="/faq" element={<FAQ />} />
+          <Route path="/comment-ca-marche" element={<CommentCaMarche />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/mentions-legales" element={<MentionsLegales />} />
+          <Route path="/cgv" element={<CGV />} />
           <Route path="/sitemap" element={<Sitemap />} />
           <Route path="/roadmap" element={<Roadmap />} />
           <Route path="/launch-checklist" element={<LaunchChecklist />} />
