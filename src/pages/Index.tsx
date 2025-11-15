@@ -25,36 +25,10 @@ import { BTPMetiersSelect } from "@/data/btp-metiers";
 import { analyticsEvents } from "@/lib/analytics";
 import { IntelligentChatbot } from "@/components/chat/IntelligentChatbot";
 import { ConversionPopup } from "@/components/ConversionPopup";
+import { demoListings, platformStats } from "@/data/demo-listings";
 
 const Index = () => {
   const navigate = useNavigate();
-  const [stats, setStats] = useState({ repreneurs: 0, experience: 0, specialisation: 0 });
-
-  useEffect(() => {
-    const targetStats = { repreneurs: 500, experience: 15, specialisation: 100 };
-    const duration = 2000;
-    const steps = 50;
-    const interval = duration / steps;
-
-    let currentStep = 0;
-    const timer = setInterval(() => {
-      currentStep++;
-      const progress = currentStep / steps;
-      
-      setStats({
-        repreneurs: Math.floor(targetStats.repreneurs * progress),
-        experience: Math.floor(targetStats.experience * progress),
-        specialisation: Math.floor(targetStats.specialisation * progress),
-      });
-
-      if (currentStep >= steps) {
-        clearInterval(timer);
-        setStats(targetStats);
-      }
-    }, interval);
-
-    return () => clearInterval(timer);
-  }, []);
 
   return (
     <div className="min-h-screen">
@@ -124,48 +98,32 @@ const Index = () => {
         {/* Featured Companies */}
         <section className="py-20 bg-slate-50">
           <div className="container mx-auto px-4">
-            <h2 className="text-3xl font-bold text-center mb-12">Opportunités à Saisir</h2>
+            <div className="text-center mb-12">
+              <h2 className="text-3xl font-bold mb-4">Opportunités à Saisir</h2>
+              <p className="text-muted-foreground max-w-2xl mx-auto">
+                Découvrez les dernières entreprises BTP disponibles à la reprise
+              </p>
+            </div>
             
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
-              <EntrepriseCard
-                type="orange"
-                certification="CERTIFIÉE RGE"
-                status="vendu"
-                title="Société d'Isolation Thermique"
-                location="Lyon, Rhône (69)"
-                creation="2020"
-                ca="542K€"
-                effectif="8 salariés"
-                secteur="Isolation et ITE"
-              />
-
-              <EntrepriseCard
-                type="orange"
-                certification="RGE QUALIPAC"
-                status="vendu"
-                title="Entreprise Chauffage & Climatisation"
-                location="Toulouse, Haute-Garonne (31)"
-                creation="2018"
-                ca="890K€"
-                effectif="6 salariés"
-                secteur="Pompes à chaleur"
-              />
-
-              <EntrepriseCard
-                type="blue"
-                certification="QUALIBAT"
-                status="disponible"
-                timeAgo="Il y a 5h"
-                title="Entreprise Générale du Bâtiment"
-                location="Nice, PACA (06)"
-                creation="2005"
-                ca="2,8M€"
-                effectif="22 salariés"
-                secteur="Tous corps d'état"
-                description="Entreprise générale tous corps d'état. Marchés publics 60%, privés 40%. Certifications Qualibat."
-                price="1 850 000 €"
-                financement={true}
-              />
+              {demoListings.slice(0, 3).map((listing) => (
+                <EntrepriseCard
+                  key={listing.id}
+                  type={listing.badge === "Coup de cœur" ? "orange" : "blue"}
+                  certification="QUALIBAT"
+                  status="disponible"
+                  timeAgo="Récent"
+                  title={listing.title}
+                  location={listing.location}
+                  creation="2015"
+                  ca={`${(listing.revenue / 1000).toFixed(0)}K€`}
+                  effectif={`${listing.employees} salariés`}
+                  secteur={listing.sector}
+                  description={listing.description}
+                  price={`${(listing.price / 1000).toFixed(0)}K€`}
+                  financement={true}
+                />
+              ))}
             </div>
 
             <div className="text-center">
@@ -174,7 +132,7 @@ const Index = () => {
                 variant="outline" 
                 size="lg"
               >
-                Voir toutes les annonces (18+ disponibles)
+                Voir toutes les annonces ({platformStats.totalListings} disponibles)
               </Button>
             </div>
           </div>
@@ -384,14 +342,26 @@ const Index = () => {
         {/* Process Timeline */}
         <ProcessTimeline />
 
-        {/* Social Proof */}
+        {/* Social Proof - Real Platform Stats */}
         <section className="py-20 bg-primary text-white">
           <div className="container mx-auto px-4">
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-12 text-center">
-              <StatCounter value={`${stats.repreneurs}+`} label="Repreneurs qualifiés actifs" />
-              <StatCounter value={stats.experience} label="Ans d'Expertise BTP" />
-              <StatCounter value={`${stats.specialisation}%`} label="Spécialisé BTP & ENR" />
-              <StatCounter value="48H" label="Délai de Valorisation" />
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+              <StatCounter 
+                value={platformStats.totalListings} 
+                label="Entreprises disponibles" 
+              />
+              <StatCounter 
+                value={platformStats.successfulSales} 
+                label="Ventes réussies" 
+              />
+              <StatCounter 
+                value={platformStats.activeRepreners} 
+                label="Repreneurs actifs" 
+              />
+              <StatCounter 
+                value={platformStats.avgTime} 
+                label="Délai moyen de vente" 
+              />
             </div>
           </div>
         </section>
