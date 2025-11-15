@@ -17,6 +17,7 @@ import { queryClient, prefetchCriticalData } from "./lib/queryClient";
 import TanStackCacheDebugger from "./components/debug/TanStackCacheDebugger";
 import Analytics from "./components/Analytics";
 import CrispWidget from "./components/chat/CrispWidget";
+import ErrorBoundary from "./components/ErrorBoundary";
 
 // Lazy load heavy pages
 const Vendre = lazy(() => import("./pages/Vendre"));
@@ -90,7 +91,8 @@ const App = () => {
   }, []);
 
   return (
-  <QueryClientProvider client={queryClient}>
+  <ErrorBoundary>
+    <QueryClientProvider client={queryClient}>
     <TooltipProvider>
       <Toaster />
       <Sonner />
@@ -175,7 +177,8 @@ const App = () => {
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>
-);
+  </ErrorBoundary>
+  );
 };
 
 export default App;
