@@ -1660,6 +1660,48 @@ export type Database = {
           },
         ]
       }
+      profiles: {
+        Row: {
+          budget_range: string | null
+          company: string | null
+          created_at: string | null
+          email: string
+          id: string
+          interested_sectors: string[] | null
+          location: string | null
+          name: string
+          phone: string | null
+          updated_at: string | null
+          user_type: string
+        }
+        Insert: {
+          budget_range?: string | null
+          company?: string | null
+          created_at?: string | null
+          email: string
+          id: string
+          interested_sectors?: string[] | null
+          location?: string | null
+          name: string
+          phone?: string | null
+          updated_at?: string | null
+          user_type: string
+        }
+        Update: {
+          budget_range?: string | null
+          company?: string | null
+          created_at?: string | null
+          email?: string
+          id?: string
+          interested_sectors?: string[] | null
+          location?: string | null
+          name?: string
+          phone?: string | null
+          updated_at?: string | null
+          user_type?: string
+        }
+        Relationships: []
+      }
       push_subscriptions: {
         Row: {
           created_at: string | null
