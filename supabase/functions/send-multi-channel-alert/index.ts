@@ -1,6 +1,7 @@
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2.39.3";
 import { Resend } from "https://esm.sh/resend@2.0.0";
+import { z } from "https://deno.land/x/zod@v3.22.4/mod.ts";
 
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
@@ -16,6 +17,16 @@ interface AlertData {
   data?: any;
 }
 
+// Input validation schema
+const alertSchema = z.object({
+  userId: z.string().uuid("Invalid user ID format"),
+  type: z.string().min(1).max(50),
+  title: z.string().min(1).max(200, "Title must be less than 200 characters"),
+  message: z.string().min(1).max(1000, "Message must be less than 1000 characters"),
+  actionUrl: z.string().url("Invalid URL format").optional(),
+  data: z.any().optional()
+});
+
 serve(async (req) => {
   if (req.method === 'OPTIONS') {
     return new Response(null, { headers: corsHeaders });
@@ -28,7 +39,19 @@ serve(async (req) => {
       { global: { headers: { Authorization: req.headers.get('Authorization')! } } }
     );
 
-    const alertData: AlertData = await req.json();
+    const body = await req.json();
+    
+    // Validate input
+    const validationResult = alertSchema.safeParse(body);
+    if (!validationResult.success) {
+      console.error("Validation error:", validationResult.error);
+      return new Response(
+        JSON.stringify({ error: "Invalid input data", details: validationResult.error.issues }),
+        { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      );
+    }
+
+    const alertData: AlertData = validationResult.data;
     const { userId, type, title, message, actionUrl, data } = alertData;
 
     // Récupérer les préférences de l'utilisateur
