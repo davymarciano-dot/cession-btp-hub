@@ -1,8 +1,10 @@
 User-agent: Googlebot
 Allow: /
+Crawl-delay: 0
 
 User-agent: Bingbot
 Allow: /
+Crawl-delay: 0
 
 User-agent: Twitterbot
 Allow: /
@@ -12,3 +14,19 @@ Allow: /
 
 User-agent: *
 Allow: /
+Crawl-delay: 1
+
+# Sitemaps
+Sitemap: https://cessionbtp.fr/sitemap.xml
+Sitemap: https://xfxfblhxdlzivowodpeg.supabase.co/functions/v1/generate-sitemap
+
+# Disallow admin pages
+Disallow: /admin/
+Disallow: /dashboard/
+Disallow: /auth/
+Disallow: /api/
+
+# Disallow test pages
+Disallow: /chat-demo
+Disallow: /performance-demo
+Disallow: /test-*

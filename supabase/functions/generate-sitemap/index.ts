@@ -6,18 +6,42 @@ const corsHeaders = {
   "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
 };
 
+// Métiers BTP
+const metiersSlugs = [
+  'plomberie', 'electricite', 'maconnerie', 'chauffage', 'climatisation',
+  'charpente', 'couverture', 'menuiserie', 'peinture', 'carrelage',
+  'platrerie', 'isolation', 'ravalement', 'terrassement', 'vrd',
+  'serrurerie', 'metallerie', 'vitrerie', 'parqueteur', 'sols-souples'
+];
+
+const villesSlugs = [
+  'paris', 'marseille', 'lyon', 'toulouse', 'nice',
+  'nantes', 'strasbourg', 'montpellier', 'bordeaux', 'lille'
+];
+
+const regionsSlugs = [
+  'ile-de-france', 'auvergne-rhone-alpes', 'nouvelle-aquitaine',
+  'occitanie', 'provence-alpes-cote-dazur', 'grand-est',
+  'hauts-de-france', 'normandie', 'bretagne', 'pays-de-la-loire'
+];
+
+const certificationsSlugs = ['rge', 'qualibat', 'qualipv', 'qualipac'];
+const energiesSlugs = ['solaire-photovoltaique', 'pompe-a-chaleur', 'isolation-thermique'];
+
 const handler = async (req: Request): Promise<Response> => {
   if (req.method === "OPTIONS") {
     return new Response(null, { headers: corsHeaders });
   }
 
   try {
+    console.log('🚀 Starting sitemap generation...');
+    
     const supabase = createClient(
       Deno.env.get("SUPABASE_URL") ?? "",
       Deno.env.get("SUPABASE_ANON_KEY") ?? ""
     );
 
-    const baseUrl = "https://cession-btp-hub.lovable.app";
+    const baseUrl = "https://cessionbtp.fr";
     const currentDate = new Date().toISOString();
 
     // Static pages
@@ -33,23 +57,14 @@ const handler = async (req: Request): Promise<Response> => {
       { url: "/faq", changefreq: "monthly", priority: "0.6" },
       { url: "/ressources", changefreq: "weekly", priority: "0.7" },
       { url: "/outils-gratuits", changefreq: "monthly", priority: "0.7" },
+      { url: "/roadmap", changefreq: "monthly", priority: "0.5" },
+      { url: "/blog", changefreq: "weekly", priority: "0.7" },
     ];
 
-    // Fetch published listings
-    const { data: listings, error } = await supabase
-      .from("annonces")
-      .select("id, updated_at")
-      .eq("statut", "publiee")
-      .order("updated_at", { ascending: false })
-      .limit(1000);
-
-    if (error) {
-      console.error("Error fetching listings:", error);
-    }
-
-    // Generate sitemap XML
     let sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">`;
+
+    let urlCount = 0;
 
     // Add static pages
     staticPages.forEach((page) => {
@@ -60,7 +75,19 @@ const handler = async (req: Request): Promise<Response> => {
     <changefreq>${page.changefreq}</changefreq>
     <priority>${page.priority}</priority>
   </url>`;
+      urlCount++;
     });
+
+    // Fetch published listings
+    const { data: listings, error } = await supabase
+      .from("annonces")
+      .select("id, updated_at")
+      .eq("statut", "publiee")
+      .order("updated_at", { ascending: false })
+      .limit(500);
+    if (error) {
+      console.error("Error fetching listings:", error);
+    }
 
     // Add dynamic listing pages
     if (listings && listings.length > 0) {
@@ -72,13 +99,93 @@ const handler = async (req: Request): Promise<Response> => {
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>`;
+        urlCount++;
       });
     }
+
+    console.log('📄 Adding SEO pages...');
+
+    // Add SEO pages - Énergies renouvelables
+    energiesSlugs.forEach((energie) => {
+      sitemap += `
+  <url>
+    <loc>${baseUrl}/entreprise-${energie}-a-vendre</loc>
+    <lastmod>${currentDate}</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+  </url>`;
+      urlCount++;
+    });
+
+    // Add SEO pages - Métiers
+    metiersSlugs.forEach((metier) => {
+      sitemap += `
+  <url>
+    <loc>${baseUrl}/entreprise-${metier}-a-vendre</loc>
+    <lastmod>${currentDate}</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+  </url>`;
+      urlCount++;
+    });
+
+    // Add SEO pages - Métiers + Villes
+    metiersSlugs.slice(0, 10).forEach((metier) => {
+      villesSlugs.forEach((ville) => {
+        sitemap += `
+  <url>
+    <loc>${baseUrl}/entreprise-${metier}-${ville}-a-vendre</loc>
+    <lastmod>${currentDate}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>`;
+        urlCount++;
+      });
+    });
+
+    // Add SEO pages - Certifications
+    certificationsSlugs.forEach((cert) => {
+      sitemap += `
+  <url>
+    <loc>${baseUrl}/entreprise-${cert}-a-vendre</loc>
+    <lastmod>${currentDate}</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+  </url>`;
+      urlCount++;
+    });
+
+    // Add SEO pages - Régions
+    regionsSlugs.forEach((region) => {
+      sitemap += `
+  <url>
+    <loc>${baseUrl}/entreprise-btp-a-vendre-${region}</loc>
+    <lastmod>${currentDate}</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>`;
+      urlCount++;
+    });
+
+    // Add SEO pages - Vendeur intent
+    metiersSlugs.slice(0, 10).forEach((metier) => {
+      sitemap += `
+  <url>
+    <loc>${baseUrl}/vendre-entreprise-${metier}</loc>
+    <lastmod>${currentDate}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>`;
+      urlCount++;
+    });
 
     sitemap += `
 </urlset>`;
 
-    console.log(`Generated sitemap with ${staticPages.length + (listings?.length || 0)} URLs`);
+    console.log(`✅ Sitemap generated with ${urlCount} URLs`);
+    console.log(`   - Static: ${staticPages.length}`);
+    console.log(`   - Listings: ${listings?.length || 0}`);
+    console.log(`   - SEO: ${urlCount - staticPages.length - (listings?.length || 0)}`);
 
     return new Response(sitemap, {
       headers: {
