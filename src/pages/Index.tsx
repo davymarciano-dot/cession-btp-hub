@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { Helmet } from "react-helmet-async";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
@@ -9,6 +8,9 @@ import { useNavigate } from "react-router-dom";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { supabase } from "@/integrations/supabase/client";
+import { ListingSkeletonGrid } from "@/components/ListingSkeleton";
+import SEO from "@/components/SEO";
+import { OptimizedImage } from "@/components/OptimizedImage";
 
 interface Annonce {
   id: string;
@@ -108,10 +110,12 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-slate-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
-      <Helmet>
-        <title>CessionBTP | Achat Vente Entreprise BTP - Plateforme n°1</title>
-        <meta name="description" content="Découvrez les meilleures opportunités d'acquisition d'entreprises BTP. Matching IA, estimation gratuite, accompagnement personnalisé." />
-      </Helmet>
+      <SEO
+        title="CessionBTP - Achat et Vente d'Entreprises BTP en France"
+        description="Plateforme n°1 pour acheter et vendre des entreprises du BTP. Plus de 500 sociétés de construction à reprendre. Success Fee 2%, Matching IA, accompagnement personnalisé. Estimation gratuite en 5 min."
+        keywords="cession entreprise BTP, vendre société construction, acheter entreprise bâtiment, reprise PME BTP, valorisation entreprise BTP, marketplace BTP"
+        url="https://cessionbtp.fr"
+      />
       <Header />
       
       <main>
@@ -266,29 +270,27 @@ const Index = () => {
 
         {/* Grille des Annonces */}
         <section className="container mx-auto px-4 py-12">
-          {loading ? (
-            <div className="text-center py-20">
-              <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
-              <p className="mt-4 text-muted-foreground">Chargement des annonces...</p>
-            </div>
-          ) : currentAnnonces.length === 0 ? (
-            <Card className="p-12 text-center">
-              <Building2 className="w-16 h-16 mx-auto text-gray-400 mb-4" />
-              <h3 className="text-2xl font-bold mb-2">Aucune annonce trouvée</h3>
-              <p className="text-muted-foreground mb-6">Essayez de modifier vos critères de recherche</p>
-              <Button onClick={() => {
-                setSearchTerm("");
-                setSelectedSector("all");
-                setSelectedRegion("all");
-                setPriceRange("all");
-              }}>
-                Réinitialiser les filtres
-              </Button>
-            </Card>
-          ) : (
-            <>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-                {currentAnnonces.map((annonce) => (
+        {/* Résultats */}
+        {loading ? (
+          <ListingSkeletonGrid count={9} />
+        ) : currentAnnonces.length === 0 ? (
+          <Card className="p-12 text-center">
+            <Building2 className="w-16 h-16 mx-auto text-gray-400 mb-4" />
+            <h3 className="text-2xl font-bold mb-2">Aucune annonce trouvée</h3>
+            <p className="text-muted-foreground mb-6">Essayez de modifier vos critères de recherche</p>
+            <Button onClick={() => {
+              setSearchTerm("");
+              setSelectedSector("all");
+              setSelectedRegion("all");
+              setPriceRange("all");
+            }}>
+              Réinitialiser les filtres
+            </Button>
+          </Card>
+        ) : (
+          <>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+              {currentAnnonces.map((annonce) => (
                   <Card 
                     key={annonce.id} 
                     className="group hover:shadow-2xl transition-all duration-300 cursor-pointer overflow-hidden"
@@ -352,13 +354,13 @@ const Index = () => {
                           Voir détails →
                         </span>
                       </div>
-                    </div>
-                  </Card>
-                ))}
-              </div>
+                  </div>
+                </Card>
+              ))}
+            </div>
 
-              {/* Pagination */}
-              {totalPages > 1 && (
+            {/* Pagination */}
+            {totalPages > 1 && (
                 <div className="flex items-center justify-center gap-2">
                   <Button
                     variant="outline"
