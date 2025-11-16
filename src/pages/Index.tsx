@@ -76,13 +76,6 @@ const Home = () => {
     { value: "2%", label: "Honoraires de succès" },
   ];
 
-  const trustLogos = [
-    { name: "BPI France", icon: "🏛️" },
-    { name: "CCI", icon: "🏛️" },
-    { name: "FFB", icon: "🏗️" },
-    { name: "Qualibat", icon: "✓" },
-  ];
-
   const opportunities = [
     {
       badge: "QUALIBAT",
@@ -446,43 +439,6 @@ const Home = () => {
               fill="white"
             />
           </svg>
-        </div>
-      </section>
-
-      {/* SECTION CONFIANCE */}
-      <section className="py-12 bg-white">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-8">
-            <p className="text-gray-600 font-medium">Ils nous font confiance</p>
-          </div>
-
-          {/* Logos */}
-          <div className="flex justify-center items-center gap-12 mb-8 flex-wrap">
-            {trustLogos.map((logo, index) => (
-              <div key={index} className="text-center">
-                <div className="w-16 h-16 bg-gray-100 rounded-xl flex items-center justify-center text-3xl mb-2">
-                  {logo.icon}
-                </div>
-                <p className="text-sm font-medium text-gray-700">{logo.name}</p>
-              </div>
-            ))}
-          </div>
-
-          {/* Badges */}
-          <div className="flex justify-center gap-6 flex-wrap">
-            <div className="flex items-center gap-2">
-              <div className="w-3 h-3 bg-green-500 rounded-full"></div>
-              <span className="text-sm text-gray-600">Certifié</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <div className="w-3 h-3 bg-blue-500 rounded-full"></div>
-              <span className="text-sm text-gray-600">Sécurisé</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <div className="w-3 h-3 bg-orange-500 rounded-full"></div>
-              <span className="text-sm text-gray-600">Confidentiel</span>
-            </div>
-          </div>
         </div>
       </section>
 
