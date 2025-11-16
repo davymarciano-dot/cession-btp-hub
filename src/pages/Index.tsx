@@ -56,6 +56,32 @@ const Home = () => {
 
     fetchAnnonces();
   }, []);
+  const [realAnnonces, setRealAnnonces] = useState<any[]>([]);
+  const [loadingAnnonces, setLoadingAnnonces] = useState(true);
+
+  // 🔥 RÉCUPÉRATION DES 3 DERNIÈRES ANNONCES RÉELLES
+  useEffect(() => {
+    const fetchAnnonces = async () => {
+      try {
+        const { data, error } = await supabase
+          .from("annonces")
+          .select("*")
+          .eq("statut", "publiee")
+          .order("created_at", { ascending: false })
+          .limit(3);
+
+        if (error) throw error;
+
+        setRealAnnonces(data || []);
+      } catch (error) {
+        console.error("Erreur lors du chargement des annonces:", error);
+      } finally {
+        setLoadingAnnonces(false);
+      }
+    };
+
+    fetchAnnonces();
+  }, []);
 
   // 🔥 NOTIFICATIONS EN TEMPS RÉEL - EN BAS À GAUCHE
   const liveNotifications = [
@@ -728,7 +754,7 @@ const Home = () => {
         <div className="container mx-auto px-4">
           <div className="text-center mb-4">
             <Button
-              onClick={() => navigate("/estimateur")}
+              onClick={() => navigate("/estimer")}
               size="lg"
               className="bg-orange-500 hover:bg-orange-600 text-white px-12 py-6 text-lg font-bold rounded-xl shadow-xl"
             >
@@ -1001,7 +1027,7 @@ const Home = () => {
           </p>
 
           <Button
-            onClick={() => navigate("/estimateur")}
+            onClick={() => navigate("/estimer")}
             size="lg"
             className="bg-white text-blue-600 hover:bg-blue-50 px-12 py-8 text-2xl font-bold rounded-2xl shadow-2xl hover:shadow-3xl transition-all transform hover:scale-105"
           >
