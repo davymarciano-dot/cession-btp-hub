@@ -245,8 +245,8 @@ const Tarifs = () => {
 
               <h3 className="text-2xl font-bold text-gray-400 mb-2">Essentiel</h3>
               <div className="mb-6">
-                <span className="text-5xl font-black text-gray-400">290€</span>
-                <span className="text-slate-600"> /3 mois</span>
+                <span className="text-4xl font-black text-gray-400">290€</span>
+                <span className="text-slate-600 text-xl"> /3 mois</span>
               </div>
               <p className="text-sm text-slate-600 mb-6">
                 Annonce simple - Cible : 5 000€ - CA : 5,9M
