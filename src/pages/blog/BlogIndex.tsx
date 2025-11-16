@@ -85,9 +85,14 @@ const ArticleCard = ({ article }: { article: BlogArticle }) => {
           <h2 className="text-xl font-bold mb-2 line-clamp-2">{article.title}</h2>
           <p className="text-muted-foreground mb-4 line-clamp-3">{article.excerpt}</p>
           
-          <div className="flex items-center justify-between text-sm text-muted-foreground">
-            <span>{article.readTime} min de lecture</span>
-            <span>{new Date(article.publishedAt).toLocaleDateString('fr-FR')}</span>
+          <div className="flex flex-col gap-2 text-sm text-muted-foreground">
+            <div className="flex items-center justify-between">
+              <span>{article.readTime} min de lecture</span>
+              <span>{new Date(article.publishedAt).toLocaleDateString('fr-FR')}</span>
+            </div>
+            <div className="text-xs">
+              Rédigé par <span className="font-medium text-foreground">{article.author}</span>
+            </div>
           </div>
         </div>
       </Card>
