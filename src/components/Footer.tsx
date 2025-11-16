@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import { Building2, Mail, Phone, MapPin, Linkedin, Facebook, Twitter, Instagram } from "lucide-react";
-import Logo from "@/components/Logo";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -57,8 +56,10 @@ const Footer = () => {
           {/* Colonne 1 : Logo et Description */}
           <div className="lg:col-span-2">
             <div className="mb-6">
-              <Logo 
-                className="h-12 w-auto block object-contain" 
+              <img 
+                src="/images/logo-cessionbtp.png" 
+                alt="CessionBTP" 
+                className="h-12 w-auto block object-contain"
               />
             </div>
 
