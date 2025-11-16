@@ -1480,6 +1480,54 @@ export type Database = {
         }
         Relationships: []
       }
+      leads_siret_partiel: {
+        Row: {
+          adresse: string | null
+          code_postal: string | null
+          created_at: string
+          departement: string | null
+          email: string
+          id: string
+          raison_sociale: string | null
+          secteur_activite: string | null
+          siret: string
+          statut: string
+          telephone: string | null
+          updated_at: string
+          ville: string | null
+        }
+        Insert: {
+          adresse?: string | null
+          code_postal?: string | null
+          created_at?: string
+          departement?: string | null
+          email: string
+          id?: string
+          raison_sociale?: string | null
+          secteur_activite?: string | null
+          siret: string
+          statut?: string
+          telephone?: string | null
+          updated_at?: string
+          ville?: string | null
+        }
+        Update: {
+          adresse?: string | null
+          code_postal?: string | null
+          created_at?: string
+          departement?: string | null
+          email?: string
+          id?: string
+          raison_sociale?: string | null
+          secteur_activite?: string | null
+          siret?: string
+          statut?: string
+          telephone?: string | null
+          updated_at?: string
+          ville?: string | null
+        }
+        Relationships: []
+      }
       listing_views: {
         Row: {
           created_at: string
