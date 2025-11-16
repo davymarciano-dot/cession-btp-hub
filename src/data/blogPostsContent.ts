@@ -1547,12 +1547,12 @@ Mensualité : 4 200€ sur 10 ans</pre>
 
       <h2 class="text-2xl font-bold mt-8 mb-4">Introduction : Reprendre Sans Fortune, C'est Possible !</h2>
       
-      <div class="bg-red-50 dark:bg-red-900/20 p-6 rounded-lg mb-4">
+      <div class="bg-destructive/10 p-6 rounded-lg mb-4">
         <p class="font-bold mb-2">La croyance limitante :</p>
         <p>"Pour reprendre une entreprise BTP à 300 000€, il faut avoir 300 000€ en banque."</p>
       </div>
 
-      <div class="bg-green-50 dark:bg-green-900/20 p-6 rounded-lg mb-6">
+      <div class="bg-primary/10 p-6 rounded-lg mb-6">
         <p class="font-bold mb-2">La réalité 2026 :</p>
         <p class="mb-3">Avec les bons montages financiers, <strong>vous pouvez reprendre avec seulement 15% à 25% d'apport personnel</strong>, soit 45 000€ à 75 000€ pour une entreprise valorisée 300 000€.</p>
         
@@ -1585,7 +1585,7 @@ Mensualité : 4 200€ sur 10 ans</pre>
           <li>└─ TOTAL ACQUISITION : 295 900€</li>
         </ul>
 
-        <p class="font-bold mb-2">FONDS DE ROULEMENT</p>
+        <p class="font-bold mb-2 mt-4">FONDS DE ROULEMENT</p>
         <ul class="mb-3 space-y-1">
           <li>├─ BFR (2,5 mois) : 83 000€</li>
           <li>├─ Stock outil/matériel : 12 000€</li>
@@ -1593,7 +1593,7 @@ Mensualité : 4 200€ sur 10 ans</pre>
           <li>└─ TOTAL FDR : 115 000€</li>
         </ul>
 
-        <p class="font-bold mb-2">ACCOMPAGNEMENT & FORMATION</p>
+        <p class="font-bold mb-2 mt-4">ACCOMPAGNEMENT & FORMATION</p>
         <ul class="mb-3 space-y-1">
           <li>├─ Passation cédant (3 mois) : 9 000€</li>
           <li>├─ Formation métier (si besoin) : 5 000€</li>
@@ -1604,7 +1604,7 @@ Mensualité : 4 200€ sur 10 ans</pre>
         <p class="border-t border-border pt-2 mt-2 font-bold text-lg">BUDGET TOTAL REPRISE : 427 400€</p>
       </div>
 
-      <div class="bg-orange-50 dark:bg-orange-900/20 p-6 rounded-lg mb-6">
+      <div class="bg-destructive/10 p-6 rounded-lg mb-6">
         <p class="font-bold mb-2">⚠️ La plupart des repreneurs se trompent :</p>
         <p class="mb-2">Ils pensent uniquement au prix d'achat (280K€) et oublient FDR + frais = 147K€ supplémentaires.</p>
         <p class="font-bold">Résultat : Trésorerie négative mois 3, panique, dépôt de bilan.</p>
@@ -1615,54 +1615,1494 @@ Mensualité : 4 200€ sur 10 ans</pre>
       <div class="grid md:grid-cols-2 gap-4 mb-6">
         <div class="bg-accent p-4 rounded-lg">
           <h4 class="font-bold mb-2">Source 1 : Apport Personnel (15% à 30%)</h4>
-          <ul class="list-disc pl-6 space-y-1 text-sm mb-2">
+          <ul class="list-disc pl-6 space-y-1 text-sm">
             <li>Épargne personnelle</li>
             <li>Épargne salariale (PEE, PERCO)</li>
             <li>Donation familiale</li>
             <li>Vente patrimoine</li>
           </ul>
-          <p class="font-bold">Montant type : 65 000€ à 130 000€</p>
+          <p class="mt-2 font-semibold">Montant type : 65 000€ à 130 000€</p>
         </div>
 
         <div class="bg-accent p-4 rounded-lg">
-          <h4 class="font-bold mb-2">Source 2 : Prêt Bancaire Classique (40% à 60%)</h4>
-          <ul class="list-disc pl-6 space-y-1 text-sm mb-2">
+          <h4 class="font-bold mb-2">Source 2 : Prêt Bancaire (40% à 60%)</h4>
+          <ul class="list-disc pl-6 space-y-1 text-sm">
             <li>Crédit amortissable 5-7 ans</li>
             <li>Taux : 4,2% à 4,8%</li>
             <li>Garantie personnelle</li>
-            <li>Assurance décès/invalidité</li>
+            <li>Assurance obligatoire</li>
           </ul>
-          <p class="font-bold">Montant type : 170 000€ à 250 000€</p>
+          <p class="mt-2 font-semibold">Montant type : 170 000€ à 250 000€</p>
         </div>
 
         <div class="bg-accent p-4 rounded-lg">
           <h4 class="font-bold mb-2">Source 3 : Crédit-Vendeur (10% à 25%)</h4>
-          <ul class="list-disc pl-6 space-y-1 text-sm mb-2">
+          <ul class="list-disc pl-6 space-y-1 text-sm">
             <li>Paiement différé au vendeur</li>
             <li>Durée : 2-4 ans</li>
             <li>Taux : 2,5% à 4%</li>
             <li>Remboursement progressif</li>
           </ul>
-          <p class="font-bold">Montant type : 40 000€ à 100 000€</p>
+          <p class="mt-2 font-semibold">Montant type : 40 000€ à 100 000€</p>
         </div>
 
         <div class="bg-accent p-4 rounded-lg">
           <h4 class="font-bold mb-2">Source 4 : Aides & Prêts d'Honneur (5% à 15%)</h4>
-          <ul class="list-disc pl-6 space-y-1 text-sm mb-2">
+          <ul class="list-disc pl-6 space-y-1 text-sm">
             <li>Prêt d'honneur (0% taux)</li>
             <li>NACRE</li>
             <li>Aide reprise Pôle Emploi (ARCE)</li>
             <li>Garantie BPI France</li>
           </ul>
-          <p class="font-bold">Montant type : 20 000€ à 60 000€</p>
+          <p class="mt-2 font-semibold">Montant type : 20 000€ à 60 000€</p>
         </div>
       </div>
 
-      <div class="bg-accent p-6 rounded-lg mt-8">
-        <h3 class="text-xl font-bold mb-4">🎯 Vous avez un projet de reprise ?</h3>
-        <p>
-          Nos experts vous accompagnent gratuitement dans le montage financier optimal adapté à votre situation.
-        </p>
+      <h3 class="text-xl font-semibold mt-6 mb-3">Plan de Financement Optimal</h3>
+
+      <p class="mb-3 font-bold">Reprise 427 400€ - Montage recommandé :</p>
+
+      <div class="bg-muted p-6 rounded-lg mb-6 font-mono text-sm">
+        <p class="font-bold mb-2">APPORT PERSONNEL : 85 000€ (20%)</p>
+        <ul class="mb-3 space-y-1">
+          <li>├─ Épargne : 60 000€</li>
+          <li>├─ Aide familiale : 15 000€</li>
+          <li>└─ Vente voiture : 10 000€</li>
+        </ul>
+
+        <p class="font-bold mb-2 mt-4">PRÊT BANCAIRE : 240 000€ (56%)</p>
+        <ul class="mb-3 space-y-1">
+          <li>├─ Durée : 7 ans</li>
+          <li>├─ Taux : 4,5%</li>
+          <li>├─ Mensualité : 3 450€</li>
+          <li>└─ Garantie BPI : 60% (144 000€)</li>
+        </ul>
+
+        <p class="font-bold mb-2 mt-4">CRÉDIT-VENDEUR : 70 000€ (16%)</p>
+        <ul class="mb-3 space-y-1">
+          <li>├─ Durée : 3 ans</li>
+          <li>├─ Taux : 3%</li>
+          <li>├─ Mensualité : 2 040€</li>
+          <li>└─ Différé 6 mois possible</li>
+        </ul>
+
+        <p class="font-bold mb-2 mt-4">PRÊT D'HONNEUR : 32 400€ (8%)</p>
+        <ul class="mb-3 space-y-1">
+          <li>├─ Initiative France : 25 000€</li>
+          <li>├─ Réseau Entreprendre : 7 400€</li>
+          <li>├─ Taux : 0%</li>
+          <li>└─ Durée : 5 ans (540€/mois)</li>
+        </ul>
+
+        <p class="border-t border-border pt-2 mt-2 font-bold text-lg">TOTAL : 427 400€ (100%)</p>
+        <p class="font-bold text-primary">APPORT RÉEL : 85 000€ (20% seulement)</p>
+      </div>
+
+      <div class="bg-muted p-4 rounded-lg mb-6">
+        <p class="font-bold mb-2">MENSUALITÉS TOTALES :</p>
+        <ul class="space-y-1 text-sm">
+          <li>Années 1-3 : 6 030€/mois (tous crédits)</li>
+          <li>Années 4-5 : 3 990€/mois (banque + honneur)</li>
+          <li>Années 6-7 : 3 450€/mois (banque seule)</li>
+        </ul>
+      </div>
+
+      <div class="bg-muted p-4 rounded-lg mb-6">
+        <p class="font-bold mb-2">Capacité de remboursement :</p>
+        <ul class="space-y-1 text-sm">
+          <li>CA : 400 000€</li>
+          <li>EBE attendu : 16% = 64 000€/an = 5 330€/mois</li>
+          <li class="text-destructive font-bold">Marge après remboursements : Négative années 1-3 ❌</li>
+        </ul>
+      </div>
+
+      <div class="bg-destructive/10 p-6 rounded-lg mb-6">
+        <p class="font-bold mb-2">🚨 ATTENTION :</p>
+        <p>Ce montage est trop serré ! Il faut optimiser.</p>
+      </div>
+
+      <h2 class="text-2xl font-bold mt-8 mb-4">Partie 2 : Les 8 Leviers de Financement Détaillés</h2>
+
+      <h3 class="text-xl font-semibold mt-6 mb-3">Levier 1 : Apport Personnel (Le Socle)</h3>
+
+      <p class="mb-4"><strong>Montant minimal requis :</strong></p>
+      <ul class="list-disc pl-6 mb-4">
+        <li>Banques exigent : <strong>20% à 30%</strong> du projet total</li>
+        <li>Idéal : <strong>25%</strong> pour rassurer tous acteurs</li>
+      </ul>
+
+      <p class="mb-3 font-bold">Sources à explorer :</p>
+
+      <div class="space-y-4 mb-6">
+        <div class="bg-accent p-4 rounded-lg">
+          <h4 class="font-bold mb-2">1. Épargne classique</h4>
+          <ul class="list-disc pl-6 space-y-1 text-sm">
+            <li>Livret A, LDDS, LEP</li>
+            <li>Compte épargne</li>
+            <li>Assurance-vie (rachat partiel)</li>
+          </ul>
+          <div class="bg-primary/10 p-3 rounded mt-2">
+            <p class="text-sm"><strong>💡 Astuce :</strong> Gardez 6 mois de charges perso (15 000€) hors projet.</p>
+          </div>
+        </div>
+
+        <div class="bg-accent p-4 rounded-lg">
+          <h4 class="font-bold mb-2">2. Épargne salariale</h4>
+          <p class="text-sm mb-2"><strong>PEE (Plan Épargne Entreprise) :</strong></p>
+          <ul class="list-disc pl-6 space-y-1 text-sm mb-3">
+            <li>Déblocage anticipé pour création/reprise</li>
+            <li>Pas de pénalité fiscale</li>
+            <li>Délai : 2-4 semaines</li>
+          </ul>
+          <p class="text-sm mb-2"><strong>PERCO / PER :</strong></p>
+          <ul class="list-disc pl-6 space-y-1 text-sm">
+            <li>Déblocage possible (cas création entreprise)</li>
+            <li>Montant : Jusqu'à 100% encours</li>
+            <li>Fiscalité : Sortie en capital sans impôt (sauf prélèvements sociaux)</li>
+          </ul>
+          <div class="bg-muted p-3 rounded mt-3">
+            <p class="text-sm font-bold mb-1">📊 Cas réel :</p>
+            <p class="text-sm">Thomas, 42 ans, 15 ans expérience chantier :</p>
+            <ul class="list-disc pl-6 space-y-1 text-sm mt-1">
+              <li>PEE : 28 000€</li>
+              <li>PERCO : 17 000€</li>
+              <li><strong>Total disponible : 45 000€</strong> sans toucher épargne perso</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="bg-accent p-4 rounded-lg">
+          <h4 class="font-bold mb-2">3. Aide familiale / Love Money</h4>
+          <p class="text-sm mb-2"><strong>Donation familiale :</strong></p>
+          <ul class="list-disc pl-6 space-y-1 text-sm mb-3">
+            <li>Abattement parent → enfant : <strong>100 000€ / 15 ans</strong></li>
+            <li>Abattement grands-parents → petits-enfants : <strong>31 865€ / 15 ans</strong></li>
+            <li>Totalement défiscalisé</li>
+          </ul>
+          <p class="text-sm mb-2"><strong>Prêt familial :</strong></p>
+          <ul class="list-disc pl-6 space-y-1 text-sm mb-3">
+            <li>Jusqu'à 5 000€ : Aucune formalité</li>
+            <li>Au-delà : Déclaration fiscale obligatoire</li>
+            <li>Taux libre (0% possible)</li>
+            <li>Durée libre</li>
+          </ul>
+          <div class="bg-muted p-3 rounded">
+            <p class="text-sm font-bold mb-1">Exemple :</p>
+            <ul class="list-disc pl-6 space-y-1 text-sm">
+              <li>Parents : 30 000€ (donation)</li>
+              <li>Beaux-parents : 15 000€ (prêt 0%, 5 ans)</li>
+              <li><strong>Total : 45 000€ boost apport</strong></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="bg-accent p-4 rounded-lg">
+          <h4 class="font-bold mb-2">4. Vente patrimoine</h4>
+          <p class="text-sm mb-2"><strong>Options :</strong></p>
+          <ul class="list-disc pl-6 space-y-1 text-sm mb-2">
+            <li>2e voiture : 8 000€ à 15 000€</li>
+            <li>Moto/bateau : 5 000€ à 20 000€</li>
+            <li>Rachat assurance-vie : Variable</li>
+            <li>Déblocage PEA (&gt;5 ans) : Sans pénalité</li>
+          </ul>
+          <p class="text-sm text-destructive"><strong>⚠️ À éviter :</strong> Vendre résidence principale (trop risqué).</p>
+        </div>
+      </div>
+
+      <h3 class="text-xl font-semibold mt-8 mb-3">Levier 2 : Prêt Bancaire Professionnel</h3>
+
+      <p class="mb-3 font-bold">Conditions d'obtention 2026 :</p>
+
+      <div class="bg-muted p-4 rounded-lg mb-4">
+        <p class="font-bold mb-2">Critères banques :</p>
+        <ol class="list-decimal pl-6 space-y-1 text-sm">
+          <li><strong>Apport ≥ 20%</strong> du projet total</li>
+          <li><strong>Expérience métier</strong> : Mini 3 ans dans le BTP</li>
+          <li><strong>Business plan</strong> crédible (CA, rentabilité)</li>
+          <li><strong>Pas de fichage Banque de France</strong></li>
+          <li><strong>Taux d'endettement global</strong> &lt; 35%</li>
+        </ol>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-4 mb-6">
+        <div class="bg-accent p-4 rounded-lg">
+          <h4 class="font-bold mb-2">Montant finançable :</h4>
+          <ul class="list-disc pl-6 space-y-1 text-sm">
+            <li><strong>50% à 70%</strong> du projet total</li>
+            <li>Maximum : 3x le CA prévisionnel année 1</li>
+          </ul>
+        </div>
+
+        <div class="bg-accent p-4 rounded-lg">
+          <h4 class="font-bold mb-2">Durée :</h4>
+          <ul class="list-disc pl-6 space-y-1 text-sm">
+            <li>Standard : <strong>7 ans</strong></li>
+            <li>Possible : 5 à 10 ans</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="bg-muted p-4 rounded-lg mb-6">
+        <p class="font-bold mb-2">Taux 2026 :</p>
+        <ul class="list-disc pl-6 space-y-1 text-sm">
+          <li>Excellent dossier : <strong>4,2%</strong></li>
+          <li>Bon dossier : <strong>4,5%</strong></li>
+          <li>Dossier moyen : <strong>4,8%</strong></li>
+          <li>Avec garantie BPI : -0,3 point</li>
+        </ul>
+      </div>
+
+      <p class="mb-3 font-bold">Garanties exigées :</p>
+
+      <div class="space-y-3 mb-6">
+        <div class="bg-accent p-4 rounded-lg">
+          <h4 class="font-bold mb-2">1. Caution personnelle (systématique)</h4>
+          <ul class="list-disc pl-6 space-y-1 text-sm">
+            <li>Engagement patrimoine personnel</li>
+            <li>Solidaire : Conjoint impliqué</li>
+            <li>Montant : 100% à 150% prêt</li>
+          </ul>
+        </div>
+
+        <div class="bg-accent p-4 rounded-lg">
+          <h4 class="font-bold mb-2">2. Nantissement fonds de commerce</h4>
+          <ul class="list-disc pl-6 space-y-1 text-sm">
+            <li>Privilège banquier sur le fonds</li>
+            <li>Inscription au greffe</li>
+          </ul>
+        </div>
+
+        <div class="bg-accent p-4 rounded-lg">
+          <h4 class="font-bold mb-2">3. Garantie BPI France (recommandé)</h4>
+          <ul class="list-disc pl-6 space-y-1 text-sm">
+            <li>Couverture : 50% à 70% du prêt</li>
+            <li>Facilite accord bancaire</li>
+            <li>Réduit caution perso</li>
+            <li>Coût : 0,5% montant garanti</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="bg-primary/10 p-6 rounded-lg mb-6">
+        <p class="font-bold mb-3">Exemple chiffré :</p>
+        <div class="bg-muted p-4 rounded text-sm font-mono">
+          <p class="mb-2">Prêt bancaire : 200 000€</p>
+          <p class="mb-2">Durée : 7 ans</p>
+          <p class="mb-2">Taux : 4,5%</p>
+          <p class="mb-3">Mensualité : 2 875€</p>
+          
+          <p class="font-bold mt-3 mb-2">Avec garantie BPI (60%) :</p>
+          <p class="mb-1">Risque banque : 80 000€ (vs 200 000€)</p>
+          <p class="mb-1">→ Taux négocié : 4,2%</p>
+          <p class="mb-1">→ Mensualité : 2 820€</p>
+          <p class="mb-1">→ Économie : 55€/mois × 84 mois = 4 620€</p>
+        </div>
+        <p class="mt-3"><strong>Coût garantie BPI : 1 000€</strong></p>
+        <p class="font-bold text-primary">ROI : ×4,6 !</p>
+      </div>
+
+      <div class="bg-accent p-6 rounded-lg mb-6">
+        <p class="font-bold mb-3">Documents à préparer (dossier béton) :</p>
+        
+        <div class="mb-4">
+          <p class="font-semibold mb-2">Partie Projet :</p>
+          <ol class="list-decimal pl-6 space-y-1 text-sm">
+            <li>Business plan 3 ans (CA, charges, résultat)</li>
+            <li>Étude marché local</li>
+            <li>Présentation entreprise cible</li>
+            <li>Justificatif prix (estimation expert)</li>
+            <li>Lettre intention vendeur</li>
+          </ol>
+        </div>
+
+        <div class="mb-4">
+          <p class="font-semibold mb-2">Partie Personnelle :</p>
+          <ol class="list-decimal pl-6 space-y-1 text-sm" start="6">
+            <li>CV détaillé (focus expérience BTP)</li>
+            <li>Relevés bancaires 6 mois</li>
+            <li>Avis imposition N-1, N-2</li>
+            <li>Justificatifs patrimoine</li>
+            <li>Attestation épargne disponible</li>
+          </ol>
+        </div>
+
+        <div>
+          <p class="font-semibold mb-2">Partie Juridique :</p>
+          <ol class="list-decimal pl-6 space-y-1 text-sm" start="11">
+            <li>Protocole d'accord (si signé)</li>
+            <li>Statuts société cible</li>
+            <li>3 derniers bilans</li>
+            <li>Attestations fiscales/sociales</li>
+          </ol>
+        </div>
+
+        <p class="mt-4 text-sm"><strong>⏱️ Délai traitement :</strong> 3 à 6 semaines</p>
+      </div>
+
+      <h3 class="text-xl font-semibold mt-8 mb-3">Levier 3 : Crédit-Vendeur (L'Arme Secrète)</h3>
+
+      <div class="bg-primary/10 p-6 rounded-lg mb-4">
+        <p class="font-bold mb-2">Principe :</p>
+        <p>Le vendeur vous fait crédit d'une partie du prix (10% à 30%), payable en 2-4 ans.</p>
+      </div>
+
+      <p class="mb-3 font-bold">Pourquoi le vendeur accepte ?</p>
+
+      <div class="grid md:grid-cols-3 gap-4 mb-6">
+        <div class="bg-accent p-4 rounded-lg">
+          <h4 class="font-bold mb-2">1. Vendre plus vite</h4>
+          <ul class="list-disc pl-6 space-y-1 text-sm">
+            <li>Élargit le pool d'acheteurs</li>
+            <li>Vendeurs motivés (retraite, lassitude)</li>
+          </ul>
+        </div>
+
+        <div class="bg-accent p-4 rounded-lg">
+          <h4 class="font-bold mb-2">2. Optimisation fiscale</h4>
+          <ul class="list-disc pl-6 space-y-1 text-sm">
+            <li>Étalement plus-value sur plusieurs années</li>
+            <li>Réduction impôt global</li>
+          </ul>
+        </div>
+
+        <div class="bg-accent p-4 rounded-lg">
+          <h4 class="font-bold mb-2">3. Sécurité transmission</h4>
+          <ul class="list-disc pl-6 space-y-1 text-sm">
+            <li>Vendeur garde lien entreprise (via créance)</li>
+            <li>Intéressé à la réussite repreneur</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="space-y-4 mb-6">
+        <div class="bg-muted p-4 rounded-lg">
+          <p class="font-bold mb-2">Montant optimal :</p>
+          <ul class="list-disc pl-6 space-y-1 text-sm">
+            <li><strong>20% à 25%</strong> du prix</li>
+            <li>Ni trop (risque vendeur), ni trop peu (impact limité)</li>
+          </ul>
+        </div>
+
+        <div class="bg-muted p-4 rounded-lg">
+          <p class="font-bold mb-2">Durée :</p>
+          <ul class="list-disc pl-6 space-y-1 text-sm">
+            <li>Idéal : <strong>3 ans</strong></li>
+            <li>Mensualités gérables</li>
+            <li>Pas trop long (vendeur veut clôturer)</li>
+          </ul>
+        </div>
+
+        <div class="bg-muted p-4 rounded-lg">
+          <p class="font-bold mb-2">Taux :</p>
+          <ul class="list-disc pl-6 space-y-1 text-sm">
+            <li>Marché : <strong>2,5% à 4%</strong></li>
+            <li>Négociable (parfois 0% si vendeur pressé)</li>
+          </ul>
+        </div>
+      </div>
+
+      <p class="mb-3 font-bold">Modalités de paiement :</p>
+
+      <div class="grid md:grid-cols-3 gap-4 mb-6">
+        <div class="bg-accent p-4 rounded-lg font-mono text-xs">
+          <h4 class="font-bold mb-2 font-sans text-sm">Option A : Mensualités constantes</h4>
+          <p class="mb-1">Crédit-vendeur : 60 000€</p>
+          <p class="mb-1">Durée : 3 ans (36 mois)</p>
+          <p class="mb-1">Taux : 3%</p>
+          <p class="font-bold text-primary">Mensualité : 1 745€</p>
+        </div>
+
+        <div class="bg-accent p-4 rounded-lg font-mono text-xs">
+          <h4 class="font-bold mb-2 font-sans text-sm">Option B : Différé 6-12 mois</h4>
+          <p class="mb-1">Crédit-vendeur : 60 000€</p>
+          <p class="mb-1">Différé : 6 mois (0€)</p>
+          <p class="font-bold text-primary">Puis : 30 mois à 2 090€</p>
+        </div>
+
+        <div class="bg-accent p-4 rounded-lg font-mono text-xs">
+          <h4 class="font-bold mb-2 font-sans text-sm">Option C : Remboursement in fine</h4>
+          <p class="mb-1">Crédit-vendeur : 60 000€</p>
+          <p class="mb-1">Mensualités : Intérêts seuls (150€)</p>
+          <p class="font-bold text-primary">An 3 : Capital 60 000€ d'un coup</p>
+        </div>
+      </div>
+
+      <div class="bg-primary/10 p-6 rounded-lg mb-6">
+        <p class="font-bold mb-3">📊 Analyse impact :</p>
+        
+        <div class="grid md:grid-cols-2 gap-4">
+          <div class="bg-muted p-4 rounded text-sm">
+            <p class="font-bold mb-2">Sans crédit-vendeur :</p>
+            <ul class="space-y-1">
+              <li>Prix : 280 000€</li>
+              <li>Apport : 84 000€ (30%)</li>
+              <li>Prêt banque : 196 000€ (70%)</li>
+              <li class="font-bold">Mensualité : 2 820€</li>
+            </ul>
+          </div>
+
+          <div class="bg-muted p-4 rounded text-sm">
+            <p class="font-bold mb-2">Avec crédit-vendeur (20%) :</p>
+            <ul class="space-y-1">
+              <li>Prix : 280 000€</li>
+              <li>Apport : 56 000€ (20%)</li>
+              <li>Prêt banque : 168 000€ (60%)</li>
+              <li>Crédit-vendeur : 56 000€ (20%)</li>
+              <li class="font-bold">Mens. : 2 415€ + 1 630€ = 4 045€</li>
+            </ul>
+          </div>
+        </div>
+
+        <p class="mt-3 font-bold text-primary">🎯 Avantage : Apport divisé par 1,5 !</p>
+      </div>
+
+      <div class="bg-accent p-6 rounded-lg mb-6">
+        <p class="font-bold mb-3">Comment négocier crédit-vendeur :</p>
+        
+        <p class="text-sm mb-2"><strong>Timing :</strong> Après accord de principe, avant signature protocole.</p>
+        
+        <div class="bg-muted p-4 rounded-lg my-3">
+          <p class="text-sm font-bold mb-2">Argumentaire :</p>
+          <p class="text-sm italic">"Monsieur [Vendeur], votre entreprise m'intéresse énormément. Pour faciliter le financement bancaire et sécuriser la transmission, seriez-vous ouvert à un crédit-vendeur de 20% (56 000€) sur 3 ans à 3% ? Cela me permettrait de réduire mon prêt bancaire et vous garantit ma motivation sur le long terme."</p>
+        </div>
+
+        <p class="text-sm mb-2"><strong>Si refus :</strong> Proposez 10-15% ou différé 12 mois.</p>
+
+        <p class="text-sm mb-2"><strong>Garanties vendeur :</strong></p>
+        <ul class="list-disc pl-6 space-y-1 text-sm">
+          <li>Nantissement parts sociales</li>
+          <li>Privilège vendeur (inscrit au greffe)</li>
+          <li>Clause résolutoire (si non-paiement)</li>
+        </ul>
+      </div>
+
+      <h3 class="text-xl font-semibold mt-8 mb-3">Levier 4 : Prêts d'Honneur (Effet Turbo)</h3>
+
+      <div class="bg-primary/10 p-6 rounded-lg mb-4">
+        <p class="font-bold mb-2">Principe :</p>
+        <p>Prêts <strong>personnels à 0%</strong> accordés au repreneur (pas à l'entreprise), remboursables 3-5 ans.</p>
+      </div>
+
+      <p class="mb-3 font-bold">Les 3 Réseaux Majeurs :</p>
+
+      <div class="space-y-4 mb-6">
+        <div class="bg-accent p-6 rounded-lg">
+          <h4 class="font-bold mb-3">1. Initiative France</h4>
+          
+          <p class="mb-2"><strong>Montant :</strong> 3 000€ à 50 000€ (moyenne : 12 000€)</p>
+          
+          <p class="mb-2"><strong>Conditions :</strong></p>
+          <ul class="list-disc pl-6 space-y-1 text-sm mb-3">
+            <li>Projet création/reprise</li>
+            <li>Pas de garantie personnelle</li>
+            <li>Passage devant comité (présentation 15 min)</li>
+            <li>Accompagnement 3 ans offert</li>
+          </ul>
+
+          <div class="grid grid-cols-3 gap-2 mb-3">
+            <div class="bg-muted p-2 rounded text-center">
+              <p class="text-xs">Taux</p>
+              <p class="font-bold">0%</p>
+            </div>
+            <div class="bg-muted p-2 rounded text-center">
+              <p class="text-xs">Durée</p>
+              <p class="font-bold">3-5 ans</p>
+            </div>
+            <div class="bg-muted p-2 rounded text-center">
+              <p class="text-xs">Délai</p>
+              <p class="font-bold">4-6 sem.</p>
+            </div>
+          </div>
+
+          <div class="bg-primary/10 p-3 rounded mb-3">
+            <p class="text-sm font-bold mb-1">Effet levier :</p>
+            <p class="text-sm">1€ prêté = <strong>7€</strong> prêt bancaire facilité</p>
+            <p class="text-sm mt-2"><strong>Exemple :</strong></p>
+            <ul class="list-disc pl-6 space-y-1 text-sm">
+              <li>Prêt honneur : 25 000€</li>
+              <li>→ Banque accepte : 175 000€ (vs 140 000€ sans)</li>
+            </ul>
+          </div>
+
+          <p class="text-sm"><strong>Contact :</strong> <a href="https://www.initiative-france.fr" target="_blank" class="text-primary hover:underline">www.initiative-france.fr</a></p>
+        </div>
+
+        <div class="bg-accent p-6 rounded-lg">
+          <h4 class="font-bold mb-3">2. Réseau Entreprendre</h4>
+          
+          <p class="mb-2"><strong>Montant :</strong> 15 000€ à 90 000€ (moyenne : 35 000€)</p>
+          
+          <p class="mb-2"><strong>Conditions :</strong></p>
+          <ul class="list-disc pl-6 space-y-1 text-sm mb-3">
+            <li>Projet &gt;50 000€</li>
+            <li>Ambition croissance forte</li>
+            <li>Lauréat = Accompagnement entrepreneur expérimenté (mentor)</li>
+            <li>Engagement bénévole réseau</li>
+          </ul>
+
+          <div class="grid grid-cols-3 gap-2 mb-3">
+            <div class="bg-muted p-2 rounded text-center">
+              <p class="text-xs">Taux</p>
+              <p class="font-bold">0%</p>
+            </div>
+            <div class="bg-muted p-2 rounded text-center">
+              <p class="text-xs">Durée</p>
+              <p class="font-bold">5 ans</p>
+            </div>
+            <div class="bg-muted p-2 rounded text-center">
+              <p class="text-xs">Délai</p>
+              <p class="font-bold">6-8 sem.</p>
+            </div>
+          </div>
+
+          <div class="bg-primary/10 p-3 rounded mb-3">
+            <p class="text-sm font-bold">Bonus :</p>
+            <p class="text-sm">Mise en relation partenaires (experts-comptables, avocats, banques).</p>
+          </div>
+
+          <p class="text-sm"><strong>Contact :</strong> <a href="https://www.reseau-entreprendre.org" target="_blank" class="text-primary hover:underline">www.reseau-entreprendre.org</a></p>
+        </div>
+
+        <div class="bg-accent p-6 rounded-lg">
+          <h4 class="font-bold mb-3">3. ADIE (Micro-crédit)</h4>
+          
+          <p class="mb-2"><strong>Montant :</strong> 500€ à 12 000€</p>
+          
+          <p class="mb-2"><strong>Conditions :</strong></p>
+          <ul class="list-disc pl-6 space-y-1 text-sm mb-3">
+            <li>Projet &lt;50 000€</li>
+            <li>Situation précaire ou refus bancaire</li>
+            <li>Accompagnement obligatoire</li>
+          </ul>
+
+          <div class="grid grid-cols-2 gap-2 mb-3">
+            <div class="bg-muted p-2 rounded text-center">
+              <p class="text-xs">Taux</p>
+              <p class="font-bold">7,5%</p>
+            </div>
+            <div class="bg-muted p-2 rounded text-center">
+              <p class="text-xs">Durée</p>
+              <p class="font-bold">4 ans max</p>
+            </div>
+          </div>
+
+          <p class="text-sm mb-2"><strong>Pour qui :</strong> Petites reprises artisanales.</p>
+          <p class="text-sm"><strong>Contact :</strong> <a href="https://www.adie.org" target="_blank" class="text-primary hover:underline">www.adie.org</a></p>
+        </div>
+      </div>
+
+      <div class="bg-primary/10 p-6 rounded-lg mb-6">
+        <p class="font-bold mb-3">Stratégie optimale :</p>
+        <p class="mb-2"><strong>Cumuler Initiative France + Réseau Entreprendre :</strong></p>
+        <ul class="list-disc pl-6 space-y-1 mb-3">
+          <li>Initiative : 25 000€</li>
+          <li>Réseau Entreprendre : 35 000€</li>
+          <li class="font-bold text-primary">Total : 60 000€ à 0% 🔥</li>
+        </ul>
+
+        <div class="bg-muted p-4 rounded text-sm font-mono">
+          <p class="font-bold mb-2">Impact financement :</p>
+          <p class="mb-1">Projet : 400 000€</p>
+          <p class="mb-1">Apport perso : 60 000€</p>
+          <p class="mb-1">Prêt honneur : 60 000€</p>
+          <p class="mb-1">→ Apport total : 120 000€ (30%)</p>
+          <p class="mb-1">→ Prêt bancaire : 250 000€ (facilité)</p>
+          <p class="mb-1">→ Crédit-vendeur : 70 000€</p>
+        </div>
+
+        <div class="mt-3 bg-muted p-3 rounded text-sm">
+          <p class="font-bold mb-2">Mensualités :</p>
+          <ul class="space-y-1">
+            <li>Banque : 3 600€</li>
+            <li>Vendeur : 2 040€</li>
+            <li>Honneur : 1 000€</li>
+            <li class="font-bold">Total : 6 640€</li>
+          </ul>
+          <p class="mt-2">EBE entreprise : 5 300€</p>
+          <p class="text-destructive font-bold">Déficit : -1 340€/mois ❌ Toujours tendu !</p>
+        </div>
+
+        <p class="mt-3 text-sm"><strong>💡 Solution :</strong> Négocier différé 12 mois sur crédit-vendeur.</p>
+      </div>
+
+      <h3 class="text-xl font-semibold mt-8 mb-3">Levier 5 : ARCE (Aide Reprise Pôle Emploi)</h3>
+
+      <p class="mb-3 font-bold">Qui peut en bénéficier ?</p>
+
+      <div class="bg-accent p-4 rounded-lg mb-4">
+        <p class="font-bold mb-2">Conditions :</p>
+        <ul class="list-disc pl-6 space-y-1 text-sm">
+          <li>Bénéficiaire ARE (allocations chômage)</li>
+          <li>Créer ou reprendre entreprise</li>
+          <li>Obtenir ACRE (exonération charges)</li>
+        </ul>
+      </div>
+
+      <div class="bg-muted p-4 rounded-lg mb-4">
+        <p class="font-bold mb-2">Montant :</p>
+        <ul class="list-disc pl-6 space-y-1 text-sm">
+          <li><strong>45%</strong> des allocations restantes</li>
+          <li>Versement en <strong>2 fois</strong> :</li>
+          <li class="ml-4">- 50% à la création/reprise</li>
+          <li class="ml-4">- 50% six mois après (si activité maintenue)</li>
+        </ul>
+      </div>
+
+      <div class="bg-primary/10 p-6 rounded-lg mb-4">
+        <p class="font-bold mb-3">Exemple :</p>
+        <div class="bg-muted p-4 rounded text-sm font-mono">
+          <p class="mb-1">Allocations chômage restantes : 24 mois × 1 800€ = 43 200€</p>
+          <p class="mb-3">ARCE : 45% = 19 440€</p>
+          
+          <p class="mb-1">Versement 1 (création) : 9 720€</p>
+          <p class="mb-1">Versement 2 (6 mois après) : 9 720€</p>
+        </div>
+      </div>
+
+      <div class="bg-accent p-4 rounded-lg mb-4">
+        <p class="font-bold mb-2">🎯 Utilisation :</p>
+        <ul class="list-disc pl-6 space-y-1 text-sm">
+          <li>Boost apport personnel</li>
+          <li>Trésorerie sécurité premiers mois</li>
+          <li>Investissement matériel</li>
+        </ul>
+      </div>
+
+      <div class="bg-muted p-4 rounded-lg mb-6">
+        <p class="font-bold mb-2">Alternative :</p>
+        <p class="text-sm mb-2">Continuer à percevoir ARE mensuellement (si faible rémunération début).</p>
+        <p class="text-sm"><strong>Choix :</strong> ARCE si besoin apport. ARE si besoin revenus réguliers.</p>
+      </div>
+
+      <div class="bg-accent p-4 rounded-lg mb-6">
+        <p class="font-bold mb-2">Démarche :</p>
+        <ol class="list-decimal pl-6 space-y-1 text-sm">
+          <li>S'inscrire Pôle Emploi (si pas encore fait)</li>
+          <li>Déposer dossier ACRE</li>
+          <li>Créer/reprendre entreprise</li>
+          <li>Demander ARCE dans 45 jours</li>
+        </ol>
+        <p class="mt-3 text-sm"><strong>Délai versement :</strong> 3-4 semaines</p>
+      </div>
+
+      <h3 class="text-xl font-semibold mt-8 mb-3">Levier 6 : NACRE (Accompagnement + Prêt)</h3>
+
+      <div class="bg-primary/10 p-6 rounded-lg mb-4">
+        <p class="font-bold mb-2">Qu'est-ce que NACRE ?</p>
+        <p class="mb-3"><strong>Nouvel Accompagnement pour la Création et la Reprise d'Entreprise</strong></p>
+        
+        <p class="font-bold mb-2">3 Phases :</p>
+        <ol class="list-decimal pl-6 space-y-1 text-sm">
+          <li><strong>Aide montage projet</strong> (4 mois)</li>
+          <li><strong>Aide structuration financière</strong> (obtention prêts)</li>
+          <li><strong>Accompagnement développement</strong> (3 ans)</li>
+        </ol>
+      </div>
+
+      <div class="bg-accent p-6 rounded-lg mb-4">
+        <p class="font-bold mb-3">Prêt NACRE :</p>
+        <div class="grid grid-cols-4 gap-2 mb-3">
+          <div class="bg-muted p-2 rounded text-center">
+            <p class="text-xs">Montant</p>
+            <p class="font-bold text-sm">1K-10K€</p>
+          </div>
+          <div class="bg-muted p-2 rounded text-center">
+            <p class="text-xs">Taux</p>
+            <p class="font-bold text-sm">0%</p>
+          </div>
+          <div class="bg-muted p-2 rounded text-center">
+            <p class="text-xs">Durée</p>
+            <p class="font-bold text-sm">1-5 ans</p>
+          </div>
+          <div class="bg-muted p-2 rounded text-center">
+            <p class="text-xs">Garantie</p>
+            <p class="font-bold text-sm">Aucune</p>
+          </div>
+        </div>
+
+        <p class="font-bold mb-2">Conditions :</p>
+        <ul class="list-disc pl-6 space-y-1 text-sm">
+          <li>Demandeur emploi</li>
+          <li>Bénéficiaire RSA</li>
+          <li>Jeune -26 ans</li>
+          <li>Senior +50 ans</li>
+        </ul>
+      </div>
+
+      <div class="bg-muted p-4 rounded-lg mb-6">
+        <p class="font-bold mb-2">Bonus :</p>
+        <p class="text-sm mb-3">Accompagnement par organisme agréé (gratuit).</p>
+        
+        <p class="font-bold mb-2">Démarche :</p>
+        <ul class="list-disc pl-6 space-y-1 text-sm">
+          <li>Contact organisme agréé local (CCI, BGE, etc.)</li>
+          <li>Montage dossier</li>
+          <li>Validation</li>
+        </ul>
+        <p class="mt-2 text-sm"><strong>Délai :</strong> 6-8 semaines</p>
+      </div>
+
+      <h3 class="text-xl font-semibold mt-8 mb-3">Levier 7 : Garantie BPI France</h3>
+
+      <div class="bg-destructive/10 p-6 rounded-lg mb-4">
+        <p class="font-bold mb-2">⚠️ Ce n'est PAS un prêt</p>
+        <p>mais une <strong>garantie</strong> qui facilite obtention prêt bancaire.</p>
+      </div>
+
+      <div class="bg-primary/10 p-6 rounded-lg mb-4">
+        <p class="font-bold mb-2">Principe :</p>
+        <p>BPI France garantit 50% à 70% de votre prêt bancaire. Si vous ne remboursez pas, BPI rembourse la banque (partiellement).</p>
+      </div>
+
+      <div class="bg-accent p-6 rounded-lg mb-4">
+        <p class="font-bold mb-3">Avantages :</p>
+        <ul class="list-none space-y-2">
+          <li>✅ Banque prend moins de risque → Accord facilité</li>
+          <li>✅ Réduction caution personnelle</li>
+          <li>✅ Taux d'intérêt réduit (-0,2 à -0,4 point)</li>
+          <li>✅ Durée allongée possible</li>
+        </ul>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-4 mb-6">
+        <div class="bg-muted p-4 rounded-lg">
+          <p class="font-bold mb-2">Montant garanti :</p>
+          <ul class="list-disc pl-6 space-y-1 text-sm">
+            <li>50% à 70% du prêt</li>
+            <li>Plafond : 200 000€ de garantie</li>
+          </ul>
+        </div>
+
+        <div class="bg-muted p-4 rounded-lg">
+          <p class="font-bold mb-2">Coût :</p>
+          <ul class="list-disc pl-6 space-y-1 text-sm">
+            <li><strong>0,5%</strong> du montant garanti/an</li>
+            <li>Exemple : Garantie 100 000€ = 500€/an</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="bg-accent p-4 rounded-lg mb-4">
+        <p class="font-bold mb-2">Qui peut en bénéficier ?</p>
+        <ul class="list-disc pl-6 space-y-1 text-sm">
+          <li>TPE/PME &lt;50 salariés</li>
+          <li>Reprise d'entreprise</li>
+          <li>Refus bancaire initial ou besoin sécuriser</li>
+        </ul>
+      </div>
+
+      <div class="bg-muted p-4 rounded-lg mb-4">
+        <p class="font-bold mb-2">Démarche :</p>
+        <ol class="list-decimal pl-6 space-y-1 text-sm">
+          <li>Votre banque fait la demande (pas vous)</li>
+          <li>Dossier instruit par BPI (10-15 jours)</li>
+          <li>Accord/Refus</li>
+          <li>Si accord : Prêt bancaire débloqué</li>
+        </ol>
+        <p class="mt-3 text-sm"><strong>Taux d'acceptation :</strong> 89%</p>
+      </div>
+
+      <div class="bg-primary/10 p-6 rounded-lg mb-6">
+        <p class="font-bold mb-3">Exemple impact :</p>
+        
+        <div class="grid md:grid-cols-2 gap-4">
+          <div class="bg-muted p-4 rounded text-sm">
+            <p class="font-bold mb-2">SANS Garantie BPI :</p>
+            <ul class="space-y-1">
+              <li>Prêt : 180 000€</li>
+              <li>Taux : 4,8%</li>
+              <li>Caution perso : 100%</li>
+              <li class="font-bold">Mensualité : 2 590€</li>
+            </ul>
+          </div>
+
+          <div class="bg-muted p-4 rounded text-sm">
+            <p class="font-bold mb-2">AVEC Garantie BPI (60%) :</p>
+            <ul class="space-y-1">
+              <li>Prêt : 180 000€</li>
+              <li>Taux : 4,4% (-0,4)</li>
+              <li>Caution perso : 40%</li>
+              <li class="font-bold">Mensualité : 2 530€</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="mt-3 bg-muted p-3 rounded text-sm">
+          <p class="mb-1">Économie : 60€/mois × 84 = 5 040€</p>
+          <p class="mb-1">Coût garantie : 540€/an × 7 = 3 780€</p>
+          <p class="font-bold text-primary">Gain net : +1 260€</p>
+        </div>
+
+        <p class="mt-3 font-bold text-primary">+ Avantage majeur : Caution perso réduite de 60% !</p>
+      </div>
+
+      <h3 class="text-xl font-semibold mt-8 mb-3">Levier 8 : Crowdfunding & Love Money 2.0</h3>
+
+      <p class="mb-4 font-bold">Nouvelles solutions 2026 :</p>
+
+      <div class="space-y-4 mb-6">
+        <div class="bg-accent p-6 rounded-lg">
+          <h4 class="font-bold mb-3">1. Crowdlending (prêt participatif)</h4>
+          
+          <p class="mb-2"><strong>Plateformes :</strong></p>
+          <ul class="list-disc pl-6 space-y-1 text-sm mb-3">
+            <li>October</li>
+            <li>Lendopolis</li>
+            <li>Credit.fr</li>
+          </ul>
+
+          <p class="mb-2"><strong>Principe :</strong></p>
+          <ul class="list-disc pl-6 space-y-1 text-sm mb-3">
+            <li>Emprunt auprès de particuliers</li>
+            <li>Taux : 4% à 8%</li>
+            <li>Montant : 50 000€ à 500 000€</li>
+            <li>Durée : 2-5 ans</li>
+          </ul>
+
+          <div class="grid md:grid-cols-2 gap-3">
+            <div class="bg-muted p-3 rounded">
+              <p class="font-bold text-sm mb-2">Avantages :</p>
+              <ul class="list-disc pl-6 space-y-1 text-xs">
+                <li>Complément financement bancaire</li>
+                <li>Délai rapide (30 jours)</li>
+                <li>Médiatisation projet</li>
+              </ul>
+            </div>
+            <div class="bg-muted p-3 rounded">
+              <p class="font-bold text-sm mb-2">Inconvénients :</p>
+              <ul class="list-disc pl-6 space-y-1 text-xs">
+                <li>Taux &gt;banque</li>
+                <li>Transparence publique obligatoire</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-accent p-6 rounded-lg">
+          <h4 class="font-bold mb-3">2. Equity crowdfunding (entrée capital)</h4>
+          
+          <p class="mb-2"><strong>Plateformes :</strong></p>
+          <ul class="list-disc pl-6 space-y-1 text-sm mb-3">
+            <li>WiSEED</li>
+            <li>Sowefund</li>
+            <li>Fundimmo</li>
+          </ul>
+
+          <p class="mb-2"><strong>Principe :</strong></p>
+          <ul class="list-disc pl-6 space-y-1 text-sm mb-3">
+            <li>Investisseurs prennent parts capital (5-20%)</li>
+            <li>Vous gardez contrôle (&gt;51%)</li>
+            <li>Sortie investisseurs : 5-7 ans (revente ou rachat parts)</li>
+          </ul>
+
+          <p class="text-sm mb-2"><strong>Montant :</strong> 100 000€ à 1M€</p>
+          <p class="text-sm"><strong>Pour qui :</strong> Grosses reprises (CA &gt;1M€) avec plan croissance ambitieux.</p>
+        </div>
+
+        <div class="bg-accent p-6 rounded-lg">
+          <h4 class="font-bold mb-3">3. Love Money digitalisé</h4>
+          
+          <p class="mb-2"><strong>Plateformes :</strong></p>
+          <ul class="list-disc pl-6 space-y-1 text-sm mb-3">
+            <li>Tudigo</li>
+            <li>KissKissBankBank Pro</li>
+          </ul>
+
+          <p class="mb-2"><strong>Principe :</strong></p>
+          <ul class="list-disc pl-6 space-y-1 text-sm mb-3">
+            <li>Famille, amis, réseau investissent</li>
+            <li>Formalisé via plateforme (sécurité juridique)</li>
+            <li>Prêt ou capital</li>
+          </ul>
+
+          <p class="text-sm mb-2"><strong>Montant :</strong> 10 000€ à 100 000€</p>
+          <p class="text-sm"><strong>Avantage :</strong> Formalise "amis" en vrais investisseurs.</p>
+        </div>
+      </div>
+
+      <h2 class="text-2xl font-bold mt-8 mb-4">Partie 3 : Montages Financiers Selon Profils</h2>
+
+      <div class="space-y-8 mb-8">
+        <div class="border border-border rounded-lg p-6">
+          <h3 class="text-xl font-semibold mb-4">Profil 1 : Salarié BTP avec Épargne</h3>
+          
+          <div class="bg-muted p-4 rounded-lg mb-4">
+            <p class="font-bold mb-2">Situation :</p>
+            <ul class="list-disc pl-6 space-y-1 text-sm">
+              <li>Âge : 35 ans</li>
+              <li>Expérience : 12 ans plombier</li>
+              <li>Épargne : 70 000€</li>
+              <li>Crédit immo : 1 200€/mois (reste 18 ans)</li>
+            </ul>
+          </div>
+
+          <p class="mb-3 font-bold">Projet : Reprise entreprise plomberie 350K€ CA - Prix 245 000€</p>
+          <p class="mb-4"><strong>Budget total :</strong> 350 000€ (acquisition + FDR + frais)</p>
+
+          <div class="bg-accent p-6 rounded-lg font-mono text-xs mb-4">
+            <p class="font-bold mb-2 font-sans text-sm">Plan financement :</p>
+            
+            <p class="font-bold mt-3 mb-1">APPORT PERSONNEL : 70 000€ (20%)</p>
+            <p class="mb-3">├─ Épargne disponible : 70 000€</p>
+
+            <p class="font-bold mt-3 mb-1">PRÊT BANCAIRE : 190 000€ (54%)</p>
+            <p class="mb-1">├─ Durée : 7 ans</p>
+            <p class="mb-1">├─ Taux : 4,3%</p>
+            <p class="mb-1">├─ Garantie BPI : 60%</p>
+            <p class="mb-3">└─ Mensualité : 2 730€</p>
+
+            <p class="font-bold mt-3 mb-1">CRÉDIT-VENDEUR : 60 000€ (17%)</p>
+            <p class="mb-1">├─ Durée : 3 ans</p>
+            <p class="mb-1">├─ Taux : 3%</p>
+            <p class="mb-1">├─ Différé : 6 mois</p>
+            <p class="mb-3">└─ Mensualité : 2 090€ (après différé)</p>
+
+            <p class="font-bold mt-3 mb-1">PRÊT HONNEUR : 30 000€ (9%)</p>
+            <p class="mb-1">├─ Initiative France : 15 000€</p>
+            <p class="mb-1">├─ Réseau Entreprendre : 15 000€</p>
+            <p class="mb-1">├─ Taux : 0%</p>
+            <p class="mb-3">└─ Mensualité : 500€</p>
+
+            <p class="border-t border-border pt-2 mt-2 font-bold">TOTAL : 350 000€</p>
+            <p class="font-bold text-primary">APPORT RÉEL : 70 000€ (20%)</p>
+          </div>
+
+          <div class="bg-muted p-4 rounded-lg mb-4">
+            <p class="font-bold mb-2">Mensualités :</p>
+            <ul class="space-y-1 text-sm">
+              <li>Mois 1-6 : 2 730€ + 500€ = 3 230€</li>
+              <li>Mois 7-36 : 2 730€ + 2 090€ + 500€ = 5 320€</li>
+              <li>Mois 37-60 : 2 730€ + 500€ = 3 230€</li>
+              <li>Mois 61-84 : 2 730€</li>
+            </ul>
+          </div>
+
+          <div class="bg-destructive/10 p-4 rounded-lg">
+            <p class="font-bold mb-2">Capacité remboursement :</p>
+            <ul class="space-y-1 text-sm">
+              <li>EBE attendu : 56 000€/an = 4 670€/mois</li>
+              <li>Salaire dirigeant : 2 500€/mois</li>
+              <li class="text-destructive font-bold">Marge années 1-3 : Négative ❌</li>
+            </ul>
+            <p class="mt-3 text-sm"><strong>💡 Solution :</strong> Négocier différé 12 mois vendeur + Salaire 2 000€ au lieu de 2 500€.</p>
+          </div>
+        </div>
+
+        <div class="border border-border rounded-lg p-6">
+          <h3 class="text-xl font-semibold mb-4">Profil 2 : Demandeur d'Emploi (Indemnisé)</h3>
+          
+          <div class="bg-muted p-4 rounded-lg mb-4">
+            <p class="font-bold mb-2">Situation :</p>
+            <ul class="list-disc pl-6 space-y-1 text-sm">
+              <li>Âge : 48 ans</li>
+              <li>Expérience : 20 ans chef de chantier</li>
+              <li>Licenciement économique il y a 4 mois</li>
+              <li>ARE : 1 950€/mois × 18 mois restants = 35 100€</li>
+              <li>Épargne : 25 000€</li>
+            </ul>
+          </div>
+
+          <p class="mb-3 font-bold">Projet : Reprise entreprise électricité 280K€ CA - Prix 190 000€</p>
+          <p class="mb-4"><strong>Budget total :</strong> 280 000€</p>
+
+          <div class="bg-accent p-6 rounded-lg font-mono text-xs mb-4">
+            <p class="font-bold mb-2 font-sans text-sm">Plan financement :</p>
+            
+            <p class="font-bold mt-3 mb-1">APPORT PERSONNEL : 25 000€ (9%)</p>
+            <p class="mb-3">├─ Épargne : 25 000€</p>
+
+            <p class="font-bold mt-3 mb-1">ARCE (Pôle Emploi) : 15 800€ (6%)</p>
+            <p class="mb-1">├─ 45% × 35 100€ = 15 795€</p>
+            <p class="mb-1">├─ Versement 1 : 7 900€ (immédiat)</p>
+            <p class="mb-3">└─ Versement 2 : 7 900€ (6 mois après)</p>
+
+            <p class="font-bold mt-3 mb-1">PRÊT BANCAIRE : 160 000€ (57%)</p>
+            <p class="mb-1">├─ Durée : 7 ans</p>
+            <p class="mb-1">├─ Taux : 4,5%</p>
+            <p class="mb-1">├─ Garantie BPI : 70%</p>
+            <p class="mb-3">└─ Mensualité : 2 300€</p>
+
+            <p class="font-bold mt-3 mb-1">CRÉDIT-VENDEUR : 50 000€ (18%)</p>
+            <p class="mb-1">├─ Durée : 4 ans</p>
+            <p class="mb-1">├─ Taux : 2,5%</p>
+            <p class="mb-1">├─ Différé : 12 mois</p>
+            <p class="mb-3">└─ Mensualité : 1 460€ (après différé)</p>
+
+            <p class="font-bold mt-3 mb-1">PRÊT HONNEUR : 20 000€ (7%)</p>
+            <p class="mb-1">├─ Initiative France : 20 000€</p>
+            <p class="mb-1">├─ Taux : 0%</p>
+            <p class="mb-3">└─ Mensualité : 335€</p>
+
+            <p class="font-bold mt-3 mb-1">NACRE : 10 000€ (3%)</p>
+            <p class="mb-1">├─ Taux : 0%</p>
+            <p class="mb-3">└─ Mensualité : 170€</p>
+
+            <p class="border-t border-border pt-2 mt-2 font-bold">TOTAL : 280 800€</p>
+            <p class="font-bold text-primary">APPORT RÉEL : 25 000€ (9% seulement !)</p>
+          </div>
+
+          <div class="bg-muted p-4 rounded-lg mb-4">
+            <p class="font-bold mb-2">Mensualités :</p>
+            <ul class="space-y-1 text-sm">
+              <li>Mois 1-12 : 2 300€ + 335€ + 170€ = 2 805€</li>
+              <li>Mois 13-48 : 2 300€ + 1 460€ + 335€ + 170€ = 4 265€</li>
+              <li>Mois 49-60 : 2 300€ + 335€ + 170€ = 2 805€</li>
+              <li>Mois 61-84 : 2 300€</li>
+            </ul>
+          </div>
+
+          <div class="bg-primary/10 p-4 rounded-lg">
+            <p class="font-bold mb-2">Trésorerie année 1 :</p>
+            <ul class="space-y-1 text-sm">
+              <li>EBE : 45 000€/an = 3 750€/mois</li>
+              <li>Mensualités : 2 805€</li>
+              <li class="text-primary font-bold">Marge : +945€/mois ✅</li>
+            </ul>
+            <p class="mt-3 font-bold text-primary">🎯 Ce montage fonctionne !</p>
+          </div>
+        </div>
+
+        <div class="border border-border rounded-lg p-6">
+          <h3 class="text-xl font-semibold mb-4">Profil 3 : Jeune sans Apport (&lt;30 ans)</h3>
+          
+          <div class="bg-muted p-4 rounded-lg mb-4">
+            <p class="font-bold mb-2">Situation :</p>
+            <ul class="list-disc pl-6 space-y-1 text-sm">
+              <li>Âge : 28 ans</li>
+              <li>Expérience : 6 ans maçon</li>
+              <li>Épargne : 12 000€ (faible)</li>
+              <li>Pas de crédit en cours</li>
+            </ul>
+          </div>
+
+          <p class="mb-3 font-bold">Projet : Reprise petite entreprise maçonnerie 180K€ CA - Prix 110 000€</p>
+          <p class="mb-4"><strong>Budget total :</strong> 165 000€</p>
+
+          <div class="bg-accent p-6 rounded-lg font-mono text-xs mb-4">
+            <p class="font-bold mb-2 font-sans text-sm">Plan financement :</p>
+            
+            <p class="font-bold mt-3 mb-1">APPORT PERSONNEL : 12 000€ (7%)</p>
+            <p class="mb-1">├─ Épargne : 10 000€</p>
+            <p class="mb-3">└─ Aide parents : 2 000€</p>
+
+            <p class="font-bold mt-3 mb-1">PRÊT BANCAIRE : 90 000€ (55%)</p>
+            <p class="mb-1">├─ Durée : 7 ans</p>
+            <p class="mb-1">├─ Taux : 4,6%</p>
+            <p class="mb-1">├─ Garantie BPI : 70%</p>
+            <p class="mb-3">└─ Mensualité : 1 295€</p>
+
+            <p class="font-bold mt-3 mb-1">CRÉDIT-VENDEUR : 35 000€ (21%)</p>
+            <p class="mb-1">├─ Durée : 4 ans</p>
+            <p class="mb-1">├─ Taux : 3%</p>
+            <p class="mb-3">└─ Mensualité : 775€</p>
+
+            <p class="font-bold mt-3 mb-1">PRÊT HONNEUR : 18 000€ (11%)</p>
+            <p class="mb-1">├─ Initiative France : 10 000€</p>
+            <p class="mb-1">├─ Réseau Entreprendre : 8 000€</p>
+            <p class="mb-3">└─ Mensualité : 300€</p>
+
+            <p class="font-bold mt-3 mb-1">NACRE : 10 000€ (6%)</p>
+            <p class="mb-1">├─ Taux : 0%</p>
+            <p class="mb-3">└─ Mensualité : 170€</p>
+
+            <p class="border-t border-border pt-2 mt-2 font-bold">TOTAL : 165 000€</p>
+            <p class="font-bold text-primary">APPORT RÉEL : 12 000€ (7% seulement !)</p>
+          </div>
+
+          <div class="bg-muted p-4 rounded-lg mb-4">
+            <p class="font-bold mb-2">Mensualités :</p>
+            <ul class="space-y-1 text-sm">
+              <li>Années 1-4 : 1 295€ + 775€ + 300€ + 170€ = 2 540€</li>
+              <li>Années 5-7 : 1 295€ + 300€ = 1 595€</li>
+            </ul>
+          </div>
+
+          <div class="bg-destructive/10 p-4 rounded-lg mb-4">
+            <p class="font-bold mb-2">Capacité remboursement :</p>
+            <ul class="space-y-1 text-sm">
+              <li>EBE : 28 000€/an = 2 330€/mois</li>
+              <li class="text-destructive font-bold">Déficit années 1-4 : -210€/mois ❌</li>
+            </ul>
+          </div>
+
+          <div class="bg-primary/10 p-4 rounded-lg">
+            <p class="font-bold mb-2">💡 Solutions :</p>
+            <ol class="list-decimal pl-6 space-y-1 text-sm">
+              <li>Salaire dirigeant mini (1 500€ vs 2 000€ prévu)</li>
+              <li>Développer CA +10% dès année 1</li>
+              <li>Différé 6 mois crédit-vendeur</li>
+            </ol>
+            <p class="mt-3 font-bold text-primary">Avec ajustements : Équilibre atteint ! ✅</p>
+          </div>
+        </div>
+
+        <div class="border border-border rounded-lg p-6">
+          <h3 class="text-xl font-semibold mb-4">Profil 4 : Cadre BTP avec Gros Apport</h3>
+          
+          <div class="bg-muted p-4 rounded-lg mb-4">
+            <p class="font-bold mb-2">Situation :</p>
+            <ul class="list-disc pl-6 space-y-1 text-sm">
+              <li>Âge : 45 ans</li>
+              <li>Directeur travaux grand groupe</li>
+              <li>Épargne : 180 000€</li>
+              <li>Envie d'indépendance</li>
+            </ul>
+          </div>
+
+          <p class="mb-3 font-bold">Projet : Reprise PME rénovation 1,2M€ CA - Prix 850 000€</p>
+          <p class="mb-4"><strong>Budget total :</strong> 1 150 000€</p>
+
+          <div class="bg-accent p-6 rounded-lg font-mono text-xs mb-4">
+            <p class="font-bold mb-2 font-sans text-sm">Plan financement :</p>
+            
+            <p class="font-bold mt-3 mb-1">APPORT PERSONNEL : 250 000€ (22%)</p>
+            <p class="mb-1">├─ Épargne : 180 000€</p>
+            <p class="mb-1">├─ Rachat assurance-vie : 50 000€</p>
+            <p class="mb-3">└─ Aide familiale : 20 000€</p>
+
+            <p class="font-bold mt-3 mb-1">PRÊT BANCAIRE : 600 000€ (52%)</p>
+            <p class="mb-1">├─ Durée : 7 ans</p>
+            <p class="mb-1">├─ Taux : 4,1%</p>
+            <p class="mb-1">├─ Garantie BPI : 50%</p>
+            <p class="mb-3">└─ Mensualité : 8 630€</p>
+
+            <p class="font-bold mt-3 mb-1">CRÉDIT-VENDEUR : 200 000€ (17%)</p>
+            <p class="mb-1">├─ Durée : 3 ans</p>
+            <p class="mb-1">├─ Taux : 3%</p>
+            <p class="mb-3">└─ Mensualité : 5 820€</p>
+
+            <p class="font-bold mt-3 mb-1">PRÊT HONNEUR : 50 000€ (4%)</p>
+            <p class="mb-1">├─ Réseau Entreprendre : 50 000€</p>
+            <p class="mb-1">├─ Taux : 0%</p>
+            <p class="mb-3">└─ Mensualité : 835€</p>
+
+            <p class="font-bold mt-3 mb-1">OBLIGATION CONVERTIBLE : 50 000€ (4%)</p>
+            <p class="mb-1">├─ Investisseur privé (ami entrepreneur)</p>
+            <p class="mb-1">├─ Taux : 4%</p>
+            <p class="mb-1">├─ Conversion actions si croissance &gt;20%</p>
+            <p class="mb-3">└─ Sinon : Remboursement 5 ans</p>
+
+            <p class="border-t border-border pt-2 mt-2 font-bold">TOTAL : 1 150 000€</p>
+            <p class="font-bold text-primary">APPORT RÉEL : 250 000€ (22%)</p>
+          </div>
+
+          <div class="bg-muted p-4 rounded-lg mb-4">
+            <p class="font-bold mb-2">Mensualités :</p>
+            <ul class="space-y-1 text-sm">
+              <li>Années 1-3 : 8 630€ + 5 820€ + 835€ + 165€ = 15 450€</li>
+              <li>Années 4-5 : 8 630€ + 835€ + 165€ = 9 630€</li>
+              <li>Années 6-7 : 8 630€ + 165€ = 8 795€</li>
+            </ul>
+          </div>
+
+          <div class="bg-primary/10 p-4 rounded-lg">
+            <p class="font-bold mb-2">Capacité remboursement :</p>
+            <ul class="space-y-1 text-sm">
+              <li>EBE : 180 000€/an = 15 000€/mois</li>
+              <li>Années 1-3 : Limite ⚠️</li>
+              <li>Années 4-7 : Confortable ✅</li>
+            </ul>
+            <p class="mt-3"><strong>Salaire dirigeant :</strong> 5 000€/mois (confortable)</p>
+          </div>
+        </div>
+      </div>
+
+      <h2 class="text-2xl font-bold mt-8 mb-4">Partie 4 : Pièges à Éviter Absolument</h2>
+
+      <div class="space-y-6 mb-8">
+        <div class="bg-destructive/10 border-l-4 border-destructive p-6 rounded-lg">
+          <h3 class="text-xl font-semibold mb-3">❌ Erreur 1 : Sous-Estimer le BFR</h3>
+          
+          <div class="bg-background/50 p-4 rounded mb-3">
+            <p class="font-bold mb-1">Le piège :</p>
+            <p class="text-sm">"Je reprends à 250K€, j'ai 250K€, c'est bon !"</p>
+          </div>
+
+          <div class="bg-background/50 p-4 rounded mb-3">
+            <p class="font-bold mb-1">Oubli :</p>
+            <ul class="list-disc pl-6 space-y-1 text-sm">
+              <li>Frais acquisition : 15K€</li>
+              <li>BFR : 70K€</li>
+              <li>Trésorerie sécurité : 20K€</li>
+            </ul>
+          </div>
+
+          <p class="text-sm mb-3"><strong>Résultat :</strong> Manque 105K€ → Trésorerie négative mois 2 → Panique.</p>
+
+          <div class="bg-primary/10 p-3 rounded">
+            <p class="font-bold text-sm">✅ Solution :</p>
+            <p class="text-sm">Budget total = Prix + 30% minimum.</p>
+          </div>
+        </div>
+
+        <div class="bg-destructive/10 border-l-4 border-destructive p-6 rounded-lg">
+          <h3 class="text-xl font-semibold mb-3">❌ Erreur 2 : Taux d'Endettement Trop Élevé</h3>
+          
+          <div class="bg-background/50 p-4 rounded mb-3">
+            <p class="font-bold mb-1">Le piège :</p>
+            <p class="text-sm">Mensualités totales (crédit immo perso + crédit reprise) &gt; 70% revenus.</p>
+          </div>
+
+          <div class="bg-background/50 p-4 rounded mb-3">
+            <p class="font-bold mb-1">Exemple :</p>
+            <ul class="list-none space-y-1 text-sm">
+              <li>Crédit immo : 1 200€</li>
+              <li>Crédit reprise : 5 500€</li>
+              <li>Total : 6 700€</li>
+              <li>Revenus foyer : 4 500€ (salaire dirigeant prévu)</li>
+              <li class="font-bold text-destructive">Taux : 149% 💥</li>
+            </ul>
+          </div>
+
+          <p class="text-sm mb-3"><strong>Conséquence :</strong> Vie impossible, stress, erreurs gestion.</p>
+
+          <div class="bg-primary/10 p-3 rounded">
+            <p class="font-bold text-sm">✅ Solution :</p>
+            <p class="text-sm">Taux endettement global max : <strong>60%</strong> (idéal : 50%).</p>
+          </div>
+        </div>
+
+        <div class="bg-destructive/10 border-l-4 border-destructive p-6 rounded-lg">
+          <h3 class="text-xl font-semibold mb-3">❌ Erreur 3 : Négliger Assurances Emprunteur</h3>
+          
+          <div class="bg-background/50 p-4 rounded mb-3">
+            <p class="font-bold mb-1">Le piège :</p>
+            <p class="text-sm">Accepter assurance groupe banque (chère) sans comparer.</p>
+          </div>
+
+          <div class="bg-background/50 p-4 rounded mb-3">
+            <p class="font-bold mb-1">Coût assurance :</p>
+            <ul class="list-none space-y-1 text-sm">
+              <li>Assurance groupe banque : 0,36% capital</li>
+              <li>Assurance déléguée : 0,18% capital</li>
+            </ul>
+            <p class="mt-2 text-sm"><strong>Sur prêt 200K€ / 7 ans :</strong></p>
+            <ul class="list-none space-y-1 text-sm mt-1">
+              <li>Groupe : 5 040€</li>
+              <li>Déléguée : 2 520€</li>
+              <li class="font-bold text-primary">Économie : 2 520€ ✅</li>
+            </ul>
+          </div>
+
+          <div class="bg-primary/10 p-3 rounded">
+            <p class="font-bold text-sm">✅ Solution :</p>
+            <p class="text-sm">Toujours comparer avec délégation assurance (loi Lagarde).</p>
+          </div>
+        </div>
+
+        <div class="bg-destructive/10 border-l-4 border-destructive p-6 rounded-lg">
+          <h3 class="text-xl font-semibold mb-3">❌ Erreur 4 : Oublier Fiscalité Plus-Value Vendeur</h3>
+          
+          <div class="bg-background/50 p-4 rounded mb-3">
+            <p class="font-bold mb-1">Le piège :</p>
+            <p class="text-sm">Vendeur accepte crédit-vendeur mais oublie qu'il paiera impôt sur plus-value année 1 (même si payé en 3 ans).</p>
+          </div>
+
+          <div class="bg-background/50 p-4 rounded mb-3">
+            <p class="font-bold mb-1">Exemple :</p>
+            <ul class="list-none space-y-1 text-sm">
+              <li>Prix : 300K€</li>
+              <li>Plus-value : 150K€</li>
+              <li>Impôt (30%) : <strong>45K€ dû année 1</strong></li>
+              <li>Crédit-vendeur : 60K€ payé sur 3 ans</li>
+            </ul>
+            <p class="mt-2 text-sm italic">"Je dois payer 45K€ d'impôt mais reçois que 20K€/an !"</p>
+          </div>
+
+          <p class="text-sm mb-3"><strong>Conséquence :</strong> Vendeur refuse ou renégocie.</p>
+
+          <div class="bg-primary/10 p-3 rounded">
+            <p class="font-bold text-sm">✅ Solution :</p>
+            <p class="text-sm">Intégrez fiscalité vendeur dans négociation. Proposez versement anticipé ou paiement accéléré année 1.</p>
+          </div>
+        </div>
+
+        <div class="bg-destructive/10 border-l-4 border-destructive p-6 rounded-lg">
+          <h3 class="text-xl font-semibold mb-3">❌ Erreur 5 : Business Plan Irréaliste</h3>
+          
+          <div class="bg-background/50 p-4 rounded mb-3">
+            <p class="font-bold mb-1">Le piège :</p>
+            <p class="text-sm">"Je vais doubler le CA année 1 !"</p>
+            <p class="text-sm mt-1"><strong>Banque :</strong> "Non."</p>
+          </div>
+
+          <p class="text-sm mb-3"><strong>Conséquence :</strong> Refus financement.</p>
+
+          <div class="bg-primary/10 p-3 rounded">
+            <p class="font-bold text-sm mb-2">✅ Solution :</p>
+            <p class="text-sm mb-2">Business plan conservateur :</p>
+            <ul class="list-disc pl-6 space-y-1 text-sm">
+              <li>Année 1 : CA stable (±5%)</li>
+              <li>Année 2 : +10% à +15%</li>
+              <li>Année 3 : +15% à +20%</li>
+            </ul>
+            <p class="text-sm mt-2"><strong>Crédibilité &gt; Optimisme.</strong></p>
+          </div>
+        </div>
+      </div>
+
+      <h2 class="text-2xl font-bold mt-8 mb-4">Partie 5 : Calendrier & Étapes Pratiques</h2>
+
+      <h3 class="text-xl font-semibold mt-6 mb-4">Planning Financement (J-90 à J0)</h3>
+
+      <div class="space-y-4 mb-8">
+        <div class="bg-accent p-6 rounded-lg">
+          <h4 class="font-bold mb-3">J-90 : Constitution Dossier</h4>
+          <ul class="list-none space-y-2">
+            <li>✅ Identifier entreprise cible</li>
+            <li>✅ Négocier prix & conditions</li>
+            <li>✅ Protocole d'accord signé (sous conditions)</li>
+          </ul>
+        </div>
+
+        <div class="bg-accent p-6 rounded-lg">
+          <h4 class="font-bold mb-3">J-75 : Préparation Financière</h4>
+          <ul class="list-none space-y-2">
+            <li>✅ Calculer budget total (acquisition + FDR + frais)</li>
+            <li>✅ Évaluer apport personnel disponible</li>
+            <li>✅ Identifier gap financement</li>
+          </ul>
+        </div>
+
+        <div class="bg-accent p-6 rounded-lg">
+          <h4 class="font-bold mb-3">J-60 : Demandes Aides</h4>
+          <ul class="list-none space-y-2">
+            <li>✅ Dossier Initiative France</li>
+            <li>✅ Dossier Réseau Entreprendre</li>
+            <li>✅ Dossier NACRE (si éligible)</li>
+            <li>✅ Dossier ARCE (si chômage)</li>
+          </ul>
+        </div>
+
+        <div class="bg-accent p-6 rounded-lg">
+          <h4 class="font-bold mb-3">J-45 : Business Plan</h4>
+          <ul class="list-none space-y-2">
+            <li>✅ Rédaction BP 3 ans</li>
+            <li>✅ Tableaux financiers (CA, charges, tréso)</li>
+            <li>✅ Validation expert-comptable</li>
+          </ul>
+        </div>
+
+        <div class="bg-accent p-6 rounded-lg">
+          <h4 class="font-bold mb-3">J-40 : Demande Bancaire</h4>
+          <ul class="list-none space-y-2">
+            <li>✅ Dossier bancaire complet</li>
+            <li>✅ RDV 2-3 banques (comparer offres)</li>
+            <li>✅ Demande garantie BPI France</li>
+          </ul>
+        </div>
+
+        <div class="bg-accent p-6 rounded-lg">
+          <h4 class="font-bold mb-3">J-25 : Négociation Crédit-Vendeur</h4>
+          <ul class="list-none space-y-2">
+            <li>✅ Proposition crédit-vendeur au vendeur</li>
+            <li>✅ Négociation montant/durée/taux</li>
+            <li>✅ Accord écrit</li>
+          </ul>
+        </div>
+
+        <div class="bg-accent p-6 rounded-lg">
+          <h4 class="font-bold mb-3">J-15 : Validation Financements</h4>
+          <ul class="list-none space-y-2">
+            <li>✅ Accord bancaire reçu</li>
+            <li>✅ Accord prêts honneur reçus</li>
+            <li>✅ Accord vendeur crédit-vendeur</li>
+          </ul>
+        </div>
+
+        <div class="bg-accent p-6 rounded-lg">
+          <h4 class="font-bold mb-3">J-7 : Finalisation</h4>
+          <ul class="list-none space-y-2">
+            <li>✅ Offre prêt bancaire signée (délai rétractation 10j)</li>
+            <li>✅ Conventions prêts honneur signées</li>
+            <li>✅ Protocole achat définitif signé</li>
+          </ul>
+        </div>
+
+        <div class="bg-primary/10 p-6 rounded-lg">
+          <h4 class="font-bold mb-3">J0 : Déblocage & Achat</h4>
+          <ul class="list-none space-y-2">
+            <li>✅ Déblocage fonds bancaires</li>
+            <li>✅ Virement apport personnel</li>
+            <li>✅ Signature acte chez notaire</li>
+            <li class="text-primary font-bold text-lg">✅ C'est votre entreprise ! 🎉</li>
+          </ul>
+        </div>
+      </div>
+
+      <h2 class="text-2xl font-bold mt-8 mb-4">Conclusion : Le Financement, un Puzzle à Assembler</h2>
+
+      <div class="bg-primary/10 p-8 rounded-lg mb-8">
+        <p class="text-xl font-bold mb-6">Les 7 Commandements du Financement Réussi :</p>
+        
+        <ol class="list-decimal pl-6 space-y-3">
+          <li class="text-lg"><strong>Budget réaliste tu calculeras</strong> (Prix + 30% mini)</li>
+          <li class="text-lg"><strong>Apport de 20-25% tu mobiliseras</strong> (épargne + aides + famille)</li>
+          <li class="text-lg"><strong>Plusieurs banques tu consulteras</strong> (comparer = négocier)</li>
+          <li class="text-lg"><strong>Crédit-vendeur tu négocieras</strong> (20% du prix = game changer)</li>
+          <li class="text-lg"><strong>Prêts d'honneur tu solliciteras</strong> (60K€ gratuits possibles)</li>
+          <li class="text-lg"><strong>Business plan crédible tu présenteras</strong> (conservateur &gt; optimiste)</li>
+          <li class="text-lg"><strong>Accompagnement tu accepteras</strong> (mentors = or)</li>
+        </ol>
+      </div>
+
+      <div class="bg-accent p-8 rounded-lg mb-8">
+        <p class="text-xl font-bold mb-4">Le montage type gagnant 2026 :</p>
+        
+        <div class="bg-muted p-6 rounded-lg font-mono text-sm mb-4">
+          <p>20% Apport personnel (épargne + famille)</p>
+          <p>50% Prêt bancaire (avec garantie BPI)</p>
+          <p>20% Crédit-vendeur (différé 6-12 mois)</p>
+          <p>10% Prêts honneur + aides (0%)</p>
+          <p class="border-t border-border pt-2 mt-2 font-bold">100% Reprise financée !</p>
+        </div>
+
+        <p class="text-center text-lg font-bold text-primary">Avec ce mix : 87% de taux d'accord bancaire.</p>
+      </div>
+
+      <h2 class="text-2xl font-bold mt-8 mb-4">Ressources & Outils Gratuits</h2>
+
+      <div class="grid md:grid-cols-2 gap-4 mb-8">
+        <a href="https://cessionbtp.fr/simulateur-financement" class="bg-accent hover:bg-accent/80 p-6 rounded-lg transition-colors">
+          <p class="font-bold mb-2">🧮 Simulateur Plan Financement</p>
+          <p class="text-sm text-muted-foreground">Calculer votre montage financier optimal</p>
+        </a>
+
+        <a href="https://cessionbtp.fr/bp-template" class="bg-accent hover:bg-accent/80 p-6 rounded-lg transition-colors">
+          <p class="font-bold mb-2">📄 Template Business Plan BTP (Excel)</p>
+          <p class="text-sm text-muted-foreground">Télécharger le modèle gratuit</p>
+        </a>
+
+        <a href="https://cessionbtp.fr/checklist-banque" class="bg-accent hover:bg-accent/80 p-6 rounded-lg transition-colors">
+          <p class="font-bold mb-2">📋 Checklist Dossier Bancaire</p>
+          <p class="text-sm text-muted-foreground">Télécharger le PDF</p>
+        </a>
+
+        <a href="https://cessionbtp.fr/pret-honneur" class="bg-accent hover:bg-accent/80 p-6 rounded-lg transition-colors">
+          <p class="font-bold mb-2">💰 Simulateur Prêt Honneur</p>
+          <p class="text-sm text-muted-foreground">Tester votre éligibilité</p>
+        </a>
+
+        <a href="https://cessionbtp.fr/contact" class="bg-accent hover:bg-accent/80 p-6 rounded-lg transition-colors">
+          <p class="font-bold mb-2">📞 RDV Expert Financement Reprise</p>
+          <p class="text-sm text-muted-foreground">Prendre RDV gratuit</p>
+        </a>
+      </div>
+
+      <div class="bg-primary text-primary-foreground p-8 rounded-lg mb-6 text-center">
+        <h3 class="text-2xl font-bold mb-4">Vous avez un projet de reprise ?</h3>
+        <p class="mb-6">Nos experts vous accompagnent gratuitement dans le montage financier optimal.</p>
+        <a href="https://cessionbtp.fr/accompagnement-reprise" class="inline-block bg-background text-foreground px-8 py-3 rounded-lg font-bold hover:opacity-90 transition-opacity">
+          Être accompagné gratuitement
+        </a>
+      </div>
+
+      <div class="bg-accent p-8 rounded-lg text-center">
+        <h3 class="text-2xl font-bold mb-4">Vous cherchez une entreprise BTP à reprendre ?</h3>
+        <p class="mb-6">Découvrez les opportunités avec plan de financement pré-établi.</p>
+        <a href="https://cessionbtp.fr/acheter" class="inline-block bg-primary text-primary-foreground px-8 py-3 rounded-lg font-bold hover:opacity-90 transition-opacity">
+          Voir les entreprises à reprendre
+        </a>
       </div>
     `,
     schema: {
