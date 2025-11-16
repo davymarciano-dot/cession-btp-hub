@@ -14,7 +14,7 @@ const Header = () => {
           {/* LOGO GÉANT - Prend toute la hauteur du menu */}
           <Link to="/" className="flex-shrink-0 hover:scale-105 transition-transform duration-300">
             <img 
-              src="/images/logo-cessionbtp.png?v=3" 
+              src="/images/logo-cessionbtp-v2.png" 
               alt="CessionBTP - N°1 Cession Entreprises BTP" 
               className="h-32 w-auto"
             />
