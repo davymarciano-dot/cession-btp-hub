@@ -7,49 +7,93 @@ import { Separator } from "@/components/ui/separator";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
-const roadmapData = [
+const guides = [
   {
-    phase: "Phase 1 - Q1 2025",
-    quarter: "Q1 2025",
-    status: "current",
-    color: "primary",
-    items: [
-      { label: "MVP Launch", status: "completed", icon: CheckCircle2 },
-      { label: "Paiements Stripe", status: "completed", icon: CheckCircle2 },
-      { label: "Matching IA", status: "completed", icon: CheckCircle2 },
-      { label: "App mobile React Native", status: "progress", icon: Clock },
-      { label: "API publique", status: "progress", icon: Clock },
-    ],
+    id: "guide-vente",
+    title: "Guide : Comment vendre son entreprise BTP",
+    description: "Le guide complet pour préparer et réussir la vente de votre entreprise du BTP. Étapes, conseils, pièges à éviter.",
+    icon: <FileText className="h-8 w-8 text-orange-500" />,
+    size: "2.5 MB",
+    pages: "42 pages"
   },
   {
-    phase: "Phase 2 - Q2 2025",
-    quarter: "Q2 2025",
-    status: "upcoming",
-    color: "secondary",
-    items: [
-      { label: "Application iOS/Android", status: "planned", icon: Smartphone },
-      { label: "Expansion internationale", status: "planned", icon: Globe },
-      { label: "Partenariats banques", status: "planned", icon: Handshake },
-      { label: "Analytics avancés", status: "planned", icon: BarChart3 },
-      { label: "Publicité ciblée", status: "planned", icon: Target },
-    ],
+    id: "checklist-vendeur",
+    title: "Checklist vendeur BTP",
+    description: "Liste complète des documents à préparer et des étapes à suivre pour une cession réussie.",
+    icon: <FileText className="h-8 w-8 text-blue-500" />,
+    size: "850 KB",
+    pages: "8 pages"
   },
   {
-    phase: "Phase 3 - Q3 2025",
-    quarter: "Q3 2025",
-    status: "future",
-    color: "accent",
-    items: [
-      { label: "CRM intégré", status: "planned", icon: Building2 },
-      { label: "Trading d'entreprises", status: "planned", icon: TrendingUp },
-      { label: "Services juridiques", status: "planned", icon: Briefcase },
-      { label: "Academy/Formation", status: "planned", icon: GraduationCap },
-      { label: "Marketplace équipements", status: "planned", icon: ShoppingCart },
-    ],
-  },
+    id: "calculateur-valorisation",
+    title: "Calculateur valorisation Excel",
+    description: "Fichier Excel pour estimer la valeur de votre entreprise BTP selon plusieurs méthodes de valorisation.",
+    icon: <Calculator className="h-8 w-8 text-green-500" />,
+    size: "1.2 MB",
+    pages: "Feuilles multiples"
+  }
 ];
 
-const statusConfig = {
+const outilsGratuits = [
+  {
+    title: "Estimateur en ligne",
+    description: "Obtenez une estimation gratuite de votre entreprise BTP en 2 minutes avec notre IA",
+    icon: <Calculator className="h-8 w-8 text-primary" />,
+    link: "/estimer",
+    type: "interne"
+  },
+  {
+    title: "Simulateur fiscalité cession",
+    description: "Calculez l'impôt sur la plus-value et optimisez la fiscalité de votre cession",
+    icon: <Calculator className="h-8 w-8 text-secondary" />,
+    link: "#",
+    type: "externe",
+    comingSoon: true
+  },
+  {
+    title: "Modèle d'annonce de vente",
+    description: "Template professionnel pour rédiger une annonce attractive et complète",
+    icon: <FileText className="h-8 w-8 text-orange-500" />,
+    link: "#",
+    type: "externe",
+    comingSoon: true
+  }
+];
+
+const partenaires = [
+  {
+    categorie: "Avocats spécialisés",
+    icon: <Briefcase className="h-10 w-10 text-blue-600" />,
+    description: "Cabinets d'avocats experts en droit des affaires et transmission d'entreprise BTP",
+    contacts: [
+      { nom: "Cabinet Legrand & Associés", ville: "Paris", specialite: "Cession BTP", tel: "01 23 45 67 89" },
+      { nom: "SCP Martin Avocat", ville: "Lyon", specialite: "Droit des sociétés", tel: "04 12 34 56 78" },
+      { nom: "Maître Dubois", ville: "Marseille", specialite: "Transmission entreprise", tel: "04 91 23 45 67" }
+    ]
+  },
+  {
+    categorie: "Experts-comptables BTP",
+    icon: <Calculator className="h-10 w-10 text-green-600" />,
+    description: "Experts-comptables spécialisés dans le secteur du BTP et la valorisation d'entreprise",
+    contacts: [
+      { nom: "EC Bâtiment Conseil", ville: "Paris", specialite: "Valorisation BTP", tel: "01 34 56 78 90" },
+      { nom: "Compta BTP Plus", ville: "Toulouse", specialite: "Audit & transmission", tel: "05 12 34 56 78" },
+      { nom: "Cabinet Expert BTP", ville: "Bordeaux", specialite: "Expertise comptable", tel: "05 56 12 34 56" }
+    ]
+  },
+  {
+    categorie: "Banques financement reprise",
+    icon: <Building2 className="h-10 w-10 text-orange-600" />,
+    description: "Banques et organismes financiers spécialisés dans le financement de reprise d'entreprise",
+    contacts: [
+      { nom: "BNP Paribas - Pôle Transmission", ville: "National", specialite: "Crédit acquisition", tel: "0 800 123 456" },
+      { nom: "Crédit Agricole Pro", ville: "National", specialite: "LBO & financement", tel: "0 800 234 567" },
+      { nom: "Bpifrance", ville: "National", specialite: "Garantie transmission", tel: "0 969 370 240" }
+    ]
+  }
+];
+
+const handleDownload = (guideId: string, setDownloadingGuide: (id: string | null) => void) => {
   completed: {
     badge: "Terminé",
     variant: "default" as const,
