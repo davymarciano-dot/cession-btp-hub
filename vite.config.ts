@@ -10,7 +10,7 @@ export default defineConfig(({ mode }) => ({
     host: "::",
     port: 8080,
   },
-  logLevel: "info",
+  logLevel: mode === "development" ? "error" : "info",
   plugins: [
     react(), 
     mode === "development" && componentTagger(),
