@@ -335,8 +335,8 @@ const Tarifs = () => {
 
               <h3 className="text-2xl font-bold text-purple-600 mb-2">Exclusif</h3>
               <div className="mb-6">
-                <span className="text-5xl font-black text-purple-600">990€</span>
-                <span className="text-slate-500"> /3 mois</span>
+                <span className="text-4xl font-black text-purple-600">990€</span>
+                <span className="text-slate-500 text-xl"> /3 mois</span>
               </div>
               <p className="text-sm text-slate-500 mb-6">
                 Top position + agent - Cible : 500€ - CA : 2M
