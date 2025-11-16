@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
@@ -11,17 +11,36 @@ import Footer from "@/components/Footer";
 import PricingCard from "@/components/PricingCard";
 import SEOHead from "@/components/SEOHead";
 import { SearchableSelect } from "@/components/SearchableSelect";
-import MapView from "@/components/MapView";
+import MapViewWrapper from "@/components/MapViewWrapper";
 import { useCachedListings } from "@/hooks/useCachedListings";
+import { useToast } from "@/hooks/use-toast";
 
 const Acheter = () => {
   const navigate = useNavigate();
+  const { toast } = useToast();
   const [showOnlyRGE, setShowOnlyRGE] = useState(false);
   const [secteurFilter, setSecteurFilter] = useState("");
   const [showMapView, setShowMapView] = useState(false);
   
   // Récupérer les annonces pour la carte
-  const { data: listings = [] } = useCachedListings({});
+  const { data: listings = [], isLoading } = useCachedListings({});
+
+  // Gérer les erreurs de la carte - revenir automatiquement à la vue liste
+  const handleMapError = () => {
+    setShowMapView(false);
+    toast({
+      title: "Carte indisponible",
+      description: "La visualisation cartographique n'est pas disponible. Affichage de la vue liste.",
+      variant: "destructive",
+    });
+  };
+
+  // Si on passe en vue carte et qu'il n'y a pas de listings, rester en vue liste
+  useEffect(() => {
+    if (showMapView && listings.length === 0 && !isLoading) {
+      setShowMapView(false);
+    }
+  }, [showMapView, listings.length, isLoading]);
 
   const secteurs = [
     { name: "Plomberie", icon: Droplet, count: 12 },
@@ -213,7 +232,10 @@ const Acheter = () => {
             {/* Vue Carte - Carte interactive */}
             {showMapView && (
               <div className="max-w-7xl mx-auto">
-                <MapView listings={listings} />
+                <MapViewWrapper 
+                  listings={listings} 
+                  onError={handleMapError}
+                />
                 <div className="mt-6 text-center">
                   <p className="text-sm text-muted-foreground mb-4">
                     💡 Cliquez sur un marqueur orange pour voir les détails d'une entreprise
