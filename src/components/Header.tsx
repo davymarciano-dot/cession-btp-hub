@@ -13,9 +13,9 @@ const Header = () => {
           {/* LOGO GÉANT - Prend toute la hauteur du menu */}
           <Link to="/" className="flex-shrink-0 hover:scale-105 transition-transform duration-300">
             <img
-              src="/images/logo-cessionbtp.png?v=5"
+              src="/images/logo-cessionbtp-hd.png"
               alt="CessionBTP"
-              className="h-58"
+              className="h-20"
               style={{ width: "auto", maxHeight: "80px" }}
             />
           </Link>
