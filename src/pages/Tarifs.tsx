@@ -53,7 +53,7 @@ const Tarifs = () => {
                 </div>
               </div>
 
-              <Button className="w-full bg-orange-500 hover:bg-blue-500 transition-colors">
+              <Button className="w-full bg-orange-500 hover:bg-blue-600 transition-colors">
                 S'inscrire gratuitement
               </Button>
             </div>
@@ -93,7 +93,7 @@ const Tarifs = () => {
                 </div>
               </div>
 
-              <Button className="w-full bg-orange-500 hover:bg-blue-500 transition-colors">
+              <Button className="w-full bg-orange-500 hover:bg-green-600 transition-colors">
                 Acheter des contacts
               </Button>
             </div>
@@ -133,7 +133,7 @@ const Tarifs = () => {
                 </div>
               </div>
 
-              <Button className="w-full bg-orange-500 hover:bg-blue-500 transition-colors">
+              <Button className="w-full bg-orange-500 hover:bg-red-600 transition-colors">
                 Choisir Pro
               </Button>
             </div>
@@ -178,7 +178,7 @@ const Tarifs = () => {
                 </div>
               </div>
 
-              <Button className="w-full bg-orange-500 hover:bg-blue-500 transition-colors">
+              <Button className="w-full bg-orange-500 hover:bg-amber-500 transition-colors">
                 Choisir Entreprise
               </Button>
             </div>
