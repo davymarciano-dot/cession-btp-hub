@@ -23,11 +23,12 @@ const Header = () => {
           {/* LOGO CESSIONBTP */}
           <Link to="/" className="hover:scale-105 transition-transform">
             <img 
-              src="/images/logo-cessionbtp.png" 
+              src="/images/logo-cessionbtp-trim.png" 
               alt="CessionBTP" 
-              className="h-20 sm:h-24 md:h-28 lg:h-32 w-auto shrink-0"
+              className="h-24 md:h-40 lg:h-48 w-auto shrink-0"
             />
           </Link>
+
 
           {/* NAVIGATION DESKTOP */}
           <nav className="hidden md:flex items-center gap-8">
