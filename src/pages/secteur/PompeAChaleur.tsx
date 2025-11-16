@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { Waves, TrendingUp, Award, Calculator } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import EntrepriseCard from "@/components/EntrepriseCard";
+import EntrepriseCardWrapper from "@/components/EntrepriseCardWrapper";
 import FAQItem from "@/components/FAQItem";
 import { useCachedListings } from "@/hooks/useCachedListings";
 import { pagesMetiersSpecifiques, faqPompeAChaleur, serviceEnergiesRenouvelablesSchema } from "@/config/seo-config-metiers-specifiques";
@@ -156,7 +156,7 @@ const PompeAChaleur = () => {
             ) : pacListings.length > 0 ? (
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {pacListings.slice(0, 9).map((listing) => (
-                  <EntrepriseCard key={listing.id} entreprise={listing} />
+                  <EntrepriseCardWrapper key={listing.id} listing={listing} />
                 ))}
               </div>
             ) : (
