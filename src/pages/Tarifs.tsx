@@ -26,7 +26,7 @@ const Tarifs = () => {
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
             {/* GRATUIT */}
             <div className="h-full flex flex-col border-2 border-slate-200 hover:border-blue-500 hover:shadow-xl transition-all rounded-2xl p-8 bg-white relative">
-              <h3 className="text-2xl font-bold text-slate-700 mb-2">Gratuit</h3>
+              <h3 className="text-2xl font-bold text-blue-600 mb-2">Gratuit</h3>
               <div className="mb-6">
                 <span className="text-5xl font-black text-blue-600">0€</span>
               </div>
