@@ -224,7 +224,10 @@ const Estimer = () => {
                     <label className="block text-sm font-bold text-orange-600 mb-3">
                       🏢 SIRET de votre entreprise (recommandé)
                     </label>
-                    <SiretAutocomplete onDataFetched={handleSiretDataFetched} />
+                    <SiretAutocomplete 
+                      onDataFetched={handleSiretDataFetched}
+                      onLeadCreated={handleLeadCreated}
+                    />
                     <p className="text-xs text-slate-600 mt-2">
                       💡 Remplissage automatique des informations de votre entreprise
                     </p>
@@ -256,7 +259,11 @@ const Estimer = () => {
                       placeholder="Ex: 500 000"
                       className="h-14 text-lg border-2 border-slate-200 focus:border-orange-500 rounded-xl"
                       value={ca}
-                      onChange={(e) => setCa(e.target.value)}
+                      onChange={(e) => {
+                        const value = e.target.value;
+                        setCa(value);
+                        if (value) updateLeadFormData({ ca: parseInt(value) });
+                      }}
                     />
                   </div>
 

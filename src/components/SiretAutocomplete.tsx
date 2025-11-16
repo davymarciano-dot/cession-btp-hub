@@ -1,14 +1,16 @@
 import { useState, useEffect, useRef } from 'react';
-import { Check, AlertCircle, Loader, Search } from 'lucide-react';
+import { Check, AlertCircle, Loader, Search, Mail } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
 import { Input } from './ui/input';
 import { Label } from './ui/label';
 import { Command, CommandEmpty, CommandGroup, CommandItem, CommandList } from './ui/command';
+import { Button } from './ui/button';
 
 interface SiretAutocompleteProps {
   onDataFetched: (data: any) => void;
   initialValue?: string;
+  onLeadCreated?: (leadId: string) => void;
 }
 
 interface CompanyData {
@@ -24,7 +26,7 @@ interface CompanyData {
   nombreSalaries: string;
 }
 
-const SiretAutocomplete = ({ onDataFetched, initialValue = '' }: SiretAutocompleteProps) => {
+const SiretAutocomplete = ({ onDataFetched, initialValue = '', onLeadCreated }: SiretAutocompleteProps) => {
   const [siret, setSiret] = useState(initialValue);
   const [isLoading, setIsLoading] = useState(false);
   const [isValid, setIsValid] = useState<boolean | null>(null);
@@ -33,8 +35,77 @@ const SiretAutocomplete = ({ onDataFetched, initialValue = '' }: SiretAutocomple
   const [searchResults, setSearchResults] = useState<CompanyData[]>([]);
   const [showDropdown, setShowDropdown] = useState(false);
   const [isSearching, setIsSearching] = useState(false);
+  const [showEmailPrompt, setShowEmailPrompt] = useState(false);
+  const [email, setEmail] = useState('');
+  const [currentLeadId, setCurrentLeadId] = useState<string | null>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const { toast } = useToast();
+
+  // ✅ ÉTAPE 1 : Créer le lead dès validation SIRET
+  const createLead = async (data: CompanyData) => {
+    try {
+      const { data: leadData, error } = await supabase
+        .from('leads_estimation')
+        .insert({
+          siret: data.siret || '',
+          raison_sociale: data.raisonSociale,
+          statut: 'siret_saisi',
+          nom: '', // Sera rempli plus tard
+          telephone: '', // Sera rempli plus tard
+          email: '', // Sera rempli dans le prompt
+        })
+        .select()
+        .single();
+
+      if (error) throw error;
+
+      setCurrentLeadId(leadData.id);
+      if (onLeadCreated) onLeadCreated(leadData.id);
+      
+      return leadData.id;
+    } catch (err: any) {
+      console.error('Erreur création lead:', err);
+      return null;
+    }
+  };
+
+  const updateLeadEmail = async (leadId: string, emailValue: string) => {
+    try {
+      const { error } = await supabase
+        .from('leads_estimation')
+        .update({
+          email: emailValue,
+          statut: 'email_saisi'
+        })
+        .eq('id', leadId);
+
+      if (error) throw error;
+
+      toast({
+        title: "Email enregistré",
+        description: "Vous recevrez votre estimation détaillée par email.",
+      });
+    } catch (err: any) {
+      console.error('Erreur mise à jour email:', err);
+    }
+  };
+
+  const handleEmailSubmit = async () => {
+    if (!email || !currentLeadId) return;
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      toast({
+        title: "Email invalide",
+        description: "Veuillez entrer une adresse email valide.",
+        variant: "destructive"
+      });
+      return;
+    }
+
+    await updateLeadEmail(currentLeadId, email);
+    setShowEmailPrompt(false);
+  };
 
   // Fermer le dropdown si on clique en dehors
   useEffect(() => {
