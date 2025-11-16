@@ -247,5 +247,22 @@ export const blogArticles: BlogArticle[] = [
       metaDescription: 'Guide spécifique pour vendre une entreprise de plomberie en 2026. Valorisation, RGE QualiPAC, contrats entretien, profils acheteurs, fiscalité.',
       keywords: ['vendre entreprise plomberie', 'cession plombier chauffagiste', 'valorisation entreprise plomberie']
     }
+  },
+  {
+    id: 13,
+    slug: 'audit-entreprise-btp-avant-achat',
+    title: 'Check-list : 47 Points à Vérifier Avant d\'Acheter une Entreprise BTP',
+    excerpt: 'L\'audit complet pour sécuriser votre reprise d\'entreprise BTP. 47 points de contrôle essentiels pour éviter les vices cachés et passifs.',
+    category: 'reprise',
+    readTime: 15,
+    author: 'CessionBTP',
+    publishedAt: '2025-11-08',
+    featured: true,
+    content: '',
+    seo: {
+      metaTitle: 'Audit Entreprise BTP : 47 Points à Vérifier | CessionBTP',
+      metaDescription: '47 points essentiels à vérifier avant de racheter une entreprise BTP. Checklist complète 2026 : documents, finances, RH, matériel. Évitez les pièges fatals.',
+      keywords: ['checklist reprise entreprise btp', 'audit achat entreprise batiment', 'due diligence entreprise construction', 'vérifications avant rachat entreprise']
+    }
   }
 ];
