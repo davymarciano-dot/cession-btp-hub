@@ -1,4 +1,5 @@
 import SEO from "@/components/SEO";
+import SEOHead from "@/components/SEOHead";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import ProcessTimeline from "@/components/ProcessTimeline";
@@ -33,6 +34,7 @@ const CommentCaMarche = () => {
 
   return (
     <>
+      <SEOHead page="howItWorks" />
       <SEO
         title="Comment ça Marche ? | CessionBTP - Processus de Cession"
         description="Découvrez notre processus simple et sécurisé pour vendre ou acheter une entreprise BTP. De la valorisation à la signature, nous vous accompagnons à chaque étape."

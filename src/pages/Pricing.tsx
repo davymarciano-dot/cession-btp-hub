@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { Helmet } from "react-helmet-async";
 import { useNavigate } from "react-router-dom";
 import Header from "@/components/Header";
+import SEOHead from "@/components/SEOHead";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Check, X } from "lucide-react";
@@ -12,10 +12,7 @@ const Pricing = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <Helmet>
-        <title>Tarifs Transparents | CessionBTP - Choisissez votre formule</title>
-        <meta name="description" content="Success Fee de 2% ou formules Premium pour vendre votre entreprise BTP. Tarifs clairs, sans surprise. Essai gratuit disponible." />
-      </Helmet>
+      <SEOHead page="pricing" />
       <Header />
 
       <main className="py-16">

@@ -1,6 +1,6 @@
-import { Helmet } from "react-helmet-async";
 import { useState } from "react";
 import Header from "@/components/Header";
+import SEOHead from "@/components/SEOHead";
 import Footer from "@/components/Footer";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Card } from "@/components/ui/card";
@@ -186,58 +186,55 @@ const FAQ = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white">
-      <Helmet>
-        <title>FAQ - Questions fréquentes | CessionBTP</title>
-        <meta name="description" content="Toutes les réponses à vos questions sur la cession et reprise d'entreprises BTP. Valorisation, financement, juridique, fiscalité." />
-        <script type="application/ld+json">
-          {JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "FAQPage",
-            "mainEntity": [
-              {
-                "@type": "Question",
-                "name": "Combien de temps faut-il pour vendre mon entreprise BTP ?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text": "Le délai moyen de vente est de 45 jours sur CessionBTP. Cela dépend de plusieurs facteurs : secteur d'activité, localisation, prix demandé, état de l'entreprise. Notre système de matching IA accélère considérablement le processus."
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "Combien coûte le service CessionBTP ?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text": "Notre Success Fee est de seulement 2% du prix de vente, contre 5% ou plus ailleurs. L'estimation et l'inscription sont 100% gratuites. Vous ne payez qu'en cas de vente réussie."
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "Comment estimer la valeur de mon entreprise BTP ?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text": "Nous utilisons plusieurs méthodes de valorisation : multiple de l'EBE (3-5x selon secteur), valorisation patrimoniale (actifs + fonds de commerce), méthode des flux de trésorerie actualisés. Notre outil d'estimation gratuit vous donne une première évaluation en 48h."
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "Quelle est la valorisation d'une entreprise RGE ?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text": "Les entreprises RGE se vendent 30-50% plus cher. Exemple : entreprise pompe à chaleur RGE QualiPAC = 1-1.5x CA vs 0.7x sans RGE. La certification est un vrai accélérateur de valeur."
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "Quel apport faut-il pour reprendre une entreprise BTP ?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text": "Généralement 30-40% du prix de vente. Les banques financent 60-70% pour une reprise d'entreprise rentable. Certains dispositifs (NACRE, prêt d'honneur) peuvent réduire l'apport personnel nécessaire."
-                }
+      <SEOHead 
+        page="faq"
+        schema={{
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "Combien de temps faut-il pour vendre mon entreprise BTP ?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Le délai moyen de vente est de 45 jours sur CessionBTP. Cela dépend de plusieurs facteurs : secteur d'activité, localisation, prix demandé, état de l'entreprise. Notre système de matching IA accélère considérablement le processus."
               }
-            ]
-          })}
-        </script>
-      </Helmet>
+            },
+            {
+              "@type": "Question",
+              "name": "Combien coûte le service CessionBTP ?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Notre Success Fee est de seulement 2% du prix de vente, contre 5% ou plus ailleurs. L'estimation et l'inscription sont 100% gratuites. Vous ne payez qu'en cas de vente réussie."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Comment estimer la valeur de mon entreprise BTP ?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Nous utilisons plusieurs méthodes de valorisation : multiple de l'EBE (3-5x selon secteur), valorisation patrimoniale (actifs + fonds de commerce), méthode des flux de trésorerie actualisés. Notre outil d'estimation gratuit vous donne une première évaluation en 48h."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Quelle est la valorisation d'une entreprise RGE ?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Les entreprises RGE se vendent 30-50% plus cher. Exemple : entreprise pompe à chaleur RGE QualiPAC = 1-1.5x CA vs 0.7x sans RGE. La certification est un vrai accélérateur de valeur."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Quel apport faut-il pour reprendre une entreprise BTP ?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Généralement 30-40% du prix de vente. Les banques financent 60-70% pour une reprise d'entreprise rentable. Certains dispositifs (NACRE, prêt d'honneur) peuvent réduire l'apport personnel nécessaire."
+              }
+            }
+          ]
+        }}
+      />
       <Header />
 
       <main className="container mx-auto px-4 py-12">
