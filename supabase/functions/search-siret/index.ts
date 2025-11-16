@@ -20,45 +20,36 @@ serve(async (req) => {
       );
     }
 
-    const PAPPERS_API_TOKEN = Deno.env.get('PAPPERS_API_TOKEN');
-    if (!PAPPERS_API_TOKEN) {
-      console.error('PAPPERS_API_TOKEN not configured');
-      return new Response(
-        JSON.stringify({ error: 'API token not configured' }),
-        { status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
-      );
-    }
-
-    // Recherche par SIRET ou raison sociale via API Pappers
-    const searchUrl = `https://api.pappers.fr/v2/recherche?api_token=${PAPPERS_API_TOKEN}&q=${encodeURIComponent(query)}&par_page=10`;
+    // Utiliser l'API gratuite data.gouv.fr pour la recherche
+    const searchUrl = `https://recherche-entreprises.api.gouv.fr/search?q=${encodeURIComponent(query)}&per_page=10`;
     
-    console.log('Searching Pappers API with query:', query);
+    console.log('Searching data.gouv.fr API with query:', query);
     
     const response = await fetch(searchUrl);
     
     if (!response.ok) {
-      console.error('Pappers API error:', response.status, response.statusText);
-      throw new Error(`Pappers API returned ${response.status}`);
+      console.error('Data.gouv.fr API error:', response.status, response.statusText);
+      throw new Error(`API returned ${response.status}`);
     }
 
     const data = await response.json();
     
     // Transformer les résultats en format utilisable
-    const results = (data.resultats || []).map((entreprise: any) => {
+    const results = (data.results || []).map((entreprise: any) => {
       const siege = entreprise.siege || {};
       const codePostal = siege.code_postal || '';
       const departement = codePostal.substring(0, 2);
       
       return {
         siret: entreprise.siret || '',
-        raisonSociale: entreprise.nom_entreprise || entreprise.denomination || '',
-        formeJuridique: entreprise.forme_juridique || '',
-        anneeCreation: entreprise.date_creation ? new Date(entreprise.date_creation).getFullYear().toString() : '',
-        secteurActivite: entreprise.libelle_code_naf || '',
-        ville: siege.ville || '',
+        raisonSociale: entreprise.nom_complet || entreprise.nom_raison_sociale || '',
+        formeJuridique: entreprise.nature_juridique || '',
+        anneeCreation: entreprise.date_creation ? entreprise.date_creation.substring(0, 4) : '',
+        secteurActivite: entreprise.activite_principale || '',
+        ville: siege.commune || '',
         codePostal: codePostal,
         departement: departement,
-        adresse: siege.adresse_ligne_1 || '',
+        adresse: siege.libelle_voie || '',
         nombreSalaries: entreprise.tranche_effectif_salarie || ''
       };
     });
