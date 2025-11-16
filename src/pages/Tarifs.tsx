@@ -236,16 +236,16 @@ const Tarifs = () => {
             </div>
 
             {/* ESSENTIEL - POPULAIRE */}
-            <div className="group h-full flex flex-col border-2 border-slate-200 hover:border-blue-500 hover:shadow-xl transition-all rounded-2xl p-8 bg-white relative">
+            <div className="group h-full flex flex-col border-2 border-slate-200 hover:border-gray-400 hover:shadow-xl transition-all rounded-2xl p-8 bg-white relative">
               <div className="absolute -top-3 left-1/2 -translate-x-1/2">
                 <span className="bg-gradient-to-r from-blue-500 to-blue-600 text-white px-4 py-1.5 rounded-full text-xs font-bold shadow-lg">
                   POPULAIRE
                 </span>
               </div>
 
-              <h3 className="text-2xl font-bold text-slate-900 mb-2">Essentiel</h3>
+              <h3 className="text-2xl font-bold text-gray-400 mb-2">Essentiel</h3>
               <div className="mb-6">
-                <span className="text-5xl font-black text-blue-600">290€</span>
+                <span className="text-5xl font-black text-gray-400">290€</span>
                 <span className="text-slate-600"> /3 mois</span>
               </div>
               <p className="text-sm text-slate-600 mb-6">
@@ -275,7 +275,7 @@ const Tarifs = () => {
                 </div>
               </div>
 
-              <Button className="w-full bg-orange-500 hover:bg-blue-500 group-hover:bg-blue-500 transition-colors">
+              <Button className="w-full bg-orange-500 hover:bg-gray-400 group-hover:bg-gray-400 transition-colors">
                 Choisir Essentiel
               </Button>
             </div>
