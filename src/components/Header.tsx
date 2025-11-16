@@ -15,7 +15,7 @@ const Header = () => {
             <img
               src="/images/logo-cessionbtp.png?v=5"
               alt="CessionBTP"
-              className="h-38"
+              className="h-58"
               style={{ width: "auto", maxHeight: "80px" }}
             />
           </Link>
