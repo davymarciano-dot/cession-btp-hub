@@ -799,6 +799,13 @@ export type Database = {
             referencedRelation: "annonces"
             referencedColumns: ["id"]
           },
+          {
+            foreignKeyName: "conversations_annonce_id_fkey"
+            columns: ["annonce_id"]
+            isOneToOne: false
+            referencedRelation: "annonces_public"
+            referencedColumns: ["id"]
+          },
         ]
       }
       conversion_tracking: {
@@ -1341,6 +1348,13 @@ export type Database = {
             referencedRelation: "annonces"
             referencedColumns: ["id"]
           },
+          {
+            foreignKeyName: "favorites_listing_id_fkey"
+            columns: ["listing_id"]
+            isOneToOne: false
+            referencedRelation: "annonces_public"
+            referencedColumns: ["id"]
+          },
         ]
       }
       leads_estimation: {
@@ -1433,6 +1447,13 @@ export type Database = {
             referencedRelation: "annonces"
             referencedColumns: ["id"]
           },
+          {
+            foreignKeyName: "listing_views_listing_id_fkey"
+            columns: ["listing_id"]
+            isOneToOne: false
+            referencedRelation: "annonces_public"
+            referencedColumns: ["id"]
+          },
         ]
       }
       listings_views_tracking: {
@@ -1492,6 +1513,13 @@ export type Database = {
             referencedRelation: "annonces"
             referencedColumns: ["id"]
           },
+          {
+            foreignKeyName: "listings_views_tracking_listing_id_fkey"
+            columns: ["listing_id"]
+            isOneToOne: false
+            referencedRelation: "annonces_public"
+            referencedColumns: ["id"]
+          },
         ]
       }
       matches: {
@@ -1549,6 +1577,13 @@ export type Database = {
             columns: ["listing_id"]
             isOneToOne: false
             referencedRelation: "annonces"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "matches_listing_id_fkey"
+            columns: ["listing_id"]
+            isOneToOne: false
+            referencedRelation: "annonces_public"
             referencedColumns: ["id"]
           },
         ]
@@ -1918,6 +1953,13 @@ export type Database = {
             referencedColumns: ["id"]
           },
           {
+            foreignKeyName: "service_orders_listing_id_fkey"
+            columns: ["listing_id"]
+            isOneToOne: false
+            referencedRelation: "annonces_public"
+            referencedColumns: ["id"]
+          },
+          {
             foreignKeyName: "service_orders_provider_id_fkey"
             columns: ["provider_id"]
             isOneToOne: false
@@ -2104,6 +2146,285 @@ export type Database = {
           total_events: number | null
           unique_users: number | null
           visitors: number | null
+        }
+        Relationships: []
+      }
+      annonces_public: {
+        Row: {
+          accompagnement_propose: Json | null
+          accompagnement_vendeur: boolean | null
+          anciennete_moyenne: number | null
+          annee_creation: number | null
+          apport_requis: number | null
+          atouts_principaux: string | null
+          ca_n1: number | null
+          ca_n2: number | null
+          ca_n3: number | null
+          certifications: Json | null
+          clientele_fidele_pct: number | null
+          code_postal: string | null
+          commentaires_acheteurs: string | null
+          competences_equipe: string | null
+          complement_vendeur: boolean | null
+          complement_vendeur_duree: string | null
+          complement_vendeur_montant: number | null
+          conditions_particulieres: string | null
+          contrats_en_cours: Json | null
+          created_at: string | null
+          credits_en_cours: boolean | null
+          credits_transferables: boolean | null
+          date_expiration: string | null
+          delai_vente: string | null
+          departement: string | null
+          description_activite: string | null
+          dette_banques: number | null
+          dette_fournisseurs: number | null
+          dette_tva: number | null
+          dette_urssaf: number | null
+          dettes_totales: number | null
+          documents_disponibles: Json | null
+          duree_accompagnement: string | null
+          duree_bail: string | null
+          ebe_n1: number | null
+          elements_differenciants: string | null
+          etat_materiel: string | null
+          financement_bancaire: string | null
+          formule_abonnement: string | null
+          id: string | null
+          infos_complementaires: string | null
+          litiges_en_cours: boolean | null
+          locaux_inclus_vente: boolean | null
+          loyer_mensuel: number | null
+          marge_negociation: number | null
+          marque_deposee: boolean | null
+          masse_salariale: number | null
+          materiel_principal: string | null
+          montant_abonnement: number | null
+          montant_credits: number | null
+          motif_vente: string | null
+          nature_litiges: string | null
+          nda_requis: boolean | null
+          niveau_anonymat: string | null
+          nombre_apprentis: number | null
+          nombre_cdd: number | null
+          nombre_cdi: number | null
+          nombre_clients_actifs: number | null
+          nombre_salaries: number | null
+          nombre_vehicules: number | null
+          nombre_vues: number | null
+          photos_entreprise: Json | null
+          photos_materiel: Json | null
+          photos_realisations: Json | null
+          potentiel_developpement: string | null
+          precisions_vente: string | null
+          presence_digitale: Json | null
+          prix_negociable: boolean | null
+          prix_vente: number | null
+          raison_sociale: string | null
+          reputation_locale: number | null
+          resultat_net_n1: number | null
+          secteur_activite: string | null
+          siret: string | null
+          site_web: boolean | null
+          situation_locaux: string | null
+          specialites: Json | null
+          statut: string | null
+          surface_locaux: number | null
+          type_clientele: Json | null
+          type_transmission: string | null
+          updated_at: string | null
+          valeur_locaux: number | null
+          valeur_materiel: number | null
+          valeur_portefeuille: number | null
+          valeur_stock: number | null
+          video_presentation: string | null
+          ville: string | null
+          visites_possibles: string | null
+          zone_intervention: Json | null
+        }
+        Insert: {
+          accompagnement_propose?: Json | null
+          accompagnement_vendeur?: boolean | null
+          anciennete_moyenne?: number | null
+          annee_creation?: number | null
+          apport_requis?: number | null
+          atouts_principaux?: string | null
+          ca_n1?: number | null
+          ca_n2?: number | null
+          ca_n3?: number | null
+          certifications?: Json | null
+          clientele_fidele_pct?: number | null
+          code_postal?: string | null
+          commentaires_acheteurs?: string | null
+          competences_equipe?: string | null
+          complement_vendeur?: boolean | null
+          complement_vendeur_duree?: string | null
+          complement_vendeur_montant?: number | null
+          conditions_particulieres?: string | null
+          contrats_en_cours?: Json | null
+          created_at?: string | null
+          credits_en_cours?: boolean | null
+          credits_transferables?: boolean | null
+          date_expiration?: string | null
+          delai_vente?: string | null
+          departement?: string | null
+          description_activite?: string | null
+          dette_banques?: number | null
+          dette_fournisseurs?: number | null
+          dette_tva?: number | null
+          dette_urssaf?: number | null
+          dettes_totales?: number | null
+          documents_disponibles?: Json | null
+          duree_accompagnement?: string | null
+          duree_bail?: string | null
+          ebe_n1?: number | null
+          elements_differenciants?: string | null
+          etat_materiel?: string | null
+          financement_bancaire?: string | null
+          formule_abonnement?: string | null
+          id?: string | null
+          infos_complementaires?: string | null
+          litiges_en_cours?: boolean | null
+          locaux_inclus_vente?: boolean | null
+          loyer_mensuel?: number | null
+          marge_negociation?: number | null
+          marque_deposee?: boolean | null
+          masse_salariale?: number | null
+          materiel_principal?: string | null
+          montant_abonnement?: number | null
+          montant_credits?: number | null
+          motif_vente?: string | null
+          nature_litiges?: string | null
+          nda_requis?: boolean | null
+          niveau_anonymat?: string | null
+          nombre_apprentis?: number | null
+          nombre_cdd?: number | null
+          nombre_cdi?: number | null
+          nombre_clients_actifs?: number | null
+          nombre_salaries?: number | null
+          nombre_vehicules?: number | null
+          nombre_vues?: number | null
+          photos_entreprise?: Json | null
+          photos_materiel?: Json | null
+          photos_realisations?: Json | null
+          potentiel_developpement?: string | null
+          precisions_vente?: string | null
+          presence_digitale?: Json | null
+          prix_negociable?: boolean | null
+          prix_vente?: number | null
+          raison_sociale?: string | null
+          reputation_locale?: number | null
+          resultat_net_n1?: number | null
+          secteur_activite?: string | null
+          siret?: string | null
+          site_web?: boolean | null
+          situation_locaux?: string | null
+          specialites?: Json | null
+          statut?: string | null
+          surface_locaux?: number | null
+          type_clientele?: Json | null
+          type_transmission?: string | null
+          updated_at?: string | null
+          valeur_locaux?: number | null
+          valeur_materiel?: number | null
+          valeur_portefeuille?: number | null
+          valeur_stock?: number | null
+          video_presentation?: string | null
+          ville?: string | null
+          visites_possibles?: string | null
+          zone_intervention?: Json | null
+        }
+        Update: {
+          accompagnement_propose?: Json | null
+          accompagnement_vendeur?: boolean | null
+          anciennete_moyenne?: number | null
+          annee_creation?: number | null
+          apport_requis?: number | null
+          atouts_principaux?: string | null
+          ca_n1?: number | null
+          ca_n2?: number | null
+          ca_n3?: number | null
+          certifications?: Json | null
+          clientele_fidele_pct?: number | null
+          code_postal?: string | null
+          commentaires_acheteurs?: string | null
+          competences_equipe?: string | null
+          complement_vendeur?: boolean | null
+          complement_vendeur_duree?: string | null
+          complement_vendeur_montant?: number | null
+          conditions_particulieres?: string | null
+          contrats_en_cours?: Json | null
+          created_at?: string | null
+          credits_en_cours?: boolean | null
+          credits_transferables?: boolean | null
+          date_expiration?: string | null
+          delai_vente?: string | null
+          departement?: string | null
+          description_activite?: string | null
+          dette_banques?: number | null
+          dette_fournisseurs?: number | null
+          dette_tva?: number | null
+          dette_urssaf?: number | null
+          dettes_totales?: number | null
+          documents_disponibles?: Json | null
+          duree_accompagnement?: string | null
+          duree_bail?: string | null
+          ebe_n1?: number | null
+          elements_differenciants?: string | null
+          etat_materiel?: string | null
+          financement_bancaire?: string | null
+          formule_abonnement?: string | null
+          id?: string | null
+          infos_complementaires?: string | null
+          litiges_en_cours?: boolean | null
+          locaux_inclus_vente?: boolean | null
+          loyer_mensuel?: number | null
+          marge_negociation?: number | null
+          marque_deposee?: boolean | null
+          masse_salariale?: number | null
+          materiel_principal?: string | null
+          montant_abonnement?: number | null
+          montant_credits?: number | null
+          motif_vente?: string | null
+          nature_litiges?: string | null
+          nda_requis?: boolean | null
+          niveau_anonymat?: string | null
+          nombre_apprentis?: number | null
+          nombre_cdd?: number | null
+          nombre_cdi?: number | null
+          nombre_clients_actifs?: number | null
+          nombre_salaries?: number | null
+          nombre_vehicules?: number | null
+          nombre_vues?: number | null
+          photos_entreprise?: Json | null
+          photos_materiel?: Json | null
+          photos_realisations?: Json | null
+          potentiel_developpement?: string | null
+          precisions_vente?: string | null
+          presence_digitale?: Json | null
+          prix_negociable?: boolean | null
+          prix_vente?: number | null
+          raison_sociale?: string | null
+          reputation_locale?: number | null
+          resultat_net_n1?: number | null
+          secteur_activite?: string | null
+          siret?: string | null
+          site_web?: boolean | null
+          situation_locaux?: string | null
+          specialites?: Json | null
+          statut?: string | null
+          surface_locaux?: number | null
+          type_clientele?: Json | null
+          type_transmission?: string | null
+          updated_at?: string | null
+          valeur_locaux?: number | null
+          valeur_materiel?: number | null
+          valeur_portefeuille?: number | null
+          valeur_stock?: number | null
+          video_presentation?: string | null
+          ville?: string | null
+          visites_possibles?: string | null
+          zone_intervention?: Json | null
         }
         Relationships: []
       }

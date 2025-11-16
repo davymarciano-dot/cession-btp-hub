@@ -36,9 +36,8 @@ const EntreprisesRGE = () => {
   const fetchRGEListings = async () => {
     try {
       const { data, error } = await supabase
-        .from('annonces')
+        .from('annonces_public')
         .select('id, raison_sociale, secteur_activite, ville, departement, prix_vente, ca_n1, nombre_salaries, certifications, created_at')
-        .eq('statut', 'publiee')
         .not('certifications', 'is', null)
         .order('created_at', { ascending: false });
 
@@ -47,7 +46,7 @@ const EntreprisesRGE = () => {
       // Filtrer uniquement les entreprises avec certifications RGE
       const rgeListings = (data || []).filter(listing => {
         const certs = listing.certifications as string[];
-        return certs && certs.some(cert => 
+        return certs && certs.some(cert =>
           ['RGE', 'Qualibat', 'Qualipac', 'QualiPV', 'Qualibois', 'Qualisol'].includes(cert)
         );
       });
