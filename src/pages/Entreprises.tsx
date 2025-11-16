@@ -177,7 +177,7 @@ const Entreprises = () => {
       <section className="bg-gradient-to-br from-primary/5 via-background to-secondary/5 py-16 border-b">
         <div className="container mx-auto px-4 max-w-5xl text-center">
           <h1 className="text-5xl font-bold mb-4 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
-            840 Entreprises BTP à Vendre
+            {loading ? "Chargement..." : `${annonces.length} Entreprise${annonces.length > 1 ? 's' : ''} BTP à Vendre`}
           </h1>
           <p className="text-xl text-muted-foreground mb-8">
             Trouvez l'entreprise parfaite à reprendre
