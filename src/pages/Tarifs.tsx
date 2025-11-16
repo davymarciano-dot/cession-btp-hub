@@ -71,6 +71,7 @@ const Tarifs = () => {
                 isHovered={hoveredBuyerCard === "Contact"}
                 onHover={(hovered) => setHoveredBuyerCard(hovered ? "Contact" : null)}
                 anyCardHovered={hoveredBuyerCard !== null}
+                isPopular
               />
               
               <PricingCard
@@ -86,12 +87,14 @@ const Tarifs = () => {
                   "Support prioritaire"
                 ]}
                 buttonText="Choisir Pro"
-                isPopular
                 variant="primary"
                 userType="acheteur"
                 isHovered={hoveredBuyerCard === "Pro"}
                 onHover={(hovered) => setHoveredBuyerCard(hovered ? "Pro" : null)}
                 anyCardHovered={hoveredBuyerCard !== null}
+                badgeText="🔥 MEILLEUR RAPPORT"
+                badgeColor="bg-gradient-to-r from-orange-500 to-red-500"
+                badgeAnimate
               />
               
               <PricingCard
@@ -111,6 +114,8 @@ const Tarifs = () => {
                 isHovered={hoveredBuyerCard === "Entreprise"}
                 onHover={(hovered) => setHoveredBuyerCard(hovered ? "Entreprise" : null)}
                 anyCardHovered={hoveredBuyerCard !== null}
+                badgeText="👑 PREMIUM"
+                badgeColor="bg-gradient-to-r from-purple-600 to-amber-500"
               />
             </div>
           </div>
@@ -162,12 +167,12 @@ const Tarifs = () => {
                   "Réseau artisans entrepreneurs"
                 ]}
                 buttonText="Choisir Essentiel"
-                isPopular
                 variant="primary"
                 userType="vendeur"
                 isHovered={hoveredSellerCard === "Essentiel"}
                 onHover={(hovered) => setHoveredSellerCard(hovered ? "Essentiel" : null)}
                 anyCardHovered={hoveredSellerCard !== null}
+                isPopular
               />
               
               <PricingCard
@@ -187,6 +192,9 @@ const Tarifs = () => {
                 isHovered={hoveredSellerCard === "Prime"}
                 onHover={(hovered) => setHoveredSellerCard(hovered ? "Prime" : null)}
                 anyCardHovered={hoveredSellerCard !== null}
+                badgeText="⭐ MEILLEUR CHOIX"
+                badgeColor="bg-gradient-to-r from-orange-500 to-orange-600"
+                badgeAnimate
               />
               
               <PricingCard
@@ -206,6 +214,8 @@ const Tarifs = () => {
                 isHovered={hoveredSellerCard === "Exclusif"}
                 onHover={(hovered) => setHoveredSellerCard(hovered ? "Exclusif" : null)}
                 anyCardHovered={hoveredSellerCard !== null}
+                badgeText="👑 PREMIUM"
+                badgeColor="bg-gradient-to-r from-purple-600 to-amber-500"
               />
             </div>
           </div>
