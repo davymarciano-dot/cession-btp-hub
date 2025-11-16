@@ -21,9 +21,7 @@ interface EstimationDialogProps {
 
 const EstimationDialog = ({ open, onOpenChange, estimation, isLoading, formData }: EstimationDialogProps) => {
   const [step, setStep] = useState(1);
-  const [nom, setNom] = useState("");
   const [email, setEmail] = useState("");
-  const [telephone, setTelephone] = useState("");
   const [isSaving, setIsSaving] = useState(false);
   const { toast } = useToast();
 
@@ -92,10 +90,10 @@ const EstimationDialog = ({ open, onOpenChange, estimation, isLoading, formData 
   const handleSubmitContact = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (!nom || !email || !telephone) {
+    if (!email) {
       toast({
-        title: "Informations manquantes",
-        description: "Veuillez remplir tous les champs obligatoires (*)",
+        title: "Email requis",
+        description: "Veuillez entrer votre adresse email",
         variant: "destructive",
       });
       return;
@@ -111,17 +109,6 @@ const EstimationDialog = ({ open, onOpenChange, estimation, isLoading, formData 
       return;
     }
 
-    const telRegex = /^(\+33|0)[1-9](\d{2}){4}$/;
-    const cleanTel = telephone.replace(/\s/g, '');
-    if (!telRegex.test(cleanTel)) {
-      toast({
-        title: "Téléphone invalide",
-        description: "Format : 06 12 34 56 78",
-        variant: "destructive",
-      });
-      return;
-    }
-
     setIsSaving(true);
 
     try {
@@ -129,9 +116,9 @@ const EstimationDialog = ({ open, onOpenChange, estimation, isLoading, formData 
         .from('leads_estimation')
         .insert([
           {
-            nom: nom.trim(),
+            nom: "",
             email: email.trim().toLowerCase(),
-            telephone: cleanTel,
+            telephone: "",
             ca: estimationRealiste?.ca,
             secteur: estimationRealiste?.secteur,
             departement: formData?.departement,
@@ -236,40 +223,16 @@ const EstimationDialog = ({ open, onOpenChange, estimation, isLoading, formData 
 
             <form onSubmit={handleSubmitContact} className="space-y-4">
               <div>
-                <Label htmlFor="nom">Nom <span className="text-destructive">*</span></Label>
-                <Input
-                  id="nom"
-                  value={nom}
-                  onChange={(e) => setNom(e.target.value)}
-                  placeholder="Dupont"
-                  required
-                  maxLength={100}
-                />
-              </div>
-
-              <div>
-                <Label htmlFor="email">Email professionnel <span className="text-destructive">*</span></Label>
+                <Label htmlFor="email">Votre email <span className="text-destructive">*</span></Label>
                 <Input
                   id="email"
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  placeholder="jean.dupont@entreprise.fr"
+                  placeholder="votre@email.com"
                   required
                   maxLength={255}
-                />
-              </div>
-
-              <div>
-                <Label htmlFor="telephone">Téléphone <span className="text-destructive">*</span></Label>
-                <Input
-                  id="telephone"
-                  type="tel"
-                  value={telephone}
-                  onChange={(e) => setTelephone(e.target.value)}
-                  placeholder="06 12 34 56 78"
-                  required
-                  maxLength={20}
+                  className="h-12"
                 />
               </div>
 
