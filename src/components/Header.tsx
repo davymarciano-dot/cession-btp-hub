@@ -16,7 +16,7 @@ const Header = () => {
             <img 
               src="/images/logo-cessionbtp.png" 
               alt="CessionBTP - N°1 Cession Entreprises BTP" 
-              className="h-24 w-auto"
+              className="h-32 w-auto"
             />
           </Link>
 
