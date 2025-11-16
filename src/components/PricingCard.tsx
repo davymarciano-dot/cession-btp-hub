@@ -16,6 +16,9 @@ interface PricingCardProps {
   isHovered?: boolean;
   onHover?: (hovered: boolean) => void;
   anyCardHovered?: boolean;
+  badgeText?: string;
+  badgeColor?: string;
+  badgeAnimate?: boolean;
 }
 
 const PricingCard = ({
@@ -31,6 +34,9 @@ const PricingCard = ({
   isHovered = false,
   onHover,
   anyCardHovered = false,
+  badgeText,
+  badgeColor,
+  badgeAnimate = false,
 }: PricingCardProps) => {
   const isPrimary = variant === "primary" || isPopular;
   
@@ -60,9 +66,11 @@ const PricingCard = ({
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
-      {isPopular && (
-        <Badge className="absolute -top-3 left-1/2 -translate-x-1/2 bg-primary text-white">
-          POPULAIRE
+      {(badgeText || isPopular) && (
+        <Badge className={`absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1.5 rounded-full text-white text-xs font-bold shadow-lg ${
+          badgeColor || 'bg-gradient-to-r from-blue-500 to-blue-600'
+        } ${badgeAnimate ? 'animate-pulse' : ''}`}>
+          {badgeText || 'POPULAIRE'}
         </Badge>
       )}
       
