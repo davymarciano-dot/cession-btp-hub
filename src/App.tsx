@@ -177,14 +177,12 @@ const App = () => {
             <Route path="/entreprise-:keyword-a-vendre" element={<BuyerKeywordPage />} />
             <Route path="/societe-:keyword-a-reprendre" element={<BuyerKeywordPage />} />
             <Route path="/petite-:keyword-a-vendre" element={<BuyerKeywordPage />} />
-            {/* SEO Pages - Seller Keywords */}
-            <Route path="/:slug" element={<SellerKeywordPage />} />
-            {/* SEO Pages - Certifications */}
-            <Route path="/entreprise-:slug-a-vendre" element={<CertificationPage />} />
             {/* SEO Pages - Métiers */}
             <Route path="/:slug-entreprise-a-vendre" element={<MetierPage />} />
             {/* SEO Pages - Régions */}
             <Route path="/entreprise-btp-a-vendre-:slug" element={<RegionPage />} />
+            {/* Generic seller keyword (MUST be last among specific SEO routes) */}
+            <Route path="/:slug" element={<SellerKeywordPage />} />
             {/* Blog */}
             <Route path="/blog/:slug" element={<BlogPost />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
