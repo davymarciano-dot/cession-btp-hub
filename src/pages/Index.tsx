@@ -39,9 +39,8 @@ const Home = () => {
     const fetchAnnonces = async () => {
       try {
         const { data, error } = await supabase
-          .from("annonces")
+          .from("annonces_public")
           .select("*")
-          .eq("statut", "publiee")
           .order("created_at", { ascending: false })
           .limit(3);
 

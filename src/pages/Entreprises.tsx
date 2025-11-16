@@ -80,9 +80,8 @@ const Entreprises = () => {
     try {
       setLoading(true);
       let query = supabase
-        .from("annonces")
-        .select("*")
-        .eq("statut", "publiee");
+        .from("annonces_public")
+        .select("*");
 
       // Apply filters
       if (secteurFilter && secteurFilter !== "all") {
