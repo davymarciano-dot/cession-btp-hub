@@ -3,14 +3,25 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Card } from "@/components/ui/card";
-import { Search, Filter, Building2, MapPin, Euro, Users, TrendingUp, Award, ChevronLeft, ChevronRight } from "lucide-react";
+import {
+  Search,
+  Filter,
+  Building2,
+  MapPin,
+  Euro,
+  Users,
+  TrendingUp,
+  Award,
+  ChevronLeft,
+  ChevronRight,
+  Sparkles,
+} from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { supabase } from "@/integrations/supabase/client";
 import { ListingSkeletonGrid } from "@/components/ListingSkeleton";
 import SEO from "@/components/SEO";
-import { OptimizedImage } from "@/components/OptimizedImage";
 
 interface Annonce {
   id: string;
@@ -35,7 +46,7 @@ const Index = () => {
   const [filteredAnnonces, setFilteredAnnonces] = useState<Annonce[]>([]);
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
-  
+
   // Filtres
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedSector, setSelectedSector] = useState<string>("all");
@@ -53,11 +64,11 @@ const Index = () => {
   const fetchAnnonces = async () => {
     setLoading(true);
     const { data, error } = await supabase
-      .from('annonces')
-      .select('*')
-      .eq('statut', 'publiee')
-      .order('created_at', { ascending: false });
-    
+      .from("annonces")
+      .select("*")
+      .eq("statut", "publiee")
+      .order("created_at", { ascending: false });
+
     if (data) {
       setAnnonces(data);
     }
@@ -67,29 +78,26 @@ const Index = () => {
   const applyFilters = () => {
     let filtered = [...annonces];
 
-    // Filtre de recherche
     if (searchTerm) {
-      filtered = filtered.filter(a => 
-        a.raison_sociale?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        a.ville.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        a.secteur_activite.toLowerCase().includes(searchTerm.toLowerCase())
+      filtered = filtered.filter(
+        (a) =>
+          a.raison_sociale?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          a.ville.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          a.secteur_activite.toLowerCase().includes(searchTerm.toLowerCase()),
       );
     }
 
-    // Filtre secteur
     if (selectedSector !== "all") {
-      filtered = filtered.filter(a => a.secteur_activite === selectedSector);
+      filtered = filtered.filter((a) => a.secteur_activite === selectedSector);
     }
 
-    // Filtre région (département)
     if (selectedRegion !== "all") {
-      filtered = filtered.filter(a => a.departement.startsWith(selectedRegion));
+      filtered = filtered.filter((a) => a.departement.startsWith(selectedRegion));
     }
 
-    // Filtre prix
     if (priceRange !== "all") {
       const [min, max] = priceRange.split("-").map(Number);
-      filtered = filtered.filter(a => {
+      filtered = filtered.filter((a) => {
         if (max) {
           return a.prix_vente >= min && a.prix_vente <= max;
         }
@@ -101,121 +109,156 @@ const Index = () => {
     setCurrentPage(1);
   };
 
-  const uniqueSectors = Array.from(new Set(annonces.map(a => a.secteur_activite))).sort();
-  
+  const uniqueSectors = Array.from(new Set(annonces.map((a) => a.secteur_activite))).sort();
+
   const totalPages = Math.ceil(filteredAnnonces.length / ITEMS_PER_PAGE);
   const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
   const endIndex = startIndex + ITEMS_PER_PAGE;
   const currentAnnonces = filteredAnnonces.slice(startIndex, endIndex);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-slate-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-slate-50">
       <SEO
         title="CessionBTP - Achat et Vente d'Entreprises BTP en France"
-        description="Plateforme n°1 pour acheter et vendre des entreprises du BTP. Plus de 500 sociétés de construction à reprendre. Success Fee 2%, Matching IA, accompagnement personnalisé. Estimation gratuite en 5 min."
-        keywords="cession entreprise BTP, vendre société construction, acheter entreprise bâtiment, reprise PME BTP, valorisation entreprise BTP, marketplace BTP"
+        description="Plateforme n°1 pour acheter et vendre des entreprises du BTP. Plus de 500 sociétés de construction à reprendre. Success Fee 2%, Matching IA, accompagnement personnalisé."
+        keywords="cession entreprise BTP, vendre société construction, acheter entreprise bâtiment, reprise PME BTP"
         url="https://cessionbtp.fr"
       />
       <Header />
-      
+
       <main>
-        {/* Hero Section Moderne */}
-        <section className="relative bg-gradient-to-r from-blue-600 via-blue-700 to-indigo-800 text-white py-24 overflow-hidden">
-          <div className="absolute inset-0 bg-grid-white/10"></div>
+        {/* 🎨 HERO SECTION ULTRA MODERNE */}
+        <section className="relative bg-gradient-to-br from-blue-900 via-blue-800 to-indigo-900 text-white py-32 overflow-hidden">
+          {/* Motif de fond animé */}
+          <div className="absolute inset-0 opacity-10">
+            <div
+              className="absolute inset-0"
+              style={{
+                backgroundImage: "radial-gradient(circle at 2px 2px, white 1px, transparent 0)",
+                backgroundSize: "50px 50px",
+              }}
+            ></div>
+          </div>
+
           <div className="container mx-auto px-4 relative z-10">
-            <div className="max-w-4xl mx-auto text-center">
-              <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full mb-6">
+            <div className="max-w-5xl mx-auto text-center">
+              {/* Badge Premium */}
+              <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md px-6 py-3 rounded-full mb-8 border border-white/20 animate-pulse">
                 <Award className="w-5 h-5 text-yellow-300" />
-                <span className="text-sm font-medium">Plateforme n°1 de cession d'entreprises BTP</span>
-              </div>
-              <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
-                Trouvez Votre Prochaine
-                <span className="block text-yellow-300">Opportunité BTP</span>
-              </h1>
-              <p className="text-xl md:text-2xl mb-8 text-blue-100">
-                {annonces.length} entreprises disponibles · Matching IA · Success Fee 2%
-              </p>
-              
-              {/* Statistiques Hero */}
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl mx-auto mb-8">
-                <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4">
-                  <div className="text-3xl font-bold">{annonces.length}</div>
-                  <div className="text-sm text-blue-100">Annonces actives</div>
-                </div>
-                <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4">
-                  <div className="text-3xl font-bold">2000+</div>
-                  <div className="text-sm text-blue-100">Acheteurs qualifiés</div>
-                </div>
-                <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4">
-                  <div className="text-3xl font-bold">45j</div>
-                  <div className="text-sm text-blue-100">Délai moyen</div>
-                </div>
-                <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4">
-                  <div className="text-3xl font-bold">98%</div>
-                  <div className="text-sm text-blue-100">Satisfaction</div>
-                </div>
+                <span className="text-sm font-bold">Plateforme n°1 de cession d'entreprises BTP</span>
               </div>
 
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button 
-                  size="lg" 
-                  className="bg-white text-blue-600 hover:bg-blue-50 text-lg px-8 py-6"
-                  onClick={() => navigate('/vendre')}
+              {/* Titre Spectaculaire */}
+              <h1 className="text-5xl md:text-7xl font-extrabold mb-8 leading-tight">
+                Trouvez Votre Prochaine
+                <span className="block mt-3 bg-gradient-to-r from-yellow-300 via-orange-400 to-yellow-300 bg-clip-text text-transparent animate-gradient">
+                  Opportunité BTP
+                </span>
+              </h1>
+
+              {/* Sous-titre */}
+              <p className="text-xl md:text-2xl mb-12 text-blue-100 font-light max-w-3xl mx-auto">
+                {annonces.length} entreprises disponibles · Matching IA · Success Fee 2%
+              </p>
+
+              {/* 📊 Stats Cards Glassmorphism */}
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto mb-12">
+                {[
+                  { number: annonces.length, label: "Annonces actives", icon: "🏗️" },
+                  { number: "2000+", label: "Acheteurs qualifiés", icon: "👥" },
+                  { number: "45j", label: "Délai moyen", icon: "⚡" },
+                  { number: "98%", label: "Satisfaction", icon: "⭐" },
+                ].map((stat, i) => (
+                  <div
+                    key={i}
+                    className="group bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/20 hover:bg-white/20 transition-all duration-500 hover:scale-110 hover:shadow-2xl hover:shadow-white/20 cursor-pointer"
+                  >
+                    <div className="text-4xl mb-3 group-hover:scale-125 transition-transform duration-300">
+                      {stat.icon}
+                    </div>
+                    <div className="text-4xl font-extrabold mb-2">{stat.number}</div>
+                    <div className="text-sm text-blue-200 font-medium">{stat.label}</div>
+                  </div>
+                ))}
+              </div>
+
+              {/* 🚀 CTA Buttons */}
+              <div className="flex flex-col sm:flex-row gap-5 justify-center">
+                <Button
+                  size="lg"
+                  className="group bg-white text-blue-900 hover:bg-blue-50 text-lg px-12 py-8 rounded-2xl font-bold shadow-2xl hover:shadow-white/30 hover:scale-105 transition-all duration-300"
+                  onClick={() => navigate("/vendre")}
                 >
-                  Vendre mon entreprise
+                  <Sparkles className="w-5 h-5 mr-2 group-hover:rotate-12 transition-transform" />
+                  <span>Vendre mon entreprise</span>
+                  <span className="ml-2 group-hover:translate-x-1 transition-transform inline-block">→</span>
                 </Button>
-                <Button 
-                  size="lg" 
-                  variant="outline" 
-                  className="bg-transparent border-2 border-white text-white hover:bg-white/10 text-lg px-8 py-6"
-                  onClick={() => document.getElementById('annonces-section')?.scrollIntoView({ behavior: 'smooth' })}
+                <Button
+                  size="lg"
+                  variant="outline"
+                  className="bg-transparent border-3 border-white text-white hover:bg-white/20 text-lg px-12 py-8 rounded-2xl font-bold backdrop-blur-sm hover:scale-105 transition-all duration-300"
+                  onClick={() => document.getElementById("annonces-section")?.scrollIntoView({ behavior: "smooth" })}
                 >
                   Parcourir les annonces
                 </Button>
               </div>
             </div>
           </div>
+
+          {/* Vagues décoratives */}
+          <div className="absolute bottom-0 left-0 right-0">
+            <svg viewBox="0 0 1440 120" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full">
+              <path
+                d="M0 0L60 10C120 20 240 40 360 46.7C480 53 600 47 720 43.3C840 40 960 40 1080 46.7C1200 53 1320 67 1380 73.3L1440 80V120H1380C1320 120 1200 120 1080 120C960 120 840 120 720 120C600 120 480 120 360 120C240 120 120 120 60 120H0V0Z"
+                fill="rgb(248, 250, 252)"
+              />
+            </svg>
+          </div>
         </section>
 
         {/* Section Recherche et Filtres */}
-        <section id="annonces-section" className="container mx-auto px-4 -mt-12 relative z-20 mb-12">
-          <Card className="p-8 shadow-2xl">
-            <div className="flex items-center gap-2 mb-6">
-              <Filter className="w-5 h-5 text-blue-600" />
-              <h2 className="text-2xl font-bold">Recherche Avancée</h2>
+        <section id="annonces-section" className="container mx-auto px-4 -mt-16 relative z-20 mb-16">
+          <Card className="p-8 shadow-2xl rounded-3xl border-2 border-gray-100">
+            <div className="flex items-center gap-3 mb-8">
+              <div className="p-3 bg-blue-100 rounded-xl">
+                <Filter className="w-6 h-6 text-blue-600" />
+              </div>
+              <h2 className="text-3xl font-extrabold text-gray-900">Recherche Avancée</h2>
             </div>
-            
+
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
               {/* Barre de recherche */}
               <div className="lg:col-span-2 relative">
-                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+                <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
                 <Input
                   placeholder="Rechercher par nom, ville, secteur..."
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
-                  className="pl-10 h-12"
+                  className="pl-12 h-14 text-base border-2 border-gray-200 rounded-xl focus:border-blue-500 transition-all"
                 />
               </div>
 
               {/* Filtre Secteur */}
               <Select value={selectedSector} onValueChange={setSelectedSector}>
-                <SelectTrigger className="h-12 bg-white dark:bg-gray-800">
-                  <SelectValue placeholder="Secteur" />
+                <SelectTrigger className="h-14 border-2 border-gray-200 rounded-xl font-medium">
+                  <SelectValue placeholder="Tous les secteurs" />
                 </SelectTrigger>
-                <SelectContent className="bg-white dark:bg-gray-800 z-50">
+                <SelectContent>
                   <SelectItem value="all">Tous les secteurs</SelectItem>
-                  {uniqueSectors.map(sector => (
-                    <SelectItem key={sector} value={sector}>{sector}</SelectItem>
+                  {uniqueSectors.map((sector) => (
+                    <SelectItem key={sector} value={sector}>
+                      {sector}
+                    </SelectItem>
                   ))}
                 </SelectContent>
               </Select>
 
               {/* Filtre Région */}
               <Select value={selectedRegion} onValueChange={setSelectedRegion}>
-                <SelectTrigger className="h-12 bg-white dark:bg-gray-800">
-                  <SelectValue placeholder="Région" />
+                <SelectTrigger className="h-14 border-2 border-gray-200 rounded-xl font-medium">
+                  <SelectValue placeholder="Toutes les régions" />
                 </SelectTrigger>
-                <SelectContent className="bg-white dark:bg-gray-800 z-50">
+                <SelectContent>
                   <SelectItem value="all">Toutes les régions</SelectItem>
                   <SelectItem value="75">Île-de-France (75)</SelectItem>
                   <SelectItem value="69">Auvergne-Rhône-Alpes (69)</SelectItem>
@@ -232,10 +275,10 @@ const Index = () => {
 
               {/* Filtre Prix */}
               <Select value={priceRange} onValueChange={setPriceRange}>
-                <SelectTrigger className="h-12 bg-white dark:bg-gray-800">
-                  <SelectValue placeholder="Prix" />
+                <SelectTrigger className="h-14 border-2 border-gray-200 rounded-xl font-medium">
+                  <SelectValue placeholder="Tous les prix" />
                 </SelectTrigger>
-                <SelectContent className="bg-white dark:bg-gray-800 z-50">
+                <SelectContent>
                   <SelectItem value="all">Tous les prix</SelectItem>
                   <SelectItem value="0-300000">Moins de 300K€</SelectItem>
                   <SelectItem value="300000-500000">300K€ - 500K€</SelectItem>
@@ -246,14 +289,16 @@ const Index = () => {
               </Select>
             </div>
 
-            <div className="mt-4 flex items-center justify-between">
-              <p className="text-sm text-muted-foreground">
-                {filteredAnnonces.length} résultat{filteredAnnonces.length > 1 ? 's' : ''} trouvé{filteredAnnonces.length > 1 ? 's' : ''}
+            <div className="mt-6 flex items-center justify-between">
+              <p className="text-base text-gray-600 font-medium">
+                <span className="text-blue-600 font-bold text-lg">{filteredAnnonces.length}</span> résultat
+                {filteredAnnonces.length > 1 ? "s" : ""} trouvé{filteredAnnonces.length > 1 ? "s" : ""}
               </p>
               {(searchTerm || selectedSector !== "all" || selectedRegion !== "all" || priceRange !== "all") && (
-                <Button 
-                  variant="outline" 
+                <Button
+                  variant="outline"
                   size="sm"
+                  className="border-2 border-blue-200 text-blue-600 hover:bg-blue-50 font-semibold"
                   onClick={() => {
                     setSearchTerm("");
                     setSelectedSector("all");
@@ -261,124 +306,150 @@ const Index = () => {
                     setPriceRange("all");
                   }}
                 >
-                  Réinitialiser les filtres
+                  Réinitialiser
                 </Button>
               )}
             </div>
           </Card>
         </section>
 
-        {/* Grille des Annonces */}
+        {/* 🎨 GRILLE DES ANNONCES MODERNE */}
         <section className="container mx-auto px-4 py-12">
-        {/* Résultats */}
-        {loading ? (
-          <ListingSkeletonGrid count={9} />
-        ) : currentAnnonces.length === 0 ? (
-          <Card className="p-12 text-center">
-            <Building2 className="w-16 h-16 mx-auto text-gray-400 mb-4" />
-            <h3 className="text-2xl font-bold mb-2">Aucune annonce trouvée</h3>
-            <p className="text-muted-foreground mb-6">Essayez de modifier vos critères de recherche</p>
-            <Button onClick={() => {
-              setSearchTerm("");
-              setSelectedSector("all");
-              setSelectedRegion("all");
-              setPriceRange("all");
-            }}>
-              Réinitialiser les filtres
-            </Button>
-          </Card>
-        ) : (
-          <>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-              {currentAnnonces.map((annonce) => (
-                  <Card 
-                    key={annonce.id} 
-                    className="group hover:shadow-2xl transition-all duration-300 cursor-pointer overflow-hidden"
+          {loading ? (
+            <ListingSkeletonGrid count={9} />
+          ) : currentAnnonces.length === 0 ? (
+            <Card className="p-16 text-center rounded-3xl">
+              <Building2 className="w-20 h-20 mx-auto text-gray-300 mb-6" />
+              <h3 className="text-3xl font-bold mb-3 text-gray-800">Aucune annonce trouvée</h3>
+              <p className="text-gray-500 text-lg mb-8">Essayez de modifier vos critères de recherche</p>
+              <Button
+                size="lg"
+                className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-6 rounded-xl"
+                onClick={() => {
+                  setSearchTerm("");
+                  setSelectedSector("all");
+                  setSelectedRegion("all");
+                  setPriceRange("all");
+                }}
+              >
+                Réinitialiser les filtres
+              </Button>
+            </Card>
+          ) : (
+            <>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+                {currentAnnonces.map((annonce) => (
+                  <Card
+                    key={annonce.id}
+                    className="group hover:shadow-2xl transition-all duration-500 cursor-pointer overflow-hidden border-2 border-gray-100 hover:border-blue-300 rounded-3xl hover:scale-105"
                     onClick={() => navigate(`/annonce/${annonce.id}`)}
                   >
-                    {/* Image placeholder avec gradient */}
-                    <div className="h-48 bg-gradient-to-br from-blue-500 to-indigo-600 relative overflow-hidden">
-                      <div className="absolute inset-0 bg-black/20"></div>
-                      <div className="absolute top-4 left-4">
-                        <span className="bg-white px-3 py-1 rounded-full text-sm font-semibold text-blue-600">
+                    {/* Image avec gradient spectaculaire */}
+                    <div className="h-64 bg-gradient-to-br from-blue-600 via-blue-700 to-indigo-800 relative overflow-hidden">
+                      <div className="absolute inset-0 bg-black/10 group-hover:bg-black/5 transition-all"></div>
+
+                      {/* Badge secteur */}
+                      <div className="absolute top-5 left-5">
+                        <span className="bg-white px-5 py-2 rounded-full text-sm font-bold text-blue-600 shadow-xl">
                           {annonce.secteur_activite}
                         </span>
                       </div>
-                      <div className="absolute bottom-4 left-4 right-4 text-white">
-                        <h3 className="text-xl font-bold mb-1 line-clamp-1">
+
+                      {/* Infos localisation */}
+                      <div className="absolute bottom-5 left-5 right-5">
+                        <h3 className="text-2xl font-extrabold mb-2 text-white drop-shadow-2xl line-clamp-1">
                           {annonce.raison_sociale || `Entreprise ${annonce.secteur_activite}`}
                         </h3>
-                        <div className="flex items-center gap-1 text-sm">
-                          <MapPin className="w-4 h-4" />
-                          <span>{annonce.ville} ({annonce.departement})</span>
+                        <div className="flex items-center gap-2 text-white/95">
+                          <MapPin className="w-5 h-5" />
+                          <span className="font-semibold">
+                            {annonce.ville} ({annonce.departement})
+                          </span>
                         </div>
                       </div>
+
+                      {/* Effet brillance */}
+                      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
                     </div>
 
-                    <div className="p-6">
-                      {/* Prix en évidence */}
-                      <div className="flex items-baseline gap-2 mb-4">
-                        <span className="text-3xl font-bold text-blue-600">
-                          {(annonce.prix_vente / 1000).toFixed(0)}K€
-                        </span>
-                        <span className="text-sm text-muted-foreground">Prix de vente</span>
+                    {/* Contenu carte */}
+                    <div className="p-7 bg-white">
+                      {/* Prix */}
+                      <div className="mb-6">
+                        <div className="flex items-baseline gap-2">
+                          <span className="text-5xl font-extrabold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
+                            {(annonce.prix_vente / 1000).toFixed(0)}K€
+                          </span>
+                          <span className="text-sm text-gray-500 font-semibold">Prix de vente</span>
+                        </div>
                       </div>
 
-                      {/* Métriques clés */}
-                      <div className="grid grid-cols-2 gap-4 mb-4">
-                        <div className="flex items-center gap-2">
-                          <TrendingUp className="w-4 h-4 text-green-600" />
+                      {/* Métriques */}
+                      <div className="grid grid-cols-2 gap-4 mb-6">
+                        <div className="flex items-center gap-3 bg-gradient-to-br from-green-50 to-emerald-50 p-4 rounded-2xl">
+                          <div className="bg-green-500 p-2 rounded-xl shadow-lg">
+                            <TrendingUp className="w-5 h-5 text-white" />
+                          </div>
                           <div>
-                            <div className="text-xs text-muted-foreground">CA annuel</div>
-                            <div className="font-semibold">{(annonce.ca_n1 / 1000).toFixed(0)}K€</div>
+                            <div className="text-xs text-gray-500 font-bold uppercase">CA annuel</div>
+                            <div className="font-extrabold text-gray-900 text-lg">
+                              {(annonce.ca_n1 / 1000).toFixed(0)}K€
+                            </div>
                           </div>
                         </div>
-                        <div className="flex items-center gap-2">
-                          <Users className="w-4 h-4 text-purple-600" />
+
+                        <div className="flex items-center gap-3 bg-gradient-to-br from-purple-50 to-violet-50 p-4 rounded-2xl">
+                          <div className="bg-purple-500 p-2 rounded-xl shadow-lg">
+                            <Users className="w-5 h-5 text-white" />
+                          </div>
                           <div>
-                            <div className="text-xs text-muted-foreground">Effectif</div>
-                            <div className="font-semibold">{annonce.nombre_salaries} pers.</div>
+                            <div className="text-xs text-gray-500 font-bold uppercase">Effectif</div>
+                            <div className="font-extrabold text-gray-900 text-lg">{annonce.nombre_salaries} pers.</div>
                           </div>
                         </div>
                       </div>
 
                       {/* Description */}
-                      <p className="text-sm text-muted-foreground line-clamp-2 mb-4">
+                      <p className="text-sm text-gray-600 line-clamp-2 mb-6 leading-relaxed">
                         {annonce.description_activite}
                       </p>
 
-                      {/* Année */}
-                      <div className="flex items-center justify-between text-xs text-muted-foreground">
-                        <span>Créée en {annonce.annee_creation}</span>
-                        <span className="text-blue-600 font-medium group-hover:underline">
-                          Voir détails →
+                      {/* Footer */}
+                      <div className="flex items-center justify-between pt-5 border-t-2 border-gray-100">
+                        <span className="text-xs text-gray-500 font-semibold">Créée en {annonce.annee_creation}</span>
+                        <span className="text-blue-600 font-bold text-sm group-hover:gap-2 flex items-center gap-1 transition-all">
+                          Voir détails
+                          <span className="group-hover:translate-x-2 transition-transform text-lg">→</span>
                         </span>
                       </div>
-                  </div>
-                </Card>
-              ))}
-            </div>
+                    </div>
+                  </Card>
+                ))}
+              </div>
 
-            {/* Pagination */}
-            {totalPages > 1 && (
-                <div className="flex items-center justify-center gap-2">
+              {/* Pagination */}
+              {totalPages > 1 && (
+                <div className="flex items-center justify-center gap-3">
                   <Button
                     variant="outline"
                     size="icon"
-                    onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
+                    onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
                     disabled={currentPage === 1}
+                    className="w-12 h-12 rounded-xl border-2"
                   >
-                    <ChevronLeft className="w-4 h-4" />
+                    <ChevronLeft className="w-5 h-5" />
                   </Button>
-                  
+
                   <div className="flex items-center gap-2">
-                    {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => (
+                    {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
                       <Button
                         key={page}
                         variant={currentPage === page ? "default" : "outline"}
                         size="icon"
                         onClick={() => setCurrentPage(page)}
-                        className={currentPage === page ? "bg-blue-600" : ""}
+                        className={`w-12 h-12 rounded-xl font-bold ${
+                          currentPage === page ? "bg-blue-600 hover:bg-blue-700 shadow-lg" : "border-2"
+                        }`}
                       >
                         {page}
                       </Button>
@@ -388,10 +459,11 @@ const Index = () => {
                   <Button
                     variant="outline"
                     size="icon"
-                    onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))}
+                    onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
                     disabled={currentPage === totalPages}
+                    className="w-12 h-12 rounded-xl border-2"
                   >
-                    <ChevronRight className="w-4 h-4" />
+                    <ChevronRight className="w-5 h-5" />
                   </Button>
                 </div>
               )}
@@ -399,26 +471,26 @@ const Index = () => {
           )}
         </section>
 
-        {/* Call to Action */}
-        <section className="bg-gradient-to-r from-blue-600 to-indigo-700 text-white py-20">
+        {/* Call to Action Final */}
+        <section className="bg-gradient-to-r from-blue-600 via-blue-700 to-indigo-700 text-white py-24">
           <div className="container mx-auto px-4 text-center">
-            <h2 className="text-4xl font-bold mb-4">Prêt à Franchir le Cap ?</h2>
-            <p className="text-xl mb-8 text-blue-100 max-w-2xl mx-auto">
+            <h2 className="text-5xl font-extrabold mb-6">Prêt à Franchir le Cap ?</h2>
+            <p className="text-xl mb-12 text-blue-100 max-w-2xl mx-auto font-light">
               Rejoignez les centaines d'entrepreneurs qui nous font confiance pour leur projet de cession
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button 
+            <div className="flex flex-col sm:flex-row gap-5 justify-center">
+              <Button
                 size="lg"
-                className="bg-white text-blue-600 hover:bg-blue-50 text-lg px-8 py-6"
-                onClick={() => navigate('/vendre')}
+                className="bg-white text-blue-600 hover:bg-blue-50 text-lg px-12 py-8 rounded-2xl font-bold shadow-2xl hover:scale-105 transition-all"
+                onClick={() => navigate("/vendre")}
               >
                 Vendre mon entreprise
               </Button>
-              <Button 
+              <Button
                 size="lg"
                 variant="outline"
-                className="bg-transparent border-2 border-white text-white hover:bg-white/10 text-lg px-8 py-6"
-                onClick={() => navigate('/estimer')}
+                className="bg-transparent border-3 border-white text-white hover:bg-white/20 text-lg px-12 py-8 rounded-2xl font-bold backdrop-blur-sm hover:scale-105 transition-all"
+                onClick={() => navigate("/estimer")}
               >
                 Estimer gratuitement
               </Button>
@@ -426,7 +498,7 @@ const Index = () => {
           </div>
         </section>
       </main>
-      
+
       <Footer />
     </div>
   );
