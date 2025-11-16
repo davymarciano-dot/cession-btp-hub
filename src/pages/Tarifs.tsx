@@ -101,9 +101,9 @@ const Tarifs = () => {
             {/* PRO - 🔥 MEILLEUR RAPPORT */}
             <div className="h-full flex flex-col border-2 border-slate-200 hover:border-blue-500 hover:shadow-xl transition-all rounded-2xl p-8 bg-white relative">
 
-              <h3 className="text-2xl font-bold text-slate-900 mb-2">Pro</h3>
+              <h3 className="text-2xl font-bold text-red-600 mb-2">Pro</h3>
               <div className="mb-6">
-                <span className="text-5xl font-black text-blue-600">99€</span>
+                <span className="text-5xl font-black text-red-600">99€</span>
                 <span className="text-slate-600"> /mois</span>
               </div>
               <p className="text-sm text-slate-600 mb-6">
