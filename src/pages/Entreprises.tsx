@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { Helmet } from "react-helmet-async";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
@@ -16,6 +15,7 @@ import { CompanyComparator } from "@/components/CompanyComparator";
 import ComparisonGuide from "@/components/ComparisonGuide";
 import { ListingSkeletonGrid } from "@/components/ListingSkeleton";
 import SEO from "@/components/SEO";
+import SEOHead from "@/components/SEOHead";
 
 interface Annonce {
   id: string;
@@ -165,6 +165,7 @@ const Entreprises = () => {
 
   return (
     <div className="min-h-screen">
+      <SEOHead page="entreprises" />
       <SEO
         title="Entreprises BTP à vendre - Trouvez votre opportunité"
         description={`Découvrez ${annonces.length} entreprises BTP à vendre en France. Filtres avancés par secteur, région, prix et CA. Carte interactive et comparateur intégré pour faire le bon choix.`}

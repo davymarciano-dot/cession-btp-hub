@@ -1,5 +1,5 @@
-import { Helmet } from 'react-helmet-async';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import SEOHead from '@/components/SEOHead';
 import { ValuationCalculator } from '@/components/tools/ValuationCalculator';
 import { FinancingSimulator } from '@/components/tools/FinancingSimulator';
 import { Calculator, PiggyBank, FileText, Download } from 'lucide-react';
@@ -36,15 +36,7 @@ export const OutilsGratuits = () => {
   
   return (
     <>
-      <Helmet>
-        <title>Outils Gratuits Cession BTP | Calculateurs & Modèles | CessionBTP</title>
-        <meta 
-          name="description" 
-          content="Calculateur de valorisation, simulateur de financement et modèles gratuits pour la cession d'entreprise BTP. Outils professionnels 100% gratuits." 
-        />
-        <meta name="keywords" content="calculateur valorisation btp, simulateur financement reprise, outils cession gratuits" />
-        <link rel="canonical" href="https://cessionbtp.fr/outils-gratuits" />
-      </Helmet>
+      <SEOHead page="about" />
       
       <div className="min-h-screen bg-background">
         <div className="bg-gradient-to-r from-primary to-blue-600 text-white py-16">
