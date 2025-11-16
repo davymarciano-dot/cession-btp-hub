@@ -65,7 +65,7 @@ const Acheter = () => {
                 Trouvez l'Entreprise BTP à Reprendre
               </h1>
               <p className="text-xl mb-12 text-center text-white/90">
-                840 entreprises BTP à vendre • Repreneurs actifs • Accompagnement complet
+                {isLoading ? "Chargement..." : `${listings.length} entreprises BTP à vendre`} • Repreneurs actifs • Accompagnement complet
               </p>
 
               {/* Advanced Search Form */}

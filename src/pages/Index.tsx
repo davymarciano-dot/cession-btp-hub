@@ -33,6 +33,25 @@ const Home = () => {
   const [notificationId, setNotificationId] = useState(0);
   const [realAnnonces, setRealAnnonces] = useState<any[]>([]);
   const [loadingAnnonces, setLoadingAnnonces] = useState(true);
+  const [totalAnnonces, setTotalAnnonces] = useState(0);
+
+  // 🔥 RÉCUPÉRATION DU NOMBRE TOTAL D'ANNONCES
+  useEffect(() => {
+    const fetchTotalAnnonces = async () => {
+      try {
+        const { count, error } = await supabase
+          .from("annonces_public")
+          .select("*", { count: 'exact', head: true });
+
+        if (error) throw error;
+        setTotalAnnonces(count || 0);
+      } catch (error) {
+        console.error("Erreur chargement nombre annonces:", error);
+      }
+    };
+
+    fetchTotalAnnonces();
+  }, []);
 
   // 🔥 RÉCUPÉRATION DES 3 DERNIÈRES ANNONCES RÉELLES
   useEffect(() => {
@@ -396,7 +415,7 @@ const Home = () => {
                 </h2>
                 
                 <p className="text-xl text-white/90 mb-8">
-                  840 entreprises BTP disponibles
+                  {totalAnnonces > 0 ? `${totalAnnonces} entreprises BTP disponibles` : "840 entreprises BTP disponibles"}
                 </p>
                 
                 <div className="space-y-3 mb-8">
