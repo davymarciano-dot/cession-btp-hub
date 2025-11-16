@@ -13,9 +13,11 @@ const Header = () => {
           {/* LOGO GÉANT - Prend toute la hauteur du menu */}
           <Link to="/" className="flex items-center gap-1 hover:scale-105 transition-transform duration-300">
             <div className="flex items-center">
-              <svg width="50" height="50" viewBox="0 0 100 100" className="mr-2">
-                <path d="M20 20 L50 50 L20 80 L10 80 L40 50 L10 20 Z" fill="#0066FF"/>
-                <path d="M50 20 L80 50 L50 80 L40 80 L70 50 L40 20 Z" fill="#FF6600"/>
+              <svg width="60" height="60" viewBox="0 0 100 100" className="mr-2">
+                {/* X croisé - partie bleue */}
+                <path d="M15,15 L45,45 L15,75 L25,75 L45,55 L25,35 L45,15 Z" fill="#1E90FF"/>
+                {/* X croisé - partie orange */}
+                <path d="M55,15 L75,35 L55,55 L75,75 L85,75 L55,45 L85,15 Z" fill="#FF8C00"/>
               </svg>
               <span className="text-3xl font-black tracking-tight">
                 <span className="text-orange-500">Cession</span>
