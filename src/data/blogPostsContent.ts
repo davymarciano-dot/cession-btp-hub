@@ -3693,7 +3693,7 @@ Mensualité : 4 200€ sur 10 ans</pre>
       </div>
     `,
     metaDescription: "47 points essentiels à vérifier avant de racheter une entreprise BTP. Checklist complète 2026 : documents, finances, RH, matériel. Évitez les pièges fatals.",
-    imageUrl: "/images/blog/checklist-audit-entreprise.jpg",
+    imageUrl: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?q=80&w=2070&auto=format&fit=crop",
     schema: {
       "@context": "https://schema.org",
       "@type": "Article",
@@ -5582,7 +5582,7 @@ Mensualité : 4 200€ sur 10 ans</pre>
       </div>
     `,
     metaDescription: '47 points essentiels à vérifier avant de racheter une entreprise BTP. Checklist complète 2026 : documents, finances, RH, matériel. Évitez les pièges fatals.',
-    imageUrl: '/images/blog/audit-entreprise-btp.jpg',
+    imageUrl: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?q=80&w=2070&auto=format&fit=crop',
     schema: {
       "@context": "https://schema.org",
       "@type": "Article",
