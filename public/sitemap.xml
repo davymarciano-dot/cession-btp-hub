@@ -3,7 +3,7 @@
   
   <!-- PAGE D'ACCUEIL -->
   <url>
-    <loc>https://cessionbtp.com/</loc>
+    <loc>https://cessionbtp.fr/</loc>
     <lastmod>2025-01-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
@@ -11,77 +11,77 @@
   
   <!-- PAGES PRINCIPALES -->
   <url>
-    <loc>https://cessionbtp.com/estimer</loc>
+    <loc>https://cessionbtp.fr/estimer</loc>
     <lastmod>2025-01-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.95</priority>
   </url>
   
   <url>
-    <loc>https://cessionbtp.com/vendre</loc>
+    <loc>https://cessionbtp.fr/vendre</loc>
     <lastmod>2025-01-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.95</priority>
   </url>
   
   <url>
-    <loc>https://cessionbtp.com/acheter</loc>
+    <loc>https://cessionbtp.fr/acheter</loc>
     <lastmod>2025-01-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.95</priority>
   </url>
   
   <url>
-    <loc>https://cessionbtp.com/entreprises</loc>
+    <loc>https://cessionbtp.fr/entreprises</loc>
     <lastmod>2025-01-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
   </url>
   
   <url>
-    <loc>https://cessionbtp.com/tarifs</loc>
+    <loc>https://cessionbtp.fr/tarifs</loc>
     <lastmod>2025-01-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   
   <url>
-    <loc>https://cessionbtp.com/comment-ca-marche</loc>
+    <loc>https://cessionbtp.fr/comment-ca-marche</loc>
     <lastmod>2025-01-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   
   <url>
-    <loc>https://cessionbtp.com/contact</loc>
+    <loc>https://cessionbtp.fr/contact</loc>
     <lastmod>2025-01-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   
   <url>
-    <loc>https://cessionbtp.com/faq</loc>
+    <loc>https://cessionbtp.fr/faq</loc>
     <lastmod>2025-01-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   
   <url>
-    <loc>https://cessionbtp.com/roadmap</loc>
+    <loc>https://cessionbtp.fr/roadmap</loc>
     <lastmod>2025-01-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://cessionbtp.com/ressources</loc>
+    <loc>https://cessionbtp.fr/ressources</loc>
     <lastmod>2025-01-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://cessionbtp.com/outils-gratuits</loc>
+    <loc>https://cessionbtp.fr/outils-gratuits</loc>
     <lastmod>2025-01-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
@@ -89,14 +89,14 @@
   
   <!-- PAGES LÉGALES -->
   <url>
-    <loc>https://cessionbtp.com/mentions-legales</loc>
+    <loc>https://cessionbtp.fr/mentions-legales</loc>
     <lastmod>2025-01-16</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
   
   <url>
-    <loc>https://cessionbtp.com/cgv</loc>
+    <loc>https://cessionbtp.fr/cgv</loc>
     <lastmod>2025-01-16</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
@@ -104,247 +104,247 @@
   
   <!-- PAGES MÉTIERS PRINCIPAUX -->
   <url>
-    <loc>https://cessionbtp.com/entreprise-plomberie-a-vendre</loc>
+    <loc>https://cessionbtp.fr/entreprise-plomberie-a-vendre</loc>
     <lastmod>2025-01-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
   </url>
   
   <url>
-    <loc>https://cessionbtp.com/entreprise-electricite-a-vendre</loc>
+    <loc>https://cessionbtp.fr/entreprise-electricite-a-vendre</loc>
     <lastmod>2025-01-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
   </url>
   
   <url>
-    <loc>https://cessionbtp.com/entreprise-maconnerie-a-vendre</loc>
+    <loc>https://cessionbtp.fr/entreprise-maconnerie-a-vendre</loc>
     <lastmod>2025-01-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
   </url>
   
   <url>
-    <loc>https://cessionbtp.com/entreprise-menuiserie-a-vendre</loc>
+    <loc>https://cessionbtp.fr/entreprise-menuiserie-a-vendre</loc>
     <lastmod>2025-01-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
   </url>
   
   <url>
-    <loc>https://cessionbtp.com/entreprise-chauffage-a-vendre</loc>
+    <loc>https://cessionbtp.fr/entreprise-chauffage-a-vendre</loc>
     <lastmod>2025-01-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
   </url>
   
   <url>
-    <loc>https://cessionbtp.com/entreprise-peinture-a-vendre</loc>
+    <loc>https://cessionbtp.fr/entreprise-peinture-a-vendre</loc>
     <lastmod>2025-01-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
   </url>
   
   <url>
-    <loc>https://cessionbtp.com/entreprise-couverture-a-vendre</loc>
+    <loc>https://cessionbtp.fr/entreprise-couverture-a-vendre</loc>
     <lastmod>2025-01-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
   </url>
   
   <url>
-    <loc>https://cessionbtp.com/entreprise-carrelage-a-vendre</loc>
+    <loc>https://cessionbtp.fr/entreprise-carrelage-a-vendre</loc>
     <lastmod>2025-01-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
   </url>
   
-  <!-- ÉNERGIES RENOUVELABLES RGE (ULTRA PRIORITAIRE) -->
+  <!-- PAGES ÉNERGIES RENOUVELABLES RGE -->
   <url>
-    <loc>https://cessionbtp.com/entreprise-pompe-chaleur-rge-a-vendre</loc>
-    <lastmod>2025-01-16</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>1.0</priority>
-  </url>
-  
-  <url>
-    <loc>https://cessionbtp.com/entreprise-photovoltaique-rge-a-vendre</loc>
-    <lastmod>2025-01-16</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>1.0</priority>
-  </url>
-  
-  <url>
-    <loc>https://cessionbtp.com/entreprise-isolation-thermique-rge-a-vendre</loc>
-    <lastmod>2025-01-16</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>1.0</priority>
-  </url>
-  
-  <url>
-    <loc>https://cessionbtp.com/entreprise-chaudiere-biomasse-rge-a-vendre</loc>
-    <lastmod>2025-01-16</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>1.0</priority>
-  </url>
-  
-  <url>
-    <loc>https://cessionbtp.com/entreprise-solaire-thermique-rge-a-vendre</loc>
-    <lastmod>2025-01-16</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>1.0</priority>
-  </url>
-  
-  <!-- CERTIFICATIONS -->
-  <url>
-    <loc>https://cessionbtp.com/entreprise-rge-a-vendre</loc>
-    <lastmod>2025-01-16</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.95</priority>
-  </url>
-  
-  <url>
-    <loc>https://cessionbtp.com/entreprise-qualibat-a-vendre</loc>
-    <lastmod>2025-01-16</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.9</priority>
-  </url>
-  
-  <url>
-    <loc>https://cessionbtp.com/entreprise-qualifelec-a-vendre</loc>
-    <lastmod>2025-01-16</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.9</priority>
-  </url>
-  
-  <url>
-    <loc>https://cessionbtp.com/entreprise-qualipv-a-vendre</loc>
-    <lastmod>2025-01-16</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.9</priority>
-  </url>
-  
-  <url>
-    <loc>https://cessionbtp.com/entreprise-qualipac-a-vendre</loc>
-    <lastmod>2025-01-16</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.9</priority>
-  </url>
-  
-  <!-- RÉGIONS PRINCIPALES -->
-  <url>
-    <loc>https://cessionbtp.com/entreprise-btp-a-vendre-ile-de-france</loc>
-    <lastmod>2025-01-16</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.85</priority>
-  </url>
-  
-  <url>
-    <loc>https://cessionbtp.com/entreprise-btp-a-vendre-auvergne-rhone-alpes</loc>
-    <lastmod>2025-01-16</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.85</priority>
-  </url>
-  
-  <url>
-    <loc>https://cessionbtp.com/entreprise-btp-a-vendre-nouvelle-aquitaine</loc>
-    <lastmod>2025-01-16</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.85</priority>
-  </url>
-  
-  <url>
-    <loc>https://cessionbtp.com/entreprise-btp-a-vendre-occitanie</loc>
-    <lastmod>2025-01-16</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.85</priority>
-  </url>
-  
-  <url>
-    <loc>https://cessionbtp.com/entreprise-btp-a-vendre-hauts-de-france</loc>
-    <lastmod>2025-01-16</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.85</priority>
-  </url>
-  
-  <url>
-    <loc>https://cessionbtp.com/entreprise-btp-a-vendre-grand-est</loc>
-    <lastmod>2025-01-16</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.85</priority>
-  </url>
-  
-  <url>
-    <loc>https://cessionbtp.com/entreprise-btp-a-vendre-provence-alpes-cote-azur</loc>
-    <lastmod>2025-01-16</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.85</priority>
-  </url>
-  
-  <url>
-    <loc>https://cessionbtp.com/entreprise-btp-a-vendre-pays-de-la-loire</loc>
-    <lastmod>2025-01-16</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.85</priority>
-  </url>
-  
-  <url>
-    <loc>https://cessionbtp.com/entreprise-btp-a-vendre-bretagne</loc>
-    <lastmod>2025-01-16</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.85</priority>
-  </url>
-  
-  <!-- PAGES VENDEUR (SELLER INTENT) -->
-  <url>
-    <loc>https://cessionbtp.com/vendre-entreprise-plomberie</loc>
+    <loc>https://cessionbtp.fr/entreprise-pompe-chaleur-rge-a-vendre</loc>
     <lastmod>2025-01-16</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
+    <priority>0.85</priority>
   </url>
   
   <url>
-    <loc>https://cessionbtp.com/vendre-entreprise-electricite</loc>
+    <loc>https://cessionbtp.fr/entreprise-photovoltaique-rge-a-vendre</loc>
     <lastmod>2025-01-16</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
+    <priority>0.85</priority>
   </url>
   
   <url>
-    <loc>https://cessionbtp.com/vendre-entreprise-maconnerie</loc>
+    <loc>https://cessionbtp.fr/entreprise-isolation-thermique-rge-a-vendre</loc>
     <lastmod>2025-01-16</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
+    <priority>0.85</priority>
   </url>
   
   <url>
-    <loc>https://cessionbtp.com/vendre-entreprise-menuiserie</loc>
+    <loc>https://cessionbtp.fr/entreprise-chaudiere-biomasse-rge-a-vendre</loc>
     <lastmod>2025-01-16</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
+    <priority>0.85</priority>
   </url>
   
   <url>
-    <loc>https://cessionbtp.com/vendre-entreprise-chauffage</loc>
+    <loc>https://cessionbtp.fr/entreprise-solaire-thermique-rge-a-vendre</loc>
     <lastmod>2025-01-16</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
+    <priority>0.85</priority>
+  </url>
+  
+  <!-- PAGES CERTIFICATIONS -->
+  <url>
+    <loc>https://cessionbtp.fr/entreprise-rge-a-vendre</loc>
+    <lastmod>2025-01-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  
+  <url>
+    <loc>https://cessionbtp.fr/entreprise-qualibat-a-vendre</loc>
+    <lastmod>2025-01-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>https://cessionbtp.fr/entreprise-qualifelec-a-vendre</loc>
+    <lastmod>2025-01-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>https://cessionbtp.fr/entreprise-qualipv-a-vendre</loc>
+    <lastmod>2025-01-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>https://cessionbtp.fr/entreprise-qualipac-a-vendre</loc>
+    <lastmod>2025-01-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <!-- PAGES RÉGIONS -->
+  <url>
+    <loc>https://cessionbtp.fr/entreprise-btp-a-vendre-ile-de-france</loc>
+    <lastmod>2025-01-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  
+  <url>
+    <loc>https://cessionbtp.fr/entreprise-btp-a-vendre-auvergne-rhone-alpes</loc>
+    <lastmod>2025-01-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>https://cessionbtp.fr/entreprise-btp-a-vendre-nouvelle-aquitaine</loc>
+    <lastmod>2025-01-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>https://cessionbtp.fr/entreprise-btp-a-vendre-occitanie</loc>
+    <lastmod>2025-01-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>https://cessionbtp.fr/entreprise-btp-a-vendre-hauts-de-france</loc>
+    <lastmod>2025-01-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>https://cessionbtp.fr/entreprise-btp-a-vendre-grand-est</loc>
+    <lastmod>2025-01-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>https://cessionbtp.fr/entreprise-btp-a-vendre-provence-alpes-cote-azur</loc>
+    <lastmod>2025-01-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>https://cessionbtp.fr/entreprise-btp-a-vendre-pays-de-la-loire</loc>
+    <lastmod>2025-01-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>https://cessionbtp.fr/entreprise-btp-a-vendre-bretagne</loc>
+    <lastmod>2025-01-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <!-- PAGES VENTE PAR SECTEUR -->
+  <url>
+    <loc>https://cessionbtp.fr/vendre-entreprise-plomberie</loc>
+    <lastmod>2025-01-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  
+  <url>
+    <loc>https://cessionbtp.fr/vendre-entreprise-electricite</loc>
+    <lastmod>2025-01-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  
+  <url>
+    <loc>https://cessionbtp.fr/vendre-entreprise-maconnerie</loc>
+    <lastmod>2025-01-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  
+  <url>
+    <loc>https://cessionbtp.fr/vendre-entreprise-menuiserie</loc>
+    <lastmod>2025-01-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  
+  <url>
+    <loc>https://cessionbtp.fr/vendre-entreprise-chauffage</loc>
+    <lastmod>2025-01-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.75</priority>
   </url>
   
   <!-- BLOG -->
   <url>
-    <loc>https://cessionbtp.com/blog</loc>
+    <loc>https://cessionbtp.fr/blog</loc>
     <lastmod>2025-01-16</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.6</priority>
   </url>
   
   <!-- ENTREPRISES RGE -->
   <url>
-    <loc>https://cessionbtp.com/entreprises-rge</loc>
+    <loc>https://cessionbtp.fr/entreprises-rge</loc>
     <lastmod>2025-01-16</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.9</priority>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
   </url>
   
 </urlset>
