@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import { supabase } from "@/integrations/supabase/client";
 import {
   ArrowRight,
   CheckCircle2,
@@ -29,6 +30,32 @@ const Home = () => {
   const [email, setEmail] = useState("");
   const [notifications, setNotifications] = useState<Array<{ id: number; text: string; show: boolean }>>([]);
   const [notificationId, setNotificationId] = useState(0);
+  const [realAnnonces, setRealAnnonces] = useState<any[]>([]);
+  const [loadingAnnonces, setLoadingAnnonces] = useState(true);
+
+  // 🔥 RÉCUPÉRATION DES 3 DERNIÈRES ANNONCES RÉELLES
+  useEffect(() => {
+    const fetchAnnonces = async () => {
+      try {
+        const { data, error } = await supabase
+          .from("annonces")
+          .select("*")
+          .eq("statut", "publiee")
+          .order("created_at", { ascending: false })
+          .limit(3);
+
+        if (error) throw error;
+
+        setRealAnnonces(data || []);
+      } catch (error) {
+        console.error("Erreur lors du chargement des annonces:", error);
+      } finally {
+        setLoadingAnnonces(false);
+      }
+    };
+
+    fetchAnnonces();
+  }, []);
 
   // 🔥 NOTIFICATIONS EN TEMPS RÉEL - EN BAS À GAUCHE
   const liveNotifications = [
