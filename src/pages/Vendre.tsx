@@ -23,6 +23,9 @@ import {
   FileText,
   Eye,
   AlertCircle,
+  Crown,
+  Zap,
+  Star,
 } from "lucide-react";
 
 const STORAGE_KEY = "cessionBTP_form_draft";
@@ -127,6 +130,13 @@ const STEPS = [
   },
   {
     id: 7,
+    title: "Formule",
+    subtitle: "Choisissez votre offre",
+    icon: FileText,
+    fields: ["formuleAbonnement"],
+  },
+  {
+    id: 8,
     title: "Récapitulatif",
     subtitle: "Vérification avant publication",
     icon: Eye,
@@ -1182,8 +1192,229 @@ const Vendre = () => {
                   </div>
                 )}
 
-                {/* ÉTAPE 7: Récapitulatif */}
+                {/* ÉTAPE 7: Choix de la formule */}
                 {currentStep === 7 && (
+                  <div className="space-y-8 animate-fade-in">
+                    <div className="text-center mb-8">
+                      <h3 className="text-2xl font-bold text-gray-900 mb-2">Choisissez votre formule</h3>
+                      <p className="text-gray-600">Sélectionnez l'offre qui correspond le mieux à vos besoins</p>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                      {/* Formule Gratuite */}
+                      <button
+                        onClick={() => {
+                          handleInputChange("formuleAbonnement", "gratuit");
+                          handleInputChange("montantAbonnement", 0);
+                          handleInputChange("stripePriceId", "");
+                        }}
+                        className={`relative p-6 rounded-2xl border-2 transition-all duration-200 text-left ${
+                          formData.formuleAbonnement === "gratuit"
+                            ? "border-orange-500 bg-orange-50 shadow-lg scale-105"
+                            : "border-gray-200 hover:border-gray-300 hover:shadow-md"
+                        }`}
+                      >
+                        <div className="flex items-center gap-3 mb-4">
+                          <div className="w-12 h-12 bg-gray-100 rounded-xl flex items-center justify-center">
+                            <Zap className="w-6 h-6 text-gray-600" />
+                          </div>
+                          <div>
+                            <h4 className="font-bold text-lg">Gratuit</h4>
+                            <p className="text-sm text-gray-500">Offre de base</p>
+                          </div>
+                        </div>
+
+                        <div className="mb-4">
+                          <div className="flex items-baseline gap-2">
+                            <span className="text-4xl font-bold text-gray-900">0€</span>
+                            <span className="text-gray-500">/3 mois</span>
+                          </div>
+                        </div>
+
+                        <ul className="space-y-3 mb-6">
+                          <li className="flex items-start gap-2 text-sm">
+                            <CheckCircle2 className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
+                            <span>Annonce visible 3 mois</span>
+                          </li>
+                          <li className="flex items-start gap-2 text-sm">
+                            <CheckCircle2 className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
+                            <span>Jusqu'à 5 photos</span>
+                          </li>
+                          <li className="flex items-start gap-2 text-sm">
+                            <CheckCircle2 className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
+                            <span>Messagerie avec acheteurs</span>
+                          </li>
+                          <li className="flex items-start gap-2 text-sm text-gray-400">
+                            <X className="w-5 h-5 flex-shrink-0 mt-0.5" />
+                            <span>Pas de badge premium</span>
+                          </li>
+                        </ul>
+
+                        {formData.formuleAbonnement === "gratuit" && (
+                          <div className="absolute top-4 right-4">
+                            <div className="w-8 h-8 bg-orange-500 rounded-full flex items-center justify-center">
+                              <CheckCircle2 className="w-5 h-5 text-white" />
+                            </div>
+                          </div>
+                        )}
+                      </button>
+
+                      {/* Formule Essentiel */}
+                      <button
+                        onClick={() => {
+                          handleInputChange("formuleAbonnement", "essentiel");
+                          handleInputChange("montantAbonnement", 290);
+                          handleInputChange("stripePriceId", "price_1SS7lN2ItaOC3ukRjM2C8ZTd");
+                        }}
+                        className={`relative p-6 rounded-2xl border-2 transition-all duration-200 text-left ${
+                          formData.formuleAbonnement === "essentiel"
+                            ? "border-orange-500 bg-orange-50 shadow-xl scale-105"
+                            : "border-orange-300 hover:border-orange-400 hover:shadow-md"
+                        }`}
+                      >
+                        <div className="absolute -top-3 left-1/2 -translate-x-1/2">
+                          <div className="bg-orange-500 text-white text-xs font-bold px-3 py-1 rounded-full">
+                            POPULAIRE
+                          </div>
+                        </div>
+
+                        <div className="flex items-center gap-3 mb-4">
+                          <div className="w-12 h-12 bg-orange-100 rounded-xl flex items-center justify-center">
+                            <Star className="w-6 h-6 text-orange-600" />
+                          </div>
+                          <div>
+                            <h4 className="font-bold text-lg">Essentiel</h4>
+                            <p className="text-sm text-gray-500">Le plus choisi</p>
+                          </div>
+                        </div>
+
+                        <div className="mb-4">
+                          <div className="flex items-baseline gap-2">
+                            <span className="text-4xl font-bold text-orange-600">290€</span>
+                            <span className="text-gray-500">/6 mois</span>
+                          </div>
+                        </div>
+
+                        <ul className="space-y-3 mb-6">
+                          <li className="flex items-start gap-2 text-sm">
+                            <CheckCircle2 className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
+                            <span className="font-medium">Annonce visible 6 mois</span>
+                          </li>
+                          <li className="flex items-start gap-2 text-sm">
+                            <CheckCircle2 className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
+                            <span className="font-medium">Jusqu'à 10 photos</span>
+                          </li>
+                          <li className="flex items-start gap-2 text-sm">
+                            <CheckCircle2 className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
+                            <span className="font-medium">Badge "Annonce Premium"</span>
+                          </li>
+                          <li className="flex items-start gap-2 text-sm">
+                            <CheckCircle2 className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
+                            <span className="font-medium">Mise en avant dans les résultats</span>
+                          </li>
+                          <li className="flex items-start gap-2 text-sm">
+                            <CheckCircle2 className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
+                            <span className="font-medium">Statistiques de vues</span>
+                          </li>
+                        </ul>
+
+                        {formData.formuleAbonnement === "essentiel" && (
+                          <div className="absolute top-4 right-4">
+                            <div className="w-8 h-8 bg-orange-500 rounded-full flex items-center justify-center">
+                              <CheckCircle2 className="w-5 h-5 text-white" />
+                            </div>
+                          </div>
+                        )}
+                      </button>
+
+                      {/* Formule Premium */}
+                      <button
+                        onClick={() => {
+                          handleInputChange("formuleAbonnement", "premium");
+                          handleInputChange("montantAbonnement", 490);
+                          handleInputChange("stripePriceId", "price_premium_example");
+                        }}
+                        className={`relative p-6 rounded-2xl border-2 transition-all duration-200 text-left ${
+                          formData.formuleAbonnement === "premium"
+                            ? "border-yellow-500 bg-gradient-to-br from-yellow-50 to-orange-50 shadow-xl scale-105"
+                            : "border-yellow-300 hover:border-yellow-400 hover:shadow-md"
+                        }`}
+                      >
+                        <div className="flex items-center gap-3 mb-4">
+                          <div className="w-12 h-12 bg-gradient-to-br from-yellow-100 to-orange-100 rounded-xl flex items-center justify-center">
+                            <Crown className="w-6 h-6 text-yellow-600" />
+                          </div>
+                          <div>
+                            <h4 className="font-bold text-lg">Premium</h4>
+                            <p className="text-sm text-gray-500">Visibilité maximale</p>
+                          </div>
+                        </div>
+
+                        <div className="mb-4">
+                          <div className="flex items-baseline gap-2">
+                            <span className="text-4xl font-bold text-yellow-600">490€</span>
+                            <span className="text-gray-500">/12 mois</span>
+                          </div>
+                        </div>
+
+                        <ul className="space-y-3 mb-6">
+                          <li className="flex items-start gap-2 text-sm">
+                            <CheckCircle2 className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
+                            <span className="font-medium">Annonce visible 12 mois</span>
+                          </li>
+                          <li className="flex items-start gap-2 text-sm">
+                            <CheckCircle2 className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
+                            <span className="font-medium">Photos illimitées</span>
+                          </li>
+                          <li className="flex items-start gap-2 text-sm">
+                            <CheckCircle2 className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
+                            <span className="font-medium">Badge "TOP Annonce"</span>
+                          </li>
+                          <li className="flex items-start gap-2 text-sm">
+                            <CheckCircle2 className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
+                            <span className="font-medium">Toujours en haut des résultats</span>
+                          </li>
+                          <li className="flex items-start gap-2 text-sm">
+                            <CheckCircle2 className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
+                            <span className="font-medium">Statistiques avancées</span>
+                          </li>
+                          <li className="flex items-start gap-2 text-sm">
+                            <CheckCircle2 className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
+                            <span className="font-medium">Support prioritaire</span>
+                          </li>
+                          <li className="flex items-start gap-2 text-sm">
+                            <CheckCircle2 className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
+                            <span className="font-medium">Accompagnement personnalisé</span>
+                          </li>
+                        </ul>
+
+                        {formData.formuleAbonnement === "premium" && (
+                          <div className="absolute top-4 right-4">
+                            <div className="w-8 h-8 bg-gradient-to-br from-yellow-500 to-orange-500 rounded-full flex items-center justify-center">
+                              <CheckCircle2 className="w-5 h-5 text-white" />
+                            </div>
+                          </div>
+                        )}
+                      </button>
+                    </div>
+
+                    <div className="bg-blue-50 border border-blue-200 rounded-xl p-4">
+                      <div className="flex items-start gap-3">
+                        <AlertCircle className="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5" />
+                        <div className="text-sm text-blue-800">
+                          <p className="font-medium mb-1">💡 Conseil</p>
+                          <p>
+                            Les annonces premium sont vendues <strong>3x plus rapidement</strong> que les annonces
+                            gratuites grâce à leur visibilité accrue.
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {/* ÉTAPE 8: Récapitulatif */}
+                {currentStep === 8 && (
                   <div className="space-y-6 animate-fade-in">
                     <div className="bg-gradient-to-r from-orange-50 to-yellow-50 border border-orange-200 rounded-2xl p-6">
                       <div className="flex items-start gap-4">
@@ -1264,6 +1495,31 @@ const Vendre = () => {
                             <dd className="font-semibold text-orange-600 text-lg">{formData.prixVente} €</dd>
                           </div>
                         </dl>
+                      </div>
+
+                      <div className="bg-white border border-gray-200 rounded-xl p-6">
+                        <h4 className="font-semibold text-gray-900 mb-4 flex items-center gap-2">
+                          {formData.formuleAbonnement === "premium" && <Crown className="w-5 h-5 text-yellow-500" />}
+                          {formData.formuleAbonnement === "essentiel" && <Star className="w-5 h-5 text-orange-500" />}
+                          {formData.formuleAbonnement === "gratuit" && <Zap className="w-5 h-5 text-gray-500" />}
+                          Formule sélectionnée
+                        </h4>
+                        <div className="flex items-center justify-between">
+                          <div>
+                            <p className="font-semibold text-lg capitalize">{formData.formuleAbonnement}</p>
+                            <p className="text-sm text-gray-500">
+                              {formData.formuleAbonnement === "gratuit" && "3 mois de visibilité"}
+                              {formData.formuleAbonnement === "essentiel" && "6 mois de visibilité"}
+                              {formData.formuleAbonnement === "premium" && "12 mois de visibilité"}
+                            </p>
+                          </div>
+                          <div className="text-right">
+                            <p className="text-2xl font-bold text-orange-600">{formData.montantAbonnement}€</p>
+                            {formData.montantAbonnement === 0 && (
+                              <p className="text-xs text-green-600 font-medium">Gratuit</p>
+                            )}
+                          </div>
+                        </div>
                       </div>
 
                       {photoPreviews.photosEntreprise.length > 0 && (
