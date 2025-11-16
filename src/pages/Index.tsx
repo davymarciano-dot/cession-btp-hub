@@ -1,507 +1,1003 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Card } from "@/components/ui/card";
-import {
-  Search,
-  Filter,
-  Building2,
-  MapPin,
-  Euro,
-  Users,
-  TrendingUp,
-  Award,
-  ChevronLeft,
-  ChevronRight,
-  Sparkles,
-} from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import { supabase } from "@/integrations/supabase/client";
-import { ListingSkeletonGrid } from "@/components/ListingSkeleton";
-import SEO from "@/components/SEO";
+import {
+  ArrowRight,
+  CheckCircle2,
+  TrendingUp,
+  Users,
+  Shield,
+  Award,
+  Target,
+  Clock,
+  Star,
+  Building2,
+  Euro,
+  Zap,
+  Crown,
+  MessageSquare,
+  BarChart3,
+  FileCheck,
+  Lock,
+} from "lucide-react";
 
-interface Annonce {
-  id: string;
-  raison_sociale: string;
-  secteur_activite: string;
-  ville: string;
-  departement: string;
-  code_postal: string;
-  prix_vente: number;
-  ca_n1: number;
-  nombre_salaries: number;
-  description_activite: string;
-  annee_creation: number;
-  statut: string;
-}
-
-const ITEMS_PER_PAGE = 9;
-
-const Index = () => {
+const Home = () => {
   const navigate = useNavigate();
-  const [annonces, setAnnonces] = useState<Annonce[]>([]);
-  const [filteredAnnonces, setFilteredAnnonces] = useState<Annonce[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [currentPage, setCurrentPage] = useState(1);
+  const [email, setEmail] = useState("");
 
-  // Filtres
-  const [searchTerm, setSearchTerm] = useState("");
-  const [selectedSector, setSelectedSector] = useState<string>("all");
-  const [selectedRegion, setSelectedRegion] = useState<string>("all");
-  const [priceRange, setPriceRange] = useState<string>("all");
+  const stats = [
+    { value: "95%", label: "Taux de réussite" },
+    { value: "45j", label: "Délai moyen" },
+    { value: "2%", label: "Honoraires de succès" },
+  ];
 
-  useEffect(() => {
-    fetchAnnonces();
-  }, []);
+  const trustLogos = [
+    { name: "BPI France", icon: "🏛️" },
+    { name: "CCI", icon: "🏛️" },
+    { name: "FFB", icon: "🏗️" },
+    { name: "Qualibat", icon: "✓" },
+  ];
 
-  useEffect(() => {
-    applyFilters();
-  }, [annonces, searchTerm, selectedSector, selectedRegion, priceRange]);
+  const opportunities = [
+    {
+      badge: "QUALIBAT",
+      status: "Récent",
+      title: "Entreprise de Maçonnerie Générale",
+      location: "Paris (75)",
+      year: "2015",
+      ca: "1 200 000 €",
+      employees: "8 salariés",
+      price: "450 000 €",
+      color: "orange",
+    },
+    {
+      badge: "QUALIBAT",
+      status: "Récent",
+      title: "Société de Plomberie-Chauffage",
+      location: "Lyon (69)",
+      year: "2015",
+      ca: "800 000 €",
+      employees: "5 salariés",
+      price: "430 000 €",
+      color: "blue",
+    },
+    {
+      badge: "QUALIBAT",
+      status: "Récent",
+      title: "Électricité Générale & Domotique",
+      location: "Marseille (13)",
+      year: "2015",
+      ca: "950 000 €",
+      employees: "6 salariés",
+      price: "580 000 €",
+      color: "blue",
+    },
+  ];
 
-  const fetchAnnonces = async () => {
-    setLoading(true);
-    const { data, error } = await supabase
-      .from("annonces")
-      .select("*")
-      .eq("statut", "publiee")
-      .order("created_at", { ascending: false });
+  const buyerPlans = [
+    {
+      name: "Gratuit",
+      price: "0€",
+      features: ["Consultation des annonces", "Recherche basique", "Interface acheteur", "Inscription gratuite"],
+      cta: "S'inscrire gratuitement",
+      popular: false,
+    },
+    {
+      name: "Contact",
+      price: "49€",
+      period: "/ 5 contacts",
+      features: [
+        "5 contacts directs",
+        "Messages dirigés vers les vendeurs",
+        "Coordonnées complètes",
+        "Historique des échanges",
+        "Accès prioritaire",
+      ],
+      cta: "Acheter des contacts",
+      popular: false,
+    },
+    {
+      name: "Pro",
+      price: "99€",
+      period: "/mois",
+      features: [
+        "Contacts ILLIMITÉS",
+        "Alertes personnalisées",
+        "Coordonnées complètes",
+        "Badge « Acheteur Vérifié »",
+        "Soutien prioritaire",
+      ],
+      cta: "Choisir Pro",
+      popular: true,
+    },
+    {
+      name: "Entreprise",
+      price: "299€",
+      period: "/mois",
+      features: [
+        "Multi-utilisateurs + API - Cible : 500€ - CA : 1,8M",
+        "Accès multi-utilisateurs",
+        "API d'intégration",
+        "Rapports avancés",
+        "Gestionnaire dédié",
+        "Équipe de formation",
+      ],
+      cta: "Choisir Entreprise",
+      popular: false,
+    },
+  ];
 
-    if (data) {
-      setAnnonces(data);
-    }
-    setLoading(false);
-  };
+  const sellerPlans = [
+    {
+      name: "Découverte",
+      subtitle: "30j gratuits",
+      price: "0€",
+      description: "Évaluation + 10 vues - Cible : 10 000€ - CA : 0",
+      features: ["Évaluation incluse", "10 vues d'annonce", "Interface spécialisée BTP", "Expert en soutien métier"],
+      cta: "Commencez gratuitement",
+      color: "gray",
+    },
+    {
+      name: "Essentiel",
+      price: "290€",
+      period: "/ 3 mois",
+      description: "Annonce simple - Cible : 5 000€ - CA : 5,9M",
+      features: [
+        "Annonce simple optimisée",
+        "Contacts qualifiés BTP",
+        "Interface professionnelle",
+        "Expert en soutien",
+        "Réseau artisans entrepreneurs",
+      ],
+      cta: "Choisir Essentiel",
+      color: "blue",
+      popular: true,
+    },
+    {
+      name: "Prime",
+      price: "490€",
+      period: "/ 3 mois",
+      description: "Mise en avant + stats - Cible : 2 000€ - CA : 3,9M",
+      features: [
+        "Mise en avant prioritaire",
+        "Statistiques détaillées",
+        "Valorisation BTP incluse",
+        "accompagnateur expert dédié",
+        "Vendez 2x plus vite",
+      ],
+      cta: "Choisir Premium",
+      color: "orange",
+    },
+    {
+      name: "Exclusif",
+      price: "990 €",
+      period: "/ 3 mois",
+      description: "Top position + agent - Cible : 500€ - CA : 2M",
+      features: [
+        "Garantie de position de premier ordre",
+        "Personnel dédié aux agents",
+        "Mémorandum professionnel",
+        "Garantie mise en relation",
+        "Conciergerie complète",
+      ],
+      cta: "Choisir Exclusif",
+      color: "gold",
+    },
+  ];
 
-  const applyFilters = () => {
-    let filtered = [...annonces];
+  const whyChooseUs = [
+    {
+      icon: "💰",
+      title: "Expertise en valorisation",
+      description: "Évaluation précise par des experts BTP. Méthode éprouvée sur 500+ transactions.",
+    },
+    {
+      icon: "🤖",
+      title: "Correspondance IA 95%",
+      description: "Notre algorithme connecte vendeurs et acheteurs avec 95% de compatibilité.",
+    },
+    {
+      icon: "🔒",
+      title: "100% Confidentiel",
+      description: "Anonymat garanti. Dataroom sécurisée. NDA systématique.",
+    },
+    {
+      icon: "💎",
+      title: "Honoraires de succès 2%",
+      description: "Vous ne payez qu'en cas de succès. Nos intérêts sont alignés.",
+    },
+  ];
 
-    if (searchTerm) {
-      filtered = filtered.filter(
-        (a) =>
-          a.raison_sociale?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-          a.ville.toLowerCase().includes(searchTerm.toLowerCase()) ||
-          a.secteur_activite.toLowerCase().includes(searchTerm.toLowerCase()),
-      );
-    }
+  const processSteps = [
+    {
+      number: 1,
+      title: "Valorisation gratuite",
+      duration: "48h",
+      description: "Obtenez une estimation précise de votre entreprise en 48h par nos experts BTP.",
+    },
+    {
+      number: 2,
+      title: "Préparation du Dossier",
+      duration: "5 jours",
+      description: "Nous optimisons votre dossier pour maximiser la valeur et attirer les meilleurs repreneurs.",
+    },
+    {
+      number: 3,
+      title: "Mise en relation",
+      duration: "1 semaine",
+      description: "Notre IA identifie les repreneurs parfaits parmi notre base de 2000+ acheteurs qualifiés.",
+    },
+    {
+      number: 4,
+      title: "Négociation",
+      duration: "2-3 semaines",
+      description: "Nos experts négociants pour vous les meilleures conditions de vente.",
+    },
+    {
+      number: 5,
+      title: "Clôture sécurisée",
+      duration: "1 semaine",
+      description: "Finalisation juridique et transfert en toute sécurité avec nos avocats spécialisés.",
+    },
+  ];
 
-    if (selectedSector !== "all") {
-      filtered = filtered.filter((a) => a.secteur_activite === selectedSector);
-    }
-
-    if (selectedRegion !== "all") {
-      filtered = filtered.filter((a) => a.departement.startsWith(selectedRegion));
-    }
-
-    if (priceRange !== "all") {
-      const [min, max] = priceRange.split("-").map(Number);
-      filtered = filtered.filter((a) => {
-        if (max) {
-          return a.prix_vente >= min && a.prix_vente <= max;
-        }
-        return a.prix_vente >= min;
-      });
-    }
-
-    setFilteredAnnonces(filtered);
-    setCurrentPage(1);
-  };
-
-  const uniqueSectors = Array.from(new Set(annonces.map((a) => a.secteur_activite))).sort();
-
-  const totalPages = Math.ceil(filteredAnnonces.length / ITEMS_PER_PAGE);
-  const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
-  const endIndex = startIndex + ITEMS_PER_PAGE;
-  const currentAnnonces = filteredAnnonces.slice(startIndex, endIndex);
+  const testimonials = [
+    {
+      name: "Marc Lefebvre",
+      company: "Plomberie-Chauffage ML",
+      location: "Toulouse (31)",
+      sector: "Plomberie-Chauffage",
+      ca: "580 000 €",
+      rating: 5,
+      text: "J'ai d'abord essayé une plateforme généraliste à 250€. 9 mois perdus, 0 contact sérieux. Avec CessionBTP, vendu en 38 jours à un repreneur parfait. Le meilleur investissement de ma vie.",
+    },
+    {
+      name: "Sophie Durand",
+      company: "Maçonnerie Générale SD",
+      location: "Lyon (69)",
+      sector: "Maçonnerie",
+      ca: "480 000 €",
+      rating: 5,
+      text: "L'algorithme de matching m'a connecté avec 3 acheteurs ultra-qualifiés. Négociation rapide. 127 vues, 8 contacts sérieux, 2 offres fermes. Impressionnant !",
+    },
+    {
+      name: "Jean-Pierre Martin",
+      company: "Électricité Industrielle JPM",
+      location: "Marseille (13)",
+      sector: "Électricité",
+      ca: "920 000 €",
+      rating: 5,
+      text: "Le tableau de bord m'a permis de suivre l'intérêt en temps réel. 127 vues, 8 contacts sérieux, 2 offres fermes. Vendu au meilleur prix !",
+    },
+  ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-slate-50">
-      <SEO
-        title="CessionBTP - Achat et Vente d'Entreprises BTP en France"
-        description="Plateforme n°1 pour acheter et vendre des entreprises du BTP. Plus de 500 sociétés de construction à reprendre. Success Fee 2%, Matching IA, accompagnement personnalisé."
-        keywords="cession entreprise BTP, vendre société construction, acheter entreprise bâtiment, reprise PME BTP"
-        url="https://cessionbtp.fr"
-      />
+    <div className="min-h-screen bg-white">
       <Header />
 
-      <main>
-        {/* 🎨 HERO SECTION ULTRA MODERNE */}
-        <section className="relative bg-gradient-to-br from-blue-900 via-blue-800 to-indigo-900 text-white py-32 overflow-hidden">
-          {/* Motif de fond animé */}
-          <div className="absolute inset-0 opacity-10">
-            <div
-              className="absolute inset-0"
-              style={{
-                backgroundImage: "radial-gradient(circle at 2px 2px, white 1px, transparent 0)",
-                backgroundSize: "50px 50px",
-              }}
-            ></div>
-          </div>
+      {/* HERO SECTION - Bleu gradient */}
+      <section className="relative bg-gradient-to-br from-blue-600 via-blue-500 to-blue-700 text-white py-20 overflow-hidden">
+        <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGQ9Ik0zNiAxOGMzLjMxNCAwIDYgMi42ODYgNiA2cy0yLjY4NiA2LTYgNi02LTIuNjg2LTYtNiAyLjY4Ni02IDYtNnoiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLW9wYWNpdHk9Ii4xIiBzdHJva2Utd2lkdGg9IjIiLz48L2c+PC9zdmc+')] opacity-10"></div>
 
-          <div className="container mx-auto px-4 relative z-10">
-            <div className="max-w-5xl mx-auto text-center">
-              {/* Badge Premium */}
-              <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md px-6 py-3 rounded-full mb-8 border border-white/20 animate-pulse">
-                <Award className="w-5 h-5 text-yellow-300" />
-                <span className="text-sm font-bold">Plateforme n°1 de cession d'entreprises BTP</span>
-              </div>
-
-              {/* Titre Spectaculaire */}
-              <h1 className="text-5xl md:text-7xl font-extrabold mb-8 leading-tight">
-                Trouvez Votre Prochaine
-                <span className="block mt-3 bg-gradient-to-r from-yellow-300 via-orange-400 to-yellow-300 bg-clip-text text-transparent animate-gradient">
-                  Opportunité BTP
-                </span>
-              </h1>
-
-              {/* Sous-titre */}
-              <p className="text-xl md:text-2xl mb-12 text-blue-100 font-light max-w-3xl mx-auto">
-                {annonces.length} entreprises disponibles · Matching IA · Success Fee 2%
-              </p>
-
-              {/* 📊 Stats Cards Glassmorphism */}
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto mb-12">
-                {[
-                  { number: annonces.length, label: "Annonces actives", icon: "🏗️" },
-                  { number: "2000+", label: "Acheteurs qualifiés", icon: "👥" },
-                  { number: "45j", label: "Délai moyen", icon: "⚡" },
-                  { number: "98%", label: "Satisfaction", icon: "⭐" },
-                ].map((stat, i) => (
-                  <div
-                    key={i}
-                    className="group bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/20 hover:bg-white/20 transition-all duration-500 hover:scale-110 hover:shadow-2xl hover:shadow-white/20 cursor-pointer"
-                  >
-                    <div className="text-4xl mb-3 group-hover:scale-125 transition-transform duration-300">
-                      {stat.icon}
-                    </div>
-                    <div className="text-4xl font-extrabold mb-2">{stat.number}</div>
-                    <div className="text-sm text-blue-200 font-medium">{stat.label}</div>
-                  </div>
-                ))}
-              </div>
-
-              {/* 🚀 CTA Buttons */}
-              <div className="flex flex-col sm:flex-row gap-5 justify-center">
-                <Button
-                  size="lg"
-                  className="group bg-white text-blue-900 hover:bg-blue-50 text-lg px-12 py-8 rounded-2xl font-bold shadow-2xl hover:shadow-white/30 hover:scale-105 transition-all duration-300"
-                  onClick={() => navigate("/vendre")}
-                >
-                  <Sparkles className="w-5 h-5 mr-2 group-hover:rotate-12 transition-transform" />
-                  <span>Vendre mon entreprise</span>
-                  <span className="ml-2 group-hover:translate-x-1 transition-transform inline-block">→</span>
-                </Button>
-                <Button
-                  size="lg"
-                  variant="outline"
-                  className="bg-transparent border-3 border-white text-white hover:bg-white/20 text-lg px-12 py-8 rounded-2xl font-bold backdrop-blur-sm hover:scale-105 transition-all duration-300"
-                  onClick={() => document.getElementById("annonces-section")?.scrollIntoView({ behavior: "smooth" })}
-                >
-                  Parcourir les annonces
-                </Button>
+        <div className="container mx-auto px-4 relative z-10">
+          <div className="max-w-4xl mx-auto text-center">
+            {/* Badge ventes */}
+            <div className="inline-block mb-6">
+              <div className="bg-blue-500/30 backdrop-blur-sm border border-blue-400/50 rounded-full px-6 py-2">
+                <p className="text-sm font-medium">🎉 127 ventes finalisées ce mois-ci</p>
               </div>
             </div>
-          </div>
 
-          {/* Vagues décoratives */}
-          <div className="absolute bottom-0 left-0 right-0">
-            <svg viewBox="0 0 1440 120" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full">
-              <path
-                d="M0 0L60 10C120 20 240 40 360 46.7C480 53 600 47 720 43.3C840 40 960 40 1080 46.7C1200 53 1320 67 1380 73.3L1440 80V120H1380C1320 120 1200 120 1080 120C960 120 840 120 720 120C600 120 480 120 360 120C240 120 120 120 60 120H0V0Z"
-                fill="rgb(248, 250, 252)"
-              />
-            </svg>
-          </div>
-        </section>
+            {/* Titre principal */}
+            <h1 className="text-5xl md:text-6xl font-bold mb-6 leading-tight">
+              Vendez votre entreprise
+              <br />
+              BTP en <span className="text-orange-400">jours 45</span>
+            </h1>
 
-        {/* Section Recherche et Filtres */}
-        <section id="annonces-section" className="container mx-auto px-4 -mt-16 relative z-20 mb-16">
-          <Card className="p-8 shadow-2xl rounded-3xl border-2 border-gray-100">
-            <div className="flex items-center gap-3 mb-8">
-              <div className="p-3 bg-blue-100 rounded-xl">
-                <Filter className="w-6 h-6 text-blue-600" />
-              </div>
-              <h2 className="text-3xl font-extrabold text-gray-900">Recherche Avancée</h2>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
-              {/* Barre de recherche */}
-              <div className="lg:col-span-2 relative">
-                <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
-                <Input
-                  placeholder="Rechercher par nom, ville, secteur..."
-                  value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
-                  className="pl-12 h-14 text-base border-2 border-gray-200 rounded-xl focus:border-blue-500 transition-all"
-                />
-              </div>
-
-              {/* Filtre Secteur */}
-              <Select value={selectedSector} onValueChange={setSelectedSector}>
-                <SelectTrigger className="h-14 border-2 border-gray-200 rounded-xl font-medium">
-                  <SelectValue placeholder="Tous les secteurs" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="all">Tous les secteurs</SelectItem>
-                  {uniqueSectors.map((sector) => (
-                    <SelectItem key={sector} value={sector}>
-                      {sector}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-
-              {/* Filtre Région */}
-              <Select value={selectedRegion} onValueChange={setSelectedRegion}>
-                <SelectTrigger className="h-14 border-2 border-gray-200 rounded-xl font-medium">
-                  <SelectValue placeholder="Toutes les régions" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="all">Toutes les régions</SelectItem>
-                  <SelectItem value="75">Île-de-France (75)</SelectItem>
-                  <SelectItem value="69">Auvergne-Rhône-Alpes (69)</SelectItem>
-                  <SelectItem value="13">Provence (13)</SelectItem>
-                  <SelectItem value="33">Nouvelle-Aquitaine (33)</SelectItem>
-                  <SelectItem value="31">Occitanie (31)</SelectItem>
-                  <SelectItem value="44">Pays de la Loire (44)</SelectItem>
-                  <SelectItem value="59">Hauts-de-France (59)</SelectItem>
-                  <SelectItem value="67">Grand Est (67)</SelectItem>
-                  <SelectItem value="06">Côte d'Azur (06)</SelectItem>
-                  <SelectItem value="35">Bretagne (35)</SelectItem>
-                </SelectContent>
-              </Select>
-
-              {/* Filtre Prix */}
-              <Select value={priceRange} onValueChange={setPriceRange}>
-                <SelectTrigger className="h-14 border-2 border-gray-200 rounded-xl font-medium">
-                  <SelectValue placeholder="Tous les prix" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="all">Tous les prix</SelectItem>
-                  <SelectItem value="0-300000">Moins de 300K€</SelectItem>
-                  <SelectItem value="300000-500000">300K€ - 500K€</SelectItem>
-                  <SelectItem value="500000-750000">500K€ - 750K€</SelectItem>
-                  <SelectItem value="750000-1000000">750K€ - 1M€</SelectItem>
-                  <SelectItem value="1000000-9999999">Plus de 1M€</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
-
-            <div className="mt-6 flex items-center justify-between">
-              <p className="text-base text-gray-600 font-medium">
-                <span className="text-blue-600 font-bold text-lg">{filteredAnnonces.length}</span> résultat
-                {filteredAnnonces.length > 1 ? "s" : ""} trouvé{filteredAnnonces.length > 1 ? "s" : ""}
-              </p>
-              {(searchTerm || selectedSector !== "all" || selectedRegion !== "all" || priceRange !== "all") && (
-                <Button
-                  variant="outline"
-                  size="sm"
-                  className="border-2 border-blue-200 text-blue-600 hover:bg-blue-50 font-semibold"
-                  onClick={() => {
-                    setSearchTerm("");
-                    setSelectedSector("all");
-                    setSelectedRegion("all");
-                    setPriceRange("all");
-                  }}
-                >
-                  Réinitialiser
-                </Button>
-              )}
-            </div>
-          </Card>
-        </section>
-
-        {/* 🎨 GRILLE DES ANNONCES MODERNE */}
-        <section className="container mx-auto px-4 py-12">
-          {loading ? (
-            <ListingSkeletonGrid count={9} />
-          ) : currentAnnonces.length === 0 ? (
-            <Card className="p-16 text-center rounded-3xl">
-              <Building2 className="w-20 h-20 mx-auto text-gray-300 mb-6" />
-              <h3 className="text-3xl font-bold mb-3 text-gray-800">Aucune annonce trouvée</h3>
-              <p className="text-gray-500 text-lg mb-8">Essayez de modifier vos critères de recherche</p>
-              <Button
-                size="lg"
-                className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-6 rounded-xl"
-                onClick={() => {
-                  setSearchTerm("");
-                  setSelectedSector("all");
-                  setSelectedRegion("all");
-                  setPriceRange("all");
-                }}
-              >
-                Réinitialiser les filtres
-              </Button>
-            </Card>
-          ) : (
-            <>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
-                {currentAnnonces.map((annonce) => (
-                  <Card
-                    key={annonce.id}
-                    className="group hover:shadow-2xl transition-all duration-500 cursor-pointer overflow-hidden border-2 border-gray-100 hover:border-blue-300 rounded-3xl hover:scale-105"
-                    onClick={() => navigate(`/annonce/${annonce.id}`)}
-                  >
-                    {/* Image avec gradient spectaculaire */}
-                    <div className="h-64 bg-gradient-to-br from-blue-600 via-blue-700 to-indigo-800 relative overflow-hidden">
-                      <div className="absolute inset-0 bg-black/10 group-hover:bg-black/5 transition-all"></div>
-
-                      {/* Badge secteur */}
-                      <div className="absolute top-5 left-5">
-                        <span className="bg-white px-5 py-2 rounded-full text-sm font-bold text-blue-600 shadow-xl">
-                          {annonce.secteur_activite}
-                        </span>
-                      </div>
-
-                      {/* Infos localisation */}
-                      <div className="absolute bottom-5 left-5 right-5">
-                        <h3 className="text-2xl font-extrabold mb-2 text-white drop-shadow-2xl line-clamp-1">
-                          {annonce.raison_sociale || `Entreprise ${annonce.secteur_activite}`}
-                        </h3>
-                        <div className="flex items-center gap-2 text-white/95">
-                          <MapPin className="w-5 h-5" />
-                          <span className="font-semibold">
-                            {annonce.ville} ({annonce.departement})
-                          </span>
-                        </div>
-                      </div>
-
-                      {/* Effet brillance */}
-                      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
-                    </div>
-
-                    {/* Contenu carte */}
-                    <div className="p-7 bg-white">
-                      {/* Prix */}
-                      <div className="mb-6">
-                        <div className="flex items-baseline gap-2">
-                          <span className="text-5xl font-extrabold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
-                            {(annonce.prix_vente / 1000).toFixed(0)}K€
-                          </span>
-                          <span className="text-sm text-gray-500 font-semibold">Prix de vente</span>
-                        </div>
-                      </div>
-
-                      {/* Métriques */}
-                      <div className="grid grid-cols-2 gap-4 mb-6">
-                        <div className="flex items-center gap-3 bg-gradient-to-br from-green-50 to-emerald-50 p-4 rounded-2xl">
-                          <div className="bg-green-500 p-2 rounded-xl shadow-lg">
-                            <TrendingUp className="w-5 h-5 text-white" />
-                          </div>
-                          <div>
-                            <div className="text-xs text-gray-500 font-bold uppercase">CA annuel</div>
-                            <div className="font-extrabold text-gray-900 text-lg">
-                              {(annonce.ca_n1 / 1000).toFixed(0)}K€
-                            </div>
-                          </div>
-                        </div>
-
-                        <div className="flex items-center gap-3 bg-gradient-to-br from-purple-50 to-violet-50 p-4 rounded-2xl">
-                          <div className="bg-purple-500 p-2 rounded-xl shadow-lg">
-                            <Users className="w-5 h-5 text-white" />
-                          </div>
-                          <div>
-                            <div className="text-xs text-gray-500 font-bold uppercase">Effectif</div>
-                            <div className="font-extrabold text-gray-900 text-lg">{annonce.nombre_salaries} pers.</div>
-                          </div>
-                        </div>
-                      </div>
-
-                      {/* Description */}
-                      <p className="text-sm text-gray-600 line-clamp-2 mb-6 leading-relaxed">
-                        {annonce.description_activite}
-                      </p>
-
-                      {/* Footer */}
-                      <div className="flex items-center justify-between pt-5 border-t-2 border-gray-100">
-                        <span className="text-xs text-gray-500 font-semibold">Créée en {annonce.annee_creation}</span>
-                        <span className="text-blue-600 font-bold text-sm group-hover:gap-2 flex items-center gap-1 transition-all">
-                          Voir détails
-                          <span className="group-hover:translate-x-2 transition-transform text-lg">→</span>
-                        </span>
-                      </div>
-                    </div>
-                  </Card>
-                ))}
-              </div>
-
-              {/* Pagination */}
-              {totalPages > 1 && (
-                <div className="flex items-center justify-center gap-3">
-                  <Button
-                    variant="outline"
-                    size="icon"
-                    onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
-                    disabled={currentPage === 1}
-                    className="w-12 h-12 rounded-xl border-2"
-                  >
-                    <ChevronLeft className="w-5 h-5" />
-                  </Button>
-
-                  <div className="flex items-center gap-2">
-                    {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
-                      <Button
-                        key={page}
-                        variant={currentPage === page ? "default" : "outline"}
-                        size="icon"
-                        onClick={() => setCurrentPage(page)}
-                        className={`w-12 h-12 rounded-xl font-bold ${
-                          currentPage === page ? "bg-blue-600 hover:bg-blue-700 shadow-lg" : "border-2"
-                        }`}
-                      >
-                        {page}
-                      </Button>
-                    ))}
-                  </div>
-
-                  <Button
-                    variant="outline"
-                    size="icon"
-                    onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
-                    disabled={currentPage === totalPages}
-                    className="w-12 h-12 rounded-xl border-2"
-                  >
-                    <ChevronRight className="w-5 h-5" />
-                  </Button>
-                </div>
-              )}
-            </>
-          )}
-        </section>
-
-        {/* Call to Action Final */}
-        <section className="bg-gradient-to-r from-blue-600 via-blue-700 to-indigo-700 text-white py-24">
-          <div className="container mx-auto px-4 text-center">
-            <h2 className="text-5xl font-extrabold mb-6">Prêt à Franchir le Cap ?</h2>
-            <p className="text-xl mb-12 text-blue-100 max-w-2xl mx-auto font-light">
-              Rejoignez les centaines d'entrepreneurs qui nous font confiance pour leur projet de cession
+            <p className="text-xl text-blue-100 mb-8 max-w-3xl mx-auto">
+              La seule plateforme 100% spécialisée BTP qui connecte vendeurs et acheteurs qualifiés
             </p>
-            <div className="flex flex-col sm:flex-row gap-5 justify-center">
+
+            {/* Trust badges avec avatars */}
+            <div className="flex items-center justify-center gap-3 mb-8">
+              <div className="flex -space-x-3">
+                <div className="w-10 h-10 rounded-full bg-blue-400 border-2 border-white flex items-center justify-center text-xs font-bold">
+                  UA
+                </div>
+                <div className="w-10 h-10 rounded-full bg-blue-300 border-2 border-white flex items-center justify-center text-xs font-bold">
+                  B
+                </div>
+                <div className="w-10 h-10 rounded-full bg-blue-200 border-2 border-white flex items-center justify-center text-xs font-bold">
+                  C
+                </div>
+                <div className="w-10 h-10 rounded-full bg-blue-100 border-2 border-white flex items-center justify-center text-xs font-bold">
+                  D
+                </div>
+                <div className="w-10 h-10 rounded-full bg-orange-400 border-2 border-white flex items-center justify-center text-xs font-bold">
+                  E
+                </div>
+              </div>
+              <p className="text-sm font-medium">
+                <span className="font-bold">2 347 entrepreneurs</span> nous font confiance
+              </p>
+            </div>
+
+            {/* CTA Buttons */}
+            <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
               <Button
-                size="lg"
-                className="bg-white text-blue-600 hover:bg-blue-50 text-lg px-12 py-8 rounded-2xl font-bold shadow-2xl hover:scale-105 transition-all"
                 onClick={() => navigate("/vendre")}
+                size="lg"
+                className="bg-orange-500 hover:bg-orange-600 text-white px-8 py-6 text-lg font-semibold rounded-xl shadow-xl hover:shadow-2xl transition-all transform hover:scale-105"
               >
-                Vendre mon entreprise
+                Je vends maintenant →
+                <div className="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded-full">
+                  -50% frais
+                </div>
               </Button>
+
               <Button
+                onClick={() => navigate("/acheter")}
                 size="lg"
                 variant="outline"
-                className="bg-transparent border-3 border-white text-white hover:bg-white/20 text-lg px-12 py-8 rounded-2xl font-bold backdrop-blur-sm hover:scale-105 transition-all"
-                onClick={() => navigate("/estimer")}
+                className="bg-white text-blue-600 border-2 border-white hover:bg-blue-50 px-8 py-6 text-lg font-semibold rounded-xl shadow-xl"
               >
-                Estimer gratuitement
+                Je cherche à reprendre
               </Button>
             </div>
+
+            {/* Alerte offre limitée */}
+            <div className="inline-flex items-center gap-2 bg-red-500/90 backdrop-blur-sm text-white px-6 py-3 rounded-full">
+              <Clock className="w-5 h-5" />
+              <p className="text-sm font-medium">
+                Offre limitée : Honoraires de réussite <strong>2% au lieu de 5%</strong> (encore 48h)
+              </p>
+            </div>
+
+            {/* Stats */}
+            <div className="grid grid-cols-3 gap-8 mt-16 max-w-3xl mx-auto">
+              {stats.map((stat, index) => (
+                <div key={index} className="text-center">
+                  <div className="text-4xl md:text-5xl font-bold mb-2">{stat.value}</div>
+                  <div className="text-sm text-blue-200">{stat.label}</div>
+                </div>
+              ))}
+            </div>
           </div>
-        </section>
-      </main>
+        </div>
+
+        {/* Wave separator */}
+        <div className="absolute bottom-0 left-0 right-0">
+          <svg viewBox="0 0 1440 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M0 120L60 105C120 90 240 60 360 45C480 30 600 30 720 37.5C840 45 960 60 1080 67.5C1200 75 1320 75 1380 75L1440 75V120H1380C1320 120 1200 120 1080 120C960 120 840 120 720 120C600 120 480 120 360 120C240 120 120 120 60 120H0Z"
+              fill="white"
+            />
+          </svg>
+        </div>
+      </section>
+
+      {/* SECTION CONFIANCE */}
+      <section className="py-12 bg-white">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-8">
+            <p className="text-gray-600 font-medium">Ils nous font confiance</p>
+          </div>
+
+          {/* Logos */}
+          <div className="flex justify-center items-center gap-12 mb-8 flex-wrap">
+            {trustLogos.map((logo, index) => (
+              <div key={index} className="text-center">
+                <div className="w-16 h-16 bg-gray-100 rounded-xl flex items-center justify-center text-3xl mb-2">
+                  {logo.icon}
+                </div>
+                <p className="text-sm font-medium text-gray-700">{logo.name}</p>
+              </div>
+            ))}
+          </div>
+
+          {/* Badges */}
+          <div className="flex justify-center gap-6 flex-wrap">
+            <div className="flex items-center gap-2">
+              <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+              <span className="text-sm text-gray-600">Certifié</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <div className="w-3 h-3 bg-blue-500 rounded-full"></div>
+              <span className="text-sm text-gray-600">Sécurisé</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <div className="w-3 h-3 bg-orange-500 rounded-full"></div>
+              <span className="text-sm text-gray-600">Confidentiel</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* OPPORTUNITÉS À SAISIR */}
+      <section className="py-16 bg-gray-50">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-4xl font-bold text-gray-900 mb-4">Opportunités à Saisir</h2>
+            <p className="text-xl text-gray-600">Découvrez les dernières entreprises BTP disponibles à la reprise</p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+            {opportunities.map((opp, index) => (
+              <div
+                key={index}
+                className={`rounded-2xl p-6 shadow-xl hover:shadow-2xl transition-all cursor-pointer transform hover:scale-105 ${
+                  opp.color === "orange"
+                    ? "bg-gradient-to-br from-orange-500 to-orange-600"
+                    : "bg-gradient-to-br from-blue-500 to-blue-600"
+                } text-white`}
+              >
+                {/* Badges */}
+                <div className="flex items-center justify-between mb-4">
+                  <div className="bg-white/20 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-bold">
+                    {opp.badge}
+                  </div>
+                  <div className="bg-orange-500 px-3 py-1 rounded-full text-xs font-bold">{opp.status}</div>
+                </div>
+
+                {/* Titre */}
+                <h3 className="text-2xl font-bold mb-4">{opp.title}</h3>
+
+                {/* Infos */}
+                <div className="space-y-2 mb-6">
+                  <div className="flex items-center gap-2 text-sm">
+                    <Building2 className="w-4 h-4" />
+                    <span>{opp.location}</span>
+                  </div>
+                  <div className="text-sm">Création : {opp.year}</div>
+                  <div className="text-sm">CA : {opp.ca}</div>
+                  <div className="text-sm">Effectif : {opp.employees}</div>
+                </div>
+
+                {/* Secteur badge */}
+                <div className="inline-block bg-white/20 backdrop-blur-sm px-4 py-2 rounded-lg mb-4">
+                  <span className="text-sm font-medium capitalize">
+                    {opp.color === "orange" ? "Maçonnerie" : "Plomberie"}
+                  </span>
+                </div>
+
+                {/* Prix */}
+                <div className="pt-4 border-t border-white/20">
+                  <div className="text-4xl font-bold text-green-300">{opp.price}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="text-center">
+            <Button
+              onClick={() => navigate("/entreprises")}
+              size="lg"
+              className="bg-orange-500 hover:bg-orange-600 text-white px-8"
+            >
+              Voir toutes les opportunités
+              <ArrowRight className="w-5 h-5 ml-2" />
+            </Button>
+          </div>
+        </div>
+      </section>
+
+      {/* TARIFS ACHETEURS */}
+      <section className="py-16 bg-white">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <div className="inline-block mb-4">
+              <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto">
+                <span className="text-3xl">🔍</span>
+              </div>
+            </div>
+            <h2 className="text-4xl font-bold text-gray-900 mb-4">acheteurs d'abonnements</h2>
+            <p className="text-xl text-gray-600">Accédez aux meilleures opportunités d'acquisition BTP</p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-6 max-w-7xl mx-auto">
+            {buyerPlans.map((plan, index) => (
+              <div
+                key={index}
+                className={`rounded-2xl p-6 border-2 transition-all ${
+                  plan.popular
+                    ? "border-blue-500 bg-blue-50 shadow-xl scale-105 relative"
+                    : "border-gray-200 hover:border-gray-300 hover:shadow-lg"
+                }`}
+              >
+                {plan.popular && (
+                  <div className="absolute -top-3 left-1/2 -translate-x-1/2">
+                    <div className="bg-blue-500 text-white text-xs font-bold px-4 py-1 rounded-full">POPULAIRE</div>
+                  </div>
+                )}
+
+                <div className="mb-6">
+                  <h3 className="text-xl font-bold text-gray-900 mb-2">{plan.name}</h3>
+                  <div className="flex items-baseline gap-1">
+                    <span className="text-4xl font-bold text-blue-600">{plan.price}</span>
+                    {plan.period && <span className="text-gray-500 text-sm">{plan.period}</span>}
+                  </div>
+                </div>
+
+                <ul className="space-y-3 mb-8">
+                  {plan.features.map((feature, i) => (
+                    <li key={i} className="flex items-start gap-2 text-sm">
+                      <CheckCircle2 className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
+                      <span className="text-gray-700">{feature}</span>
+                    </li>
+                  ))}
+                </ul>
+
+                <Button
+                  className={`w-full ${
+                    plan.popular
+                      ? "bg-blue-600 hover:bg-blue-700 text-white"
+                      : "bg-orange-500 hover:bg-orange-600 text-white"
+                  }`}
+                >
+                  {plan.cta}
+                </Button>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* COMPARATIF TABLEAU */}
+      <section className="py-16 bg-gradient-to-br from-blue-50 to-white">
+        <div className="container mx-auto px-4">
+          <div className="max-w-5xl mx-auto">
+            <div className="bg-white rounded-2xl shadow-xl overflow-hidden">
+              <div className="bg-gradient-to-r from-blue-600 to-blue-500 p-6">
+                <h2 className="text-3xl font-bold text-white text-center">
+                  Comparaison honnête avec les plateformes généralistes
+                </h2>
+              </div>
+
+              <div className="overflow-x-auto">
+                <table className="w-full">
+                  <thead>
+                    <tr className="border-b-2 border-gray-200">
+                      <th className="p-4 text-left font-semibold text-gray-700">Critère</th>
+                      <th className="p-4 text-center font-semibold text-gray-700">Sites généralistes</th>
+                      <th className="p-4 text-center font-semibold text-blue-700 bg-blue-50">CessionBTP ✓</th>
+                      <th className="p-4 text-center font-semibold text-gray-700">Exemples</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr className="border-b border-gray-100">
+                      <td className="p-4 font-medium">Prix</td>
+                      <td className="p-4 text-center">250€/an (12 mois)</td>
+                      <td className="p-4 text-center bg-blue-50 font-bold text-blue-700">290€ (3 mois)</td>
+                      <td className="p-4 text-center text-sm">BPI France Transmission, Fusacq</td>
+                    </tr>
+                    <tr className="border-b border-gray-100 bg-green-50">
+                      <td className="p-4 font-medium">Coût mensuel</td>
+                      <td className="p-4 text-center">21€</td>
+                      <td className="p-4 text-center bg-blue-50 font-bold text-blue-700">97€</td>
+                      <td className="p-4 text-center">-</td>
+                    </tr>
+                    <tr className="border-b border-gray-100">
+                      <td className="p-4 font-medium">Délai moyen de vente</td>
+                      <td className="p-4 text-center">18-24 mois 🐌</td>
+                      <td className="p-4 text-center bg-blue-50 font-bold text-green-600">45 jours ⚡</td>
+                      <td className="p-4 text-center">-</td>
+                    </tr>
+                    <tr className="border-b border-gray-100">
+                      <td className="p-4 font-medium">Spécialisation</td>
+                      <td className="p-4 text-center">Tous secteurs</td>
+                      <td className="p-4 text-center bg-blue-50 font-bold text-blue-700">100 % BTP et ENR</td>
+                      <td className="p-4 text-center">-</td>
+                    </tr>
+                    <tr className="border-b border-gray-100">
+                      <td className="p-4 font-medium">Entrepreneurs actifs</td>
+                      <td className="p-4 text-center">Grand public</td>
+                      <td className="p-4 text-center bg-blue-50 font-bold text-blue-700">Plus de 2000 BTP qualifiés</td>
+                      <td className="p-4 text-center">-</td>
+                    </tr>
+                    <tr className="border-b border-gray-100">
+                      <td className="p-4 font-medium">Valorisation</td>
+                      <td className="p-4 text-center">Non inclus (+500€)</td>
+                      <td className="p-4 text-center bg-blue-50 font-bold text-green-600">✓ Inclus</td>
+                      <td className="p-4 text-center">-</td>
+                    </tr>
+                    <tr className="border-b border-gray-100">
+                      <td className="p-4 font-medium">Soutien</td>
+                      <td className="p-4 text-center">Courriel générique</td>
+                      <td className="p-4 text-center bg-blue-50 font-bold text-blue-700">Expert BTP dédié</td>
+                      <td className="p-4 text-center">-</td>
+                    </tr>
+                    <tr className="bg-blue-50">
+                      <td className="p-4 font-bold">Honoraires de succès</td>
+                      <td className="p-4 text-center">Forfait</td>
+                      <td className="p-4 text-center bg-blue-100 font-bold text-blue-700">2% seulement</td>
+                      <td className="p-4 text-center">-</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <div className="bg-blue-50 border-t-4 border-blue-500 p-6">
+                <div className="flex items-start gap-4">
+                  <div className="flex-shrink-0">
+                    <div className="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center">
+                      <span className="text-2xl">💡</span>
+                    </div>
+                  </div>
+                  <div>
+                    <p className="font-bold text-lg text-gray-900 mb-2">Le vrai calcul :</p>
+                    <p className="text-gray-700 mb-2">
+                      <span className="font-semibold">Généralistes :</span> 250€ + 500€ de valorisation + 18 mois
+                      d'attente = <span className="text-red-600 font-bold">750€ et 540 jours perdus</span>
+                    </p>
+                    <p className="text-gray-700">
+                      <span className="font-semibold">CessionBTP :</span> 290€ tout compris + 45 jours ={" "}
+                      <span className="text-green-600 font-bold">VENDU ✓</span>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Témoignage en dessous */}
+            <div className="mt-8 bg-gradient-to-r from-blue-600 to-blue-700 rounded-2xl p-8 text-white">
+              <div className="flex items-start gap-4">
+                <div className="flex-shrink-0">
+                  <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center text-2xl">💬</div>
+                </div>
+                <div className="flex-1">
+                  <p className="text-lg italic mb-4">
+                    "J'ai d'abord essayé une plateforme généraliste à 250€. 9 mois perdus, 0 contact sérieux. Avec
+                    CessionBTP, vendu en 38 jours à un repreneur parfait. Le meilleur investissement de ma vie."
+                  </p>
+                  <p className="font-semibold">- Témoignage vérifié d'un entrepreneur BTP</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* TARIFS VENDEURS */}
+      <section className="py-16 bg-gradient-to-br from-orange-50 to-white">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-4">
+            <Button
+              onClick={() => navigate("/estimateur")}
+              size="lg"
+              className="bg-orange-500 hover:bg-orange-600 text-white px-12 py-6 text-lg font-bold rounded-xl shadow-xl"
+            >
+              💰 COMMENCER MON ESTIMATION GRATUITE
+            </Button>
+          </div>
+
+          <div className="text-center mb-12 mt-12">
+            <div className="inline-block mb-4">
+              <div className="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mx-auto">
+                <span className="text-3xl">🏗️</span>
+              </div>
+            </div>
+            <h2 className="text-4xl font-bold text-gray-900 mb-4">Abonnements vendeurs</h2>
+            <p className="text-xl text-gray-600">Choisissez la formule adaptée à vos besoins de transmission</p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-6 max-w-7xl mx-auto">
+            {sellerPlans.map((plan, index) => (
+              <div
+                key={index}
+                className={`rounded-2xl p-6 border-2 transition-all ${
+                  plan.popular
+                    ? "border-blue-500 bg-white shadow-xl scale-105 relative"
+                    : "border-gray-200 hover:border-gray-300 hover:shadow-lg bg-white"
+                }`}
+              >
+                {plan.popular && (
+                  <div className="absolute -top-3 left-1/2 -translate-x-1/2">
+                    <div className="bg-blue-500 text-white text-xs font-bold px-4 py-1 rounded-full">POPULAIRE</div>
+                  </div>
+                )}
+
+                <div className="mb-6">
+                  <h3 className="text-xl font-bold text-gray-900 mb-1">{plan.name}</h3>
+                  {plan.subtitle && <p className="text-sm text-gray-500 mb-3">{plan.subtitle}</p>}
+                  <div className="flex items-baseline gap-1 mb-2">
+                    <span
+                      className={`text-4xl font-bold ${
+                        plan.color === "blue"
+                          ? "text-blue-600"
+                          : plan.color === "orange"
+                            ? "text-orange-600"
+                            : plan.color === "gold"
+                              ? "text-yellow-600"
+                              : "text-gray-600"
+                      }`}
+                    >
+                      {plan.price}
+                    </span>
+                    {plan.period && <span className="text-gray-500 text-sm">{plan.period}</span>}
+                  </div>
+                  <p className="text-xs text-gray-500">{plan.description}</p>
+                </div>
+
+                <ul className="space-y-3 mb-8">
+                  {plan.features.map((feature, i) => (
+                    <li key={i} className="flex items-start gap-2 text-sm">
+                      <CheckCircle2 className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
+                      <span className="text-gray-700">{feature}</span>
+                    </li>
+                  ))}
+                </ul>
+
+                <Button
+                  onClick={() => navigate("/vendre")}
+                  className={`w-full ${
+                    plan.popular
+                      ? "bg-blue-600 hover:bg-blue-700 text-white"
+                      : "bg-orange-500 hover:bg-orange-600 text-white"
+                  }`}
+                >
+                  {plan.cta}
+                </Button>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* POURQUOI CHOISIR CESSIONBTP */}
+      <section className="py-16 bg-gradient-to-br from-green-50 to-white">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-4xl font-bold text-gray-900 mb-4">Pourquoi choisir CessionBTP</h2>
+            <p className="text-xl text-gray-600">
+              La plateforme la plus complète pour vendre ou acheter une entreprise BTP
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 max-w-6xl mx-auto">
+            {whyChooseUs.map((item, index) => (
+              <div
+                key={index}
+                className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all text-center"
+              >
+                <div className="w-16 h-16 bg-gradient-to-br from-blue-100 to-orange-100 rounded-2xl flex items-center justify-center mx-auto mb-4 text-3xl">
+                  {item.icon}
+                </div>
+                <h3 className="text-xl font-bold text-gray-900 mb-3">{item.title}</h3>
+                <p className="text-gray-600">{item.description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* HONORAIRES DE SUCCÈS */}
+      <section className="py-16 bg-gradient-to-br from-blue-50 to-green-50">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto text-center">
+            <div className="inline-block mb-6">
+              <div className="w-20 h-20 bg-gradient-to-br from-blue-500 to-green-500 rounded-full flex items-center justify-center mx-auto">
+                <span className="text-4xl">🎉</span>
+              </div>
+            </div>
+
+            <h2 className="text-5xl font-bold text-gray-900 mb-6">Honoraires de succès transparents</h2>
+
+            <div className="bg-white rounded-3xl p-12 shadow-2xl mb-8">
+              <div className="text-center mb-8">
+                <div className="text-8xl font-bold bg-gradient-to-r from-green-500 to-blue-500 bg-clip-text text-transparent mb-4">
+                  2%
+                </div>
+                <p className="text-2xl text-gray-700">Seulement en cas de vente réussie</p>
+              </div>
+
+              <div className="bg-green-50 border-2 border-green-200 rounded-2xl p-6">
+                <h3 className="text-xl font-bold text-gray-900 mb-4">Exemple concret :</h3>
+                <div className="space-y-2 text-left max-w-2xl mx-auto">
+                  <p className="text-lg">
+                    Vente <span className="font-bold text-blue-600">500 000 €</span> ={" "}
+                    <span className="font-bold text-green-600">10 000 € de commission</span>
+                  </p>
+                  <p className="text-sm text-gray-600">(vs 25 000€ à 40 000€ chez les concurrents)</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* COMMENT ÇA MARCHE - 5 ÉTAPES */}
+      <section className="py-16 bg-white">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <div className="inline-block mb-4">
+              <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto">
+                <span className="text-3xl">🚀</span>
+              </div>
+            </div>
+            <h2 className="text-4xl font-bold text-gray-900 mb-4">Comment ça marche</h2>
+            <p className="text-xl text-gray-600">Un processus simple et efficace en 5 étapes</p>
+          </div>
+
+          <div className="max-w-4xl mx-auto">
+            {processSteps.map((step, index) => (
+              <div key={index} className="flex gap-6 mb-8 last:mb-0">
+                <div className="flex-shrink-0">
+                  <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center text-white text-2xl font-bold shadow-lg">
+                    {step.number}
+                  </div>
+                </div>
+
+                <div className="flex-1 bg-gradient-to-r from-blue-50 to-white rounded-2xl p-6 shadow-md hover:shadow-lg transition-all">
+                  <div className="flex items-center gap-3 mb-2">
+                    <h3 className="text-2xl font-bold text-gray-900">{step.title}</h3>
+                    <span className="bg-orange-500 text-white text-xs font-bold px-3 py-1 rounded-full">
+                      {step.duration}
+                    </span>
+                  </div>
+                  <p className="text-gray-600">{step.description}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* STATS + TÉMOIGNAGES */}
+      <section className="py-16 bg-gradient-to-br from-blue-600 to-blue-700 text-white">
+        <div className="container mx-auto px-4">
+          {/* Stats */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-16">
+            <div className="text-center">
+              <div className="text-5xl font-bold mb-2">2 847</div>
+              <div className="text-blue-200">Entreprises disponibles</div>
+            </div>
+            <div className="text-center">
+              <div className="text-5xl font-bold mb-2">543</div>
+              <div className="text-blue-200">Ventes réussies</div>
+            </div>
+            <div className="text-center">
+              <div className="text-5xl font-bold mb-2">2 347</div>
+              <div className="text-blue-200">Entrepreneurs actifs</div>
+            </div>
+            <div className="text-center">
+              <div className="text-5xl font-bold mb-2">45 jours</div>
+              <div className="text-blue-200">Délai moyen de vente</div>
+            </div>
+          </div>
+
+          {/* Badge 4,9/5 */}
+          <div className="text-center mb-12">
+            <div className="inline-block bg-orange-500 px-6 py-3 rounded-full">
+              <p className="font-bold">⭐ 4,9/5 - Plus de 250 avis</p>
+            </div>
+          </div>
+
+          {/* Titre témoignages */}
+          <div className="text-center mb-12">
+            <h2 className="text-4xl font-bold mb-4">Ils ont vendu en moins de 45 jours</h2>
+            <p className="text-xl text-blue-200">
+              Des résultats concrets, des vendeurs satisfaits. Rejoignez les 500+ entrepreneurs qui nous ont fait
+              confiance.
+            </p>
+          </div>
+
+          {/* Témoignages cards */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
+            {testimonials.map((testimonial, index) => (
+              <div key={index} className="bg-white rounded-2xl p-6 text-gray-900 shadow-xl">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center text-white font-bold">
+                    {testimonial.name
+                      .split(" ")
+                      .map((n) => n[0])
+                      .join("")}
+                  </div>
+                  <div>
+                    <h4 className="font-bold">{testimonial.name}</h4>
+                    <p className="text-sm text-blue-600">{testimonial.company}</p>
+                    <p className="text-xs text-gray-500">{testimonial.location}</p>
+                  </div>
+                </div>
+
+                <div className="mb-3">
+                  <div className="flex items-center gap-2 text-sm text-gray-600 mb-1">
+                    <span>Secteur</span>
+                  </div>
+                  <p className="font-medium">{testimonial.sector}</p>
+                </div>
+
+                <div className="mb-3">
+                  <div className="flex items-center gap-2 text-sm text-gray-600 mb-1">
+                    <span>CA annuel</span>
+                  </div>
+                  <p className="font-medium">{testimonial.ca}</p>
+                </div>
+
+                <div className="flex gap-1 mb-4">
+                  {[...Array(testimonial.rating)].map((_, i) => (
+                    <Star key={i} className="w-5 h-5 fill-yellow-400 text-yellow-400" />
+                  ))}
+                </div>
+
+                <p className="text-sm text-gray-700 italic">"{testimonial.text}"</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* CTA FINAL */}
+      <section className="py-20 bg-gradient-to-br from-blue-600 via-blue-500 to-orange-500 text-white">
+        <div className="container mx-auto px-4 text-center">
+          <h2 className="text-5xl font-bold mb-6">Prêt à vendre votre entreprise BTP ?</h2>
+          <p className="text-2xl text-white/90 mb-8 max-w-3xl mx-auto">
+            Estimation gratuite • Accompagnement expert • Résultats garantis
+          </p>
+
+          <Button
+            onClick={() => navigate("/estimateur")}
+            size="lg"
+            className="bg-white text-blue-600 hover:bg-blue-50 px-12 py-8 text-2xl font-bold rounded-2xl shadow-2xl hover:shadow-3xl transition-all transform hover:scale-105"
+          >
+            🔥 COMMENCER MON ESTIMATION
+          </Button>
+        </div>
+      </section>
+
+      {/* NEWSLETTER */}
+      <section className="py-16 bg-gray-900 text-white">
+        <div className="container mx-auto px-4">
+          <div className="max-w-3xl mx-auto text-center">
+            <h2 className="text-3xl font-bold mb-4">Restez Informé des Opportunités BTP</h2>
+            <p className="text-gray-400 mb-8">
+              Recevez chaque semaine les meilleures offres de cession et nos analyses sectorielles.
+            </p>
+
+            <div className="flex flex-col sm:flex-row gap-4 justify-center max-w-md mx-auto">
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="Votre email professionnel"
+                className="flex-1 px-6 py-4 rounded-xl text-gray-900 border-2 border-gray-700 focus:border-blue-500 focus:outline-none"
+              />
+              <Button className="bg-blue-600 hover:bg-blue-700 px-8 py-4 rounded-xl font-semibold">S'abonner</Button>
+            </div>
+
+            <div className="flex items-center justify-center gap-2 mt-4">
+              <CheckCircle2 className="w-4 h-4 text-green-500" />
+              <p className="text-sm text-gray-400">Pas de spam - Désabonnement facile</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* FOOTER TRUST BADGES */}
+      <section className="py-8 bg-gray-800 border-t border-gray-700">
+        <div className="container mx-auto px-4">
+          <div className="flex flex-wrap justify-center items-center gap-12 text-gray-400">
+            <div className="flex items-center gap-2">
+              <Award className="w-5 h-5" />
+              <span className="text-sm">Experts certifiés</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <Lock className="w-5 h-5" />
+              <span className="text-sm">Données sécurisées RGPD</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <Shield className="w-5 h-5" />
+              <span className="text-sm">Site sécurisé SSL</span>
+            </div>
+          </div>
+        </div>
+      </section>
 
       <Footer />
     </div>
   );
 };
 
-export default Index;
+export default Home;
