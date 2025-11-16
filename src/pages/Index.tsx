@@ -24,6 +24,7 @@ import {
   Lock,
   X,
 } from "lucide-react";
+import SEOHead from "@/components/SEOHead";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -302,6 +303,7 @@ const Home = () => {
 
   return (
     <div className="min-h-screen bg-white">
+      <SEOHead page="home" />
       <Header />
 
       {/* 🔥 NOTIFICATIONS EN TEMPS RÉEL - EN BAS À GAUCHE */}

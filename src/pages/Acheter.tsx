@@ -10,6 +10,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import PricingCard from "@/components/PricingCard";
 import { BTPMetiersSelect } from "@/data/btp-metiers";
+import SEOHead from "@/components/SEOHead";
 
 const Acheter = () => {
   const navigate = useNavigate();
@@ -26,6 +27,7 @@ const Acheter = () => {
 
   return (
     <div className="min-h-screen">
+      <SEOHead page="acheter" />
       <Header />
 
       <main>
