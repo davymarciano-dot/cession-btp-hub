@@ -56,32 +56,6 @@ const Home = () => {
 
     fetchAnnonces();
   }, []);
-  const [realAnnonces, setRealAnnonces] = useState<any[]>([]);
-  const [loadingAnnonces, setLoadingAnnonces] = useState(true);
-
-  // 🔥 RÉCUPÉRATION DES 3 DERNIÈRES ANNONCES RÉELLES
-  useEffect(() => {
-    const fetchAnnonces = async () => {
-      try {
-        const { data, error } = await supabase
-          .from("annonces")
-          .select("*")
-          .eq("statut", "publiee")
-          .order("created_at", { ascending: false })
-          .limit(3);
-
-        if (error) throw error;
-
-        setRealAnnonces(data || []);
-      } catch (error) {
-        console.error("Erreur lors du chargement des annonces:", error);
-      } finally {
-        setLoadingAnnonces(false);
-      }
-    };
-
-    fetchAnnonces();
-  }, []);
 
   // 🔥 NOTIFICATIONS EN TEMPS RÉEL - EN BAS À GAUCHE
   const liveNotifications = [
