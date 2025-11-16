@@ -1,9 +1,8 @@
-import { useMemo, useState } from 'react';
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
 
-// Fix icône Leaflet (utilise les assets CDN pour éviter les problèmes de bundling)
+// Fix icône Leaflet via CDN pour éviter les soucis d'assets bundlés
 // @ts-ignore
 delete (L.Icon.Default.prototype as any)._getIconUrl;
 L.Icon.Default.mergeOptions({
@@ -12,7 +11,7 @@ L.Icon.Default.mergeOptions({
   shadowUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png',
 });
 
-// Coordonnées simples par département (peuvent être complétées)
+// Coordonnées (échantillon, peut être complété)
 const departementsCoords: Record<string, [number, number]> = {
   '01': [46.2044, 5.2258],
   '06': [43.7102, 7.2620],
@@ -24,33 +23,84 @@ const departementsCoords: Record<string, [number, number]> = {
   '75': [48.8566, 2.3522],
 };
 
-interface ListingsMapProps {
-  listings: Array<{
-    id: string;
-    secteur_activite?: string;
-    ville?: string;
-    departement?: string;
-    ca_n1?: number;
-    prix_vente?: number;
-  }>;
+interface Listing {
+  id: string;
+  secteur_activite?: string;
+  ville?: string;
+  departement?: string;
+  ca_n1?: number;
+  prix_vente?: number;
 }
 
+interface ListingsMapProps {
+  listings: Listing[];
+}
+
+// Composant SANS react-leaflet (Leaflet pur) pour contourner les erreurs Context/react-leaflet
 const ListingsMap = ({ listings }: ListingsMapProps) => {
+  const containerRef = useRef<HTMLDivElement | null>(null);
+  const mapRef = useRef<L.Map | null>(null);
+  const markersLayerRef = useRef<L.LayerGroup | null>(null);
   const [hasError, setHasError] = useState(false);
 
-  // Prépare les marqueurs avec garde d'erreurs
   const markers = useMemo(() => {
     try {
-      return (listings || []).map((listing) => {
-        const coords = departementsCoords[listing.departement || ''] || [48.8566, 2.3522];
-        return { ...listing, coords } as (typeof listing & { coords: [number, number] });
+      return (listings || []).map((l) => {
+        const coords = departementsCoords[l.departement || ''] || [48.8566, 2.3522];
+        return { ...l, coords } as Listing & { coords: [number, number] };
       });
     } catch (e) {
-      console.error('Erreur lors de la préparation des marqueurs:', e);
+      console.error('Préparation des marqueurs - erreur:', e);
       setHasError(true);
-      return [] as any[];
+      return [] as (Listing & { coords: [number, number] })[];
     }
   }, [listings]);
+
+  useEffect(() => {
+    if (!containerRef.current || hasError) return;
+
+    try {
+      // Init carte une seule fois
+      if (!mapRef.current) {
+        mapRef.current = L.map(containerRef.current, {
+          center: [46.603354, 1.888334],
+          zoom: 6,
+          scrollWheelZoom: false,
+        });
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+          attribution: '&copy; OpenStreetMap contributors',
+        }).addTo(mapRef.current);
+
+        markersLayerRef.current = L.layerGroup().addTo(mapRef.current);
+      }
+
+      // Rafraîchir les marqueurs
+      if (markersLayerRef.current) {
+        markersLayerRef.current.clearLayers();
+        markers.forEach((m) => {
+          const marker = L.marker(m.coords);
+          const html = `
+            <div style="min-width:220px">
+              <div style="font-weight:700;margin-bottom:6px">${m.secteur_activite || 'Entreprise BTP'}</div>
+              ${m.ville ? `<div style="color:#475569;margin-bottom:4px">${m.ville} (${m.departement || ''})</div>` : ''}
+              ${typeof m.ca_n1 === 'number' ? `<div>CA: ${m.ca_n1.toLocaleString('fr-FR')}€</div>` : ''}
+              ${typeof m.prix_vente === 'number' ? `<div>Prix: ${m.prix_vente.toLocaleString('fr-FR')}€</div>` : ''}
+            </div>
+          `;
+          marker.bindPopup(html);
+          marker.addTo(markersLayerRef.current!);
+        });
+      }
+    } catch (e) {
+      console.error('Initialisation/maj de la carte - erreur:', e);
+      setHasError(true);
+    }
+
+    return () => {
+      // Ne pas détruire la carte entre les re-render du même montage
+    };
+  }, [markers, hasError]);
 
   if (hasError) {
     return (
@@ -60,34 +110,7 @@ const ListingsMap = ({ listings }: ListingsMapProps) => {
     );
   }
 
-  return (
-    <div className="w-full h-[600px] rounded-xl overflow-hidden shadow-xl">
-      <MapContainer
-        center={[46.603354, 1.888334]}
-        zoom={6}
-        className="h-full w-full"
-        scrollWheelZoom={false}
-      >
-        <TileLayer
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-          attribution='&copy; OpenStreetMap contributors'
-        />
-
-        {markers.map((listing) => (
-          <Marker key={listing.id} position={listing.coords as [number, number]}>
-            <Popup>
-              <div className="p-2">
-                <h3 className="font-bold">{listing.secteur_activite || 'Entreprise BTP'}</h3>
-                {listing.ville && <p>{listing.ville}</p>}
-                {typeof listing.ca_n1 === 'number' && <p>CA: {listing.ca_n1.toLocaleString('fr-FR')}€</p>}
-                {typeof listing.prix_vente === 'number' && <p>Prix: {listing.prix_vente.toLocaleString('fr-FR')}€</p>}
-              </div>
-            </Popup>
-          </Marker>
-        ))}
-      </MapContainer>
-    </div>
-  );
+  return <div ref={containerRef} className="w-full h-[600px] rounded-xl overflow-hidden shadow-xl" />;
 };
 
 export default ListingsMap;
