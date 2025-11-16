@@ -25,7 +25,7 @@ const Header = () => {
             <img 
               src="/images/logo-cessionbtp-2eead586.png" 
               alt="CessionBTP" 
-              className="block object-contain h-24 md:h-40 lg:h-48 w-auto shrink-0"
+              className="block object-contain h-32 md:h-72 lg:h-96 w-auto shrink-0"
             />
           </Link>
 
