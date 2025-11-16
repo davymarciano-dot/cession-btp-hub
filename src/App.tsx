@@ -29,6 +29,7 @@ const Estimation = lazy(() => import("./pages/Estimation"));
 const ResultatEstimation = lazy(() => import("./pages/ResultatEstimation"));
 const PaymentSuccess = lazy(() => import("./pages/PaymentSuccess"));
 const Auth = lazy(() => import("./pages/Auth"));
+const Connexion = lazy(() => import("./pages/Connexion"));
 const Dashboard = lazy(() => import("./pages/Dashboard"));
 const VendorDashboard = lazy(() => import("./pages/VendorDashboard"));
 const AnnonceDetail = lazy(() => import("./pages/AnnonceDetail"));
@@ -133,6 +134,7 @@ const App = () => {
             <Route path="/dashboard/analytics/:id" element={<VendorListingAnalytics />} />
             <Route path="/payment-success" element={<PaymentSuccess />} />
             <Route path="/auth" element={<Auth />} />
+            <Route path="/connexion" element={<Connexion />} />
             <Route path="/tarifs" element={<Tarifs />} />
             <Route path="/pricing" element={<Pricing />} />
             <Route path="/ressources" element={<Ressources />} />
