@@ -8,24 +8,17 @@ const Header = () => {
 
   return (
     <header className="sticky top-0 z-50 bg-gradient-to-r from-white via-slate-50 to-white border-b-4 border-gradient-to-r from-orange-500 via-blue-500 to-orange-500 shadow-lg">
-      <div className="container mx-auto px-6 py-3">
+      <div className="container mx-auto px-6 py-2">
         <div className="flex items-center justify-between gap-8">
           
           {/* LOGO GÉANT - Prend toute la hauteur du menu */}
           <Link to="/" className="flex-shrink-0 hover:scale-105 transition-transform duration-300">
-            <svg width="400" height="120" viewBox="0 0 1200 400" xmlns="http://www.w3.org/2000/svg" className="h-24 w-auto">
-              {/* X bleu */}
-              <path d="M150 100 L250 200 L150 300 L100 300 L200 200 L100 100 Z" fill="#1E90FF"/>
-              
-              {/* X orange */}
-              <path d="M150 300 L250 200 L350 300 L300 300 L200 200 L300 100 L250 100 L150 200 L250 300 Z" fill="#FF8C00"/>
-              
-              {/* Texte "Cession" en orange */}
-              <text x="400" y="250" fontFamily="Arial, sans-serif" fontSize="120" fontWeight="bold" fill="#FF8C00">Cession</text>
-              
-              {/* Texte "BTP" en bleu foncé */}
-              <text x="900" y="250" fontFamily="Arial, sans-serif" fontSize="120" fontWeight="bold" fill="#003366">BTP</text>
-            </svg>
+            <img 
+              src="/images/logo-cessionbtp.png?v=5" 
+              alt="CessionBTP" 
+              className="h-20"
+              style={{ width: 'auto', maxHeight: '80px' }}
+            />
           </Link>
 
           {/* NAVIGATION DESKTOP - Alignée à droite */}
