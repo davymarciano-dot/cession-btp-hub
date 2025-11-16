@@ -11,6 +11,14 @@ L.Icon.Default.mergeOptions({
   shadowUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png',
 });
 
+// Fonction pour formater les montants
+const formatCurrency = (value: number | undefined): string => {
+  if (!value) return 'N/A';
+  if (value >= 1000000) return `${(value / 1000000).toFixed(1)}M€`;
+  if (value >= 1000) return `${(value / 1000).toFixed(0)}K€`;
+  return `${value}€`;
+};
+
 // Coordonnées (échantillon, peut être complété)
 const departementsCoords: Record<string, [number, number]> = {
   '01': [46.2044, 5.2258],
@@ -80,15 +88,43 @@ const ListingsMap = ({ listings }: ListingsMapProps) => {
         markersLayerRef.current.clearLayers();
         markers.forEach((m) => {
           const marker = L.marker(m.coords);
-          const html = `
-            <div style="min-width:220px">
-              <div style="font-weight:700;margin-bottom:6px">${m.secteur_activite || 'Entreprise BTP'}</div>
-              ${m.ville ? `<div style="color:#475569;margin-bottom:4px">${m.ville} (${m.departement || ''})</div>` : ''}
-              ${typeof m.ca_n1 === 'number' ? `<div>CA: ${m.ca_n1.toLocaleString('fr-FR')}€</div>` : ''}
-              ${typeof m.prix_vente === 'number' ? `<div>Prix: ${m.prix_vente.toLocaleString('fr-FR')}€</div>` : ''}
-            </div>
+          
+          // HTML stylé pour le popup avec bouton
+          const popupContent = document.createElement('div');
+          popupContent.className = 'p-3 min-w-[200px]';
+          popupContent.innerHTML = `
+            <h3 style="font-weight: 700; font-size: 1.125rem; margin-bottom: 0.5rem; color: #1e293b;">
+              ${m.secteur_activite || 'Entreprise BTP'}
+            </h3>
+            <p style="font-size: 0.875rem; color: #475569; margin-bottom: 0.25rem;">
+              📍 ${m.ville || 'N/A'}, ${m.departement || ''}
+            </p>
+            <p style="font-size: 0.875rem; margin-bottom: 0.25rem; color: #1e293b;">
+              💰 CA: ${formatCurrency(m.ca_n1)}
+            </p>
+            <p style="font-size: 0.875rem; font-weight: 600; color: #16a34a; margin-bottom: 0.75rem;">
+              Prix: ${formatCurrency(m.prix_vente)}
+            </p>
+            <button 
+              class="listing-details-btn w-full px-4 py-2 text-sm font-semibold text-white rounded-md transition-all duration-200"
+              style="background: linear-gradient(to right, #f97316, #ec4899); cursor: pointer; border: none;"
+              onmouseover="this.style.background='linear-gradient(to right, #ea580c, #db2777)'"
+              onmouseout="this.style.background='linear-gradient(to right, #f97316, #ec4899)'"
+              data-listing-id="${m.id}"
+            >
+              Voir détails →
+            </button>
           `;
-          marker.bindPopup(html);
+
+          // Event listener sur le bouton
+          const button = popupContent.querySelector('.listing-details-btn');
+          if (button) {
+            button.addEventListener('click', () => {
+              window.location.href = `/entreprises/${m.id}`;
+            });
+          }
+
+          marker.bindPopup(popupContent);
           marker.addTo(markersLayerRef.current!);
         });
       }
