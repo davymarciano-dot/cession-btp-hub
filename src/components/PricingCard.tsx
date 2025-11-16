@@ -13,6 +13,9 @@ interface PricingCardProps {
   isPopular?: boolean;
   variant?: "default" | "primary";
   userType?: "vendeur" | "acheteur";
+  isHovered?: boolean;
+  onHover?: (hovered: boolean) => void;
+  anyCardHovered?: boolean;
 }
 
 const PricingCard = ({
@@ -25,6 +28,9 @@ const PricingCard = ({
   isPopular,
   variant = "default",
   userType = "acheteur",
+  isHovered = false,
+  onHover,
+  anyCardHovered = false,
 }: PricingCardProps) => {
   const isPrimary = variant === "primary" || isPopular;
   
@@ -32,12 +38,30 @@ const PricingCard = ({
     analyticsEvents.selectSubscription(title, userType);
   };
   
+  const handleMouseEnter = () => {
+    onHover?.(true);
+  };
+  
+  const handleMouseLeave = () => {
+    onHover?.(false);
+  };
+  
+  // Déterminer si cette carte doit avoir le style "actif" (contour bleu + bouton bleu)
+  // - Si cette carte est survolée → active
+  // - Si c'est la carte populaire ET qu'aucune carte n'est survolée → active
+  // - Sinon → pas active
+  const isActive = isHovered || (isPrimary && !anyCardHovered);
+  
   return (
-    <div className={`h-full flex flex-col rounded-2xl p-8 ${
-      isPrimary 
-        ? 'border-2 border-primary shadow-lg' 
-        : 'border-2 border-slate-200'
-    } bg-card relative hover:border-blue-500 hover:shadow-xl hover:scale-[1.02] transition-all duration-300`}>
+    <div 
+      className={`h-full flex flex-col rounded-2xl p-8 ${
+        isActive
+          ? 'border-2 border-blue-500 shadow-xl scale-[1.02]' 
+          : 'border-2 border-slate-200'
+      } bg-card relative transition-all duration-300`}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+    >
       {isPopular && (
         <Badge className="absolute -top-3 left-1/2 -translate-x-1/2 bg-primary text-white">
           POPULAIRE
@@ -70,9 +94,9 @@ const PricingCard = ({
       <Button 
         onClick={handleClick}
         className={`w-full ${
-          isPrimary 
-            ? 'bg-primary hover:bg-primary/90 text-white' 
-            : 'bg-orange-500 hover:bg-blue-500 text-white'
+          isActive
+            ? 'bg-blue-500 hover:bg-blue-600 text-white' 
+            : 'bg-orange-500 hover:bg-orange-600 text-white'
         } transition-colors duration-300`}
       >
         {buttonText}
