@@ -1,5 +1,6 @@
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
 import { z } from "https://deno.land/x/zod@v3.22.4/mod.ts";
+import { checkRateLimit, getClientIP } from "../_shared/rateLimit.ts";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -20,6 +21,27 @@ serve(async (req) => {
   }
 
   try {
+    // Rate limiting: 10 requests per minute per IP
+    const clientIP = getClientIP(req);
+    const rateLimitCheck = checkRateLimit(clientIP, { windowMs: 60000, maxRequests: 10 });
+    
+    if (rateLimitCheck.limited) {
+      return new Response(
+        JSON.stringify({ 
+          error: "Trop de demandes. Veuillez réessayer dans quelques instants.",
+          retryAfter: rateLimitCheck.retryAfter 
+        }),
+        { 
+          status: 429, 
+          headers: { 
+            ...corsHeaders, 
+            "Content-Type": "application/json",
+            "Retry-After": String(rateLimitCheck.retryAfter)
+          } 
+        }
+      );
+    }
+    
     const body = await req.json();
     
     // Validate input
@@ -34,7 +56,8 @@ serve(async (req) => {
     
     const { ca, secteur, departement } = validationResult.data;
     
-    console.log("Estimation request:", { ca, secteur, departement });
+    // Sanitized logging - only metadata, no sensitive values
+    console.log("Estimation request received");
 
     const LOVABLE_API_KEY = Deno.env.get("LOVABLE_API_KEY");
     if (!LOVABLE_API_KEY) {

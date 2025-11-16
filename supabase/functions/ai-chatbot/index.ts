@@ -1,6 +1,7 @@
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 import { z } from "https://deno.land/x/zod@v3.22.4/mod.ts";
+import { checkRateLimit, getClientIP } from "../_shared/rateLimit.ts";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -25,6 +26,27 @@ serve(async (req) => {
   }
 
   try {
+    // Rate limiting: 20 requests per minute per IP for chatbot
+    const clientIP = getClientIP(req);
+    const rateLimitCheck = checkRateLimit(clientIP, { windowMs: 60000, maxRequests: 20 });
+    
+    if (rateLimitCheck.limited) {
+      return new Response(
+        JSON.stringify({ 
+          error: "Trop de messages. Attendez quelques secondes.",
+          retryAfter: rateLimitCheck.retryAfter 
+        }),
+        { 
+          status: 429, 
+          headers: { 
+            ...corsHeaders, 
+            "Content-Type": "application/json",
+            "Retry-After": String(rateLimitCheck.retryAfter)
+          } 
+        }
+      );
+    }
+    
     const body = await req.json();
     
     // Validate input
@@ -51,7 +73,8 @@ serve(async (req) => {
 
     // Détecter l'intention du message
     const intent = detectIntent(message);
-    console.log("Intent détecté:", intent);
+    // Sanitized logging - intent only, no message content
+    console.log("Intent detected:", intent);
 
     // Construire le système prompt contextuel
     const systemPrompt = buildSystemPrompt(intent);
@@ -83,12 +106,12 @@ serve(async (req) => {
     const aiResponse = await response.json();
     const botMessage = aiResponse.choices[0]?.message?.content || "Désolé, je n'ai pas pu traiter votre demande.";
 
-    // Logger l'interaction
+    // Store interaction log (messages stored in DB only, not console)
     await supabase.from('chatbot_logs').insert({
       user_id: userId || null,
       session_id: sessionId,
       intent,
-      message,
+      message, // Stored securely in DB, not logged to console
       response: botMessage,
       action_taken: getActionForIntent(intent)
     });

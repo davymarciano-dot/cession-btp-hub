@@ -149,9 +149,9 @@ const Sitemap = () => {
       <main className="container mx-auto px-4 py-12">
         <Card className="p-8">
           <div className="text-center mb-8">
-            <h1 className="text-4xl font-bold mb-4">Générateur de Sitemap</h1>
+            <h1 className="text-4xl font-bold mb-4">Générateur de Sitemap XML</h1>
             <p className="text-muted-foreground">
-              Générez un sitemap XML pour améliorer le référencement
+              Générez un sitemap XML pour améliorer le référencement SEO
             </p>
           </div>
 
