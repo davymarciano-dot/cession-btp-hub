@@ -176,9 +176,15 @@ const Estimer = () => {
                 </div>
 
                 <div className="space-y-6">
-                  {/* SIRET - NOUVEAU CHAMP EN PREMIER */}
-                  <div>
+                  {/* SIRET - EN PREMIER */}
+                  <div className="p-6 bg-gradient-to-br from-orange-50 to-pink-50 rounded-2xl border-2 border-orange-200">
+                    <label className="block text-sm font-bold text-orange-600 mb-3">
+                      🏢 SIRET de votre entreprise (recommandé)
+                    </label>
                     <SiretAutocomplete onDataFetched={handleSiretDataFetched} />
+                    <p className="text-xs text-slate-600 mt-2">
+                      💡 Remplissage automatique des informations de votre entreprise
+                    </p>
                   </div>
 
                   {/* Raison sociale (pré-rempli ou modifiable) */}
@@ -190,7 +196,7 @@ const Estimer = () => {
                       <Input
                         type="text"
                         placeholder="Raison sociale"
-                        className="h-14 text-lg border-2 border-slate-200 focus:border-orange-500 rounded-xl"
+                        className="h-14 text-lg border-2 border-green-200 bg-green-50 rounded-xl"
                         value={raisonSociale}
                         onChange={(e) => setRaisonSociale(e.target.value)}
                       />
