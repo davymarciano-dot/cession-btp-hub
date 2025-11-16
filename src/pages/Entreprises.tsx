@@ -16,6 +16,7 @@ import { ListingSkeletonGrid } from "@/components/ListingSkeleton";
 import SEO from "@/components/SEO";
 import SEOHead from "@/components/SEOHead";
 import { SearchableSelect } from "@/components/SearchableSelect";
+import { SearchableRegionSelect } from "@/components/SearchableRegionSelect";
 
 interface Annonce {
   id: string;
@@ -194,23 +195,11 @@ const Entreprises = () => {
                 />
               </div>
               <div className="md:col-span-1">
-                <Select value={regionFilter} onValueChange={setRegionFilter}>
-                  <SelectTrigger>
-                    <SelectValue placeholder="Toute la France" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="all">Toute la France</SelectItem>
-                    <SelectItem value="75">Île-de-France</SelectItem>
-                    <SelectItem value="69">Auvergne-Rhône-Alpes</SelectItem>
-                    <SelectItem value="13">Provence-Alpes-Côte d'Azur</SelectItem>
-                    <SelectItem value="31">Occitanie</SelectItem>
-                    <SelectItem value="44">Pays de la Loire</SelectItem>
-                    <SelectItem value="33">Nouvelle-Aquitaine</SelectItem>
-                    <SelectItem value="59">Hauts-de-France</SelectItem>
-                    <SelectItem value="35">Bretagne</SelectItem>
-                    <SelectItem value="67">Grand Est</SelectItem>
-                  </SelectContent>
-                </Select>
+                <SearchableRegionSelect
+                  value={regionFilter}
+                  onValueChange={setRegionFilter}
+                  placeholder="Toutes les régions"
+                />
               </div>
               <Button 
                 size="lg" 
@@ -276,23 +265,13 @@ const Entreprises = () => {
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium mb-2">Département</label>
-                    <Select value={regionFilter} onValueChange={setRegionFilter}>
-                      <SelectTrigger>
-                        <SelectValue placeholder="Tous les départements" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="all">Tous les départements</SelectItem>
-                        <SelectItem value="01">01 - Ain</SelectItem>
-                        <SelectItem value="06">06 - Alpes-Maritimes</SelectItem>
-                        <SelectItem value="13">13 - Bouches-du-Rhône</SelectItem>
-                        <SelectItem value="31">31 - Haute-Garonne</SelectItem>
-                        <SelectItem value="33">33 - Gironde</SelectItem>
-                        <SelectItem value="59">59 - Nord</SelectItem>
-                        <SelectItem value="69">69 - Rhône</SelectItem>
-                        <SelectItem value="75">75 - Paris</SelectItem>
-                      </SelectContent>
-                    </Select>
+                    <label className="block text-sm font-medium mb-2">Région</label>
+                    <SearchableRegionSelect
+                      value={regionFilter}
+                      onValueChange={setRegionFilter}
+                      placeholder="Toutes les régions"
+                      className="w-full"
+                    />
                   </div>
 
                   <div>
