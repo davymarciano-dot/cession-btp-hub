@@ -281,16 +281,16 @@ const Tarifs = () => {
             </div>
 
             {/* PRIME - ⭐ MEILLEUR CHOIX */}
-            <div className="group h-full flex flex-col border-2 border-slate-200 hover:border-blue-500 hover:shadow-xl transition-all rounded-2xl p-8 bg-white relative">
+            <div className="group h-full flex flex-col border-2 border-slate-200 hover:border-orange-500 hover:shadow-xl transition-all rounded-2xl p-8 bg-white relative">
               <div className="absolute -top-3 left-1/2 -translate-x-1/2">
                 <span className="bg-gradient-to-r from-orange-500 to-orange-600 text-white px-4 py-1.5 rounded-full text-xs font-bold shadow-lg animate-pulse">
                   ⭐ MEILLEUR CHOIX
                 </span>
               </div>
 
-              <h3 className="text-2xl font-bold text-slate-700 mb-2">Prime</h3>
+              <h3 className="text-2xl font-bold text-orange-500 mb-2">Prime</h3>
               <div className="mb-6">
-                <span className="text-5xl font-black text-orange-600">490€</span>
+                <span className="text-5xl font-black text-orange-500">490€</span>
                 <span className="text-slate-500"> /3 mois</span>
               </div>
               <p className="text-sm text-slate-500 mb-6">
@@ -320,7 +320,7 @@ const Tarifs = () => {
                 </div>
               </div>
 
-              <Button className="w-full bg-orange-500 hover:bg-blue-500 group-hover:bg-blue-500 transition-colors">
+              <Button className="w-full bg-orange-500 hover:bg-orange-500 group-hover:bg-orange-500 transition-colors">
                 Choisir Premium
               </Button>
             </div>
