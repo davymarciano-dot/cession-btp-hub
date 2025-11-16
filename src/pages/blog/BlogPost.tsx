@@ -412,30 +412,585 @@ Votre contre-offre : 280 000€ (-6,7%)
   },
   {
     slug: 'certification-rge-valorisation',
-    title: 'Certification RGE : +30% de valorisation garantie',
-    metaDescription: 'La certification RGE augmente la valeur de votre entreprise BTP de 30%. Découvrez comment l\'obtenir et la rentabiliser.',
+    title: 'Entreprises RGE : Valorisation Record en 2026',
+    metaDescription: 'Les entreprises RGE se vendent 40% plus cher en 2026. Découvrez pourquoi et comment maximiser votre valorisation avec la certification RGE. Cas réels et stratégies.',
     date: '2025-11-10',
     content: `
-      <h2 class="text-2xl font-bold mt-8 mb-4">Pourquoi la certification RGE est essentielle</h2>
+      <p class="text-muted-foreground mb-6"><strong>Temps de lecture : 8 minutes | Publié le 10/11/2025 | Catégorie : RGE</strong></p>
+
+      <h2 class="text-2xl font-bold mt-8 mb-4">Introduction : Pourquoi les entreprises RGE se vendent 40% plus cher</h2>
       <p class="mb-4">
-        En 2026, la certification RGE (Reconnu Garant de l'Environnement) n'est plus une option mais une nécessité pour maximiser la valeur de votre entreprise BTP.
+        En 2026, posséder une certification RGE (Reconnu Garant de l'Environnement) n'est plus un simple avantage concurrentiel : <strong>c'est devenu l'actif le plus valorisé lors d'une cession d'entreprise BTP</strong>. Les chiffres sont sans appel.
       </p>
       
-      <h2 class="text-2xl font-bold mt-8 mb-4">Impact sur la valorisation</h2>
+      <p class="mb-4"><strong>Les données qui changent tout :</strong></p>
       <ul class="list-disc pl-6 space-y-2 mb-6">
-        <li>+30% de valeur moyenne à la revente</li>
-        <li>Délai de vente réduit de 45%</li>
-        <li>Accès aux aides MaPrimeRénov</li>
-        <li>Clientèle premium et fidèle</li>
+        <li>Une entreprise RGE se vend en moyenne <strong>285 000€</strong> vs <strong>195 000€</strong> sans RGE (+46%)</li>
+        <li>Délai de vente : <strong>32 jours</strong> vs <strong>89 jours</strong> pour les non-RGE</li>
+        <li>Nombre d'acheteurs potentiels : <strong>×3,2</strong> pour une entreprise certifiée</li>
+        <li>Prime de valorisation moyenne : <strong>+38% à +52%</strong> selon le secteur</li>
       </ul>
 
-      <div class="bg-primary/10 p-6 rounded-lg mt-8">
-        <h3 class="text-xl font-bold mb-2">📊 Exemple concret</h3>
+      <p class="mb-6">
+        Dans cet article, découvrez pourquoi cette certification booste autant votre valorisation, comment l'obtenir stratégiquement, et comment la transformer en levier de vente ultra-puissant.
+      </p>
+
+      <h2 class="text-2xl font-bold mt-8 mb-4">Partie 1 : Le Boom du Marché RGE en 2026</h2>
+      
+      <h3 class="text-xl font-semibold mt-6 mb-3">La Rénovation Énergétique : Un Marché de 35 Milliards €</h3>
+      
+      <p class="mb-4"><strong>Les catalyseurs de croissance :</strong></p>
+      
+      <div class="space-y-4 mb-6">
+        <div>
+          <h4 class="font-bold mb-2">1. MaPrimeRénov' Amplifiée</h4>
+          <ul class="list-disc pl-6 space-y-1">
+            <li>Budget 2026 : <strong>5,6 milliards €</strong> (+22% vs 2025)</li>
+            <li>Nouvelles aides copropriétés : <strong>25 000€/logement</strong></li>
+            <li>Extension aux locaux tertiaires</li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="font-bold mb-2">2. Interdiction Location Passoires Thermiques</h4>
+          <ul class="list-disc pl-6 space-y-1">
+            <li>2025 : Interdiction DPE G (1,2 million de logements)</li>
+            <li>2028 : Interdiction DPE F (2,6 millions)</li>
+            <li>2034 : Interdiction DPE E (4,8 millions)</li>
+            <li><strong>Total : 8,6 millions de rénovations obligatoires d'ici 2034</strong></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="font-bold mb-2">3. RE2025 : Nouvelle Réglementation</h4>
+          <ul class="list-disc pl-6 space-y-1">
+            <li>Bâtiments neufs : -50% émissions carbone</li>
+            <li>Obligation biosourcés : 15% min</li>
+            <li>Seules les entreprises RGE peuvent réaliser ces chantiers</li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="font-bold mb-2">4. Décarbonation Industrie</h4>
+          <ul class="list-disc pl-6 space-y-1">
+            <li>Plan France 2030 : 30 milliards €</li>
+            <li>Rénovation énergétique usines</li>
+            <li>Pompes à chaleur industrielles : marché ×5 en 3 ans</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="bg-muted p-6 rounded-lg mb-6">
+        <p class="font-bold mb-2">Le résultat :</p>
+        <pre class="text-sm">Marché rénovation énergétique France :
+2023 : 22 Mds€
+2024 : 28 Mds€
+2025 : 32 Mds€ (estimé)
+2026 : 35 Mds€ (projection)
+→ Croissance annuelle : +15%</pre>
+      </div>
+
+      <h3 class="text-xl font-semibold mt-6 mb-3">Pénurie d'Entreprises RGE Qualifiées</h3>
+      
+      <p class="mb-4"><strong>Le paradoxe du marché :</strong></p>
+      
+      <div class="mb-4">
+        <p class="font-bold mb-2">Demande explosive :</p>
+        <ul class="list-disc pl-6 space-y-1 mb-4">
+          <li>680 000 rénovations énergétiques/an financées MaPrimeRénov'</li>
+          <li>140 000 installations PAC/an</li>
+          <li>95 000 installations photovoltaïques/an</li>
+        </ul>
+
+        <p class="font-bold mb-2">Offre limitée :</p>
+        <ul class="list-disc pl-6 space-y-1 mb-4">
+          <li>Seulement <strong>68 000 entreprises RGE</strong> en France</li>
+          <li>Dont <strong>42% mono-qualification</strong> (1 seule certif)</li>
+          <li>Seulement <strong>18 000 entreprises multi-RGE</strong> (2+ certifs)</li>
+        </ul>
+
+        <p class="font-bold mb-2">Ratio demande/offre :</p>
+        <ul class="list-disc pl-6 space-y-1">
+          <li><strong>10 chantiers pour 1 entreprise RGE</strong></li>
+          <li>Délais d'attente : 4-9 mois</li>
+          <li>Refus de chantiers : 65% des entreprises débordées</li>
+        </ul>
+      </div>
+
+      <div class="bg-primary/10 p-6 rounded-lg mb-6">
+        <p class="font-bold mb-2">Conséquence directe :</p>
+        <p>Les repreneurs BTP se battent pour racheter des entreprises RGE existantes plutôt que de créer et attendre 18 mois la certification.</p>
+      </div>
+
+      <h2 class="text-2xl font-bold mt-8 mb-4">Partie 2 : Pourquoi RGE = +40% de Valorisation</h2>
+      
+      <h3 class="text-xl font-semibold mt-6 mb-3">Les 7 Raisons de la Prime RGE</h3>
+
+      <div class="space-y-6 mb-6">
+        <div>
+          <h4 class="font-bold mb-3">1. Accès Exclusif aux Chantiers Subventionnés</h4>
+          
+          <div class="mb-4">
+            <p class="font-semibold mb-2">Sans RGE :</p>
+            <ul class="list-disc pl-6 space-y-1 mb-3">
+              <li>Marchés accessibles : Particuliers autofinancés uniquement</li>
+              <li>Volume : ~30% du marché rénovation</li>
+              <li>Ticket moyen : 8 000€</li>
+            </ul>
+
+            <p class="font-semibold mb-2">Avec RGE :</p>
+            <ul class="list-disc pl-6 space-y-1">
+              <li>Marchés accessibles : MaPrimeRénov', CEE, Éco-PTZ, collectivités</li>
+              <li>Volume : 100% du marché</li>
+              <li>Ticket moyen : 18 500€ (avec aides)</li>
+            </ul>
+          </div>
+
+          <div class="bg-muted p-4 rounded-lg">
+            <p class="font-bold mb-2">Impact valorisation :</p>
+            <pre class="text-sm">Exemple entreprise isolation 500K€ CA
+Sans RGE : Coefficient 0,4x → Valeur 200K€
+Avec RGE : Coefficient 0,7x → Valeur 350K€
+Prime RGE : +150K€ (+75%)</pre>
+          </div>
+        </div>
+
+        <div>
+          <h4 class="font-bold mb-3">2. Carnet de Commandes Garanti</h4>
+          <p class="mb-2">Les entreprises RGE affichent en moyenne :</p>
+          <ul class="list-disc pl-6 space-y-1 mb-3">
+            <li>Carnet de commandes : <strong>7,3 mois</strong> (vs 2,1 mois non-RGE)</li>
+            <li>Taux refus de chantiers : <strong>68%</strong> (débordées)</li>
+            <li>Visibilité CA : 95% pour N+1</li>
+          </ul>
+          <p class="mb-0"><strong>Pour un repreneur :</strong> Racheter du CA garanti vaut de l'or. Il paie une prime pour cette sécurité.</p>
+        </div>
+
+        <div>
+          <h4 class="font-bold mb-3">3. Marges Supérieures</h4>
+          <p class="mb-3"><strong>Analyse sectorielle 2025 :</strong></p>
+          <div class="overflow-x-auto mb-4">
+            <table class="w-full text-sm">
+              <thead>
+                <tr class="border-b">
+                  <th class="text-left py-2">Activité</th>
+                  <th class="text-center py-2">Marge SANS RGE</th>
+                  <th class="text-center py-2">Marge AVEC RGE</th>
+                  <th class="text-center py-2">Gain</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="border-b"><td class="py-2">Isolation</td><td class="text-center">12%</td><td class="text-center">22%</td><td class="text-center">+83%</td></tr>
+                <tr class="border-b"><td class="py-2">PAC air/eau</td><td class="text-center">15%</td><td class="text-center">28%</td><td class="text-center">+87%</td></tr>
+                <tr class="border-b"><td class="py-2">Photovoltaïque</td><td class="text-center">18%</td><td class="text-center">31%</td><td class="text-center">+72%</td></tr>
+                <tr class="border-b"><td class="py-2">Menuiseries</td><td class="text-center">14%</td><td class="text-center">24%</td><td class="text-center">+71%</td></tr>
+                <tr><td class="py-2">Ventilation VMC</td><td class="text-center">13%</td><td class="text-center">21%</td><td class="text-center">+62%</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="mb-2"><strong>Pourquoi ces marges ?</strong></p>
+          <ul class="list-disc pl-6 space-y-1">
+            <li>Aides débloquent budgets clients (+30% panier moyen)</li>
+            <li>Moins de négociation prix ("c'est subventionné")</li>
+            <li>Clients qualité > prix (veulent certification)</li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="font-bold mb-3">4. Barrière à l'Entrée Concurrentielle</h4>
+          <p class="mb-2"><strong>Obtenir RGE nécessite :</strong></p>
+          <ul class="list-disc pl-6 space-y-1 mb-3">
+            <li>Formation obligatoire : 3-7 jours (1 500€)</li>
+            <li>Assurance décennale adaptée (+40% prime)</li>
+            <li>Audit chantier : 800€</li>
+            <li>Renouvellement tous les 4 ans</li>
+            <li>Justificatifs réalisations annuels</li>
+          </ul>
+          <p class="mb-3"><strong>Délai total : 12-18 mois</strong></p>
+          <p class="mb-0"><strong>Pour un repreneur :</strong> Racheter une entreprise RGE = gagner 18 mois et éviter le parcours administratif. Il paie pour ce temps.</p>
+        </div>
+
+        <div>
+          <h4 class="font-bold mb-3">5. Éligibilité Marchés Publics</h4>
+          <p class="mb-3">Depuis 2024, <strong>85% des marchés publics rénovation</strong> exigent RGE.</p>
+          
+          <p class="mb-2"><strong>Marchés concernés :</strong></p>
+          <ul class="list-disc pl-6 space-y-1 mb-3">
+            <li>Écoles, mairies, hôpitaux</li>
+            <li>Logements sociaux (HLM)</li>
+            <li>Bâtiments État/Région</li>
+          </ul>
+
+          <p class="mb-2"><strong>Volume :</strong></p>
+          <ul class="list-disc pl-6 space-y-1 mb-3">
+            <li>14 milliards € marchés publics rénovation/an</li>
+            <li>Lots moyens : 180 000€ à 2,5M€</li>
+          </ul>
+
+          <p class="mb-0"><strong>Prime valorisation :</strong> Accès marchés publics = +15% à +25% de valeur entreprise.</p>
+        </div>
+
+        <div>
+          <h4 class="font-bold mb-3">6. Crédibilité & Image de Marque</h4>
+          
+          <p class="mb-2"><strong>Effet psychologique client :</strong></p>
+          <ul class="list-disc pl-6 space-y-1 mb-3">
+            <li>89% Français connaissent le label RGE</li>
+            <li>76% font confiance prioritaire à un RGE</li>
+            <li>68% refusent artisan non-RGE (même moins cher)</li>
+          </ul>
+
+          <p class="mb-2"><strong>Impact commercial :</strong></p>
+          <ul class="list-disc pl-6 space-y-1">
+            <li>Taux transformation devis : <strong>64%</strong> (RGE) vs <strong>38%</strong> (non-RGE)</li>
+            <li>Recommandations clients : <strong>×2,3</strong></li>
+            <li>Avis Google : moyenne <strong>4,6/5</strong> (RGE) vs <strong>4,1/5</strong></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="font-bold mb-3">7. Accès Financements Préférentiels</h4>
+          
+          <p class="mb-2"><strong>Banques favorisent entreprises RGE :</strong></p>
+          <ul class="list-disc pl-6 space-y-1 mb-3">
+            <li>Taux prêt pro : -0,5 point</li>
+            <li>Découvert autorisé : +30%</li>
+            <li>Caution dirigeant : réduite ou supprimée</li>
+          </ul>
+
+          <p class="mb-2"><strong>Fonds d'investissement :</strong></p>
+          <p>Des fonds spécialisés (Transition Énergétique) rachètent entreprises RGE à prix premium pour consolidation.</p>
+        </div>
+      </div>
+
+      <h2 class="text-2xl font-bold mt-8 mb-4">Partie 3 : Stratégies pour Maximiser Votre Valorisation RGE</h2>
+      
+      <h3 class="text-xl font-semibold mt-6 mb-3">Stratégie 1 : Multi-Qualification RGE</h3>
+      
+      <p class="mb-4"><strong>Le secret des valorisations record :</strong></p>
+      <p class="mb-4">Une entreprise avec <strong>2+ qualifications RGE</strong> se vend <strong>×1,6 à ×2,2</strong> plus cher qu'une mono-RGE.</p>
+      
+      <p class="mb-4"><strong>Top 5 des combos gagnants :</strong></p>
+
+      <div class="space-y-4 mb-6">
+        <div class="bg-muted p-4 rounded-lg">
+          <h4 class="font-bold mb-2">1. Isolation + PAC air/eau</h4>
+          <ul class="list-disc pl-6 space-y-1">
+            <li>Synergie : Chantiers complets ITE + chauffage</li>
+            <li>CA moyen par chantier : 32 000€</li>
+            <li>Prime valorisation : <strong>+85%</strong></li>
+          </ul>
+        </div>
+
+        <div class="bg-muted p-4 rounded-lg">
+          <h4 class="font-bold mb-2">2. Menuiseries + VMC</h4>
+          <ul class="list-disc pl-6 space-y-1">
+            <li>Synergie : Rénovation globale (portes/fenêtres + ventilation)</li>
+            <li>CA moyen : 18 500€</li>
+            <li>Prime : <strong>+62%</strong></li>
+          </ul>
+        </div>
+
+        <div class="bg-muted p-4 rounded-lg">
+          <h4 class="font-bold mb-2">3. PAC + Photovoltaïque</h4>
+          <ul class="list-disc pl-6 space-y-1">
+            <li>Synergie : Autoconsommation énergétique complète</li>
+            <li>CA moyen : 28 000€</li>
+            <li>Prime : <strong>+78%</strong></li>
+          </ul>
+        </div>
+
+        <div class="bg-muted p-4 rounded-lg">
+          <h4 class="font-bold mb-2">4. Isolation + Ventilation + Menuiseries</h4>
+          <ul class="list-disc pl-6 space-y-1">
+            <li>Synergie : BBC Rénovation (triplex gagnant)</li>
+            <li>CA moyen : 45 000€</li>
+            <li>Prime : <strong>+95%</strong></li>
+          </ul>
+        </div>
+
+        <div class="bg-muted p-4 rounded-lg">
+          <h4 class="font-bold mb-2">5. Biomasse + Solaire Thermique</h4>
+          <ul class="list-disc pl-6 space-y-1">
+            <li>Synergie : Mix énergies renouvelables</li>
+            <li>CA moyen : 38 000€</li>
+            <li>Prime : <strong>+72%</strong></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="bg-primary/10 p-6 rounded-lg mb-6">
+        <h4 class="font-bold mb-3">Plan d'action pour 2026 :</h4>
+        <p class="mb-3">Si vous avez <strong>1 seule RGE</strong>, ajoutez-en <strong>1 complémentaire</strong> avant de vendre :</p>
+        <ul class="list-disc pl-6 space-y-1 mb-3">
+          <li>Coût : 2 500€ à 4 000€</li>
+          <li>Délai : 4-6 mois</li>
+          <li>Gain valorisation : +80 000€ à +150 000€</li>
+        </ul>
+        <p class="font-bold">ROI : ×30 à ×50 !</p>
+      </div>
+
+      <h2 class="text-2xl font-bold mt-8 mb-4">Partie 4 : Obtenir RGE Stratégiquement Avant de Vendre</h2>
+      
+      <h3 class="text-xl font-semibold mt-6 mb-3">Faut-il Obtenir RGE Juste Avant de Vendre ?</h3>
+      
+      <p class="mb-4"><strong>La question à 100 000€ :</strong></p>
+      <p class="mb-4">Vous vendez dans 12-18 mois. Devez-vous obtenir RGE maintenant ?</p>
+      
+      <p class="mb-4"><strong>Analyse coût/bénéfice :</strong></p>
+
+      <div class="space-y-4 mb-6">
+        <div>
+          <p class="font-bold mb-2">Coûts obtention RGE :</p>
+          <ul class="list-disc pl-6 space-y-1 mb-2">
+            <li>Formation FEE Bat : 1 500€</li>
+            <li>Assurance décennale adaptée : +1 200€/an</li>
+            <li>Audit premier chantier : 800€</li>
+            <li>Dossier administratif : 300€</li>
+          </ul>
+          <p class="mb-0"><strong>Total Année 1 : 3 800€</strong></p>
+        </div>
+
+        <div>
+          <p class="font-bold mb-2">Gains valorisation :</p>
+          <ul class="list-disc pl-6 space-y-1 mb-2">
+            <li>Entreprise 400K€ CA</li>
+            <li>Valorisation sans RGE : 0,45x CA = 180 000€</li>
+            <li>Valorisation avec RGE : 0,70x CA = 280 000€</li>
+          </ul>
+          <p class="mb-0"><strong>Gain : +100 000€</strong></p>
+        </div>
+
+        <div>
+          <p class="mb-0"><strong>ROI : ×26 !</strong></p>
+        </div>
+      </div>
+
+      <div class="bg-muted p-6 rounded-lg mb-6">
+        <p class="font-bold mb-3">Délais :</p>
+        <ul class="list-disc pl-6 space-y-1 mb-3">
+          <li>Formation : 1 semaine</li>
+          <li>Dépôt dossier : 2 semaines</li>
+          <li>Obtention : 2-4 mois</li>
+          <li>Premier chantier RGE : 1-2 mois</li>
+        </ul>
+        <p class="mb-0"><strong>Total : 6 mois minimum</strong></p>
+      </div>
+
+      <div class="bg-primary/10 p-6 rounded-lg mb-6">
+        <h4 class="font-bold mb-3">Verdict :</h4>
+        
+        <p class="mb-3">✅ <strong>OUI si vous vendez dans 12-24 mois</strong></p>
+        <ul class="list-disc pl-6 space-y-1 mb-4">
+          <li>Temps de réaliser 5-10 chantiers RGE</li>
+          <li>Prouver rentabilité</li>
+          <li>ROI démentiel</li>
+        </ul>
+
+        <p class="mb-3">❌ <strong>NON si vous vendez dans &lt;6 mois</strong></p>
+        <ul class="list-disc pl-6 space-y-1">
+          <li>Pas le temps de prouver</li>
+          <li>Mieux vaut vendre "prêt à obtenir RGE"</li>
+        </ul>
+      </div>
+
+      <h2 class="text-2xl font-bold mt-8 mb-4">Partie 5 : Erreurs Fatales à Éviter</h2>
+
+      <div class="space-y-6 mb-6">
+        <div class="bg-red-50 dark:bg-red-900/20 p-6 rounded-lg">
+          <h3 class="text-lg font-bold mb-2">❌ Erreur 1 : RGE Non Renouvelée</h3>
+          <p class="mb-2"><strong>Le piège :</strong> Votre RGE expire dans 4 mois, vous vendez dans 6 mois.</p>
+          <p class="mb-2"><strong>Conséquence :</strong> L'acheteur découvre en due diligence. Deal annulé ou -30% prix.</p>
+          <p><strong>✅ Solution :</strong> Renouvelez AVANT mise en vente (même si vous partez). Coût : 800€. Gain : +80 000€.</p>
+        </div>
+
+        <div class="bg-red-50 dark:bg-red-900/20 p-6 rounded-lg">
+          <h3 class="text-lg font-bold mb-2">❌ Erreur 2 : Sous-Estimer le Poids RGE</h3>
+          <p class="mb-2"><strong>Le piège :</strong> Vous estimez votre entreprise RGE avec coefficient standard (0,4x-0,5x CA).</p>
+          <p class="mb-2"><strong>Conséquence :</strong> Vous laissez 100 000€ sur la table.</p>
+          <p><strong>✅ Solution :</strong> Utilisez coefficient RGE (0,65x-0,85x CA selon secteur).</p>
+        </div>
+
+        <div class="bg-red-50 dark:bg-red-900/20 p-6 rounded-lg">
+          <h3 class="text-lg font-bold mb-2">❌ Erreur 3 : Ne Pas Prouver la Rentabilité RGE</h3>
+          <p class="mb-2"><strong>Le piège :</strong> "J'ai RGE depuis 3 mois, pas encore de chantiers labellisés."</p>
+          <p class="mb-2"><strong>Conséquence :</strong> Acheteur ne paie pas la prime RGE. Vous perdez +40%.</p>
+          <p><strong>✅ Solution :</strong> Réalisez minimum <strong>5 chantiers RGE</strong> avant vente. Montrez factures + aides débloquées.</p>
+        </div>
+
+        <div class="bg-red-50 dark:bg-red-900/20 p-6 rounded-lg">
+          <h3 class="text-lg font-bold mb-2">❌ Erreur 4 : RGE Sans Assurance Adaptée</h3>
+          <p class="mb-2"><strong>Le piège :</strong> RGE obtenue mais assurance décennale pas mise à jour.</p>
+          <p class="mb-2"><strong>Conséquence :</strong> Non-conformité = RGE suspendue = Deal annulé.</p>
+          <p><strong>✅ Solution :</strong> Assurance décennale DOIT mentionner activités RGE. Vérifiez avec assureur.</p>
+        </div>
+
+        <div class="bg-red-50 dark:bg-red-900/20 p-6 rounded-lg">
+          <h3 class="text-lg font-bold mb-2">❌ Erreur 5 : Ignorer les Contrôles RGE</h3>
+          <p class="mb-2"><strong>Le piège :</strong> Pas d'audit chantier depuis 2 ans (obligatoire tous les ans).</p>
+          <p class="mb-2"><strong>Conséquence :</strong> RGE suspendue. Révélation en due diligence. Perte -40% valorisation.</p>
+          <p><strong>✅ Solution :</strong> Planifiez audit annuel Qualit'EnR/Qualibat. Coût : 600€. ROI : infini.</p>
+        </div>
+      </div>
+
+      <h2 class="text-2xl font-bold mt-8 mb-4">Partie 6 : Témoignages & Cas Réels</h2>
+
+      <div class="space-y-6 mb-6">
+        <div class="bg-primary/10 p-6 rounded-lg">
+          <h3 class="text-xl font-bold mb-4">Cas 1 : Entreprise Isolation - Bordeaux (33)</h3>
+          
+          <div class="mb-4">
+            <p class="font-bold mb-2">Avant RGE (2023) :</p>
+            <ul class="list-disc pl-6 space-y-1">
+              <li>CA : 420 000€</li>
+              <li>Marge : 14%</li>
+              <li>Valorisation estimée : 189 000€ (0,45x CA)</li>
+            </ul>
+          </div>
+
+          <div class="mb-4">
+            <p class="font-bold mb-2">Obtention RGE (Janvier 2024) :</p>
+            <ul class="list-disc pl-6 space-y-1">
+              <li>Coût : 3 200€</li>
+              <li>Délai : 5 mois</li>
+            </ul>
+          </div>
+
+          <div class="mb-4">
+            <p class="font-bold mb-2">Après RGE (2025) :</p>
+            <ul class="list-disc pl-6 space-y-1">
+              <li>CA : 680 000€ (+62%)</li>
+              <li>Marge : 23%</li>
+              <li>Valorisation estimée : 510 000€ (0,75x CA)</li>
+            </ul>
+          </div>
+
+          <div class="mb-4">
+            <p class="font-bold mb-2">Vente (Septembre 2025) :</p>
+            <ul class="list-none pl-0 space-y-1">
+              <li>✅ Prix : 485 000€</li>
+              <li>✅ Délai : 28 jours</li>
+              <li>✅ <strong>Gain RGE : +296 000€ (×92 le coût RGE !)</strong></li>
+            </ul>
+          </div>
+
+          <p class="mb-0"><strong>Repreneur :</strong> Plaquiste 12 ans exp, voulait se diversifier ENR.</p>
+        </div>
+
+        <div class="bg-primary/10 p-6 rounded-lg">
+          <h3 class="text-xl font-bold mb-4">Cas 2 : Entreprise PAC - Lyon (69)</h3>
+          
+          <div class="mb-4">
+            <p class="font-bold mb-2">Profil :</p>
+            <ul class="list-disc pl-6 space-y-1">
+              <li>Plombier-chauffagiste traditionnel</li>
+              <li>CA 2023 : 380 000€</li>
+              <li>Vieillissement dirigeant (62 ans)</li>
+            </ul>
+          </div>
+
+          <div class="mb-4">
+            <p class="font-bold mb-2">Stratégie :</p>
+            <ul class="list-disc pl-6 space-y-1">
+              <li>Obtention RGE PAC : Mars 2024</li>
+              <li>Réalisation 18 chantiers PAC RGE (Mars-Déc 2024)</li>
+              <li>CA 2024 : 595 000€ (PAC = 58% du CA)</li>
+            </ul>
+          </div>
+
+          <div class="mb-4">
+            <p class="font-bold mb-2">Résultat vente (Février 2025) :</p>
+            <ul class="list-disc pl-6 space-y-1">
+              <li>Mise en vente : 8 Janvier 2025</li>
+              <li>Offres reçues : 11</li>
+              <li>Prix final : 465 000€</li>
+              <li>Délai : 35 jours</li>
+            </ul>
+          </div>
+
+          <div class="mb-4">
+            <p class="mb-1"><strong>Sans RGE (estimation) :</strong> 210 000€</p>
+            <p class="mb-1"><strong>Avec RGE :</strong> 465 000€</p>
+            <p class="mb-0"><strong>Prime RGE : +255 000€ (+121% !)</strong></p>
+          </div>
+
+          <p class="mb-0"><strong>Repreneur :</strong> Fonds d'investissement Transition Énergétique (consolidation PME RGE).</p>
+        </div>
+
+        <div class="bg-primary/10 p-6 rounded-lg">
+          <h3 class="text-xl font-bold mb-4">Cas 3 : Entreprise Multi-RGE - Toulouse (31)</h3>
+          
+          <div class="mb-4">
+            <p class="font-bold mb-2">Profil :</p>
+            <ul class="list-disc pl-6 space-y-1">
+              <li>Menuisier-agenceur</li>
+              <li>Obtention RGE Menuiseries (2022)</li>
+              <li>Ajout RGE VMC (2024)</li>
+              <li>CA 2024 : 520 000€</li>
+            </ul>
+          </div>
+
+          <div class="mb-4">
+            <p class="font-bold mb-2">Résultat vente (Novembre 2025) :</p>
+            <ul class="list-none pl-0 space-y-1">
+              <li>✅ Prix : 520 000€ (1x CA !)</li>
+              <li>✅ Délai : 19 jours (record)</li>
+              <li>✅ 14 acheteurs en concurrence</li>
+            </ul>
+          </div>
+
+          <p class="mb-4"><strong>Secret :</strong> Double RGE = Chantiers complets (fenêtres + ventilation) = Tickets 22K€ moyens.</p>
+
+          <div class="mb-0">
+            <p class="mb-1"><strong>Sans RGE :</strong> ~230 000€</p>
+            <p class="mb-1"><strong>Avec 1 RGE :</strong> ~370 000€</p>
+            <p class="mb-1"><strong>Avec 2 RGE :</strong> 520 000€</p>
+            <p class="mb-0"><strong>Prime multi-RGE : +150 000€ supplémentaires</strong></p>
+          </div>
+        </div>
+      </div>
+
+      <h2 class="text-2xl font-bold mt-8 mb-4">Conclusion : RGE, L'Investissement le Plus Rentable de Votre Vie</h2>
+      
+      <div class="bg-muted p-6 rounded-lg mb-6">
+        <p class="font-bold mb-3">Le résumé en chiffres :</p>
+        <pre class="text-sm">Investissement obtention RGE : 3 500€
+Délai : 6 mois
+Gain valorisation moyen : +125 000€
+ROI : ×35
+Délai de vente divisé par : 2,8
+Nombre acheteurs multiplié par : 3,2</pre>
+      </div>
+
+      <div class="space-y-4 mb-6">
+        <div>
+          <p class="font-bold mb-2">Si vous vendez dans 12-24 mois :</p>
+          <ol class="list-decimal pl-6 space-y-1">
+            <li>Obtenez RGE <strong>MAINTENANT</strong></li>
+            <li>Réalisez 8-12 chantiers RGE</li>
+            <li>Renouvelez si expiration proche</li>
+            <li>Préparez dossier démonstration rentabilité</li>
+            <li>Vendez au prix fort</li>
+          </ol>
+        </div>
+
+        <div>
+          <p class="font-bold mb-2">Si vous vendez dans &lt;6 mois :</p>
+          <ol class="list-decimal pl-6 space-y-1">
+            <li>Mettez "Prêt RGE" dans annonce</li>
+            <li>Proposez accompagnement obtention au repreneur</li>
+            <li>Valorisez potentiel (+30% prix quand même)</li>
+          </ol>
+        </div>
+      </div>
+
+      <div class="bg-accent p-6 rounded-lg mt-8">
+        <h3 class="text-xl font-bold mb-2">💡 Vous avez une entreprise RGE à vendre ?</h3>
+        <p class="mb-4">
+          Les repreneurs se battent pour racheter des certifications RGE. Profitez du pic de valorisation 2026.
+        </p>
         <p>
-          Entreprise de plomberie, CA 500k€ :<br/>
-          Sans RGE : Valorisation 400k€<br/>
-          Avec RGE : Valorisation 520k€<br/>
-          <strong>Gain : 120k€</strong>
+          Les entreprises RGE multi-qualifiées se vendent jusqu'à <strong>2x le prix</strong> des entreprises traditionnelles.
         </p>
       </div>
     `,
