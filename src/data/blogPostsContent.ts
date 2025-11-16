@@ -6,7 +6,7 @@ export interface BlogPostContent {
 }
 
 export const blogPostsFullContent: Record<string, BlogPostContent> = {
-  'vendre-entreprise-btp-2026': {
+  'guide-complet-vendre-entreprise-btp-2026': {
     metaDescription: 'Vendez votre entreprise BTP en 45 jours avec notre méthode complète 2026. Estimation, diffusion, négociation : le guide étape par étape qui marche.',
     imageUrl: 'https://images.unsplash.com/photo-1541888946425-d81bb19240f5?q=80&w=2070',
     content: `
@@ -411,7 +411,7 @@ Votre contre-offre : 280 000€ (-6,7%)
       }
     }
   },
-  'certification-rge-valorisation': {
+  'entreprises-rge-valorisation-record': {
     metaDescription: 'Les entreprises RGE se vendent 40% plus cher en 2026. Découvrez pourquoi et comment maximiser votre valorisation avec la certification RGE. Cas réels et stratégies.',
     imageUrl: 'https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=2069',
     content: `
