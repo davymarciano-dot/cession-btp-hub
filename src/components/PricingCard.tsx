@@ -47,10 +47,8 @@ const PricingCard = ({
   };
   
   // Déterminer si cette carte doit avoir le style "actif" (contour bleu + bouton bleu)
-  // - Si cette carte est survolée → active
-  // - Si c'est la carte populaire ET qu'aucune autre carte n'est survolée → active
-  // - Sinon → pas active
-  const isActive = isHovered || (isPrimary && !anyCardHovered && !isHovered);
+  // Désormais: seule la carte survolée est active
+  const isActive = isHovered;
   
   return (
     <div 
