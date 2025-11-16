@@ -77,8 +77,10 @@ const PricingCard = ({
       className={`h-full flex flex-col rounded-2xl p-8 border-2 ${
         isActive
           ? 'border-blue-500 shadow-xl scale-[1.02]'
+          : anyCardHovered
+          ? 'border-slate-200 opacity-50'
           : 'border-slate-200'
-      } bg-card relative transition-all duration-300 hover:border-blue-500 hover:shadow-xl hover:scale-[1.02] overflow-hidden`}
+      } bg-card relative transition-all duration-300 hover:border-blue-500 hover:shadow-xl hover:scale-[1.02] hover:opacity-100 overflow-hidden`}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       onMouseMove={handleMouseMove}
