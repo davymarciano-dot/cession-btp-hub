@@ -931,6 +931,7 @@ export type Database = {
       demandes_contact: {
         Row: {
           annonce_id: string
+          budget_estime: number | null
           coordinates_revealed: boolean
           coordinates_revealed_at: string | null
           created_at: string
@@ -947,6 +948,7 @@ export type Database = {
         }
         Insert: {
           annonce_id: string
+          budget_estime?: number | null
           coordinates_revealed?: boolean
           coordinates_revealed_at?: string | null
           created_at?: string
@@ -963,6 +965,7 @@ export type Database = {
         }
         Update: {
           annonce_id?: string
+          budget_estime?: number | null
           coordinates_revealed?: boolean
           coordinates_revealed_at?: string | null
           created_at?: string
@@ -1483,6 +1486,7 @@ export type Database = {
       leads_siret_partiel: {
         Row: {
           adresse: string | null
+          ca_estime: number | null
           code_postal: string | null
           created_at: string
           departement: string | null
@@ -1498,6 +1502,7 @@ export type Database = {
         }
         Insert: {
           adresse?: string | null
+          ca_estime?: number | null
           code_postal?: string | null
           created_at?: string
           departement?: string | null
@@ -1513,6 +1518,7 @@ export type Database = {
         }
         Update: {
           adresse?: string | null
+          ca_estime?: number | null
           code_postal?: string | null
           created_at?: string
           departement?: string | null
