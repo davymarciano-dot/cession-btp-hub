@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import { MapPin } from 'lucide-react';
 import 'leaflet/dist/leaflet.css';
@@ -70,6 +71,7 @@ const departementCoords: Record<string, [number, number]> = {
 };
 
 const ListingsMap = ({ listings }: ListingsMapProps) => {
+  const navigate = useNavigate();
   const [selectedListing, setSelectedListing] = useState<Listing | null>(null);
   const [enrichedListings, setEnrichedListings] = useState<Listing[]>([]);
 
@@ -139,12 +141,12 @@ const ListingsMap = ({ listings }: ListingsMapProps) => {
                     👥 Effectif: {listing.nombre_salaries} personnes
                   </p>
                 </div>
-                <a
-                  href={`/annonce/${listing.id}`}
-                  className="mt-3 inline-block text-blue-600 hover:text-blue-800 text-sm font-medium"
+                <button
+                  onClick={() => navigate(`/entreprises/${listing.id}`)}
+                  className="mt-3 inline-block text-blue-600 hover:text-blue-800 text-sm font-medium cursor-pointer bg-transparent border-0 p-0"
                 >
                   Voir les détails →
-                </a>
+                </button>
               </div>
             </Popup>
           </Marker>
