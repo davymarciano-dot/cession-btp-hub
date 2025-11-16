@@ -18,7 +18,7 @@ import TanStackCacheDebugger from "./components/debug/TanStackCacheDebugger";
 import Analytics from "./components/Analytics";
 import CrispWidget from "./components/chat/CrispWidget";
 import ErrorBoundary from "./components/ErrorBoundary";
-import { PWAInstallPrompt } from "./components/PWAInstallPrompt";
+// import { PWAInstallPrompt } from "./components/PWAInstallPrompt";
 
 // Lazy load heavy pages
 const Vendre = lazy(() => import("./pages/Vendre"));
@@ -115,7 +115,7 @@ const App = () => {
       <BrowserRouter>
         <Analytics />
         <CrispWidget />
-        <PWAInstallPrompt />
+        {/* <PWAInstallPrompt /> */}
         <Suspense fallback={<PageLoader />}>
           <ProactiveChat />
           <DarkModeToggle />
