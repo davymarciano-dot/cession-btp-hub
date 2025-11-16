@@ -69,10 +69,10 @@ const CertificationPage = () => {
                 Certification {cert.name}
               </Badge>
               <h1 className="text-5xl md:text-6xl font-bold mb-6">
-                Entreprises {cert.name} à vendre
+                Entreprises {cert.name} à Reprendre
               </h1>
               <p className="text-xl mb-4 opacity-90">
-                {cert.fullName}
+                {cert.count} entreprises {cert.name} à vendre • {cert.fullName}
               </p>
               <p className="text-lg mb-8 opacity-80">
                 {cert.description}
@@ -96,7 +96,7 @@ const CertificationPage = () => {
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Button size="lg" className="bg-accent text-accent-foreground hover:bg-accent/90" asChild>
                   <Link to="/acheter">
-                    Voir les {cert.count} entreprises {cert.name}
+                    Reprendre une entreprise {cert.name}
                   </Link>
                 </Button>
                 <Button size="lg" variant="outline" className="bg-white text-primary hover:bg-white/90" asChild>

@@ -55,11 +55,11 @@ const RegionPage = () => {
               </div>
               
               <h1 className="text-5xl md:text-6xl font-bold mb-6">
-                Entreprises BTP à vendre en {region.name}
+                Entreprises BTP à Reprendre en {region.name}
               </h1>
               
               <p className="text-xl mb-8 opacity-90">
-                {region.description}
+                {region.count} entreprises BTP à vendre • {region.description}
               </p>
               
               <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mb-8">
@@ -80,7 +80,7 @@ const RegionPage = () => {
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Button size="lg" className="bg-accent text-accent-foreground hover:bg-accent/90" asChild>
                   <Link to="/acheter">
-                    Voir les {region.count} entreprises
+                    Reprendre une entreprise en {region.name}
                   </Link>
                 </Button>
                 <Button size="lg" variant="outline" className="bg-white text-primary hover:bg-white/90" asChild>

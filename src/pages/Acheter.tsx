@@ -62,10 +62,10 @@ const Acheter = () => {
           <div className="container mx-auto px-4">
             <div className="max-w-5xl mx-auto">
               <h1 className="text-5xl md:text-6xl font-bold mb-6 text-center">
-                Trouvez l'Entreprise BTP de Vos Rêves
+                Trouvez l'Entreprise BTP à Reprendre
               </h1>
               <p className="text-xl mb-12 text-center text-white/90">
-                2000+ repreneurs actifs • Entreprises vérifiées • Accompagnement complet
+                840 entreprises BTP à vendre • Repreneurs actifs • Accompagnement complet
               </p>
 
               {/* Advanced Search Form */}
