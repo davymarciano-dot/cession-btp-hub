@@ -26,6 +26,7 @@ import {
 } from "lucide-react";
 import SEOHead from "@/components/SEOHead";
 import { SearchableSelect } from "@/components/SearchableSelect";
+import { SearchableRegionSelect } from "@/components/SearchableRegionSelect";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -36,6 +37,7 @@ const Home = () => {
   const [loadingAnnonces, setLoadingAnnonces] = useState(true);
   const [totalAnnonces, setTotalAnnonces] = useState(0);
   const [secteurFilter, setSecteurFilter] = useState<string>("");
+  const [regionFilter, setRegionFilter] = useState<string>("");
 
   // 🔥 RÉCUPÉRATION DU NOMBRE TOTAL D'ANNONCES
   useEffect(() => {
@@ -429,14 +431,12 @@ const Home = () => {
                     className="flex-1"
                   />
                   
-                  <select className="flex-1 px-4 py-3 border border-gray-300 rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#FF6B35] focus:border-transparent">
-                    <option value="">Région</option>
-                    <option value="idf">Île-de-France</option>
-                    <option value="paca">Provence-Alpes-Côte d'Azur</option>
-                    <option value="ara">Auvergne-Rhône-Alpes</option>
-                    <option value="occitanie">Occitanie</option>
-                    <option value="na">Nouvelle-Aquitaine</option>
-                  </select>
+                  <SearchableRegionSelect
+                    value={regionFilter}
+                    onValueChange={setRegionFilter}
+                    placeholder="Toutes les régions"
+                    className="flex-1"
+                  />
                   
                   <Button 
                     onClick={() => navigate('/entreprises')}
