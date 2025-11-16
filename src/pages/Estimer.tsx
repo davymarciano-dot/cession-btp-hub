@@ -10,6 +10,7 @@ import EstimationDialog from "@/components/EstimationDialog";
 import { useToast } from "@/hooks/use-toast";
 import SEOHead from "@/components/SEOHead";
 import SiretAutocomplete from "@/components/SiretAutocomplete";
+import { supabase } from "@/integrations/supabase/client";
 
 // Secteurs BTP les plus courants
 const secteursBTP = [
