@@ -3,10 +3,11 @@ import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
 import confetti from "canvas-confetti";
 import { useToast } from "@/hooks/use-toast";
-import { supabase } from "@/integrations/supabase/client";
+// import { supabase } from "@/integrations/supabase/client";
 import { debounce } from "lodash";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import SiretAutocomplete from "@/components/SiretAutocomplete";
 import {
   ArrowLeft,
   ArrowRight,
@@ -285,6 +286,22 @@ const Vendre = () => {
   useEffect(() => {
     autoSave(formData, currentStep);
   }, [formData, currentStep, autoSave]);
+
+  // Gestion des données SIRET
+  const handleSiretData = (data: any) => {
+    console.log('📋 Données SIRET reçues:', data);
+    
+    // Pré-remplir les champs du formulaire avec les données SIRET
+    if (data.siret) handleInputChange("siret", data.siret);
+    if (data.raisonSociale) handleInputChange("raisonSociale", data.raisonSociale);
+    if (data.formeJuridique) handleInputChange("formeJuridique", data.formeJuridique);
+    if (data.anneeCreation) handleInputChange("anneeCreation", data.anneeCreation);
+    if (data.secteurActivite) handleInputChange("secteurActivite", data.secteurActivite);
+    if (data.ville) handleInputChange("ville", data.ville);
+    if (data.codePostal) handleInputChange("codePostal", data.codePostal);
+    if (data.departement) handleInputChange("departement", data.departement);
+    if (data.nombreSalaries) handleInputChange("nombreSalaries", data.nombreSalaries);
+  };
 
   // Validation d'une étape
   const validateStep = (step: number): boolean => {
@@ -759,17 +776,10 @@ const Vendre = () => {
                         </select>
                       </div>
 
-                      <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-2">SIRET *</label>
-                        <input
-                          type="text"
-                          value={formData.siret}
-                          onChange={(e) => handleInputChange("siret", e.target.value)}
-                          placeholder="14 chiffres"
-                          maxLength={14}
-                          className={`w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-orange-500 focus:border-transparent transition ${
-                            errors.siret ? "border-red-500" : "border-gray-300"
-                          }`}
+                      <div className="w-full">
+                        <SiretAutocomplete 
+                          onDataFetched={handleSiretData}
+                          initialValue={formData.siret}
                         />
                         {errors.siret && (
                           <p className="mt-1 text-sm text-red-600 flex items-center gap-1">
