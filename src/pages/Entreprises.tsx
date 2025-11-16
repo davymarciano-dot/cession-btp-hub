@@ -7,7 +7,7 @@ import { Filter, ChevronLeft, ChevronRight } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import EntrepriseCard from "@/components/EntrepriseCard";
-import ListingsMap from "@/components/ListingsMap";
+import MapViewWrapper from "@/components/MapViewWrapper";
 import { useToast } from "@/hooks/use-toast";
 import { analyticsEvents } from "@/lib/analytics";
 import { CompanyComparator } from "@/components/CompanyComparator";
@@ -325,7 +325,7 @@ const Entreprises = () => {
                       <p className="text-muted-foreground">Chargement de la carte...</p>
                     </div>
                   ) : (
-                    <ListingsMap 
+                    <MapViewWrapper
                       listings={annonces.length > 0 ? annonces : [
                         {
                           id: "exemple-1",
@@ -354,7 +354,15 @@ const Entreprises = () => {
                           ca_n1: 1200000,
                           nombre_salaries: 12
                         }
-                      ]} 
+                      ]}
+                      onError={() => {
+                        setShowMap(false);
+                        toast({
+                          title: "Carte indisponible",
+                          description: "La carte a rencontré un problème. Retour à la vue liste.",
+                          variant: "destructive",
+                        });
+                      }}
                     />
                   )}
                 </div>
