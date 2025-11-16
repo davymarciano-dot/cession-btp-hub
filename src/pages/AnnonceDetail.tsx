@@ -7,6 +7,7 @@ import { useAutoMatching } from "@/hooks/useAutoMatching";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import PhotoGallery from "@/components/PhotoGallery";
+import ContactSellerDialog from "@/components/ContactSellerDialog";
 import { ListingAnalytics } from "@/components/analytics/ListingAnalytics";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -555,32 +556,32 @@ const AnnonceDetail = () => {
             {/* Colonne latérale - Contact */}
             <div className="lg:col-span-1">
               <Card className="p-6 sticky top-24">
-                <h2 className="text-xl font-bold mb-4">Contacter le vendeur</h2>
+                <h2 className="text-xl font-bold mb-4">Informations de contact</h2>
                 
                 <div className="space-y-4 mb-6">
-                  <div className="flex items-center gap-3 text-sm">
-                    <Phone className="w-4 h-4 text-muted-foreground" />
-                    <span className="blur-sm select-none">XX XX XX XX XX</span>
+                  <div className="bg-blue-50 p-4 rounded-lg">
+                    <p className="text-sm text-blue-900 font-semibold mb-2">
+                      🔒 Système de contact sécurisé
+                    </p>
+                    <p className="text-xs text-blue-700">
+                      Pour protéger la confidentialité des vendeurs et des acheteurs, toutes les mises en relation passent par CessionBTP.
+                    </p>
                   </div>
-                  <div className="flex items-center gap-3 text-sm">
-                    <Mail className="w-4 h-4 text-muted-foreground" />
-                    <span className="blur-sm select-none">contact@exemple.fr</span>
+                  
+                  <div className="flex items-center gap-3 text-sm text-muted-foreground">
+                    <Phone className="w-4 h-4" />
+                    <span>Coordonnées transmises après accord</span>
+                  </div>
+                  <div className="flex items-center gap-3 text-sm text-muted-foreground">
+                    <Mail className="w-4 h-4" />
+                    <span>Contact via plateforme sécurisée</span>
                   </div>
                 </div>
 
-                <p className="text-sm text-muted-foreground mb-4">
-                  Les coordonnées complètes sont dévoilées après connexion
-                </p>
-
-                <Button 
-                  onClick={handleContact}
-                  className="w-full bg-secondary hover:bg-secondary/90"
-                  size="lg"
-                  disabled={isContacting}
-                >
-                  <MessageCircle className="w-4 h-4 mr-2" />
-                  {isContacting ? "Connexion..." : "Envoyer un message"}
-                </Button>
+                <ContactSellerDialog 
+                  annonceId={annonce.id}
+                  secteurActivite={annonce.secteur_activite}
+                />
 
                 <div className="mt-6 p-4 bg-muted rounded-lg">
                   <h3 className="font-semibold mb-2 text-sm">📋 Informations</h3>

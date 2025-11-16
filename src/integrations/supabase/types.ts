@@ -928,6 +928,57 @@ export type Database = {
         }
         Relationships: []
       }
+      demandes_contact: {
+        Row: {
+          annonce_id: string
+          created_at: string
+          email_acheteur: string
+          id: string
+          message: string
+          nom_acheteur: string
+          statut: string
+          telephone_acheteur: string
+          updated_at: string
+        }
+        Insert: {
+          annonce_id: string
+          created_at?: string
+          email_acheteur: string
+          id?: string
+          message: string
+          nom_acheteur: string
+          statut?: string
+          telephone_acheteur: string
+          updated_at?: string
+        }
+        Update: {
+          annonce_id?: string
+          created_at?: string
+          email_acheteur?: string
+          id?: string
+          message?: string
+          nom_acheteur?: string
+          statut?: string
+          telephone_acheteur?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "demandes_contact_annonce_id_fkey"
+            columns: ["annonce_id"]
+            isOneToOne: false
+            referencedRelation: "annonces"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "demandes_contact_annonce_id_fkey"
+            columns: ["annonce_id"]
+            isOneToOne: false
+            referencedRelation: "annonces_public"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       digital_products: {
         Row: {
           created_at: string
