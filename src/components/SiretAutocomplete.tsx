@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { Check, AlertCircle, Loader, Search } from 'lucide-react';
-import { supabase } from '@/integrations/supabase/client';
+// import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
 import { Input } from './ui/input';
 import { Label } from './ui/label';
@@ -78,7 +78,7 @@ const SiretAutocomplete = ({ onDataFetched, initialValue = '' }: SiretAutocomple
     return value;
   };
 
-  // Rechercher des entreprises via l'API Pappers
+  // Rechercher des entreprises via l'API Pappers (temporairement désactivé)
   const searchCompanies = async (query: string) => {
     if (query.length < 3) {
       setSearchResults([]);
@@ -88,16 +88,10 @@ const SiretAutocomplete = ({ onDataFetched, initialValue = '' }: SiretAutocomple
 
     setIsSearching(true);
     try {
-      const { data, error: searchError } = await supabase.functions.invoke('search-siret', {
-        body: { query }
-      });
-
-      if (searchError) throw searchError;
-
-      if (data && data.results) {
-        setSearchResults(data.results);
-        setShowDropdown(data.results.length > 0);
-      }
+      // Temporairement désactivé - pas d'appel API
+      console.log('🔍 Recherche SIRET désactivée temporairement:', query);
+      setSearchResults([]);
+      setShowDropdown(false);
     } catch (err: any) {
       console.error('Search error:', err);
       setSearchResults([]);
@@ -134,46 +128,29 @@ const SiretAutocomplete = ({ onDataFetched, initialValue = '' }: SiretAutocomple
     });
   };
 
-  // Récupérer les données de l'entreprise via l'edge function (fallback)
+  // Récupérer les données de l'entreprise (temporairement désactivé)
   const fetchCompanyData = async (siretNumber: string) => {
     setIsLoading(true);
     setError('');
     
     try {
-      const { data, error: fetchError } = await supabase.functions.invoke('fetch-siret-data', {
-        body: { siret: siretNumber.replace(/\s/g, '') }
+      // Temporairement désactivé - valider le SIRET manuellement
+      console.log('📋 Récupération données SIRET désactivée temporairement:', siretNumber);
+      
+      setError('Recherche SIRET temporairement indisponible. Veuillez remplir les champs manuellement.');
+      setIsValid(true);
+      setCompanyData(null);
+      
+      onDataFetched({
+        siret: siretNumber.replace(/\s/g, ''),
       });
-
-      if (fetchError) {
-        throw new Error(fetchError.message || 'SIRET non trouvé');
-      }
-
-      if (data && data.raisonSociale) {
-        setCompanyData(data);
-        
-        onDataFetched({
-          siret: siretNumber.replace(/\s/g, ''),
-          raisonSociale: data.raisonSociale || '',
-          formeJuridique: data.formeJuridique || '',
-          anneeCreation: data.anneeCreation || '',
-          secteurActivite: data.secteurActivite || '',
-          ville: data.ville || '',
-          codePostal: data.codePostal || '',
-          departement: data.departement || '',
-          adresse: data.adresse || '',
-          nombreSalaries: data.nombreSalaries || ''
-        });
-
-        setIsValid(true);
-        toast({
-          title: "Entreprise trouvée !",
-          description: "Les informations ont été récupérées avec succès.",
-        });
-      } else {
-        throw new Error('Données incomplètes');
-      }
+      
+      toast({
+        title: "SIRET validé",
+        description: "Veuillez remplir les autres champs manuellement.",
+      });
     } catch (err: any) {
-      console.log('SIRET not found, allowing manual entry:', err);
+      console.log('SIRET error:', err);
       setError('SIRET non trouvé. Vous pouvez continuer en remplissant les champs manuellement.');
       setIsValid(true);
       setCompanyData(null);
