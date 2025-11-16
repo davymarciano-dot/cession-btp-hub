@@ -61,9 +61,9 @@ const Tarifs = () => {
             {/* CONTACT - POPULAIRE */}
             <div className="h-full flex flex-col border-2 border-slate-200 hover:border-blue-500 hover:shadow-xl transition-all rounded-2xl p-8 bg-white relative">
 
-              <h3 className="text-2xl font-bold text-slate-700 mb-2">Contact</h3>
+              <h3 className="text-2xl font-bold text-green-600 mb-2">Contact</h3>
               <div className="mb-6">
-                <span className="text-5xl font-black text-blue-600">49€</span>
+                <span className="text-5xl font-black text-green-600">49€</span>
                 <span className="text-slate-500"> /5 contacts</span>
               </div>
               <p className="text-sm text-slate-500 mb-6">
