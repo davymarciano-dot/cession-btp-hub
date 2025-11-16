@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { blogArticles, BlogArticle } from '@/data/blogArticles';
+import { blogPostsFullContent } from '@/data/blogPostsContent';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -61,9 +62,20 @@ const BlogIndex = () => {
 };
 
 const ArticleCard = ({ article }: { article: BlogArticle }) => {
+  const fullContent = blogPostsFullContent[article.slug];
+  
   return (
     <Link to={`/blog/${article.slug}`}>
       <Card className="h-full hover:shadow-lg transition-shadow overflow-hidden">
+        {fullContent?.imageUrl && (
+          <div className="w-full h-48 overflow-hidden">
+            <img 
+              src={fullContent.imageUrl} 
+              alt={article.title}
+              className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+            />
+          </div>
+        )}
         <div className="p-6">
           <div className="flex items-center gap-2 mb-3">
             <Badge variant="secondary">{article.category}</Badge>
