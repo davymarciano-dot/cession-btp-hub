@@ -11,13 +11,17 @@ const Header = () => {
       <div className="container mx-auto px-6 py-2">
         <div className="flex items-center justify-between gap-8">
           {/* LOGO GÉANT - Prend toute la hauteur du menu */}
-          <Link to="/" className="flex-shrink-0 hover:scale-105 transition-transform duration-300">
-            <img
-              src="/images/logo-cessionbtp-hd.png"
-              alt="CessionBTP"
-              className="h-20"
-              style={{ width: "auto", maxHeight: "80px" }}
-            />
+          <Link to="/" className="flex items-center gap-1 hover:scale-105 transition-transform duration-300">
+            <div className="flex items-center">
+              <svg width="50" height="50" viewBox="0 0 100 100" className="mr-2">
+                <path d="M20 20 L50 50 L20 80 L10 80 L40 50 L10 20 Z" fill="#1E90FF"/>
+                <path d="M50 20 L80 50 L50 80 L40 80 L70 50 L40 20 Z" fill="#FF8C00"/>
+              </svg>
+              <span className="text-3xl font-black tracking-tight">
+                <span className="text-orange-500">Cession</span>
+                <span className="text-blue-600">BTP</span>
+              </span>
+            </div>
           </Link>
 
           {/* NAVIGATION DESKTOP - Alignée à droite */}
