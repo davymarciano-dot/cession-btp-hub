@@ -498,44 +498,58 @@ const Home = () => {
             {opportunities.map((opp, index) => (
               <div
                 key={index}
-                className={`rounded-2xl p-6 shadow-xl hover:shadow-2xl transition-all duration-300 cursor-pointer transform hover:scale-105 hover:-translate-y-2 ${
+                onClick={() => navigate("/entreprises")}
+                className={`rounded-2xl p-6 shadow-xl hover:shadow-2xl transition-all duration-300 cursor-pointer transform hover:scale-105 hover:-translate-y-2 border-4 border-transparent hover:border-white ${
                   opp.color === "orange"
                     ? "bg-gradient-to-br from-orange-500 to-orange-600"
                     : "bg-gradient-to-br from-blue-500 to-blue-600"
                 } text-white relative overflow-hidden group`}
               >
-                {/* Badges */}
-                <div className="flex items-center justify-between mb-4">
-                  <div className="bg-white/20 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-bold">
-                    {opp.badge}
+                {/* Badge "Voir l'annonce" au hover */}
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-all duration-300 z-20">
+                  <div className="bg-white text-blue-600 px-6 py-3 rounded-full font-bold shadow-2xl flex items-center gap-2 transform scale-90 group-hover:scale-100 transition-transform">
+                    <ArrowRight className="w-5 h-5" />
+                    Voir l'annonce
                   </div>
-                  <div className="bg-orange-500 px-3 py-1 rounded-full text-xs font-bold">{opp.status}</div>
                 </div>
 
-                {/* Titre */}
-                <h3 className="text-2xl font-bold mb-4">{opp.title}</h3>
+                {/* Effet de brillance au hover */}
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
 
-                {/* Infos */}
-                <div className="space-y-2 mb-6">
-                  <div className="flex items-center gap-2 text-sm">
-                    <Building2 className="w-4 h-4" />
-                    <span>{opp.location}</span>
+                <div className="relative z-10 group-hover:opacity-50 transition-opacity duration-300">
+                  {/* Badges */}
+                  <div className="flex items-center justify-between mb-4">
+                    <div className="bg-white/20 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-bold">
+                      {opp.badge}
+                    </div>
+                    <div className="bg-orange-500 px-3 py-1 rounded-full text-xs font-bold">{opp.status}</div>
                   </div>
-                  <div className="text-sm">Création : {opp.year}</div>
-                  <div className="text-sm">CA : {opp.ca}</div>
-                  <div className="text-sm">Effectif : {opp.employees}</div>
-                </div>
 
-                {/* Secteur badge */}
-                <div className="inline-block bg-white/20 backdrop-blur-sm px-4 py-2 rounded-lg mb-4">
-                  <span className="text-sm font-medium capitalize">
-                    {opp.color === "orange" ? "Maçonnerie" : "Plomberie"}
-                  </span>
-                </div>
+                  {/* Titre */}
+                  <h3 className="text-2xl font-bold mb-4">{opp.title}</h3>
 
-                {/* Prix */}
-                <div className="pt-4 border-t border-white/20">
-                  <div className="text-4xl font-bold text-green-300">{opp.price}</div>
+                  {/* Infos */}
+                  <div className="space-y-2 mb-6">
+                    <div className="flex items-center gap-2 text-sm">
+                      <Building2 className="w-4 h-4" />
+                      <span>{opp.location}</span>
+                    </div>
+                    <div className="text-sm">Création : {opp.year}</div>
+                    <div className="text-sm">CA : {opp.ca}</div>
+                    <div className="text-sm">Effectif : {opp.employees}</div>
+                  </div>
+
+                  {/* Secteur badge */}
+                  <div className="inline-block bg-white/20 backdrop-blur-sm px-4 py-2 rounded-lg mb-4">
+                    <span className="text-sm font-medium capitalize">
+                      {opp.color === "orange" ? "Maçonnerie" : "Plomberie"}
+                    </span>
+                  </div>
+
+                  {/* Prix */}
+                  <div className="pt-4 border-t border-white/20">
+                    <div className="text-4xl font-bold text-green-300">{opp.price}</div>
+                  </div>
                 </div>
               </div>
             ))}
