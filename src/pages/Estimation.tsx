@@ -12,7 +12,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { BTPMetiersSelect } from "@/data/btp-metiers";
 import { useToast } from "@/hooks/use-toast";
-import { supabase } from "@/integrations/supabase/client";
+// import { supabase } from "@/integrations/supabase/client";
 import { analyticsEvents } from "@/lib/analytics";
 import SiretAutocomplete from "@/components/SiretAutocomplete";
 
@@ -134,22 +134,61 @@ const Estimation = () => {
     try {
       toast({
         title: "⏳ Analyse en cours...",
-        description: "Notre IA analyse votre entreprise (cela peut prendre 10-20 secondes)",
+        description: "Calcul de l'estimation...",
       });
 
-      const { data, error } = await supabase.functions.invoke('generate-estimation', {
-        body: formData
-      });
+      // Calcul local de l'estimation
+      const ca = parseFloat(formData.caN1);
+      const secteur = formData.secteur;
+      
+      // Multiples par secteur
+      const multiplesParSecteur: { [key: string]: { min: number; max: number } } = {
+        "electricien": { min: 0.55, max: 1.15 },
+        "plombier": { min: 0.45, max: 0.95 },
+        "chauffagiste": { min: 0.45, max: 0.95 },
+        "climatisation": { min: 0.50, max: 1.00 },
+        "macon": { min: 0.35, max: 0.75 },
+        "menuisier": { min: 0.35, max: 0.85 },
+        "couvreur": { min: 0.45, max: 0.95 },
+        "peintre": { min: 0.25, max: 0.65 },
+        "isolation": { min: 0.40, max: 0.90 },
+        "panneaux-solaires": { min: 0.60, max: 1.20 },
+        "pompe-chaleur": { min: 0.50, max: 1.10 },
+        "default": { min: 0.35, max: 0.85 }
+      };
 
-      if (error) {
-        throw error;
-      }
+      const multipleBase = multiplesParSecteur[secteur] || multiplesParSecteur["default"];
+      
+      let bonusMultiple = 0;
+      if (ca > 2000000) bonusMultiple += 0.15;
+      else if (ca > 1000000) bonusMultiple += 0.12;
+      else if (ca > 500000) bonusMultiple += 0.08;
+      else if (ca > 300000) bonusMultiple += 0.05;
 
-      if (data.error) {
-        throw new Error(data.error);
-      }
+      const multipleMin = Math.max(0.2, multipleBase.min + bonusMultiple * 0.3);
+      const multipleMax = Math.min(1.5, multipleBase.max + bonusMultiple);
+      const multipleMoyen = (multipleMin + multipleMax) / 2;
 
-      const { estimation: aiEstimation } = data;
+      const estimationBasse = Math.round(ca * multipleMin);
+      const estimationHaute = Math.round(ca * multipleMax);
+      const estimationMoyenne = Math.round(ca * multipleMoyen);
+
+      const aiEstimation = {
+        estimationBasse,
+        estimationHaute,
+        estimationMoyenne,
+        analyseDetaillee: `Votre entreprise dans le secteur ${secteur} présente un profil intéressant pour une cession.`,
+        pointsForts: [
+          "Secteur d'activité dynamique",
+          "Chiffre d'affaires stable",
+          "Potentiel de développement"
+        ],
+        recommandations: [
+          "Mettre en valeur vos certifications",
+          "Documenter votre portefeuille client",
+          "Préparer vos documents financiers"
+        ]
+      };
       
       setEstimation({ 
         min: aiEstimation.estimationBasse, 
@@ -162,7 +201,7 @@ const Estimation = () => {
       setShowResults(true);
       
       toast({
-        title: "✅ Estimation IA calculée !",
+        title: "✅ Estimation calculée !",
         description: `Valeur estimée : ${aiEstimation.estimationMoyenne.toLocaleString('fr-FR')} €`,
       });
     } catch (error: any) {

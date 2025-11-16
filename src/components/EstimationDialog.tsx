@@ -9,7 +9,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { TrendingUp, CheckCircle, ArrowRight } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
-import { supabase } from "@/integrations/supabase/client";
+// import { supabase } from "@/integrations/supabase/client";
 
 interface EstimationDialogProps {
   open: boolean;
@@ -112,28 +112,30 @@ const EstimationDialog = ({ open, onOpenChange, estimation, isLoading, formData 
     setIsSaving(true);
 
     try {
-      const { error } = await supabase
-        .from('leads_estimation')
-        .insert([
-          {
-            nom: "",
-            email: email.trim().toLowerCase(),
-            telephone: "",
-            siret: formData?.siret || null,
-            raison_sociale: formData?.raisonSociale || null,
-            ca: estimationRealiste?.ca,
-            secteur: estimationRealiste?.secteur,
-            departement: formData?.departement,
-            estimation_min: estimationRealiste?.valeurMin,
-            estimation_max: estimationRealiste?.valeurMax,
-            estimation_moyenne: estimationRealiste?.valeurMoyenne,
-            multiple_ca: parseFloat(estimationRealiste?.multipleMoyen || "0")
-          }
-        ]);
+      // Créer l'objet lead
+      const leadData = {
+        nom: "",
+        email: email.trim().toLowerCase(),
+        telephone: "",
+        siret: formData?.siret || null,
+        raison_sociale: formData?.raisonSociale || null,
+        ca: estimationRealiste?.ca,
+        secteur: estimationRealiste?.secteur,
+        departement: formData?.departement,
+        estimation_min: estimationRealiste?.valeurMin,
+        estimation_max: estimationRealiste?.valeurMax,
+        estimation_moyenne: estimationRealiste?.valeurMoyenne,
+        multiple_ca: parseFloat(estimationRealiste?.multipleMoyen || "0"),
+        date: new Date().toISOString()
+      };
 
-      if (error) {
-        console.error("Erreur lead:", error);
-      }
+      // Log dans la console
+      console.log('📧 LEAD ENREGISTRÉ:', leadData);
+
+      // Stocker dans localStorage
+      const leads = JSON.parse(localStorage.getItem('leads_estimation') || '[]');
+      leads.push(leadData);
+      localStorage.setItem('leads_estimation', JSON.stringify(leads));
 
       setStep(2);
       

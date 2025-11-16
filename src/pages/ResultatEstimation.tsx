@@ -5,7 +5,7 @@ import { Card } from "@/components/ui/card";
 import { Check, TrendingUp, AlertCircle, Download, Share2 } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import { supabase } from "@/integrations/supabase/client";
+// import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 
 interface EstimationData {
@@ -33,9 +33,32 @@ const ResultatEstimation = () => {
   useEffect(() => {
     const fetchEstimation = async () => {
       if (!estimationId) {
+        // Essayer de récupérer la dernière estimation
+        const lastId = localStorage.getItem('last_estimation_id');
+        if (lastId) {
+          const stored = localStorage.getItem(`estimation_${lastId}`);
+          if (stored) {
+            const data = JSON.parse(stored);
+            setEstimation({
+              id: data.id,
+              estimationBasse: data.min,
+              estimationMoyenne: data.moyenne,
+              estimationHaute: data.max,
+              multipleValorisation: ((data.moyenne || 0) / (data.formData?.caN1 || 1)),
+              analyseDetaillee: data.analyse || "",
+              pointsForts: data.pointsForts || [],
+              recommandations: data.recommandations || [],
+              secteur: data.formData?.secteur || "",
+              ca_n1: parseFloat(data.formData?.caN1 || "0"),
+            });
+            setIsLoading(false);
+            return;
+          }
+        }
+        
         toast({
           title: "Erreur",
-          description: "ID d'estimation manquant",
+          description: "Aucune estimation trouvée",
           variant: "destructive",
         });
         navigate("/estimation");
@@ -44,28 +67,25 @@ const ResultatEstimation = () => {
 
       setIsLoading(true);
       try {
-        const { data, error } = await supabase
-          .from("estimations")
-          .select("*")
-          .eq("id", estimationId)
-          .single();
-
-        if (error) throw error;
-
-        if (data) {
-          setEstimation({
-            id: data.id,
-            estimationBasse: data.estimation_basse,
-            estimationMoyenne: data.estimation_moyenne,
-            estimationHaute: data.estimation_haute,
-            multipleValorisation: data.multiple_valorisation,
-            analyseDetaillee: data.analyse_detaillee,
-            pointsForts: data.points_forts as string[],
-            recommandations: data.recommandations as string[],
-            secteur: data.secteur,
-            ca_n1: data.ca_n1,
-          });
+        const stored = localStorage.getItem(`estimation_${estimationId}`);
+        
+        if (!stored) {
+          throw new Error("Estimation not found in localStorage");
         }
+
+        const data = JSON.parse(stored);
+        setEstimation({
+          id: data.id,
+          estimationBasse: data.min,
+          estimationMoyenne: data.moyenne,
+          estimationHaute: data.max,
+          multipleValorisation: ((data.moyenne || 0) / (data.formData?.caN1 || 1)),
+          analyseDetaillee: data.analyse || "",
+          pointsForts: data.pointsForts || [],
+          recommandations: data.recommandations || [],
+          secteur: data.formData?.secteur || "",
+          ca_n1: parseFloat(data.formData?.caN1 || "0"),
+        });
       } catch (error: any) {
         console.error("Error fetching estimation:", error);
         toast({
