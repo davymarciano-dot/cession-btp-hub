@@ -31,21 +31,26 @@ const Tarifs = () => {
             <div className="text-center mb-12">
               <div className="text-6xl mb-4">🔍</div>
               <h2 className="text-3xl font-bold mb-4">Abonnements acheteurs</h2>
-              <p className="text-xl text-muted-foreground">
+              <p className="text-xl text-muted-foreground mb-2">
                 Accédez aux meilleures opportunités d'acquisition BTP
               </p>
+              <div className="inline-flex items-center gap-2 bg-green-50 text-green-700 px-4 py-2 rounded-full text-sm font-semibold">
+                ✅ Consultation et demandes de contact 100% GRATUITES
+              </div>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
               <PricingCard
                 title="Gratuit"
                 price="0€"
-                description="Consultation - Cible : 50 000€ - CA : 0"
+                description="Consultation illimitée - Demandes de contact gratuites"
                 features={[
-                  "Consultation des annonces",
-                  "Recherche basique",
-                  "Interface acheteur",
-                  "Inscription gratuite"
+                  "✅ Consultation ILLIMITÉE des annonces",
+                  "✅ Demandes de contact GRATUITES",
+                  "✅ Recherche avancée",
+                  "✅ Alertes email",
+                  "❌ Dossier complet entreprise",
+                  "❌ Coordonnées directes vendeur"
                 ]}
                 buttonText="S'inscrire gratuitement"
                 userType="acheteur"
@@ -55,21 +60,22 @@ const Tarifs = () => {
               />
               
               <PricingCard
-                title="Contact"
+                title="Dossier"
                 price="49€"
-                period="/5 contacts"
-                description="Messages directs - Cible : 10 000€ - CA : 2,5M"
+                period="/dossier"
+                description="Accès complet à UN dossier d'entreprise"
                 features={[
-                  "5 contacts directs",
-                  "Messages dirigés vers vendeurs",
-                  "Coordonnées complètes",
-                  "Historique des échanges",
-                  "Accès prioritaire"
+                  "Dossier complet 1 entreprise",
+                  "Bilan financier détaillé",
+                  "Coordonnées vendeur",
+                  "Documents juridiques",
+                  "Accompagnement par email",
+                  "Valable 30 jours"
                 ]}
-                buttonText="Acheter des contacts"
+                buttonText="Acheter un dossier"
                 userType="acheteur"
-                isHovered={hoveredBuyerCard === "Contact"}
-                onHover={(hovered) => setHoveredBuyerCard(hovered ? "Contact" : null)}
+                isHovered={hoveredBuyerCard === "Dossier"}
+                onHover={(hovered) => setHoveredBuyerCard(hovered ? "Dossier" : null)}
                 anyCardHovered={hoveredBuyerCard !== null}
                 isPopular
               />
@@ -78,13 +84,14 @@ const Tarifs = () => {
                 title="Pro"
                 price="99€"
                 period="/mois"
-                description="Illimité + alertes - Cible : 5 000€ - CA : 6M"
+                description="Accès illimité aux dossiers complets"
                 features={[
-                  "Contacts ILLIMITÉS",
-                  "Alertes personnalisées",
-                  "Coordonnées complètes",
+                  "Dossiers complets ILLIMITÉS",
+                  "Coordonnées de TOUS les vendeurs",
+                  "Alertes en temps réel",
                   "Badge 'Acheteur Vérifié'",
-                  "Support prioritaire"
+                  "Support prioritaire",
+                  "Espace dédié"
                 ]}
                 buttonText="Choisir Pro"
                 variant="primary"
@@ -130,24 +137,29 @@ const Tarifs = () => {
             <div className="text-center mb-12">
               <div className="text-6xl mb-4">🏗️</div>
               <h2 className="text-3xl font-bold mb-4">Abonnements vendeurs</h2>
-              <p className="text-xl text-muted-foreground">
-                Choisissez la formule adaptée à vos besoins de transmission
+              <p className="text-xl text-muted-foreground mb-2">
+                Vendez votre entreprise en toute sécurité
               </p>
+              <div className="inline-flex items-center gap-2 bg-green-50 text-green-700 px-4 py-2 rounded-full text-sm font-semibold">
+                ✅ Publication GRATUITE • Commission 2% uniquement à la vente
+              </div>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
               <PricingCard
                 title="Découverte"
                 price="Gratuit"
-                period="30j"
-                description="Évaluation + 10 vues - Cible : 10 000€ - CA : 0"
+                period="Publication gratuite"
+                description="Publiez votre annonce sans frais initiaux"
                 features={[
-                  "Évaluation incluse",
-                  "10 vues d'annonce",
-                  "Interface spécialisée BTP",
-                  "Expert en soutien métier"
+                  "✅ Publication GRATUITE",
+                  "✅ Demandes de contact illimitées",
+                  "✅ Anonymat garanti",
+                  "✅ Mise en relation sécurisée",
+                  "❌ Pas de mise en avant",
+                  "💰 Commission 2% uniquement à la vente"
                 ]}
-                buttonText="Commencer gratuitement"
+                buttonText="Publier gratuitement"
                 userType="vendeur"
                 isHovered={hoveredSellerCard === "Découverte"}
                 onHover={(hovered) => setHoveredSellerCard(hovered ? "Découverte" : null)}
@@ -222,35 +234,94 @@ const Tarifs = () => {
         </section>
 
         {/* Success Fee Section */}
-        <section className="py-20 bg-slate-50">
+        <section className="py-20 bg-gradient-to-br from-blue-50 to-indigo-50">
           <div className="container mx-auto px-4">
-            <div className="max-w-4xl mx-auto text-center">
-              <div className="text-6xl mb-6">💎</div>
-              <h2 className="text-3xl font-bold mb-4">Success Fee 2%</h2>
-              <p className="text-xl text-muted-foreground mb-8">
-                Nous ne gagnons que si vous gagnez. Nos intérêts sont parfaitement alignés avec les vôtres.
-              </p>
-              <div className="bg-white p-8 rounded-xl shadow-lg">
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-left">
+            <div className="max-w-5xl mx-auto">
+              <div className="text-center mb-12">
+                <div className="text-6xl mb-6">💎</div>
+                <h2 className="text-4xl font-bold mb-4">Commission Success Fee : 2%</h2>
+                <p className="text-xl text-muted-foreground">
+                  Nous gagnons uniquement quand vous gagnez. Vos intérêts sont nos intérêts.
+                </p>
+              </div>
+              
+              <div className="grid md:grid-cols-2 gap-6 mb-8">
+                <div className="bg-white p-8 rounded-2xl shadow-lg">
+                  <h3 className="text-2xl font-bold mb-4 text-primary">👨‍💼 Pour les vendeurs</h3>
+                  <ul className="space-y-3">
+                    <li className="flex items-start gap-3">
+                      <span className="text-2xl">✅</span>
+                      <div>
+                        <p className="font-semibold">Publication 100% gratuite</p>
+                        <p className="text-sm text-muted-foreground">Aucun frais initial, publiez sans risque</p>
+                      </div>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <span className="text-2xl">✅</span>
+                      <div>
+                        <p className="font-semibold">Commission uniquement à la vente</p>
+                        <p className="text-sm text-muted-foreground">2% du prix de vente final, payable à la signature</p>
+                      </div>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <span className="text-2xl">✅</span>
+                      <div>
+                        <p className="font-semibold">Pas de vente = 0€ à payer</p>
+                        <p className="text-sm text-muted-foreground">Aucun engagement, aucun risque financier</p>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+                
+                <div className="bg-white p-8 rounded-2xl shadow-lg">
+                  <h3 className="text-2xl font-bold mb-4 text-primary">🔍 Pour les acheteurs</h3>
+                  <ul className="space-y-3">
+                    <li className="flex items-start gap-3">
+                      <span className="text-2xl">✅</span>
+                      <div>
+                        <p className="font-semibold">Consultation gratuite illimitée</p>
+                        <p className="text-sm text-muted-foreground">Parcourez toutes les annonces sans frais</p>
+                      </div>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <span className="text-2xl">✅</span>
+                      <div>
+                        <p className="font-semibold">Demandes de contact gratuites</p>
+                        <p className="text-sm text-muted-foreground">Contactez autant de vendeurs que vous voulez</p>
+                      </div>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <span className="text-2xl">💰</span>
+                      <div>
+                        <p className="font-semibold">Dossiers complets payants</p>
+                        <p className="text-sm text-muted-foreground">49€/dossier ou 99€/mois pour accès illimité</p>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              
+              <div className="bg-gradient-to-r from-amber-50 to-orange-50 p-8 rounded-2xl border-2 border-amber-200">
+                <h4 className="text-xl font-bold mb-4 flex items-center gap-2">
+                  <span>🎯</span>
+                  Exemple concret de commission
+                </h4>
+                <div className="grid md:grid-cols-3 gap-6 text-center">
                   <div>
-                    <h3 className="font-bold text-lg mb-2">💰 Commission unique</h3>
-                    <p className="text-muted-foreground">
-                      Seulement 2% du prix de vente, payable uniquement lors de la signature
-                    </p>
+                    <p className="text-3xl font-bold text-primary mb-2">250 000€</p>
+                    <p className="text-sm text-muted-foreground">Prix de vente</p>
+                  </div>
+                  <div className="flex items-center justify-center">
+                    <span className="text-2xl">→</span>
                   </div>
                   <div>
-                    <h3 className="font-bold text-lg mb-2">🎯 Intérêts alignés</h3>
-                    <p className="text-muted-foreground">
-                      Plus votre entreprise se vend cher, plus nous sommes satisfaits
-                    </p>
-                  </div>
-                  <div>
-                    <h3 className="font-bold text-lg mb-2">✅ Sans risque</h3>
-                    <p className="text-muted-foreground">
-                      Pas de vente = pas de commission. Simple et transparent
-                    </p>
+                    <p className="text-3xl font-bold text-orange-600 mb-2">5 000€</p>
+                    <p className="text-sm text-muted-foreground">Commission CessionBTP (2%)</p>
                   </div>
                 </div>
+                <p className="text-center mt-6 text-sm text-muted-foreground">
+                  💡 Plus votre entreprise se vend cher, plus vous êtes gagnant. Nos intérêts sont parfaitement alignés !
+                </p>
               </div>
             </div>
           </div>
