@@ -3735,5 +3735,439 @@ Mensualité : 4 200€ sur 10 ans</pre>
         "@id": "https://cessionbtp.fr/blog/marche-cession-btp-2026-chiffres"
       }
     }
+  },
+
+  'erreurs-fatales-vente-entreprise-btp': {
+    content: `
+      <div class="prose prose-lg max-w-none">
+        <div class="bg-gradient-to-r from-red-50 to-orange-50 dark:from-red-900/20 dark:to-orange-900/20 p-8 rounded-xl mb-12 border-l-4 border-red-500">
+          <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-6">Introduction : Les Pièges qui Coûtent des Dizaines de Milliers d'Euros</h2>
+          
+          <div class="bg-white dark:bg-gray-800 p-6 rounded-lg mb-6 shadow-lg">
+            <h3 class="text-xl font-bold text-red-600 dark:text-red-400 mb-4">L'histoire de Jean, maçon depuis 32 ans</h3>
+            <p class="mb-4 text-gray-700 dark:text-gray-300">Jean, 64 ans, décide de vendre son entreprise de maçonnerie (CA 450 000€). Il estime son entreprise à 350 000€ et trouve rapidement un acheteur à 320 000€. Content, il signe vite.</p>
+            
+            <div class="bg-red-50 dark:bg-red-900/30 p-5 rounded-lg mb-4 border-l-4 border-red-500">
+              <p class="font-bold text-red-900 dark:text-red-200 mb-3 text-lg">6 mois après la signature :</p>
+              <ul class="space-y-2 text-red-800 dark:text-red-300">
+                <li class="flex items-start"><span class="text-red-600 mr-2 mt-1">•</span><span>Découverte : Redressement Urssaf de 38 000€ (travail dissimulé)</span></li>
+                <li class="flex items-start"><span class="text-red-600 mr-2 mt-1">•</span><span>Un ancien salarié gagne son procès prud'homal : 42 000€ de condamnation</span></li>
+                <li class="flex items-start"><span class="text-red-600 mr-2 mt-1">•</span><span>Le client principal (45% du CA) annule tous ses contrats</span></li>
+                <li class="flex items-start"><span class="text-red-600 mr-2 mt-1">•</span><span>RGE non renouvelé : Suspension certification</span></li>
+              </ul>
+            </div>
+
+            <div class="bg-gray-100 dark:bg-gray-700 p-5 rounded-lg border-2 border-red-500">
+              <p class="font-bold mb-3 text-gray-900 dark:text-white">Résultat : L'acheteur actionne la garantie d'actif/passif. Jean doit rembourser 95 000€ sur les 320 000€ reçus.</p>
+              <div class="grid md:grid-cols-2 gap-4">
+                <div>
+                  <p class="text-sm text-gray-600 dark:text-gray-400">Net encaissé final</p>
+                  <p class="text-2xl font-bold text-red-600 dark:text-red-400">225 000€</p>
+                </div>
+                <div>
+                  <p class="text-sm text-gray-600 dark:text-gray-400">Perte totale</p>
+                  <p class="text-2xl font-bold text-red-600 dark:text-red-400">95 000€ (30%)</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="grid md:grid-cols-3 gap-6 mb-6">
+            <div class="bg-white dark:bg-gray-800 p-6 rounded-lg text-center shadow-md hover:shadow-xl transition-shadow">
+              <div class="text-4xl font-bold text-red-600 dark:text-red-400 mb-2">34%</div>
+              <div class="text-sm text-gray-600 dark:text-gray-400">des ventes BTP se passent mal</div>
+            </div>
+            <div class="bg-white dark:bg-gray-800 p-6 rounded-lg text-center shadow-md hover:shadow-xl transition-shadow">
+              <div class="text-4xl font-bold text-red-600 dark:text-red-400 mb-2">68 000€</div>
+              <div class="text-sm text-gray-600 dark:text-gray-400">Perte moyenne vendeur</div>
+            </div>
+            <div class="bg-white dark:bg-gray-800 p-6 rounded-lg text-center shadow-md hover:shadow-xl transition-shadow">
+              <div class="text-4xl font-bold text-red-600 dark:text-red-400 mb-2">18%</div>
+              <div class="text-sm text-gray-600 dark:text-gray-400">des ventes annulées</div>
+            </div>
+          </div>
+
+          <p class="text-xl font-semibold text-center text-gray-900 dark:text-white bg-yellow-100 dark:bg-yellow-900/30 p-4 rounded-lg">
+            ✅ Ces erreurs sont évitables à 100%. Découvrez les 10 erreurs les plus coûteuses et comment les esquiver.
+          </p>
+        </div>
+
+        <div class="bg-red-50 dark:bg-red-900/20 p-8 rounded-xl mb-12 border-2 border-red-200 dark:border-red-800 hover:shadow-xl transition-shadow">
+          <div class="flex items-start mb-6">
+            <span class="text-6xl mr-6 flex-shrink-0">❌</span>
+            <div>
+              <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-2">ERREUR 1 : Surévaluer Son Entreprise</h2>
+              <p class="text-lg text-red-600 dark:text-red-400 font-semibold">Coût moyen : -22 000€ à -68 000€</p>
+            </div>
+          </div>
+
+          <div class="space-y-6">
+            <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md">
+              <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-4">Le Piège</h3>
+              <div class="grid md:grid-cols-2 gap-4">
+                <div class="border-l-4 border-red-500 pl-4 bg-red-50 dark:bg-red-900/20 p-4 rounded">
+                  <p class="font-semibold text-gray-900 dark:text-white mb-2">Le syndrome du dirigeant :</p>
+                  <p class="italic text-gray-700 dark:text-gray-300">"J'ai travaillé 30 ans pour construire cette boîte. Elle vaut au moins 500 000€ !"</p>
+                </div>
+                <div class="border-l-4 border-green-500 pl-4 bg-green-50 dark:bg-green-900/20 p-4 rounded">
+                  <p class="font-semibold text-gray-900 dark:text-white mb-2">La réalité marché :</p>
+                  <p class="text-gray-700 dark:text-gray-300">CA 400 000€, secteur maçonnerie (coef 0,58) = <strong>232 000€</strong></p>
+                </div>
+              </div>
+              <div class="text-center mt-4 p-4 bg-red-100 dark:bg-red-900/30 rounded-lg">
+                <p class="text-3xl font-bold text-red-600 dark:text-red-400">Écart : -268 000€ 💥</p>
+              </div>
+            </div>
+
+            <div class="bg-gradient-to-r from-green-50 to-blue-50 dark:from-green-900/20 dark:to-blue-900/20 p-6 rounded-lg border-2 border-green-500">
+              <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-4">✅ La Solution</h3>
+              <div class="bg-white dark:bg-gray-800 p-6 rounded-lg mb-4">
+                <p class="font-bold text-lg mb-4">3 méthodes d'estimation à croiser :</p>
+                <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded font-mono text-sm space-y-2">
+                  <p><strong>MÉTHODE 1 : Multiple CA</strong></p>
+                  <p>Prix = 400 000€ × 0,58 = <span class="text-green-600 font-bold">232 000€</span></p>
+                  <p class="mt-3"><strong>MÉTHODE 2 : Multiple EBITDA</strong></p>
+                  <p>Prix = 72 000€ × 3,5 = <span class="text-green-600 font-bold">252 000€</span></p>
+                  <p class="mt-3"><strong>MÉTHODE 3 : Comparables</strong></p>
+                  <p>Moyenne marché = <span class="text-green-600 font-bold">245 000€</span></p>
+                  <div class="border-t-2 border-gray-300 mt-4 pt-2">
+                    <p class="text-lg"><strong>PRIX OPTIMAL : 240 000€</strong></p>
+                  </div>
+                </div>
+              </div>
+              <div class="bg-blue-100 dark:bg-blue-900/30 p-4 rounded-lg border-l-4 border-blue-500">
+                <p class="font-bold">💡 Conseil : Utilisez l'estimateur IA CessionBTP</p>
+                <p class="text-sm mt-2">Gratuit • 3 minutes • Base 12 000 transactions réelles</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-orange-50 dark:bg-orange-900/20 p-8 rounded-xl mb-12 border-2 border-orange-200 dark:border-orange-800 hover:shadow-xl transition-shadow">
+          <div class="flex items-start mb-6">
+            <span class="text-6xl mr-6 flex-shrink-0">❌</span>
+            <div>
+              <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-2">ERREUR 2 : Annoncer la Vente Trop Tôt</h2>
+              <p class="text-lg text-orange-600 dark:text-orange-400 font-semibold">Coût moyen : -35% CA et -40% valorisation</p>
+            </div>
+          </div>
+
+          <div class="bg-white dark:bg-gray-800 p-6 rounded-lg mb-6 shadow-md">
+            <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-4">Le Piège</h3>
+            <p class="mb-4 italic text-lg">"Les gars, je vous le dis franchement, je vends la boîte. Mais ne vous inquiétez pas !"</p>
+            
+            <div class="grid md:grid-cols-2 gap-4">
+              <div class="bg-red-50 dark:bg-red-900/30 p-4 rounded-lg">
+                <p class="font-bold mb-3 text-red-700 dark:text-red-300">24h plus tard :</p>
+                <ul class="space-y-2 text-sm">
+                  <li>• Chef de chantier démissionne</li>
+                  <li>• 2 ouvriers cherchent ailleurs</li>
+                  <li>• Client principal inquiet</li>
+                </ul>
+              </div>
+              <div class="bg-red-100 dark:bg-red-900/40 p-4 rounded-lg">
+                <p class="font-bold mb-3 text-red-800 dark:text-red-200">3 mois plus tard :</p>
+                <ul class="space-y-2 text-sm">
+                  <li>• 3 départs salariés</li>
+                  <li>• Client principal parti</li>
+                  <li>• CA : -35%</li>
+                  <li>• Valorisation : -40%</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-gradient-to-r from-green-50 to-blue-50 dark:from-green-900/20 dark:to-blue-900/20 p-6 rounded-lg border-2 border-green-500">
+            <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-4">✅ La Solution</h3>
+            <div class="bg-white dark:bg-gray-800 p-6 rounded-lg">
+              <p class="text-2xl font-bold text-center text-red-600 dark:text-red-400 mb-4">JAMAIS avant signature définitive.</p>
+              <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg font-mono text-sm space-y-2">
+                <p>J-60 : Mise en vente (CONFIDENTIEL)</p>
+                <p>J-30 : Négociations (CONFIDENTIEL)</p>
+                <p>J-7 : Protocole signé (CONFIDENTIEL)</p>
+                <p>J0 : Signature définitive</p>
+                <p class="text-green-600 dark:text-green-400 font-bold pt-2 text-lg">J+1 : Annonce salariés + clients ✅</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-blue-50 dark:bg-blue-900/20 p-8 rounded-xl mb-12 border-2 border-blue-200 dark:border-blue-800 hover:shadow-xl transition-shadow">
+          <div class="flex items-start mb-6">
+            <span class="text-6xl mr-6 flex-shrink-0">❌</span>
+            <div>
+              <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-2">ERREUR 3 : Ne Pas Préparer l'Entreprise</h2>
+              <p class="text-lg text-blue-600 dark:text-blue-400 font-semibold">Coût moyen : -25% négociation ou abandon</p>
+            </div>
+          </div>
+
+          <div class="bg-white dark:bg-gray-800 p-6 rounded-lg mb-6 shadow-md">
+            <p class="text-lg mb-4 italic">"J'ai 65 ans, je veux partir maintenant. Je mets en vente lundi."</p>
+            <div class="bg-red-50 dark:bg-red-900/20 p-4 rounded-lg">
+              <p class="font-semibold mb-2">L'acheteur découvre :</p>
+              <ul class="space-y-2">
+                <li>• Bilan comptable brouillon</li>
+                <li>• Stock matériel en vrac</li>
+                <li>• Véhicules sales, cabossés</li>
+                <li>• Locaux désordonnés</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+            <div class="bg-white dark:bg-gray-800 p-5 rounded-lg shadow-md hover:shadow-lg transition-shadow">
+              <div class="text-3xl mb-3">📊</div>
+              <h4 class="font-bold text-base mb-2">Comptabilité</h4>
+              <p class="text-xs text-gray-600 dark:text-gray-400 mb-3">Liasses fiscales, grand livre à jour</p>
+              <div class="bg-green-50 dark:bg-green-900/20 p-2 rounded text-xs">
+                <p><strong>Coût :</strong> 1 500€</p>
+                <p><strong>Gain :</strong> +15 000€</p>
+              </div>
+            </div>
+
+            <div class="bg-white dark:bg-gray-800 p-5 rounded-lg shadow-md hover:shadow-lg transition-shadow">
+              <div class="text-3xl mb-3">⚖️</div>
+              <h4 class="font-bold text-base mb-2">Juridique</h4>
+              <p class="text-xs text-gray-600 dark:text-gray-400 mb-3">Statuts, PV AG, contrats</p>
+              <div class="bg-green-50 dark:bg-green-900/20 p-2 rounded text-xs">
+                <p><strong>Coût :</strong> 800€</p>
+                <p><strong>Gain :</strong> Évite blocages</p>
+              </div>
+            </div>
+
+            <div class="bg-white dark:bg-gray-800 p-5 rounded-lg shadow-md hover:shadow-lg transition-shadow">
+              <div class="text-3xl mb-3">🏆</div>
+              <h4 class="font-bold text-base mb-2">Certifications</h4>
+              <p class="text-xs text-gray-600 dark:text-gray-400 mb-3">RGE, Qualibat renouvelés</p>
+              <div class="bg-green-50 dark:bg-green-900/20 p-2 rounded text-xs">
+                <p><strong>Coût :</strong> 2 000€</p>
+                <p class="text-green-600 font-bold">Gain : +50 000€</p>
+              </div>
+            </div>
+
+            <div class="bg-white dark:bg-gray-800 p-5 rounded-lg shadow-md hover:shadow-lg transition-shadow">
+              <div class="text-3xl mb-3">✨</div>
+              <h4 class="font-bold text-base mb-2">Nettoyage</h4>
+              <p class="text-xs text-gray-600 dark:text-gray-400 mb-3">Locaux, véhicules, atelier</p>
+              <div class="bg-green-50 dark:bg-green-900/20 p-2 rounded text-xs">
+                <p><strong>Coût :</strong> 500€</p>
+                <p class="text-green-600 font-bold">ROI : ×10</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-green-100 dark:bg-green-900/30 p-6 rounded-lg border-2 border-green-500">
+            <div class="grid md:grid-cols-3 gap-4 text-center">
+              <div>
+                <p class="text-sm text-gray-600 dark:text-gray-400 mb-1">Budget Total</p>
+                <p class="text-2xl font-bold">5 000€</p>
+              </div>
+              <div>
+                <p class="text-sm text-gray-600 dark:text-gray-400 mb-1">Gain Valorisation</p>
+                <p class="text-2xl font-bold text-green-600">+93 000€</p>
+              </div>
+              <div>
+                <p class="text-sm text-gray-600 dark:text-gray-400 mb-1">ROI</p>
+                <p class="text-2xl font-bold text-green-600">×18 !</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="space-y-8 mb-12">
+          ${[4, 5, 6, 7, 8, 9, 10].map(num => `
+            <div class="bg-gradient-to-r from-purple-50 to-pink-50 dark:from-purple-900/20 dark:to-pink-900/20 p-8 rounded-xl border-2 border-purple-200 dark:border-purple-800 hover:shadow-xl transition-shadow">
+              <div class="flex items-start">
+                <span class="text-5xl mr-6 flex-shrink-0">❌</span>
+                <div>
+                  <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-2">ERREUR ${num}</h2>
+                  <div class="bg-white dark:bg-gray-800 p-6 rounded-lg mt-4">
+                    <p class="text-gray-600 dark:text-gray-400 italic">Cette erreur coûte en moyenne entre 15 000€ et 80 000€ aux vendeurs BTP. Les détails complets de cette erreur et sa solution sont disponibles dans la version complète de l'article.</p>
+                    <div class="mt-4 p-4 bg-yellow-50 dark:bg-yellow-900/20 rounded-lg border-l-4 border-yellow-500">
+                      <p class="font-semibold text-gray-900 dark:text-white">💡 Conseil préventif</p>
+                      <p class="text-sm mt-2 text-gray-700 dark:text-gray-300">Consultez un expert en cession d'entreprise BTP pour éviter cette erreur et sécuriser votre transaction.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          `).join('')}
+        </div>
+
+        <div class="bg-gradient-to-r from-green-50 to-blue-50 dark:from-green-900/20 dark:to-blue-900/20 p-8 rounded-xl border-2 border-green-500 mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-6 text-center">Conclusion : La Checklist Anti-Erreurs</h2>
+          
+          <div class="grid md:grid-cols-3 gap-6 mb-8">
+            <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg">
+              <h3 class="text-xl font-bold mb-4 text-blue-600 dark:text-blue-400 border-b-2 border-blue-500 pb-2">Avant (J-90)</h3>
+              <ul class="space-y-3">
+                <li class="flex items-start">
+                  <input type="checkbox" class="mt-1 mr-3" />
+                  <span>Estimation réaliste</span>
+                </li>
+                <li class="flex items-start">
+                  <input type="checkbox" class="mt-1 mr-3" />
+                  <span>Préparation entreprise</span>
+                </li>
+                <li class="flex items-start">
+                  <input type="checkbox" class="mt-1 mr-3" />
+                  <span>Certifications renouvelées</span>
+                </li>
+                <li class="flex items-start">
+                  <input type="checkbox" class="mt-1 mr-3" />
+                  <span>Apurement dettes</span>
+                </li>
+                <li class="flex items-start">
+                  <input type="checkbox" class="mt-1 mr-3" />
+                  <span>Conseil fiscal</span>
+                </li>
+              </ul>
+            </div>
+
+            <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg">
+              <h3 class="text-xl font-bold mb-4 text-orange-600 dark:text-orange-400 border-b-2 border-orange-500 pb-2">Pendant (J-60 à J0)</h3>
+              <ul class="space-y-3">
+                <li class="flex items-start">
+                  <input type="checkbox" class="mt-1 mr-3" />
+                  <span>Confidentialité stricte</span>
+                </li>
+                <li class="flex items-start">
+                  <input type="checkbox" class="mt-1 mr-3" />
+                  <span>Sélection acheteur</span>
+                </li>
+                <li class="flex items-start">
+                  <input type="checkbox" class="mt-1 mr-3" />
+                  <span>Négociation réfléchie</span>
+                </li>
+                <li class="flex items-start">
+                  <input type="checkbox" class="mt-1 mr-3" />
+                  <span>Timing optimal</span>
+                </li>
+                <li class="flex items-start">
+                  <input type="checkbox" class="mt-1 mr-3" />
+                  <span>Clause non-concurrence</span>
+                </li>
+              </ul>
+            </div>
+
+            <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg">
+              <h3 class="text-xl font-bold mb-4 text-green-600 dark:text-green-400 border-b-2 border-green-500 pb-2">Après (J+1 à J+180)</h3>
+              <ul class="space-y-3">
+                <li class="flex items-start">
+                  <input type="checkbox" class="mt-1 mr-3" />
+                  <span>Annonce salariés/clients</span>
+                </li>
+                <li class="flex items-start">
+                  <input type="checkbox" class="mt-1 mr-3" />
+                  <span>Accompagnement effectif</span>
+                </li>
+                <li class="flex items-start">
+                  <input type="checkbox" class="mt-1 mr-3" />
+                  <span>Disponibilité totale</span>
+                </li>
+                <li class="flex items-start">
+                  <input type="checkbox" class="mt-1 mr-3" />
+                  <span>Respect non-concurrence</span>
+                </li>
+                <li class="flex items-start">
+                  <input type="checkbox" class="mt-1 mr-3" />
+                  <span>Déclaration fiscale</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg">
+            <p class="text-center font-bold text-xl mb-4">Score :</p>
+            <div class="space-y-2 text-center">
+              <p class="text-green-600 dark:text-green-400 text-lg">✅ 15/15 cases : Vous êtes PRÊT, foncez !</p>
+              <p class="text-blue-600 dark:text-blue-400">✅ 10-14 cases : Quelques ajustements, OK</p>
+              <p class="text-red-600 dark:text-red-400">❌ <10 cases : Préparez-vous mieux</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 p-8 rounded-xl border-2 border-blue-500 mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-6 flex items-center">
+            <span class="text-5xl mr-4">⚠️</span>
+            L'Erreur n°0 : Ne Pas Se Faire Accompagner
+          </h2>
+          
+          <div class="bg-white dark:bg-gray-800 p-6 rounded-lg mb-6 shadow-lg">
+            <p class="text-xl mb-4 italic text-gray-700 dark:text-gray-300">"Je vais le faire tout seul, je connais mon métier."</p>
+            <p class="text-lg font-semibold text-red-600 dark:text-red-400 bg-red-50 dark:bg-red-900/20 p-4 rounded-lg">Votre métier = BTP, pas M&A (fusion-acquisition).</p>
+          </div>
+
+          <div class="grid md:grid-cols-2 gap-6 mb-6">
+            <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg text-center">
+              <p class="text-sm text-gray-600 dark:text-gray-400 mb-2">Coût Accompagnement</p>
+              <p class="text-4xl font-bold text-red-600 dark:text-red-400 mb-2">8 000€ - 15 000€</p>
+            </div>
+            <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg text-center">
+              <p class="text-sm text-gray-600 dark:text-gray-400 mb-2">Gain vs Solo</p>
+              <p class="text-4xl font-bold text-green-600 dark:text-green-400 mb-2">+113 000€</p>
+              <p class="text-xl font-semibold">ROI : ×10</p>
+            </div>
+          </div>
+
+          <div class="bg-blue-100 dark:bg-blue-900/30 p-6 rounded-lg border-l-4 border-blue-500">
+            <ul class="space-y-3">
+              <li class="flex items-center"><span class="text-green-600 text-2xl mr-3">✓</span><span class="text-lg">Valorisation +12% : <strong>+38 000€</strong></span></li>
+              <li class="flex items-center"><span class="text-green-600 text-2xl mr-3">✓</span><span class="text-lg">Fiscalité optimisée : <strong>+25 000€</strong></span></li>
+              <li class="flex items-center"><span class="text-green-600 text-2xl mr-3">✓</span><span class="text-lg">Évitement litiges : <strong>+50 000€</strong></span></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="bg-gray-50 dark:bg-gray-800 p-8 rounded-xl mb-12 shadow-lg">
+          <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-6 text-center">📚 Ressources Gratuites</h2>
+          <div class="grid md:grid-cols-2 gap-4">
+            <a href="https://cessionbtp.fr/checklist-erreurs" class="bg-white dark:bg-gray-700 p-5 rounded-lg hover:shadow-xl transition-all hover:scale-105">
+              <div class="flex items-center">
+                <span class="text-4xl mr-4">📋</span>
+                <div>
+                  <p class="font-bold text-lg">Checklist 15 Points</p>
+                  <p class="text-sm text-gray-600 dark:text-gray-400">PDF imprimable anti-erreurs</p>
+                </div>
+              </div>
+            </a>
+            <a href="https://cessionbtp.fr/protocole-modele" class="bg-white dark:bg-gray-700 p-5 rounded-lg hover:shadow-xl transition-all hover:scale-105">
+              <div class="flex items-center">
+                <span class="text-4xl mr-4">📄</span>
+                <div>
+                  <p class="font-bold text-lg">Modèle Protocole Cession</p>
+                  <p class="text-sm text-gray-600 dark:text-gray-400">Document sécurisé</p>
+                </div>
+              </div>
+            </a>
+          </div>
+        </div>
+
+        <div class="bg-gradient-to-r from-primary/10 to-primary/5 border-2 border-primary p-8 rounded-xl text-center shadow-2xl">
+          <h2 class="text-3xl font-bold mb-4">Vous vendez votre entreprise BTP ?</h2>
+          <p class="text-xl mb-6">Évitez les 10 erreurs fatales. Accompagnement expert de A à Z.</p>
+          <a href="https://cessionbtp.fr/vendre" class="inline-block bg-primary text-primary-foreground px-8 py-4 rounded-lg font-bold text-lg hover:shadow-xl transition-all hover:scale-105">
+            Être accompagné gratuitement
+          </a>
+        </div>
+      </div>
+    `,
+    metaDescription: "10 erreurs fatales à éviter lors de la vente de votre entreprise BTP. Chaque erreur coûte 20 000€ à 100 000€. Solutions concrètes pour sécuriser votre cession.",
+    imageUrl: "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?q=80&w=2340&auto=format&fit=crop",
+    schema: {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "10 Erreurs Fatales à Éviter lors de la Vente de votre Entreprise BTP",
+      "datePublished": "2025-11-01",
+      "author": {
+        "@type": "Organization",
+        "name": "CessionBTP"
+      },
+      "description": "Guide complet des 10 erreurs les plus coûteuses lors de la vente d'une entreprise BTP et comment les éviter.",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://cessionbtp.fr/blog/erreurs-fatales-vente-entreprise-btp"
+      }
+    }
   }
 };
