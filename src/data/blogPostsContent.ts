@@ -4627,5 +4627,876 @@ Mensualité : 4 200€ sur 10 ans</pre>
       "datePublished": "2025-10-28",
       "dateModified": "2025-10-28"
     }
+  },
+  'audit-entreprise-btp-avant-achat': {
+    content: `
+      <div class="prose prose-lg max-w-none">
+        <p class="text-xl text-muted-foreground mb-8">L'histoire de Marc, 42 ans, qui rachète une entreprise de maçonnerie pour 280 000€. Le bilan est nickel, le vendeur sympathique, tout semble parfait. Il signe. <strong>3 mois plus tard : 85 000€ de passifs cachés découverts.</strong> Aujourd'hui, Marc est en liquidation judiciaire.</p>
+
+        <div class="bg-destructive/10 border-l-4 border-destructive p-6 my-8 rounded-r">
+          <h3 class="text-destructive font-bold text-lg mb-3">⚠️ La statistique qui fait froid dans le dos</h3>
+          <ul class="space-y-2 text-destructive-foreground">
+            <li><strong>34% des reprises BTP échouent</strong> dans les 3 premières années</li>
+            <li><strong>Cause n°1 (68% des cas) :</strong> Vices cachés, passifs non détectés</li>
+            <li><strong>Perte moyenne :</strong> 85 000€ à 150 000€</li>
+          </ul>
+        </div>
+
+        <p class="text-lg font-semibold text-primary">La bonne nouvelle : Avec une checklist rigoureuse, vous pouvez détecter 95% des problèmes AVANT de signer.</p>
+
+        <h2 class="text-3xl font-bold mt-12 mb-6 text-foreground">Mode d'Emploi de la Checklist</h2>
+        
+        <div class="grid md:grid-cols-2 gap-6 my-8">
+          <div class="border rounded-lg p-6 bg-card">
+            <h3 class="font-bold text-lg mb-3 text-card-foreground">✅ Étape 1 : Imprimez la checklist</h3>
+            <p class="text-muted-foreground">Version PDF téléchargeable en bas d'article. Cochez au fur et à mesure.</p>
+          </div>
+          <div class="border rounded-lg p-6 bg-card">
+            <h3 class="font-bold text-lg mb-3 text-card-foreground">📋 Étape 2 : Phase d'audit (30 jours)</h3>
+            <p class="text-muted-foreground">Due diligence AVANT signature protocole. Demandez TOUS les documents.</p>
+          </div>
+          <div class="border rounded-lg p-6 bg-card">
+            <h3 class="font-bold text-lg mb-3 text-card-foreground">📊 Étape 3 : Scoring</h3>
+            <p class="text-muted-foreground">47 points = 100%. Score >85% : Excellent. Score <50% : Abandon.</p>
+          </div>
+          <div class="border rounded-lg p-6 bg-card">
+            <h3 class="font-bold text-lg mb-3 text-card-foreground">🚨 Étape 4 : Levée points bloquants</h3>
+            <p class="text-muted-foreground">Points rouges = STOP absolu. Négociez corrections AVANT signature.</p>
+          </div>
+        </div>
+
+        <h2 class="text-3xl font-bold mt-16 mb-8 text-foreground border-b-2 border-primary pb-3">PARTIE 1 : Documents Légaux & Administratifs (8 points)</h2>
+
+        <div class="space-y-8">
+          <div class="border-l-4 border-primary pl-6 py-4 bg-primary/5">
+            <h3 class="text-2xl font-bold mb-4">✅ Point 1 : Extrait Kbis à Jour (&lt;3 mois)</h3>
+            <div class="bg-background/50 p-4 rounded mb-4">
+              <p class="font-semibold text-lg mb-2">Pourquoi c'est critique :</p>
+              <p>Le Kbis est la "carte d'identité" de l'entreprise.</p>
+            </div>
+            <p class="mb-3"><strong>Ce qu'il révèle :</strong></p>
+            <ul class="list-disc pl-6 space-y-1 mb-4">
+              <li>Nom, adresse, SIRET</li>
+              <li>Capital social</li>
+              <li>Dirigeants actuels</li>
+              <li><strong>Procédures collectives éventuelles</strong> (redressement, liquidation)</li>
+            </ul>
+            <div class="bg-destructive/10 border border-destructive/20 p-4 rounded">
+              <p class="font-bold text-destructive">🚨 BLOQUANT si : Procédure collective en cours, interdiction de gérer</p>
+            </div>
+          </div>
+
+          <div class="border-l-4 border-primary pl-6 py-4 bg-primary/5">
+            <h3 class="text-2xl font-bold mb-4">✅ Point 2 : Statuts Société à Jour</h3>
+            <p class="mb-3"><strong>Ce qu'il faut vérifier :</strong></p>
+            <ul class="list-disc pl-6 space-y-1 mb-4">
+              <li>Forme juridique (SARL, SAS, EURL)</li>
+              <li>Capital social (cohérent avec bilan ?)</li>
+              <li>Répartition parts sociales/actions</li>
+              <li>Clauses spéciales (agrément, préemption)</li>
+            </ul>
+            <div class="bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 p-4 rounded">
+              <p class="font-bold text-amber-800 dark:text-amber-300">⚠️ Red flags :</p>
+              <ul class="list-disc pl-6 mt-2 text-amber-700 dark:text-amber-400">
+                <li>Statuts >10 ans sans mise à jour</li>
+                <li>Capital social ridiculement bas (1€) alors que gros CA</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="border-l-4 border-primary pl-6 py-4 bg-primary/5">
+            <h3 class="text-2xl font-bold mb-4">✅ Point 3 : PV Assemblées Générales (3 dernières années)</h3>
+            <p class="mb-3"><strong>Ce qu'il faut chercher :</strong></p>
+            <ul class="list-disc pl-6 space-y-1">
+              <li>Approbation comptes annuels</li>
+              <li>Distributions dividendes excessives ?</li>
+              <li>Changements dirigeants</li>
+              <li>Décisions engageant l'avenir (emprunts, cautions)</li>
+            </ul>
+          </div>
+
+          <div class="border-l-4 border-primary pl-6 py-4 bg-primary/5">
+            <h3 class="text-2xl font-bold mb-4">✅ Point 4 : Registre Unique du Personnel</h3>
+            <p class="mb-3"><strong>Ce qu'il révèle :</strong></p>
+            <ul class="list-disc pl-6 space-y-1 mb-4">
+              <li>Nombre exact salariés</li>
+              <li>Turnover (si >30%/an = problème)</li>
+              <li>Salariés étrangers sans autorisation (amende 15 000€/salarié)</li>
+            </ul>
+          </div>
+
+          <div class="border-l-4 border-primary pl-6 py-4 bg-primary/5">
+            <h3 class="text-2xl font-bold mb-4">✅ Point 5 : Autorisation Travaux (si locaux loués)</h3>
+            <div class="bg-destructive/10 border border-destructive/20 p-4 rounded">
+              <p class="font-bold text-destructive">🚨 Red flag : Travaux non autorisés = Risque démolition + Remise en état à vos frais</p>
+            </div>
+          </div>
+
+          <div class="border-l-4 border-primary pl-6 py-4 bg-primary/5">
+            <h3 class="text-2xl font-bold mb-4">✅ Point 6 : Bail Commercial (si locataire)</h3>
+            <p class="mb-3"><strong>Ce qu'il faut vérifier :</strong></p>
+            <ul class="list-disc pl-6 space-y-1 mb-4">
+              <li>Durée restante (bail 3-6-9 ans)</li>
+              <li>Montant loyer (cohérent marché ?)</li>
+              <li>Droit au renouvellement</li>
+            </ul>
+            <div class="bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 p-4 rounded">
+              <p class="font-bold text-amber-800 dark:text-amber-300">⚠️ Red flags :</p>
+              <ul class="list-disc pl-6 mt-2 text-amber-700 dark:text-amber-400">
+                <li>Loyer excessif (>15% CA)</li>
+                <li>Bail expire dans <1 an</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="border-l-4 border-primary pl-6 py-4 bg-primary/5">
+            <h3 class="text-2xl font-bold mb-4">✅ Point 7 : Assurances en Cours de Validité</h3>
+            <p class="font-semibold mb-3">Les 4 assurances BTP obligatoires :</p>
+            <div class="grid md:grid-cols-2 gap-4 mb-4">
+              <div class="bg-card p-4 rounded border">
+                <p class="font-bold text-primary">1. RC Professionnelle</p>
+                <p class="text-sm text-muted-foreground">Couvre dommages causés à tiers. Montant garantie : 1M€ minimum</p>
+              </div>
+              <div class="bg-card p-4 rounded border">
+                <p class="font-bold text-primary">2. Décennale</p>
+                <p class="text-sm text-muted-foreground">OBLIGATOIRE construction. Montant : 3M€ minimum</p>
+              </div>
+              <div class="bg-card p-4 rounded border">
+                <p class="font-bold text-primary">3. Flotte Auto</p>
+                <p class="text-sm text-muted-foreground">Tous véhicules assurés ? Conducteurs déclarés ?</p>
+              </div>
+              <div class="bg-card p-4 rounded border">
+                <p class="font-bold text-primary">4. Matériel</p>
+                <p class="text-sm text-muted-foreground">Vol, casse, incendie (optionnel mais recommandé)</p>
+              </div>
+            </div>
+            <div class="bg-destructive/10 border border-destructive/20 p-4 rounded">
+              <p class="font-bold text-destructive">🚨 STOP absolu : Décennale résiliée/suspendue = Activité illégale</p>
+            </div>
+          </div>
+
+          <div class="border-l-4 border-primary pl-6 py-4 bg-primary/5">
+            <h3 class="text-2xl font-bold mb-4">✅ Point 8 : Absence Interdiction de Gérer</h3>
+            <p class="mb-3"><strong>Comment vérifier :</strong></p>
+            <ul class="list-disc pl-6 space-y-1">
+              <li>Demandez attestation sur l'honneur</li>
+              <li>Consultez BODACC (gratuit)</li>
+            </ul>
+          </div>
+        </div>
+
+        <h2 class="text-3xl font-bold mt-16 mb-8 text-foreground border-b-2 border-primary pb-3">PARTIE 2 : Documents Comptables & Financiers (10 points)</h2>
+
+        <div class="space-y-8">
+          <div class="border-l-4 border-primary pl-6 py-4 bg-primary/5">
+            <h3 class="text-2xl font-bold mb-4">✅ Point 9 : Liasses Fiscales N-1, N-2, N-3</h3>
+            <p class="font-semibold mb-3">Ce qu'il faut analyser :</p>
+            <div class="bg-card p-4 rounded border mb-4">
+              <p class="font-bold mb-2">Évolution CA :</p>
+              <ul class="list-disc pl-6 space-y-1 text-sm">
+                <li>✅ Croissance >5%/an : Bon</li>
+                <li>✅ Stable ±5% : OK</li>
+                <li>🚨 Baisse >10%/an : Problème</li>
+              </ul>
+            </div>
+            <div class="bg-card p-4 rounded border">
+              <p class="font-bold mb-2">Ratios clés :</p>
+              <ul class="list-disc pl-6 space-y-1 text-sm">
+                <li>Marge brute : >25% (BTP)</li>
+                <li>Marge nette : >8%</li>
+                <li>Rentabilité : Résultat/CA >5%</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="border-l-4 border-primary pl-6 py-4 bg-primary/5">
+            <h3 class="text-2xl font-bold mb-4">✅ Point 10 : Grand Livre Comptable Année N</h3>
+            <p class="mb-3"><strong>Ce que ça révèle :</strong></p>
+            <ul class="list-disc pl-6 space-y-1 mb-4">
+              <li>Réalité clients (qui paie combien ?)</li>
+              <li>Prélèvements dirigeant</li>
+              <li>Transactions inhabituelles</li>
+            </ul>
+            <div class="bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 p-4 rounded">
+              <p class="font-bold text-amber-800 dark:text-amber-300">⚠️ Red flags :</p>
+              <ul class="list-disc pl-6 mt-2 text-amber-700 dark:text-amber-400">
+                <li>Clients "étranges" (famille, amis = factures fictives ?)</li>
+                <li>Dépenses personnelles dans charges entreprise</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="border-l-4 border-primary pl-6 py-4 bg-primary/5">
+            <h3 class="text-2xl font-bold mb-4">✅ Point 11 : Balance Âgée Clients</h3>
+            <div class="overflow-x-auto mb-4">
+              <table class="min-w-full border-collapse border">
+                <thead class="bg-primary/10">
+                  <tr>
+                    <th class="border p-2 text-left">Client</th>
+                    <th class="border p-2">Montant Dû</th>
+                    <th class="border p-2">&lt;30j</th>
+                    <th class="border p-2">30-60j</th>
+                    <th class="border p-2">60-90j</th>
+                    <th class="border p-2">&gt;90j</th>
+                  </tr>
+                </thead>
+              </table>
+            </div>
+            <div class="bg-destructive/10 border border-destructive/20 p-4 rounded">
+              <p class="font-bold text-destructive">🚨 Red flag : Créances >90j représentant >20% du total</p>
+              <p class="text-sm mt-2 text-destructive-foreground">Action : Déduisez créances douteuses du prix d'achat</p>
+            </div>
+          </div>
+
+          <div class="border-l-4 border-primary pl-6 py-4 bg-primary/5">
+            <h3 class="text-2xl font-bold mb-4">✅ Point 12 : Balance Âgée Fournisseurs</h3>
+            <div class="bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 p-4 rounded">
+              <p class="font-bold text-amber-800 dark:text-amber-300">⚠️ Red flags :</p>
+              <ul class="list-disc pl-6 mt-2 text-amber-700 dark:text-amber-400">
+                <li>Dettes >90 jours (trésorerie tendue)</li>
+                <li>Mises en demeure reçues</li>
+                <li>Fournisseurs qui refusent livrer</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="border-l-4 border-primary pl-6 py-4 bg-primary/5">
+            <h3 class="text-2xl font-bold mb-4">✅ Point 13 : Relevés Bancaires 6 Derniers Mois</h3>
+            <p class="font-semibold mb-3">Ce qu'il faut chercher :</p>
+            <div class="grid md:grid-cols-2 gap-4">
+              <div class="bg-card p-4 rounded border">
+                <p class="font-bold text-primary mb-2">Mouvements créditeurs</p>
+                <ul class="list-disc pl-6 text-sm space-y-1">
+                  <li>Encaissements clients (réguliers ?)</li>
+                  <li>Subventions, aides</li>
+                </ul>
+              </div>
+              <div class="bg-card p-4 rounded border">
+                <p class="font-bold text-primary mb-2">Mouvements débiteurs</p>
+                <ul class="list-disc pl-6 text-sm space-y-1">
+                  <li>Salaires (cohérents ?)</li>
+                  <li>Découvert bancaire (fréquent ?)</li>
+                  <li>Rejets prélèvements Urssaf</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="border-l-4 border-primary pl-6 py-4 bg-primary/5">
+            <h3 class="text-2xl font-bold mb-4">✅ Point 14 : Tableau de Trésorerie Prévisionnel 12 Mois</h3>
+            <p class="mb-3">Projection trésorerie future avec hypothèses réalistes.</p>
+            <div class="bg-destructive/10 border border-destructive/20 p-4 rounded">
+              <p class="font-bold text-destructive">🚨 Red flag : Trésorerie négative >3 mois ou hypothèses irréalistes (CA ×2)</p>
+            </div>
+          </div>
+
+          <div class="border-l-4 border-primary pl-6 py-4 bg-primary/5">
+            <h3 class="text-2xl font-bold mb-4">✅ Point 15 : État des Emprunts en Cours</h3>
+            <div class="bg-card p-4 rounded border mb-4">
+              <p class="font-mono text-sm">
+                Exemple :<br>
+                Emprunt matériel : 45 000€ restant, 1 200€/mois, 3 ans<br>
+                Emprunt véhicules : 22 000€ restant, 650€/mois, 2,5 ans<br>
+                TOTAL : 67 000€, 1 850€/mois
+              </p>
+            </div>
+            <p class="text-sm"><strong>Vérification :</strong> Mensualités <20% EBE</p>
+          </div>
+
+          <div class="border-l-4 border-primary pl-6 py-4 bg-primary/5">
+            <h3 class="text-2xl font-bold mb-4">✅ Point 16 : Inventaire Stocks Valorisé</h3>
+            <div class="bg-card p-4 rounded border mb-4">
+              <p class="font-mono text-sm">
+                Stock papier : 35 000€<br>
+                Stock réel après comptage : 28 000€<br>
+                Stock obsolète (>2 ans) : 5 000€<br>
+                <strong>Stock valorisable : 23 000€</strong><br>
+                <span class="text-destructive">→ Décote : -12 000€ sur prix achat</span>
+              </p>
+            </div>
+            <p class="text-sm font-semibold">Action : Comptage physique obligatoire, ne pas croire le papier</p>
+          </div>
+
+          <div class="border-l-4 border-primary pl-6 py-4 bg-primary/5">
+            <h3 class="text-2xl font-bold mb-4">✅ Point 17 : Carnet de Commandes Fermes</h3>
+            <p class="font-semibold mb-3">Benchmarks :</p>
+            <ul class="list-disc pl-6 space-y-1 mb-4">
+              <li>✅ Carnet 3-6 mois CA : Excellent</li>
+              <li>✅ Carnet 1-2 mois CA : Correct</li>
+              <li>🚨 Carnet <1 mois CA : Fragile</li>
+            </ul>
+            <div class="bg-destructive/10 border border-destructive/20 p-4 rounded">
+              <p class="font-bold text-destructive">🚨 Red flag : Carnet vide = Business à reconstruire</p>
+            </div>
+          </div>
+
+          <div class="border-l-4 border-primary pl-6 py-4 bg-primary/5">
+            <h3 class="text-2xl font-bold mb-4">✅ Point 18 : Contrats Clients Récurrents</h3>
+            <div class="bg-primary/10 p-4 rounded mb-4">
+              <p class="font-semibold mb-2">Récurrence = CA prédictible = Or</p>
+              <p class="text-sm">Exemple : 150 contrats entretien PAC : 180€/an = 27 000€ CA récurrent</p>
+            </div>
+            <p class="text-sm"><strong>Ce qu'il faut vérifier :</strong> Transférabilité, taux renouvellement >80%</p>
+          </div>
+        </div>
+
+        <h2 class="text-3xl font-bold mt-16 mb-8 text-foreground border-b-2 border-primary pb-3">PARTIE 3 : Ressources Humaines (7 points)</h2>
+
+        <div class="space-y-8">
+          <div class="border-l-4 border-primary pl-6 py-4 bg-primary/5">
+            <h3 class="text-2xl font-bold mb-4">✅ Point 19 : Contrats de Travail Tous Salariés</h3>
+            <p class="mb-3"><strong>Ce qu'il faut vérifier :</strong></p>
+            <ul class="list-disc pl-6 space-y-1 mb-4">
+              <li>Salaires cohérents avec marché</li>
+              <li>Ancienneté (indemnités licenciement = Ancienneté/10 × salaire brut)</li>
+              <li>Clauses spéciales (non-concurrence, primes)</li>
+            </ul>
+            <div class="bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 p-4 rounded">
+              <p class="font-bold text-amber-800 dark:text-amber-300">⚠️ Red flags :</p>
+              <ul class="list-disc pl-6 mt-2 text-amber-700 dark:text-amber-400">
+                <li>Salaires sous convention collective (illégal)</li>
+                <li>Heures sup non payées (arriérés)</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="border-l-4 border-primary pl-6 py-4 bg-primary/5">
+            <h3 class="text-2xl font-bold mb-4">✅ Point 20 : Bulletins de Paie 12 Derniers Mois</h3>
+            <p class="mb-3">Vérité vs contrats. Analyser cohérence salaires, heures sup, absences.</p>
+          </div>
+
+          <div class="border-l-4 border-primary pl-6 py-4 bg-primary/5">
+            <h3 class="text-2xl font-bold mb-4">✅ Point 21 : Attestations Urssaf & Pôle Emploi à Jour</h3>
+            <div class="bg-destructive/10 border border-destructive/20 p-4 rounded">
+              <p class="font-bold text-destructive">🚨 Si refus fournir : STOP → Il y a forcément une dette cachée</p>
+              <p class="text-sm mt-2 text-destructive-foreground">Action : Exigez apurement AVANT signature OU Séquestre montant (notaire)</p>
+            </div>
+          </div>
+
+          <div class="border-l-4 border-primary pl-6 py-4 bg-primary/5">
+            <h3 class="text-2xl font-bold mb-4">✅ Point 22 : Absence Litiges Prud'homaux</h3>
+            <p class="mb-3"><strong>Types litiges fréquents BTP :</strong></p>
+            <ul class="list-disc pl-6 space-y-1 mb-4">
+              <li>Licenciement abusif (indemnités 6-24 mois salaire)</li>
+              <li>Harcèlement moral</li>
+              <li>Heures sup non payées</li>
+              <li>Accident travail (faute inexcusable employeur)</li>
+            </ul>
+            <p class="text-sm font-semibold">Action : Clause garantie passif social obligatoire</p>
+          </div>
+
+          <div class="border-l-4 border-primary pl-6 py-4 bg-primary/5">
+            <h3 class="text-2xl font-bold mb-4">✅ Point 23 : Visites Médicales à Jour</h3>
+            <p class="mb-3">Tous salariés doivent avoir visite médicale <24 mois.</p>
+            <div class="bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 p-4 rounded">
+              <p class="font-bold text-amber-800 dark:text-amber-300">⚠️ Red flag : Visites jamais faites = Amende 1 500€/salarié</p>
+            </div>
+          </div>
+
+          <div class="border-l-4 border-primary pl-6 py-4 bg-primary/5">
+            <h3 class="text-2xl font-bold mb-4">✅ Point 24 : Document Unique d'Évaluation des Risques (DUER)</h3>
+            <p class="mb-3">Document listant TOUS risques professionnels + Mesures prévention.</p>
+            <div class="bg-destructive/10 border border-destructive/20 p-4 rounded">
+              <p class="font-bold text-destructive">🚨 DUER inexistant : Amende 1 500€ + Responsabilité pénale si accident</p>
+            </div>
+          </div>
+
+          <div class="border-l-4 border-primary pl-6 py-4 bg-primary/5">
+            <h3 class="text-2xl font-bold mb-4">✅ Point 25 : Plan de Formation & Habilitations</h3>
+            <p class="font-semibold mb-3">Formations BTP obligatoires :</p>
+            <ul class="list-disc pl-6 space-y-1 mb-4">
+              <li>Habilitation électrique - Renouvellement 3 ans</li>
+              <li>CACES (engins) - Renouvellement 5-10 ans</li>
+              <li>Amiante SS4 - Recyclage 3 ans</li>
+            </ul>
+            <p class="text-sm">Action : Budget formation 1ère année : 5 000€ à 15 000€</p>
+          </div>
+        </div>
+
+        <h2 class="text-3xl font-bold mt-16 mb-8 text-foreground border-b-2 border-primary pb-3">PARTIE 4 : Clients & Commercial (6 points)</h2>
+
+        <div class="space-y-8">
+          <div class="border-l-4 border-primary pl-6 py-4 bg-primary/5">
+            <h3 class="text-2xl font-bold mb-4">✅ Point 26 : Liste Clients Actifs (Anonymisée)</h3>
+            <div class="bg-card p-4 rounded border mb-4">
+              <p class="font-mono text-sm">
+                Top 5 clients : 210 000€ (52% CA total)<br>
+                → Concentration élevée = Risque<br><br>
+                Client n°1 : 95 000€ (24% CA)<br>
+                → Dépendance critique
+              </p>
+            </div>
+            <p class="font-semibold mb-2">Benchmarks :</p>
+            <ul class="list-disc pl-6 space-y-1 text-sm">
+              <li>Client n°1 : <20% CA idéal</li>
+              <li>Top 3 clients : <40% CA idéal</li>
+            </ul>
+          </div>
+
+          <div class="border-l-4 border-primary pl-6 py-4 bg-primary/5">
+            <h3 class="text-2xl font-bold mb-4">✅ Point 27 : Taux de Fidélisation Clients</h3>
+            <div class="bg-card p-4 rounded border mb-4">
+              <p class="font-mono text-sm">
+                Calcul :<br>
+                Clients actifs année N : 85<br>
+                Clients actifs année N-1 : 92<br>
+                Clients communs : 68<br><br>
+                Taux fidélisation = 68/92 = <strong>74%</strong>
+              </p>
+            </div>
+            <p class="font-semibold">Benchmarks : >80% Excellent | 60-80% Bon | <60% Problème</p>
+          </div>
+
+          <div class="border-l-4 border-primary pl-6 py-4 bg-primary/5">
+            <h3 class="text-2xl font-bold mb-4">✅ Point 28 : Pipeline Commercial (Devis en Cours)</h3>
+            <p class="mb-3">Devis = CA potentiel futur. Taux transformation habituel BTP : 40-60%</p>
+            <div class="bg-destructive/10 border border-destructive/20 p-4 rounded">
+              <p class="font-bold text-destructive">🚨 Red flag : Pipeline vide (prospection arrêtée)</p>
+            </div>
+          </div>
+
+          <div class="border-l-4 border-primary pl-6 py-4 bg-primary/5">
+            <h3 class="text-2xl font-bold mb-4">✅ Point 29 : Avis Clients & Réputation en Ligne</h3>
+            <p class="font-semibold mb-3">Où vérifier :</p>
+            <ul class="list-disc pl-6 space-y-1 mb-4">
+              <li>Google My Business</li>
+              <li>Pages Jaunes</li>
+              <li>Trustpilot</li>
+            </ul>
+            <p class="font-semibold">Benchmarks : Note >4/5 Excellent | 3-4/5 Correct | <3/5 Problème</p>
+          </div>
+
+          <div class="border-l-4 border-primary pl-6 py-4 bg-primary/5">
+            <h3 class="text-2xl font-bold mb-4">✅ Point 30 : Sources d'Acquisition Clients</h3>
+            <div class="overflow-x-auto">
+              <table class="min-w-full border-collapse border text-sm">
+                <thead class="bg-primary/10">
+                  <tr>
+                    <th class="border p-2 text-left">Source</th>
+                    <th class="border p-2">% CA</th>
+                    <th class="border p-2">Coût acquisition</th>
+                    <th class="border p-2">Récurrence</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="border p-2">Bouche-à-oreille</td>
+                    <td class="border p-2 text-center">45%</td>
+                    <td class="border p-2 text-center">0€</td>
+                    <td class="border p-2 text-center">Élevée</td>
+                  </tr>
+                  <tr>
+                    <td class="border p-2">Google Ads</td>
+                    <td class="border p-2 text-center">25%</td>
+                    <td class="border p-2 text-center">150€/client</td>
+                    <td class="border p-2 text-center">Moyenne</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="border-l-4 border-primary pl-6 py-4 bg-primary/5">
+            <h3 class="text-2xl font-bold mb-4">✅ Point 31 : Présence Digitale</h3>
+            <p class="mb-3"><strong>Ce qu'il faut vérifier :</strong></p>
+            <div class="grid md:grid-cols-3 gap-4">
+              <div class="bg-card p-4 rounded border">
+                <p class="font-bold text-primary mb-2">Site web</p>
+                <ul class="list-disc pl-6 text-sm space-y-1">
+                  <li>Existe ? À jour ?</li>
+                  <li>Mobile-friendly ?</li>
+                  <li>SEO local ?</li>
+                </ul>
+              </div>
+              <div class="bg-card p-4 rounded border">
+                <p class="font-bold text-primary mb-2">Réseaux sociaux</p>
+                <ul class="list-disc pl-6 text-sm space-y-1">
+                  <li>Actifs ?</li>
+                  <li>Publications <1 mois ?</li>
+                </ul>
+              </div>
+              <div class="bg-card p-4 rounded border">
+                <p class="font-bold text-primary mb-2">Google My Business</p>
+                <ul class="list-disc pl-6 text-sm space-y-1">
+                  <li>Fiche complète ?</li>
+                  <li>Photos récentes ?</li>
+                </ul>
+              </div>
+            </div>
+            <p class="mt-4 text-sm">Action : Budget refonte digitale année 1 : 3 000€ à 8 000€</p>
+          </div>
+        </div>
+
+        <h2 class="text-3xl font-bold mt-16 mb-8 text-foreground border-b-2 border-primary pb-3">PARTIE 5 : Matériel & Équipements (5 points)</h2>
+
+        <div class="space-y-8">
+          <div class="border-l-4 border-primary pl-6 py-4 bg-primary/5">
+            <h3 class="text-2xl font-bold mb-4">✅ Point 32 : Inventaire Matériel Valorisé</h3>
+            <p class="mb-3"><strong>Visite physique obligatoire :</strong> Ne pas croire le papier. VOIR le matériel.</p>
+            <div class="bg-card p-4 rounded border mb-4">
+              <p class="font-mono text-sm">
+                Calcul valorisation réelle :<br>
+                Matériel papier : 85 000€<br>
+                Décote vétusté (30%) : -25 500€<br>
+                Matériel cassé : -8 000€<br>
+                <strong>Valeur réelle : 51 500€</strong><br>
+                <span class="text-destructive">→ Ajustement prix : -33 500€</span>
+              </p>
+            </div>
+          </div>
+
+          <div class="border-l-4 border-primary pl-6 py-4 bg-primary/5">
+            <h3 class="text-2xl font-bold mb-4">✅ Point 33 : État Véhicules (Flotte)</h3>
+            <p class="mb-3"><strong>Pour chaque véhicule :</strong></p>
+            <ul class="list-disc pl-6 space-y-1 mb-4">
+              <li>Kilométrage, contrôle technique OK</li>
+              <li>Carnet entretien (révisions faites ?)</li>
+              <li>État mécanique (essai routier)</li>
+              <li>Financement (crédit-bail ? propriété ?)</li>
+            </ul>
+            <p class="text-sm">Action : Provisionnez remplacement véhicules années 1-3 : 20 000€ à 60 000€</p>
+          </div>
+
+          <div class="border-l-4 border-primary pl-6 py-4 bg-primary/5">
+            <h3 class="text-2xl font-bold mb-4">✅ Point 34 : Contrats Leasing & LOA</h3>
+            <div class="bg-card p-4 rounded border mb-4">
+              <p class="font-mono text-sm">
+                Exemple :<br>
+                LOA Camion : 650€/mois, 24 mois restants<br>
+                Engagement restant : 15 600€<br>
+                Option rachat : 12 000€
+              </p>
+            </div>
+            <p class="text-sm">Action : Intégrez mensualités LOA dans business plan trésorerie</p>
+          </div>
+
+          <div class="border-l-4 border-primary pl-6 py-4 bg-primary/5">
+            <h3 class="text-2xl font-bold mb-4">✅ Point 35 : Contrats Maintenance Matériel</h3>
+            <p class="mb-3">Maintenance = Disponibilité matériel = Productivité</p>
+            <div class="bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 p-4 rounded">
+              <p class="font-bold text-amber-800 dark:text-amber-300">⚠️ Red flag : Pas de contrats = Pannes = Chantiers arrêtés</p>
+            </div>
+          </div>
+
+          <div class="border-l-4 border-primary pl-6 py-4 bg-primary/5">
+            <h3 class="text-2xl font-bold mb-4">✅ Point 36 : Locaux (Propriété ou Location)</h3>
+            <p class="mb-3"><strong>Ce qu'il faut vérifier :</strong></p>
+            <ul class="list-disc pl-6 space-y-1 mb-4">
+              <li>Surface & agencement adaptés</li>
+              <li>Conformité normes (électrique, incendie, accessibilité)</li>
+              <li>État général (travaux nécessaires ?)</li>
+            </ul>
+          </div>
+        </div>
+
+        <h2 class="text-3xl font-bold mt-16 mb-8 text-foreground border-b-2 border-primary pb-3">PARTIE 6 : Fournisseurs & Partenaires (4 points)</h2>
+
+        <div class="space-y-8">
+          <div class="border-l-4 border-primary pl-6 py-4 bg-primary/5">
+            <h3 class="text-2xl font-bold mb-4">✅ Point 37 : Liste Fournisseurs Principaux</h3>
+            <p class="mb-3"><strong>Concentration :</strong></p>
+            <ul class="list-disc pl-6 space-y-1">
+              <li>Idéal : Top 3 fournisseurs <50% achats</li>
+              <li>🚨 Red flag : >70% (dépendance)</li>
+            </ul>
+            <p class="mt-4 text-sm font-semibold">Action : Contactez Top 3 fournisseurs, confirmez poursuite relation</p>
+          </div>
+
+          <div class="border-l-4 border-primary pl-6 py-4 bg-primary/5">
+            <h3 class="text-2xl font-bold mb-4">✅ Point 38 : Conditions Tarifaires Négociées</h3>
+            <div class="bg-card p-4 rounded border mb-4">
+              <p class="font-mono text-sm">
+                Exemple impact :<br>
+                Tarif catalogue : 100€<br>
+                Remise négociée vendeur : -15%<br>
+                Prix net vendeur : 85€<br><br>
+                Si pas de transfert accord :<br>
+                Prix standard vous : 100€<br>
+                <span class="text-destructive">→ Marge -15% = Rentabilité impactée</span>
+              </p>
+            </div>
+          </div>
+
+          <div class="border-l-4 border-primary pl-6 py-4 bg-primary/5">
+            <h3 class="text-2xl font-bold mb-4">✅ Point 39 : Sous-Traitants Habituels</h3>
+            <div class="bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 p-4 rounded">
+              <p class="font-bold text-amber-800 dark:text-amber-300">⚠️ Red flags :</p>
+              <ul class="list-disc pl-6 mt-2 text-amber-700 dark:text-amber-400">
+                <li>Dépendance >30% CA sur sous-traitance</li>
+                <li>Sous-traitants non-déclarés (travail dissimulé = 45 000€ amende)</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="border-l-4 border-primary pl-6 py-4 bg-primary/5">
+            <h3 class="text-2xl font-bold mb-4">✅ Point 40 : Partenariats Prescripteurs</h3>
+            <p class="font-semibold mb-3">Prescripteurs BTP :</p>
+            <ul class="list-disc pl-6 space-y-1 mb-4">
+              <li>Architectes</li>
+              <li>Bureaux d'études</li>
+              <li>Syndics copropriétés</li>
+              <li>Autres artisans complémentaires</li>
+            </ul>
+            <p class="text-sm font-semibold">Action : Rencontrez prescripteurs clés, rassurez continuité</p>
+          </div>
+        </div>
+
+        <h2 class="text-3xl font-bold mt-16 mb-8 text-foreground border-b-2 border-primary pb-3">PARTIE 7 : Juridique & Conformité (7 points)</h2>
+
+        <div class="space-y-8">
+          <div class="border-l-4 border-primary pl-6 py-4 bg-primary/5">
+            <h3 class="text-2xl font-bold mb-4">✅ Point 41 : Certifications & Qualifications</h3>
+            <p class="mb-3"><strong>Principales certifications BTP :</strong></p>
+            <ul class="list-disc pl-6 space-y-1 mb-4">
+              <li>RGE (QualiPAC, QualiPV, QualiBois, Qualibat)</li>
+              <li>Qualibat (tous corps d'état)</li>
+              <li>ISO 9001 (qualité)</li>
+            </ul>
+            <div class="bg-destructive/10 border border-destructive/20 p-4 rounded">
+              <p class="font-bold text-destructive">🚨 Red flag : RGE expire <6 mois (renouvellement urgent)</p>
+            </div>
+          </div>
+
+          <div class="border-l-4 border-primary pl-6 py-4 bg-primary/5">
+            <h3 class="text-2xl font-bold mb-4">✅ Point 42 : Litiges en Cours</h3>
+            <p class="mb-3"><strong>Types litiges BTP :</strong></p>
+            <ul class="list-disc pl-6 space-y-1 mb-4">
+              <li>Malfaçons (client mécontent)</li>
+              <li>Retard livraison (pénalités)</li>
+              <li>Sinistre décennale (vice construction)</li>
+            </ul>
+            <p class="text-sm font-semibold">Action : Clause garantie passif obligatoire</p>
+          </div>
+
+          <div class="border-l-4 border-primary pl-6 py-4 bg-primary/5">
+            <h3 class="text-2xl font-bold mb-4">✅ Point 43 : Conformité Environnementale</h3>
+            <div class="grid md:grid-cols-3 gap-4">
+              <div class="bg-card p-4 rounded border">
+                <p class="font-bold text-primary mb-2">Déchets</p>
+                <ul class="list-disc pl-6 text-sm space-y-1">
+                  <li>Contrat collecte</li>
+                  <li>BSD archivés 3 ans</li>
+                </ul>
+              </div>
+              <div class="bg-card p-4 rounded border">
+                <p class="font-bold text-primary mb-2">Amiante/Plomb</p>
+                <ul class="list-disc pl-6 text-sm space-y-1">
+                  <li>Attestation SS4</li>
+                  <li>Registre interventions</li>
+                </ul>
+              </div>
+              <div class="bg-card p-4 rounded border">
+                <p class="font-bold text-primary mb-2">Fluides frigorigènes</p>
+                <ul class="list-disc pl-6 text-sm space-y-1">
+                  <li>Attestation capacité</li>
+                  <li>Registre contrôles</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="border-l-4 border-primary pl-6 py-4 bg-primary/5">
+            <h3 class="text-2xl font-bold mb-4">✅ Point 44 : Contrôles & Inspections</h3>
+            <p class="mb-3"><strong>Types contrôles BTP :</strong></p>
+            <ul class="list-disc pl-6 space-y-1 mb-4">
+              <li>Urssaf (travail dissimulé, charges sociales)</li>
+              <li>Inspection du travail (durée travail, sécurité)</li>
+              <li>Impôts (TVA, IS)</li>
+            </ul>
+            <div class="bg-destructive/10 border border-destructive/20 p-4 rounded">
+              <p class="font-bold text-destructive">🚨 Si contrôle en cours : Suspendre négociation jusqu'à résultat</p>
+            </div>
+          </div>
+
+          <div class="border-l-4 border-primary pl-6 py-4 bg-primary/5">
+            <h3 class="text-2xl font-bold mb-4">✅ Point 45 : Propriété Intellectuelle</h3>
+            <p class="mb-3"><strong>Ce qu'il faut vérifier :</strong></p>
+            <ul class="list-disc pl-6 space-y-1 mb-4">
+              <li>Nom commercial déposé INPI ?</li>
+              <li>Nom de domaine : Propriétaire entreprise ou vendeur perso ?</li>
+              <li>Logo : Propriété et droits d'utilisation</li>
+            </ul>
+            <p class="text-sm font-semibold">Action : Transférez TOUS actifs immatériels</p>
+          </div>
+
+          <div class="border-l-4 border-primary pl-6 py-4 bg-primary/5">
+            <h3 class="text-2xl font-bold mb-4">✅ Point 46 : Clause de Non-Concurrence Vendeur</h3>
+            <div class="bg-card p-4 rounded border mb-4">
+              <p class="font-semibold mb-2">Ce qu'il faut négocier :</p>
+              <ul class="list-disc pl-6 space-y-1 text-sm">
+                <li><strong>Durée :</strong> 3 à 5 ans (idéal : 5 ans)</li>
+                <li><strong>Périmètre :</strong> Département entier</li>
+                <li><strong>Activité :</strong> Interdiction créer, reprendre, participer</li>
+                <li><strong>Sanction :</strong> 5 000€/mois si violation</li>
+              </ul>
+            </div>
+            <div class="bg-destructive/10 border border-destructive/20 p-4 rounded">
+              <p class="font-bold text-destructive">🚨 NON NÉGOCIABLE : Exigez 5 ans mini + Département</p>
+            </div>
+          </div>
+
+          <div class="border-l-4 border-primary pl-6 py-4 bg-primary/5">
+            <h3 class="text-2xl font-bold mb-4">✅ Point 47 : Garantie d'Actif et de Passif (GAP)</h3>
+            <p class="mb-4">Protection ultime contre vices cachés.</p>
+            <div class="bg-card p-4 rounded border mb-4">
+              <p class="font-semibold mb-2">Mécanisme :</p>
+              <p class="font-mono text-sm">
+                Passif découvert : 35 000€ (ex: Urssaf)<br>
+                Plafond GAP : 70% × 280 000€ = 196 000€<br>
+                Franchise : 5 000€<br><br>
+                <strong>Vendeur rembourse : 30 000€</strong>
+              </p>
+            </div>
+            <div class="bg-primary/10 p-4 rounded">
+              <p class="font-bold text-primary">✅ OBLIGATOIRE : Minimum 50% prix, 5 ans, franchise 2-5K€</p>
+            </div>
+          </div>
+        </div>
+
+        <h2 class="text-3xl font-bold mt-16 mb-8 text-foreground border-b-2 border-accent pb-3">Scoring Final & Décision</h2>
+
+        <div class="bg-gradient-to-r from-primary/10 to-accent/10 p-8 rounded-lg mb-8">
+          <h3 class="text-2xl font-bold mb-6 text-center">Calculez Votre Score</h3>
+          <p class="text-center text-lg mb-6">1 point par case cochée ✅ | 0 point si non vérifié ou red flag 🚨</p>
+          <p class="text-center text-3xl font-bold">TOTAL : ___ / 47 points</p>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-6 mb-12">
+          <div class="border-2 border-green-500 bg-green-50 dark:bg-green-900/20 p-6 rounded-lg">
+            <p class="font-bold text-2xl text-green-700 dark:text-green-400 mb-3">40-47 points (85-100%) : EXCELLENT ✅</p>
+            <p class="text-green-600 dark:text-green-300 mb-2">Dossier solide, entreprise saine</p>
+            <p class="font-semibold text-green-700 dark:text-green-400">→ Action : Foncez, signez au prix négocié</p>
+          </div>
+
+          <div class="border-2 border-blue-500 bg-blue-50 dark:bg-blue-900/20 p-6 rounded-lg">
+            <p class="font-bold text-2xl text-blue-700 dark:text-blue-400 mb-3">33-39 points (70-84%) : BON ✅</p>
+            <p class="text-blue-600 dark:text-blue-300 mb-2">Quelques points d'attention, rien de bloquant</p>
+            <p class="font-semibold text-blue-700 dark:text-blue-400">→ Action : Négociez ajustements mineurs ou -5 à -10% prix</p>
+          </div>
+
+          <div class="border-2 border-amber-500 bg-amber-50 dark:bg-amber-900/20 p-6 rounded-lg">
+            <p class="font-bold text-2xl text-amber-700 dark:text-amber-400 mb-3">24-32 points (50-69%) : MOYEN ⚠️</p>
+            <p class="text-amber-600 dark:text-amber-300 mb-2">Problèmes identifiés, risques modérés</p>
+            <p class="font-semibold text-amber-700 dark:text-amber-400">→ Action : Négociez corrections OU -15 à -25% prix</p>
+          </div>
+
+          <div class="border-2 border-red-500 bg-red-50 dark:bg-red-900/20 p-6 rounded-lg">
+            <p class="font-bold text-2xl text-red-700 dark:text-red-400 mb-3">&lt;24 points (&lt;50%) : RISQUÉ 🚨</p>
+            <p class="text-red-600 dark:text-red-300 mb-2">Nombreux problèmes, vices potentiels</p>
+            <p class="font-semibold text-red-700 dark:text-red-400">→ Action : Exigez -30 à -50% prix OU Abandon</p>
+          </div>
+        </div>
+
+        <h2 class="text-3xl font-bold mt-16 mb-8 text-foreground">Conclusion : Ne Signez Jamais Sans Avoir Tout Vérifié</h2>
+
+        <div class="grid md:grid-cols-3 gap-6 mb-8">
+          <div class="bg-destructive/10 border-l-4 border-destructive p-6 rounded-r">
+            <p class="font-bold text-xl text-destructive mb-3">❌ Erreur 1</p>
+            <p class="text-destructive-foreground">"Le vendeur a l'air honnête, je lui fais confiance"</p>
+            <p class="font-semibold text-destructive mt-2">→ 34% de reprises ratées</p>
+          </div>
+
+          <div class="bg-destructive/10 border-l-4 border-destructive p-6 rounded-r">
+            <p class="font-bold text-xl text-destructive mb-3">❌ Erreur 2</p>
+            <p class="text-destructive-foreground">"Le bilan comptable est bon, ça suffit"</p>
+            <p class="font-semibold text-destructive mt-2">→ Bilan = Passé. Checklist = Futur.</p>
+          </div>
+
+          <div class="bg-destructive/10 border-l-4 border-destructive p-6 rounded-r">
+            <p class="font-bold text-xl text-destructive mb-3">❌ Erreur 3</p>
+            <p class="text-destructive-foreground">"Je n'ai pas le temps de tout vérifier"</p>
+            <p class="font-semibold text-destructive mt-2">→ 2 semaines d'audit vs 5 ans de galère</p>
+          </div>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-6 mb-12">
+          <div class="bg-primary/10 border-l-4 border-primary p-6 rounded-r">
+            <p class="font-bold text-xl text-primary mb-3">✅ Règle 1</p>
+            <p>Vérifiez TOUT. Même ce qui semble évident.</p>
+          </div>
+
+          <div class="bg-primary/10 border-l-4 border-primary p-6 rounded-r">
+            <p class="font-bold text-xl text-primary mb-3">✅ Règle 2</p>
+            <p>Exigez documents ÉCRITS. Pas de confiance verbale.</p>
+          </div>
+
+          <div class="bg-primary/10 border-l-4 border-primary p-6 rounded-r">
+            <p class="font-bold text-xl text-primary mb-3">✅ Règle 3</p>
+            <p>Faites-vous accompagner (expert-comptable, avocat).</p>
+          </div>
+        </div>
+
+        <div class="bg-gradient-to-r from-primary/20 to-accent/20 p-8 rounded-lg text-center mb-12">
+          <h3 class="text-2xl font-bold mb-4">Le ROI de la Due Diligence</h3>
+          <div class="grid md:grid-cols-3 gap-6 max-w-3xl mx-auto">
+            <div>
+              <p class="text-4xl font-bold text-primary mb-2">8 000€</p>
+              <p class="text-muted-foreground">Coût audit complet</p>
+            </div>
+            <div>
+              <p class="text-4xl font-bold text-accent mb-2">100 000€</p>
+              <p class="text-muted-foreground">Passifs évités</p>
+            </div>
+            <div>
+              <p class="text-4xl font-bold text-primary mb-2">×10-50</p>
+              <p class="text-muted-foreground">ROI</p>
+            </div>
+          </div>
+          <p class="text-xl font-bold mt-6">Investissez 8 000€ en audit. Économisez 100 000€ en merdes.</p>
+        </div>
+
+        <div class="border-t-2 border-primary pt-8">
+          <h2 class="text-3xl font-bold mb-6 text-center">Ressources Gratuites</h2>
+          <div class="grid md:grid-cols-2 gap-4 mb-8">
+            <a href="https://cessionbtp.fr/checklist-47-points" class="block p-4 border rounded-lg hover:bg-primary/5 transition-colors">
+              <p class="font-bold text-primary">📋 Checklist 47 Points (PDF Imprimable)</p>
+              <p class="text-sm text-muted-foreground">Télécharger →</p>
+            </a>
+            <a href="https://cessionbtp.fr/scoring-reprise" class="block p-4 border rounded-lg hover:bg-primary/5 transition-colors">
+              <p class="font-bold text-primary">📊 Tableur Scoring Automatique (Excel)</p>
+              <p class="text-sm text-muted-foreground">Télécharger →</p>
+            </a>
+            <a href="https://cessionbtp.fr/demande-docs" class="block p-4 border rounded-lg hover:bg-primary/5 transition-colors">
+              <p class="font-bold text-primary">📄 Modèle Demande Documents Vendeur</p>
+              <p class="text-sm text-muted-foreground">Télécharger →</p>
+            </a>
+            <a href="https://cessionbtp.fr/rapport-dd" class="block p-4 border rounded-lg hover:bg-primary/5 transition-colors">
+              <p class="font-bold text-primary">💼 Template Rapport Due Diligence</p>
+              <p class="text-sm text-muted-foreground">Télécharger →</p>
+            </a>
+          </div>
+        </div>
+
+        <div class="bg-gradient-to-r from-primary to-accent text-primary-foreground p-8 rounded-lg text-center">
+          <h3 class="text-2xl font-bold mb-4">Vous reprenez une entreprise BTP ?</h3>
+          <p class="text-lg mb-6">Nos experts réalisent l'audit complet des 47 points pour vous (5 jours, rapport détaillé, recommandations).</p>
+          <a href="https://cessionbtp.fr/audit-pro" class="inline-block bg-background text-foreground px-8 py-4 rounded-lg font-bold text-lg hover:bg-background/90 transition-colors">
+            Demander un audit professionnel →
+          </a>
+        </div>
+      </div>
+    `,
+    metaDescription: '47 points essentiels à vérifier avant de racheter une entreprise BTP. Checklist complète 2026 : documents, finances, RH, matériel. Évitez les pièges fatals.',
+    imageUrl: '/images/blog/audit-entreprise-btp.jpg',
+    schema: {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Check-list : 47 Points à Vérifier Avant d'Acheter une Entreprise BTP",
+      "description": "Checklist exhaustive de 47 points pour auditer une entreprise BTP avant rachat : documents, finances, RH, matériel, conformité. Évitez les vices cachés.",
+      "author": {
+        "@type": "Organization",
+        "name": "CessionBTP"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "CessionBTP",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://cessionbtp.fr/logo.png"
+        }
+      },
+      "datePublished": "2025-11-08",
+      "dateModified": "2025-11-08"
+    }
   }
 };
