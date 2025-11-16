@@ -1,235 +1,244 @@
-// Configuration SEO centralisée pour CessionBTP
-export const SEO_CONFIG = {
-  // Configuration de base
-  site: {
-    name: "CessionBTP",
-    url: "https://cessionbtp.fr",
-    description: "Plateforme n°1 pour acheter et vendre des entreprises du BTP en France. Plus de 500 sociétés de construction à reprendre. Success Fee 2%, Matching IA, 543 entreprises vendues.",
-    logo: "/logo-hd.png",
-    email: "contact@cessionbtp.fr",
-    phone: "+33-1-76-38-02-92",
-    address: {
-      country: "FR",
-      locality: "Paris"
-    }
-  },
+// SEO Configuration - CessionBTP
+// Optimisé pour dominer "cession entreprise BTP" et mots-clés associés
 
-  // Social media
-  social: {
-    facebook: "https://www.facebook.com/cessionbtp",
-    linkedin: "https://www.linkedin.com/company/cessionbtp",
-    twitter: "https://twitter.com/cessionbtp",
-    twitterHandle: "@cessionbtp"
-  },
-
-  // Meta tags par défaut
-  defaultMeta: {
-    title: "CessionBTP - Achat et Vente d'Entreprises BTP",
-    description: "Plateforme n°1 pour acheter et vendre des entreprises du BTP en France. Plus de 500 sociétés de construction à reprendre. Success Fee 2%, Matching IA, 543 entreprises vendues.",
-    keywords: "cession entreprise BTP, vendre société construction, acheter entreprise bâtiment, reprise BTP, valorisation entreprise BTP",
-    author: "CessionBTP",
-    robots: "index, follow",
-    language: "French"
-  },
-
-  // Schema.org - Organization
-  organizationSchema: {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    name: "CessionBTP",
-    url: "https://cessionbtp.fr",
-    logo: "https://cessionbtp.fr/logo-hd.png",
-    telephone: "+33-1-76-38-02-92",
-    email: "contact@cessionbtp.fr",
-    address: {
-      "@type": "PostalAddress",
-      addressCountry: "FR",
-      addressLocality: "Paris"
-    },
-    contactPoint: {
-      "@type": "ContactPoint",
-      telephone: "+33-1-76-38-02-92",
-      contactType: "customer service",
-      areaServed: "FR",
-      availableLanguage: ["French"]
-    },
-    sameAs: [
-      "https://www.facebook.com/cessionbtp",
-      "https://www.linkedin.com/company/cessionbtp",
-      "https://twitter.com/cessionbtp"
-    ]
-  },
-
-  // Schema.org - WebSite
-  websiteSchema: {
-    "@context": "https://schema.org",
-    "@type": "WebSite",
-    name: "CessionBTP",
-    url: "https://cessionbtp.fr",
-    potentialAction: {
-      "@type": "SearchAction",
-      target: "https://cessionbtp.fr/acheter?q={search_term_string}",
-      "query-input": "required name=search_term_string"
-    }
-  },
-
-  // Configuration des pages
-  pages: {
-    home: {
-      title: "CessionBTP - Achat et Vente d'Entreprises BTP",
-      description: "Plateforme n°1 pour acheter et vendre des entreprises du BTP en France. Plus de 500 sociétés de construction à reprendre. Success Fee 2%, Matching IA, 543 entreprises vendues.",
-      keywords: "cession entreprise BTP, vendre société construction, acheter entreprise bâtiment, reprise BTP, valorisation entreprise BTP",
-      canonical: "https://cessionbtp.fr"
-    },
-    acheter: {
-      title: "Acheter une Entreprise BTP | +500 Opportunités",
-      description: "Découvrez +500 entreprises BTP à vendre en France. Plomberie, électricité, maçonnerie, menuiserie. Accompagnement complet et matching IA personnalisé.",
-      keywords: "acheter entreprise BTP, reprise société construction, entreprise bâtiment à vendre",
-      canonical: "https://cessionbtp.fr/acheter"
-    },
-    vendre: {
-      title: "Vendre votre Entreprise BTP | Success Fee 2%",
-      description: "Vendez votre entreprise BTP avec seulement 2% de success fee. Valorisation gratuite, acheteurs qualifiés, confidentialité garantie.",
-      keywords: "vendre entreprise BTP, cession société construction, valorisation entreprise",
-      canonical: "https://cessionbtp.fr/vendre"
-    },
-    estimer: {
-      title: "Estimation Gratuite Entreprise BTP | Valorisation en 2 min",
-      description: "Obtenez une estimation gratuite et instantanée de votre entreprise BTP. Algorithme IA basé sur +1000 transactions réelles. Résultat immédiat.",
-      keywords: "estimation entreprise BTP, valorisation société construction, calculer prix entreprise",
-      canonical: "https://cessionbtp.fr/estimer"
-    },
-    pricing: {
-      title: "Tarifs CessionBTP | Success Fee 2% | Sans frais cachés",
-      description: "Tarifs transparents : 2% de success fee uniquement à la vente réussie. Pas d'abonnement, pas de frais cachés. Valorisation et matching gratuits.",
-      keywords: "tarifs cession entreprise, commission vente BTP, prix vendre entreprise",
-      canonical: "https://cessionbtp.fr/tarifs"
-    },
-    faq: {
-      title: "FAQ - Questions Fréquentes | CessionBTP",
-      description: "Toutes les réponses à vos questions sur l'achat et la vente d'entreprises BTP. Processus, délais, valorisation, financement.",
-      keywords: "questions cession entreprise BTP, FAQ vente société construction",
-      canonical: "https://cessionbtp.fr/faq"
-    },
-    contact: {
-      title: "Contact CessionBTP | Accompagnement Personnalisé",
-      description: "Contactez nos experts pour un accompagnement personnalisé dans votre projet d'achat ou de vente d'entreprise BTP.",
-      keywords: "contact cession BTP, expert vente entreprise construction",
-      canonical: "https://cessionbtp.fr/contact"
-    }
-  },
-
-  // Open Graph par défaut
-  openGraph: {
-    type: "website",
-    locale: "fr_FR",
-    siteName: "CessionBTP"
-  },
-
-  // Twitter Card par défaut
-  twitterCard: {
-    card: "summary_large_image",
-    site: "@cessionbtp"
-  },
-
-  // Robots meta
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      "max-video-preview": -1,
-      "max-image-preview": "large",
-      "max-snippet": -1
-    }
-  }
-} as const;
-
-// Types pour la configuration SEO
-export interface PageSEO {
-  title: string;
-  description: string;
-  keywords: string;
-  canonical?: string;
-  image?: string;
-  type?: string;
-  publishedTime?: string;
-  modifiedTime?: string;
-}
-
-// Helper pour générer les meta tags d'une page
-export const getPageSEO = (pageName: keyof typeof SEO_CONFIG.pages): PageSEO => {
-  return SEO_CONFIG.pages[pageName];
+export const siteConfig = {
+  name: "CessionBTP",
+  url: "https://cessionbtp.com",
+  ogImage: "https://cessionbtp.com/og-image.jpg",
+  description: "Plateforme n°1 pour acheter et vendre des entreprises du BTP en France. Estimation gratuite par IA, matching intelligent, accompagnement personnalisé.",
+  keywords: [
+    "cession entreprise BTP",
+    "vendre entreprise BTP",
+    "acheter entreprise construction",
+    "reprise entreprise bâtiment",
+    "transmission entreprise BTP",
+    "fonds de commerce BTP",
+    "estimation entreprise BTP",
+    "valorisation entreprise construction",
+  ],
+  author: "CessionBTP",
+  creator: "CessionBTP",
+  publisher: "CessionBTP",
+  locale: "fr_FR",
+  type: "website",
 };
 
-// Helper pour générer le Schema.org d'un listing
-export const getListingSchema = (listing: {
-  name: string;
-  description: string;
-  price: number;
-  location?: string;
-  certifications?: string[];
-}) => ({
-  "@context": "https://schema.org",
-  "@type": "Product",
-  name: listing.name,
-  description: listing.description,
-  offers: {
-    "@type": "Offer",
-    price: listing.price,
-    priceCurrency: "EUR",
-    availability: "https://schema.org/InStock",
-    seller: {
-      "@type": "Organization",
-      name: "CessionBTP"
-    }
+// META TAGS PAR PAGE
+export const pageSEO = {
+  // PAGE D'ACCUEIL
+  home: {
+    title: "CessionBTP - Achat & Vente d'Entreprises BTP en France | Plateforme N°1 Spécialisée",
+    description: "Trouvez ou vendez votre entreprise BTP en France. 1ère plateforme 100% dédiée au secteur construction. Estimation IA gratuite, matching intelligent, success fee 2%. +500 entreprises disponibles.",
+    keywords: "cession entreprise BTP, vendre entreprise construction, acheter entreprise bâtiment, transmission BTP France, plateforme cession BTP",
+    canonical: "https://cessionbtp.com",
+    h1: "La Plateforme N°1 pour Acheter et Vendre des Entreprises du BTP en France",
+    schema: "WebSite",
   },
-  ...(listing.location && {
-    location: {
-      "@type": "Place",
-      address: {
-        "@type": "PostalAddress",
-        addressRegion: listing.location
-      }
-    }
-  })
+
+  // PAGE ESTIMER
+  estimer: {
+    title: "Estimation Gratuite Entreprise BTP par IA | Valorisation en 2 Minutes - CessionBTP",
+    description: "Estimez gratuitement votre entreprise BTP en 2 minutes avec notre IA. Algorithme réaliste adapté au secteur construction (multiples 0.3x-1.2x CA). Résultat immédiat + expert vous rappelle sous 24h.",
+    keywords: "estimation entreprise BTP, valorisation entreprise construction, calculer valeur entreprise bâtiment, prix entreprise BTP, multiple CA construction, estimer entreprise maçonnerie",
+    canonical: "https://cessionbtp.com/estimer",
+    h1: "Estimez la Valeur de Votre Entreprise BTP Gratuitement par IA",
+    schema: "Service",
+  },
+
+  // PAGE VENDRE
+  vendre: {
+    title: "Vendre Votre Entreprise BTP | Success Fee 2% - Accompagnement Expert | CessionBTP",
+    description: "Vendez votre entreprise BTP avec CessionBTP. Success fee seulement 2%, accompagnement personnalisé, acheteurs qualifiés. Maçonnerie, plomberie, électricité, tous corps d'état. Publication gratuite.",
+    keywords: "vendre entreprise BTP, cession entreprise construction, vente entreprise bâtiment, céder entreprise maçonnerie, transmettre entreprise plomberie, vendre société BTP",
+    canonical: "https://cessionbtp.com/vendre",
+    h1: "Vendez Votre Entreprise BTP en Toute Confiance",
+    schema: "Service",
+  },
+
+  // PAGE ACHETER
+  acheter: {
+    title: "Acheter une Entreprise BTP | +500 Opportunités Construction France | CessionBTP",
+    description: "Achetez une entreprise BTP rentable en France. +500 opportunités : maçonnerie, plomberie, électricité, couverture. Annonces vérifiées, données financières transparentes, accompagnement expert.",
+    keywords: "acheter entreprise BTP, reprendre entreprise construction, achat entreprise bâtiment, reprise entreprise maçonnerie, opportunité BTP, investissement construction",
+    canonical: "https://cessionbtp.com/acheter",
+    h1: "Trouvez l'Entreprise BTP Idéale à Reprendre",
+    schema: "Service",
+  },
+
+  // PAGE ENTREPRISES (LISTE)
+  entreprises: {
+    title: "Entreprises BTP à Vendre en France | Annonces Vérifiées Construction | CessionBTP",
+    description: "Parcourez +500 entreprises BTP à vendre en France. Annonces vérifiées avec données financières : CA, résultat, effectif. Maçonnerie, plomberie, électricité, tous secteurs construction.",
+    keywords: "entreprises BTP à vendre, sociétés construction à reprendre, annonces cession BTP, fonds de commerce construction, entreprises bâtiment à vendre France",
+    canonical: "https://cessionbtp.com/entreprises",
+    h1: "Entreprises BTP à Vendre en France",
+    schema: "CollectionPage",
+  },
+
+  // PAGE À PROPOS
+  about: {
+    title: "À Propos de CessionBTP | La Plateforme Spécialisée Cession Construction",
+    description: "CessionBTP est la 1ère plateforme 100% dédiée à la cession d'entreprises BTP en France. Fondée par des experts du secteur construction. Matching IA, success fee 2%, accompagnement personnalisé.",
+    keywords: "CessionBTP, plateforme cession BTP, transmission entreprise construction, expert cession bâtiment",
+    canonical: "https://cessionbtp.com/a-propos",
+    h1: "CessionBTP, Spécialiste de la Transmission d'Entreprises BTP",
+    schema: "AboutPage",
+  },
+
+  // PAGE CONTACT
+  contact: {
+    title: "Contactez CessionBTP | Expert Cession Entreprise BTP | Réponse 24h",
+    description: "Contactez nos experts en cession d'entreprises BTP. Réponse garantie sous 24h. Accompagnement gratuit pour vendeurs et acheteurs. Paris, Lyon, Marseille, toute la France.",
+    keywords: "contact CessionBTP, expert cession BTP, conseil transmission entreprise construction",
+    canonical: "https://cessionbtp.com/contact",
+    h1: "Contactez Nos Experts BTP",
+    schema: "ContactPage",
+  },
+
+  // PAGE COMMENT ÇA MARCHE
+  howItWorks: {
+    title: "Comment Ça Marche | Processus Cession Entreprise BTP en 3 Étapes | CessionBTP",
+    description: "Découvrez le processus de cession avec CessionBTP : 1) Estimation gratuite 2) Matching acheteurs qualifiés 3) Accompagnement jusqu'à la signature. Simple, rapide, sécurisé.",
+    keywords: "comment vendre entreprise BTP, processus cession construction, étapes vente entreprise bâtiment",
+    canonical: "https://cessionbtp.com/comment-ca-marche",
+    h1: "Comment Vendre ou Acheter une Entreprise BTP avec CessionBTP",
+    schema: "HowTo",
+  },
+
+  // PAGE TARIFS
+  pricing: {
+    title: "Tarifs CessionBTP | Success Fee 2% - Le Moins Cher du Marché | Sans Frais Cachés",
+    description: "Tarifs transparents CessionBTP : Success fee 2% uniquement à la vente. Estimation gratuite, publication gratuite, accompagnement inclus. Aucun frais caché. 4x moins cher que la concurrence.",
+    keywords: "tarifs cession BTP, prix vente entreprise construction, commission cession entreprise, success fee BTP",
+    canonical: "https://cessionbtp.com/tarifs",
+    h1: "Tarifs Transparents - Success Fee 2% Seulement",
+    schema: "PriceSpecification",
+  },
+
+  // PAGE FAQ
+  faq: {
+    title: "FAQ Cession Entreprise BTP | Questions Fréquentes Vente & Achat Construction",
+    description: "Toutes les réponses à vos questions sur la cession d'entreprises BTP. Valorisation, processus, délais, fiscalité, accompagnement. Guide complet par nos experts.",
+    keywords: "questions cession BTP, FAQ vente entreprise construction, guide transmission entreprise bâtiment",
+    canonical: "https://cessionbtp.com/faq",
+    h1: "Questions Fréquentes sur la Cession d'Entreprises BTP",
+    schema: "FAQPage",
+  },
+
+  // PAGE ROADMAP
+  roadmap: {
+    title: "Roadmap CessionBTP | Fonctionnalités à Venir Plateforme Cession BTP",
+    description: "Découvrez les prochaines fonctionnalités de CessionBTP : IA avancée, API, matching amélioré, nouveaux outils pour vendeurs et acheteurs.",
+    keywords: "roadmap CessionBTP, nouvelles fonctionnalités cession BTP",
+    canonical: "https://cessionbtp.com/roadmap",
+    h1: "Notre Roadmap - Les Prochaines Innovations CessionBTP",
+    schema: "WebPage",
+  },
+};
+
+// SCHEMA.ORG - ORGANISATION
+export const organizationSchema = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "CessionBTP",
+  "legalName": "CessionBTP SAS",
+  "url": "https://cessionbtp.com",
+  "logo": "https://cessionbtp.com/logo.png",
+  "foundingDate": "2024",
+  "description": "Plateforme n°1 pour acheter et vendre des entreprises du BTP en France",
+  "address": {
+    "@type": "PostalAddress",
+    "addressCountry": "FR",
+    "addressRegion": "Île-de-France",
+    "addressLocality": "Paris"
+  },
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "contactType": "Service Client",
+    "telephone": "+33-1-23-45-67-89",
+    "email": "contact@cessionbtp.fr",
+    "availableLanguage": "French"
+  },
+  "sameAs": [
+    "https://www.linkedin.com/company/cessionbtp",
+    "https://twitter.com/cessionbtp",
+    "https://www.facebook.com/cessionbtp"
+  ],
+  "areaServed": {
+    "@type": "Country",
+    "name": "France"
+  },
+  "serviceType": "Cession et transmission d'entreprises BTP",
+  "knowsAbout": [
+    "Cession entreprise BTP",
+    "Transmission entreprise construction",
+    "Valorisation entreprise bâtiment",
+    "Estimation entreprise BTP"
+  ]
+};
+
+// SCHEMA.ORG - SERVICE ESTIMATION
+export const serviceEstimationSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Estimation Gratuite Entreprise BTP par IA",
+  "description": "Estimez gratuitement la valeur de votre entreprise BTP en 2 minutes avec notre intelligence artificielle",
+  "provider": {
+    "@type": "Organization",
+    "name": "CessionBTP"
+  },
+  "serviceType": "Estimation d'entreprise",
+  "areaServed": {
+    "@type": "Country",
+    "name": "France"
+  },
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "EUR",
+    "description": "Estimation gratuite sans engagement"
+  },
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.8",
+    "reviewCount": "156"
+  }
+};
+
+// BREADCRUMB EXEMPLE
+export const breadcrumbSchema = (items: Array<{name: string, url: string}>) => ({
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": items.map((item, index) => ({
+    "@type": "ListItem",
+    "position": index + 1,
+    "name": item.name,
+    "item": item.url
+  }))
 });
 
-// Helper pour générer le Schema.org d'un article de blog
-export const getBlogPostSchema = (post: {
-  title: string;
-  description: string;
-  publishedTime: string;
-  modifiedTime?: string;
-  author: string;
-  image?: string;
-}) => ({
+// FAQ SCHEMA EXEMPLE
+export const faqSchema = (faqs: Array<{question: string, answer: string}>) => ({
   "@context": "https://schema.org",
-  "@type": "BlogPosting",
-  headline: post.title,
-  description: post.description,
-  datePublished: post.publishedTime,
-  dateModified: post.modifiedTime || post.publishedTime,
-  author: {
-    "@type": "Person",
-    name: post.author
-  },
-  publisher: {
-    "@type": "Organization",
-    name: "CessionBTP",
-    logo: {
-      "@type": "ImageObject",
-      url: "https://cessionbtp.fr/logo-hd.png"
+  "@type": "FAQPage",
+  "mainEntity": faqs.map(faq => ({
+    "@type": "Question",
+    "name": faq.question,
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": faq.answer
     }
-  },
-  ...(post.image && {
-    image: {
-      "@type": "ImageObject",
-      url: post.image
-    }
-  })
+  }))
 });
+
+export default {
+  siteConfig,
+  pageSEO,
+  organizationSchema,
+  serviceEstimationSchema,
+  breadcrumbSchema,
+  faqSchema
+};
 
 // Helper pour générer le Schema.org FAQ
 export const getFAQSchema = (faqs: Array<{ question: string; answer: string }>) => ({
