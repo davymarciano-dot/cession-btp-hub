@@ -9,6 +9,7 @@ import { DepartementsSelect } from "@/data/departements";
 import EstimationDialog from "@/components/EstimationDialog";
 import { useToast } from "@/hooks/use-toast";
 import SEOHead from "@/components/SEOHead";
+import SiretAutocomplete from "@/components/SiretAutocomplete";
 
 // Secteurs BTP les plus courants
 const secteursBTP = [
@@ -31,6 +32,8 @@ const secteursBTP = [
 ];
 
 const Estimer = () => {
+  const [siret, setSiret] = useState("");
+  const [raisonSociale, setRaisonSociale] = useState("");
   const [ca, setCa] = useState("");
   const [secteur, setSecteur] = useState("");
   const [departement, setDepartement] = useState("");
@@ -38,6 +41,31 @@ const Estimer = () => {
   const [estimation, setEstimation] = useState<any>(null);
   const [showDialog, setShowDialog] = useState(false);
   const { toast } = useToast();
+
+  // Callback quand le SIRET est validé et les données récupérées
+  const handleSiretDataFetched = (data: any) => {
+    if (data.siret) {
+      setSiret(data.siret);
+    }
+    if (data.raisonSociale) {
+      setRaisonSociale(data.raisonSociale);
+    }
+    if (data.secteurActivite) {
+      // Mapper le secteur récupéré vers nos valeurs
+      const secteurLower = data.secteurActivite.toLowerCase();
+      if (secteurLower.includes('électri')) setSecteur('electricien');
+      else if (secteurLower.includes('plomb')) setSecteur('plombier');
+      else if (secteurLower.includes('maçon')) setSecteur('macon');
+      else if (secteurLower.includes('menuisi')) setSecteur('menuisier');
+      else if (secteurLower.includes('couvr')) setSecteur('couvreur');
+      else if (secteurLower.includes('peintr')) setSecteur('peintre');
+      else if (secteurLower.includes('chauffage')) setSecteur('chauffagiste');
+      else setSecteur('autre');
+    }
+    if (data.departement) {
+      setDepartement(data.departement);
+    }
+  };
 
   const handleEstimation = async () => {
     if (!ca || !secteur || !departement) {
@@ -66,6 +94,8 @@ const Estimer = () => {
       ca: caNumber,
       secteur,
       departement,
+      siret: siret || undefined,
+      raisonSociale: raisonSociale || undefined,
     };
 
     setEstimation(estimationData);
@@ -146,6 +176,27 @@ const Estimer = () => {
                 </div>
 
                 <div className="space-y-6">
+                  {/* SIRET - NOUVEAU CHAMP EN PREMIER */}
+                  <div>
+                    <SiretAutocomplete onDataFetched={handleSiretDataFetched} />
+                  </div>
+
+                  {/* Raison sociale (pré-rempli ou modifiable) */}
+                  {raisonSociale && (
+                    <div>
+                      <label className="block text-sm font-semibold text-slate-700 mb-2">
+                        🏢 Raison sociale
+                      </label>
+                      <Input
+                        type="text"
+                        placeholder="Raison sociale"
+                        className="h-14 text-lg border-2 border-slate-200 focus:border-orange-500 rounded-xl"
+                        value={raisonSociale}
+                        onChange={(e) => setRaisonSociale(e.target.value)}
+                      />
+                    </div>
+                  )}
+
                   {/* CA */}
                   <div>
                     <label className="block text-sm font-semibold text-slate-700 mb-2">

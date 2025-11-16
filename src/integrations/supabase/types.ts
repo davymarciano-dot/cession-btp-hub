@@ -1372,6 +1372,7 @@ export type Database = {
           prenom: string | null
           raison_sociale: string | null
           secteur: string | null
+          siret: string | null
           telephone: string
         }
         Insert: {
@@ -1388,6 +1389,7 @@ export type Database = {
           prenom?: string | null
           raison_sociale?: string | null
           secteur?: string | null
+          siret?: string | null
           telephone: string
         }
         Update: {
@@ -1404,6 +1406,7 @@ export type Database = {
           prenom?: string | null
           raison_sociale?: string | null
           secteur?: string | null
+          siret?: string | null
           telephone?: string
         }
         Relationships: []
