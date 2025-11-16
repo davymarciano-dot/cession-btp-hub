@@ -27,14 +27,6 @@ const Header = () => {
             </Link>
 
             <Link
-              to="/acheter"
-              className="group relative text-slate-800 hover:text-orange-500 transition-all duration-300 font-semibold text-lg px-4 py-2"
-            >
-              <span className="relative z-10">Acheter</span>
-              <span className="absolute bottom-0 left-0 w-0 h-1 bg-gradient-to-r from-orange-500 to-pink-500 group-hover:w-full transition-all duration-300"></span>
-            </Link>
-
-            <Link
               to="/entreprises"
               className="group relative text-slate-800 hover:text-orange-500 transition-all duration-300 font-semibold text-lg px-4 py-2"
             >
@@ -105,14 +97,6 @@ const Header = () => {
                 onClick={() => setMobileMenuOpen(false)}
               >
                 💼 Vendre
-              </Link>
-
-              <Link
-                to="/acheter"
-                className="text-slate-800 hover:text-white hover:bg-gradient-to-r hover:from-orange-500 hover:to-pink-500 transition-all font-semibold text-lg py-3 px-4 rounded-lg"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                🔍 Acheter
               </Link>
 
               <Link
