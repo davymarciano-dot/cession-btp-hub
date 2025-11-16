@@ -31,8 +31,8 @@ const Header = () => {
               className="group relative text-slate-800 hover:text-orange-500 transition-all duration-300 font-semibold text-lg px-4 py-2"
             >
               <span className="relative z-10">
-                <span className="hidden xl:inline">Entreprises à Vendre</span>
-                <span className="xl:hidden">Entreprises</span>
+                <span className="hidden md:inline">Entreprises à Vendre</span>
+                <span className="md:hidden">Entreprises</span>
               </span>
               <span className="absolute bottom-0 left-0 w-0 h-1 bg-gradient-to-r from-orange-500 to-pink-500 group-hover:w-full transition-all duration-300"></span>
             </Link>
