@@ -57,7 +57,7 @@ const Footer = () => {
           <div className="lg:col-span-2">
             <div className="mb-6">
               <img 
-                src="/images/logo-cessionbtp-transparent-final.png" 
+                src="/images/logo-cessionbtp-transparent.png" 
                 alt="CessionBTP" 
                 className="h-12 w-auto block object-contain"
               />
