@@ -1,9 +1,10 @@
-import { useState } from 'react';
-import { Check, AlertCircle, Loader } from 'lucide-react';
+import { useState, useEffect, useRef } from 'react';
+import { Check, AlertCircle, Loader, Search } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
 import { Input } from './ui/input';
 import { Label } from './ui/label';
+import { Command, CommandEmpty, CommandGroup, CommandItem, CommandList } from './ui/command';
 
 interface SiretAutocompleteProps {
   onDataFetched: (data: any) => void;
@@ -11,6 +12,7 @@ interface SiretAutocompleteProps {
 }
 
 interface CompanyData {
+  siret?: string;
   raisonSociale: string;
   formeJuridique: string;
   anneeCreation: string;
@@ -28,7 +30,22 @@ const SiretAutocomplete = ({ onDataFetched, initialValue = '' }: SiretAutocomple
   const [isValid, setIsValid] = useState<boolean | null>(null);
   const [error, setError] = useState('');
   const [companyData, setCompanyData] = useState<CompanyData | null>(null);
+  const [searchResults, setSearchResults] = useState<CompanyData[]>([]);
+  const [showDropdown, setShowDropdown] = useState(false);
+  const [isSearching, setIsSearching] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
   const { toast } = useToast();
+
+  // Fermer le dropdown si on clique en dehors
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setShowDropdown(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
 
   // Validation du format SIRET avec algorithme de Luhn
   const validateSiret = (value: string): boolean => {
@@ -61,7 +78,63 @@ const SiretAutocomplete = ({ onDataFetched, initialValue = '' }: SiretAutocomple
     return value;
   };
 
-  // Récupérer les données de l'entreprise via l'edge function
+  // Rechercher des entreprises via l'API Pappers
+  const searchCompanies = async (query: string) => {
+    if (query.length < 3) {
+      setSearchResults([]);
+      setShowDropdown(false);
+      return;
+    }
+
+    setIsSearching(true);
+    try {
+      const { data, error: searchError } = await supabase.functions.invoke('search-siret', {
+        body: { query }
+      });
+
+      if (searchError) throw searchError;
+
+      if (data && data.results) {
+        setSearchResults(data.results);
+        setShowDropdown(data.results.length > 0);
+      }
+    } catch (err: any) {
+      console.error('Search error:', err);
+      setSearchResults([]);
+      setShowDropdown(false);
+    } finally {
+      setIsSearching(false);
+    }
+  };
+
+  // Sélectionner une entreprise depuis les résultats
+  const selectCompany = (company: CompanyData) => {
+    setSiret(company.siret);
+    setCompanyData(company);
+    setIsValid(true);
+    setShowDropdown(false);
+    setSearchResults([]);
+
+    onDataFetched({
+      siret: company.siret,
+      raisonSociale: company.raisonSociale,
+      formeJuridique: company.formeJuridique,
+      anneeCreation: company.anneeCreation,
+      secteurActivite: company.secteurActivite,
+      ville: company.ville,
+      codePostal: company.codePostal,
+      departement: company.departement,
+      adresse: company.adresse,
+      nombreSalaries: company.nombreSalaries
+    });
+
+    toast({
+      title: "Entreprise sélectionnée !",
+      description: company.raisonSociale,
+    });
+  };
+
+  // Récupérer les données de l'entreprise via l'edge function (fallback)
   const fetchCompanyData = async (siretNumber: string) => {
     setIsLoading(true);
     setError('');
@@ -78,7 +151,6 @@ const SiretAutocomplete = ({ onDataFetched, initialValue = '' }: SiretAutocomple
       if (data && data.raisonSociale) {
         setCompanyData(data);
         
-        // Passer les données au formulaire parent
         onDataFetched({
           siret: siretNumber.replace(/\s/g, ''),
           raisonSociale: data.raisonSociale || '',
@@ -103,10 +175,9 @@ const SiretAutocomplete = ({ onDataFetched, initialValue = '' }: SiretAutocomple
     } catch (err: any) {
       console.log('SIRET not found, allowing manual entry:', err);
       setError('SIRET non trouvé. Vous pouvez continuer en remplissant les champs manuellement.');
-      setIsValid(true); // Valide quand même pour permettre la saisie manuelle
+      setIsValid(true);
       setCompanyData(null);
       
-      // Passer quand même le SIRET au parent
       onDataFetched({
         siret: siretNumber.replace(/\s/g, ''),
       });
@@ -121,16 +192,23 @@ const SiretAutocomplete = ({ onDataFetched, initialValue = '' }: SiretAutocomple
     }
   };
 
-  // Gérer les changements de l'input
+  // Gérer les changements de l'input avec recherche en temps réel
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value.replace(/[^\d\s]/g, '');
     
     if (value.replace(/\s/g, '').length <= 14) {
       setSiret(value);
+      setCompanyData(null);
+      setIsValid(null);
+      setError('');
       
       const cleanedValue = value.replace(/\s/g, '');
       
-      if (cleanedValue.length === 14) {
+      // Recherche dès 3 caractères
+      if (cleanedValue.length >= 3 && cleanedValue.length < 14) {
+        searchCompanies(cleanedValue);
+      } else if (cleanedValue.length === 14) {
+        setShowDropdown(false);
         const valid = validateSiret(cleanedValue);
         setIsValid(valid);
         
@@ -138,18 +216,16 @@ const SiretAutocomplete = ({ onDataFetched, initialValue = '' }: SiretAutocomple
           fetchCompanyData(cleanedValue);
         } else {
           setError('SIRET invalide (vérification de la clé)');
-          setCompanyData(null);
         }
       } else {
-        setIsValid(null);
-        setError('');
-        setCompanyData(null);
+        setSearchResults([]);
+        setShowDropdown(false);
       }
     }
   };
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-4" ref={dropdownRef}>
       <div className="relative">
         <Label htmlFor="siret">
           Numéro SIRET *
@@ -161,7 +237,7 @@ const SiretAutocomplete = ({ onDataFetched, initialValue = '' }: SiretAutocomple
             type="text"
             value={formatSiret(siret)}
             onChange={handleChange}
-            placeholder="123 456 789 00012"
+            placeholder="Tapez un SIRET ou raison sociale..."
             className={`pr-10 ${
               isValid === true ? 'border-green-500 focus-visible:ring-green-500' : ''
             } ${
@@ -171,11 +247,47 @@ const SiretAutocomplete = ({ onDataFetched, initialValue = '' }: SiretAutocomple
           
           {/* Icône de statut */}
           <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none">
-            {isLoading && <Loader className="w-5 h-5 text-primary animate-spin" />}
+            {(isLoading || isSearching) && <Loader className="w-5 h-5 text-primary animate-spin" />}
             {isValid === true && !isLoading && <Check className="w-5 h-5 text-green-500" />}
             {isValid === false && !isLoading && <AlertCircle className="w-5 h-5 text-destructive" />}
+            {!isLoading && !isSearching && !isValid && siret.length >= 3 && <Search className="w-5 h-5 text-muted-foreground" />}
           </div>
         </div>
+
+        {/* Dropdown des résultats */}
+        {showDropdown && searchResults.length > 0 && (
+          <div className="absolute z-50 w-full mt-1 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg shadow-lg max-h-64 overflow-y-auto">
+            <Command>
+              <CommandList>
+                <CommandGroup>
+                  {searchResults.map((company, index) => (
+                    <CommandItem
+                      key={index}
+                      onSelect={() => selectCompany(company)}
+                      className="cursor-pointer hover:bg-slate-100 dark:hover:bg-slate-700 p-3"
+                    >
+                      <div className="flex flex-col gap-1 w-full">
+                        <div className="flex items-center justify-between">
+                          <span className="font-semibold text-sm">{company.raisonSociale}</span>
+                          <span className="text-xs text-muted-foreground">{company.siret}</span>
+                        </div>
+                        <div className="text-xs text-muted-foreground">
+                          {company.secteurActivite}
+                        </div>
+                        <div className="text-xs text-muted-foreground">
+                          {company.ville} {company.codePostal && `(${company.codePostal})`}
+                        </div>
+                      </div>
+                    </CommandItem>
+                  ))}
+                </CommandGroup>
+                {searchResults.length === 0 && (
+                  <CommandEmpty>Aucun résultat trouvé</CommandEmpty>
+                )}
+              </CommandList>
+            </Command>
+          </div>
+        )}
 
         {/* Message d'erreur ou info */}
         {error && (
@@ -201,8 +313,8 @@ const SiretAutocomplete = ({ onDataFetched, initialValue = '' }: SiretAutocomple
       </div>
 
       <div className="text-xs text-muted-foreground">
-        <p>💡 Le SIRET sera vérifié automatiquement via l'API publique data.gouv.fr</p>
-        <p className="mt-1">Si l'entreprise n'est pas trouvée, vous pourrez remplir les champs manuellement.</p>
+        <p>💡 Tapez au moins 3 caractères pour rechercher une entreprise</p>
+        <p className="mt-1">Vous pouvez aussi saisir manuellement un SIRET de 14 chiffres.</p>
       </div>
     </div>
   );
