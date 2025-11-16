@@ -78,7 +78,7 @@ const SiretAutocomplete = ({ onDataFetched, initialValue = '' }: SiretAutocomple
     return value;
   };
 
-  // Rechercher des entreprises via l'API Pappers (temporairement désactivé)
+  // Rechercher des entreprises via l'API du gouvernement
   const searchCompanies = async (query: string) => {
     if (query.length < 3) {
       setSearchResults([]);
@@ -88,10 +88,37 @@ const SiretAutocomplete = ({ onDataFetched, initialValue = '' }: SiretAutocomple
 
     setIsSearching(true);
     try {
-      // Temporairement désactivé - pas d'appel API
-      console.log('🔍 Recherche SIRET désactivée temporairement:', query);
-      setSearchResults([]);
-      setShowDropdown(false);
+      const response = await fetch(
+        `https://recherche-entreprises.api.gouv.fr/search?q=${encodeURIComponent(query)}&per_page=5`,
+        {
+          method: 'GET',
+          headers: {
+            'Accept': 'application/json',
+          }
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error('Erreur lors de la recherche');
+      }
+
+      const data = await response.json();
+      
+      const results = data.results?.map((result: any) => ({
+        siret: result.siege?.siret || '',
+        raisonSociale: result.nom_complet || result.nom_raison_sociale || '',
+        formeJuridique: result.nature_juridique || '',
+        anneeCreation: result.date_creation ? new Date(result.date_creation).getFullYear().toString() : '',
+        secteurActivite: result.activite_principale || '',
+        ville: result.siege?.commune || '',
+        codePostal: result.siege?.code_postal || '',
+        departement: result.siege?.code_postal?.substring(0, 2) || '',
+        adresse: result.siege?.libelle_voie || '',
+        nombreSalaries: result.tranche_effectif_salarie || '0',
+      })) || [];
+      
+      setSearchResults(results);
+      setShowDropdown(results.length > 0);
     } catch (err: any) {
       console.error('Search error:', err);
       setSearchResults([]);
@@ -128,41 +155,65 @@ const SiretAutocomplete = ({ onDataFetched, initialValue = '' }: SiretAutocomple
     });
   };
 
-  // Récupérer les données de l'entreprise (temporairement désactivé)
+  // Récupérer les données de l'entreprise via l'API du gouvernement
   const fetchCompanyData = async (siretNumber: string) => {
     setIsLoading(true);
     setError('');
     
     try {
-      // Temporairement désactivé - valider le SIRET manuellement
-      console.log('📋 Récupération données SIRET désactivée temporairement:', siretNumber);
+      const response = await fetch(
+        `https://recherche-entreprises.api.gouv.fr/search?q=${siretNumber}`,
+        {
+          method: 'GET',
+          headers: {
+            'Accept': 'application/json',
+          }
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error('SIRET non trouvé');
+      }
+
+      const data = await response.json();
       
-      setError('Recherche SIRET temporairement indisponible. Veuillez remplir les champs manuellement.');
-      setIsValid(true);
-      setCompanyData(null);
-      
-      onDataFetched({
-        siret: siretNumber.replace(/\s/g, ''),
-      });
-      
-      toast({
-        title: "SIRET validé",
-        description: "Veuillez remplir les autres champs manuellement.",
-      });
+      if (data.results && data.results.length > 0) {
+        const company = data.results[0];
+        const companyInfo: CompanyData = {
+          siret: company.siege?.siret || siretNumber,
+          raisonSociale: company.nom_complet || company.nom_raison_sociale || '',
+          formeJuridique: company.nature_juridique || '',
+          anneeCreation: company.date_creation ? new Date(company.date_creation).getFullYear().toString() : '',
+          secteurActivite: company.activite_principale || '',
+          ville: company.siege?.commune || '',
+          codePostal: company.siege?.code_postal || '',
+          departement: company.siege?.code_postal?.substring(0, 2) || '',
+          adresse: company.siege?.libelle_voie || '',
+          nombreSalaries: company.tranche_effectif_salarie || '0',
+        };
+        
+        setCompanyData(companyInfo);
+        setIsValid(true);
+        
+        onDataFetched(companyInfo);
+        
+        toast({
+          title: "✅ Entreprise trouvée",
+          description: companyInfo.raisonSociale,
+        });
+      } else {
+        throw new Error('Entreprise non trouvée');
+      }
     } catch (err: any) {
       console.log('SIRET error:', err);
-      setError('SIRET non trouvé. Vous pouvez continuer en remplissant les champs manuellement.');
-      setIsValid(true);
+      setError(err.message || 'SIRET non trouvé. Vous pouvez continuer en remplissant les champs manuellement.');
+      setIsValid(false);
       setCompanyData(null);
       
-      onDataFetched({
-        siret: siretNumber.replace(/\s/g, ''),
-      });
-      
       toast({
-        title: "SIRET validé",
-        description: "Continuez en remplissant les champs manuellement.",
-        variant: "default",
+        title: "Erreur",
+        description: err.message || "SIRET non trouvé",
+        variant: "destructive",
       });
     } finally {
       setIsLoading(false);
