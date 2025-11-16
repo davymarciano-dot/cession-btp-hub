@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
+import logo from "@/assets/logo-cessionbtp.png";
 
 const Header = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -12,10 +13,7 @@ const Header = () => {
         <div className="flex items-center justify-between gap-8">
           {/* LOGO GÉANT - Prend toute la hauteur du menu */}
           <Link to="/" className="hover:scale-105 transition-transform duration-300">
-            <span className="text-4xl font-black tracking-tight">
-              <span className="text-orange-500">Cession</span>
-              <span className="text-blue-600">BTP</span>
-            </span>
+            <img src={logo} alt="CessionBTP" className="h-12" />
           </Link>
 
           {/* NAVIGATION DESKTOP - Alignée à droite */}
