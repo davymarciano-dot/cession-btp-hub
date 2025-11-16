@@ -13,7 +13,7 @@ const Header = () => {
         <div className="flex items-center justify-between gap-8">
           {/* LOGO GÉANT - Prend toute la hauteur du menu */}
           <Link to="/" className="hover:scale-105 transition-transform duration-300">
-            <img src={logo} alt="CessionBTP" className="h-[70px] w-auto" />
+            <img src={logo} alt="CessionBTP" className="h-auto w-full max-w-md" />
           </Link>
 
           {/* NAVIGATION DESKTOP - Alignée à droite */}
