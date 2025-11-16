@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
+import Logo from "@/components/Logo";
 
 const Header = () => {
   const navigate = useNavigate();
@@ -22,10 +23,8 @@ const Header = () => {
         <div className="flex items-center justify-between">
           {/* LOGO CESSIONBTP */}
           <Link to="/" className="hover:scale-105 transition-transform">
-            <img 
-              src="/images/logo-cessionbtp-pure.png" 
-              alt="CessionBTP" 
-              className="block object-contain h-24 md:h-48 lg:h-56 w-auto shrink-0"
+            <Logo 
+              className="block object-contain h-24 md:h-48 lg:h-56 w-auto shrink-0" 
             />
           </Link>
 
