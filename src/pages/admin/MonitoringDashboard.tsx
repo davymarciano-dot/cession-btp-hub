@@ -66,12 +66,49 @@ const MonitoringDashboard = () => {
   const [performanceData, setPerformanceData] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
+  // Vérifier les permissions admin
+  useEffect(() => {
+    const checkAdminAccess = async () => {
+      try {
+        const { data: { session } } = await supabase.auth.getSession();
+        
+        if (!session) {
+          toast.error("Vous devez être connecté");
+          window.location.href = "/auth";
+          return;
+        }
+
+        const { data: userRoles, error: roleError } = await supabase
+          .from("user_roles")
+          .select("role")
+          .eq("user_id", session.user.id)
+          .eq("role", "admin")
+          .single();
+
+        if (roleError || !userRoles) {
+          toast.error("Accès refusé : permissions administrateur requises");
+          window.location.href = "/";
+          return;
+        }
+
+        setIsLoading(false);
+      } catch (error) {
+        toast.error("Erreur lors de la vérification des permissions");
+        window.location.href = "/";
+      }
+    };
+
+    checkAdminAccess();
+  }, []);
+
   // Charger les métriques initiales
   useEffect(() => {
-    loadMetrics();
-    const interval = setInterval(loadMetrics, 10000); // Refresh toutes les 10s
-    return () => clearInterval(interval);
-  }, []);
+    if (!isLoading) {
+      loadMetrics();
+      const interval = setInterval(loadMetrics, 10000);
+      return () => clearInterval(interval);
+    }
+  }, [isLoading]);
 
   // Surveiller les métriques en temps réel
   useEffect(() => {

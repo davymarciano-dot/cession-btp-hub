@@ -91,7 +91,52 @@ const Admin = () => {
   };
 
   useEffect(() => {
-    fetchAnnonces();
+    const checkAdminAccess = async () => {
+      try {
+        const { data: { session } } = await supabase.auth.getSession();
+        
+        if (!session) {
+          toast({
+            title: "Erreur d'authentification",
+            description: "Vous devez être connecté pour accéder à cette page",
+            variant: "destructive"
+          });
+          window.location.href = "/auth";
+          return;
+        }
+
+        // Check if user has admin role
+        const { data: userRoles, error: roleError } = await supabase
+          .from("user_roles")
+          .select("role")
+          .eq("user_id", session.user.id)
+          .eq("role", "admin")
+          .single();
+
+        if (roleError || !userRoles) {
+          toast({
+            title: "Accès refusé",
+            description: "Vous n'avez pas les permissions administrateur",
+            variant: "destructive"
+          });
+          window.location.href = "/";
+          return;
+        }
+
+        // User is admin, fetch data
+        fetchAnnonces();
+      } catch (error) {
+        console.error("Erreur lors de la vérification des permissions:", error);
+        toast({
+          title: "Erreur",
+          description: "Erreur lors de la vérification des permissions",
+          variant: "destructive"
+        });
+        window.location.href = "/";
+      }
+    };
+
+    checkAdminAccess();
   }, []);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
