@@ -11,19 +11,11 @@ const Header = () => {
       <div className="container mx-auto px-6 py-2">
         <div className="flex items-center justify-between gap-8">
           {/* LOGO GÉANT - Prend toute la hauteur du menu */}
-          <Link to="/" className="flex items-center gap-1 hover:scale-105 transition-transform duration-300">
-            <div className="flex items-center">
-              <svg width="60" height="60" viewBox="0 0 100 100" className="mr-2">
-                {/* X croisé - partie bleue */}
-                <path d="M15,15 L45,45 L15,75 L25,75 L45,55 L25,35 L45,15 Z" fill="#1E90FF"/>
-                {/* X croisé - partie orange */}
-                <path d="M55,15 L75,35 L55,55 L75,75 L85,75 L55,45 L85,15 Z" fill="#FF8C00"/>
-              </svg>
-              <span className="text-3xl font-black tracking-tight">
-                <span className="text-orange-500">Cession</span>
-                <span className="text-blue-600">BTP</span>
-              </span>
-            </div>
+          <Link to="/" className="hover:scale-105 transition-transform duration-300">
+            <span className="text-4xl font-black tracking-tight">
+              <span className="text-orange-500">Cession</span>
+              <span className="text-blue-600">BTP</span>
+            </span>
           </Link>
 
           {/* NAVIGATION DESKTOP - Alignée à droite */}
