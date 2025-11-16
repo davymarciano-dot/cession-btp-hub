@@ -1,5 +1,6 @@
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
 import { corsHeaders } from "../_shared/cors.ts";
+import { checkRateLimit, getClientIP } from '../_shared/rateLimit.ts';
 
 serve(async (req) => {
   if (req.method === 'OPTIONS') {
@@ -7,6 +8,28 @@ serve(async (req) => {
   }
 
   try {
+    // Rate limiting - 10 requests per minute per IP
+    const clientIP = getClientIP(req);
+    const rateLimitResult = checkRateLimit(clientIP, { windowMs: 60000, maxRequests: 10 });
+    
+    if (rateLimitResult.limited) {
+      console.log(`Rate limit exceeded for IP: ${clientIP}`);
+      return new Response(
+        JSON.stringify({ 
+          error: 'Trop de requêtes. Veuillez réessayer dans quelques instants.',
+          retryAfter: rateLimitResult.retryAfter 
+        }),
+        { 
+          status: 429, 
+          headers: { 
+            ...corsHeaders, 
+            'Content-Type': 'application/json',
+            'Retry-After': String(rateLimitResult.retryAfter)
+          } 
+        }
+      );
+    }
+
     const { siret } = await req.json();
 
     if (!siret || siret.length !== 14) {
