@@ -150,23 +150,6 @@ export const blogArticles: BlogArticle[] = [
     }
   },
   {
-    id: 7,
-    slug: 'audit-entreprise-btp-avant-achat',
-    title: 'Check-list : 47 Points à Vérifier Avant d\'Acheter une Entreprise BTP',
-    excerpt: 'L\'audit complet pour sécuriser votre reprise d\'entreprise BTP',
-    category: 'reprendre',
-    readTime: 15,
-    author: 'CessionBTP',
-    publishedAt: '2025-11-08',
-    featured: true,
-    content: `<h2>L'audit pré-acquisition</h2><p>47 points de contrôle essentiels...</p>`,
-    seo: {
-      metaTitle: 'Audit Entreprise BTP : 47 Points à Vérifier | CessionBTP',
-      metaDescription: 'Check-list complète pour auditer une entreprise BTP avant rachat.',
-      keywords: ['audit entreprise btp', 'due diligence btp', 'check-list rachat']
-    }
-  },
-  {
     id: 8,
     slug: 'marche-cession-btp-2026-chiffres',
     title: 'Marché de la Cession BTP 2026 : Chiffres et Tendances',
@@ -185,39 +168,6 @@ export const blogArticles: BlogArticle[] = [
   },
   {
     id: 9,
-    slug: 'erreurs-eviter-vente-entreprise-btp',
-    title: '10 Erreurs Fatales à Éviter lors de la Vente de votre Entreprise',
-    excerpt: 'Les pièges à éviter absolument pour réussir la vente de votre entreprise BTP',
-    category: 'conseils',
-    readTime: 8,
-    author: 'CessionBTP',
-    publishedAt: '2025-11-01',
-    featured: true,
-    content: `<h2>Les erreurs les plus coûteuses</h2><p>10 pièges à éviter absolument...</p>`,
-    seo: {
-      metaTitle: '10 Erreurs à Éviter Vente Entreprise BTP | CessionBTP',
-      metaDescription: 'Les erreurs fatales qui peuvent faire échouer la vente de votre entreprise.',
-      keywords: ['erreurs vente entreprise', 'pièges cession btp', 'conseils vente']
-    }
-  },
-  {
-    id: 10,
-    slug: 'vendre-entreprise-plomberie-2026',
-    title: 'Vendre son Entreprise de Plomberie : Guide Spécifique 2026',
-    excerpt: 'Tout ce qu\'il faut savoir pour vendre une entreprise de plomberie en 2026',
-    category: 'secteurs',
-    readTime: 12,
-    author: 'CessionBTP',
-    publishedAt: '2025-10-28',
-    content: `<h2>Spécificités du secteur plomberie</h2><p>Guide complet pour les plombiers...</p>`,
-    seo: {
-      metaTitle: 'Vendre Entreprise Plomberie 2026 : Guide Complet | CessionBTP',
-      metaDescription: 'Guide spécifique pour vendre une entreprise de plomberie en 2026.',
-      keywords: ['entreprise plomberie', 'vente plombier', 'cession plomberie']
-    }
-  },
-  {
-    id: 11,
     slug: 'erreurs-fatales-vente-entreprise-btp',
     title: '10 Erreurs Fatales à Éviter lors de la Vente de votre Entreprise BTP',
     excerpt: 'Découvrez les 10 erreurs les plus coûteuses (20 000€ à 100 000€) et comment les éviter pour sécuriser votre cession.',
@@ -233,7 +183,7 @@ export const blogArticles: BlogArticle[] = [
     }
   },
   {
-    id: 12,
+    id: 10,
     slug: 'vendre-entreprise-plomberie-2026',
     title: 'Vendre son Entreprise de Plomberie : Guide Spécifique 2026',
     excerpt: 'Tout ce qu\'il faut savoir pour vendre une entreprise de plomberie en 2026. Valorisation, RGE, contrats entretien, fiscalité.',
@@ -249,7 +199,7 @@ export const blogArticles: BlogArticle[] = [
     }
   },
   {
-    id: 13,
+    id: 11,
     slug: 'audit-entreprise-btp-avant-achat',
     title: 'Check-list : 47 Points à Vérifier Avant d\'Acheter une Entreprise BTP',
     excerpt: 'L\'audit complet pour sécuriser votre reprise d\'entreprise BTP. 47 points de contrôle essentiels pour éviter les vices cachés et passifs.',
