@@ -173,10 +173,76 @@ const Entreprises = () => {
       />
       <Header />
 
+      {/* Hero Header avec recherche */}
+      <section className="bg-gradient-to-br from-primary/5 via-background to-secondary/5 py-16 border-b">
+        <div className="container mx-auto px-4 max-w-5xl text-center">
+          <h1 className="text-5xl font-bold mb-4 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+            840 Entreprises BTP à Vendre
+          </h1>
+          <p className="text-xl text-muted-foreground mb-8">
+            Trouvez l'entreprise parfaite à reprendre
+          </p>
+
+          {/* Barre de recherche proéminente */}
+          <div className="bg-card rounded-xl shadow-xl p-6 mb-8 max-w-3xl mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div className="md:col-span-1">
+                <SearchableSelect
+                  value={secteurFilter}
+                  onValueChange={setSecteurFilter}
+                  placeholder="Secteur d'activité"
+                />
+              </div>
+              <div className="md:col-span-1">
+                <Select value={regionFilter} onValueChange={setRegionFilter}>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Toute la France" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="all">Toute la France</SelectItem>
+                    <SelectItem value="75">Île-de-France</SelectItem>
+                    <SelectItem value="69">Auvergne-Rhône-Alpes</SelectItem>
+                    <SelectItem value="13">Provence-Alpes-Côte d'Azur</SelectItem>
+                    <SelectItem value="31">Occitanie</SelectItem>
+                    <SelectItem value="44">Pays de la Loire</SelectItem>
+                    <SelectItem value="33">Nouvelle-Aquitaine</SelectItem>
+                    <SelectItem value="59">Hauts-de-France</SelectItem>
+                    <SelectItem value="35">Bretagne</SelectItem>
+                    <SelectItem value="67">Grand Est</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+              <Button 
+                size="lg" 
+                className="w-full md:col-span-1"
+                onClick={applyFilters}
+              >
+                Rechercher →
+              </Button>
+            </div>
+          </div>
+
+          {/* Stats rassurantes */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-sm">
+            <div className="flex items-center justify-center gap-2 text-muted-foreground">
+              <span className="text-green-500 text-lg">✅</span>
+              <span>Délai moyen vente : 45 jours</span>
+            </div>
+            <div className="flex items-center justify-center gap-2 text-muted-foreground">
+              <span className="text-green-500 text-lg">💰</span>
+              <span>Financement jusqu'à 90%</span>
+            </div>
+            <div className="flex items-center justify-center gap-2 text-muted-foreground">
+              <span className="text-green-500 text-lg">🤝</span>
+              <span>Accompagnement gratuit</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <main className="py-12 bg-slate-50 min-h-screen">
         <div className="container mx-auto px-4">
           <div className="mb-8">
-            <h1 className="text-4xl font-bold mb-4">Entreprises BTP disponibles</h1>
             <p className="text-xl text-muted-foreground">
               {loading ? "Chargement..." : `${annonces.length > 0 ? annonces.length : (secteurFilter === "all" && regionFilter === "all") || annonces.length === 0 ? 3 : 0} ${annonces.length === 1 ? "entreprise disponible" : "entreprises disponibles"}`}
             </p>
