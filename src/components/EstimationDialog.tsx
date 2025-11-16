@@ -119,6 +119,8 @@ const EstimationDialog = ({ open, onOpenChange, estimation, isLoading, formData 
             nom: "",
             email: email.trim().toLowerCase(),
             telephone: "",
+            siret: formData?.siret || null,
+            raison_sociale: formData?.raisonSociale || null,
             ca: estimationRealiste?.ca,
             secteur: estimationRealiste?.secteur,
             departement: formData?.departement,
