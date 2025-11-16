@@ -22,32 +22,48 @@ const Header = () => {
     <header className="sticky top-0 z-50 w-full bg-white/95 backdrop-blur-md border-b border-gray-200 shadow-sm">
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-20">
-          {/* LOGO - VRAI LOGO CESSIONBTP */}
+          {/* 🎨 LOGO CESSIONBTP - VRAI DESIGN */}
           <Link to="/" className="flex items-center hover:opacity-90 transition-opacity">
-            {/* 
-              IMPORTANT : Place ton logo dans public/logo-cessionbtp.png
-              ou dans src/assets/logo-cessionbtp.png
-              
-              Ensuite, utilise le chemin approprié :
-              - Si dans public/ : src="/logo-cessionbtp.png"
-              - Si dans src/assets/ : import logo from '@/assets/logo-cessionbtp.png'
-            */}
-            <img
-              src="/logo-cessionbtp.png"
-              alt="CessionBTP - Plateforme de cession d'entreprises BTP"
-              className="h-14 w-auto object-contain"
-              onError={(e) => {
-                // Fallback si le logo n'est pas trouvé
-                e.currentTarget.style.display = "none";
-                e.currentTarget.nextElementSibling?.classList.remove("hidden");
-              }}
-            />
+            <svg
+              width="200"
+              height="50"
+              viewBox="0 0 800 150"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-12 w-auto"
+            >
+              {/* X bleu (haut gauche) */}
+              <path d="M30 30 L80 80 L30 130 L50 130 L100 80 L50 30 Z" fill="#0066FF" />
 
-            {/* Fallback texte si image pas chargée */}
-            <div className="hidden">
-              <span className="text-3xl font-extrabold text-orange-500">Cession</span>
-              <span className="text-3xl font-extrabold text-blue-900">BTP</span>
-            </div>
+              {/* X orange (bas gauche) */}
+              <path d="M130 30 L80 80 L130 130 L110 130 L60 80 L110 30 Z" fill="#FF8800" />
+
+              {/* Texte "Cession" en orange */}
+              <text
+                x="160"
+                y="105"
+                fontFamily="Arial, sans-serif"
+                fontSize="72"
+                fontWeight="bold"
+                fontStyle="italic"
+                fill="#FF8800"
+              >
+                Cession
+              </text>
+
+              {/* Texte "BTP" en bleu foncé */}
+              <text
+                x="520"
+                y="105"
+                fontFamily="Arial, sans-serif"
+                fontSize="72"
+                fontWeight="bold"
+                fontStyle="italic"
+                fill="#1E3A8A"
+              >
+                BTP
+              </text>
+            </svg>
           </Link>
 
           {/* MENU DESKTOP */}
