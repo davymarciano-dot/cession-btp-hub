@@ -452,6 +452,144 @@ const Home = () => {
         </div>
       </section>
 
+      {/* SECTION OPPORTUNITÉS À SAISIR */}
+      <section className="py-16 bg-gray-50">
+        <div className="container mx-auto px-4">
+          {/* Titre et sous-titre */}
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gray-900">
+              Opportunités à Saisir
+            </h2>
+            <p className="text-lg text-gray-600">
+              Découvrez les dernières entreprises BTP disponibles à la reprise
+            </p>
+          </div>
+
+          {/* Cards entreprises */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-7xl mx-auto">
+            {/* CARD 1 - Isolation Thermique */}
+            <div className="relative rounded-2xl p-6 shadow-lg" style={{ backgroundColor: '#FF6B35' }}>
+              {/* Badges */}
+              <div className="absolute top-4 left-4">
+                <span className="bg-white text-gray-900 px-3 py-1 rounded-full text-xs font-bold">
+                  CERTIFIÉE RGE
+                </span>
+              </div>
+              <div className="absolute top-4 right-4">
+                <span className="bg-blue-600 text-white px-3 py-1 rounded-full text-xs font-bold">
+                  VENDU
+                </span>
+              </div>
+
+              {/* Contenu */}
+              <div className="mt-12 text-white">
+                <h3 className="text-xl font-bold mb-3">
+                  Société d'Isolation Thermique
+                </h3>
+                <p className="mb-4 flex items-center gap-2">
+                  <span>📍</span>
+                  <span>Lyon, Rhône (69)</span>
+                </p>
+
+                {/* Détails */}
+                <div className="space-y-2 mb-4">
+                  <p>• Création : 2020</p>
+                  <p>• CA : 542K€</p>
+                  <p>• Effectif : 8 salariés</p>
+                </div>
+
+                {/* Tag */}
+                <div className="mt-4">
+                  <span className="bg-white px-3 py-1 rounded-full text-sm font-semibold" style={{ color: '#FF6B35' }}>
+                    Isolation et ITE
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            {/* CARD 2 - Chauffage & Climatisation */}
+            <div className="relative rounded-2xl p-6 shadow-lg" style={{ backgroundColor: '#FF6B35' }}>
+              {/* Badges */}
+              <div className="absolute top-4 left-4">
+                <span className="bg-white text-gray-900 px-3 py-1 rounded-full text-xs font-bold">
+                  RGE QUALIPAC
+                </span>
+              </div>
+              <div className="absolute top-4 right-4">
+                <span className="bg-blue-600 text-white px-3 py-1 rounded-full text-xs font-bold">
+                  VENDU
+                </span>
+              </div>
+
+              {/* Contenu */}
+              <div className="mt-12 text-white">
+                <h3 className="text-xl font-bold mb-3">
+                  Entreprise Chauffage & Climatisation
+                </h3>
+                <p className="mb-4 flex items-center gap-2">
+                  <span>📍</span>
+                  <span>Toulouse, Haute-Garonne (31)</span>
+                </p>
+
+                {/* Détails */}
+                <div className="space-y-2 mb-4">
+                  <p>• Création : 2018</p>
+                  <p>• CA : 890K€</p>
+                  <p>• Effectif : 6 salariés</p>
+                </div>
+
+                {/* Tag */}
+                <div className="mt-4">
+                  <span className="bg-white px-3 py-1 rounded-full text-sm font-semibold" style={{ color: '#FF6B35' }}>
+                    PAC et Climatisation
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            {/* CARD 3 - Entreprise Générale du Bâtiment */}
+            <div className="relative rounded-2xl p-6 shadow-lg bg-blue-600">
+              {/* Badges */}
+              <div className="absolute top-4 left-4">
+                <span className="bg-white text-gray-900 px-3 py-1 rounded-full text-xs font-bold">
+                  QUALIBAT
+                </span>
+              </div>
+              <div className="absolute top-4 right-4">
+                <span className="px-3 py-1 rounded-full text-xs font-bold text-white" style={{ backgroundColor: '#FF6B35' }}>
+                  il y a 5h
+                </span>
+              </div>
+
+              {/* Contenu */}
+              <div className="mt-12 text-white">
+                <h3 className="text-xl font-bold mb-3">
+                  Entreprise Générale du Bâtiment
+                </h3>
+                <p className="mb-4 flex items-center gap-2">
+                  <span>📍</span>
+                  <span>Nice, PACA (06)</span>
+                </p>
+
+                {/* Détails */}
+                <div className="space-y-2 mb-4">
+                  <p>• Création : 2005</p>
+                  <p>• CA : 2,8M€</p>
+                  <p>• Effectif : 22 salariés</p>
+                </div>
+
+                {/* Tag */}
+                <div className="mt-4">
+                  <span className="bg-white text-blue-600 px-3 py-1 rounded-full text-sm font-semibold">
+                    Entreprise générale tous corps d'état. Marchés publics et privés, jusqu'à 40%...
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* HERO SECTION - Double CTA Vendeurs/Acheteurs */}
       <section className="relative py-20 overflow-hidden bg-gradient-to-br from-slate-50 via-white to-blue-50">
         <div className="container mx-auto px-4 relative z-10">
