@@ -205,7 +205,7 @@ const Tarifs = () => {
               <h3 className="text-2xl font-bold text-sky-500 mb-2">Découverte</h3>
               <div className="mb-6">
                 <span className="text-5xl font-black text-sky-500">Gratuit</span>
-                <span className="text-slate-500 text-lg"> 30j</span>
+                <span className="text-sky-500 text-2xl font-bold"> 30j</span>
               </div>
               <p className="text-sm text-slate-500 mb-6">
                 Évaluation + 10 vues - Cible : 10 000€ - CA : 0
