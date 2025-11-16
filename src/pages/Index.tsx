@@ -48,6 +48,32 @@ const Home = () => {
 
         setRealAnnonces(data || []);
       } catch (error) {
+        console.error("Erreur chargement annonces:", error);
+      } finally {
+        setLoadingAnnonces(false);
+      }
+    };
+
+    fetchAnnonces();
+  }, []);
+  const [realAnnonces, setRealAnnonces] = useState<any[]>([]);
+  const [loadingAnnonces, setLoadingAnnonces] = useState(true);
+
+  // 🔥 RÉCUPÉRATION DES 3 DERNIÈRES ANNONCES RÉELLES
+  useEffect(() => {
+    const fetchAnnonces = async () => {
+      try {
+        const { data, error } = await supabase
+          .from("annonces")
+          .select("*")
+          .eq("statut", "publiee")
+          .order("created_at", { ascending: false })
+          .limit(3);
+
+        if (error) throw error;
+
+        setRealAnnonces(data || []);
+      } catch (error) {
         console.error("Erreur lors du chargement des annonces:", error);
       } finally {
         setLoadingAnnonces(false);
@@ -101,42 +127,6 @@ const Home = () => {
     { value: "95%", label: "Taux de réussite" },
     { value: "45j", label: "Délai moyen" },
     { value: "2%", label: "Honoraires de succès" },
-  ];
-
-  const opportunities = [
-    {
-      badge: "QUALIBAT",
-      status: "Récent",
-      title: "Entreprise de Maçonnerie Générale",
-      location: "Paris (75)",
-      year: "2015",
-      ca: "1 200 000 €",
-      employees: "8 salariés",
-      price: "450 000 €",
-      color: "orange",
-    },
-    {
-      badge: "QUALIBAT",
-      status: "Récent",
-      title: "Société de Plomberie-Chauffage",
-      location: "Lyon (69)",
-      year: "2015",
-      ca: "800 000 €",
-      employees: "5 salariés",
-      price: "430 000 €",
-      color: "blue",
-    },
-    {
-      badge: "QUALIBAT",
-      status: "Récent",
-      title: "Électricité Générale & Domotique",
-      location: "Marseille (13)",
-      year: "2015",
-      ca: "950 000 €",
-      employees: "6 salariés",
-      price: "580 000 €",
-      color: "blue",
-    },
   ];
 
   const buyerPlans = [
@@ -477,66 +467,98 @@ const Home = () => {
             <p className="text-xl text-gray-600">Découvrez les dernières entreprises BTP disponibles à la reprise</p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-            {opportunities.map((opp, index) => (
-              <div
-                key={index}
-                onClick={() => navigate("/entreprises")}
-                className={`rounded-2xl p-6 shadow-xl hover:shadow-2xl transition-all duration-300 cursor-pointer transform hover:scale-105 hover:-translate-y-2 border-4 border-transparent hover:border-white ${
-                  opp.color === "orange"
-                    ? "bg-gradient-to-br from-orange-500 to-orange-600"
-                    : "bg-gradient-to-br from-blue-500 to-blue-600"
-                } text-white relative overflow-hidden group`}
-              >
-                {/* Badge "Voir l'annonce" au hover */}
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-all duration-300 z-20">
-                  <div className="bg-white text-blue-600 px-6 py-3 rounded-full font-bold shadow-2xl flex items-center gap-2 transform scale-90 group-hover:scale-100 transition-transform">
-                    <ArrowRight className="w-5 h-5" />
-                    Voir l'annonce
-                  </div>
-                </div>
+          {loadingAnnonces ? (
+            <div className="text-center py-12">
+              <div className="animate-spin rounded-full h-12 w-12 border-4 border-orange-500 border-t-transparent mx-auto"></div>
+              <p className="text-gray-600 mt-4">Chargement des annonces...</p>
+            </div>
+          ) : realAnnonces.length === 0 ? (
+            <div className="text-center py-12">
+              <Building2 className="w-16 h-16 text-gray-400 mx-auto mb-4" />
+              <p className="text-gray-600 text-lg mb-4">Aucune annonce disponible pour le moment.</p>
+              <Button onClick={() => navigate("/vendre")} className="bg-orange-500 hover:bg-orange-600 text-white">
+                Publier la première annonce
+              </Button>
+            </div>
+          ) : (
+            <>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                {realAnnonces.map((annonce, index) => {
+                  const colors = ["orange", "blue", "blue"];
+                  const color = colors[index % 3];
 
-                {/* Effet de brillance au hover */}
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
+                  return (
+                    <div
+                      key={annonce.id}
+                      onClick={() => navigate(`/annonce/${annonce.id}`)}
+                      className={`rounded-2xl p-6 shadow-xl hover:shadow-2xl transition-all duration-300 cursor-pointer transform hover:scale-105 hover:-translate-y-2 border-4 border-transparent hover:border-white ${
+                        color === "orange"
+                          ? "bg-gradient-to-br from-orange-500 to-orange-600"
+                          : "bg-gradient-to-br from-blue-500 to-blue-600"
+                      } text-white relative overflow-hidden group`}
+                    >
+                      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-all duration-300 z-20">
+                        <div className="bg-white text-blue-600 px-6 py-3 rounded-full font-bold shadow-2xl flex items-center gap-2">
+                          <ArrowRight className="w-5 h-5" />
+                          Voir l'annonce
+                        </div>
+                      </div>
 
-                <div className="relative z-10 group-hover:opacity-50 transition-opacity duration-300">
-                  {/* Badges */}
-                  <div className="flex items-center justify-between mb-4">
-                    <div className="bg-white/20 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-bold">
-                      {opp.badge}
+                      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
+
+                      <div className="relative z-10 group-hover:opacity-50 transition-opacity duration-300">
+                        <div className="flex items-center justify-between mb-4">
+                          <div className="bg-white/20 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-bold uppercase">
+                            {annonce.secteur_activite || "BTP"}
+                          </div>
+                          <div className="bg-green-500 px-3 py-1 rounded-full text-xs font-bold">Récent</div>
+                        </div>
+
+                        <h3 className="text-2xl font-bold mb-4 line-clamp-2">
+                          {annonce.raison_sociale || "Entreprise BTP"}
+                        </h3>
+
+                        <div className="space-y-2 mb-6">
+                          {annonce.ville && (
+                            <div className="flex items-center gap-2 text-sm">
+                              <Building2 className="w-4 h-4" />
+                              <span>
+                                {annonce.ville} {annonce.departement && `(${annonce.departement})`}
+                              </span>
+                            </div>
+                          )}
+                          {annonce.annee_creation && <div className="text-sm">Création : {annonce.annee_creation}</div>}
+                          {annonce.ca_n1 && (
+                            <div className="text-sm">CA : {parseInt(annonce.ca_n1).toLocaleString("fr-FR")} €</div>
+                          )}
+                          {annonce.nombre_salaries && (
+                            <div className="text-sm">
+                              Effectif : {annonce.nombre_salaries} salarié
+                              {parseInt(annonce.nombre_salaries) > 1 ? "s" : ""}
+                            </div>
+                          )}
+                        </div>
+
+                        {annonce.secteur_activite && (
+                          <div className="inline-block bg-white/20 backdrop-blur-sm px-4 py-2 rounded-lg mb-4">
+                            <span className="text-sm font-medium capitalize">{annonce.secteur_activite}</span>
+                          </div>
+                        )}
+
+                        <div className="pt-4 border-t border-white/20">
+                          <div className="text-3xl md:text-4xl font-bold text-green-300">
+                            {annonce.prix_vente
+                              ? `${parseInt(annonce.prix_vente).toLocaleString("fr-FR")} €`
+                              : "Prix sur demande"}
+                          </div>
+                        </div>
+                      </div>
                     </div>
-                    <div className="bg-orange-500 px-3 py-1 rounded-full text-xs font-bold">{opp.status}</div>
-                  </div>
-
-                  {/* Titre */}
-                  <h3 className="text-2xl font-bold mb-4">{opp.title}</h3>
-
-                  {/* Infos */}
-                  <div className="space-y-2 mb-6">
-                    <div className="flex items-center gap-2 text-sm">
-                      <Building2 className="w-4 h-4" />
-                      <span>{opp.location}</span>
-                    </div>
-                    <div className="text-sm">Création : {opp.year}</div>
-                    <div className="text-sm">CA : {opp.ca}</div>
-                    <div className="text-sm">Effectif : {opp.employees}</div>
-                  </div>
-
-                  {/* Secteur badge */}
-                  <div className="inline-block bg-white/20 backdrop-blur-sm px-4 py-2 rounded-lg mb-4">
-                    <span className="text-sm font-medium capitalize">
-                      {opp.color === "orange" ? "Maçonnerie" : "Plomberie"}
-                    </span>
-                  </div>
-
-                  {/* Prix */}
-                  <div className="pt-4 border-t border-white/20">
-                    <div className="text-4xl font-bold text-green-300">{opp.price}</div>
-                  </div>
-                </div>
+                  );
+                })}
               </div>
-            ))}
-          </div>
+            </>
+          )}
 
           <div className="text-center">
             <Button
