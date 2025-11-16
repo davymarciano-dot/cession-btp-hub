@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { Building2, Menu, X } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 
@@ -22,35 +22,35 @@ const Header = () => {
     <header className="sticky top-0 z-50 w-full bg-white/95 backdrop-blur-md border-b border-gray-200 shadow-sm">
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-20">
-          {/* LOGO - Plus gros et visible */}
-          <Link to="/" className="flex items-center gap-3 hover:opacity-80 transition-opacity group">
-            {/* Logo SVG */}
-            <div className="relative w-12 h-12 flex items-center justify-center">
-              {/* X bleu et orange */}
-              <svg width="48" height="48" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                {/* X bleu */}
-                <path
-                  d="M20 20 L50 50 L20 80 L35 80 L65 50 L35 20 Z"
-                  fill="#2563eb"
-                  className="group-hover:fill-blue-600 transition-colors"
-                />
-                {/* X orange */}
-                <path
-                  d="M80 20 L50 50 L80 80 L65 80 L35 50 L65 20 Z"
-                  fill="#f97316"
-                  className="group-hover:fill-orange-600 transition-colors"
-                />
-              </svg>
-            </div>
+          {/* LOGO - VRAI LOGO CESSIONBTP */}
+          <Link to="/" className="flex items-center hover:opacity-90 transition-opacity">
+            {/* 
+              IMPORTANT : Place ton logo dans public/logo-cessionbtp.png
+              ou dans src/assets/logo-cessionbtp.png
+              
+              Ensuite, utilise le chemin approprié :
+              - Si dans public/ : src="/logo-cessionbtp.png"
+              - Si dans src/assets/ : import logo from '@/assets/logo-cessionbtp.png'
+            */}
+            <img
+              src="/logo-cessionbtp.png"
+              alt="CessionBTP - Plateforme de cession d'entreprises BTP"
+              className="h-14 w-auto object-contain"
+              onError={(e) => {
+                // Fallback si le logo n'est pas trouvé
+                e.currentTarget.style.display = "none";
+                e.currentTarget.nextElementSibling?.classList.remove("hidden");
+              }}
+            />
 
-            {/* Texte CessionBTP */}
-            <div className="flex items-baseline">
-              <span className="text-3xl font-extrabold text-orange-500 tracking-tight">Cession</span>
-              <span className="text-3xl font-extrabold text-blue-900 tracking-tight">BTP</span>
+            {/* Fallback texte si image pas chargée */}
+            <div className="hidden">
+              <span className="text-3xl font-extrabold text-orange-500">Cession</span>
+              <span className="text-3xl font-extrabold text-blue-900">BTP</span>
             </div>
           </Link>
 
-          {/* MENU DESKTOP - Navigation principale */}
+          {/* MENU DESKTOP */}
           <nav className="hidden lg:flex items-center gap-1">
             {menuItems.map((item) => (
               <Link
@@ -63,7 +63,7 @@ const Header = () => {
             ))}
           </nav>
 
-          {/* BOUTONS CTA - Desktop */}
+          {/* BOUTONS CTA Desktop */}
           <div className="hidden lg:flex items-center gap-3">
             <Button
               variant="outline"
@@ -80,7 +80,7 @@ const Header = () => {
             </Button>
           </div>
 
-          {/* BURGER MENU - Mobile */}
+          {/* BURGER MENU Mobile */}
           <button
             className="lg:hidden p-2 text-gray-700 hover:bg-gray-100 rounded-lg"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -90,7 +90,7 @@ const Header = () => {
         </div>
       </div>
 
-      {/* MENU MOBILE - Dropdown */}
+      {/* MENU MOBILE Dropdown */}
       {mobileMenuOpen && (
         <div className="lg:hidden bg-white border-t border-gray-200 shadow-xl">
           <nav className="container mx-auto px-4 py-6 space-y-2">
@@ -105,7 +105,6 @@ const Header = () => {
               </Link>
             ))}
 
-            {/* CTA Mobile */}
             <div className="pt-4 space-y-3 border-t border-gray-200">
               <Button
                 variant="outline"
