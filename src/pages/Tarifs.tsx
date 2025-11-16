@@ -1,9 +1,13 @@
+import { useState } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import PricingCard from "@/components/PricingCard";
 import ComparisonTable from "@/components/ComparisonTable";
 
 const Tarifs = () => {
+  const [hoveredBuyerCard, setHoveredBuyerCard] = useState<string | null>(null);
+  const [hoveredSellerCard, setHoveredSellerCard] = useState<string | null>(null);
+
   return (
     <div className="min-h-screen">
       <Header />
@@ -45,6 +49,9 @@ const Tarifs = () => {
                 ]}
                 buttonText="S'inscrire gratuitement"
                 userType="acheteur"
+                isHovered={hoveredBuyerCard === "Gratuit"}
+                onHover={(hovered) => setHoveredBuyerCard(hovered ? "Gratuit" : null)}
+                anyCardHovered={hoveredBuyerCard !== null}
               />
               
               <PricingCard
@@ -61,6 +68,9 @@ const Tarifs = () => {
                 ]}
                 buttonText="Acheter des contacts"
                 userType="acheteur"
+                isHovered={hoveredBuyerCard === "Contact"}
+                onHover={(hovered) => setHoveredBuyerCard(hovered ? "Contact" : null)}
+                anyCardHovered={hoveredBuyerCard !== null}
               />
               
               <PricingCard
@@ -79,6 +89,9 @@ const Tarifs = () => {
                 isPopular
                 variant="primary"
                 userType="acheteur"
+                isHovered={hoveredBuyerCard === "Pro"}
+                onHover={(hovered) => setHoveredBuyerCard(hovered ? "Pro" : null)}
+                anyCardHovered={hoveredBuyerCard !== null}
               />
               
               <PricingCard
@@ -95,6 +108,9 @@ const Tarifs = () => {
                 ]}
                 buttonText="Choisir Entreprise"
                 userType="acheteur"
+                isHovered={hoveredBuyerCard === "Entreprise"}
+                onHover={(hovered) => setHoveredBuyerCard(hovered ? "Entreprise" : null)}
+                anyCardHovered={hoveredBuyerCard !== null}
               />
             </div>
           </div>
@@ -128,6 +144,9 @@ const Tarifs = () => {
                 ]}
                 buttonText="Commencer gratuitement"
                 userType="vendeur"
+                isHovered={hoveredSellerCard === "Découverte"}
+                onHover={(hovered) => setHoveredSellerCard(hovered ? "Découverte" : null)}
+                anyCardHovered={hoveredSellerCard !== null}
               />
               
               <PricingCard
@@ -146,6 +165,9 @@ const Tarifs = () => {
                 isPopular
                 variant="primary"
                 userType="vendeur"
+                isHovered={hoveredSellerCard === "Essentiel"}
+                onHover={(hovered) => setHoveredSellerCard(hovered ? "Essentiel" : null)}
+                anyCardHovered={hoveredSellerCard !== null}
               />
               
               <PricingCard
@@ -162,6 +184,9 @@ const Tarifs = () => {
                 ]}
                 buttonText="Choisir Premium"
                 userType="vendeur"
+                isHovered={hoveredSellerCard === "Prime"}
+                onHover={(hovered) => setHoveredSellerCard(hovered ? "Prime" : null)}
+                anyCardHovered={hoveredSellerCard !== null}
               />
               
               <PricingCard
@@ -178,6 +203,9 @@ const Tarifs = () => {
                 ]}
                 buttonText="Choisir Exclusif"
                 userType="vendeur"
+                isHovered={hoveredSellerCard === "Exclusif"}
+                onHover={(hovered) => setHoveredSellerCard(hovered ? "Exclusif" : null)}
+                anyCardHovered={hoveredSellerCard !== null}
               />
             </div>
           </div>
