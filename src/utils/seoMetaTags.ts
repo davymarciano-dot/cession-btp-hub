@@ -7,7 +7,7 @@ export interface MetaTags {
 }
 
 export const generateMetaTags = (page: string, params?: Record<string, string>): MetaTags => {
-  const baseUrl = "https://cession-btp-hub.lovable.app";
+  const baseUrl = "https://cessionbtp.fr";
   
   const metaTags: Record<string, MetaTags> = {
     home: {
@@ -132,6 +132,6 @@ export const generateListingMetaTags = (listing: {
     title,
     description,
     keywords: `entreprise ${listing.secteur_activite} à vendre, reprise ${listing.secteur_activite}, ${listing.ville}, ${listing.departement}`,
-    url: `https://cession-btp-hub.lovable.app/entreprises/${listing.id}`,
+    url: `https://cessionbtp.fr/entreprises/${listing.id}`,
   };
 };
