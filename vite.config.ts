@@ -10,6 +10,7 @@ export default defineConfig(({ mode }) => ({
     host: "::",
     port: 8080,
   },
+  logLevel: "info",
   plugins: [
     react(), 
     mode === "development" && componentTagger(),
@@ -166,6 +167,7 @@ export default defineConfig(({ mode }) => ({
         },
       },
     },
+    reportCompressedSize: false,
     chunkSizeWarningLimit: 1000,
     sourcemap: mode !== "production",
   },
