@@ -1,346 +1,135 @@
-import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { Menu, X, LayoutDashboard, Bell } from "lucide-react";
-import { Link, useNavigate, useLocation } from "react-router-dom";
-import { supabase } from "@/integrations/supabase/client";
-import { User } from "@supabase/supabase-js";
-import { NotificationCenter } from "./notifications/NotificationCenter";
+import { Building2, Menu, X } from "lucide-react";
+import { Link, useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 const Header = () => {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [user, setUser] = useState<User | null>(null);
   const navigate = useNavigate();
-  const location = useLocation();
-  
-  const isActive = (path: string) => location.pathname === path;
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-  useEffect(() => {
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      setUser(session?.user ?? null);
-    });
-
-    const { data: { subscription } } = supabase.auth.onAuthStateChange(
-      (_event, session) => {
-        setUser(session?.user ?? null);
-      }
-    );
-
-    return () => subscription.unsubscribe();
-  }, []);
+  const menuItems = [
+    { label: "Vendre", path: "/vendre" },
+    { label: "Acheter", path: "/acheter" },
+    { label: "Entreprises", path: "/entreprises" },
+    { label: "🌱 RGE", path: "/entreprises-rge" },
+    { label: "Estimer", path: "/estimer" },
+    { label: "Tarifs", path: "/tarifs" },
+    { label: "FAQ", path: "/faq" },
+    { label: "Roadmap", path: "/roadmap" },
+  ];
 
   return (
-    <header className="sticky top-0 bg-white shadow-sm border-b border-gray-100 z-50">
-      <nav className="max-w-7xl mx-auto px-4">
+    <header className="sticky top-0 z-50 w-full bg-white/95 backdrop-blur-md border-b border-gray-200 shadow-sm">
+      <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-20">
-          {/* Logo */}
-          <Link to="/" className="flex items-center py-2">
-            <img 
-              src="/logo-hd.png" 
-              alt="CessionBTP - Plateforme de cession d'entreprises BTP" 
-              className="h-12 md:h-14 w-auto" 
-              style={{ maxHeight: '60px' }} 
-            />
+          {/* LOGO - Plus gros et visible */}
+          <Link to="/" className="flex items-center gap-3 hover:opacity-80 transition-opacity group">
+            {/* Logo SVG */}
+            <div className="relative w-12 h-12 flex items-center justify-center">
+              {/* X bleu et orange */}
+              <svg width="48" height="48" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                {/* X bleu */}
+                <path
+                  d="M20 20 L50 50 L20 80 L35 80 L65 50 L35 20 Z"
+                  fill="#2563eb"
+                  className="group-hover:fill-blue-600 transition-colors"
+                />
+                {/* X orange */}
+                <path
+                  d="M80 20 L50 50 L80 80 L65 80 L35 50 L65 20 Z"
+                  fill="#f97316"
+                  className="group-hover:fill-orange-600 transition-colors"
+                />
+              </svg>
+            </div>
+
+            {/* Texte CessionBTP */}
+            <div className="flex items-baseline">
+              <span className="text-3xl font-extrabold text-orange-500 tracking-tight">Cession</span>
+              <span className="text-3xl font-extrabold text-blue-900 tracking-tight">BTP</span>
+            </div>
           </Link>
 
-          {/* Desktop Navigation */}
-          <div className="hidden lg:flex items-center gap-6 xl:gap-8">
-            <Link 
-              to="/vendre" 
-              className={`font-semibold transition-colors ${
-                isActive('/vendre') ? 'text-blue-600' : 'text-gray-800 hover:text-blue-600'
-              }`}
-            >
-              Vendre
-            </Link>
-            <Link 
-              to="/acheter" 
-              className={`font-semibold transition-colors ${
-                isActive('/acheter') ? 'text-blue-600' : 'text-gray-800 hover:text-blue-600'
-              }`}
-            >
-              Acheter
-            </Link>
-            <Link 
-              to="/entreprises" 
-              className={`font-semibold transition-colors ${
-                isActive('/entreprises') ? 'text-blue-600' : 'text-gray-800 hover:text-blue-600'
-              }`}
-            >
-              Entreprises
-            </Link>
-            <Link 
-              to="/entreprises-rge" 
-              className={`font-semibold transition-colors ${
-                isActive('/entreprises-rge') ? 'text-green-600' : 'text-green-700 hover:text-green-600'
-              }`}
-            >
-              🌱 RGE
-            </Link>
-            <Link 
-              to="/estimer" 
-              className={`font-semibold transition-colors ${
-                isActive('/estimer') ? 'text-blue-600' : 'text-gray-800 hover:text-blue-600'
-              }`}
-            >
-              Estimer
-            </Link>
-            <Link 
-              to="/tarifs" 
-              className={`font-semibold transition-colors ${
-                isActive('/tarifs') ? 'text-blue-600' : 'text-gray-800 hover:text-blue-600'
-              }`}
-            >
-              Tarifs
-            </Link>
-            <Link 
-              to="/faq" 
-              className={`font-semibold transition-colors ${
-                isActive('/faq') ? 'text-blue-600' : 'text-gray-800 hover:text-blue-600'
-              }`}
-            >
-              FAQ
-            </Link>
-            <Link 
-              to="/roadmap" 
-              className={`font-semibold transition-colors ${
-                isActive('/roadmap') ? 'text-blue-600' : 'text-gray-800 hover:text-blue-600'
-              }`}
-            >
-              Roadmap
-            </Link>
-            <Link 
-              to="/admin" 
-              className={`font-semibold transition-colors ${
-                isActive('/admin') ? 'text-orange-600' : 'text-orange-700 hover:text-orange-600'
-              }`}
-            >
-              🔧 Admin
-            </Link>
-            {user && (
-              <>
-                <Link 
-                  to="/messages" 
-                  className={`font-semibold transition-colors ${
-                    isActive('/messages') ? 'text-blue-600' : 'text-gray-800 hover:text-blue-600'
-                  }`}
-                >
-                  Messages
-                </Link>
-                <Link 
-                  to="/mes-matchs" 
-                  className={`font-semibold transition-colors ${
-                    isActive('/mes-matchs') ? 'text-blue-600' : 'text-gray-800 hover:text-blue-600'
-                  }`}
-                >
-                  Mes Matchs
-                </Link>
-                <Link 
-                  to="/dashboard-vendeur" 
-                  className={`font-semibold transition-colors ${
-                    isActive('/dashboard-vendeur') ? 'text-blue-600' : 'text-gray-800 hover:text-blue-600'
-                  }`}
-                >
-                  Dashboard
-                </Link>
-              </>
-            )}
-          </div>
+          {/* MENU DESKTOP - Navigation principale */}
+          <nav className="hidden lg:flex items-center gap-1">
+            {menuItems.map((item) => (
+              <Link
+                key={item.path}
+                to={item.path}
+                className="px-4 py-2 text-sm font-semibold text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-all duration-200"
+              >
+                {item.label}
+              </Link>
+            ))}
+          </nav>
 
-          {/* Desktop Actions */}
-          <div className="hidden md:flex items-center gap-3">
-            {user && <NotificationCenter />}
-            {user ? (
-              <Button 
-                variant="outline" 
-                className="border-2 border-blue-600 text-blue-600 hover:bg-blue-50 font-semibold px-4 py-2"
-                onClick={() => navigate('/dashboard')}
-              >
-                <LayoutDashboard className="w-4 h-4 mr-2" />
-                Mon Espace
-              </Button>
-            ) : (
-              <Button 
-                variant="outline" 
-                className="border-2 border-blue-600 text-blue-600 hover:bg-blue-50 font-semibold px-4 py-2"
-                onClick={() => navigate('/auth')}
-              >
-                Connexion
-              </Button>
-            )}
-            <Button 
-              className="bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white font-bold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all px-4 md:px-6 py-2.5"
-              onClick={() => navigate('/estimer')}
+          {/* BOUTONS CTA - Desktop */}
+          <div className="hidden lg:flex items-center gap-3">
+            <Button
+              variant="outline"
+              onClick={() => navigate("/auth")}
+              className="border-2 border-blue-600 text-blue-600 hover:bg-blue-50 font-semibold px-6 rounded-xl"
+            >
+              Connexion
+            </Button>
+            <Button
+              onClick={() => navigate("/estimer")}
+              className="bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white font-bold px-6 rounded-xl shadow-lg hover:shadow-xl transition-all"
             >
               Estimer Gratuitement
             </Button>
           </div>
 
-          {/* Mobile Menu Button */}
+          {/* BURGER MENU - Mobile */}
           <button
+            className="lg:hidden p-2 text-gray-700 hover:bg-gray-100 rounded-lg"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="lg:hidden p-2 text-gray-800"
           >
-            {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+            {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
         </div>
+      </div>
 
-          {/* Mobile Menu */}
-          {mobileMenuOpen && (
-            <div className="lg:hidden fixed inset-0 top-20 bg-white z-50 overflow-y-auto animate-fade-in">
-              <div className="flex flex-col px-6 py-8 space-y-6">
-                <Link 
-                  to="/vendre" 
-                  onClick={() => setMobileMenuOpen(false)}
-                  className={`text-2xl font-bold transition-all py-3 px-4 rounded-lg ${
-                    isActive('/vendre') 
-                      ? 'text-blue-600 bg-blue-50 border-l-4 border-blue-600' 
-                      : 'text-gray-800 hover:bg-gray-50'
-                  }`}
-                >
-                  Vendre
-                </Link>
-                <Link 
-                  to="/acheter"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className={`text-2xl font-bold transition-all py-3 px-4 rounded-lg ${
-                    isActive('/acheter') 
-                      ? 'text-blue-600 bg-blue-50 border-l-4 border-blue-600' 
-                      : 'text-gray-800 hover:bg-gray-50'
-                  }`}
-                >
-                  Acheter
-                </Link>
-                <Link 
-                  to="/entreprises"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className={`text-2xl font-bold transition-all py-3 px-4 rounded-lg ${
-                    isActive('/entreprises') 
-                      ? 'text-blue-600 bg-blue-50 border-l-4 border-blue-600' 
-                      : 'text-gray-800 hover:bg-gray-50'
-                  }`}
-                >
-                  Entreprises
-                </Link>
-                <Link 
-                  to="/entreprises-rge"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className={`text-2xl font-bold transition-all py-3 px-4 rounded-lg ${
-                    isActive('/entreprises-rge') 
-                      ? 'text-green-600 bg-green-50 border-l-4 border-green-600' 
-                      : 'text-green-700 hover:bg-green-50'
-                  }`}
-                >
-                  🌱 RGE
-                </Link>
-                <Link 
-                  to="/estimer"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className={`text-2xl font-bold transition-all py-3 px-4 rounded-lg ${
-                    isActive('/estimer') 
-                      ? 'text-blue-600 bg-blue-50 border-l-4 border-blue-600' 
-                      : 'text-gray-800 hover:bg-gray-50'
-                  }`}
-                >
-                  Estimer
-                </Link>
-                <Link 
-                  to="/tarifs"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className={`text-2xl font-bold transition-all py-3 px-4 rounded-lg ${
-                    isActive('/tarifs') 
-                      ? 'text-blue-600 bg-blue-50 border-l-4 border-blue-600' 
-                      : 'text-gray-800 hover:bg-gray-50'
-                  }`}
-                >
-                  Tarifs
-                </Link>
-                <Link 
-                  to="/faq"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className={`text-2xl font-bold transition-all py-3 px-4 rounded-lg ${
-                    isActive('/faq') 
-                      ? 'text-blue-600 bg-blue-50 border-l-4 border-blue-600' 
-                      : 'text-gray-800 hover:bg-gray-50'
-                  }`}
-                >
-                  FAQ
-                </Link>
-                <Link 
-                  to="/roadmap"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className={`text-2xl font-bold transition-all py-3 px-4 rounded-lg ${
-                    isActive('/roadmap') 
-                      ? 'text-blue-600 bg-blue-50 border-l-4 border-blue-600' 
-                      : 'text-gray-800 hover:bg-gray-50'
-                  }`}
-                >
-                  Roadmap
-                </Link>
+      {/* MENU MOBILE - Dropdown */}
+      {mobileMenuOpen && (
+        <div className="lg:hidden bg-white border-t border-gray-200 shadow-xl">
+          <nav className="container mx-auto px-4 py-6 space-y-2">
+            {menuItems.map((item) => (
+              <Link
+                key={item.path}
+                to={item.path}
+                onClick={() => setMobileMenuOpen(false)}
+                className="block px-4 py-3 text-base font-semibold text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-all"
+              >
+                {item.label}
+              </Link>
+            ))}
 
-                {user ? (
-                  <div className="space-y-6 pt-6 border-t border-gray-200">
-                    <Link 
-                      to="/messages"
-                      onClick={() => setMobileMenuOpen(false)}
-                      className={`text-xl font-semibold flex items-center gap-3 py-3 px-4 rounded-lg ${
-                        isActive('/messages') 
-                          ? 'text-blue-600 bg-blue-50' 
-                          : 'text-gray-700 hover:bg-gray-50'
-                      }`}
-                    >
-                      Messages
-                    </Link>
-                    <Link 
-                      to="/dashboard"
-                      onClick={() => setMobileMenuOpen(false)}
-                      className={`text-xl font-semibold flex items-center gap-3 py-3 px-4 rounded-lg ${
-                        isActive('/dashboard') 
-                          ? 'text-blue-600 bg-blue-50' 
-                          : 'text-gray-700 hover:bg-gray-50'
-                      }`}
-                    >
-                      <LayoutDashboard className="w-5 h-5" />
-                      Mon Espace
-                    </Link>
-                    <Button 
-                      onClick={async () => {
-                        await supabase.auth.signOut();
-                        navigate('/');
-                        setMobileMenuOpen(false);
-                      }}
-                      variant="outline"
-                      className="w-full text-lg py-6"
-                    >
-                      Déconnexion
-                    </Button>
-                  </div>
-                ) : (
-                  <div className="space-y-4 pt-6 border-t border-gray-200">
-                    <Button 
-                      onClick={() => {
-                        navigate('/auth');
-                        setMobileMenuOpen(false);
-                      }}
-                      variant="outline"
-                      className="w-full text-lg py-6"
-                    >
-                      Connexion
-                    </Button>
-                    <Button 
-                      onClick={() => {
-                        navigate('/vendre');
-                        setMobileMenuOpen(false);
-                      }}
-                      className="w-full bg-gradient-to-r from-orange-500 to-orange-600 text-white text-lg py-6"
-                    >
-                      Publier une annonce
-                    </Button>
-                  </div>
-                )}
-              </div>
+            {/* CTA Mobile */}
+            <div className="pt-4 space-y-3 border-t border-gray-200">
+              <Button
+                variant="outline"
+                onClick={() => {
+                  navigate("/auth");
+                  setMobileMenuOpen(false);
+                }}
+                className="w-full border-2 border-blue-600 text-blue-600 font-semibold py-6 rounded-xl"
+              >
+                Connexion
+              </Button>
+              <Button
+                onClick={() => {
+                  navigate("/estimer");
+                  setMobileMenuOpen(false);
+                }}
+                className="w-full bg-gradient-to-r from-orange-500 to-orange-600 text-white font-bold py-6 rounded-xl shadow-lg"
+              >
+                Estimer Gratuitement
+              </Button>
             </div>
-          )}
-      </nav>
+          </nav>
+        </div>
+      )}
     </header>
   );
 };
