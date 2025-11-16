@@ -411,6 +411,111 @@ Votre contre-offre : 280 000€ (-6,7%)
       }
     }
   },
+  'valorisation-entreprise-pompe-chaleur-2026': {
+    metaDescription: 'Les entreprises PAC atteignent des valorisations records en 2026. Prix moyen +40%, délai vente 28 jours. Analyse complète du marché.',
+    imageUrl: 'https://images.unsplash.com/photo-1621905251189-08b45d6a269e?q=80&w=2069',
+    content: `
+      <p class="text-muted-foreground mb-6"><strong>Temps de lecture : 10 minutes | Publié le 12/11/2025 | Catégorie : Vente</strong></p>
+
+      <h2 class="text-2xl font-bold mt-8 mb-4">Introduction : Le Boom des Pompes à Chaleur</h2>
+      <p class="mb-4">
+        L'année 2026 marque un tournant historique pour le secteur des pompes à chaleur. Avec l'interdiction des chaudières gaz neuves depuis janvier 2025 et la fin du fioul en 2026, les entreprises installatrices de PAC sont devenues les stars du BTP.
+      </p>
+
+      <div class="bg-muted p-6 rounded-lg mb-6">
+        <h4 class="font-bold mb-3">Les chiffres explosifs :</h4>
+        <ul class="list-disc pl-6 space-y-2">
+          <li><strong>Prix de vente moyen : 550 000€</strong> (+40% vs 2024)</li>
+          <li><strong>Délai de vente : 28 jours</strong> (record absolu BTP)</li>
+          <li><strong>Ratio demande/offre : 6,3</strong> acheteurs pour 1 entreprise</li>
+          <li><strong>Taux de concrétisation : 96%</strong> (offre → vente effective)</li>
+          <li><strong>Prime RGE QualiPAC : +45%</strong> sur la valorisation</li>
+        </ul>
+      </div>
+
+      <h2 class="text-2xl font-bold mt-8 mb-4">Pourquoi cette Envolée des Prix ?</h2>
+
+      <h3 class="text-xl font-semibold mt-6 mb-3">1. Interdiction Chaudières Gaz : Le Catalyseur</h3>
+      <p class="mb-4">
+        Depuis le 1er janvier 2025, <strong>l'installation de chaudières gaz neuves est interdite</strong> dans les logements neufs et rénovations lourdes. Le fioul suit en 2026.
+      </p>
+      <p class="mb-4"><strong>Conséquence directe :</strong></p>
+      <ul class="list-disc pl-6 space-y-2 mb-6">
+        <li>8,5 millions de foyers chauffés au gaz (potentiel de remplacement)</li>
+        <li>3,2 millions de foyers au fioul (obligation conversion 2026-2028)</li>
+        <li>Marché PAC : <strong>+42% de demande en 1 an</strong></li>
+        <li>Pénurie installateurs qualifiés RGE</li>
+      </ul>
+
+      <h3 class="text-xl font-semibold mt-6 mb-3">2. MaPrimeRénov' Boostée</h3>
+      <p class="mb-4">L'État a porté les aides à des niveaux inédits :</p>
+      <div class="bg-primary/10 p-6 rounded-lg mb-6">
+        <table class="w-full text-left">
+          <thead>
+            <tr class="border-b">
+              <th class="py-2">Revenu</th>
+              <th class="py-2">Aide PAC air/eau</th>
+              <th class="py-2">Reste à charge</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="border-b"><td class="py-2">Très modeste</td><td class="py-2">10 000€</td><td class="py-2">~2 000€</td></tr>
+            <tr class="border-b"><td class="py-2">Modeste</td><td class="py-2">8 000€</td><td class="py-2">~4 000€</td></tr>
+            <tr class="border-b"><td class="py-2">Intermédiaire</td><td class="py-2">4 000€</td><td class="py-2">~8 000€</td></tr>
+            <tr><td class="py-2">Supérieur</td><td class="py-2">0€</td><td class="py-2">~12 000€</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2 class="text-2xl font-bold mt-8 mb-4">Valorisation : Comprendre les Multiples</h2>
+
+      <h3 class="text-xl font-semibold mt-6 mb-3">Coefficient de Base</h3>
+      <p class="mb-4">Une entreprise pompe à chaleur se valorise entre <strong>0,85x et 1,30x le CA</strong> (vs 0,50-0,70x pour plomberie classique).</p>
+      
+      <div class="mb-6">
+        <h4 class="font-bold mb-3">Exemple :</h4>
+        <pre class="bg-muted p-4 rounded-lg overflow-x-auto">
+CA 2025 : 650 000€
+Coefficient : 0,95x
+Prix de base : 617 500€
+        </pre>
+      </div>
+
+      <h2 class="text-2xl font-bold mt-8 mb-4">Conclusion : L'Opportunité d'une Génération</h2>
+      <p class="mb-4">
+        Si vous possédez une entreprise d'installation de pompes à chaleur avec RGE QualiPAC, <strong>vous êtes assis sur une mine d'or</strong>.
+      </p>
+      
+      <div class="bg-muted p-6 rounded-lg mb-6">
+        <h4 class="font-bold mb-3">Les 3 Facteurs Gagnants :</h4>
+        <ul class="list-disc pl-6 space-y-2">
+          <li>✅ <strong>Demande record</strong> (interdiction gaz/fioul)</li>
+          <li>✅ <strong>Offre limitée</strong> (barrière RGE)</li>
+          <li>✅ <strong>Solvabilité clients</strong> (aides État massives)</li>
+        </ul>
+      </div>
+    `,
+    schema: {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Entreprises de Pompe à Chaleur : Valorisation Record en 2026",
+      "description": "Les entreprises PAC atteignent des valorisations records en 2026. Prix moyen +40%, délai vente 28 jours.",
+      "author": {
+        "@type": "Organization",
+        "name": "CessionBTP"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "CessionBTP",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://cessionbtp.fr/logo.png"
+        }
+      },
+      "datePublished": "2025-11-12",
+      "dateModified": "2025-11-12"
+    }
+  },
   'entreprises-rge-valorisation-record': {
     metaDescription: 'Les entreprises RGE se vendent 40% plus cher en 2026. Découvrez pourquoi et comment maximiser votre valorisation avec la certification RGE. Cas réels et stratégies.',
     imageUrl: 'https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=2069',
