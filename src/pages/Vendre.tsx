@@ -27,6 +27,7 @@ import {
   Zap,
   Star,
 } from "lucide-react";
+import SEOHead from "@/components/SEOHead";
 
 const STORAGE_KEY = "cessionBTP_form_draft";
 
@@ -463,6 +464,7 @@ const Vendre = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50">
+      <SEOHead page="vendre" />
       <Header />
 
       {/* Hero avec gradient moderne */}
