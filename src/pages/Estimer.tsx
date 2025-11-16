@@ -40,7 +40,13 @@ const Estimer = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [estimation, setEstimation] = useState<any>(null);
   const [showDialog, setShowDialog] = useState(false);
+  const [currentLeadId, setCurrentLeadId] = useState<string | null>(null);
   const { toast } = useToast();
+
+  // Callback quand un lead est créé
+  const handleLeadCreated = (leadId: string) => {
+    setCurrentLeadId(leadId);
+  };
 
   // Callback quand le SIRET est validé et les données récupérées
   const handleSiretDataFetched = (data: any) => {
@@ -67,6 +73,25 @@ const Estimer = () => {
     }
   };
 
+  // ✅ ÉTAPE 3 : Mettre à jour le lead quand les champs changent
+  const updateLeadFormData = async (updates: any) => {
+    if (!currentLeadId) return;
+
+    try {
+      const { error } = await supabase
+        .from('leads_estimation')
+        .update({
+          ...updates,
+          statut: 'formulaire_en_cours'
+        })
+        .eq('id', currentLeadId);
+
+      if (error) throw error;
+    } catch (err) {
+      console.error('Erreur mise à jour lead:', err);
+    }
+  };
+
   const handleEstimation = async () => {
     if (!ca || !secteur || !departement) {
       toast({
@@ -85,6 +110,23 @@ const Estimer = () => {
         variant: "destructive",
       });
       return;
+    }
+
+    // ✅ ÉTAPE 4 : Mettre à jour le lead avec statut final
+    if (currentLeadId) {
+      try {
+        await supabase
+          .from('leads_estimation')
+          .update({
+            ca: caNumber,
+            secteur,
+            departement,
+            statut: 'estimation_complete'
+          })
+          .eq('id', currentLeadId);
+      } catch (err) {
+        console.error('Erreur mise à jour finale lead:', err);
+      }
     }
 
     setIsLoading(true);
@@ -220,7 +262,10 @@ const Estimer = () => {
                   {/* Secteur */}
                   <div>
                     <label className="block text-sm font-semibold text-slate-700 mb-2">🏗️ Secteur d'activité BTP</label>
-                    <Select value={secteur} onValueChange={setSecteur}>
+              <Select value={secteur} onValueChange={(value) => {
+                setSecteur(value);
+                updateLeadFormData({ secteur: value });
+              }}>
                       <SelectTrigger className="h-14 text-lg border-2 border-slate-200 focus:border-orange-500 rounded-xl">
                         <SelectValue placeholder="Sélectionnez votre secteur" />
                       </SelectTrigger>
