@@ -70,6 +70,16 @@ const Contact = lazy(() => import("./pages/Contact"));
 const MentionsLegales = lazy(() => import("./pages/MentionsLegales"));
 const CGV = lazy(() => import("./pages/CGV"));
 
+// Pages métiers spécifiques énergies renouvelables
+const PanneauxSolaires = lazy(() => import("./pages/secteur/PanneauxSolaires"));
+const Photovoltaique = lazy(() => import("./pages/secteur/Photovoltaique"));
+const PompeAChaleur = lazy(() => import("./pages/secteur/PompeAChaleur"));
+const EnergiesRenouvelables = lazy(() => import("./pages/secteur/EnergiesRenouvelables"));
+const RGEPage = lazy(() => import("./pages/certification/RGE"));
+const InstallationChauffage = lazy(() => import("./pages/secteur/InstallationChauffage"));
+const IsolationThermique = lazy(() => import("./pages/secteur/IsolationThermique"));
+
+
 // Loading fallback component
 const PageLoader = () => (
   <div className="min-h-screen bg-background flex items-center justify-center">
@@ -151,6 +161,15 @@ const App = () => {
           <Route path="/admin/monitoring" element={<MonitoringDashboard />} />
           <Route path="/admin" element={<Admin />} />
           <Route path="/blog" element={<BlogIndex />} />
+          
+          {/* Pages métiers spécifiques énergies renouvelables (haute priorité SEO) */}
+          <Route path="/secteur/panneaux-solaires" element={<PanneauxSolaires />} />
+          <Route path="/secteur/photovoltaique" element={<Photovoltaique />} />
+          <Route path="/secteur/pompe-a-chaleur" element={<PompeAChaleur />} />
+          <Route path="/secteur/energies-renouvelables" element={<EnergiesRenouvelables />} />
+          <Route path="/secteur/installation-chauffage" element={<InstallationChauffage />} />
+          <Route path="/secteur/isolation-thermique" element={<IsolationThermique />} />
+          <Route path="/certification/rge" element={<RGEPage />} />
           
           {/* Pages énergies renouvelables RGE (ULTRA PRIORITAIRE) */}
           <Route path="/entreprise-:slug-a-vendre" element={<RenewableEnergyPage />} />
