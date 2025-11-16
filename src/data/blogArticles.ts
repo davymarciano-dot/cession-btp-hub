@@ -215,5 +215,21 @@ export const blogArticles: BlogArticle[] = [
       metaDescription: 'Guide spécifique pour vendre une entreprise de plomberie en 2026.',
       keywords: ['entreprise plomberie', 'vente plombier', 'cession plomberie']
     }
+  },
+  {
+    id: 11,
+    slug: 'erreurs-fatales-vente-entreprise-btp',
+    title: '10 Erreurs Fatales à Éviter lors de la Vente de votre Entreprise BTP',
+    excerpt: 'Découvrez les 10 erreurs les plus coûteuses (20 000€ à 100 000€) et comment les éviter pour sécuriser votre cession.',
+    category: 'conseils',
+    readTime: 8,
+    author: 'CessionBTP',
+    publishedAt: '2025-11-01',
+    content: '',
+    seo: {
+      metaTitle: '10 Erreurs Fatales Vente Entreprise BTP | Guide Complet 2026',
+      metaDescription: '10 erreurs fatales à éviter lors de la vente de votre entreprise BTP. Chaque erreur coûte 20 000€ à 100 000€. Solutions concrètes.',
+      keywords: ['erreurs vente entreprise btp', 'pièges cession entreprise batiment', 'conseils vente entreprise construction']
+    }
   }
 ];
