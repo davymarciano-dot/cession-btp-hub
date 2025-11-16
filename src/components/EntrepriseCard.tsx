@@ -185,7 +185,7 @@ const EntrepriseCard = ({
         }}
         disabled={!id}
       >
-        Voir détails →
+        Reprendre cette entreprise →
       </Button>
     </div>
   );

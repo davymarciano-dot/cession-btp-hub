@@ -60,11 +60,11 @@ const MetierPage = () => {
               </div>
               
               <h1 className="text-5xl md:text-6xl font-bold mb-6">
-                Entreprise {metier.name} à vendre
+                Entreprise {metier.name} à Reprendre
               </h1>
               
               <p className="text-xl mb-8 opacity-90">
-                {metier.description}
+                {metier.count} entreprises {metier.name} à vendre • {metier.description}
               </p>
               
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
@@ -89,7 +89,7 @@ const MetierPage = () => {
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Button size="lg" className="bg-accent text-accent-foreground hover:bg-accent/90" asChild>
                   <Link to="/acheter">
-                    Voir les {metier.count} entreprises
+                    Reprendre une entreprise {metier.name}
                   </Link>
                 </Button>
                 <Button size="lg" variant="outline" className="bg-white text-primary hover:bg-white/90" asChild>

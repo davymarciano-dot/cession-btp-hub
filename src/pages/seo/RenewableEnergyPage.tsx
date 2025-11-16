@@ -90,10 +90,10 @@ export const RenewableEnergyPage = () => {
               <span className="text-sm opacity-90">Reconnu Garant de l'Environnement</span>
             </div>
             <h1 className="text-4xl font-bold mb-4">
-              Entreprise {data.title} RGE à Vendre
+              Entreprise {data.title} RGE à Reprendre
             </h1>
             <p className="text-xl opacity-90">
-              Accès immédiat aux aides d'État • Marché en croissance {data.growth} par an
+              Entreprises {data.title} à vendre • Accès immédiat aux aides d'État • Marché en croissance {data.growth} par an
             </p>
           </div>
 
