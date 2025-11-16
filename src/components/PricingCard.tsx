@@ -54,11 +54,11 @@ const PricingCard = ({
   
   return (
     <div 
-      className={`h-full flex flex-col rounded-2xl p-8 ${
+      className={`h-full flex flex-col rounded-2xl p-8 border-2 ${
         isActive
-          ? 'border-2 border-blue-500 shadow-xl scale-[1.02]' 
-          : 'border-2 border-slate-200'
-      } bg-card relative transition-all duration-300`}
+          ? 'border-blue-500 shadow-xl scale-[1.02]'
+          : 'border-slate-200'
+      } bg-card relative transition-all duration-300 hover:border-blue-500 hover:shadow-xl hover:scale-[1.02]`}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
@@ -96,7 +96,7 @@ const PricingCard = ({
         className={`w-full ${
           isActive
             ? 'bg-blue-500 hover:bg-blue-600 text-white' 
-            : 'bg-orange-500 hover:bg-orange-600 text-white'
+            : 'bg-orange-500 hover:bg-blue-500 text-white'
         } transition-colors duration-300`}
       >
         {buttonText}
