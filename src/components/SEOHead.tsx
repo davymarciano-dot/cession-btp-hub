@@ -1,5 +1,5 @@
 import { Helmet } from "react-helmet-async";
-import { siteConfig, pageSEO, organizationSchema } from "@/config/seo-config";
+import { siteConfig, pageSEO, websiteSchema, organizationSchema } from "@/config/seo-config";
 
 interface SEOHeadProps {
   page: keyof typeof pageSEO;
@@ -69,6 +69,11 @@ const SEOHead = ({
           {JSON.stringify(schema)}
         </script>
       )}
+      
+      {/* WEBSITE SCHEMA (sur toutes les pages) */}
+      <script type="application/ld+json">
+        {JSON.stringify(websiteSchema)}
+      </script>
       
       {/* ORGANIZATION SCHEMA (sur toutes les pages) */}
       <script type="application/ld+json">

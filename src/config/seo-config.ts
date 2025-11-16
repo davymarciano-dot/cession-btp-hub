@@ -23,6 +23,19 @@ export const siteConfig = {
   type: "website",
 };
 
+// SCHEMA.ORG - WEBSITE avec SearchAction
+export const websiteSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "CessionBTP",
+  "url": "https://cessionbtp.fr",
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": "https://cessionbtp.fr/entreprises?q={search_term_string}",
+    "query-input": "required name=search_term_string"
+  }
+};
+
 // META TAGS PAR PAGE
 export const pageSEO = {
   // PAGE D'ACCUEIL
@@ -143,7 +156,12 @@ export const organizationSchema = {
   "name": "CessionBTP",
   "legalName": "CessionBTP SAS",
   "url": "https://cessionbtp.fr",
-  "logo": "https://cessionbtp.fr/logo.png",
+  "logo": {
+    "@type": "ImageObject",
+    "url": "https://cessionbtp.fr/logo-hd.png",
+    "width": "600",
+    "height": "60"
+  },
   "foundingDate": "2024",
   "description": "Plateforme n°1 pour acheter et vendre des entreprises du BTP en France",
   "address": {
@@ -162,7 +180,8 @@ export const organizationSchema = {
   "sameAs": [
     "https://www.linkedin.com/company/cessionbtp",
     "https://twitter.com/cessionbtp",
-    "https://www.facebook.com/cessionbtp"
+    "https://www.facebook.com/cessionbtp",
+    "https://www.youtube.com/@cessionbtp"
   ],
   "areaServed": {
     "@type": "Country",
@@ -234,6 +253,7 @@ export const faqSchema = (faqs: Array<{question: string, answer: string}>) => ({
 export default {
   siteConfig,
   pageSEO,
+  websiteSchema,
   organizationSchema,
   serviceEstimationSchema,
   breadcrumbSchema,
