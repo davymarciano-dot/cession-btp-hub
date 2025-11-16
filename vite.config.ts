@@ -70,8 +70,7 @@ export default defineConfig(({ mode }) => ({
             urlPattern: /^https:\/\/xfxfblhxdlzivowodpeg\.supabase\.co\/functions\/.*/i,
             handler: 'NetworkOnly',
             options: {
-              cacheName: 'supabase-functions',
-              networkTimeoutSeconds: 15
+              cacheName: 'supabase-functions'
             }
           },
           // Google Fonts CSS - Cache First longue durée
