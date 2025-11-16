@@ -5,7 +5,7 @@ import { Select, SelectContent, SelectTrigger, SelectValue } from "@/components/
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { DepartementsSelect } from "@/data/departements";
-import EstimationDialog from "@/components/EstimationDialog";
+
 import { useToast } from "@/hooks/use-toast";
 import { SearchableSelect } from "@/components/SearchableSelect";
 
@@ -13,9 +13,6 @@ const Estimer = () => {
   const [ca, setCa] = useState("");
   const [secteur, setSecteur] = useState("");
   const [departement, setDepartement] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
-  const [estimation, setEstimation] = useState<any>(null);
-  const [showDialog, setShowDialog] = useState(false);
   const { toast } = useToast();
 
   const handleEstimation = async () => {
@@ -39,18 +36,10 @@ const Estimer = () => {
       return;
     }
 
-    setIsLoading(true);
-    setShowDialog(true);
-
-    // Créer l'objet estimation avec les données du formulaire
-    const estimationData = {
-      ca: caNumber,
-      secteur,
-      departement,
-    };
-
-    setEstimation(estimationData);
-    setIsLoading(false);
+    toast({
+      title: "Estimation demandée",
+      description: "Nous travaillons sur votre estimation.",
+    });
   };
 
   return (
@@ -102,22 +91,14 @@ const Estimer = () => {
                 <Button
                   className="w-full bg-orange-500 hover:bg-orange-600 text-white text-lg py-6"
                   onClick={handleEstimation}
-                  disabled={isLoading}
                 >
-                  {isLoading ? "⏳ Génération en cours..." : "💰 Obtenir Mon Estimation Gratuite par IA"}
+                  💰 Obtenir Mon Estimation Gratuite par IA
                 </Button>
                 <p className="text-sm text-muted-foreground text-center mt-4">
                   ✅ Powered by Lovable AI • Sans engagement • 100% confidentiel
                 </p>
               </div>
 
-              <EstimationDialog
-                open={showDialog}
-                onOpenChange={setShowDialog}
-                estimation={estimation}
-                isLoading={isLoading}
-                formData={{ ca, secteur, departement }}
-              />
             </div>
           </div>
         </section>
