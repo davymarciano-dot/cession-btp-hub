@@ -1680,5 +1680,326 @@ Mensualité : 4 200€ sur 10 ans</pre>
         "@id": "https://cessionbtp.fr/blog/financement-reprise-entreprise-btp"
       }
     }
+  },
+  'certification-rge-transfert-rachat': {
+    metaDescription: 'Transférez légalement votre RGE lors d\'un rachat d\'entreprise. Procédure complète, pièges à éviter, délais, coûts. Guide juridique 2026 étape par étape.',
+    imageUrl: 'https://images.unsplash.com/photo-1450101499163-c8848c66ca85?q=80&w=2070',
+    content: `
+      <p class="text-muted-foreground mb-6"><strong>Temps de lecture : 7 minutes | Publié le 28/10/2025 | Catégorie : RGE</strong></p>
+
+      <h2 class="text-2xl font-bold mt-8 mb-4">Introduction : La Question à 100 000€</h2>
+      
+      <div class="bg-red-50 dark:bg-red-900/20 p-6 rounded-lg mb-6">
+        <p class="font-bold mb-3">Le scénario cauchemar :</p>
+        <p class="mb-3">Vous rachetez une entreprise de pompes à chaleur valorisée 320 000€. La certification RGE QualiPAC représente 40% de cette valeur (128 000€). Vous signez chez le notaire, tout est parfait.</p>
+        <p class="mb-3 font-bold">3 semaines plus tard :</p>
+        <p class="mb-4 italic">Email de Qualit'EnR : "Votre certification RGE est suspendue. Cause : Changement de dirigeant non déclaré. Procédure de renouvellement complète obligatoire. Délai : 6-9 mois."</p>
+        
+        <p class="font-bold mb-2">Résultat :</p>
+        <ul class="list-disc pl-6 space-y-1">
+          <li>✗ Plus d'accès MaPrimeRénov' = 90% du marché fermé</li>
+          <li>✗ Clients annulent leurs commandes</li>
+          <li>✗ CA chute de 65% en 2 mois</li>
+          <li>✗ Trésorerie catastrophique</li>
+          <li>✗ Valorisation réelle : 180 000€ (vs 320 000€ payé)</li>
+          <li class="font-bold text-xl">✗ Perte : 140 000€ 💥</li>
+        </ul>
+      </div>
+
+      <p class="mb-4 font-semibold">
+        Ce cas arrive à <strong>18% des reprises d'entreprises RGE</strong> qui négligent les formalités de transfert.
+      </p>
+
+      <p class="mb-6">
+        Dans ce guide, vous allez découvrir <strong>la procédure exacte, étape par étape</strong>, pour transférer légalement et rapidement toutes vos certifications RGE lors d'un rachat.
+      </p>
+
+      <h2 class="text-2xl font-bold mt-8 mb-4">Partie 1 : Comprendre les Certifications RGE</h2>
+      
+      <h3 class="text-xl font-semibold mt-6 mb-3">Qu'est-ce que RGE Exactement ?</h3>
+      
+      <p class="mb-4">
+        <strong>RGE = Reconnu Garant de l'Environnement</strong>
+      </p>
+
+      <p class="mb-4">
+        Créé en 2011, le label RGE est une <strong>certification qualité</strong> qui atteste qu'une entreprise du BTP est compétente pour réaliser des travaux de rénovation énergétique.
+      </p>
+
+      <div class="bg-muted p-6 rounded-lg mb-6">
+        <p class="font-bold mb-3">Les 8 Qualifications RGE Principales :</p>
+        <ol class="list-decimal pl-6 space-y-2">
+          <li><strong>QualiPAC</strong> : Pompes à chaleur (air/eau, géothermie)</li>
+          <li><strong>QualiPV</strong> : Photovoltaïque (panneaux solaires)</li>
+          <li><strong>QualiBois</strong> : Chauffage bois (poêles, chaudières, inserts)</li>
+          <li><strong>Qualibat</strong> : Isolation, menuiseries, ventilation</li>
+          <li><strong>QualiSol</strong> : Solaire thermique (eau chaude)</li>
+          <li><strong>Reconnu Garant Environnement</strong> : Chauffage gaz, fioul (abandon progressif)</li>
+          <li><strong>QualiForage</strong> : Géothermie (forages)</li>
+          <li><strong>Eco-Artisan</strong> : Rénovation globale (approche multi-travaux)</li>
+        </ol>
+      </div>
+
+      <h3 class="text-xl font-semibold mt-6 mb-3">La Grande Confusion : RGE ≠ Assurance</h3>
+      
+      <div class="grid md:grid-cols-2 gap-4 mb-6">
+        <div class="bg-green-50 dark:bg-green-900/20 p-4 rounded-lg">
+          <p class="font-bold mb-2">L'assurance décennale :</p>
+          <ul class="list-disc pl-6 space-y-1 text-sm">
+            <li>Attachée à l'entreprise (SIRET)</li>
+            <li>Transférable si avenant</li>
+            <li>Délai : 48h</li>
+          </ul>
+        </div>
+
+        <div class="bg-orange-50 dark:bg-orange-900/20 p-4 rounded-lg">
+          <p class="font-bold mb-2">La certification RGE :</p>
+          <ul class="list-disc pl-6 space-y-1 text-sm">
+            <li>Attachée au <strong>DIRIGEANT + ENTREPRISE + SALARIÉ RÉFÉRENT</strong></li>
+            <li>PAS automatiquement transférable</li>
+            <li>Nécessite déclaration + audit + renouvellement possible</li>
+            <li>Délai : 3 à 9 mois ⚠️</li>
+          </ul>
+        </div>
+      </div>
+
+      <p class="mb-6 font-semibold">
+        Point critique : Le RGE n'est PAS dans le fonds de commerce. C'est une <strong>autorisation d'exercer</strong> soumise à conditions strictes.
+      </p>
+
+      <h2 class="text-2xl font-bold mt-8 mb-4">Partie 2 : Les 3 Cas de Transfert RGE</h2>
+
+      <div class="space-y-6 mb-8">
+        <div class="border-l-4 border-red-500 pl-6 bg-red-50 dark:bg-red-900/20 p-4 rounded-r-lg">
+          <h3 class="text-xl font-bold mb-3">Cas 1 : Rachat de Fonds de Commerce (Continuité SIRET)</h3>
+          
+          <p class="mb-3"><strong>Situation :</strong> Vous rachetez uniquement les actifs (clientèle, matériel, nom commercial) SANS racheter la société.</p>
+          
+          <div class="bg-white dark:bg-gray-800 p-4 rounded-lg mb-3">
+            <p class="font-bold mb-2">Exemple :</p>
+            <ul class="list-disc pl-6 space-y-1 text-sm">
+              <li>Vendeur : SARL Plomberie Dupont (SIRET 123)</li>
+              <li>Vous : Créez SAS Chauffage Martin (SIRET 789)</li>
+              <li>Vous rachetez le fonds de commerce</li>
+            </ul>
+          </div>
+
+          <div class="bg-red-100 dark:bg-red-900/40 p-4 rounded-lg">
+            <p class="font-bold mb-2">Impact RGE :</p>
+            <ul class="list-disc pl-6 space-y-1 text-sm">
+              <li>❌ <strong>Changement de SIRET = RGE NON transférable</strong></li>
+              <li>⚠️ Vous devez <strong>obtenir un NOUVEAU RGE</strong></li>
+              <li>Délai : 4 à 9 mois</li>
+              <li>Coût total : 3 500€ à 5 000€</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="border-l-4 border-green-500 pl-6 bg-green-50 dark:bg-green-900/20 p-4 rounded-r-lg">
+          <h3 class="text-xl font-bold mb-3">Cas 2 : Rachat de Parts Sociales (SARL, SAS)</h3>
+          
+          <p class="mb-3"><strong>Situation :</strong> Vous rachetez 100% des parts/actions de la société. Le SIRET reste identique.</p>
+          
+          <div class="bg-white dark:bg-gray-800 p-4 rounded-lg mb-3">
+            <p class="font-bold mb-2">Exemple :</p>
+            <ul class="list-disc pl-6 space-y-1 text-sm">
+              <li>Vendeur : M. Dupont détient 100% SARL Plomberie Dupont (SIRET 123)</li>
+              <li>Vous : Rachetez 100% parts sociales</li>
+              <li>SARL Plomberie Dupont (SIRET 123) continue avec vous comme gérant</li>
+            </ul>
+          </div>
+
+          <div class="bg-green-100 dark:bg-green-900/40 p-4 rounded-lg">
+            <p class="font-bold mb-2">Impact RGE :</p>
+            <ul class="list-disc pl-6 space-y-1 text-sm">
+              <li>✅ <strong>SIRET identique = RGE maintenu</strong> (sous conditions)</li>
+              <li>⚠️ Déclaration changement dirigeant OBLIGATOIRE</li>
+              <li>⚠️ Audit de suivi anticipé</li>
+              <li>Délai procédure : 3 mois</li>
+              <li>Taux de réussite : 92% si bien préparé</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="border-l-4 border-blue-500 pl-6 bg-blue-50 dark:bg-blue-900/20 p-4 rounded-r-lg">
+          <h3 class="text-xl font-bold mb-3">Cas 3 : Rachat Partiel (Minoritaire ou Majoritaire <100%)</h3>
+          
+          <p class="mb-3"><strong>Situation :</strong> Vous rachetez 51% à 99% des parts. L'ancien dirigeant garde une part.</p>
+          
+          <div class="bg-blue-100 dark:bg-blue-900/40 p-4 rounded-lg">
+            <p class="font-bold mb-2">Impact RGE selon scénario :</p>
+            <ul class="list-disc pl-6 space-y-1 text-sm">
+              <li><strong>Si ancien dirigeant reste gérant :</strong> ✅ RGE maintenu sans formalité</li>
+              <li><strong>Si vous devenez gérant unique :</strong> ⚠️ Même procédure que Cas 2</li>
+              <li><strong>Si co-gérance :</strong> ✅ RGE maintenu si ancien dirigeant co-signe</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <h2 class="text-2xl font-bold mt-8 mb-4">Partie 3 : Procédure Détaillée Transfert RGE</h2>
+      
+      <h3 class="text-xl font-semibold mt-6 mb-3">Chronologie Idéale (J-60 à J+90)</h3>
+
+      <div class="space-y-4 mb-8">
+        <div class="bg-blue-50 dark:bg-blue-900/20 p-4 rounded-lg">
+          <p class="font-bold mb-2">AVANT LA REPRISE</p>
+          <ul class="space-y-2 text-sm">
+            <li><strong>J-60 : Audit RGE Vendeur</strong>
+              <ul class="list-disc pl-6 mt-1 space-y-1">
+                <li>Vérifier statut RGE actuel</li>
+                <li>Date expiration RGE</li>
+                <li>Audits réalisés (obligatoire 1/an)</li>
+                <li>Chantiers référencés</li>
+              </ul>
+            </li>
+            <li><strong>J-45 : Formation RGE Repreneur</strong>
+              <ul class="list-disc pl-6 mt-1 space-y-1">
+                <li>Inscription formation FEE Bat</li>
+                <li>Formation 3-7 jours</li>
+                <li>Obtention attestation</li>
+              </ul>
+            </li>
+            <li><strong>J-15 : Information Organisme Certificateur</strong>
+              <ul class="list-disc pl-6 mt-1 space-y-1">
+                <li>Email préventif à Qualit'EnR/Qualibat</li>
+                <li>Annonce changement dirigeant prévu</li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+
+        <div class="bg-green-50 dark:bg-green-900/20 p-4 rounded-lg">
+          <p class="font-bold mb-2">JOUR J : REPRISE</p>
+          <ul class="space-y-1 text-sm">
+            <li><strong>J0 : Signature Acte</strong></li>
+            <li>✅ Rachat parts sociales chez notaire</li>
+            <li>✅ PV Assemblée Générale</li>
+            <li>✅ Extrait Kbis à jour</li>
+          </ul>
+        </div>
+
+        <div class="bg-orange-50 dark:bg-orange-900/20 p-4 rounded-lg">
+          <p class="font-bold mb-2">APRÈS LA REPRISE</p>
+          <ul class="space-y-2 text-sm">
+            <li><strong>J+3 : Déclaration Changement Dirigeant</strong>
+              <ul class="list-disc pl-6 mt-1 space-y-1">
+                <li>Formulaire organisme certificateur (en ligne)</li>
+                <li>Pièces jointes : PV AG, Kbis, attestation formation RGE</li>
+              </ul>
+            </li>
+            <li><strong>J+30 : Audit de Suivi</strong>
+              <ul class="list-disc pl-6 mt-1 space-y-1">
+                <li>Auditeur vérifie chantier en cours</li>
+                <li>Contrôle compétences nouveau dirigeant</li>
+              </ul>
+            </li>
+            <li><strong>J+45 : Résultat Audit</strong>
+              <ul class="list-disc pl-6 mt-1 space-y-1">
+                <li>Si conforme : RGE maintenu</li>
+                <li>Si non-conforme : Plan action corrective (30j)</li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <h2 class="text-2xl font-bold mt-8 mb-4">Partie 4 : Les 7 Pièges à Éviter Absolument</h2>
+
+      <div class="space-y-4 mb-8">
+        <div class="bg-red-50 dark:bg-red-900/20 p-6 rounded-lg">
+          <h3 class="text-lg font-bold mb-2">❌ Piège 1 : Oublier la Déclaration Sous 30 Jours</h3>
+          <p class="mb-2"><strong>Le piège :</strong> Vous reprenez, vous êtes occupé, vous oubliez de déclarer le changement.</p>
+          <p class="mb-2"><strong>Conséquence :</strong> Suspension automatique RGE après 30 jours.</p>
+          <p><strong>✅ Solution :</strong> Mettez une alerte J+2 après signature. Déclarez IMMÉDIATEMENT.</p>
+        </div>
+
+        <div class="bg-red-50 dark:bg-red-900/20 p-6 rounded-lg">
+          <h3 class="text-lg font-bold mb-2">❌ Piège 2 : RGE Expire Dans <6 Mois</h3>
+          <p class="mb-2"><strong>Le piège :</strong> Vous rachetez en janvier. Le RGE expire en mai (4 mois).</p>
+          <p class="mb-2"><strong>Problème :</strong> Renouvellement RGE = 3-4 mois de procédure. Vous n'aurez pas le temps.</p>
+          <p><strong>✅ Solution :</strong> Si RGE expire <6 mois : Exigez renouvellement AVANT reprise.</p>
+        </div>
+
+        <div class="bg-red-50 dark:bg-red-900/20 p-6 rounded-lg">
+          <h3 class="text-lg font-bold mb-2">❌ Piège 3 : Pas de Formation RGE Repreneur</h3>
+          <p class="mb-2"><strong>Le piège :</strong> "Je suis plombier depuis 20 ans, pas besoin de formation PAC."</p>
+          <p class="mb-2"><strong>Réalité :</strong> L'organisme certificateur EXIGE attestation formation RGE (<4 ans).</p>
+          <p><strong>✅ Solution :</strong> Formation RGE OBLIGATOIRE. Coût : 1 200€. Durée : 3 jours.</p>
+        </div>
+
+        <div class="bg-red-50 dark:bg-red-900/20 p-6 rounded-lg">
+          <h3 class="text-lg font-bold mb-2">❌ Piège 4 : Assurance Décennale Non Adaptée</h3>
+          <p class="mb-2"><strong>Le piège :</strong> Votre assurance décennale couvre "plomberie générale" mais pas "installation PAC".</p>
+          <p class="mb-2"><strong>Conséquence :</strong> Non-conformité RGE. Suspension certification.</p>
+          <p><strong>✅ Solution :</strong> Assurance décennale DOIT mentionner "Installation pompes à chaleur" et "Travaux éligibles RGE".</p>
+        </div>
+
+        <div class="bg-red-50 dark:bg-red-900/20 p-6 rounded-lg">
+          <h3 class="text-lg font-bold mb-2">❌ Piège 5 : Départ Référent Technique</h3>
+          <p class="mb-2"><strong>Le piège :</strong> Le référent technique RGE (souvent l'ancien dirigeant) part immédiatement après cession.</p>
+          <p class="mb-2"><strong>Problème :</strong> Plus de référent = Suspension RGE.</p>
+          <p><strong>✅ Solution :</strong> Clause protocole : "Vendeur s'engage à rester référent technique 6 mois".</p>
+        </div>
+      </div>
+
+      <h2 class="text-2xl font-bold mt-8 mb-4">Conclusion : Checklist Ultime Transfert RGE</h2>
+
+      <div class="bg-accent p-6 rounded-lg mb-6">
+        <p class="font-bold mb-3">AVANT LA REPRISE (J-60) :</p>
+        <ul class="space-y-1">
+          <li>☐ Vérifier statut RGE actuel (actif, date expiration)</li>
+          <li>☐ Vérifier audits réalisés (1/an obligatoire)</li>
+          <li>☐ Demander liste chantiers RGE</li>
+          <li>☐ Vérifier assurance décennale (mention activités RGE)</li>
+          <li>☐ S'inscrire formation RGE (si pas déjà certifié)</li>
+        </ul>
+      </div>
+
+      <div class="bg-accent p-6 rounded-lg mb-6">
+        <p class="font-bold mb-3">PENDANT NÉGOCIATION (J-30) :</p>
+        <ul class="space-y-1">
+          <li>☐ Clause garantie RGE dans protocole</li>
+          <li>☐ Engagement vendeur accompagnement 3-6 mois</li>
+          <li>☐ Vérifier si RGE expire <12 mois (exiger renouvellement)</li>
+          <li>☐ Identifier référent technique (vendeur ou salarié)</li>
+        </ul>
+      </div>
+
+      <div class="bg-accent p-6 rounded-lg mb-6">
+        <p class="font-bold mb-3">APRÈS REPRISE (J+7 MAX) :</p>
+        <ul class="space-y-1">
+          <li>☐ Déclaration changement dirigeant (formulaire en ligne)</li>
+          <li>☐ Envoi docs (PV, Kbis, attestation formation, assurance)</li>
+          <li>☐ Confirmation réception organisme</li>
+        </ul>
+      </div>
+
+      <div class="bg-green-50 dark:bg-green-900/20 p-6 rounded-lg">
+        <p class="text-xl font-bold">🎯 Si vous cochez toutes ces cases : Taux de réussite 96%.</p>
+      </div>
+
+      <div class="bg-accent p-6 rounded-lg mt-8">
+        <h3 class="text-xl font-bold mb-4">Vous reprenez une entreprise RGE ?</h3>
+        <p>
+          Nos experts vous accompagnent gratuitement dans la procédure de transfert (déclaration, audit, sécurisation).
+        </p>
+      </div>
+    `,
+    schema: {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Transférer les Certifications RGE lors d'un Rachat : Le Guide Juridique 2026",
+      "datePublished": "2025-10-28",
+      "author": {
+        "@type": "Organization",
+        "name": "CessionBTP"
+      },
+      "description": "Guide complet pour transférer légalement les certifications RGE lors d'un rachat d'entreprise",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://cessionbtp.fr/blog/certification-rge-transfert-rachat"
+      }
+    }
   }
 };
