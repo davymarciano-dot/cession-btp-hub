@@ -4,18 +4,24 @@ import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
-import { Search, Shield, Users, FileCheck, Wrench, Zap, Home, Droplet, Palette, TreeDeciduous } from "lucide-react";
+import { Search, Shield, Users, FileCheck, Wrench, Zap, Home, Droplet, Palette, TreeDeciduous, Map, List } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import PricingCard from "@/components/PricingCard";
 import SEOHead from "@/components/SEOHead";
 import { SearchableSelect } from "@/components/SearchableSelect";
+import MapView from "@/components/MapView";
+import { useCachedListings } from "@/hooks/useCachedListings";
 
 const Acheter = () => {
   const navigate = useNavigate();
   const [showOnlyRGE, setShowOnlyRGE] = useState(false);
   const [secteurFilter, setSecteurFilter] = useState("");
+  const [showMapView, setShowMapView] = useState(false);
+  
+  // Récupérer les annonces pour la carte
+  const { data: listings = [] } = useCachedListings({});
 
   const secteurs = [
     { name: "Plomberie", icon: Droplet, count: 12 },
@@ -148,31 +154,81 @@ const Acheter = () => {
           </div>
         </section>
 
-        {/* Secteurs BTP Grid */}
+        {/* Secteurs BTP Grid / Carte Interactive */}
         <section className="py-20 bg-slate-50">
           <div className="container mx-auto px-4">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold mb-4">Explorez par Secteur</h2>
-              <p className="text-xl text-muted-foreground">
-                Des opportunités dans tous les métiers du BTP
-              </p>
+            <div className="flex flex-col md:flex-row items-center justify-between mb-8">
+              <div className="text-center md:text-left mb-6 md:mb-0">
+                <h2 className="text-3xl font-bold mb-2">
+                  {showMapView ? "Carte Interactive des Entreprises" : "Explorez par Secteur"}
+                </h2>
+                <p className="text-xl text-muted-foreground">
+                  {showMapView 
+                    ? `${listings.length} entreprises disponibles sur toute la France`
+                    : "Des opportunités dans tous les métiers du BTP"
+                  }
+                </p>
+              </div>
+
+              {/* Toggle Vue Liste / Carte */}
+              <div className="flex gap-2 bg-white p-1 rounded-lg shadow-md">
+                <Button
+                  onClick={() => setShowMapView(false)}
+                  variant={!showMapView ? "default" : "ghost"}
+                  className={`flex items-center gap-2 ${!showMapView ? 'bg-primary text-white' : 'text-muted-foreground'}`}
+                >
+                  <List className="w-4 h-4" />
+                  Vue Liste
+                </Button>
+                <Button
+                  onClick={() => setShowMapView(true)}
+                  variant={showMapView ? "default" : "ghost"}
+                  className={`flex items-center gap-2 ${showMapView ? 'bg-primary text-white' : 'text-muted-foreground'}`}
+                >
+                  <Map className="w-4 h-4" />
+                  Vue Carte
+                </Button>
+              </div>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
-              {secteurs.map((secteur) => (
-                <button
-                  key={secteur.name}
-                  onClick={() => navigate("/entreprises")}
-                  className="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 cursor-pointer group"
-                >
-                  <secteur.icon className="h-12 w-12 text-primary mb-4 group-hover:text-secondary transition-colors" />
-                  <h3 className="text-xl font-bold mb-2">{secteur.name}</h3>
-                  <p className="text-muted-foreground">
-                    {secteur.count} entreprise{secteur.count > 1 ? 's' : ''} disponible{secteur.count > 1 ? 's' : ''}
+            {/* Vue Liste - Grille de secteurs */}
+            {!showMapView && (
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+                {secteurs.map((secteur) => (
+                  <button
+                    key={secteur.name}
+                    onClick={() => navigate("/entreprises")}
+                    className="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 cursor-pointer group"
+                  >
+                    <secteur.icon className="h-12 w-12 text-primary mb-4 group-hover:text-secondary transition-colors" />
+                    <h3 className="text-xl font-bold mb-2">{secteur.name}</h3>
+                    <p className="text-muted-foreground">
+                      {secteur.count} entreprise{secteur.count > 1 ? 's' : ''} disponible{secteur.count > 1 ? 's' : ''}
+                    </p>
+                  </button>
+                ))}
+              </div>
+            )}
+
+            {/* Vue Carte - Carte interactive */}
+            {showMapView && (
+              <div className="max-w-7xl mx-auto">
+                <MapView listings={listings} />
+                <div className="mt-6 text-center">
+                  <p className="text-sm text-muted-foreground mb-4">
+                    💡 Cliquez sur un marqueur orange pour voir les détails d'une entreprise
                   </p>
-                </button>
-              ))}
-            </div>
+                  <Button
+                    onClick={() => navigate("/entreprises")}
+                    variant="outline"
+                    size="lg"
+                    className="font-semibold"
+                  >
+                    Voir toutes les annonces détaillées →
+                  </Button>
+                </div>
+              </div>
+            )}
           </div>
         </section>
 
