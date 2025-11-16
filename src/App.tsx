@@ -61,7 +61,6 @@ const VendorOnboarding = lazy(() => import("./components/VendorOnboarding"));
 const CronLogsAdmin = lazy(() => import("./pages/admin/CronLogs"));
 const BlogIndex = lazy(() => import("./pages/blog/BlogIndex"));
 const VendorListingAnalytics = lazy(() => import("./pages/dashboard/VendorListingAnalytics"));
-const Roadmap = lazy(() => import("./pages/Roadmap"));
 const LaunchChecklist = lazy(() => import("./pages/LaunchChecklist"));
 const MonitoringDashboard = lazy(() => import("./pages/admin/MonitoringDashboard"));
 const Admin = lazy(() => import("./pages/Admin"));
@@ -147,7 +146,6 @@ const App = () => {
           <Route path="/mentions-legales" element={<MentionsLegales />} />
           <Route path="/cgv" element={<CGV />} />
           <Route path="/sitemap" element={<Sitemap />} />
-          <Route path="/roadmap" element={<Roadmap />} />
           <Route path="/launch-checklist" element={<LaunchChecklist />} />
           <Route path="/seo-stats" element={<SeoStats />} />
           <Route path="/backlinks-manager" element={<BacklinksManager />} />
