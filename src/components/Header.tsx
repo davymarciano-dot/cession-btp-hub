@@ -23,7 +23,7 @@ const Header = () => {
           {/* LOGO CESSIONBTP */}
           <Link to="/" className="hover:scale-105 transition-transform">
             <img 
-              src="/images/logo-cessionbtp.png" 
+              src="/images/logo-cessionbtp-2eead586.png" 
               alt="CessionBTP" 
               className="block object-contain h-24 md:h-40 lg:h-48 w-auto shrink-0"
             />

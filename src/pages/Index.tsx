@@ -341,7 +341,7 @@ const Home = () => {
             {/* Logo CessionBTP */}
             <div className="mb-8 flex justify-center">
               <img 
-                src="/images/logo-cessionbtp.png" 
+                src="/images/logo-cessionbtp-2eead586.png" 
                 alt="CessionBTP" 
                 className="h-20 w-auto opacity-90 block object-contain"
               />
