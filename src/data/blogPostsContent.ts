@@ -4169,5 +4169,463 @@ Mensualité : 4 200€ sur 10 ans</pre>
         "@id": "https://cessionbtp.fr/blog/erreurs-fatales-vente-entreprise-btp"
       }
     }
+  },
+  
+  'vendre-entreprise-plomberie-2026': {
+    content: `
+      <div class="prose prose-lg max-w-none">
+        <div class="bg-gradient-to-r from-blue-50 to-cyan-50 dark:from-blue-950/20 dark:to-cyan-950/20 border-l-4 border-blue-500 p-6 rounded-r-lg mb-8">
+          <h2 class="text-2xl font-bold text-blue-900 dark:text-blue-100 mt-0 mb-4">🔧 Le Marché Plomberie en 2026</h2>
+          <p class="text-blue-800 dark:text-blue-200 mb-4 text-lg font-semibold">La plomberie-chauffage est le 2e secteur le plus actif en cessions BTP (après maçonnerie).</p>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
+            <div class="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-sm">
+              <div class="text-3xl font-bold text-blue-600 dark:text-blue-400">2 664</div>
+              <div class="text-sm text-gray-600 dark:text-gray-400">Entreprises cédées en 2026</div>
+            </div>
+            <div class="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-sm">
+              <div class="text-3xl font-bold text-blue-600 dark:text-blue-400">38 jours</div>
+              <div class="text-sm text-gray-600 dark:text-gray-400">Délai moyen de vente</div>
+            </div>
+            <div class="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-sm">
+              <div class="text-3xl font-bold text-blue-600 dark:text-blue-400">295 000€</div>
+              <div class="text-sm text-gray-600 dark:text-gray-400">Prix moyen</div>
+            </div>
+            <div class="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-sm">
+              <div class="text-3xl font-bold text-blue-600 dark:text-blue-400">89%</div>
+              <div class="text-sm text-gray-600 dark:text-gray-400">Taux de concrétisation</div>
+            </div>
+          </div>
+        </div>
+
+        <h2 class="text-3xl font-bold mt-12 mb-6">Les 5 Types d'Entreprises Plomberie</h2>
+
+        <div class="space-y-6">
+          <div class="bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-6">
+            <h3 class="text-xl font-bold text-gray-900 dark:text-gray-100 mb-3">Type 1 : Plomberie Sanitaire Pure (25%)</h3>
+            <p class="text-gray-700 dark:text-gray-300 mb-3"><strong>Activité :</strong> Installation/réparation sanitaires, dépannage fuites, débouchage canalisations</p>
+            <div class="grid grid-cols-2 gap-4">
+              <div>
+                <p class="text-sm font-semibold text-gray-600 dark:text-gray-400">CA Moyen</p>
+                <p class="text-lg font-bold text-blue-600 dark:text-blue-400">180-350K€</p>
+              </div>
+              <div>
+                <p class="text-sm font-semibold text-gray-600 dark:text-gray-400">Valorisation</p>
+                <p class="text-lg font-bold text-blue-600 dark:text-blue-400">0,50-0,60x CA</p>
+              </div>
+            </div>
+            <p class="mt-3 text-sm text-gray-600 dark:text-gray-400"><strong>Pourquoi faible :</strong> Forte concurrence, barrière entrée basse, marges moyennes (12-18%)</p>
+          </div>
+
+          <div class="bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-6">
+            <h3 class="text-xl font-bold text-gray-900 dark:text-gray-100 mb-3">Type 2 : Plomberie-Chauffage Traditionnel (35%)</h3>
+            <p class="text-gray-700 dark:text-gray-300 mb-3"><strong>Activité :</strong> Plomberie sanitaire + Chauffage gaz/fioul + Chaudières + Entretien annuel</p>
+            <div class="grid grid-cols-2 gap-4">
+              <div>
+                <p class="text-sm font-semibold text-gray-600 dark:text-gray-400">CA Moyen</p>
+                <p class="text-lg font-bold text-blue-600 dark:text-blue-400">350-650K€</p>
+              </div>
+              <div>
+                <p class="text-sm font-semibold text-gray-600 dark:text-gray-400">Valorisation</p>
+                <p class="text-lg font-bold text-blue-600 dark:text-blue-400">0,60-0,70x CA</p>
+              </div>
+            </div>
+            <p class="mt-3 text-sm text-green-600 dark:text-green-400"><strong>Points forts :</strong> Récurrence (contrats entretien), marges correctes (18-25%), clientèle fidèle</p>
+          </div>
+
+          <div class="bg-gradient-to-r from-green-50 to-emerald-50 dark:from-green-950/20 dark:to-emerald-950/20 border-2 border-green-500 rounded-lg p-6">
+            <div class="flex items-center mb-3">
+              <h3 class="text-xl font-bold text-gray-900 dark:text-gray-100">Type 3 : Plomberie-Chauffage + PAC (30%)</h3>
+              <span class="ml-3 px-3 py-1 bg-green-500 text-white text-sm font-bold rounded-full">⭐ STAR 2026</span>
+            </div>
+            <p class="text-gray-700 dark:text-gray-300 mb-3"><strong>Activité :</strong> Plomberie-chauffage + Pompes à chaleur + RGE QualiPAC + MaPrimeRénov'</p>
+            <div class="grid grid-cols-2 gap-4">
+              <div>
+                <p class="text-sm font-semibold text-gray-600 dark:text-gray-400">CA Moyen</p>
+                <p class="text-lg font-bold text-green-600 dark:text-green-400">450-900K€</p>
+              </div>
+              <div>
+                <p class="text-sm font-semibold text-gray-600 dark:text-gray-400">Valorisation</p>
+                <p class="text-lg font-bold text-green-600 dark:text-green-400">0,75-0,95x CA</p>
+              </div>
+            </div>
+            <div class="mt-4 bg-white dark:bg-gray-800 p-4 rounded-lg">
+              <p class="font-semibold text-green-700 dark:text-green-400 mb-2">Points forts :</p>
+              <ul class="list-disc list-inside space-y-1 text-sm text-gray-700 dark:text-gray-300">
+                <li>Marché explosif (+22%/an)</li>
+                <li>Marges élevées (25-32%)</li>
+                <li>RGE = barrière entrée</li>
+                <li>Aides État = Solvabilité clients</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="bg-gradient-to-r from-purple-50 to-pink-50 dark:from-purple-950/20 dark:to-pink-950/20 border-2 border-purple-500 rounded-lg p-6">
+            <div class="flex items-center mb-3">
+              <h3 class="text-xl font-bold text-gray-900 dark:text-gray-100">Type 4 : Plomberie Multi-Énergies (8%)</h3>
+              <span class="ml-3 px-3 py-1 bg-purple-500 text-white text-sm font-bold rounded-full">⭐⭐ PREMIUM</span>
+            </div>
+            <p class="text-gray-700 dark:text-gray-300 mb-3"><strong>Activité :</strong> PAC + Solaire thermique + Biomasse + Multi-RGE + Rénovation globale</p>
+            <div class="grid grid-cols-2 gap-4">
+              <div>
+                <p class="text-sm font-semibold text-gray-600 dark:text-gray-400">CA Moyen</p>
+                <p class="text-lg font-bold text-purple-600 dark:text-purple-400">800K€-1,5M€</p>
+              </div>
+              <div>
+                <p class="text-sm font-semibold text-gray-600 dark:text-gray-400">Valorisation</p>
+                <p class="text-lg font-bold text-purple-600 dark:text-purple-400">0,85-1,10x CA</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-blue-50 dark:bg-blue-950/20 border-l-4 border-blue-500 p-6 rounded-r-lg my-8">
+          <h3 class="text-xl font-bold text-blue-900 dark:text-blue-100 mt-0 mb-4">💡 Exemple Calcul Valorisation Complet</h3>
+          <div class="bg-white dark:bg-gray-800 p-6 rounded-lg">
+            <p class="font-semibold mb-2">ENTREPRISE PLOMBERIE-PAC</p>
+            <ul class="space-y-2 text-sm mb-4">
+              <li>• CA : 550 000€</li>
+              <li>• Type : Plomberie-Chauffage + PAC</li>
+              <li>• RGE : Oui (QualiPAC)</li>
+              <li>• Contrats entretien : 180</li>
+              <li>• Carnet commandes : 8 mois</li>
+              <li>• Zone : Lyon métropole</li>
+            </ul>
+            <div class="border-t border-gray-200 dark:border-gray-700 pt-4">
+              <p class="text-sm mb-2"><strong>Calcul :</strong></p>
+              <ul class="space-y-1 text-sm text-gray-700 dark:text-gray-300">
+                <li>Coefficient base (Type 3) : 0,75</li>
+                <li>+ RGE QualiPAC : ×1,35</li>
+                <li>+ Contrats entretien : ×1,18</li>
+                <li>+ Carnet >6 mois : ×1,10</li>
+                <li>+ Métropole Lyon : ×1,08</li>
+              </ul>
+              <div class="mt-4 pt-4 border-t-2 border-blue-500">
+                <p class="text-sm mb-2">Coefficient final : 0,75 × 1,35 × 1,18 × 1,10 × 1,08 = <strong class="text-blue-600 dark:text-blue-400">1,42</strong></p>
+                <p class="text-2xl font-bold text-blue-600 dark:text-blue-400">PRIX = 550 000€ × 1,42 = 781 000€</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <h2 class="text-3xl font-bold mt-12 mb-6">Préparer sa Plomberie à la Vente (6 Mois Avant)</h2>
+
+        <div class="space-y-8">
+          <div class="bg-gradient-to-r from-green-50 to-emerald-50 dark:from-green-950/20 dark:to-emerald-950/20 border-l-4 border-green-500 p-6 rounded-r-lg">
+            <h3 class="text-2xl font-bold text-green-900 dark:text-green-100 mb-4">Optimisation 1 : Obtenir RGE QualiPAC</h3>
+            <p class="text-xl font-bold text-green-700 dark:text-green-400 mb-4">Impact valorisation : +150 000€ à +250 000€</p>
+            
+            <div class="space-y-4">
+              <div class="bg-white dark:bg-gray-800 p-4 rounded-lg">
+                <p class="font-semibold mb-2">Étape 1 : Formation QualiPAC (3 jours - 1 200€)</p>
+                <p class="text-sm text-gray-600 dark:text-gray-400">FEE Bat Module PAC + Obtention attestation</p>
+              </div>
+              
+              <div class="bg-white dark:bg-gray-800 p-4 rounded-lg">
+                <p class="font-semibold mb-2">Étape 2 : Assurance Décennale Adaptée (+1 500€/an)</p>
+                <p class="text-sm text-gray-600 dark:text-gray-400">Mention "Installation PAC air/eau"</p>
+              </div>
+              
+              <div class="bg-white dark:bg-gray-800 p-4 rounded-lg">
+                <p class="font-semibold mb-2">Étape 3 : Dépôt Dossier Qualit'EnR (300€)</p>
+                <p class="text-sm text-gray-600 dark:text-gray-400">Attestation + Assurance + Référence chantier</p>
+              </div>
+
+              <div class="bg-white dark:bg-gray-800 p-4 rounded-lg">
+                <p class="font-semibold mb-2">Étape 4 : Premier Chantier PAC</p>
+                <p class="text-sm text-gray-600 dark:text-gray-400">Installation basique sous supervision + Audit Qualit'EnR</p>
+              </div>
+            </div>
+
+            <div class="mt-6 bg-white dark:bg-gray-800 p-6 rounded-lg">
+              <p class="text-sm font-semibold mb-2">AVANT RGE : CA 450K€ × 0,62 = <span class="text-red-600 dark:text-red-400">279 000€</span></p>
+              <p class="text-sm font-semibold mb-2">APRÈS RGE : CA 450K€ × 0,85 = <span class="text-green-600 dark:text-green-400">382 500€</span></p>
+              <p class="text-xl font-bold text-green-600 dark:text-green-400 mt-4">GAIN : +103 500€ • ROI : ×23 !</p>
+            </div>
+          </div>
+
+          <div class="bg-orange-50 dark:bg-orange-950/20 border-l-4 border-orange-500 p-6 rounded-r-lg">
+            <h3 class="text-2xl font-bold text-orange-900 dark:text-orange-100 mb-4">Optimisation 2 : Développer Contrats Entretien</h3>
+            <p class="text-xl font-bold text-orange-700 dark:text-orange-400 mb-4">Impact valorisation : +35 000€ à +80 000€</p>
+            
+            <p class="mb-4 text-gray-700 dark:text-gray-300">Les contrats entretien chaudière/PAC = Or pour acheteur</p>
+            
+            <div class="space-y-3">
+              <div class="bg-white dark:bg-gray-800 p-4 rounded-lg">
+                <p class="font-semibold mb-2">Action 1 : Relance Base Clients</p>
+                <p class="text-sm text-gray-600 dark:text-gray-400">Email/SMS : "Entretien obligatoire - Offre spéciale 149€/an"</p>
+                <p class="text-sm font-semibold text-orange-600 dark:text-orange-400 mt-2">Objectif : 100 nouveaux contrats</p>
+              </div>
+              
+              <div class="bg-white dark:bg-gray-800 p-4 rounded-lg">
+                <p class="font-semibold mb-2">Action 2 : Systématisation Nouveaux Chantiers</p>
+                <p class="text-sm text-gray-600 dark:text-gray-400">CHAQUE installation = Proposition contrat (-30% si signature jour J)</p>
+                <p class="text-sm font-semibold text-orange-600 dark:text-orange-400 mt-2">Objectif : 80% nouveaux clients signent</p>
+              </div>
+              
+              <div class="bg-white dark:bg-gray-800 p-4 rounded-lg">
+                <p class="font-semibold mb-2">Action 3 : Partenariat Syndics/Bailleurs</p>
+                <p class="text-sm text-gray-600 dark:text-gray-400">Démarchage syndics + Contrat global immeuble</p>
+                <p class="text-sm font-semibold text-orange-600 dark:text-orange-400 mt-2">1 syndic 50 logements = 50 contrats</p>
+              </div>
+            </div>
+
+            <div class="mt-6 bg-white dark:bg-gray-800 p-6 rounded-lg">
+              <p class="text-sm mb-2">Résultat visé 6 mois : <strong>270 contrats</strong></p>
+              <p class="text-sm mb-2">CA récurrent : 270 × 180€ = <strong>48 600€/an</strong></p>
+              <p class="text-sm mb-2">Marge : 48 600€ × 75% = <strong>36 450€/an</strong></p>
+              <p class="text-xl font-bold text-orange-600 dark:text-orange-400 mt-4">Gain valorisation : +72 900€</p>
+            </div>
+          </div>
+        </div>
+
+        <h2 class="text-3xl font-bold mt-12 mb-6">Les 4 Profils d'Acheteurs Plomberie</h2>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 rounded-lg p-6">
+            <div class="flex items-center mb-4">
+              <div class="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center text-white font-bold text-xl mr-3">1</div>
+              <h3 class="text-xl font-bold">Plombier Salarié (55%)</h3>
+            </div>
+            <p class="text-sm text-gray-600 dark:text-gray-400 mb-3">Âge 28-45 ans • 8-20 ans expérience</p>
+            <div class="space-y-2 text-sm">
+              <p><strong class="text-green-600 dark:text-green-400">✓ Points forts :</strong> Compétent métier, connaît le local, crédible salariés</p>
+              <p><strong class="text-orange-600 dark:text-orange-400">⚠ Points faibles :</strong> Apport faible (30-60K€), peu expérience gestion</p>
+            </div>
+          </div>
+
+          <div class="bg-purple-50 dark:bg-purple-950/20 border border-purple-200 dark:border-purple-800 rounded-lg p-6">
+            <div class="flex items-center mb-4">
+              <div class="w-12 h-12 bg-purple-500 rounded-full flex items-center justify-center text-white font-bold text-xl mr-3">2</div>
+              <h3 class="text-xl font-bold">Chef Entreprise BTP (25%)</h3>
+            </div>
+            <p class="text-sm text-gray-600 dark:text-gray-400 mb-3">Âge 40-55 ans • Déjà dirigeant PME</p>
+            <div class="space-y-2 text-sm">
+              <p><strong class="text-green-600 dark:text-green-400">✓ Points forts :</strong> Expérience gestion, réseau installé, capacité financière</p>
+              <p><strong class="text-orange-600 dark:text-orange-400">⚠ Points faibles :</strong> Pas expert plomberie (délègue)</p>
+            </div>
+          </div>
+
+          <div class="bg-orange-50 dark:bg-orange-950/20 border border-orange-200 dark:border-orange-800 rounded-lg p-6">
+            <div class="flex items-center mb-4">
+              <div class="w-12 h-12 bg-orange-500 rounded-full flex items-center justify-center text-white font-bold text-xl mr-3">3</div>
+              <h3 class="text-xl font-bold">Cadre Reconversion (15%)</h3>
+            </div>
+            <p class="text-sm text-gray-600 dark:text-gray-400 mb-3">Âge 45-55 ans • 0 expérience plomberie</p>
+            <div class="space-y-2 text-sm">
+              <p><strong class="text-green-600 dark:text-green-400">✓ Points forts :</strong> Capital disponible, compétences gestion</p>
+              <p><strong class="text-red-600 dark:text-red-400">✗ Points faibles :</strong> Aucune compétence technique, risque échec 68%</p>
+            </div>
+          </div>
+
+          <div class="bg-green-50 dark:bg-green-950/20 border border-green-200 dark:border-green-800 rounded-lg p-6">
+            <div class="flex items-center mb-4">
+              <div class="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center text-white font-bold text-xl mr-3">4</div>
+              <h3 class="text-xl font-bold">Fonds Investissement (5%)</h3>
+            </div>
+            <p class="text-sm text-gray-600 dark:text-gray-400 mb-3">Consolidation marché • Groupe régional</p>
+            <div class="space-y-2 text-sm">
+              <p><strong class="text-green-600 dark:text-green-400">✓ Points forts :</strong> Prix premium +15-25%, financement sécurisé</p>
+              <p><strong class="text-orange-600 dark:text-orange-400">⚠ Points faibles :</strong> Perte identité entreprise</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-gradient-to-r from-red-50 to-orange-50 dark:from-red-950/20 dark:to-orange-950/20 border-l-4 border-red-500 p-6 rounded-r-lg mt-8">
+          <h3 class="text-xl font-bold text-red-900 dark:text-red-100 mb-4">⚠️ Pièges Spécifiques Plomberie</h3>
+          
+          <div class="space-y-4">
+            <div class="bg-white dark:bg-gray-800 p-4 rounded-lg">
+              <p class="font-bold text-red-600 dark:text-red-400 mb-2">Piège 1 : Dépendance Client Principal</p>
+              <p class="text-sm mb-2">45% CA avec un syndic (relation personnelle, pas de contrat écrit)</p>
+              <p class="text-sm font-semibold text-green-600 dark:text-green-400">✓ Solution : Formaliser contrat 3 ans + Présenter repreneur AVANT signature</p>
+            </div>
+
+            <div class="bg-white dark:bg-gray-800 p-4 rounded-lg">
+              <p class="font-bold text-red-600 dark:text-red-400 mb-2">Piège 2 : Stock Pièces Obsolètes</p>
+              <p class="text-sm mb-2">Stock comptable 32K€ mais réel valorisable 18K€ (décote -14K€)</p>
+              <p class="text-sm font-semibold text-green-600 dark:text-green-400">✓ Solution : Inventaire 6 mois avant + Éliminer obsolètes</p>
+            </div>
+
+            <div class="bg-white dark:bg-gray-800 p-4 rounded-lg">
+              <p class="font-bold text-red-600 dark:text-red-400 mb-2">Piège 3 : Salariés Clés Non Fidélisés</p>
+              <p class="text-sm mb-2">Chef chantier (15 ans) démissionne → 2 plombiers le suivent</p>
+              <p class="text-sm font-semibold text-green-600 dark:text-green-400">✓ Solution : Clause maintien salariés 12 mois + Prime fidélisation</p>
+            </div>
+
+            <div class="bg-white dark:bg-gray-800 p-4 rounded-lg">
+              <p class="font-bold text-red-600 dark:text-red-400 mb-2">Piège 4 : RGE Non Renouvelé</p>
+              <p class="text-sm mb-2">RGE expire dans 6 mois → Perte 40% valorisation si non renouvelé</p>
+              <p class="text-sm font-semibold text-green-600 dark:text-green-400">✓ Solution : Renouveler AVANT vente (coût 2,5K€ vs perte 65K€)</p>
+            </div>
+          </div>
+        </div>
+
+        <h2 class="text-3xl font-bold mt-12 mb-6">Fiscalité Spécifique Plomberie</h2>
+
+        <div class="bg-green-50 dark:bg-green-950/20 border-l-4 border-green-500 p-6 rounded-r-lg mb-6">
+          <h3 class="text-xl font-bold text-green-900 dark:text-green-100 mb-4">Optimisation 1 : Abattement Départ Retraite</h3>
+          
+          <div class="bg-white dark:bg-gray-800 p-6 rounded-lg">
+            <p class="font-semibold mb-3">Si vous avez >60 ans et partez en retraite :</p>
+            
+            <div class="bg-blue-50 dark:bg-blue-900/20 p-4 rounded mb-4">
+              <p class="text-sm mb-2"><strong>Exemple :</strong></p>
+              <ul class="text-sm space-y-1">
+                <li>Prix vente : 320 000€</li>
+                <li>Prix achat (2005) : 40 000€</li>
+                <li>Plus-value : 280 000€</li>
+              </ul>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div class="bg-red-50 dark:bg-red-900/20 p-4 rounded">
+                <p class="font-semibold text-red-600 dark:text-red-400 mb-2">SANS abattement</p>
+                <p class="text-sm mb-2">Impôt (30%) : <strong>84 000€</strong></p>
+              </div>
+
+              <div class="bg-green-50 dark:bg-green-900/20 p-4 rounded">
+                <p class="font-semibold text-green-600 dark:text-green-400 mb-2">AVEC abattement 500K€</p>
+                <p class="text-sm mb-2">Plus-value imposable : <strong>0€</strong></p>
+                <p class="text-sm">Impôt : <strong>0€</strong> ✅</p>
+              </div>
+            </div>
+
+            <p class="text-2xl font-bold text-green-600 dark:text-green-400 mt-4 text-center">ÉCONOMIE : 84 000€ !</p>
+          </div>
+        </div>
+
+        <h2 class="text-3xl font-bold mt-12 mb-6">Checklist Finale Plomberie</h2>
+
+        <div class="space-y-6">
+          <div class="bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 rounded-lg p-6">
+            <h3 class="text-xl font-bold mb-4">✅ 6 Mois Avant Vente</h3>
+            <ul class="space-y-2">
+              <li class="flex items-start">
+                <span class="text-blue-500 mr-2">▪</span>
+                <span><strong>Obtenir RGE QualiPAC</strong> (si pas déjà) → +100K€</span>
+              </li>
+              <li class="flex items-start">
+                <span class="text-blue-500 mr-2">▪</span>
+                <span><strong>Développer contrats entretien</strong> (+100 contrats mini) → +50K€</span>
+              </li>
+              <li class="flex items-start">
+                <span class="text-blue-500 mr-2">▪</span>
+                <span><strong>Nettoyer véhicules/locaux</strong> → +10K€</span>
+              </li>
+              <li class="flex items-start">
+                <span class="text-blue-500 mr-2">▪</span>
+                <span><strong>Créer site web basique</strong> → +15K€</span>
+              </li>
+              <li class="flex items-start">
+                <span class="text-blue-500 mr-2">▪</span>
+                <span><strong>Formaliser processus</strong> (devis, chantier, SAV) → +12K€</span>
+              </li>
+              <li class="flex items-start">
+                <span class="text-blue-500 mr-2">▪</span>
+                <span><strong>Inventaire stock</strong> (éliminer obsolètes) → Évite -15K€</span>
+              </li>
+            </ul>
+            <div class="mt-4 pt-4 border-t border-blue-200 dark:border-blue-800">
+              <p class="text-sm">Investissement : <strong>8 000€</strong></p>
+              <p class="text-lg font-bold text-blue-600 dark:text-blue-400 mt-2">Gain valorisation : +187 000€ • ROI : ×23</p>
+            </div>
+          </div>
+
+          <div class="bg-orange-50 dark:bg-orange-950/20 border border-orange-200 dark:border-orange-800 rounded-lg p-6">
+            <h3 class="text-xl font-bold mb-4">✅ Pendant Vente</h3>
+            <ul class="space-y-2">
+              <li class="flex items-start">
+                <span class="text-orange-500 mr-2">▪</span>
+                <span>Annonce optimisée (détails, chiffres, atouts)</span>
+              </li>
+              <li class="flex items-start">
+                <span class="text-orange-500 mr-2">▪</span>
+                <span>Sélection acheteur (compétence > prix)</span>
+              </li>
+              <li class="flex items-start">
+                <span class="text-orange-500 mr-2">▪</span>
+                <span>Valorisation RGE (défendre prime)</span>
+              </li>
+              <li class="flex items-start">
+                <span class="text-orange-500 mr-2">▪</span>
+                <span>Négociation contrats entretien (prouver récurrence)</span>
+              </li>
+              <li class="flex items-start">
+                <span class="text-orange-500 mr-2">▪</span>
+                <span>Structure deal (fixe + earn-out + crédit-vendeur)</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="bg-green-50 dark:bg-green-950/20 border border-green-200 dark:border-green-800 rounded-lg p-6">
+            <h3 class="text-xl font-bold mb-4">✅ Après Vente</h3>
+            <ul class="space-y-2">
+              <li class="flex items-start">
+                <span class="text-green-500 mr-2">▪</span>
+                <span>Accompagnement 4 mois (clients, process, autonomie)</span>
+              </li>
+              <li class="flex items-start">
+                <span class="text-green-500 mr-2">▪</span>
+                <span>Disponibilité totale (repreneur peut appeler)</span>
+              </li>
+              <li class="flex items-start">
+                <span class="text-green-500 mr-2">▪</span>
+                <span>Respect non-concurrence (5 ans, département)</span>
+              </li>
+              <li class="flex items-start">
+                <span class="text-green-500 mr-2">▪</span>
+                <span>Déclaration fiscale (abattement retraite si éligible)</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="bg-gradient-to-r from-blue-600 to-cyan-600 text-white p-8 rounded-xl mt-12 text-center">
+          <h2 class="text-3xl font-bold mb-4">🎯 Cas Idéal : Entreprise Prête à Vendre</h2>
+          <div class="bg-white/10 backdrop-blur-sm rounded-lg p-6 text-left">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+              <div>
+                <p class="mb-1">📍 <strong>Localisation :</strong> Bordeaux métropole</p>
+                <p class="mb-1">💼 <strong>Activité :</strong> Plomberie-Chauffage + PAC RGE</p>
+                <p class="mb-1">💰 <strong>CA :</strong> 520 000€ (+8%/an)</p>
+                <p class="mb-1">📊 <strong>EBITDA :</strong> 24% (125 000€)</p>
+              </div>
+              <div>
+                <p class="mb-1">👥 <strong>Effectif :</strong> 7 salariés (6 ans ancienneté moy.)</p>
+                <p class="mb-1">🔧 <strong>Certifications :</strong> RGE QualiPAC + Qualibat</p>
+                <p class="mb-1">📋 <strong>Contrats :</strong> 240 (43 200€ CA récurrent)</p>
+                <p class="mb-1">📦 <strong>Carnet :</strong> 8 mois</p>
+              </div>
+            </div>
+            <div class="mt-6 pt-6 border-t border-white/20">
+              <p class="text-2xl font-bold mb-2">Prix : 550 000€</p>
+              <p class="text-sm opacity-90">Coefficient 1,08 • Délai vente : 28 jours • Taux concrétisation : 100%</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-12 text-center bg-gradient-to-r from-blue-50 to-cyan-50 dark:from-blue-950/20 dark:to-cyan-950/20 p-8 rounded-xl">
+          <h2 class="text-2xl font-bold mb-4">Prêt à Vendre Votre Entreprise de Plomberie ?</h2>
+          <p class="text-lg mb-6">Profitez du marché record 2026. Valorisation +32% vs 2023. Délai moyen 38 jours.</p>
+          <a href="/vendre" class="inline-block bg-gradient-to-r from-blue-600 to-cyan-600 text-white px-8 py-4 rounded-lg font-bold text-lg hover:shadow-lg transition-all">
+            Vendre Mon Entreprise de Plomberie
+          </a>
+        </div>
+      </div>
+    `,
+    metaDescription: "Vendez votre entreprise de plomberie en 38 jours. Guide complet 2026 : valorisation, RGE, contrats entretien, fiscalité. Prix moyen +32% vs 2023. Accompagnement expert.",
+    imageUrl: "https://images.unsplash.com/photo-1607472586893-edb57bdc0e39?auto=format&fit=crop&q=80&w=1200",
+    schema: {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Vendre son Entreprise de Plomberie : Guide Spécifique 2026",
+      "description": "Guide complet pour vendre son entreprise de plomberie-chauffage en 2026. Valorisation, optimisations, profils acheteurs, fiscalité, pièges à éviter.",
+      "author": {
+        "@type": "Organization",
+        "name": "CessionBTP"
+      },
+      "datePublished": "2025-10-28",
+      "dateModified": "2025-10-28"
+    }
   }
 };
