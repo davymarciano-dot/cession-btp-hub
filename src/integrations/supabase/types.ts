@@ -931,10 +931,15 @@ export type Database = {
       demandes_contact: {
         Row: {
           annonce_id: string
+          coordinates_revealed: boolean
+          coordinates_revealed_at: string | null
           created_at: string
           email_acheteur: string
           id: string
           message: string
+          nda_ip_address: unknown
+          nda_signed: boolean
+          nda_signed_at: string | null
           nom_acheteur: string
           statut: string
           telephone_acheteur: string
@@ -942,10 +947,15 @@ export type Database = {
         }
         Insert: {
           annonce_id: string
+          coordinates_revealed?: boolean
+          coordinates_revealed_at?: string | null
           created_at?: string
           email_acheteur: string
           id?: string
           message: string
+          nda_ip_address?: unknown
+          nda_signed?: boolean
+          nda_signed_at?: string | null
           nom_acheteur: string
           statut?: string
           telephone_acheteur: string
@@ -953,10 +963,15 @@ export type Database = {
         }
         Update: {
           annonce_id?: string
+          coordinates_revealed?: boolean
+          coordinates_revealed_at?: string | null
           created_at?: string
           email_acheteur?: string
           id?: string
           message?: string
+          nda_ip_address?: unknown
+          nda_signed?: boolean
+          nda_signed_at?: string | null
           nom_acheteur?: string
           statut?: string
           telephone_acheteur?: string

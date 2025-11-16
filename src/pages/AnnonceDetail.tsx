@@ -158,7 +158,7 @@ const AnnonceDetail = () => {
         await supabase.from("messages").insert({
           conversation_id: conversationId,
           sender_id: user.id,
-          content: `Bonjour, je suis intéressé par votre annonce "${annonce.raison_sociale || 'Entreprise anonyme'}".`
+          content: `Bonjour, je suis intéressé par votre annonce d'entreprise ${annonce.secteur_activite}.`
         });
       }
 
@@ -176,7 +176,7 @@ const AnnonceDetail = () => {
 
   const handleShare = (method: 'copy' | 'email' | 'linkedin') => {
     const url = window.location.href;
-    const title = `${annonce.raison_sociale || 'Entreprise BTP'} à vendre - ${annonce.prix_vente.toLocaleString('fr-FR')}€`;
+    const title = `Entreprise ${annonce.secteur_activite} à vendre - ${annonce.prix_vente.toLocaleString('fr-FR')}€`;
     
     switch(method) {
       case 'copy':
@@ -256,12 +256,15 @@ const AnnonceDetail = () => {
                 <div className="flex items-start justify-between mb-4">
                   <div>
                     <h1 className="text-3xl font-bold mb-2">
-                      {annonce.raison_sociale || `Entreprise ${annonce.secteur_activite}`}
+                      Entreprise {annonce.secteur_activite}
                     </h1>
+                    <p className="text-sm text-muted-foreground mb-3">
+                      📍 Localisation générale • Informations complètes disponibles après accord de confidentialité
+                    </p>
                     <div className="flex flex-wrap gap-2 mb-3">
                       <Badge variant="secondary" className="flex items-center gap-1">
                         <MapPin className="w-3 h-3" />
-                        {annonce.ville} ({annonce.departement})
+                        Département {annonce.departement}
                       </Badge>
                       <Badge variant="outline">{annonce.secteur_activite}</Badge>
                       <Badge variant="outline" className="flex items-center gap-1">
