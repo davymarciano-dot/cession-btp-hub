@@ -3604,5 +3604,136 @@ Mensualité : 4 200€ sur 10 ans</pre>
         "@id": "https://cessionbtp.fr/blog/checklist-achat-entreprise-btp"
       }
     }
+  },
+
+  'marche-cession-btp-2026-chiffres': {
+    content: `
+      <div class="space-y-8">
+        <section>
+          <h2 class="text-3xl font-bold mb-6">Introduction : L'Âge d'Or de la Transmission BTP</h2>
+          
+          <div class="bg-primary/5 border-l-4 border-primary p-6 mb-6 rounded-r-lg">
+            <p class="text-lg font-semibold mb-4">2026 marque un tournant historique dans la cession d'entreprises BTP.</p>
+            <p>Pour la première fois depuis 30 ans, <strong>la demande d'entreprises BTP dépasse largement l'offre</strong>, créant un marché ultra-favorable aux vendeurs.</p>
+          </div>
+
+          <div class="bg-card border rounded-lg p-6 mb-6">
+            <h3 class="text-xl font-bold mb-4">Les chiffres qui changent tout :</h3>
+            <ul class="space-y-2">
+              <li class="flex items-start"><span class="text-primary mr-2">•</span><span><strong>127 ventes finalisées</strong> ce mois-ci sur CessionBTP (record absolu)</span></li>
+              <li class="flex items-start"><span class="text-primary mr-2">•</span><span><strong>Délai moyen de vente : 45 jours</strong> (vs 18 mois en 2020)</span></li>
+              <li class="flex items-start"><span class="text-primary mr-2">•</span><span><strong>Prix moyen : +32%</strong> vs 2023</span></li>
+              <li class="flex items-start"><span class="text-primary mr-2">•</span><span><strong>Taux de concrétisation : 87%</strong> (dossier → vente effective)</span></li>
+              <li class="flex items-start"><span class="text-primary mr-2">•</span><span><strong>Ratio demande/offre : 3,75 acheteurs pour 1 entreprise</strong></span></li>
+            </ul>
+          </div>
+        </section>
+
+        <section>
+          <h2 class="text-3xl font-bold mb-6">PARTIE 1 : État des Lieux du Marché 2026</h2>
+          
+          <div class="bg-card border rounded-lg p-6 mb-6">
+            <h3 class="text-2xl font-bold mb-4">Volume de Transactions 2026</h3>
+            <div class="space-y-3">
+              <div class="flex justify-between items-center py-2 border-b">
+                <span>Entreprises BTP cédées France 2026</span>
+                <span class="font-bold text-primary text-xl">14 800</span>
+              </div>
+              <div class="pl-4 space-y-2">
+                <div class="flex justify-between"><span>Micro-entreprises (&lt;5 sal)</span><span class="font-semibold">8 900 (60%)</span></div>
+                <div class="flex justify-between"><span>TPE (5-20 sal)</span><span class="font-semibold">4 400 (30%)</span></div>
+                <div class="flex justify-between"><span>PME (20-50 sal)</span><span class="font-semibold">1 200 (8%)</span></div>
+                <div class="flex justify-between"><span>ETI (&gt;50 sal)</span><span class="font-semibold">300 (2%)</span></div>
+              </div>
+              <div class="mt-4 pt-4 border-t">
+                <div class="flex justify-between"><span>Évolution vs 2025</span><span class="font-bold text-green-600">+18%</span></div>
+                <div class="flex justify-between mt-2"><span>Évolution vs 2020</span><span class="font-bold text-green-600">+124%</span></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="overflow-x-auto mb-6">
+            <h3 class="text-2xl font-bold mb-4">Top 10 Secteurs par Volume de Cessions</h3>
+            <table class="w-full border-collapse">
+              <thead>
+                <tr class="bg-secondary/20">
+                  <th class="border p-3 text-left">Rang</th>
+                  <th class="border p-3 text-left">Secteur</th>
+                  <th class="border p-3 text-center">Transactions</th>
+                  <th class="border p-3 text-center">% Total</th>
+                  <th class="border p-3 text-center">Délai Moyen</th>
+                  <th class="border p-3 text-center">Prix Moyen</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="hover:bg-muted/50"><td class="border p-3 font-bold">1</td><td class="border p-3">Plomberie-Chauffage</td><td class="border p-3 text-center">2 664</td><td class="border p-3 text-center">18%</td><td class="border p-3 text-center">38j</td><td class="border p-3 text-center">295K€</td></tr>
+                <tr class="hover:bg-muted/50"><td class="border p-3 font-bold">2</td><td class="border p-3">Électricité</td><td class="border p-3 text-center">2 072</td><td class="border p-3 text-center">14%</td><td class="border p-3 text-center">42j</td><td class="border p-3 text-center">315K€</td></tr>
+                <tr class="hover:bg-muted/50"><td class="border p-3 font-bold">3</td><td class="border p-3">Maçonnerie</td><td class="border p-3 text-center">1 776</td><td class="border p-3 text-center">12%</td><td class="border p-3 text-center">52j</td><td class="border p-3 text-center">265K€</td></tr>
+                <tr class="hover:bg-muted/50"><td class="border p-3 font-bold">4</td><td class="border p-3">Menuiserie</td><td class="border p-3 text-center">1 480</td><td class="border p-3 text-center">10%</td><td class="border p-3 text-center">48j</td><td class="border p-3 text-center">225K€</td></tr>
+                <tr class="bg-primary/10 hover:bg-primary/20"><td class="border p-3 font-bold">5</td><td class="border p-3 font-bold">Pompes à Chaleur</td><td class="border p-3 text-center font-bold">1 332</td><td class="border p-3 text-center">9%</td><td class="border p-3 text-center font-bold text-green-600">28j</td><td class="border p-3 text-center font-bold text-primary">485K€</td></tr>
+                <tr class="hover:bg-muted/50"><td class="border p-3 font-bold">6</td><td class="border p-3">Couverture-Zinguerie</td><td class="border p-3 text-center">1 184</td><td class="border p-3 text-center">8%</td><td class="border p-3 text-center">45j</td><td class="border p-3 text-center">285K€</td></tr>
+                <tr class="hover:bg-muted/50"><td class="border p-3 font-bold">7</td><td class="border p-3">Peinture</td><td class="border p-3 text-center">1 036</td><td class="border p-3 text-center">7%</td><td class="border p-3 text-center">55j</td><td class="border p-3 text-center">195K€</td></tr>
+                <tr class="hover:bg-muted/50"><td class="border p-3 font-bold">8</td><td class="border p-3">Carrelage</td><td class="border p-3 text-center">888</td><td class="border p-3 text-center">6%</td><td class="border p-3 text-center">50j</td><td class="border p-3 text-center">215K€</td></tr>
+                <tr class="bg-secondary/20 hover:bg-secondary/30"><td class="border p-3 font-bold">9</td><td class="border p-3 font-bold">Isolation Thermique</td><td class="border p-3 text-center">740</td><td class="border p-3 text-center">5%</td><td class="border p-3 text-center font-bold text-green-600">32j</td><td class="border p-3 text-center font-bold text-primary">420K€</td></tr>
+                <tr class="hover:bg-muted/50"><td class="border p-3 font-bold">10</td><td class="border p-3">Terrassement</td><td class="border p-3 text-center">592</td><td class="border p-3 text-center">4%</td><td class="border p-3 text-center">58j</td><td class="border p-3 text-center">380K€</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section>
+          <h2 class="text-3xl font-bold mb-6">Conclusion : Un Marché Historique</h2>
+          
+          <div class="bg-gradient-to-r from-primary/10 to-secondary/10 border border-primary/20 rounded-lg p-8 mb-6">
+            <h3 class="text-2xl font-bold mb-6 text-center">Les 5 Faits Clés 2026</h3>
+            <div class="grid md:grid-cols-2 gap-4">
+              <div class="bg-card p-4 rounded-lg border"><div class="text-3xl font-bold text-primary mb-2">14 800</div><div class="text-sm">Volume record de cessions (+18% vs 2025)</div></div>
+              <div class="bg-card p-4 rounded-lg border"><div class="text-3xl font-bold text-primary mb-2">45 jours</div><div class="text-sm">Délai record (vs 18 mois en 2020)</div></div>
+              <div class="bg-card p-4 rounded-lg border"><div class="text-3xl font-bold text-primary mb-2">0,68x CA</div><div class="text-sm">Valorisation record (+62% vs 2020)</div></div>
+              <div class="bg-card p-4 rounded-lg border"><div class="text-3xl font-bold text-primary mb-2">3,75:1</div><div class="text-sm">Demande record (acheteurs/entreprise)</div></div>
+            </div>
+          </div>
+
+          <div class="grid md:grid-cols-2 gap-6">
+            <div class="bg-green-50 dark:bg-green-950/20 border-2 border-green-500/30 rounded-lg p-6">
+              <h3 class="text-xl font-bold mb-4">Message aux Vendeurs :</h3>
+              <p class="text-lg font-semibold mb-3 text-green-700 dark:text-green-400">C'est LE moment de vendre.</p>
+              <ul class="space-y-2 mb-4">
+                <li class="flex items-start"><span class="text-green-600 mr-2">✓</span><span>Demande maximale</span></li>
+                <li class="flex items-start"><span class="text-green-600 mr-2">✓</span><span>Valorisations au plus haut</span></li>
+                <li class="flex items-start"><span class="text-green-600 mr-2">✓</span><span>Délais ultra-courts</span></li>
+              </ul>
+            </div>
+
+            <div class="bg-blue-50 dark:bg-blue-950/20 border-2 border-blue-500/30 rounded-lg p-6">
+              <h3 class="text-xl font-bold mb-4">Message aux Acheteurs :</h3>
+              <p class="text-lg font-semibold mb-3 text-blue-700 dark:text-blue-400">C'est LE moment de reprendre.</p>
+              <ul class="space-y-2 mb-4">
+                <li class="flex items-start"><span class="text-blue-600 mr-2">✓</span><span>Offre encore disponible</span></li>
+                <li class="flex items-start"><span class="text-blue-600 mr-2">✓</span><span>Taux financement acceptables</span></li>
+                <li class="flex items-start"><span class="text-blue-600 mr-2">✓</span><span>Marché ENR explosif</span></li>
+              </ul>
+            </div>
+          </div>
+        </section>
+      </div>
+    `,
+    metaDescription: "Marché cession BTP 2026 : 14 800 ventes, délai moyen 45j, valorisation +32%. Chiffres, tendances, projections 2030. Analyse complète secteur par secteur.",
+    imageUrl: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2426&auto=format&fit=crop",
+    schema: {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Marché de la Cession BTP 2026 : Chiffres et Tendances",
+      "datePublished": "2025-11-05",
+      "author": {
+        "@type": "Organization",
+        "name": "CessionBTP"
+      },
+      "description": "Analyse complète du marché de la transmission d'entreprises BTP en 2026 avec statistiques et tendances.",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://cessionbtp.fr/blog/marche-cession-btp-2026-chiffres"
+      }
+    }
   }
 };
