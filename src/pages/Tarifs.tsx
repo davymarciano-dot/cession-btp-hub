@@ -231,7 +231,7 @@ const Tarifs = () => {
               </div>
 
               <Button className="w-full bg-orange-500 hover:bg-sky-500 group-hover:bg-sky-500 transition-colors">
-                Commencer gratuitement
+                Commencer Gratuitement
               </Button>
             </div>
 
