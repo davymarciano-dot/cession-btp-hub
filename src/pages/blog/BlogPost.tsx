@@ -86,7 +86,7 @@ const BlogPost = () => {
             
             <h1 className="text-4xl font-bold mb-4">{article.title}</h1>
             
-            <div className="flex items-center justify-between text-muted-foreground mb-6">
+            <div className="flex flex-col gap-2 text-muted-foreground mb-6">
               <div className="flex items-center gap-4">
                 <time>
                   {new Date(article.publishedAt).toLocaleDateString('fr-FR', {
@@ -97,6 +97,9 @@ const BlogPost = () => {
                 </time>
                 <span>•</span>
                 <span>{article.readTime} min de lecture</span>
+              </div>
+              <div className="text-sm">
+                Rédigé par <span className="font-medium text-foreground">{article.author}</span>
               </div>
             </div>
 

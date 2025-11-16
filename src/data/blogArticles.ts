@@ -24,7 +24,7 @@ export const blogArticles: BlogArticle[] = [
     excerpt: 'Découvrez la méthode complète pour vendre votre entreprise BTP rapidement et au meilleur prix en 2026.',
     category: 'vente',
     readTime: 15,
-    author: 'CessionBTP',
+    author: 'Sandra Moreau',
     publishedAt: '2025-11-14',
     featured: true,
     content: `
@@ -57,7 +57,7 @@ export const blogArticles: BlogArticle[] = [
     excerpt: 'Pourquoi les entreprises RGE se vendent 40% plus cher',
     category: 'rge',
     readTime: 8,
-    author: 'CessionBTP',
+    author: 'Marc Dubois',
     publishedAt: '2025-11-10',
     content: `
       <h2>Le marché RGE explose</h2>
@@ -83,7 +83,7 @@ export const blogArticles: BlogArticle[] = [
     excerpt: 'Tout savoir pour réussir la reprise d\'une entreprise PAC',
     category: 'reprise',
     readTime: 10,
-    author: 'CessionBTP',
+    author: 'Sandra Moreau',
     publishedAt: '2025-11-05',
     content: `
       <h2>Opportunité en or 2026</h2>
@@ -102,7 +102,7 @@ export const blogArticles: BlogArticle[] = [
     excerpt: 'Les solutions de financement pour reprendre une entreprise BTP',
     category: 'financement',
     readTime: 15,
-    author: 'CessionBTP',
+    author: 'Laurent Martin',
     publishedAt: '2025-11-01',
     content: `
       <h2>Les solutions de financement 2026</h2>
@@ -121,7 +121,7 @@ export const blogArticles: BlogArticle[] = [
     excerpt: 'Comment transférer les certifications RGE lors d\'une reprise',
     category: 'rge',
     readTime: 7,
-    author: 'CessionBTP',
+    author: 'Sophie Laurent',
     publishedAt: '2025-10-28',
     content: `
       <h2>Transfert de certification RGE</h2>
@@ -140,7 +140,7 @@ export const blogArticles: BlogArticle[] = [
     excerpt: 'Avec l\'interdiction des chaudières gaz, les entreprises PAC se vendent 40% plus cher.',
     category: 'vente',
     readTime: 10,
-    author: 'CessionBTP',
+    author: 'Marc Dubois',
     publishedAt: '2025-11-12',
     content: `<h2>Le boom des pompes à chaleur</h2><p>Analyse complète du marché PAC en 2026...</p>`,
     seo: {
@@ -156,7 +156,7 @@ export const blogArticles: BlogArticle[] = [
     excerpt: 'Analyse complète du marché de la transmission d\'entreprises BTP en 2026',
     category: 'marche',
     readTime: 10,
-    author: 'CessionBTP',
+    author: 'Laurent Martin',
     publishedAt: '2025-11-05',
     featured: true,
     content: `<h2>État du marché 2026</h2><p>Statistiques et tendances du secteur...</p>`,
@@ -173,7 +173,7 @@ export const blogArticles: BlogArticle[] = [
     excerpt: 'Découvrez les 10 erreurs les plus coûteuses (20 000€ à 100 000€) et comment les éviter pour sécuriser votre cession.',
     category: 'conseils',
     readTime: 8,
-    author: 'CessionBTP',
+    author: 'Sandra Moreau',
     publishedAt: '2025-11-01',
     content: '',
     seo: {
@@ -189,7 +189,7 @@ export const blogArticles: BlogArticle[] = [
     excerpt: 'Tout ce qu\'il faut savoir pour vendre une entreprise de plomberie en 2026. Valorisation, RGE, contrats entretien, fiscalité.',
     category: 'secteurs',
     readTime: 12,
-    author: 'CessionBTP',
+    author: 'Sophie Laurent',
     publishedAt: '2025-10-28',
     content: '',
     seo: {
@@ -205,7 +205,7 @@ export const blogArticles: BlogArticle[] = [
     excerpt: 'L\'audit complet pour sécuriser votre reprise d\'entreprise BTP. 47 points de contrôle essentiels pour éviter les vices cachés et passifs.',
     category: 'reprise',
     readTime: 15,
-    author: 'CessionBTP',
+    author: 'Marc Dubois',
     publishedAt: '2025-11-08',
     featured: true,
     content: '',
