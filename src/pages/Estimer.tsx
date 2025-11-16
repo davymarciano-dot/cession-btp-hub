@@ -9,6 +9,7 @@ import { DepartementsSelect } from "@/data/departements";
 import EstimationDialog from "@/components/EstimationDialog";
 import { useToast } from "@/hooks/use-toast";
 import { SearchableSelect } from "@/components/SearchableSelect";
+import SEOHead from "@/components/SEOHead";
 
 const Estimer = () => {
   const [ca, setCa] = useState("");
@@ -54,6 +55,7 @@ const Estimer = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
+      <SEOHead page="estimer" />
       <Header />
 
       <main>
