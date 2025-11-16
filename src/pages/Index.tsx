@@ -25,6 +25,7 @@ import {
   X,
 } from "lucide-react";
 import SEOHead from "@/components/SEOHead";
+import { SearchableSelect } from "@/components/SearchableSelect";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -34,6 +35,7 @@ const Home = () => {
   const [realAnnonces, setRealAnnonces] = useState<any[]>([]);
   const [loadingAnnonces, setLoadingAnnonces] = useState(true);
   const [totalAnnonces, setTotalAnnonces] = useState(0);
+  const [secteurFilter, setSecteurFilter] = useState<string>("");
 
   // 🔥 RÉCUPÉRATION DU NOMBRE TOTAL D'ANNONCES
   useEffect(() => {
@@ -420,14 +422,12 @@ const Home = () => {
             <div className="mt-12 max-w-4xl mx-auto">
               <div className="bg-white rounded-2xl shadow-2xl p-6">
                 <div className="flex flex-col md:flex-row gap-4">
-                  <select className="flex-1 px-4 py-3 border border-gray-300 rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#FF6B35] focus:border-transparent">
-                    <option value="">Type d'entreprise</option>
-                    <option value="electricite">Électricité</option>
-                    <option value="plomberie">Plomberie</option>
-                    <option value="maconnerie">Maçonnerie</option>
-                    <option value="menuiserie">Menuiserie</option>
-                    <option value="couverture">Couverture</option>
-                  </select>
+                  <SearchableSelect
+                    value={secteurFilter}
+                    onValueChange={setSecteurFilter}
+                    placeholder="Tous les secteurs"
+                    className="flex-1"
+                  />
                   
                   <select className="flex-1 px-4 py-3 border border-gray-300 rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#FF6B35] focus:border-transparent">
                     <option value="">Région</option>
