@@ -17,13 +17,13 @@ const Header = () => {
   ];
 
   return (
-    <header className="sticky top-0 z-50 w-full bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-sm">
+    <header className="sticky top-0 z-50 w-full bg-transparent backdrop-blur-0 border-b-0 shadow-none">
       <div className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
           {/* LOGO CESSIONBTP */}
           <Link to="/" className="hover:scale-105 transition-transform">
             <img 
-              src="/images/logo-cessionbtp-clean.png" 
+              src="/images/logo-cessionbtp-transparent-final.png" 
               alt="CessionBTP" 
               className="block object-contain h-24 md:h-48 lg:h-56 w-auto shrink-0"
             />
