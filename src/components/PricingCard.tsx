@@ -42,16 +42,19 @@ const PricingCard = ({
   const isPrimary = variant === "primary" || isPopular;
   const cardRef = useRef<HTMLDivElement>(null);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [isMouseOver, setIsMouseOver] = useState(false);
   
   const handleClick = () => {
     analyticsEvents.selectSubscription(title, userType);
   };
   
   const handleMouseEnter = () => {
+    setIsMouseOver(true);
     onHover?.(true);
   };
   
   const handleMouseLeave = () => {
+    setIsMouseOver(false);
     onHover?.(false);
     setMousePosition({ x: 0, y: 0 });
   };
@@ -80,8 +83,8 @@ const PricingCard = ({
       onMouseLeave={handleMouseLeave}
       onMouseMove={handleMouseMove}
       style={{
-        background: isActive
-          ? `radial-gradient(600px circle at ${mousePosition.x}px ${mousePosition.y}px, rgba(59, 130, 246, 0.1), transparent 40%)`
+        background: isMouseOver
+          ? `radial-gradient(400px circle at ${mousePosition.x}px ${mousePosition.y}px, rgba(59, 130, 246, 0.15), transparent 50%)`
           : undefined,
       }}
     >
