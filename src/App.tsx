@@ -201,10 +201,10 @@ const App = () => {
             <TanStackCacheDebugger />
           </>
         )}
-      </BrowserRouter>
-    </TooltipProvider>
-  </QueryClientProvider>
-  </ErrorBoundary>
+      </TooltipProvider>
+    </QueryClientProvider>
+    </ErrorBoundary>
+  </BrowserRouter>
   );
 };
 
