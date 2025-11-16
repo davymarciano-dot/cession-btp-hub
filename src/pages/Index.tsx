@@ -343,7 +343,7 @@ const Home = () => {
               <img 
                 src="/images/logo-cessionbtp-2eead586.png" 
                 alt="CessionBTP" 
-                className="h-20 w-auto opacity-90 block object-contain"
+                className="h-48 md:h-64 lg:h-80 w-auto opacity-90 block object-contain"
               />
             </div>
 
