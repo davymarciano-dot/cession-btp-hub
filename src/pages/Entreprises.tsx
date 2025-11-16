@@ -8,7 +8,6 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import EntrepriseCard from "@/components/EntrepriseCard";
 import ListingsMap from "@/components/ListingsMap";
-import { BTPMetiersSelect } from "@/data/btp-metiers";
 import { useToast } from "@/hooks/use-toast";
 import { analyticsEvents } from "@/lib/analytics";
 import { CompanyComparator } from "@/components/CompanyComparator";
@@ -16,6 +15,7 @@ import ComparisonGuide from "@/components/ComparisonGuide";
 import { ListingSkeletonGrid } from "@/components/ListingSkeleton";
 import SEO from "@/components/SEO";
 import SEOHead from "@/components/SEOHead";
+import { SearchableSelect } from "@/components/SearchableSelect";
 
 interface Annonce {
   id: string;
@@ -201,15 +201,12 @@ const Entreprises = () => {
                 <div className="space-y-6">
                   <div>
                     <label className="block text-sm font-medium mb-2">Secteur</label>
-                    <Select value={secteurFilter} onValueChange={setSecteurFilter}>
-                      <SelectTrigger>
-                        <SelectValue placeholder="Tous les secteurs" />
-                      </SelectTrigger>
-                      <SelectContent className="max-h-[400px] overflow-y-auto">
-                        <SelectItem value="all">Tous les secteurs</SelectItem>
-                        <BTPMetiersSelect />
-                      </SelectContent>
-                    </Select>
+                    <SearchableSelect
+                      value={secteurFilter}
+                      onValueChange={setSecteurFilter}
+                      placeholder="Tous les secteurs"
+                      className="w-full"
+                    />
                   </div>
 
                   <div>
