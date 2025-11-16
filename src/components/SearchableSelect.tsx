@@ -55,11 +55,11 @@ export const SearchableSelect = ({ value, onValueChange, placeholder, className 
           <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="w-[400px] p-0">
-        <Command>
-          <CommandInput placeholder="Rechercher un secteur..." />
+      <PopoverContent className="w-[400px] p-0 z-50 bg-popover" align="start">
+        <Command className="bg-popover">
+          <CommandInput placeholder="Rechercher un secteur..." className="bg-background" />
           <CommandEmpty>Aucun secteur trouvé.</CommandEmpty>
-          <CommandGroup className="max-h-[300px] overflow-y-auto">
+          <CommandGroup className="max-h-[300px] overflow-y-auto bg-popover">
             {btpSecteurs.map((secteur) => (
               <CommandItem
                 key={secteur.value}
