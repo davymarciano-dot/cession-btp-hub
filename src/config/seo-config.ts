@@ -29,9 +29,13 @@ export const websiteSchema = {
   "@type": "WebSite",
   "name": "CessionBTP",
   "url": "https://cessionbtp.fr",
+  "description": "Plateforme n°1 pour acheter et vendre des entreprises du BTP en France",
   "potentialAction": {
     "@type": "SearchAction",
-    "target": "https://cessionbtp.fr/entreprises?q={search_term_string}",
+    "target": {
+      "@type": "EntryPoint",
+      "urlTemplate": "https://cessionbtp.fr/entreprises?q={search_term_string}"
+    },
     "query-input": "required name=search_term_string"
   }
 };
