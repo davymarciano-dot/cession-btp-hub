@@ -22,48 +22,25 @@ const Header = () => {
     <header className="sticky top-0 z-50 w-full bg-white/95 backdrop-blur-md border-b border-gray-200 shadow-sm">
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-20">
-          {/* 🎨 LOGO CESSIONBTP - VRAI DESIGN */}
-          <Link to="/" className="flex items-center hover:opacity-90 transition-opacity">
-            <svg
-              width="200"
-              height="50"
-              viewBox="0 0 800 150"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-12 w-auto"
-            >
-              {/* X bleu (haut gauche) */}
-              <path d="M30 30 L80 80 L30 130 L50 130 L100 80 L50 30 Z" fill="#0066FF" />
-
-              {/* X orange (bas gauche) */}
-              <path d="M130 30 L80 80 L130 130 L110 130 L60 80 L110 30 Z" fill="#FF8800" />
-
-              {/* Texte "Cession" en orange */}
-              <text
-                x="160"
-                y="105"
-                fontFamily="Arial, sans-serif"
-                fontSize="72"
-                fontWeight="bold"
-                fontStyle="italic"
-                fill="#FF8800"
-              >
-                Cession
-              </text>
-
-              {/* Texte "BTP" en bleu foncé */}
-              <text
-                x="520"
-                y="105"
-                fontFamily="Arial, sans-serif"
-                fontSize="72"
-                fontWeight="bold"
-                fontStyle="italic"
-                fill="#1E3A8A"
-              >
-                BTP
-              </text>
+          {/* LOGO CESSIONBTP */}
+          <Link to="/" className="flex items-center gap-0 hover:opacity-90 transition-opacity h-12">
+            {/* Symbole X stylisé */}
+            <svg width="64" height="48" viewBox="0 0 64 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+              {/* X bleu (diagonale haut-gauche vers bas-droite) */}
+              <path d="M8 4 L28 24 L8 44 L16 44 L36 24 L16 4 Z" fill="#0066FF"/>
+              {/* X orange (diagonale haut-droite vers bas-gauche) */}
+              <path d="M48 4 L28 24 L48 44 L40 44 L20 24 L40 4 Z" fill="#FF8800"/>
             </svg>
+            
+            {/* Texte Cession en orange */}
+            <span className="font-bold italic text-[32px] leading-none" style={{ color: '#FF8800', fontFamily: 'Arial, sans-serif' }}>
+              Cession
+            </span>
+            
+            {/* Texte BTP en bleu marine */}
+            <span className="font-bold italic text-[32px] leading-none" style={{ color: '#1E3A8A', fontFamily: 'Arial, sans-serif' }}>
+              BTP
+            </span>
           </Link>
 
           {/* MENU DESKTOP */}
