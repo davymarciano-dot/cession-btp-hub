@@ -1,115 +1,166 @@
+import { useState } from "react";
+import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
-import { Link, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import logo from "@/assets/logo-cessionbtp-final.png";
 
 const Header = () => {
-  const navigate = useNavigate();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-  const menuItems = [
-    { label: "Vendre", path: "/vendre" },
-    { label: "Acheter", path: "/acheter" },
-    { label: "Entreprises", path: "/entreprises" },
-    { label: "Estimer", path: "/estimer" },
-    { label: "Tarifs", path: "/tarifs" },
-    { label: "Blog", path: "/blog" },
-  ];
-
   return (
-    <header className="sticky top-0 z-50 w-full bg-transparent backdrop-blur-0 border-b-0 shadow-none">
+    <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-sm">
       <div className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
-          {/* LOGO CESSIONBTP */}
-          <Link to="/" className="hover:scale-105 transition-transform">
+          
+          {/* LOGO */}
+          <Link to="/" className="hover:scale-105 transition-transform duration-300">
             <img 
-              src="/images/logo-cessionbtp.png" 
+              src={logo}
               alt="CessionBTP" 
-              className="block object-contain h-24 md:h-48 lg:h-56 w-auto shrink-0"
+              className="h-16 md:h-20"
             />
           </Link>
 
-
           {/* NAVIGATION DESKTOP */}
-          <nav className="hidden md:flex items-center gap-8">
-            {menuItems.map((item) => (
-              <Link
-                key={item.path}
-                to={item.path}
-                className="text-slate-700 hover:text-orange-500 transition-colors font-medium"
-              >
-                {item.label}
-              </Link>
-            ))}
+          <nav className="hidden lg:flex items-center gap-8">
+            <Link 
+              to="/vendre" 
+              className="text-slate-700 hover:text-orange-500 transition-colors duration-200 font-medium text-base"
+            >
+              Vendre
+            </Link>
+            <Link 
+              to="/acheter" 
+              className="text-slate-700 hover:text-orange-500 transition-colors duration-200 font-medium text-base"
+            >
+              Acheter
+            </Link>
+            <Link 
+              to="/entreprises" 
+              className="text-slate-700 hover:text-orange-500 transition-colors duration-200 font-medium text-base"
+            >
+              Entreprises
+            </Link>
+            <Link 
+              to="/estimer" 
+              className="text-slate-700 hover:text-orange-500 transition-colors duration-200 font-medium text-base"
+            >
+              Estimer
+            </Link>
+            <Link 
+              to="/tarifs" 
+              className="text-slate-700 hover:text-orange-500 transition-colors duration-200 font-medium text-base"
+            >
+              Tarifs
+            </Link>
+            <Link 
+              to="/blog" 
+              className="text-slate-700 hover:text-orange-500 transition-colors duration-200 font-medium text-base"
+            >
+              Blog
+            </Link>
           </nav>
 
-          {/* BOUTONS CTA Desktop */}
-          <div className="hidden md:flex items-center gap-3">
-            <Button
-              variant="outline"
-              onClick={() => navigate("/auth")}
-              className="border-slate-300 hover:border-orange-500 transition-colors"
+          {/* BOUTONS CTA DESKTOP */}
+          <div className="hidden lg:flex items-center gap-3">
+            <Button 
+              variant="outline" 
+              className="border-2 border-slate-300 hover:border-orange-500 hover:text-orange-500 transition-all duration-200"
+              asChild
             >
-              Connexion
+              <Link to="/auth">Connexion</Link>
             </Button>
-            <Button
-              onClick={() => navigate("/estimer")}
-              className="bg-gradient-to-r from-orange-500 to-pink-500 hover:from-orange-600 hover:to-pink-600 text-white font-semibold shadow-md hover:shadow-lg transition-all"
+            <Button 
+              className="bg-gradient-to-r from-orange-500 to-pink-500 hover:from-orange-600 hover:to-pink-600 text-white font-semibold shadow-lg hover:shadow-xl transition-all duration-200"
+              asChild
             >
-              Estimer Gratuitement
+              <Link to="/estimer">Estimer Gratuitement</Link>
             </Button>
           </div>
 
-          {/* BURGER MENU Mobile */}
+          {/* BOUTON MENU MOBILE */}
           <button
-            className="md:hidden p-2 text-slate-700 hover:bg-slate-100 rounded-lg transition-colors"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            aria-label="Menu"
+            className="lg:hidden p-2 text-slate-700 hover:text-orange-500 transition-colors"
           >
-            {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            {mobileMenuOpen ? (
+              <X className="w-6 h-6" />
+            ) : (
+              <Menu className="w-6 h-6" />
+            )}
           </button>
         </div>
-      </div>
 
-      {/* MENU MOBILE Dropdown */}
-      {mobileMenuOpen && (
-        <div className="md:hidden bg-white border-t border-slate-200 shadow-xl">
-          <nav className="container mx-auto px-4 py-6 space-y-2">
-            {menuItems.map((item) => (
-              <Link
-                key={item.path}
-                to={item.path}
+        {/* MENU MOBILE */}
+        {mobileMenuOpen && (
+          <div className="lg:hidden mt-4 pb-4 border-t border-slate-200 pt-4 animate-in slide-in-from-top">
+            <nav className="flex flex-col gap-4">
+              <Link 
+                to="/vendre" 
+                className="text-slate-700 hover:text-orange-500 transition-colors font-medium py-2"
                 onClick={() => setMobileMenuOpen(false)}
-                className="block px-4 py-3 text-base font-medium text-slate-700 hover:text-orange-500 hover:bg-orange-50 rounded-lg transition-all"
               >
-                {item.label}
+                Vendre
               </Link>
-            ))}
-
-            <div className="pt-4 space-y-3 border-t border-slate-200">
-              <Button
-                variant="outline"
-                onClick={() => {
-                  navigate("/auth");
-                  setMobileMenuOpen(false);
-                }}
-                className="w-full border-slate-300 font-medium py-6 rounded-xl"
+              <Link 
+                to="/acheter" 
+                className="text-slate-700 hover:text-orange-500 transition-colors font-medium py-2"
+                onClick={() => setMobileMenuOpen(false)}
               >
-                Connexion
-              </Button>
-              <Button
-                onClick={() => {
-                  navigate("/estimer");
-                  setMobileMenuOpen(false);
-                }}
-                className="w-full bg-gradient-to-r from-orange-500 to-pink-500 text-white font-semibold py-6 rounded-xl shadow-lg"
+                Acheter
+              </Link>
+              <Link 
+                to="/entreprises" 
+                className="text-slate-700 hover:text-orange-500 transition-colors font-medium py-2"
+                onClick={() => setMobileMenuOpen(false)}
               >
-                Estimer Gratuitement
-              </Button>
-            </div>
-          </nav>
-        </div>
-      )}
+                Entreprises
+              </Link>
+              <Link 
+                to="/estimer" 
+                className="text-slate-700 hover:text-orange-500 transition-colors font-medium py-2"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Estimer
+              </Link>
+              <Link 
+                to="/tarifs" 
+                className="text-slate-700 hover:text-orange-500 transition-colors font-medium py-2"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Tarifs
+              </Link>
+              <Link 
+                to="/blog" 
+                className="text-slate-700 hover:text-orange-500 transition-colors font-medium py-2"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Blog
+              </Link>
+              
+              <div className="flex flex-col gap-3 mt-4">
+                <Button 
+                  variant="outline" 
+                  className="w-full border-2 border-slate-300"
+                  asChild
+                >
+                  <Link to="/auth" onClick={() => setMobileMenuOpen(false)}>
+                    Connexion
+                  </Link>
+                </Button>
+                <Button 
+                  className="w-full bg-gradient-to-r from-orange-500 to-pink-500"
+                  asChild
+                >
+                  <Link to="/estimer" onClick={() => setMobileMenuOpen(false)}>
+                    Estimer Gratuitement
+                  </Link>
+                </Button>
+              </div>
+            </nav>
+          </div>
+        )}
+      </div>
     </header>
   );
 };
