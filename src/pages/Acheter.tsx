@@ -9,12 +9,13 @@ import { useNavigate } from "react-router-dom";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import PricingCard from "@/components/PricingCard";
-import { BTPMetiersSelect } from "@/data/btp-metiers";
 import SEOHead from "@/components/SEOHead";
+import { SearchableSelect } from "@/components/SearchableSelect";
 
 const Acheter = () => {
   const navigate = useNavigate();
   const [showOnlyRGE, setShowOnlyRGE] = useState(false);
+  const [secteurFilter, setSecteurFilter] = useState("");
 
   const secteurs = [
     { name: "Plomberie", icon: Droplet, count: 12 },
@@ -65,14 +66,12 @@ const Acheter = () => {
                 </div>
                 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-                  <Select>
-                    <SelectTrigger className="text-foreground">
-                      <SelectValue placeholder="Secteur d'activité" />
-                    </SelectTrigger>
-                    <SelectContent className="max-h-[400px] overflow-y-auto">
-                      <BTPMetiersSelect />
-                    </SelectContent>
-                  </Select>
+                  <SearchableSelect
+                    value={secteurFilter}
+                    onValueChange={setSecteurFilter}
+                    placeholder="Quel secteur recherchez-vous ?"
+                    className="w-full text-foreground"
+                  />
 
                   <Select>
                     <SelectTrigger className="text-foreground">

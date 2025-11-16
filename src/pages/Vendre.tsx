@@ -8,6 +8,7 @@ import { debounce } from "lodash";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import SiretAutocomplete from "@/components/SiretAutocomplete";
+import { SearchableSelect } from "@/components/SearchableSelect";
 import {
   ArrowLeft,
   ArrowRight,
@@ -792,22 +793,12 @@ const Vendre = () => {
 
                     <div>
                       <label className="block text-sm font-medium text-gray-700 mb-2">Secteur d'activité *</label>
-                      <select
+                      <SearchableSelect
                         value={formData.secteurActivite}
-                        onChange={(e) => handleInputChange("secteurActivite", e.target.value)}
-                        className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-orange-500 focus:border-transparent transition"
-                      >
-                        <option value="">Sélectionnez</option>
-                        <option value="Maçonnerie">Maçonnerie</option>
-                        <option value="Plomberie">Plomberie</option>
-                        <option value="Électricité">Électricité</option>
-                        <option value="Charpente">Charpente</option>
-                        <option value="Couverture">Couverture</option>
-                        <option value="Menuiserie">Menuiserie</option>
-                        <option value="Peinture">Peinture</option>
-                        <option value="Terrassement">Terrassement</option>
-                        <option value="Autre">Autre</option>
-                      </select>
+                        onValueChange={(value) => handleInputChange("secteurActivite", value)}
+                        placeholder="Sélectionnez votre secteur d'activité"
+                        className="w-full"
+                      />
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
