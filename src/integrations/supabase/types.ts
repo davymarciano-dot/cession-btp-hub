@@ -1343,6 +1343,57 @@ export type Database = {
           },
         ]
       }
+      leads_estimation: {
+        Row: {
+          ca: number | null
+          created_at: string
+          departement: string | null
+          email: string
+          estimation_max: number | null
+          estimation_min: number | null
+          estimation_moyenne: number | null
+          id: string
+          multiple_ca: number | null
+          nom: string
+          prenom: string | null
+          raison_sociale: string | null
+          secteur: string | null
+          telephone: string
+        }
+        Insert: {
+          ca?: number | null
+          created_at?: string
+          departement?: string | null
+          email: string
+          estimation_max?: number | null
+          estimation_min?: number | null
+          estimation_moyenne?: number | null
+          id?: string
+          multiple_ca?: number | null
+          nom: string
+          prenom?: string | null
+          raison_sociale?: string | null
+          secteur?: string | null
+          telephone: string
+        }
+        Update: {
+          ca?: number | null
+          created_at?: string
+          departement?: string | null
+          email?: string
+          estimation_max?: number | null
+          estimation_min?: number | null
+          estimation_moyenne?: number | null
+          id?: string
+          multiple_ca?: number | null
+          nom?: string
+          prenom?: string | null
+          raison_sociale?: string | null
+          secteur?: string | null
+          telephone?: string
+        }
+        Relationships: []
+      }
       listing_views: {
         Row: {
           created_at: string
