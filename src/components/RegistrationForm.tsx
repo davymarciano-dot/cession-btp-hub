@@ -1,305 +1,401 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { z } from 'zod';
-import { supabase } from '@/integrations/supabase/client';
-import { trackSignUp } from './Analytics';
-import { useToast } from '@/hooks/use-toast';
-import { Button } from './ui/button';
-import { Input } from './ui/input';
-import { Label } from './ui/label';
-import { Checkbox } from './ui/checkbox';
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from './ui/select';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './ui/card';
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Checkbox } from "@/components/ui/checkbox";
+import { supabase } from "@/integrations/supabase/client";
+import { useNavigate } from "react-router-dom";
+import { useToast } from "@/hooks/use-toast";
+import { Loader2 } from "lucide-react";
+import { z } from "zod";
 
 const registrationSchema = z.object({
-  email: z.string().email('Email invalide').max(255),
-  password: z.string().min(8, 'Minimum 8 caractères').max(100),
-  name: z.string().min(2, 'Nom requis').max(100),
-  phone: z.string().min(10, 'Téléphone invalide').max(20),
-  company: z.string().max(100).optional(),
-  type: z.enum(['buyer', 'seller']),
-  budget: z.string().optional(),
-  location: z.string().max(100).optional(),
-  acceptTerms: z.boolean().refine(val => val === true, 'Vous devez accepter les CGU'),
+  profil: z.string().min(1, "Le profil est requis"),
+  email: z.string().email("Email invalide").max(255),
+  password: z.string().min(6, "Le mot de passe doit contenir au moins 6 caractères"),
+  telephone: z.string().min(6, "Le téléphone est requis"),
+  phoneCountry: z.string(),
+  nom: z.string().min(1, "Le nom est requis"),
+  prenom: z.string().min(1, "Le prénom est requis"),
+  societe: z.string().optional(),
+  pays: z.string().min(1, "Le pays est requis"),
+  ville: z.string().min(1, "La ville est requise"),
+  adresse: z.string().min(1, "L'adresse est requise"),
+  acceptCgu: z.boolean().refine(val => val === true, "Vous devez accepter les CGU"),
 });
 
 type RegistrationFormData = z.infer<typeof registrationSchema>;
 
-interface RegistrationFormProps {
-  userType?: 'buyer' | 'seller';
-}
+const countriesWithDialCode = [
+  { code: "FR", name: "France", dial: "+33", flag: "🇫🇷" },
+  { code: "BE", name: "Belgique", dial: "+32", flag: "🇧🇪" },
+  { code: "CH", name: "Suisse", dial: "+41", flag: "🇨🇭" },
+  { code: "CA", name: "Canada", dial: "+1", flag: "🇨🇦" },
+  { code: "US", name: "États-Unis", dial: "+1", flag: "🇺🇸" },
+  { code: "GB", name: "Royaume-Uni", dial: "+44", flag: "🇬🇧" },
+  { code: "DE", name: "Allemagne", dial: "+49", flag: "🇩🇪" },
+  { code: "ES", name: "Espagne", dial: "+34", flag: "🇪🇸" },
+  { code: "IT", name: "Italie", dial: "+39", flag: "🇮🇹" },
+  { code: "PT", name: "Portugal", dial: "+351", flag: "🇵🇹" },
+  { code: "LU", name: "Luxembourg", dial: "+352", flag: "🇱🇺" },
+  { code: "MC", name: "Monaco", dial: "+377", flag: "🇲🇨" },
+  { code: "AD", name: "Andorre", dial: "+376", flag: "🇦🇩" },
+  { code: "MA", name: "Maroc", dial: "+212", flag: "🇲🇦" },
+  { code: "DZ", name: "Algérie", dial: "+213", flag: "🇩🇿" },
+  { code: "TN", name: "Tunisie", dial: "+216", flag: "🇹🇳" },
+  { code: "SN", name: "Sénégal", dial: "+221", flag: "🇸🇳" },
+  { code: "CI", name: "Côte d'Ivoire", dial: "+225", flag: "🇨🇮" },
+];
 
-export default function RegistrationForm({ userType = 'buyer' }: RegistrationFormProps) {
+const countries = [
+  "Afghanistan", "Afrique du Sud", "Albanie", "Algérie", "Allemagne", "Andorre", 
+  "Angola", "Antigua-et-Barbuda", "Arabie saoudite", "Argentine", "Arménie", 
+  "Australie", "Autriche", "Azerbaïdjan", "Bahamas", "Bahreïn", "Bangladesh", 
+  "Barbade", "Belgique", "Belize", "Bénin", "Bhoutan", "Biélorussie", "Birmanie", 
+  "Bolivie", "Bosnie-Herzégovine", "Botswana", "Brésil", "Brunei", "Bulgarie", 
+  "Burkina Faso", "Burundi", "Cambodge", "Cameroun", "Canada", "Cap-Vert", 
+  "Centrafrique", "Chili", "Chine", "Chypre", "Colombie", "Comores", 
+  "Congo-Brazzaville", "Congo-Kinshasa", "Corée du Nord", "Corée du Sud", 
+  "Costa Rica", "Côte d'Ivoire", "Croatie", "Cuba", "Danemark", "Djibouti", 
+  "Dominique", "Égypte", "Émirats arabes unis", "Équateur", "Érythrée", 
+  "Espagne", "Estonie", "Eswatini", "États-Unis", "Éthiopie", "Fidji", 
+  "Finlande", "France", "Gabon", "Gambie", "Géorgie", "Ghana", "Grèce", 
+  "Grenade", "Guatemala", "Guinée", "Guinée équatoriale", "Guinée-Bissau", 
+  "Guyana", "Haïti", "Honduras", "Hongrie", "Inde", "Indonésie", "Irak", 
+  "Iran", "Irlande", "Islande", "Israël", "Italie", "Jamaïque", "Japon", 
+  "Jordanie", "Kazakhstan", "Kenya", "Kirghizistan", "Kiribati", "Koweït", 
+  "Laos", "Lesotho", "Lettonie", "Liban", "Liberia", "Libye", "Liechtenstein", 
+  "Lituanie", "Luxembourg", "Macédoine du Nord", "Madagascar", "Malaisie", 
+  "Malawi", "Maldives", "Mali", "Malte", "Maroc", "Marshall", "Maurice", 
+  "Mauritanie", "Mexique", "Micronésie", "Moldavie", "Monaco", "Mongolie", 
+  "Monténégro", "Mozambique", "Namibie", "Nauru", "Népal", "Nicaragua", 
+  "Niger", "Nigeria", "Norvège", "Nouvelle-Zélande", "Oman", "Ouganda", 
+  "Ouzbékistan", "Pakistan", "Palaos", "Palestine", "Panama", 
+  "Papouasie-Nouvelle-Guinée", "Paraguay", "Pays-Bas", "Pérou", "Philippines", 
+  "Pologne", "Portugal", "Qatar", "République dominicaine", "République tchèque", 
+  "Roumanie", "Royaume-Uni", "Russie", "Rwanda", "Saint-Christophe-et-Niévès", 
+  "Sainte-Lucie", "Saint-Marin", "Saint-Vincent-et-les-Grenadines", 
+  "Salomon", "Salvador", "Samoa", "Sao Tomé-et-Principe", "Sénégal", "Serbie", 
+  "Seychelles", "Sierra Leone", "Singapour", "Slovaquie", "Slovénie", "Somalie", 
+  "Soudan", "Soudan du Sud", "Sri Lanka", "Suède", "Suisse", "Suriname", 
+  "Syrie", "Tadjikistan", "Tanzanie", "Tchad", "Thaïlande", "Timor oriental", 
+  "Togo", "Tonga", "Trinité-et-Tobago", "Tunisie", "Turkménistan", "Turquie", 
+  "Tuvalu", "Ukraine", "Uruguay", "Vanuatu", "Vatican", "Venezuela", "Viêt Nam", 
+  "Yémen", "Zambie", "Zimbabwe"
+];
+
+export default function RegistrationForm() {
   const navigate = useNavigate();
   const { toast } = useToast();
-  const [loading, setLoading] = useState(false);
-  const [formData, setFormData] = useState<RegistrationFormData>({
-    email: '',
-    password: '',
-    name: '',
-    phone: '',
-    company: '',
-    type: userType,
-    budget: '',
-    location: '',
-    acceptTerms: false,
+  const [isLoading, setIsLoading] = useState(false);
+  const [formData, setFormData] = useState<Partial<RegistrationFormData>>({
+    profil: "",
+    email: "",
+    password: "",
+    telephone: "",
+    phoneCountry: "FR",
+    nom: "",
+    prenom: "",
+    societe: "",
+    pays: "France",
+    ville: "",
+    adresse: "",
+    acceptCgu: false,
   });
+
+  const handleInputChange = (field: keyof RegistrationFormData, value: string | boolean) => {
+    setFormData(prev => ({ ...prev, [field]: value }));
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setLoading(true);
+    setIsLoading(true);
 
     try {
-      // Validate form data
-      const validatedData = registrationSchema.parse(formData);
+      const validated = registrationSchema.parse(formData);
 
-      // Create auth account
       const redirectUrl = `${window.location.origin}/`;
-      const { data: authData, error: authError } = await supabase.auth.signUp({
-        email: validatedData.email,
-        password: validatedData.password,
+      const selectedCountry = countriesWithDialCode.find(c => c.code === validated.phoneCountry);
+      const fullPhoneNumber = `${selectedCountry?.dial || "+33"} ${validated.telephone}`;
+
+      const { data: authData, error: signUpError } = await supabase.auth.signUp({
+        email: validated.email,
+        password: validated.password,
         options: {
           emailRedirectTo: redirectUrl,
           data: {
-            name: validatedData.name,
-            type: validatedData.type,
-          },
-        },
+            profil: validated.profil,
+            telephone: fullPhoneNumber,
+            nom: validated.nom,
+            prenom: validated.prenom,
+            societe: validated.societe || null,
+            pays: validated.pays,
+            ville: validated.ville,
+            adresse: validated.adresse,
+          }
+        }
       });
 
-      if (authError) throw authError;
-
-      if (!authData.user) {
-        throw new Error('Erreur lors de la création du compte');
+      if (signUpError) {
+        if (signUpError.message.includes("already registered")) {
+          toast({
+            title: "Compte existant",
+            description: "Cet email est déjà utilisé. Veuillez vous connecter.",
+            variant: "destructive",
+          });
+        } else {
+          toast({
+            title: "Erreur d'inscription",
+            description: signUpError.message,
+            variant: "destructive",
+          });
+        }
+        return;
       }
 
-      // Create profile
-      const { error: profileError } = await supabase
-        .from('profiles')
-        .insert({
-          id: authData.user.id,
-          email: validatedData.email,
-          name: validatedData.name,
-          phone: validatedData.phone,
-          company: validatedData.company || null,
-          user_type: validatedData.type,
-          budget_range: validatedData.budget || null,
-          location: validatedData.location || null,
-          interested_sectors: [],
-        });
-
-      if (profileError) throw profileError;
-
-      // Track conversion
-      trackSignUp(validatedData.type);
-
-      // Send welcome email
-      try {
-        await supabase.functions.invoke('send-welcome-email', {
-          body: { email: validatedData.email, name: validatedData.name },
-        });
-      } catch (emailError) {
-        console.error('Welcome email error:', emailError);
-        // Don't fail registration if email fails
-      }
-
-      // Success
       toast({
-        title: '✅ Inscription réussie !',
-        description: 'Vérifiez vos emails pour confirmer votre compte.',
+        title: "✅ Compte créé !",
+        description: "Votre compte vient d'être créé, consultez votre boite mail pour l'activer.",
       });
 
-      // Redirect
-      if (validatedData.type === 'seller') {
-        navigate('/vendre');
-      } else {
-        navigate('/acheter');
-      }
-    } catch (error) {
-      // Log only the error message, not the full error object
-      if (error instanceof Error) {
-        console.error('Registration error:', error.message);
-      }
-      
+      setTimeout(() => {
+        navigate("/auth?tab=confirmation");
+      }, 1500);
+
+    } catch (error: any) {
       if (error instanceof z.ZodError) {
         toast({
-          variant: 'destructive',
-          title: 'Erreur de validation',
-          description: error.errors[0]?.message || 'Données invalides',
-        });
-      } else if (error instanceof Error) {
-        toast({
-          variant: 'destructive',
-          title: 'Erreur',
-          description: error.message,
+          title: "Validation échouée",
+          description: error.errors[0].message,
+          variant: "destructive",
         });
       } else {
         toast({
-          variant: 'destructive',
-          title: 'Erreur',
-          description: "Erreur lors de l'inscription",
+          title: "Erreur",
+          description: "Une erreur est survenue lors de l'inscription.",
+          variant: "destructive",
         });
       }
     } finally {
-      setLoading(false);
+      setIsLoading(false);
     }
   };
 
   return (
-    <Card className="max-w-md mx-auto">
-      <CardHeader>
-        <CardTitle>
-          {formData.type === 'seller' ? '🏗️ Vendre mon entreprise' : '🔍 Trouver une entreprise'}
-        </CardTitle>
-        <CardDescription>
-          Créez votre compte pour accéder à toutes les fonctionnalités
-        </CardDescription>
-      </CardHeader>
-      <CardContent>
-        <form onSubmit={handleSubmit} className="space-y-4">
-          {/* Email */}
-          <div className="space-y-2">
-            <Label htmlFor="email">Email *</Label>
-            <Input
-              id="email"
-              type="email"
-              required
-              value={formData.email}
-              onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-              placeholder="email@example.com"
-            />
-          </div>
+    <form onSubmit={handleSubmit} className="space-y-6">
+      {/* Profil */}
+      <div className="space-y-2">
+        <Label htmlFor="profil">Profil *</Label>
+        <Select value={formData.profil} onValueChange={(value) => handleInputChange("profil", value)}>
+          <SelectTrigger>
+            <SelectValue placeholder="Sélectionnez votre profil" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="porteur">
+              <div className="py-1">
+                <div className="font-medium">Porteur de projet</div>
+                <div className="text-xs text-muted-foreground">(Acquéreur recherchant une affaire à la vente ou en location)</div>
+              </div>
+            </SelectItem>
+            <SelectItem value="cedant">
+              <div className="py-1">
+                <div className="font-medium">Cédant propriétaire</div>
+                <div className="text-xs text-muted-foreground">(Chef d'entreprise souhaitant céder ou louer son bien)</div>
+              </div>
+            </SelectItem>
+            <SelectItem value="franchise">
+              <div className="py-1">
+                <div className="font-medium">Enseigne de la franchise</div>
+                <div className="text-xs text-muted-foreground">(Souhaitant diffuser des annonces de cession ou de création)</div>
+              </div>
+            </SelectItem>
+            <SelectItem value="immobilier">
+              <div className="py-1">
+                <div className="font-medium">Professionnel de l'immobilier</div>
+                <div className="text-xs text-muted-foreground">(Agence, cabinet d'affaire souhaitant diffuser des annonces)</div>
+              </div>
+            </SelectItem>
+          </SelectContent>
+        </Select>
+      </div>
 
-          {/* Password */}
-          <div className="space-y-2">
-            <Label htmlFor="password">Mot de passe *</Label>
-            <Input
-              id="password"
-              type="password"
-              required
-              minLength={8}
-              value={formData.password}
-              onChange={(e) => setFormData({ ...formData, password: e.target.value })}
-              placeholder="Minimum 8 caractères"
-            />
-          </div>
+      {/* Email et Téléphone */}
+      <div className="grid md:grid-cols-2 gap-4">
+        <div className="space-y-2">
+          <Label htmlFor="email">Email de contact *</Label>
+          <Input
+            id="email"
+            type="email"
+            placeholder="Email de contact"
+            value={formData.email}
+            onChange={(e) => handleInputChange("email", e.target.value)}
+            required
+          />
+        </div>
 
-          {/* Name */}
-          <div className="space-y-2">
-            <Label htmlFor="name">Nom complet *</Label>
+        <div className="space-y-2">
+          <Label htmlFor="telephone">Téléphone *</Label>
+          <div className="flex gap-2">
+            <Select value={formData.phoneCountry} onValueChange={(value) => handleInputChange("phoneCountry", value)}>
+              <SelectTrigger className="w-[140px]">
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent className="max-h-[300px]">
+                {countriesWithDialCode.map((country) => (
+                  <SelectItem key={country.code} value={country.code}>
+                    {country.flag} {country.dial}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
             <Input
-              id="name"
-              type="text"
-              required
-              value={formData.name}
-              onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-              placeholder="Jean Dupont"
-            />
-          </div>
-
-          {/* Phone */}
-          <div className="space-y-2">
-            <Label htmlFor="phone">Téléphone *</Label>
-            <Input
-              id="phone"
+              id="telephone"
               type="tel"
+              placeholder="Téléphone"
+              value={formData.telephone}
+              onChange={(e) => handleInputChange("telephone", e.target.value)}
               required
-              value={formData.phone}
-              onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-              placeholder="06 12 34 56 78"
+              className="flex-1"
             />
           </div>
+        </div>
+      </div>
 
-          {/* Company */}
-          <div className="space-y-2">
-            <Label htmlFor="company">Entreprise</Label>
-            <Input
-              id="company"
-              type="text"
-              value={formData.company}
-              onChange={(e) => setFormData({ ...formData, company: e.target.value })}
-              placeholder="SARL Construction"
-            />
-          </div>
+      {/* Mot de passe */}
+      <div className="space-y-2">
+        <Label htmlFor="password">Mot de passe *</Label>
+        <Input
+          id="password"
+          type="password"
+          placeholder="Mot de passe (6 caractères minimum)"
+          value={formData.password}
+          onChange={(e) => handleInputChange("password", e.target.value)}
+          required
+        />
+      </div>
 
-          {/* Budget (for buyers) */}
-          {formData.type === 'buyer' && (
-            <div className="space-y-2">
-              <Label htmlFor="budget">Budget</Label>
-              <Select
-                value={formData.budget}
-                onValueChange={(value) => setFormData({ ...formData, budget: value })}
-              >
-                <SelectTrigger id="budget">
-                  <SelectValue placeholder="Sélectionner..." />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="0-250k">0 - 250 000€</SelectItem>
-                  <SelectItem value="250-500k">250 000 - 500 000€</SelectItem>
-                  <SelectItem value="500k-1m">500 000 - 1M€</SelectItem>
-                  <SelectItem value="1m+">Plus de 1M€</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
-          )}
+      {/* Nom et Prénom */}
+      <div className="grid md:grid-cols-2 gap-4">
+        <div className="space-y-2">
+          <Label htmlFor="nom">Nom *</Label>
+          <Input
+            id="nom"
+            type="text"
+            placeholder="Nom"
+            value={formData.nom}
+            onChange={(e) => handleInputChange("nom", e.target.value)}
+            required
+          />
+        </div>
 
-          {/* Terms */}
-          <div className="flex items-start space-x-2">
-            <Checkbox
-              id="terms"
-              checked={formData.acceptTerms}
-              onCheckedChange={(checked) =>
-                setFormData({ ...formData, acceptTerms: checked as boolean })
-              }
-            />
-            <Label htmlFor="terms" className="text-sm leading-tight cursor-pointer">
-              J'accepte les{' '}
-              <a href="/terms" className="text-primary hover:underline">
-                CGU
-              </a>{' '}
-              et la{' '}
-              <a href="/privacy" className="text-primary hover:underline">
-                politique de confidentialité
-              </a>
-            </Label>
-          </div>
+        <div className="space-y-2">
+          <Label htmlFor="prenom">Prénom *</Label>
+          <Input
+            id="prenom"
+            type="text"
+            placeholder="Prénom"
+            value={formData.prenom}
+            onChange={(e) => handleInputChange("prenom", e.target.value)}
+            required
+          />
+        </div>
+      </div>
 
-          {/* Submit */}
-          <Button type="submit" disabled={loading || !formData.acceptTerms} className="w-full">
-            {loading ? '⏳ Inscription...' : '🚀 Créer mon compte'}
-          </Button>
+      {/* Société */}
+      <div className="space-y-2">
+        <Label htmlFor="societe">Société</Label>
+        <Input
+          id="societe"
+          type="text"
+          placeholder="Société"
+          value={formData.societe}
+          onChange={(e) => handleInputChange("societe", e.target.value)}
+        />
+      </div>
 
-          {/* Benefits */}
-          <Card className="bg-muted">
-            <CardContent className="pt-4">
-              <h3 className="font-semibold mb-2">✅ Vos avantages</h3>
-              <ul className="text-sm space-y-1">
-                {formData.type === 'seller' ? (
-                  <>
-                    <li>• Évaluation gratuite de votre entreprise</li>
-                    <li>• Mise en relation avec acheteurs qualifiés</li>
-                    <li>• Accompagnement personnalisé</li>
-                    <li>• Confidentialité garantie</li>
-                  </>
-                ) : (
-                  <>
-                    <li>• Accès à +500 entreprises à vendre</li>
-                    <li>• Alertes personnalisées</li>
-                    <li>• Mise en relation directe</li>
-                    <li>• Conseils d'experts</li>
-                  </>
-                )}
-              </ul>
-            </CardContent>
-          </Card>
-        </form>
-      </CardContent>
-    </Card>
+      {/* Pays et Ville */}
+      <div className="grid md:grid-cols-2 gap-4">
+        <div className="space-y-2">
+          <Label htmlFor="pays">Pays *</Label>
+          <Select value={formData.pays} onValueChange={(value) => handleInputChange("pays", value)}>
+            <SelectTrigger>
+              <SelectValue />
+            </SelectTrigger>
+            <SelectContent className="max-h-[300px]">
+              {countries.map((country) => (
+                <SelectItem key={country} value={country}>
+                  {country}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+        </div>
+
+        <div className="space-y-2">
+          <Label htmlFor="ville">Ville *</Label>
+          <Input
+            id="ville"
+            type="text"
+            placeholder="Ville"
+            value={formData.ville}
+            onChange={(e) => handleInputChange("ville", e.target.value)}
+            required
+          />
+        </div>
+      </div>
+
+      {/* Adresse */}
+      <div className="space-y-2">
+        <Label htmlFor="adresse">Adresse *</Label>
+        <Input
+          id="adresse"
+          type="text"
+          placeholder="Adresse"
+          value={formData.adresse}
+          onChange={(e) => handleInputChange("adresse", e.target.value)}
+          required
+        />
+      </div>
+
+      {/* CGU Checkbox */}
+      <div className="flex items-start space-x-2">
+        <Checkbox
+          id="acceptCgu"
+          checked={formData.acceptCgu}
+          onCheckedChange={(checked) => handleInputChange("acceptCgu", checked as boolean)}
+        />
+        <label htmlFor="acceptCgu" className="text-sm leading-tight cursor-pointer">
+          En cochant cette case, j'accepte et je reconnais avoir pris connaissance des{" "}
+          <a href="/cgv" className="text-primary underline">conditions générales d'utilisation</a>{" "}
+          et de la{" "}
+          <a href="/mentions-legales" className="text-primary underline">politique de données personnelles</a>.
+        </label>
+      </div>
+
+      {/* Submit Button */}
+      <Button type="submit" disabled={isLoading || !formData.acceptCgu} className="w-full h-12 text-base">
+        {isLoading ? (
+          <>
+            <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+            Création en cours...
+          </>
+        ) : (
+          "Créer mon compte →"
+        )}
+      </Button>
+
+      <p className="text-sm text-muted-foreground text-right">* Champs obligatoires</p>
+
+      {/* Link to login */}
+      <div className="text-center pt-4">
+        <p className="text-sm text-muted-foreground">
+          Déjà inscrit ?{" "}
+          <button type="button" onClick={() => navigate("/auth")} className="text-primary underline font-medium hover:text-primary/80">
+            Connectez-vous
+          </button>
+        </p>
+      </div>
+    </form>
   );
 }
