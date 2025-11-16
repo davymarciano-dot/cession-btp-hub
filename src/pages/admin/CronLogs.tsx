@@ -30,12 +30,47 @@ const CronLogsAdmin = () => {
     dateRange: '24h'
   });
   const [stats, setStats] = useState<Record<string, JobStats>>({});
+  const [isAuthorized, setIsAuthorized] = useState(false);
   
+  // Vérifier les permissions admin
   useEffect(() => {
-    fetchLogs();
-    const interval = setInterval(fetchLogs, 10000);
-    return () => clearInterval(interval);
-  }, [filters]);
+    const checkAdminAccess = async () => {
+      try {
+        const { data: { session } } = await supabase.auth.getSession();
+        
+        if (!session) {
+          window.location.href = "/auth";
+          return;
+        }
+
+        const { data: userRoles, error: roleError } = await supabase
+          .from("user_roles")
+          .select("role")
+          .eq("user_id", session.user.id)
+          .eq("role", "admin")
+          .single();
+
+        if (roleError || !userRoles) {
+          window.location.href = "/";
+          return;
+        }
+
+        setIsAuthorized(true);
+      } catch (error) {
+        window.location.href = "/";
+      }
+    };
+
+    checkAdminAccess();
+  }, []);
+
+  useEffect(() => {
+    if (isAuthorized) {
+      fetchLogs();
+      const interval = setInterval(fetchLogs, 10000);
+      return () => clearInterval(interval);
+    }
+  }, [filters, isAuthorized]);
   
   const fetchLogs = async () => {
     // TODO: Use automation_logs table when available
