@@ -14,6 +14,7 @@ import { BTPMetiersSelect } from "@/data/btp-metiers";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { analyticsEvents } from "@/lib/analytics";
+import SiretAutocomplete from "@/components/SiretAutocomplete";
 
 const Estimation = () => {
   const navigate = useNavigate();
@@ -42,7 +43,38 @@ const Estimation = () => {
     rgeSecteursAutre: false,
     partenaireFinancement: "non",
     partenairesListe: [] as string[],
-  });
+});
+
+  const [siret, setSiret] = useState('');
+  const [raisonSociale, setRaisonSociale] = useState('');
+
+  const mapSecteur = (label: string) => {
+    const s = label.toLowerCase();
+    if (s.includes('électri') || s.includes('electri')) return 'electricien';
+    if (s.includes('plomb')) return 'plombier';
+    if (s.includes('chauff')) return 'chauffagiste';
+    if (s.includes('clim')) return 'climatisation';
+    if (s.includes('maçon') || s.includes('macon')) return 'macon';
+    if (s.includes('menuis')) return 'menuisier';
+    if (s.includes('couvr')) return 'couvreur';
+    if (s.includes('peintr')) return 'peintre';
+    if (s.includes('isolation')) return 'isolation';
+    if (s.includes('solaire') || s.includes('photovolt')) return 'panneaux-solaires';
+    if (s.includes('pompe à chaleur') || s.includes('pompe a chaleur')) return 'pompe-chaleur';
+    return '';
+  };
+
+  const handleSiretDataFetched = (data: any) => {
+    if (data.siret) setSiret(data.siret);
+    if (data.raisonSociale) setRaisonSociale(data.raisonSociale);
+    if (data.departement) handleInputChange('departement', String(data.departement));
+    if (data.anneeCreation) handleInputChange('anneeCreation', String(data.anneeCreation));
+    if (data.nombreSalaries) handleInputChange('nombreEmployes', String(data.nombreSalaries));
+    if (data.secteurActivite) {
+      const mapped = mapSecteur(data.secteurActivite);
+      if (mapped) handleInputChange('secteur', mapped);
+    }
+  };
 
   const [showResults, setShowResults] = useState(false);
   const [showTeaser, setShowTeaser] = useState(false);
@@ -214,6 +246,20 @@ const Estimation = () => {
                 </h2>
 
                 <form onSubmit={handleSubmit} className="space-y-6">
+
+                  {/* SIRET - en premier */}
+                  <div className="p-6 bg-gradient-to-br from-orange-50 to-pink-50 rounded-2xl border-2 border-orange-200">
+                    <Label htmlFor="siret" className="text-base font-semibold text-orange-700">Numéro SIRET</Label>
+                    <div className="mt-3">
+                      <SiretAutocomplete onDataFetched={handleSiretDataFetched} />
+                    </div>
+                    {raisonSociale && (
+                      <div className="mt-4">
+                        <Label className="text-sm">Raison sociale</Label>
+                        <Input value={raisonSociale} readOnly className="mt-2 bg-green-50 border-green-200" />
+                      </div>
+                    )}
+                  </div>
                   
                   {/* Question 1: Secteur */}
                   <div>
