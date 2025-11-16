@@ -7,7 +7,7 @@ import { Filter, ChevronLeft, ChevronRight } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import EntrepriseCard from "@/components/EntrepriseCard";
-import MapViewWrapper from "@/components/MapViewWrapper";
+import SafeListingsMap from "@/components/SafeListingsMap";
 import { useToast } from "@/hooks/use-toast";
 import { analyticsEvents } from "@/lib/analytics";
 import { CompanyComparator } from "@/components/CompanyComparator";
@@ -325,7 +325,7 @@ const Entreprises = () => {
                       <p className="text-muted-foreground">Chargement de la carte...</p>
                     </div>
                   ) : (
-                    <MapViewWrapper
+                    <SafeListingsMap
                       listings={annonces.length > 0 ? annonces : [
                         {
                           id: "exemple-1",
