@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
 import Header from "@/components/Header";
@@ -21,11 +21,54 @@ import {
   BarChart3,
   FileCheck,
   Lock,
+  X,
 } from "lucide-react";
 
 const Home = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
+  const [notifications, setNotifications] = useState<Array<{ id: number; text: string; show: boolean }>>([]);
+  const [notificationId, setNotificationId] = useState(0);
+
+  // 🔥 NOTIFICATIONS EN TEMPS RÉEL - EN BAS À GAUCHE
+  const liveNotifications = [
+    "🎉 Marc L. vient de vendre son entreprise de plomberie (Toulouse)",
+    "✅ Sophie T. a reçu 3 offres d'achat (Bordeaux)",
+    "🔥 Jean D. vient de s'inscrire (Lyon)",
+    "💰 Entreprise RGE vendue avec +30% de valorisation (Strasbourg)",
+    "⭐ Patrick M. a validé son estimation en 2 min (Nantes)",
+    "🎯 Nouvelle offre reçue pour une société de chauffage (Lille)",
+    "👏 4 acheteurs intéressés par une société d'électricité (Nice)",
+    "🚀 Entreprise d'électricité vendue en 1,2M€ (Nice)",
+    "💼 Repreneur qualifié vient de s'inscrire (Bordeaux)",
+    "🏆 Vente finalisée en 38 jours (Toulouse)",
+  ];
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      const randomNotif = liveNotifications[Math.floor(Math.random() * liveNotifications.length)];
+      const newId = notificationId + 1;
+
+      setNotifications((prev) => [...prev, { id: newId, text: randomNotif, show: true }]);
+      setNotificationId(newId);
+
+      setTimeout(() => {
+        setNotifications((prev) => prev.map((n) => (n.id === newId ? { ...n, show: false } : n)));
+        setTimeout(() => {
+          setNotifications((prev) => prev.filter((n) => n.id !== newId));
+        }, 500);
+      }, 6000);
+    }, 10000);
+
+    return () => clearInterval(interval);
+  }, [notificationId]);
+
+  const removeNotification = (id: number) => {
+    setNotifications((prev) => prev.map((n) => (n.id === id ? { ...n, show: false } : n)));
+    setTimeout(() => {
+      setNotifications((prev) => prev.filter((n) => n.id !== id));
+    }, 500);
+  };
 
   const stats = [
     { value: "95%", label: "Taux de réussite" },
@@ -277,6 +320,33 @@ const Home = () => {
     <div className="min-h-screen bg-white">
       <Header />
 
+      {/* 🔥 NOTIFICATIONS EN TEMPS RÉEL - EN BAS À GAUCHE */}
+      <div className="fixed bottom-4 left-4 z-50 space-y-2 max-w-sm">
+        {notifications.map((notif) => (
+          <div
+            key={notif.id}
+            className={`bg-white border-2 border-green-500 rounded-xl shadow-2xl p-4 flex items-start gap-3 transition-all duration-500 transform ${
+              notif.show ? "translate-x-0 opacity-100" : "-translate-x-full opacity-0"
+            }`}
+          >
+            <div className="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0 relative">
+              <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+              <div className="absolute w-3 h-3 bg-green-500 rounded-full animate-ping"></div>
+            </div>
+            <div className="flex-1">
+              <p className="text-xs font-bold text-green-600 mb-1">🔴 EN DIRECT</p>
+              <p className="text-sm text-gray-700">{notif.text}</p>
+            </div>
+            <button
+              onClick={() => removeNotification(notif.id)}
+              className="flex-shrink-0 text-gray-400 hover:text-gray-600 transition-colors"
+            >
+              <X className="w-4 h-4" />
+            </button>
+          </div>
+        ))}
+      </div>
+
       {/* HERO SECTION - Bleu gradient */}
       <section className="relative bg-gradient-to-br from-blue-600 via-blue-500 to-blue-700 text-white py-20 overflow-hidden">
         <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGQ9Ik0zNiAxOGMzLjMxNCAwIDYgMi42ODYgNiA2cy0yLjY4NiA2LTYgNi02LTIuNjg2LTYtNiAyLjY4Ni02IDYtNnoiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLW9wYWNpdHk9Ii4xIiBzdHJva2Utd2lkdGg9IjIiLz48L2c+PC9zdmc+')] opacity-10"></div>
@@ -428,11 +498,35 @@ const Home = () => {
             {opportunities.map((opp, index) => (
               <div
                 key={index}
-                className={`rounded-2xl p-6 shadow-xl hover:shadow-2xl transition-all cursor-pointer transform hover:scale-105 ${
+                className={`card-3d rounded-2xl p-6 shadow-xl hover:shadow-2xl transition-all cursor-pointer transform hover:scale-105 ${
                   opp.color === "orange"
                     ? "bg-gradient-to-br from-orange-500 to-orange-600"
                     : "bg-gradient-to-br from-blue-500 to-blue-600"
                 } text-white`}
+                style={{
+                  transformStyle: "preserve-3d",
+                  transition: "all 0.3s ease",
+                }}
+                onMouseMove={(e) => {
+                  const card = e.currentTarget;
+                  const rect = card.getBoundingClientRect();
+                  const x = e.clientX - rect.left;
+                  const y = e.clientY - rect.top;
+
+                  const centerX = rect.width / 2;
+                  const centerY = rect.height / 2;
+
+                  const rotateX = (y - centerY) / 15;
+                  const rotateY = (centerX - x) / 15;
+
+                  card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`;
+                  card.style.boxShadow = "0 25px 50px -12px rgba(0, 0, 0, 0.25)";
+                }}
+                onMouseLeave={(e) => {
+                  const card = e.currentTarget;
+                  card.style.transform = "perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)";
+                  card.style.boxShadow = "0 10px 15px -3px rgba(0, 0, 0, 0.1)";
+                }}
               >
                 {/* Badges */}
                 <div className="flex items-center justify-between mb-4">
@@ -996,6 +1090,60 @@ const Home = () => {
       </section>
 
       <Footer />
+
+      {/* 🎨 ANIMATIONS CSS */}
+      <style>{`
+        @keyframes fade-in {
+          from {
+            opacity: 0;
+            transform: translateY(20px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+        
+        @keyframes slide-in-left {
+          from {
+            transform: translateX(-100%);
+            opacity: 0;
+          }
+          to {
+            transform: translateX(0);
+            opacity: 1;
+          }
+        }
+        
+        .card-3d {
+          transform-style: preserve-3d;
+          backface-visibility: hidden;
+        }
+        
+        .animate-fade-in {
+          animation: fade-in 0.6s ease-out;
+        }
+        
+        .animate-slide-in {
+          animation: slide-in-left 0.5s ease-out;
+        }
+
+        /* Effet de brillance sur les cards */
+        .card-3d::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: -100%;
+          width: 100%;
+          height: 100%;
+          background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+          transition: left 0.5s;
+        }
+        
+        .card-3d:hover::before {
+          left: 100%;
+        }
+      `}</style>
     </div>
   );
 };
