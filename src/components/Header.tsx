@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
+import logoCessionBTP from "@/assets/logo-cessionbtp-final.png";
 
 const Header = () => {
   const navigate = useNavigate();
@@ -23,24 +24,12 @@ const Header = () => {
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-20">
           {/* LOGO CESSIONBTP */}
-          <Link to="/" className="flex items-center gap-0 hover:opacity-90 transition-opacity h-12">
-            {/* Symbole X stylisé */}
-            <svg width="64" height="48" viewBox="0 0 64 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-              {/* X bleu (diagonale haut-gauche vers bas-droite) */}
-              <path d="M8 4 L28 24 L8 44 L16 44 L36 24 L16 4 Z" fill="#0066FF"/>
-              {/* X orange (diagonale haut-droite vers bas-gauche) */}
-              <path d="M48 4 L28 24 L48 44 L40 44 L20 24 L40 4 Z" fill="#FF8800"/>
-            </svg>
-            
-            {/* Texte Cession en orange */}
-            <span className="font-bold italic text-[32px] leading-none" style={{ color: '#FF8800', fontFamily: 'Arial, sans-serif' }}>
-              Cession
-            </span>
-            
-            {/* Texte BTP en bleu marine */}
-            <span className="font-bold italic text-[32px] leading-none" style={{ color: '#1E3A8A', fontFamily: 'Arial, sans-serif' }}>
-              BTP
-            </span>
+          <Link to="/" className="flex items-center hover:opacity-90 transition-opacity">
+            <img 
+              src={logoCessionBTP} 
+              alt="CessionBTP Logo" 
+              className="h-12 w-auto"
+            />
           </Link>
 
           {/* MENU DESKTOP */}
