@@ -352,63 +352,100 @@ const Home = () => {
       </div>
 
       {/* NEW HERO SECTION */}
-      <section className="relative bg-gradient-to-br from-background via-muted/30 to-background py-20 md:py-28 overflow-hidden">
-        {/* Background decoration */}
-        <div className="absolute inset-0 opacity-5">
-          <div className="absolute w-96 h-96 bg-primary rounded-full blur-3xl -top-20 -right-20"></div>
-          <div className="absolute w-96 h-96 bg-secondary rounded-full blur-3xl -bottom-20 -left-20"></div>
+      <section className="relative overflow-hidden" style={{ 
+        background: 'linear-gradient(135deg, #2563EB 0%, #1E40AF 100%)',
+        minHeight: '600px',
+        padding: '60px 20px'
+      }}>
+        {/* BADGE LIVE */}
+        <div className="absolute top-4 left-1/2 transform -translate-x-1/2 z-20">
+          <div className="bg-[#EF4444] text-white px-6 py-2 rounded-full text-sm font-semibold shadow-lg animate-pulse">
+            LIVE - Entreprise d'Électricité vendue pour €1,2M à Nice (06) il y a 6h
+          </div>
         </div>
         
-        <div className="container mx-auto px-4 relative z-10">
-          <div className="text-center max-w-4xl mx-auto">
-            {/* Main Heading */}
-            <h1 className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent leading-tight">
-              Achetez ou Vendez votre Entreprise BTP
+        <div className="container mx-auto max-w-6xl relative z-10 flex flex-col items-center justify-center" style={{ minHeight: '480px' }}>
+          <div className="text-center space-y-8">
+            {/* H1 */}
+            <h1 className="text-white text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
+              Cédez ou reprenez une entreprise BTP en 45 jours
             </h1>
             
-            {/* Subtitle */}
-            <div className="space-y-2 mb-10">
-              <p className="text-xl md:text-2xl text-muted-foreground font-medium">
-                La 1ère plateforme de cession d'entreprises BTP en France
-              </p>
-              <p className="text-lg md:text-xl text-muted-foreground">
-                {totalAnnonces > 0 ? `${totalAnnonces} entreprises disponibles` : "840 entreprises disponibles"} | Délai moyen 45 jours
-              </p>
-            </div>
+            {/* STATS */}
+            <p className="text-white/90 text-base md:text-lg font-medium">
+              Matching IA • 500+ transactions réalisées • 95% satisfaction • 2000+ repreneurs qualifiés
+            </p>
             
-            {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
+            {/* CTA BUTTONS */}
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-4">
+              <Button 
+                onClick={() => navigate('/vendre')}
+                className="w-full sm:w-auto px-8 py-6 text-lg font-bold text-white rounded-xl shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all"
+                style={{ backgroundColor: '#FF6B35' }}
+              >
+                Vendre mon entreprise
+              </Button>
               <Button 
                 onClick={() => navigate('/entreprises')}
-                className="inline-flex items-center justify-center px-8 py-4 text-lg font-bold text-white bg-primary hover:bg-primary/90 rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 transition-all"
-              >
-                Voir les Entreprises
-                <span className="ml-2">→</span>
-              </Button>
-              <Button 
-                onClick={() => navigate('/estimer')}
                 variant="outline"
-                className="inline-flex items-center justify-center px-8 py-4 text-lg font-bold border-2 rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 transition-all"
+                className="w-full sm:w-auto px-8 py-6 text-lg font-bold text-white border-2 border-white bg-transparent hover:bg-white/10 rounded-xl shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all"
               >
-                Estimer Gratuitement
+                Trouver une entreprise
               </Button>
             </div>
             
-            {/* Stats */}
-            <div className="flex flex-wrap items-center justify-center gap-6 text-muted-foreground">
+            {/* RÉASSURANCE */}
+            <div className="flex flex-col sm:flex-row gap-6 justify-center items-center pt-6 text-white">
               <div className="flex items-center gap-2">
-                <span className="text-2xl">⭐</span>
-                <span className="font-semibold">95% de réussite</span>
+                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                </svg>
+                <span className="font-semibold">Résultat en 48h</span>
               </div>
-              <div className="hidden sm:block text-muted-foreground/30">|</div>
               <div className="flex items-center gap-2">
-                <span className="text-2xl">⏱️</span>
-                <span className="font-semibold">45 jours délai moyen</span>
+                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                </svg>
+                <span className="font-semibold">100% confidentiel</span>
               </div>
-              <div className="hidden sm:block text-muted-foreground/30">|</div>
               <div className="flex items-center gap-2">
-                <span className="text-2xl">💰</span>
-                <span className="font-semibold">2% d'honoraires</span>
+                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                </svg>
+                <span className="font-semibold">Sans engagement</span>
+              </div>
+            </div>
+            
+            {/* BARRE DE RECHERCHE */}
+            <div className="mt-12 max-w-4xl mx-auto">
+              <div className="bg-white rounded-2xl shadow-2xl p-6">
+                <div className="flex flex-col md:flex-row gap-4">
+                  <select className="flex-1 px-4 py-3 border border-gray-300 rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#FF6B35] focus:border-transparent">
+                    <option value="">Type d'entreprise</option>
+                    <option value="electricite">Électricité</option>
+                    <option value="plomberie">Plomberie</option>
+                    <option value="maconnerie">Maçonnerie</option>
+                    <option value="menuiserie">Menuiserie</option>
+                    <option value="couverture">Couverture</option>
+                  </select>
+                  
+                  <select className="flex-1 px-4 py-3 border border-gray-300 rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#FF6B35] focus:border-transparent">
+                    <option value="">Région</option>
+                    <option value="idf">Île-de-France</option>
+                    <option value="paca">Provence-Alpes-Côte d'Azur</option>
+                    <option value="ara">Auvergne-Rhône-Alpes</option>
+                    <option value="occitanie">Occitanie</option>
+                    <option value="na">Nouvelle-Aquitaine</option>
+                  </select>
+                  
+                  <Button 
+                    onClick={() => navigate('/entreprises')}
+                    className="px-8 py-3 text-lg font-bold text-white rounded-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-all"
+                    style={{ backgroundColor: '#FF6B35' }}
+                  >
+                    Rechercher
+                  </Button>
+                </div>
               </div>
             </div>
           </div>
