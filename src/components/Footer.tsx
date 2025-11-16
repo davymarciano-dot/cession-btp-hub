@@ -9,7 +9,6 @@ const Footer = () => {
       { label: "À propos", path: "/about" },
       { label: "Comment ça marche", path: "/comment-ca-marche" },
       { label: "Notre équipe", path: "/equipe" },
-      { label: "Roadmap", path: "/roadmap" },
       { label: "Blog", path: "/blog" },
     ],
     vendeurs: [
