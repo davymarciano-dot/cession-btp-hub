@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Check } from "lucide-react";
 import { analyticsEvents } from "@/lib/analytics";
+import { useRef, useState } from "react";
 
 interface PricingCardProps {
   title: string;
@@ -39,6 +40,8 @@ const PricingCard = ({
   badgeAnimate = false,
 }: PricingCardProps) => {
   const isPrimary = variant === "primary" || isPopular;
+  const cardRef = useRef<HTMLDivElement>(null);
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   
   const handleClick = () => {
     analyticsEvents.selectSubscription(title, userType);
@@ -50,6 +53,15 @@ const PricingCard = ({
   
   const handleMouseLeave = () => {
     onHover?.(false);
+    setMousePosition({ x: 0, y: 0 });
+  };
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!cardRef.current) return;
+    const rect = cardRef.current.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    setMousePosition({ x, y });
   };
   
   // Déterminer si cette carte doit avoir le style "actif" (contour bleu + bouton bleu)
@@ -58,13 +70,20 @@ const PricingCard = ({
   
   return (
     <div 
+      ref={cardRef}
       className={`h-full flex flex-col rounded-2xl p-8 border-2 ${
         isActive
           ? 'border-blue-500 shadow-xl scale-[1.02]'
           : 'border-slate-200'
-      } bg-card relative transition-all duration-300 hover:border-blue-500 hover:shadow-xl hover:scale-[1.02]`}
+      } bg-card relative transition-all duration-300 hover:border-blue-500 hover:shadow-xl hover:scale-[1.02] overflow-hidden`}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
+      onMouseMove={handleMouseMove}
+      style={{
+        background: isActive
+          ? `radial-gradient(600px circle at ${mousePosition.x}px ${mousePosition.y}px, rgba(59, 130, 246, 0.1), transparent 40%)`
+          : undefined,
+      }}
     >
       {(badgeText || isPopular) && (
         <Badge className={`absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1.5 rounded-full text-white text-xs font-bold shadow-lg ${
