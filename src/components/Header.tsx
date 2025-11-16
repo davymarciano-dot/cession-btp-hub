@@ -25,7 +25,7 @@ const Header = () => {
             <img 
               src="/images/logo-cessionbtp.png" 
               alt="CessionBTP" 
-              className="h-14 md:h-20 w-auto"
+              className="h-16 md:h-24 w-auto"
             />
           </Link>
 
