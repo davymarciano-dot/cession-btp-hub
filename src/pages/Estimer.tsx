@@ -1,15 +1,34 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Select, SelectContent, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Calculator, TrendingUp, Shield, Zap, CheckCircle2, ArrowRight } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { DepartementsSelect } from "@/data/departements";
 import EstimationDialog from "@/components/EstimationDialog";
 import { useToast } from "@/hooks/use-toast";
-import { SearchableSelect } from "@/components/SearchableSelect";
 import SEOHead from "@/components/SEOHead";
+
+// Secteurs BTP les plus courants
+const secteursBTP = [
+  { value: "electricien", label: "Électricien" },
+  { value: "plombier", label: "Plombier" },
+  { value: "plombier-chauffagiste", label: "Plombier-chauffagiste" },
+  { value: "chauffagiste", label: "Chauffagiste" },
+  { value: "climatisation", label: "Climatisation" },
+  { value: "macon", label: "Maçon" },
+  { value: "menuisier", label: "Menuisier" },
+  { value: "couvreur", label: "Couvreur" },
+  { value: "peintre", label: "Peintre en bâtiment" },
+  { value: "platrier", label: "Plâtrier" },
+  { value: "carreleur", label: "Carreleur" },
+  { value: "terrassier", label: "Terrassier" },
+  { value: "panneaux-solaires", label: "Panneaux solaires / Photovoltaïque" },
+  { value: "pompe-chaleur", label: "Pompe à chaleur" },
+  { value: "isolation", label: "Isolation thermique" },
+  { value: "autre", label: "Autre secteur BTP" },
+];
 
 const Estimer = () => {
   const [ca, setCa] = useState("");
@@ -144,11 +163,18 @@ const Estimer = () => {
                   {/* Secteur */}
                   <div>
                     <label className="block text-sm font-semibold text-slate-700 mb-2">🏗️ Secteur d'activité BTP</label>
-                    <SearchableSelect
-                      value={secteur}
-                      onValueChange={setSecteur}
-                      placeholder="Sélectionnez votre secteur"
-                    />
+                    <Select value={secteur} onValueChange={setSecteur}>
+                      <SelectTrigger className="h-14 text-lg border-2 border-slate-200 focus:border-orange-500 rounded-xl">
+                        <SelectValue placeholder="Sélectionnez votre secteur" />
+                      </SelectTrigger>
+                      <SelectContent className="max-h-[300px]">
+                        {secteursBTP.map((s) => (
+                          <SelectItem key={s.value} value={s.value}>
+                            {s.label}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
                   </div>
 
                   {/* Département */}
