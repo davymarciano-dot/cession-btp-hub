@@ -25,7 +25,7 @@ const Tarifs = () => {
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
             {/* GRATUIT */}
-            <div className="h-full flex flex-col border-2 border-slate-200 hover:border-blue-500 hover:shadow-xl transition-all duration-300 rounded-2xl p-8 bg-white relative">
+            <div className="h-full flex flex-col border-2 border-slate-200 hover:border-blue-500 hover:shadow-xl transition-all rounded-2xl p-8 bg-white relative">
               <h3 className="text-2xl font-bold text-slate-700 mb-2">Gratuit</h3>
               <div className="mb-6">
                 <span className="text-5xl font-black text-blue-600">0€</span>
@@ -53,18 +53,13 @@ const Tarifs = () => {
                 </div>
               </div>
 
-              <Button className="w-full bg-orange-500 hover:bg-blue-500 transition-colors duration-300">
+              <Button className="w-full bg-orange-500 hover:bg-blue-500 transition-colors">
                 S'inscrire gratuitement
               </Button>
             </div>
 
             {/* CONTACT - POPULAIRE */}
-            <div className="h-full flex flex-col border-2 border-slate-200 hover:border-blue-500 hover:shadow-xl transition-all duration-300 rounded-2xl p-8 bg-white relative">
-              <div className="absolute -top-3 left-1/2 -translate-x-1/2">
-                <span className="bg-gradient-to-r from-blue-500 to-blue-600 text-white px-4 py-1.5 rounded-full text-xs font-bold shadow-lg">
-                  POPULAIRE
-                </span>
-              </div>
+            <div className="h-full flex flex-col border-2 border-slate-200 hover:border-blue-500 hover:shadow-xl transition-all rounded-2xl p-8 bg-white relative">
 
               <h3 className="text-2xl font-bold text-slate-700 mb-2">Contact</h3>
               <div className="mb-6">
@@ -98,13 +93,13 @@ const Tarifs = () => {
                 </div>
               </div>
 
-              <Button className="w-full bg-orange-500 hover:bg-blue-500 transition-colors duration-300">
+              <Button className="w-full bg-orange-500 hover:bg-blue-500 transition-colors">
                 Acheter des contacts
               </Button>
             </div>
 
             {/* PRO - 🔥 MEILLEUR RAPPORT */}
-            <div className="h-full flex flex-col border-2 border-slate-200 hover:border-blue-500 hover:shadow-xl transition-all duration-300 rounded-2xl p-8 bg-white relative">
+            <div className="h-full flex flex-col border-2 border-slate-200 hover:border-blue-500 hover:shadow-xl transition-all rounded-2xl p-8 bg-white relative">
               <div className="absolute -top-3 left-1/2 -translate-x-1/2">
                 <span className="bg-gradient-to-r from-blue-500 to-blue-600 text-white px-4 py-1.5 rounded-full text-xs font-bold shadow-lg">
                   POPULAIRE
@@ -143,13 +138,13 @@ const Tarifs = () => {
                 </div>
               </div>
 
-              <Button className="w-full bg-orange-500 hover:bg-blue-500 transition-colors duration-300">
+              <Button className="w-full bg-orange-500 hover:bg-blue-500 transition-colors">
                 Choisir Pro
               </Button>
             </div>
 
             {/* ENTREPRISE - 👑 PREMIUM */}
-            <div className="h-full flex flex-col border-2 border-slate-200 hover:border-blue-500 hover:shadow-xl transition-all duration-300 rounded-2xl p-8 bg-white relative">
+            <div className="h-full flex flex-col border-2 border-slate-200 hover:border-blue-500 hover:shadow-xl transition-all rounded-2xl p-8 bg-white relative">
               <div className="absolute -top-3 left-1/2 -translate-x-1/2">
                 <span className="bg-gradient-to-r from-purple-600 to-amber-500 text-white px-4 py-1.5 rounded-full text-xs font-bold shadow-lg">
                   👑 PREMIUM
@@ -188,7 +183,7 @@ const Tarifs = () => {
                 </div>
               </div>
 
-              <Button className="w-full bg-orange-500 hover:bg-blue-500 transition-colors duration-300">
+              <Button className="w-full bg-orange-500 hover:bg-blue-500 transition-colors">
                 Choisir Entreprise
               </Button>
             </div>
@@ -211,7 +206,7 @@ const Tarifs = () => {
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
             {/* DÉCOUVERTE */}
-            <div className="h-full flex flex-col border-2 border-slate-200 hover:border-blue-500 hover:shadow-xl transition-all duration-300 rounded-2xl p-8 bg-white relative">
+            <div className="h-full flex flex-col border-2 border-slate-200 hover:border-blue-500 hover:shadow-xl transition-all rounded-2xl p-8 bg-white relative">
               <h3 className="text-2xl font-bold text-slate-700 mb-2">Découverte</h3>
               <div className="mb-6">
                 <span className="text-5xl font-black text-blue-600">Gratuit</span>
@@ -240,13 +235,13 @@ const Tarifs = () => {
                 </div>
               </div>
 
-              <Button className="w-full bg-orange-500 hover:bg-blue-500 transition-colors duration-300">
+              <Button className="w-full bg-orange-500 hover:bg-blue-500 transition-colors">
                 Commencer gratuitement
               </Button>
             </div>
 
             {/* ESSENTIEL - POPULAIRE */}
-            <div className="h-full flex flex-col border-2 border-slate-200 hover:border-blue-500 hover:shadow-xl transition-all duration-300 rounded-2xl p-8 bg-white relative">
+            <div className="h-full flex flex-col border-2 border-slate-200 hover:border-blue-500 hover:shadow-xl transition-all rounded-2xl p-8 bg-white relative">
               <div className="absolute -top-3 left-1/2 -translate-x-1/2">
                 <span className="bg-gradient-to-r from-blue-500 to-blue-600 text-white px-4 py-1.5 rounded-full text-xs font-bold shadow-lg">
                   POPULAIRE
@@ -285,13 +280,13 @@ const Tarifs = () => {
                 </div>
               </div>
 
-              <Button className="w-full bg-orange-500 hover:bg-blue-500 transition-colors duration-300">
+              <Button className="w-full bg-orange-500 hover:bg-blue-500 transition-colors">
                 Choisir Essentiel
               </Button>
             </div>
 
             {/* PRIME - ⭐ MEILLEUR CHOIX */}
-            <div className="h-full flex flex-col border-2 border-slate-200 hover:border-blue-500 hover:shadow-xl transition-all duration-300 rounded-2xl p-8 bg-white relative">
+            <div className="h-full flex flex-col border-2 border-slate-200 hover:border-blue-500 hover:shadow-xl transition-all rounded-2xl p-8 bg-white relative">
               <div className="absolute -top-3 left-1/2 -translate-x-1/2">
                 <span className="bg-gradient-to-r from-orange-500 to-orange-600 text-white px-4 py-1.5 rounded-full text-xs font-bold shadow-lg animate-pulse">
                   ⭐ MEILLEUR CHOIX
@@ -330,13 +325,13 @@ const Tarifs = () => {
                 </div>
               </div>
 
-              <Button className="w-full bg-orange-500 hover:bg-blue-500 transition-colors duration-300">
+              <Button className="w-full bg-orange-500 hover:bg-blue-500 transition-colors">
                 Choisir Premium
               </Button>
             </div>
 
             {/* EXCLUSIF - 👑 PREMIUM */}
-            <div className="h-full flex flex-col border-2 border-slate-200 hover:border-blue-500 hover:shadow-xl transition-all duration-300 rounded-2xl p-8 bg-white relative">
+            <div className="h-full flex flex-col border-2 border-slate-200 hover:border-blue-500 hover:shadow-xl transition-all rounded-2xl p-8 bg-white relative">
               <div className="absolute -top-3 left-1/2 -translate-x-1/2">
                 <span className="bg-gradient-to-r from-purple-600 to-amber-500 text-white px-4 py-1.5 rounded-full text-xs font-bold shadow-lg">
                   👑 PREMIUM
@@ -375,7 +370,7 @@ const Tarifs = () => {
                 </div>
               </div>
 
-              <Button className="w-full bg-orange-500 hover:bg-blue-500 transition-colors duration-300">
+              <Button className="w-full bg-orange-500 hover:bg-blue-500 transition-colors">
                 Choisir Exclusif
               </Button>
             </div>
