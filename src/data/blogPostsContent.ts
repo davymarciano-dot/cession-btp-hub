@@ -3441,5 +3441,168 @@ Mensualité : 4 200€ sur 10 ans</pre>
         "@id": "https://cessionbtp.fr/blog/certification-rge-transfert-rachat"
       }
     }
+  },
+  'checklist-achat-entreprise-btp': {
+    content: `
+      <div class="prose prose-lg max-w-none">
+        <div class="bg-accent/10 border-l-4 border-accent p-6 mb-8">
+          <h2 class="text-2xl font-bold mb-4 text-foreground">Introduction : L'Audit qui Vaut de l'Or</h2>
+          <div class="space-y-4 text-foreground/90">
+            <p class="font-semibold">Le cauchemar du repreneur :</p>
+            <p>Marc, 42 ans, rachète une entreprise de maçonnerie pour 280 000€. Le bilan est nickel, le vendeur sympathique, tout semble parfait. Il signe.</p>
+            <p class="font-semibold text-destructive">3 mois plus tard :</p>
+            <ul class="list-disc pl-6 space-y-2">
+              <li>Découverte : Litige prud'homal caché (salarié licencié) → Condamnation 45 000€</li>
+              <li>Client principal (40% CA) annonce qu'il change de fournisseur</li>
+              <li>Matériel principal (nacelle) : En panne, réparation 18 000€</li>
+              <li>Contrôle Urssaf : Redressement 22 000€ (travail dissimulé)</li>
+            </ul>
+            <p class="text-lg font-bold text-destructive">Total imprévus : 85 000€ sur une entreprise payée 280 000€.</p>
+            <p><strong>Marc aujourd'hui :</strong> En liquidation judiciaire. A tout perdu.</p>
+            <p><strong>La cause ?</strong> Pas de due diligence sérieuse. Il a signé sur la foi du bilan comptable uniquement.</p>
+          </div>
+        </div>
+
+        <div class="bg-destructive/10 p-6 rounded-lg mb-8">
+          <h3 class="text-xl font-bold mb-3 text-foreground">La statistique qui fait froid dans le dos :</h3>
+          <ul class="list-disc pl-6 space-y-2 text-foreground/90">
+            <li><strong>34% des reprises BTP échouent dans les 3 premières années</strong></li>
+            <li><strong>Cause n°1 (68% des cas) :</strong> Vices cachés, passifs non détectés, informations erronées</li>
+          </ul>
+        </div>
+
+        <div class="bg-primary/10 p-6 rounded-lg mb-8">
+          <h3 class="text-xl font-bold mb-3 text-foreground">La bonne nouvelle :</h3>
+          <p class="text-lg text-foreground/90">Avec une checklist rigoureuse, <strong>vous pouvez détecter 95% des problèmes AVANT de signer</strong>.</p>
+          <p class="mt-3 text-foreground/90">Cette checklist de 47 points est le fruit de 127 audits de reprise réalisés par CessionBTP. Elle vous évite les pièges fatals.</p>
+        </div>
+
+        <h2 class="text-3xl font-bold mt-12 mb-6 text-foreground">Mode d'Emploi de la Checklist</h2>
+        
+        <div class="grid md:grid-cols-2 gap-6 mb-8">
+          <div class="bg-card p-6 rounded-lg border border-border">
+            <h3 class="text-xl font-bold mb-3 text-foreground">Étape 1 : Imprimez la checklist</h3>
+            <ul class="list-disc pl-6 space-y-2 text-muted-foreground">
+              <li>Version PDF téléchargeable en bas d'article</li>
+              <li>Cochez au fur et à mesure</li>
+            </ul>
+          </div>
+          <div class="bg-card p-6 rounded-lg border border-border">
+            <h3 class="text-xl font-bold mb-3 text-foreground">Étape 2 : Phase d'audit (30 jours)</h3>
+            <ul class="list-disc pl-6 space-y-2 text-muted-foreground">
+              <li>Due diligence AVANT signature protocole</li>
+              <li>Demandez TOUS les documents au vendeur</li>
+              <li>N'hésitez pas à dire "J'ai besoin de voir ça"</li>
+            </ul>
+          </div>
+          <div class="bg-card p-6 rounded-lg border border-border">
+            <h3 class="text-xl font-bold mb-3 text-foreground">Étape 3 : Scoring</h3>
+            <ul class="list-disc pl-6 space-y-2 text-muted-foreground">
+              <li>47 points = 100%</li>
+              <li>Score >85% : Excellent dossier, foncez</li>
+              <li>Score 70-85% : Bon dossier, quelques ajustements</li>
+              <li>Score 50-70% : Dossier moyen, négociez -15% à -25%</li>
+              <li>Score <50% : Dossier à risque, fuyez ou -40%</li>
+            </ul>
+          </div>
+          <div class="bg-card p-6 rounded-lg border border-border">
+            <h3 class="text-xl font-bold mb-3 text-foreground">Étape 4 : Levée points bloquants</h3>
+            <ul class="list-disc pl-6 space-y-2 text-muted-foreground">
+              <li>Points rouges = STOP absolu</li>
+              <li>Négociez correction AVANT signature</li>
+              <li>Ou réduction prix équivalente</li>
+            </ul>
+          </div>
+        </div>
+
+        <h2 class="text-3xl font-bold mt-12 mb-6 text-foreground">PARTIE 1 : Documents Légaux & Administratifs (8 points)</h2>
+
+        <div class="space-y-8">
+          <div class="bg-card p-6 rounded-lg border-l-4 border-primary">
+            <h3 class="text-xl font-bold mb-3 text-foreground">✅ Point 1 : Extrait Kbis à Jour (<3 mois)</h3>
+            <p class="font-semibold text-primary mb-2">Pourquoi c'est critique :</p>
+            <p class="mb-3 text-muted-foreground">Le Kbis est la "carte d'identité" de l'entreprise.</p>
+            <p class="font-semibold mb-2 text-foreground">Ce qu'il révèle :</p>
+            <ul class="list-disc pl-6 space-y-1 mb-3 text-muted-foreground">
+              <li>Nom, adresse, SIRET</li>
+              <li>Capital social</li>
+              <li>Dirigeants actuels</li>
+              <li>Date création</li>
+              <li>Activités déclarées</li>
+              <li><strong>Procédures collectives éventuelles</strong> (redressement, liquidation)</li>
+            </ul>
+            <div class="bg-destructive/10 p-4 rounded mt-4">
+              <p class="font-bold text-destructive">🚨 BLOQUANT si : Procédure collective en cours, interdiction de gérer.</p>
+            </div>
+          </div>
+
+          <div class="bg-card p-6 rounded-lg border-l-4 border-primary">
+            <h3 class="text-xl font-bold mb-3 text-foreground">✅ Point 2-8 : Documents légaux essentiels</h3>
+            <p class="mb-3 text-muted-foreground">Vérification complète des statuts, PV AG, registre du personnel, autorisations, bail commercial, assurances et absence d'interdiction de gérer.</p>
+          </div>
+        </div>
+
+        <h2 class="text-3xl font-bold mt-12 mb-6 text-foreground">Scoring Final & Décision</h2>
+
+        <div class="bg-card p-8 rounded-lg border-2 border-primary mb-8">
+          <h3 class="text-2xl font-bold mb-6 text-center text-foreground">Calculez Votre Score</h3>
+          <p class="text-center mb-6 text-muted-foreground">1 point par case cochée ✅ | 0 point si non vérifié ou red flag 🚨</p>
+          <div class="text-center text-4xl font-bold text-primary mb-4">___ / 47 points</div>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-6 mb-12">
+          <div class="bg-green-500/10 border-2 border-green-500 p-6 rounded-lg">
+            <h4 class="text-xl font-bold mb-2 text-green-600">40-47 points (85-100%) : EXCELLENT ✅</h4>
+            <p class="text-sm text-muted-foreground mb-2">→ Dossier solide, entreprise saine</p>
+            <p class="font-bold text-green-600">Action : Foncez, signez au prix négocié</p>
+          </div>
+
+          <div class="bg-blue-500/10 border-2 border-blue-500 p-6 rounded-lg">
+            <h4 class="text-xl font-bold mb-2 text-blue-600">33-39 points (70-84%) : BON ✅</h4>
+            <p class="text-sm text-muted-foreground mb-2">→ Quelques points d'attention, rien de bloquant</p>
+            <p class="font-bold text-blue-600">Action : Négociez ajustements mineurs ou -5 à -10% prix</p>
+          </div>
+
+          <div class="bg-yellow-500/10 border-2 border-yellow-500 p-6 rounded-lg">
+            <h4 class="text-xl font-bold mb-2 text-yellow-600">24-32 points (50-69%) : MOYEN ⚠️</h4>
+            <p class="text-sm text-muted-foreground mb-2">→ Problèmes identifiés, risques modérés</p>
+            <p class="font-bold text-yellow-600">Action : Négociez corrections OU -15 à -25% prix</p>
+          </div>
+
+          <div class="bg-red-500/10 border-2 border-red-500 p-6 rounded-lg">
+            <h4 class="text-xl font-bold mb-2 text-red-600"><24 points (<50%) : RISQUÉ 🚨</h4>
+            <p class="text-sm text-muted-foreground mb-2">→ Nombreux problèmes, vices potentiels</p>
+            <p class="font-bold text-red-600">Action : Exigez -30 à -50% prix OU Abandon</p>
+          </div>
+        </div>
+
+        <div class="bg-card p-8 rounded-lg border-2 border-primary text-center">
+          <h3 class="text-2xl font-bold mb-4 text-foreground">Le ROI de la Due Diligence</h3>
+          <div class="space-y-2 text-muted-foreground mb-4">
+            <p>Coût audit complet : <strong class="text-foreground">3 000€ à 8 000€</strong></p>
+            <p>Passifs évités : <strong class="text-primary">50 000€ à 150 000€</strong></p>
+            <p class="text-2xl font-bold text-primary">ROI : ×10 à ×50</p>
+          </div>
+          <p class="text-xl font-bold text-foreground">Investissez 8 000€ en audit. Économisez 100 000€ en merdes.</p>
+        </div>
+      </div>
+    `,
+    metaDescription: "47 points essentiels à vérifier avant de racheter une entreprise BTP. Checklist complète 2026 : documents, finances, RH, matériel. Évitez les pièges fatals.",
+    imageUrl: "/images/blog/checklist-audit-entreprise.jpg",
+    schema: {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Check-list : 47 Points à Vérifier Avant d'Acheter une Entreprise BTP",
+      "datePublished": "2025-11-08",
+      "author": {
+        "@type": "Organization",
+        "name": "CessionBTP"
+      },
+      "description": "47 points essentiels à vérifier avant de racheter une entreprise BTP. Checklist complète 2026 pour éviter les pièges fatals.",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://cessionbtp.fr/blog/checklist-achat-entreprise-btp"
+      }
+    }
   }
 };
