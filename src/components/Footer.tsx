@@ -55,12 +55,12 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-10">
           {/* Colonne 1 : Logo et Description */}
           <div className="lg:col-span-2">
-            <div className="flex items-center gap-3 mb-6">
-              <Building2 className="w-10 h-10 text-orange-500" />
-              <div>
-                <span className="text-2xl font-extrabold text-orange-500">Cession</span>
-                <span className="text-2xl font-extrabold text-white">BTP</span>
-              </div>
+            <div className="mb-6">
+              <img 
+                src="/images/logo-cessionbtp.png" 
+                alt="CessionBTP" 
+                className="h-12 w-auto"
+              />
             </div>
 
             <p className="text-gray-300 mb-6 leading-relaxed">

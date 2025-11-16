@@ -338,6 +338,15 @@ const Home = () => {
 
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-4xl mx-auto text-center">
+            {/* Logo CessionBTP */}
+            <div className="mb-8 flex justify-center">
+              <img 
+                src="/images/logo-cessionbtp.png" 
+                alt="CessionBTP" 
+                className="h-16 w-auto opacity-90"
+              />
+            </div>
+
             {/* Badge ventes */}
             <div className="inline-block mb-6">
               <div className="bg-blue-500/30 backdrop-blur-sm border border-blue-400/50 rounded-full px-6 py-2">
