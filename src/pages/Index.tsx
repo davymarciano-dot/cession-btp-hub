@@ -498,35 +498,11 @@ const Home = () => {
             {opportunities.map((opp, index) => (
               <div
                 key={index}
-                className={`card-3d rounded-2xl p-6 shadow-xl hover:shadow-2xl transition-all cursor-pointer transform hover:scale-105 ${
+                className={`rounded-2xl p-6 shadow-xl hover:shadow-2xl transition-all duration-300 cursor-pointer transform hover:scale-105 hover:-translate-y-2 ${
                   opp.color === "orange"
                     ? "bg-gradient-to-br from-orange-500 to-orange-600"
                     : "bg-gradient-to-br from-blue-500 to-blue-600"
-                } text-white`}
-                style={{
-                  transformStyle: "preserve-3d",
-                  transition: "all 0.3s ease",
-                }}
-                onMouseMove={(e) => {
-                  const card = e.currentTarget;
-                  const rect = card.getBoundingClientRect();
-                  const x = e.clientX - rect.left;
-                  const y = e.clientY - rect.top;
-
-                  const centerX = rect.width / 2;
-                  const centerY = rect.height / 2;
-
-                  const rotateX = (y - centerY) / 15;
-                  const rotateY = (centerX - x) / 15;
-
-                  card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`;
-                  card.style.boxShadow = "0 25px 50px -12px rgba(0, 0, 0, 0.25)";
-                }}
-                onMouseLeave={(e) => {
-                  const card = e.currentTarget;
-                  card.style.transform = "perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)";
-                  card.style.boxShadow = "0 10px 15px -3px rgba(0, 0, 0, 0.1)";
-                }}
+                } text-white relative overflow-hidden group`}
               >
                 {/* Badges */}
                 <div className="flex items-center justify-between mb-4">
@@ -1115,33 +1091,12 @@ const Home = () => {
           }
         }
         
-        .card-3d {
-          transform-style: preserve-3d;
-          backface-visibility: hidden;
-        }
-        
         .animate-fade-in {
           animation: fade-in 0.6s ease-out;
         }
         
         .animate-slide-in {
           animation: slide-in-left 0.5s ease-out;
-        }
-
-        /* Effet de brillance sur les cards */
-        .card-3d::before {
-          content: '';
-          position: absolute;
-          top: 0;
-          left: -100%;
-          width: 100%;
-          height: 100%;
-          background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-          transition: left 0.5s;
-        }
-        
-        .card-3d:hover::before {
-          left: 100%;
         }
       `}</style>
     </div>
