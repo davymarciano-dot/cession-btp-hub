@@ -106,12 +106,12 @@ const App = () => {
   }, []);
 
   return (
-  <ErrorBoundary>
-    <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <Toaster />
-      <Sonner />
-      <BrowserRouter>
+  <BrowserRouter>
+    <ErrorBoundary>
+      <QueryClientProvider client={queryClient}>
+      <TooltipProvider>
+        <Toaster />
+        <Sonner />
         <Analytics />
         <CrispWidget />
         {/* <PWAInstallPrompt /> */}
