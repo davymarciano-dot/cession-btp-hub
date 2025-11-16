@@ -50,7 +50,7 @@ const EntrepriseCardWrapper = ({
       certification={getCertification()}
       status={listing.statut === "publiee" ? "disponible" : "vendu"}
       title={`Entreprise ${listing.secteur_activite}`}
-      location={`${listing.ville}, ${listing.departement}`}
+      location={`Département ${listing.departement}`}
       creation={getCreationYear()}
       ca={formatCurrency(listing.ca_n1)}
       effectif={`${listing.nombre_salaries} salarié${listing.nombre_salaries > 1 ? 's' : ''}`}
