@@ -332,114 +332,109 @@ const Home = () => {
         ))}
       </div>
 
-      {/* HERO SECTION - Bleu gradient */}
-      <section className="relative bg-gradient-to-br from-blue-600 via-blue-500 to-blue-700 text-white py-20 overflow-hidden">
-        <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGQ9Ik0zNiAxOGMzLjMxNCAwIDYgMi42ODYgNiA2cy0yLjY4NiA2LTYgNi02LTIuNjg2LTYtNiAyLjY4Ni02IDYtNnoiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLW9wYWNpdHk9Ii4xIiBzdHJva2Utd2lkdGg9IjIiLz48L2c+PC9zdmc+')] opacity-10"></div>
-
+      {/* HERO SECTION - Double CTA Vendeurs/Acheteurs */}
+      <section className="relative py-20 overflow-hidden bg-gradient-to-br from-slate-50 via-white to-blue-50">
         <div className="container mx-auto px-4 relative z-10">
-          <div className="max-w-4xl mx-auto text-center">
-            {/* Logo CessionBTP */}
-            <div className="mb-8 flex justify-center">
-              <img 
-                src="/images/logo-cessionbtp-pure.png" 
-                alt="CessionBTP" 
-                className="h-48 md:h-64 lg:h-80 w-auto opacity-90 block object-contain"
-              />
-            </div>
-
-            {/* Badge ventes */}
-            <div className="inline-block mb-6">
-              <div className="bg-blue-500/30 backdrop-blur-sm border border-blue-400/50 rounded-full px-6 py-2">
-                <p className="text-sm font-medium">🎉 127 ventes finalisées ce mois-ci</p>
+          <div className="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+            
+            {/* Section Vendeurs */}
+            <div className="group relative bg-gradient-to-br from-orange-500 to-orange-600 rounded-3xl p-8 md:p-12 text-white shadow-2xl hover:shadow-3xl transition-all duration-300 hover:scale-105 overflow-hidden">
+              <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGQ9Ik0zNiAxOGMzLjMxNCAwIDYgMi42ODYgNiA2cy0yLjY4NiA2LTYgNi02LTIuNjg2LTYtNiAyLjY4Ni02IDYtNnoiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLW9wYWNpdHk9Ii4xIiBzdHJva2Utd2lkdGg9IjIiLz48L2c+PC9zdmc+')] opacity-10"></div>
+              
+              <div className="relative z-10">
+                <div className="inline-flex items-center gap-2 bg-white/20 backdrop-blur-sm rounded-full px-4 py-2 mb-6">
+                  <TrendingUp className="w-4 h-4" />
+                  <span className="text-sm font-medium">Pour Vendeurs</span>
+                </div>
+                
+                <h2 className="text-4xl md:text-5xl font-bold mb-4 leading-tight">
+                  Vendeurs
+                </h2>
+                
+                <p className="text-xl text-white/90 mb-8">
+                  Vendez votre entreprise BTP en 45 jours
+                </p>
+                
+                <div className="space-y-3 mb-8">
+                  <div className="flex items-center gap-3">
+                    <CheckCircle2 className="w-5 h-5 flex-shrink-0" />
+                    <span className="text-sm">95% de taux de réussite</span>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <CheckCircle2 className="w-5 h-5 flex-shrink-0" />
+                    <span className="text-sm">Délai moyen : 45 jours</span>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <CheckCircle2 className="w-5 h-5 flex-shrink-0" />
+                    <span className="text-sm">Accompagnement gratuit</span>
+                  </div>
+                </div>
+                
+                <Button
+                  onClick={() => navigate("/vendre")}
+                  size="lg"
+                  className="w-full bg-white text-orange-600 hover:bg-orange-50 px-8 py-6 text-lg font-semibold rounded-xl shadow-xl hover:shadow-2xl transition-all group"
+                >
+                  Vendre mon entreprise
+                  <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                </Button>
               </div>
             </div>
 
-            {/* Titre principal */}
-            <h1 className="text-5xl md:text-6xl font-bold mb-6 leading-tight">
-              Vendez votre entreprise
-              <br />
-              BTP en <span className="text-orange-400">jours 45</span>
-            </h1>
-
-            <p className="text-xl text-blue-100 mb-8 max-w-3xl mx-auto">
-              La seule plateforme 100% spécialisée BTP qui connecte vendeurs et acheteurs qualifiés
-            </p>
-
-            {/* Trust badges avec avatars */}
-            <div className="flex items-center justify-center gap-3 mb-8">
-              <div className="flex -space-x-3">
-                <div className="w-10 h-10 rounded-full bg-blue-400 border-2 border-white flex items-center justify-center text-xs font-bold">
-                  UA
+            {/* Section Acheteurs */}
+            <div className="group relative bg-gradient-to-br from-blue-600 to-blue-700 rounded-3xl p-8 md:p-12 text-white shadow-2xl hover:shadow-3xl transition-all duration-300 hover:scale-105 overflow-hidden">
+              <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGQ9Ik0zNiAxOGMzLjMxNCAwIDYgMi42ODYgNiA2cy0yLjY4NiA2LTYgNi02LTIuNjg2LTYtNiAyLjY4Ni02IDYtNnoiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLW9wYWNpdHk9Ii4xIiBzdHJva2Utd2lkdGg9IjIiLz48L2c+PC9zdmc+')] opacity-10"></div>
+              
+              <div className="relative z-10">
+                <div className="inline-flex items-center gap-2 bg-white/20 backdrop-blur-sm rounded-full px-4 py-2 mb-6">
+                  <Building2 className="w-4 h-4" />
+                  <span className="text-sm font-medium">Pour Acheteurs</span>
                 </div>
-                <div className="w-10 h-10 rounded-full bg-blue-300 border-2 border-white flex items-center justify-center text-xs font-bold">
-                  B
+                
+                <h2 className="text-4xl md:text-5xl font-bold mb-4 leading-tight">
+                  Acheteurs
+                </h2>
+                
+                <p className="text-xl text-white/90 mb-8">
+                  840 entreprises BTP disponibles
+                </p>
+                
+                <div className="space-y-3 mb-8">
+                  <div className="flex items-center gap-3">
+                    <CheckCircle2 className="w-5 h-5 flex-shrink-0" />
+                    <span className="text-sm">Filtres avancés par secteur</span>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <CheckCircle2 className="w-5 h-5 flex-shrink-0" />
+                    <span className="text-sm">Financement jusqu'à 90%</span>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <CheckCircle2 className="w-5 h-5 flex-shrink-0" />
+                    <span className="text-sm">Contact direct vendeurs</span>
+                  </div>
                 </div>
-                <div className="w-10 h-10 rounded-full bg-blue-200 border-2 border-white flex items-center justify-center text-xs font-bold">
-                  C
-                </div>
-                <div className="w-10 h-10 rounded-full bg-blue-100 border-2 border-white flex items-center justify-center text-xs font-bold">
-                  D
-                </div>
-                <div className="w-10 h-10 rounded-full bg-orange-400 border-2 border-white flex items-center justify-center text-xs font-bold">
-                  E
-                </div>
+                
+                <Button
+                  onClick={() => navigate("/entreprises")}
+                  size="lg"
+                  className="w-full bg-white text-blue-600 hover:bg-blue-50 px-8 py-6 text-lg font-semibold rounded-xl shadow-xl hover:shadow-2xl transition-all group"
+                >
+                  Voir les entreprises
+                  <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                </Button>
               </div>
-              <p className="text-sm font-medium">
-                <span className="font-bold">2 347 entrepreneurs</span> nous font confiance
-              </p>
-            </div>
-
-            {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
-              <Button
-                onClick={() => navigate("/vendre")}
-                size="lg"
-                className="bg-orange-500 hover:bg-orange-600 text-white px-8 py-6 text-lg font-semibold rounded-xl shadow-xl hover:shadow-2xl transition-all transform hover:scale-105"
-              >
-                Je vends maintenant →
-                <div className="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded-full">
-                  -50% frais
-                </div>
-              </Button>
-
-              <Button
-                onClick={() => navigate("/acheter")}
-                size="lg"
-                variant="outline"
-                className="bg-white text-blue-600 border-2 border-white hover:bg-blue-50 px-8 py-6 text-lg font-semibold rounded-xl shadow-xl"
-              >
-                Je cherche à reprendre
-              </Button>
-            </div>
-
-            {/* Alerte offre limitée */}
-            <div className="inline-flex items-center gap-2 bg-red-500/90 backdrop-blur-sm text-white px-6 py-3 rounded-full">
-              <Clock className="w-5 h-5" />
-              <p className="text-sm font-medium">
-                Offre limitée : Honoraires de réussite <strong>2% au lieu de 5%</strong> (encore 48h)
-              </p>
-            </div>
-
-            {/* Stats */}
-            <div className="grid grid-cols-3 gap-8 mt-16 max-w-3xl mx-auto">
-              {stats.map((stat, index) => (
-                <div key={index} className="text-center">
-                  <div className="text-4xl md:text-5xl font-bold mb-2">{stat.value}</div>
-                  <div className="text-sm text-blue-200">{stat.label}</div>
-                </div>
-              ))}
             </div>
           </div>
-        </div>
 
-        {/* Wave separator */}
-        <div className="absolute bottom-0 left-0 right-0">
-          <svg viewBox="0 0 1440 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path
-              d="M0 120L60 105C120 90 240 60 360 45C480 30 600 30 720 37.5C840 45 960 60 1080 67.5C1200 75 1320 75 1380 75L1440 75V120H1380C1320 120 1200 120 1080 120C960 120 840 120 720 120C600 120 480 120 360 120C240 120 120 120 60 120H0Z"
-              fill="white"
-            />
-          </svg>
+          {/* Stats en bas */}
+          <div className="grid grid-cols-3 gap-8 mt-16 max-w-3xl mx-auto text-center">
+            {stats.map((stat, index) => (
+              <div key={index}>
+                <div className="text-4xl md:text-5xl font-bold text-primary mb-2">{stat.value}</div>
+                <div className="text-sm text-muted-foreground">{stat.label}</div>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
