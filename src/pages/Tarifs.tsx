@@ -1,13 +1,9 @@
-import { useState } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import PricingCard from "@/components/PricingCard";
 import ComparisonTable from "@/components/ComparisonTable";
 
 const Tarifs = () => {
-  const [hoveredBuyerCard, setHoveredBuyerCard] = useState<string | null>(null);
-  const [hoveredSellerCard, setHoveredSellerCard] = useState<string | null>(null);
-
   return (
     <div className="min-h-screen">
       <Header />
@@ -54,9 +50,6 @@ const Tarifs = () => {
                 ]}
                 buttonText="S'inscrire gratuitement"
                 userType="acheteur"
-                isHovered={hoveredBuyerCard === "Gratuit"}
-                onHover={(hovered) => setHoveredBuyerCard(hovered ? "Gratuit" : null)}
-                anyCardHovered={hoveredBuyerCard !== null}
               />
               
               <PricingCard
@@ -74,9 +67,6 @@ const Tarifs = () => {
                 ]}
                 buttonText="Acheter un dossier"
                 userType="acheteur"
-                isHovered={hoveredBuyerCard === "Dossier"}
-                onHover={(hovered) => setHoveredBuyerCard(hovered ? "Dossier" : null)}
-                anyCardHovered={hoveredBuyerCard !== null}
                 isPopular
               />
               
@@ -96,9 +86,6 @@ const Tarifs = () => {
                 buttonText="Choisir Pro"
                 variant="primary"
                 userType="acheteur"
-                isHovered={hoveredBuyerCard === "Pro"}
-                onHover={(hovered) => setHoveredBuyerCard(hovered ? "Pro" : null)}
-                anyCardHovered={hoveredBuyerCard !== null}
                 badgeText="🔥 MEILLEUR RAPPORT"
                 badgeColor="bg-gradient-to-r from-orange-500 to-red-500"
                 badgeAnimate
@@ -118,9 +105,6 @@ const Tarifs = () => {
                 ]}
                 buttonText="Choisir Entreprise"
                 userType="acheteur"
-                isHovered={hoveredBuyerCard === "Entreprise"}
-                onHover={(hovered) => setHoveredBuyerCard(hovered ? "Entreprise" : null)}
-                anyCardHovered={hoveredBuyerCard !== null}
                 badgeText="👑 PREMIUM"
                 badgeColor="bg-gradient-to-r from-purple-600 to-amber-500"
               />
@@ -161,9 +145,6 @@ const Tarifs = () => {
                 ]}
                 buttonText="Publier gratuitement"
                 userType="vendeur"
-                isHovered={hoveredSellerCard === "Découverte"}
-                onHover={(hovered) => setHoveredSellerCard(hovered ? "Découverte" : null)}
-                anyCardHovered={hoveredSellerCard !== null}
               />
               
               <PricingCard
@@ -181,9 +162,6 @@ const Tarifs = () => {
                 buttonText="Choisir Essentiel"
                 variant="primary"
                 userType="vendeur"
-                isHovered={hoveredSellerCard === "Essentiel"}
-                onHover={(hovered) => setHoveredSellerCard(hovered ? "Essentiel" : null)}
-                anyCardHovered={hoveredSellerCard !== null}
                 isPopular
               />
               
@@ -201,9 +179,6 @@ const Tarifs = () => {
                 ]}
                 buttonText="Choisir Premium"
                 userType="vendeur"
-                isHovered={hoveredSellerCard === "Prime"}
-                onHover={(hovered) => setHoveredSellerCard(hovered ? "Prime" : null)}
-                anyCardHovered={hoveredSellerCard !== null}
                 badgeText="⭐ MEILLEUR CHOIX"
                 badgeColor="bg-gradient-to-r from-orange-500 to-orange-600"
                 badgeAnimate
@@ -223,9 +198,6 @@ const Tarifs = () => {
                 ]}
                 buttonText="Choisir Exclusif"
                 userType="vendeur"
-                isHovered={hoveredSellerCard === "Exclusif"}
-                onHover={(hovered) => setHoveredSellerCard(hovered ? "Exclusif" : null)}
-                anyCardHovered={hoveredSellerCard !== null}
                 badgeText="👑 PREMIUM"
                 badgeColor="bg-gradient-to-r from-purple-600 to-amber-500"
               />
