@@ -290,8 +290,8 @@ const Tarifs = () => {
 
               <h3 className="text-2xl font-bold text-orange-500 mb-2">Prime</h3>
               <div className="mb-6">
-                <span className="text-5xl font-black text-orange-500">490€</span>
-                <span className="text-slate-500"> /3 mois</span>
+                <span className="text-4xl font-black text-orange-500">490€</span>
+                <span className="text-slate-500 text-xl"> /3 mois</span>
               </div>
               <p className="text-sm text-slate-500 mb-6">
                 Mise en avant + stats - Cible : 2 000€ - CA : 3,9M
