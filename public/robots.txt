@@ -1,32 +1,77 @@
+# Robots.txt optimisé pour CessionBTP
+# Mis à jour: 2025-01-17
+
+# Google
 User-agent: Googlebot
 Allow: /
 Crawl-delay: 0
+Allow: /*.js
+Allow: /*.css
+Allow: /*.png
+Allow: /*.jpg
+Allow: /*.jpeg
+Allow: /*.gif
+Allow: /*.svg
+Allow: /*.webp
 
+# Bing
 User-agent: Bingbot
 Allow: /
 Crawl-delay: 0
 
-User-agent: Twitterbot
-Allow: /
-
-User-agent: facebookexternalhit
-Allow: /
-
-User-agent: *
+# Autres bots majeurs
+User-agent: Slurp
+User-agent: DuckDuckBot
+User-agent: Baiduspider
+User-agent: YandexBot
 Allow: /
 Crawl-delay: 1
 
-# Sitemaps
-Sitemap: https://cessionbtp.fr/sitemap.xml
-Sitemap: https://xfxfblhxdlzivowodpeg.supabase.co/functions/v1/generate-sitemap
+# Social Media Crawlers (important pour partages)
+User-agent: Twitterbot
+User-agent: facebookexternalhit
+User-agent: LinkedInBot
+User-agent: WhatsApp
+Allow: /
 
-# Disallow admin pages
+# Autres bots
+User-agent: *
+Allow: /
+Crawl-delay: 2
+
+# Interdictions - Pages privées
 Disallow: /admin/
 Disallow: /dashboard/
 Disallow: /auth/
+Disallow: /connexion
+Disallow: /messages
 Disallow: /api/
+Disallow: /_next/
+Disallow: /node_modules/
 
-# Disallow test pages
+# Interdictions - Pages test/dev
 Disallow: /chat-demo
 Disallow: /performance-demo
 Disallow: /test-*
+Disallow: /demo-*
+Disallow: /*?session_id=*
+Disallow: /*?auth=*
+
+# Interdictions - Paramètres URL inutiles
+Disallow: /*?sort=*
+Disallow: /*?filter=*
+Disallow: /*?page=*
+Disallow: /*?utm_*
+
+# Permettre l'accès aux ressources importantes
+Allow: /images/
+Allow: /assets/
+Allow: /public/
+
+# Sitemaps (ULTRA IMPORTANT)
+Sitemap: https://cessionbtp.fr/sitemap.xml
+Sitemap: https://cessionbtp.fr/sitemap-static.xml
+Sitemap: https://xfxfblhxdlzivowodpeg.supabase.co/functions/v1/generate-sitemap
+
+# Host (facultatif mais recommandé)
+Host: https://cessionbtp.fr
