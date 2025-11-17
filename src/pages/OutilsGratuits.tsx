@@ -2,11 +2,14 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import SEOHead from '@/components/SEOHead';
 import { ValuationCalculator } from '@/components/tools/ValuationCalculator';
 import { FinancingSimulator } from '@/components/tools/FinancingSimulator';
-import { Calculator, PiggyBank, FileText, Download } from 'lucide-react';
+import { Calculator, PiggyBank, FileText, Download, ArrowLeft } from 'lucide-react';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
+import { Link } from 'react-router-dom';
+import Footer from '@/components/Footer';
+import Header from '@/components/Header';
 
-export const OutilsGratuits = () => {
+export default function OutilsGratuits() {
   const documents = [
     {
       nom: 'Checklist Cession BTP',
@@ -36,15 +39,29 @@ export const OutilsGratuits = () => {
   
   return (
     <>
+      <Header />
       <SEOHead page="about" />
       
       <div className="min-h-screen bg-background">
         <div className="bg-gradient-to-r from-primary to-blue-600 text-white py-16">
-          <div className="container mx-auto px-4 text-center">
-            <h1 className="text-4xl font-bold mb-4">Outils Gratuits Cession BTP</h1>
-            <p className="text-xl opacity-90 max-w-2xl mx-auto">
-              Calculateurs, simulateurs et modèles professionnels pour réussir votre cession
-            </p>
+          <div className="container mx-auto px-4">
+            <div className="max-w-4xl mx-auto">
+              <Link to="/">
+                <Button 
+                  variant="ghost" 
+                  className="mb-6 text-primary-foreground hover:text-primary-foreground hover:bg-primary-foreground/10"
+                >
+                  <ArrowLeft className="mr-2 h-4 w-4" />
+                  Retour à l'accueil
+                </Button>
+              </Link>
+              <div className="text-center">
+                <h1 className="text-4xl font-bold mb-4">Outils gratuits cession BTP</h1>
+                <p className="text-xl opacity-90 max-w-2xl mx-auto">
+                  Calculateurs, simulateurs et modèles professionnels pour réussir votre cession
+                </p>
+              </div>
+            </div>
           </div>
         </div>
         
@@ -156,6 +173,7 @@ export const OutilsGratuits = () => {
           </div>
         </div>
       </div>
+      <Footer />
     </>
   );
-};
+}

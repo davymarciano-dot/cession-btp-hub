@@ -52,7 +52,7 @@ const SellerKeywordPage = lazy(() => import("./pages/seo/SellerKeywordPage"));
 const BuyerKeywordPage = lazy(() => import("./pages/seo/BuyerKeywordPage"));
 const RenewableEnergyPage = lazy(() => import("./pages/seo/RenewableEnergyPage").then(module => ({ default: module.RenewableEnergyPage })));
 const BacklinksManager = lazy(() => import("./pages/BacklinksManager").then(module => ({ default: module.BacklinksManager })));
-const OutilsGratuits = lazy(() => import("./pages/OutilsGratuits").then(module => ({ default: module.OutilsGratuits })));
+const OutilsGratuits = lazy(() => import("./pages/OutilsGratuits"));
 const AutomationDashboard = lazy(() => import("./pages/AutomationDashboard").then(module => ({ default: module.AutomationDashboard })));
 const Marketplace = lazy(() => import("./pages/Marketplace"));
 const AffiliateDashboard = lazy(() => import("./pages/AffiliateDashboard"));
@@ -72,6 +72,9 @@ const Contact = lazy(() => import("./pages/Contact"));
 const MentionsLegales = lazy(() => import("./pages/MentionsLegales"));
 const CGV = lazy(() => import("./pages/CGV"));
 const NotreEquipe = lazy(() => import("./pages/NotreEquipe"));
+const SuccessStories = lazy(() => import("./pages/SuccessStories"));
+const MatchingIA = lazy(() => import("./pages/MatchingIA"));
+const LexiqueBTP = lazy(() => import("./pages/LexiqueBTP"));
 
 // Pages métiers spécifiques énergies renouvelables
 const PanneauxSolaires = lazy(() => import("./pages/secteur/PanneauxSolaires"));
@@ -148,7 +151,11 @@ const App = () => {
           <Route path="/faq" element={<FAQ />} />
           <Route path="/comment-ca-marche" element={<CommentCaMarche />} />
           <Route path="/contact" element={<Contact />} />
-          <Route path="/equipe" element={<NotreEquipe />} />
+            <Route path="/equipe" element={<NotreEquipe />} />
+            <Route path="/success-stories" element={<SuccessStories />} />
+            <Route path="/matching-ia" element={<MatchingIA />} />
+            <Route path="/outils-gratuits" element={<OutilsGratuits />} />
+            <Route path="/lexique-btp" element={<LexiqueBTP />} />
           <Route path="/mentions-legales" element={<MentionsLegales />} />
           <Route path="/cgv" element={<CGV />} />
           <Route path="/sitemap" element={<Sitemap />} />
