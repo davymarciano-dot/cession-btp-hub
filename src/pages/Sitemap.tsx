@@ -3,9 +3,7 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
-import { certifications, metiers, regions } from '@/data/seo-data';
-import { sellerKeywords } from '@/data/seo-seller-keywords';
-import { buyerKeywords } from '@/data/seo-buyer-keywords';
+import { generateAllSeoPages } from '@/utils/seoPageGenerator';
 
 const Sitemap = () => {
   const [sitemapXml, setSitemapXml] = useState<string>('');
@@ -13,15 +11,21 @@ const Sitemap = () => {
   const generateSitemap = () => {
     const baseUrl = 'https://cessionbtp.fr';
     const today = new Date().toISOString().split('T')[0];
+    const pages = generateAllSeoPages();
     
     let xml = `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <!-- Main pages -->
   <url>
     <loc>${baseUrl}/</loc>
     <lastmod>${today}</lastmod>
     <priority>1.0</priority>
     <changefreq>daily</changefreq>
+    <image:image>
+      <image:loc>${baseUrl}/images/logo-cessionbtp-hd.png</image:loc>
+      <image:title>CessionBTP - Plateforme de cession d'entreprises BTP</image:title>
+    </image:image>
   </url>
   <url>
     <loc>${baseUrl}/vendre</loc>
@@ -30,7 +34,7 @@ const Sitemap = () => {
     <changefreq>weekly</changefreq>
   </url>
   <url>
-    <loc>${baseUrl}/acheter</loc>
+    <loc>${baseUrl}/entreprises</loc>
     <lastmod>${today}</lastmod>
     <priority>0.9</priority>
     <changefreq>daily</changefreq>
@@ -47,78 +51,16 @@ const Sitemap = () => {
     <priority>0.8</priority>
     <changefreq>weekly</changefreq>
   </url>
-  <url>
-    <loc>${baseUrl}/faq</loc>
-    <lastmod>${today}</lastmod>
-    <priority>0.7</priority>
-    <changefreq>weekly</changefreq>
-  </url>
   
-  <!-- Certification pages -->
+  <!-- SEO Pages dynamiques (${pages.length} pages) -->
 `;
 
-    certifications.forEach(cert => {
+    pages.forEach(page => {
       xml += `  <url>
-    <loc>${baseUrl}/entreprise-${cert.slug}-a-vendre</loc>
+    <loc>${baseUrl}${page.path}</loc>
     <lastmod>${today}</lastmod>
-    <priority>0.8</priority>
-    <changefreq>daily</changefreq>
-  </url>
-`;
-    });
-
-    xml += `  
-  <!-- Metier pages -->
-`;
-
-    metiers.forEach(metier => {
-      xml += `  <url>
-    <loc>${baseUrl}/${metier.slug}-entreprise-a-vendre</loc>
-    <lastmod>${today}</lastmod>
-    <priority>0.8</priority>
-    <changefreq>daily</changefreq>
-  </url>
-`;
-    });
-
-    xml += `  
-  <!-- Region pages -->
-`;
-
-    regions.forEach(region => {
-      xml += `  <url>
-    <loc>${baseUrl}/entreprise-btp-a-vendre-${region.slug}</loc>
-    <lastmod>${today}</lastmod>
-    <priority>0.8</priority>
-    <changefreq>daily</changefreq>
-  </url>
-`;
-    });
-
-    xml += `  
-  <!-- Seller keyword pages -->
-`;
-
-    sellerKeywords.forEach(keyword => {
-      xml += `  <url>
-    <loc>${baseUrl}/${keyword.slug}</loc>
-    <lastmod>${today}</lastmod>
-    <priority>0.9</priority>
-    <changefreq>daily</changefreq>
-  </url>
-`;
-    });
-
-    xml += `  
-  <!-- Buyer keyword pages -->
-`;
-
-    buyerKeywords.forEach(keyword => {
-      xml += `  <url>
-    <loc>${baseUrl}/${keyword.slug}</loc>
-    <lastmod>${today}</lastmod>
-    <priority>0.9</priority>
-    <changefreq>daily</changefreq>
+    <priority>${page.priority}</priority>
+    <changefreq>${page.changefreq}</changefreq>
   </url>
 `;
     });
@@ -135,23 +77,25 @@ const Sitemap = () => {
     const url = window.URL.createObjectURL(blob);
     const link = document.createElement('a');
     link.href = url;
-    link.download = 'sitemap.xml';
+    link.download = 'sitemap-complete.xml';
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
     window.URL.revokeObjectURL(url);
   };
 
+  const pages = generateAllSeoPages();
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800">
+    <div className="min-h-screen bg-gradient-to-br from-background to-muted">
       <Header />
       
       <main className="container mx-auto px-4 py-12">
         <Card className="p-8">
           <div className="text-center mb-8">
-            <h1 className="text-4xl font-bold mb-4">Générateur de Sitemap XML</h1>
-            <p className="text-muted-foreground">
-              Générez un sitemap XML pour améliorer le référencement SEO
+            <h1 className="text-4xl font-bold mb-4">Générateur de sitemap XML ultra-optimisé</h1>
+            <p className="text-muted-foreground text-lg">
+              {pages.length} pages SEO générées automatiquement pour domination Google
             </p>
           </div>
 
@@ -159,8 +103,9 @@ const Sitemap = () => {
             <Button 
               onClick={generateSitemap}
               size="lg"
+              className="bg-primary hover:bg-primary/90"
             >
-              Générer le Sitemap
+              Générer le sitemap complet
             </Button>
             
             {sitemapXml && (
@@ -169,15 +114,15 @@ const Sitemap = () => {
                 variant="outline"
                 size="lg"
               >
-                Télécharger le Sitemap
+                Télécharger sitemap.xml
               </Button>
             )}
           </div>
 
           {sitemapXml && (
             <div className="mt-8">
-              <h2 className="text-2xl font-semibold mb-4">Sitemap Généré</h2>
-              <pre className="p-5 bg-gray-50 dark:bg-gray-900 overflow-auto max-h-[600px] rounded-lg border">
+              <h2 className="text-2xl font-semibold mb-4">Sitemap généré ({pages.length} pages)</h2>
+              <pre className="p-5 bg-muted overflow-auto max-h-[600px] rounded-lg border text-sm">
                 {sitemapXml}
               </pre>
             </div>
