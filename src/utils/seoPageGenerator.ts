@@ -8,7 +8,7 @@ export interface SeoPage {
   title: string;
   priority: number;
   changefreq: string;
-  type: 'metier' | 'metier-ville' | 'certification' | 'region' | 'keyword' | 'renewable-energy';
+  type: 'metier' | 'metier-ville' | 'metier-region' | 'certification' | 'region' | 'keyword' | 'renewable-energy';
 }
 
 export const generateAllSeoPages = (): SeoPage[] => {
@@ -37,15 +37,28 @@ export const generateAllSeoPages = (): SeoPage[] => {
   });
   
   // 2. Pages métier + ville (ex: /entreprise-plomberie-paris-a-vendre)
-  // EXPLOSION SEO : 50 métiers × 50 villes = 2500 pages !
-  metiersComplete.slice(0, 50).forEach(metier => {
-    villesFrance.slice(0, 50).forEach(ville => {
+  // MEGA EXPLOSION SEO : 100 métiers × 100 villes = 10 000 pages !
+  metiersComplete.forEach(metier => {
+    villesFrance.forEach(ville => {
       pages.push({
         path: `/entreprise-${metier.slug}-${ville}-a-vendre`,
         title: `Entreprise ${metier.name} à vendre ${ville}`,
         priority: 0.8,
         changefreq: 'weekly',
         type: 'metier-ville'
+      });
+    });
+  });
+  
+  // 2b. Pages métier + région (100 métiers × 13 régions = 1300 pages)
+  metiersComplete.forEach(metier => {
+    regions.forEach(region => {
+      pages.push({
+        path: `/entreprise-${metier.slug}-${region.slug}`,
+        title: `Entreprise ${metier.name} ${region.name}`,
+        priority: 0.85,
+        changefreq: 'weekly',
+        type: 'metier-region'
       });
     });
   });
@@ -94,6 +107,7 @@ export const getTotalSeoPages = () => {
       renewableEnergy: pages.filter(p => p.type === 'renewable-energy').length,
       metier: pages.filter(p => p.type === 'metier').length,
       metierVille: pages.filter(p => p.type === 'metier-ville').length,
+      metierRegion: pages.filter(p => p.type === 'metier-region').length,
       certification: pages.filter(p => p.type === 'certification').length,
       region: pages.filter(p => p.type === 'region').length,
       keyword: pages.filter(p => p.type === 'keyword').length
