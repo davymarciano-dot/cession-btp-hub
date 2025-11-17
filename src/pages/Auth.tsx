@@ -10,7 +10,7 @@ import { useToast } from "@/hooks/use-toast";
 import { User, Session } from "@supabase/supabase-js";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import { Loader2, LogIn, UserPlus } from "lucide-react";
+import { Loader2, LogIn, UserPlus, Shield, Mail, Lock } from "lucide-react";
 import { z } from "zod";
 import { analyticsEvents } from "@/lib/analytics";
 import RegistrationForm from "@/components/RegistrationForm";
@@ -113,102 +113,146 @@ const Auth = () => {
 
 
   return (
-    <div className="min-h-screen bg-slate-50">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-slate-50">
       <Header />
 
-      <section className="bg-gradient-to-br from-secondary to-orange-600 text-white py-16">
-        <div className="container mx-auto px-4">
+      <section className="relative bg-gradient-to-br from-primary via-primary/95 to-secondary text-white py-20 overflow-hidden">
+        <div className="absolute inset-0 bg-grid-white/[0.05] bg-[size:30px_30px]" />
+        <div className="container mx-auto px-4 relative">
           <div className="max-w-4xl mx-auto text-center">
+            <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full mb-6">
+              <Shield className="w-4 h-4" />
+              <span className="text-sm font-medium">Plateforme 100% sécurisée</span>
+            </div>
             <h1 className="text-4xl md:text-5xl font-bold mb-4">
-              Connexion / Inscription
+              Rejoignez CessionBTP
             </h1>
-            <p className="text-xl text-white/90">
-              Accédez à votre espace vendeur
+            <p className="text-xl text-white/90 max-w-2xl mx-auto">
+              Créez votre compte en 2 minutes et accédez à toutes les opportunités BTP
             </p>
           </div>
         </div>
       </section>
 
-      <section className="py-12">
-        <div className="container mx-auto px-4">
-          <div className="max-w-md mx-auto">
-            <Tabs defaultValue="login" className="w-full">
-              <TabsList className="grid w-full grid-cols-2">
-                <TabsTrigger value="login">Connexion</TabsTrigger>
-                <TabsTrigger value="signup">Inscription</TabsTrigger>
-              </TabsList>
+      <div className="container mx-auto px-4 py-12 md:py-16">
+        <Tabs defaultValue={tabParam || "login"} className="max-w-5xl mx-auto">
+          <TabsList className="grid w-full max-w-md mx-auto grid-cols-2 mb-8 h-12 bg-muted/50">
+            <TabsTrigger value="login" className="flex items-center gap-2 data-[state=active]:bg-background data-[state=active]:shadow-sm">
+              <LogIn className="w-4 h-4" />
+              Connexion
+            </TabsTrigger>
+            <TabsTrigger value="signup" className="flex items-center gap-2 data-[state=active]:bg-background data-[state=active]:shadow-sm">
+              <UserPlus className="w-4 h-4" />
+              Inscription
+            </TabsTrigger>
+          </TabsList>
 
-              <TabsContent value="login">
-                <Card>
-                  <CardHeader>
-                    <CardTitle className="flex items-center gap-2">
-                      <LogIn className="w-5 h-5" />
-                      Connexion
-                    </CardTitle>
-                    <CardDescription>
-                      Connectez-vous à votre compte CessionBTP
+          <TabsContent value="login" className="mt-0">
+            <Card className="border-2 shadow-xl">
+              <CardHeader className="space-y-3 pb-6">
+                <div className="flex items-center gap-3">
+                  <div className="p-2 bg-primary/10 rounded-lg">
+                    <LogIn className="w-6 h-6 text-primary" />
+                  </div>
+                  <div>
+                    <CardTitle className="text-2xl">Connexion</CardTitle>
+                    <CardDescription className="text-base">
+                      Accédez à votre espace personnel
                     </CardDescription>
-                  </CardHeader>
-                  <form onSubmit={handleLogin}>
-                    <CardContent className="space-y-4">
-                      <div className="space-y-2">
-                        <Label htmlFor="login-email">Email</Label>
-                        <Input
-                          id="login-email"
-                          type="email"
-                          placeholder="votre@email.com"
-                          value={loginEmail}
-                          onChange={(e) => setLoginEmail(e.target.value)}
-                          required
-                          disabled={isLoading}
-                        />
-                      </div>
-                      <div className="space-y-2">
-                        <Label htmlFor="login-password">Mot de passe</Label>
-                        <Input
-                          id="login-password"
-                          type="password"
-                          placeholder="••••••••"
-                          value={loginPassword}
-                          onChange={(e) => setLoginPassword(e.target.value)}
-                          required
-                          disabled={isLoading}
-                        />
-                      </div>
-                    </CardContent>
-                    <CardFooter>
-                      <Button type="submit" className="w-full" disabled={isLoading}>
-                        {isLoading ? (
-                          <>
-                            <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                            Connexion...
-                          </>
-                        ) : (
-                          <>
-                            <LogIn className="w-4 h-4 mr-2" />
-                            Se connecter
-                          </>
-                        )}
-                      </Button>
-                    </CardFooter>
-                  </form>
-                </Card>
-              </TabsContent>
+                  </div>
+                </div>
+              </CardHeader>
+              <CardContent className="space-y-6">
+                <form onSubmit={handleLogin} className="space-y-5">
+                  <div className="space-y-2">
+                    <Label htmlFor="login-email" className="text-sm font-medium flex items-center gap-2">
+                      <Mail className="w-4 h-4 text-primary" />
+                      Email
+                    </Label>
+                    <Input
+                      id="login-email"
+                      type="email"
+                      placeholder="votre@email.com"
+                      value={loginEmail}
+                      onChange={(e) => setLoginEmail(e.target.value)}
+                      className="h-11 bg-background border-2 focus:border-primary transition-all"
+                      required
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="login-password" className="text-sm font-medium flex items-center gap-2">
+                      <Lock className="w-4 h-4 text-primary" />
+                      Mot de passe
+                    </Label>
+                    <Input
+                      id="login-password"
+                      type="password"
+                      placeholder="••••••••"
+                      value={loginPassword}
+                      onChange={(e) => setLoginPassword(e.target.value)}
+                      className="h-11 bg-background border-2 focus:border-primary transition-all"
+                      required
+                    />
+                  </div>
+                  <Button 
+                    type="submit" 
+                    size="lg"
+                    className="w-full h-12 text-base font-semibold bg-gradient-to-r from-primary to-primary/90 hover:from-primary/90 hover:to-primary shadow-lg hover:shadow-xl transition-all"
+                    disabled={isLoading}
+                  >
+                    {isLoading ? (
+                      <>
+                        <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+                        Connexion en cours...
+                      </>
+                    ) : (
+                      <>
+                        <LogIn className="mr-2 h-5 w-5" />
+                        Se connecter
+                      </>
+                    )}
+                  </Button>
+                </form>
+              </CardContent>
+              <CardFooter className="flex flex-col gap-4 border-t pt-6">
+                <div className="text-sm text-center text-muted-foreground">
+                  Pas encore de compte ?{" "}
+                  <button
+                    onClick={() => {
+                      const signupTab = document.querySelector('[value="signup"]') as HTMLButtonElement;
+                      signupTab?.click();
+                    }}
+                    className="text-primary hover:underline font-semibold underline-offset-2"
+                  >
+                    Créer un compte gratuitement
+                  </button>
+                </div>
+              </CardFooter>
+            </Card>
+          </TabsContent>
 
-              <TabsContent value="signup">
-                <Card>
-                  <CardHeader className="text-center">
-                    <CardTitle className="text-2xl">Créez votre compte !</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <RegistrationForm />
-                  </CardContent>
-                </Card>
-              </TabsContent>
-            </Tabs>
-          </div>
-        </div>
-      </section>
+          <TabsContent value="signup" className="mt-0">
+            <Card className="border-2 shadow-xl">
+              <CardHeader className="space-y-3 pb-6">
+                <div className="flex items-center gap-3">
+                  <div className="p-2 bg-primary/10 rounded-lg">
+                    <UserPlus className="w-6 h-6 text-primary" />
+                  </div>
+                  <div>
+                    <CardTitle className="text-2xl">Créez votre compte</CardTitle>
+                    <CardDescription className="text-base">
+                      Rejoignez la communauté CessionBTP en quelques clics
+                    </CardDescription>
+                  </div>
+                </div>
+              </CardHeader>
+              <CardContent className="pt-2">
+                <RegistrationForm />
+              </CardContent>
+            </Card>
+          </TabsContent>
+        </Tabs>
+      </div>
 
       <Footer />
     </div>

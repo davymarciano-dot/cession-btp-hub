@@ -7,8 +7,9 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { supabase } from "@/integrations/supabase/client";
 import { useNavigate } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
-import { Loader2 } from "lucide-react";
+import { Loader2, Mail, Lock, User, Phone, Building2, MapPin, Home, Shield, Check } from "lucide-react";
 import { z } from "zod";
+import { Card } from "@/components/ui/card";
 
 const registrationSchema = z.object({
   profil: z.string().min(1, "Le profil est requis"),
@@ -49,47 +50,19 @@ const countriesWithDialCode = [
 ];
 
 const countries = [
-  "Afghanistan", "Afrique du Sud", "Albanie", "Algérie", "Allemagne", "Andorre", 
-  "Angola", "Antigua-et-Barbuda", "Arabie saoudite", "Argentine", "Arménie", 
-  "Australie", "Autriche", "Azerbaïdjan", "Bahamas", "Bahreïn", "Bangladesh", 
-  "Barbade", "Belgique", "Belize", "Bénin", "Bhoutan", "Biélorussie", "Birmanie", 
-  "Bolivie", "Bosnie-Herzégovine", "Botswana", "Brésil", "Brunei", "Bulgarie", 
-  "Burkina Faso", "Burundi", "Cambodge", "Cameroun", "Canada", "Cap-Vert", 
-  "Centrafrique", "Chili", "Chine", "Chypre", "Colombie", "Comores", 
-  "Congo-Brazzaville", "Congo-Kinshasa", "Corée du Nord", "Corée du Sud", 
-  "Costa Rica", "Côte d'Ivoire", "Croatie", "Cuba", "Danemark", "Djibouti", 
-  "Dominique", "Égypte", "Émirats arabes unis", "Équateur", "Érythrée", 
-  "Espagne", "Estonie", "Eswatini", "États-Unis", "Éthiopie", "Fidji", 
-  "Finlande", "France", "Gabon", "Gambie", "Géorgie", "Ghana", "Grèce", 
-  "Grenade", "Guatemala", "Guinée", "Guinée équatoriale", "Guinée-Bissau", 
-  "Guyana", "Haïti", "Honduras", "Hongrie", "Inde", "Indonésie", "Irak", 
-  "Iran", "Irlande", "Islande", "Israël", "Italie", "Jamaïque", "Japon", 
-  "Jordanie", "Kazakhstan", "Kenya", "Kirghizistan", "Kiribati", "Koweït", 
-  "Laos", "Lesotho", "Lettonie", "Liban", "Liberia", "Libye", "Liechtenstein", 
-  "Lituanie", "Luxembourg", "Macédoine du Nord", "Madagascar", "Malaisie", 
-  "Malawi", "Maldives", "Mali", "Malte", "Maroc", "Marshall", "Maurice", 
-  "Mauritanie", "Mexique", "Micronésie", "Moldavie", "Monaco", "Mongolie", 
-  "Monténégro", "Mozambique", "Namibie", "Nauru", "Népal", "Nicaragua", 
-  "Niger", "Nigeria", "Norvège", "Nouvelle-Zélande", "Oman", "Ouganda", 
-  "Ouzbékistan", "Pakistan", "Palaos", "Palestine", "Panama", 
-  "Papouasie-Nouvelle-Guinée", "Paraguay", "Pays-Bas", "Pérou", "Philippines", 
-  "Pologne", "Portugal", "Qatar", "République dominicaine", "République tchèque", 
-  "Roumanie", "Royaume-Uni", "Russie", "Rwanda", "Saint-Christophe-et-Niévès", 
-  "Sainte-Lucie", "Saint-Marin", "Saint-Vincent-et-les-Grenadines", 
-  "Salomon", "Salvador", "Samoa", "Sao Tomé-et-Principe", "Sénégal", "Serbie", 
-  "Seychelles", "Sierra Leone", "Singapour", "Slovaquie", "Slovénie", "Somalie", 
-  "Soudan", "Soudan du Sud", "Sri Lanka", "Suède", "Suisse", "Suriname", 
-  "Syrie", "Tadjikistan", "Tanzanie", "Tchad", "Thaïlande", "Timor oriental", 
-  "Togo", "Tonga", "Trinité-et-Tobago", "Tunisie", "Turkménistan", "Turquie", 
-  "Tuvalu", "Ukraine", "Uruguay", "Vanuatu", "Vatican", "Venezuela", "Viêt Nam", 
-  "Yémen", "Zambie", "Zimbabwe"
+  "France", "Belgique", "Suisse", "Canada", "États-Unis", "Royaume-Uni",
+  "Allemagne", "Espagne", "Italie", "Portugal", "Luxembourg", "Monaco",
+  "Andorre", "Maroc", "Algérie", "Tunisie", "Sénégal", "Côte d'Ivoire",
+  "Australie", "Autriche", "Brésil", "Chine", "Danemark", "Finlande",
+  "Grèce", "Inde", "Irlande", "Israël", "Japon", "Mexique", "Pays-Bas",
+  "Nouvelle-Zélande", "Norvège", "Pologne", "Russie", "Singapour", "Suède", "Turquie"
 ];
 
-export default function RegistrationForm() {
+const RegistrationForm = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
   const [isLoading, setIsLoading] = useState(false);
-  const [formData, setFormData] = useState<Partial<RegistrationFormData>>({
+  const [formData, setFormData] = useState<RegistrationFormData>({
     profil: "",
     email: "",
     password: "",
@@ -104,50 +77,43 @@ export default function RegistrationForm() {
     acceptCgu: false,
   });
 
-  const handleInputChange = (field: keyof RegistrationFormData, value: string | boolean) => {
-    setFormData(prev => ({ ...prev, [field]: value }));
-  };
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
 
     try {
-      const validated = registrationSchema.parse(formData);
+      registrationSchema.parse(formData);
 
       const redirectUrl = `${window.location.origin}/`;
-      const selectedCountry = countriesWithDialCode.find(c => c.code === validated.phoneCountry);
-      const fullPhoneNumber = `${selectedCountry?.dial || "+33"} ${validated.telephone}`;
-
-      const { data: authData, error: signUpError } = await supabase.auth.signUp({
-        email: validated.email,
-        password: validated.password,
+      const { error } = await supabase.auth.signUp({
+        email: formData.email,
+        password: formData.password,
         options: {
           emailRedirectTo: redirectUrl,
           data: {
-            profil: validated.profil,
-            telephone: fullPhoneNumber,
-            nom: validated.nom,
-            prenom: validated.prenom,
-            societe: validated.societe || null,
-            pays: validated.pays,
-            ville: validated.ville,
-            adresse: validated.adresse,
-          }
-        }
+            profil: formData.profil,
+            nom: formData.nom,
+            prenom: formData.prenom,
+            telephone: `${countriesWithDialCode.find(c => c.code === formData.phoneCountry)?.dial} ${formData.telephone}`,
+            societe: formData.societe || null,
+            pays: formData.pays,
+            ville: formData.ville,
+            adresse: formData.adresse,
+          },
+        },
       });
 
-      if (signUpError) {
-        if (signUpError.message.includes("already registered")) {
+      if (error) {
+        if (error.message.includes("already registered")) {
           toast({
-            title: "Compte existant",
-            description: "Cet email est déjà utilisé. Veuillez vous connecter.",
+            title: "Email déjà utilisé",
+            description: "Un compte existe déjà avec cet email. Veuillez vous connecter.",
             variant: "destructive",
           });
         } else {
           toast({
-            title: "Erreur d'inscription",
-            description: signUpError.message,
+            title: "Erreur",
+            description: error.message,
             variant: "destructive",
           });
         }
@@ -155,14 +121,11 @@ export default function RegistrationForm() {
       }
 
       toast({
-        title: "✅ Compte créé !",
-        description: "Votre compte vient d'être créé, consultez votre boite mail pour l'activer.",
+        title: "✅ Inscription réussie !",
+        description: "Bienvenue sur CessionBTP.",
       });
 
-      setTimeout(() => {
-        navigate("/auth?tab=confirmation");
-      }, 1500);
-
+      navigate("/?tab=login");
     } catch (error: any) {
       if (error instanceof z.ZodError) {
         toast({
@@ -183,67 +146,83 @@ export default function RegistrationForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-6">
+    <form onSubmit={handleSubmit} className="space-y-5">
       {/* Profil */}
       <div className="space-y-2">
-        <Label htmlFor="profil">Profil *</Label>
-        <Select value={formData.profil} onValueChange={(value) => handleInputChange("profil", value)}>
-          <SelectTrigger>
+        <Label htmlFor="profil" className="text-sm font-medium flex items-center gap-2">
+          <User className="w-4 h-4 text-primary" />
+          Profil <span className="text-destructive">*</span>
+        </Label>
+        <Select
+          value={formData.profil}
+          onValueChange={(value) => setFormData(prev => ({ ...prev, profil: value }))}
+        >
+          <SelectTrigger className="h-11 bg-background border-2 hover:border-primary/50 transition-all">
             <SelectValue placeholder="Sélectionnez votre profil" />
           </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="porteur">
+          <SelectContent className="bg-background border-2">
+            <SelectItem value="porteur" className="cursor-pointer">
               <div className="py-1">
-                <div className="font-medium">Porteur de projet</div>
-                <div className="text-xs text-muted-foreground">(Acquéreur recherchant une entreprise à la vente)</div>
+                <div className="font-semibold text-foreground">Porteur de projet</div>
+                <div className="text-xs text-muted-foreground">Je souhaite acheter une entreprise</div>
               </div>
             </SelectItem>
-            <SelectItem value="cedant">
+            <SelectItem value="cedant" className="cursor-pointer">
               <div className="py-1">
-                <div className="font-medium">Cédant propriétaire</div>
-                <div className="text-xs text-muted-foreground">(Chef d'entreprise souhaitant céder son entreprise)</div>
+                <div className="font-semibold text-foreground">Cédant propriétaire</div>
+                <div className="text-xs text-muted-foreground">Je souhaite vendre mon entreprise</div>
               </div>
             </SelectItem>
-            <SelectItem value="franchise">
+            <SelectItem value="franchise" className="cursor-pointer">
               <div className="py-1">
-                <div className="font-medium">Enseigne de la franchise</div>
-                <div className="text-xs text-muted-foreground">(Souhaitant diffuser des annonces de cession d'entreprise)</div>
+                <div className="font-semibold text-foreground">Enseigne de la franchise</div>
+                <div className="text-xs text-muted-foreground">Je représente un réseau de franchise</div>
               </div>
             </SelectItem>
-            <SelectItem value="immobilier">
+            <SelectItem value="professionnel" className="cursor-pointer">
               <div className="py-1">
-                <div className="font-medium">Professionnel de l'immobilier</div>
-                <div className="text-xs text-muted-foreground">(Agence, cabinet d'affaire souhaitant diffuser des annonces)</div>
+                <div className="font-semibold text-foreground">Professionnel de l'immobilier</div>
+                <div className="text-xs text-muted-foreground">Agent, courtier ou consultant</div>
               </div>
             </SelectItem>
           </SelectContent>
         </Select>
       </div>
 
-      {/* Email et Téléphone */}
+      {/* Email et Téléphone - 2 colonnes */}
       <div className="grid md:grid-cols-2 gap-4">
         <div className="space-y-2">
-          <Label htmlFor="email">Email de contact *</Label>
+          <Label htmlFor="email" className="text-sm font-medium flex items-center gap-2">
+            <Mail className="w-4 h-4 text-primary" />
+            Email de contact <span className="text-destructive">*</span>
+          </Label>
           <Input
             id="email"
             type="email"
-            placeholder="Email de contact"
+            placeholder="votre@email.com"
             value={formData.email}
-            onChange={(e) => handleInputChange("email", e.target.value)}
+            onChange={(e) => setFormData(prev => ({ ...prev, email: e.target.value }))}
+            className="h-11 bg-background border-2 focus:border-primary transition-all"
             required
           />
         </div>
 
         <div className="space-y-2">
-          <Label htmlFor="telephone">Téléphone *</Label>
+          <Label htmlFor="telephone" className="text-sm font-medium flex items-center gap-2">
+            <Phone className="w-4 h-4 text-primary" />
+            Téléphone <span className="text-destructive">*</span>
+          </Label>
           <div className="flex gap-2">
-            <Select value={formData.phoneCountry} onValueChange={(value) => handleInputChange("phoneCountry", value)}>
-              <SelectTrigger className="w-[140px]">
+            <Select
+              value={formData.phoneCountry}
+              onValueChange={(value) => setFormData(prev => ({ ...prev, phoneCountry: value }))}
+            >
+              <SelectTrigger className="w-[120px] h-11 bg-background border-2">
                 <SelectValue />
               </SelectTrigger>
-              <SelectContent className="max-h-[300px]">
+              <SelectContent className="bg-background border-2">
                 {countriesWithDialCode.map((country) => (
-                  <SelectItem key={country.code} value={country.code}>
+                  <SelectItem key={country.code} value={country.code} className="cursor-pointer">
                     {country.flag} {country.dial}
                   </SelectItem>
                 ))}
@@ -252,11 +231,11 @@ export default function RegistrationForm() {
             <Input
               id="telephone"
               type="tel"
-              placeholder="Téléphone"
+              placeholder="06 12 34 56 78"
               value={formData.telephone}
-              onChange={(e) => handleInputChange("telephone", e.target.value)}
+              onChange={(e) => setFormData(prev => ({ ...prev, telephone: e.target.value }))}
+              className="flex-1 h-11 bg-background border-2 focus:border-primary transition-all"
               required
-              className="flex-1"
             />
           </div>
         </div>
@@ -264,67 +243,90 @@ export default function RegistrationForm() {
 
       {/* Mot de passe */}
       <div className="space-y-2">
-        <Label htmlFor="password">Mot de passe *</Label>
+        <Label htmlFor="password" className="text-sm font-medium flex items-center gap-2">
+          <Lock className="w-4 h-4 text-primary" />
+          Mot de passe <span className="text-destructive">*</span>
+        </Label>
         <Input
           id="password"
           type="password"
-          placeholder="Mot de passe (6 caractères minimum)"
+          placeholder="••••••••"
           value={formData.password}
-          onChange={(e) => handleInputChange("password", e.target.value)}
+          onChange={(e) => setFormData(prev => ({ ...prev, password: e.target.value }))}
+          className="h-11 bg-background border-2 focus:border-primary transition-all"
           required
         />
+        <p className="text-xs text-muted-foreground">Minimum 6 caractères</p>
       </div>
 
-      {/* Nom et Prénom */}
+      {/* Nom et Prénom - 2 colonnes */}
       <div className="grid md:grid-cols-2 gap-4">
         <div className="space-y-2">
-          <Label htmlFor="nom">Nom *</Label>
+          <Label htmlFor="nom" className="text-sm font-medium flex items-center gap-2">
+            <User className="w-4 h-4 text-primary" />
+            Nom <span className="text-destructive">*</span>
+          </Label>
           <Input
             id="nom"
             type="text"
-            placeholder="Nom"
+            placeholder="Dupont"
             value={formData.nom}
-            onChange={(e) => handleInputChange("nom", e.target.value)}
+            onChange={(e) => setFormData(prev => ({ ...prev, nom: e.target.value }))}
+            className="h-11 bg-background border-2 focus:border-primary transition-all"
             required
           />
         </div>
 
         <div className="space-y-2">
-          <Label htmlFor="prenom">Prénom *</Label>
+          <Label htmlFor="prenom" className="text-sm font-medium flex items-center gap-2">
+            <User className="w-4 h-4 text-primary" />
+            Prénom <span className="text-destructive">*</span>
+          </Label>
           <Input
             id="prenom"
             type="text"
-            placeholder="Prénom"
+            placeholder="Jean"
             value={formData.prenom}
-            onChange={(e) => handleInputChange("prenom", e.target.value)}
+            onChange={(e) => setFormData(prev => ({ ...prev, prenom: e.target.value }))}
+            className="h-11 bg-background border-2 focus:border-primary transition-all"
             required
           />
         </div>
       </div>
 
-      {/* Société */}
+      {/* Société - pleine largeur */}
       <div className="space-y-2">
-        <Label htmlFor="societe">Société</Label>
+        <Label htmlFor="societe" className="text-sm font-medium flex items-center gap-2">
+          <Building2 className="w-4 h-4 text-primary" />
+          Société <span className="text-muted-foreground text-xs">(optionnel)</span>
+        </Label>
         <Input
           id="societe"
           type="text"
-          placeholder="Société"
+          placeholder="Nom de votre société"
           value={formData.societe}
-          onChange={(e) => handleInputChange("societe", e.target.value)}
+          onChange={(e) => setFormData(prev => ({ ...prev, societe: e.target.value }))}
+          className="h-11 bg-background border-2 focus:border-primary transition-all"
         />
       </div>
 
-      {/* Pays et Ville */}
+      {/* Pays et Ville - 2 colonnes */}
       <div className="grid md:grid-cols-2 gap-4">
         <div className="space-y-2">
-          <Label htmlFor="pays">Pays *</Label>
-          <Select value={formData.pays} onValueChange={(value) => handleInputChange("pays", value)}>
-            <SelectTrigger>
-              <SelectValue />
+          <Label htmlFor="pays" className="text-sm font-medium flex items-center gap-2">
+            <MapPin className="w-4 h-4 text-primary" />
+            Pays <span className="text-destructive">*</span>
+          </Label>
+          <Select
+            value={formData.pays}
+            onValueChange={(value) => setFormData(prev => ({ ...prev, pays: value }))}
+          >
+            <SelectTrigger className="h-11 bg-background border-2 hover:border-primary/50 transition-all">
+              <SelectValue placeholder="France" />
             </SelectTrigger>
-            <SelectContent className="max-h-[300px]">
+            <SelectContent className="bg-background border-2 max-h-[300px]">
               {countries.map((country) => (
-                <SelectItem key={country} value={country}>
+                <SelectItem key={country} value={country} className="cursor-pointer">
                   {country}
                 </SelectItem>
               ))}
@@ -333,69 +335,96 @@ export default function RegistrationForm() {
         </div>
 
         <div className="space-y-2">
-          <Label htmlFor="ville">Ville *</Label>
+          <Label htmlFor="ville" className="text-sm font-medium flex items-center gap-2">
+            <MapPin className="w-4 h-4 text-primary" />
+            Ville <span className="text-destructive">*</span>
+          </Label>
           <Input
             id="ville"
             type="text"
-            placeholder="Ville"
+            placeholder="Paris"
             value={formData.ville}
-            onChange={(e) => handleInputChange("ville", e.target.value)}
+            onChange={(e) => setFormData(prev => ({ ...prev, ville: e.target.value }))}
+            className="h-11 bg-background border-2 focus:border-primary transition-all"
             required
           />
         </div>
       </div>
 
-      {/* Adresse */}
+      {/* Adresse - pleine largeur */}
       <div className="space-y-2">
-        <Label htmlFor="adresse">Adresse *</Label>
+        <Label htmlFor="adresse" className="text-sm font-medium flex items-center gap-2">
+          <Home className="w-4 h-4 text-primary" />
+          Adresse <span className="text-destructive">*</span>
+        </Label>
         <Input
           id="adresse"
           type="text"
-          placeholder="Adresse"
+          placeholder="12 rue de la République"
           value={formData.adresse}
-          onChange={(e) => handleInputChange("adresse", e.target.value)}
+          onChange={(e) => setFormData(prev => ({ ...prev, adresse: e.target.value }))}
+          className="h-11 bg-background border-2 focus:border-primary transition-all"
           required
         />
       </div>
 
-      {/* CGU Checkbox */}
-      <div className="flex items-start space-x-2">
-        <Checkbox
-          id="acceptCgu"
-          checked={formData.acceptCgu}
-          onCheckedChange={(checked) => handleInputChange("acceptCgu", checked as boolean)}
-        />
-        <label htmlFor="acceptCgu" className="text-sm leading-tight cursor-pointer">
-          En cochant cette case, j'accepte et je reconnais avoir pris connaissance des{" "}
-          <a href="/cgv" className="text-primary underline">conditions générales d'utilisation</a>{" "}
-          et de la{" "}
-          <a href="/mentions-legales" className="text-primary underline">politique de données personnelles</a>.
-        </label>
-      </div>
+      {/* CGU */}
+      <Card className="p-4 bg-muted/30 border-2">
+        <div className="flex items-start gap-3">
+          <Checkbox
+            id="acceptCgu"
+            checked={formData.acceptCgu}
+            onCheckedChange={(checked) => 
+              setFormData(prev => ({ ...prev, acceptCgu: checked === true }))
+            }
+            className="mt-1"
+          />
+          <Label 
+            htmlFor="acceptCgu" 
+            className="text-sm leading-relaxed cursor-pointer flex-1"
+          >
+            <span className="flex items-center gap-2">
+              <Shield className="w-4 h-4 text-primary shrink-0" />
+              <span>
+                J'accepte les{" "}
+                <a href="/cgv" target="_blank" className="text-primary hover:underline font-semibold underline-offset-2">
+                  Conditions Générales d'Utilisation
+                </a>
+                {" "}et la{" "}
+                <a href="/mentions-legales" target="_blank" className="text-primary hover:underline font-semibold underline-offset-2">
+                  Politique de confidentialité
+                </a>
+                <span className="text-destructive"> *</span>
+              </span>
+            </span>
+          </Label>
+        </div>
+      </Card>
 
-      {/* Submit Button */}
-      <Button type="submit" disabled={isLoading || !formData.acceptCgu} className="w-full h-12 text-base">
+      <Button 
+        type="submit" 
+        size="lg"
+        className="w-full h-12 text-base font-semibold bg-gradient-to-r from-primary to-primary/90 hover:from-primary/90 hover:to-primary shadow-lg hover:shadow-xl transition-all"
+        disabled={isLoading}
+      >
         {isLoading ? (
           <>
-            <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+            <Loader2 className="mr-2 h-5 w-5 animate-spin" />
             Création en cours...
           </>
         ) : (
-          "Créer mon compte →"
+          <>
+            <Check className="mr-2 h-5 w-5" />
+            Créer mon compte gratuitement
+          </>
         )}
       </Button>
 
-      <p className="text-sm text-muted-foreground text-right">* Champs obligatoires</p>
-
-      {/* Link to login */}
-      <div className="text-center pt-4">
-        <p className="text-sm text-muted-foreground">
-          Déjà inscrit ?{" "}
-          <button type="button" onClick={() => navigate("/auth")} className="text-primary underline font-medium hover:text-primary/80">
-            Connectez-vous
-          </button>
-        </p>
-      </div>
+      <p className="text-xs text-center text-muted-foreground">
+        En créant un compte, vous rejoignez la communauté CessionBTP et accédez à toutes les opportunités du BTP
+      </p>
     </form>
   );
-}
+};
+
+export default RegistrationForm;
