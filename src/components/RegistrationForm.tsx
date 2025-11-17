@@ -207,7 +207,7 @@ export default function RegistrationForm() {
             <SelectItem value="franchise">
               <div className="py-1">
                 <div className="font-medium">Enseigne de la franchise</div>
-                <div className="text-xs text-muted-foreground">(Souhaitant diffuser des annonces de cession ou de création)</div>
+                <div className="text-xs text-muted-foreground">(Souhaitant diffuser des annonces de cession d'entreprise)</div>
               </div>
             </SelectItem>
             <SelectItem value="immobilier">
