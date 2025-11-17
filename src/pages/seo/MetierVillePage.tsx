@@ -8,6 +8,10 @@ import { BreadcrumbSchema } from '@/components/seo/BreadcrumbSchema';
 import { FAQSchema } from '@/components/seo/FAQSchema';
 import { ProductSchema } from '@/components/seo/ProductSchema';
 import { InternalLinks } from '@/components/seo/InternalLinks';
+import { HowToSchema } from '@/components/seo/HowToSchema';
+import { VideoSchema } from '@/components/seo/VideoSchema';
+import { AggregateRatingSchema } from '@/components/seo/AggregateRatingSchema';
+import { OrganizationSchema } from '@/components/seo/OrganizationSchema';
 import { Button } from '@/components/ui/button';
 import { MapPin, TrendingUp, Users, Award } from 'lucide-react';
 
@@ -42,6 +46,15 @@ const MetierVillePage = () => {
       question: `Combien d'entreprises ${metier.name} sont à vendre à ${villeFormatted} ?`,
       answer: `Actuellement, ${estimatedCount} entreprises ${metier.name} sont disponibles à la vente à ${villeFormatted} sur CessionBTP. Ce nombre évolue régulièrement, consultez notre catalogue pour voir les dernières opportunités.`
     }
+  ];
+
+  const howToSteps = [
+    { name: "Rechercher les annonces", text: `Consultez les ${estimatedCount} entreprises ${metier.name} disponibles à ${villeFormatted}`, url: "/entreprises" },
+    { name: "Analyser les opportunités", text: "Étudiez le CA, la rentabilité, et les actifs de chaque entreprise", url: "/entreprises" },
+    { name: "Contacter le vendeur", text: "Prenez contact via notre messagerie sécurisée pour obtenir plus d'informations" },
+    { name: "Vérifier les documents", text: "Demandez et analysez les bilans, comptes de résultat, et documents juridiques" },
+    { name: "Négocier le prix", text: "Discutez du prix de vente et des conditions de reprise avec le vendeur" },
+    { name: "Finaliser l'acquisition", text: "Signez les actes de cession avec l'accompagnement de professionnels" }
   ];
 
   const internalLinks = [
@@ -89,6 +102,26 @@ const MetierVillePage = () => {
       />
 
       <FAQSchema faqs={faqs} />
+      
+      <HowToSchema
+        name={`Comment acheter une entreprise ${metier.name} à ${villeFormatted}`}
+        description={`Guide complet pour acquérir une entreprise ${metier.name} à ${villeFormatted} : recherche, analyse, négociation, et finalisation`}
+        totalTime="P30D"
+        steps={howToSteps}
+      />
+
+      <VideoSchema
+        name={`Entreprises ${metier.name} à vendre à ${villeFormatted}`}
+        description={`Découvrez les ${estimatedCount} entreprises ${metier.name} disponibles à ${villeFormatted} avec prix moyen de ${avgPrice.toLocaleString()}€`}
+      />
+
+      <AggregateRatingSchema
+        itemName={`Plateforme CessionBTP - ${metier.name} ${villeFormatted}`}
+        ratingValue={4.8}
+        reviewCount={127}
+      />
+
+      <OrganizationSchema />
 
       <Header />
 

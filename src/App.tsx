@@ -46,6 +46,7 @@ const SeoStats = lazy(() => import("./pages/SeoStats"));
 const CertificationPage = lazy(() => import("./pages/seo/CertificationPage"));
 const MetierPage = lazy(() => import("./pages/seo/MetierPage"));
 const MetierVillePage = lazy(() => import("./pages/seo/MetierVillePage"));
+const MetierRegionPage = lazy(() => import("./pages/seo/MetierRegionPage"));
 const RegionPage = lazy(() => import("./pages/seo/RegionPage"));
 const SellerKeywordPage = lazy(() => import("./pages/seo/SellerKeywordPage"));
 const BuyerKeywordPage = lazy(() => import("./pages/seo/BuyerKeywordPage"));
@@ -173,8 +174,10 @@ const App = () => {
           <Route path="/certification/rge" element={<RGEPage />} />
           
           {/* Pages énergies renouvelables RGE (ULTRA PRIORITAIRE) */}
-          {/* Route Métier + Ville COMBINÉ (la plus spécifique) */}
+          {/* Route Métier + Ville COMBINÉ (la plus spécifique, 10 000 pages) */}
           <Route path="/entreprise-:metier-:ville-a-vendre" element={<MetierVillePage />} />
+          {/* Route Métier + Région (1 300 pages) */}
+          <Route path="/entreprise-:metier-:region" element={<MetierRegionPage />} />
           {/* Route énergies renouvelables */}
           <Route path="/entreprise-:slug-a-vendre" element={<RenewableEnergyPage />} />
             {/* SEO Pages - Buyer Keywords (before generic seller to match first) */}
