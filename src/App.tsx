@@ -162,7 +162,6 @@ const App = () => {
           <Route path="/launch-checklist" element={<LaunchChecklist />} />
           <Route path="/seo-stats" element={<SeoStats />} />
           <Route path="/backlinks-manager" element={<BacklinksManager />} />
-          <Route path="/outils-gratuits" element={<OutilsGratuits />} />
           <Route path="/automation-dashboard" element={<AutomationDashboard />} />
           <Route path="/marketplace" element={<Marketplace />} />
           <Route path="/affiliation" element={<AffiliateDashboard />} />

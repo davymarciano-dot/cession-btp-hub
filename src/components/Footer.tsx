@@ -6,9 +6,9 @@ const Footer = () => {
 
   const footerLinks = {
     entreprise: [
-      { label: "À propos", path: "/about" },
       { label: "Comment ça marche", path: "/comment-ca-marche" },
       { label: "Notre équipe", path: "/equipe" },
+      { label: "Contact", path: "/contact" },
       { label: "Blog", path: "/blog" },
     ],
     vendeurs: [
@@ -19,25 +19,21 @@ const Footer = () => {
       { label: "FAQ Vendeurs", path: "/faq" },
     ],
     acheteurs: [
-      { label: "Acheter une entreprise", path: "/acheter" },
       { label: "Parcourir les annonces", path: "/entreprises" },
       { label: "Entreprises RGE", path: "/entreprises-rge" },
-      { label: "Matching IA", path: "/matching" },
+      { label: "Matching IA", path: "/matching-ia" },
+      { label: "Mes matchs", path: "/mes-matchs" },
       { label: "FAQ Acheteurs", path: "/faq" },
     ],
     ressources: [
       { label: "Guides gratuits", path: "/ressources" },
       { label: "Outils gratuits", path: "/outils-gratuits" },
-      { label: "Calculateurs", path: "/calculateurs" },
-      { label: "Lexique BTP", path: "/lexique" },
+      { label: "Lexique BTP", path: "/lexique-btp" },
       { label: "Marketplace services", path: "/marketplace" },
     ],
     legal: [
       { label: "Mentions légales", path: "/mentions-legales" },
-      { label: "CGU", path: "/cgu" },
       { label: "CGV", path: "/cgv" },
-      { label: "Politique de confidentialité", path: "/confidentialite" },
-      { label: "Cookies", path: "/cookies" },
     ],
   };
 
