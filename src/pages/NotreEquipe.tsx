@@ -1,5 +1,9 @@
 import { Card, CardContent } from "@/components/ui/card";
-import { Mail, Linkedin, Phone } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Mail, Linkedin, Phone, ArrowLeft } from "lucide-react";
+import { Link } from "react-router-dom";
+import Footer from "@/components/Footer";
+import Header from "@/components/Header";
 
 const teamMembers = [
   {
@@ -60,20 +64,33 @@ const teamMembers = [
 
 export default function NotreEquipe() {
   return (
-    <div className="min-h-screen bg-background">
-      {/* Hero Section */}
-      <section className="bg-gradient-to-br from-primary via-primary/90 to-primary/80 text-primary-foreground py-20">
-        <div className="container mx-auto px-4">
-          <div className="max-w-3xl mx-auto text-center">
-            <h1 className="text-4xl md:text-5xl font-bold mb-6">
-              Notre équipe
-            </h1>
-            <p className="text-xl text-primary-foreground/90">
-              Des experts passionnés à votre service pour réussir votre transmission d'entreprise BTP
-            </p>
+    <>
+      <Header />
+      <div className="min-h-screen bg-background">
+        {/* Hero Section */}
+        <section className="bg-gradient-to-br from-primary via-primary/90 to-primary/80 text-primary-foreground py-20">
+          <div className="container mx-auto px-4">
+            <div className="max-w-3xl mx-auto">
+              <Link to="/">
+                <Button 
+                  variant="ghost" 
+                  className="mb-6 text-primary-foreground hover:text-primary-foreground hover:bg-primary-foreground/10"
+                >
+                  <ArrowLeft className="mr-2 h-4 w-4" />
+                  Retour à l'accueil
+                </Button>
+              </Link>
+              <div className="text-center">
+                <h1 className="text-4xl md:text-5xl font-bold mb-6">
+                  Notre équipe
+                </h1>
+                <p className="text-xl text-primary-foreground/90">
+                  Des experts passionnés à votre service pour réussir votre transmission d'entreprise BTP
+                </p>
+              </div>
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
 
       {/* Mission Section */}
       <section className="py-16 bg-muted/30">
@@ -155,22 +172,28 @@ export default function NotreEquipe() {
               Notre équipe est à votre écoute pour vous accompagner dans votre transmission d'entreprise BTP
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a 
-                href="/contact" 
-                className="inline-flex items-center justify-center px-8 py-3 bg-background text-primary font-semibold rounded-lg hover:bg-background/90 transition-colors"
-              >
-                Nous contacter
-              </a>
-              <a 
-                href="/vendre" 
-                className="inline-flex items-center justify-center px-8 py-3 bg-secondary text-secondary-foreground font-semibold rounded-lg hover:bg-secondary/90 transition-colors"
-              >
-                Vendre mon entreprise
-              </a>
+              <Link to="/contact">
+                <Button 
+                  size="lg"
+                  className="bg-background text-primary hover:bg-background/90"
+                >
+                  Nous contacter
+                </Button>
+              </Link>
+              <Link to="/vendre">
+                <Button 
+                  size="lg"
+                  variant="secondary"
+                >
+                  Vendre mon entreprise
+                </Button>
+              </Link>
             </div>
           </div>
         </div>
       </section>
-    </div>
+      </div>
+      <Footer />
+    </>
   );
 }
