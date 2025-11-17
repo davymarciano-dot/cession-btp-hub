@@ -37,9 +37,9 @@ export const generateAllSeoPages = (): SeoPage[] => {
   });
   
   // 2. Pages métier + ville (ex: /entreprise-plomberie-paris-a-vendre)
-  // Limiter aux 20 premières villes pour ne pas surcharger
-  metiersComplete.slice(0, 15).forEach(metier => {
-    villesFrance.slice(0, 20).forEach(ville => {
+  // EXPLOSION SEO : 50 métiers × 50 villes = 2500 pages !
+  metiersComplete.slice(0, 50).forEach(metier => {
+    villesFrance.slice(0, 50).forEach(ville => {
       pages.push({
         path: `/entreprise-${metier.slug}-${ville}-a-vendre`,
         title: `Entreprise ${metier.name} à vendre ${ville}`,
