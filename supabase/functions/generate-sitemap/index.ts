@@ -6,30 +6,81 @@ const corsHeaders = {
   "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
 };
 
-// Métiers BTP
+// MEGA liste de métiers BTP (150+) pour domination SEO
 const metiersSlugs = [
-  'plomberie', 'electricite', 'maconnerie', 'chauffage', 'climatisation',
-  'charpente', 'couverture', 'menuiserie', 'peinture', 'carrelage',
-  'platrerie', 'isolation', 'ravalement', 'terrassement', 'vrd',
-  'serrurerie', 'metallerie', 'vitrerie', 'parqueteur', 'sols-souples'
+  // Électricité (20)
+  'electricite', 'electricien-batiment', 'electricien-industriel', 'domotique', 'eclairage-led',
+  'antenne-satellite', 'alarme-securite', 'video-surveillance', 'interphonie', 'controle-acces',
+  'cablage-reseau', 'fibre-optique', 'tableau-electrique', 'borne-recharge', 'pompe-chaleur-elec',
+  'chauffage-electrique', 'climatisation-reversible', 'automatisme-portail', 'videophone', 'parafoudre',
+  
+  // Chauffage (25)
+  'chauffage', 'chauffagiste', 'plomberie-chauffage', 'chaudiere-gaz', 'chaudiere-fioul',
+  'chaudiere-bois', 'chaudiere-granules', 'poele-bois', 'poele-granules', 'insert-cheminee',
+  'radiateur', 'plancher-chauffant', 'pac-air-eau', 'pac-air-air', 'pac-geothermie',
+  'chauffage-solaire', 'ballon-thermodynamique', 'chauffe-eau-solaire', 'maintenance-chauffage', 'depannage-chauffage',
+  'ramonage', 'tubage-conduit', 'desembouage', 'regulation-chauffage', 'adoucisseur-eau',
+  
+  // Climatisation (15)
+  'climatisation', 'clim-reversible', 'clim-gainable', 'clim-multisplit', 'clim-monosplit',
+  'ventilation', 'vmc', 'vmc-double-flux', 'vmc-simple-flux', 'vmc-hygro',
+  'extraction-air', 'traitement-air', 'purificateur-air', 'deshumidificateur', 'rafraichisseur',
+  
+  // Plomberie (20)
+  'plomberie', 'plombier', 'sanitaire', 'salle-bain', 'cuisine',
+  'robinetterie', 'wc-toilettes', 'douche-italienne', 'baignoire', 'lavabo',
+  'evier', 'debouchage', 'canalisation', 'fosse-septique', 'assainissement',
+  'adduction-eau', 'reseau-eau', 'surpresseur', 'pompe-relevage', 'traitement-eau',
+  
+  // Photovoltaïque & Solaire (15)
+  'photovoltaique', 'panneaux-solaires', 'onduleur-solaire', 'batterie-solaire', 'autoconsommation',
+  'ombriere-solaire', 'carport-solaire', 'hangar-photovoltaique', 'centrale-solaire', 'tracker-solaire',
+  'solaire-thermique', 'chauffe-eau-solaire', 'piscine-solaire', 'maintenance-photovoltaique', 'monitoring-solaire',
+  
+  // Isolation (20)
+  'isolation', 'isolation-thermique', 'isolation-phonique', 'isolation-combles', 'isolation-murs',
+  'isolation-sol', 'isolation-facade', 'isolation-toiture', 'laine-roche', 'laine-verre',
+  'ouate-cellulose', 'polyurethane', 'polystyrene', 'fibre-bois', 'chanvre',
+  'liege', 'isolation-exterieure', 'isolation-interieure', 'pare-vapeur', 'etancheite-air',
+  
+  // Menuiserie & Fenêtres (15)
+  'menuiserie', 'menuisier', 'fenetres', 'portes', 'volets',
+  'portail', 'pergola', 'veranda', 'verriere', 'baie-vitree',
+  'porte-garage', 'garde-corps', 'escalier', 'parquet', 'terrasse-bois',
+  
+  // Autres métiers BTP (20)
+  'maconnerie', 'peinture', 'carrelage', 'couverture', 'zinguerie',
+  'charpente', 'etancheite', 'facades', 'ravalement', 'terrassement',
+  'vrd', 'genie-civil', 'platrerie', 'demolition', 'desamiantage',
+  'diagnostic-immobilier', 'dpe', 'audit-energetique', 'bureau-etudes', 'maitrise-oeuvre'
 ];
 
-// Grandes villes françaises pour pages dédiées
+// Top 50 villes françaises pour maximiser la couverture SEO
 const villesSlugs = [
-  'paris', 'marseille', 'lyon', 'toulouse', 'nice',
-  'nantes', 'strasbourg', 'montpellier', 'bordeaux', 'lille',
-  'rennes', 'reims', 'saint-etienne', 'toulon', 'grenoble',
-  'dijon', 'angers', 'nimes', 'villeurbanne', 'clermont-ferrand'
+  'paris', 'marseille', 'lyon', 'toulouse', 'nice', 'nantes', 'montpellier', 'strasbourg', 'bordeaux', 'lille',
+  'rennes', 'reims', 'saint-etienne', 'toulon', 'grenoble', 'dijon', 'angers', 'nimes', 'villeurbanne', 'clermont-ferrand',
+  'aix-en-provence', 'brest', 'tours', 'amiens', 'limoges', 'annecy', 'perpignan', 'besancon', 'metz', 'orleans',
+  'mulhouse', 'rouen', 'caen', 'nancy', 'argenteuil', 'saint-denis', 'montreuil', 'avignon', 'versailles', 'pau',
+  'dunkerque', 'poitiers', 'asnieres', 'colombes', 'aulnay', 'courbevoie', 'vitry', 'champigny', 'rueil', 'antibes'
 ];
 
+// Toutes les régions françaises
 const regionsSlugs = [
   'ile-de-france', 'auvergne-rhone-alpes', 'nouvelle-aquitaine',
-  'occitanie', 'provence-alpes-cote-dazur', 'grand-est',
-  'hauts-de-france', 'normandie', 'bretagne', 'pays-de-la-loire'
+  'occitanie', 'hauts-de-france', 'grand-est', 'provence-alpes-cote-azur',
+  'pays-de-la-loire', 'bretagne', 'normandie', 'bourgogne-franche-comte',
+  'centre-val-de-loire', 'corse'
 ];
 
-const certificationsSlugs = ['rge', 'qualibat', 'qualipv', 'qualipac'];
-const energiesSlugs = ['solaire-photovoltaique', 'pompe-a-chaleur', 'isolation-thermique'];
+// Toutes les certifications BTP importantes
+const certificationsSlugs = ['rge', 'qualibat', 'qualipac', 'qualipv', 'qualibois', 'handibat', 'qualienr'];
+
+// Focus énergies renouvelables RGE (ultra-prioritaire pour 2025)
+const energiesSlugs = [
+  'photovoltaique', 'pompe-a-chaleur', 'isolation-thermique',
+  'panneaux-solaires', 'chauffage-bois', 'renovation-energetique',
+  'audit-energetique', 'ventilation-vmc', 'menuiseries-exterieures'
+];
 
 const handler = async (req: Request): Promise<Response> => {
   if (req.method === "OPTIONS") {
