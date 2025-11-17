@@ -195,13 +195,13 @@ export default function RegistrationForm() {
             <SelectItem value="porteur">
               <div className="py-1">
                 <div className="font-medium">Porteur de projet</div>
-                <div className="text-xs text-muted-foreground">(Acquéreur recherchant une affaire à la vente ou en location)</div>
+                <div className="text-xs text-muted-foreground">(Acquéreur recherchant une entreprise à la vente)</div>
               </div>
             </SelectItem>
             <SelectItem value="cedant">
               <div className="py-1">
                 <div className="font-medium">Cédant propriétaire</div>
-                <div className="text-xs text-muted-foreground">(Chef d'entreprise souhaitant céder ou louer son bien)</div>
+                <div className="text-xs text-muted-foreground">(Chef d'entreprise souhaitant céder son entreprise)</div>
               </div>
             </SelectItem>
             <SelectItem value="franchise">
