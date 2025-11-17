@@ -71,6 +71,7 @@ const CommentCaMarche = lazy(() => import("./pages/CommentCaMarche"));
 const Contact = lazy(() => import("./pages/Contact"));
 const MentionsLegales = lazy(() => import("./pages/MentionsLegales"));
 const CGV = lazy(() => import("./pages/CGV"));
+const NotreEquipe = lazy(() => import("./pages/NotreEquipe"));
 
 // Pages métiers spécifiques énergies renouvelables
 const PanneauxSolaires = lazy(() => import("./pages/secteur/PanneauxSolaires"));
@@ -147,6 +148,7 @@ const App = () => {
           <Route path="/faq" element={<FAQ />} />
           <Route path="/comment-ca-marche" element={<CommentCaMarche />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/equipe" element={<NotreEquipe />} />
           <Route path="/mentions-legales" element={<MentionsLegales />} />
           <Route path="/cgv" element={<CGV />} />
           <Route path="/sitemap" element={<Sitemap />} />
