@@ -91,6 +91,8 @@ const RegistrationForm = () => {
   
   const [addressSuggestions, setAddressSuggestions] = useState<AddressSuggestion[]>([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
+  const [isLoadingAddress, setIsLoadingAddress] = useState(false);
+  const [addressError, setAddressError] = useState<string | null>(null);
   const suggestionsRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -106,29 +108,57 @@ const RegistrationForm = () => {
 
   const handleAddressChange = async (value: string) => {
     setFormData(prev => ({ ...prev, adresse: value }));
+    setAddressError(null);
     
     console.log('🔍 Recherche adresse:', value, 'longueur:', value.length);
     
     if (value.length > 2) {
+      setIsLoadingAddress(true);
       try {
         const url = `https://api-adresse.data.gouv.fr/search/?q=${encodeURIComponent(value)}&limit=5`;
         console.log('📡 Appel API:', url);
         
-        const response = await fetch(url);
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 5000);
+        
+        const response = await fetch(url, { signal: controller.signal });
+        clearTimeout(timeoutId);
+        
+        if (!response.ok) {
+          throw new Error(`Erreur API: ${response.status}`);
+        }
+        
         const data = await response.json();
         
         console.log('✅ Résultats API:', data.features?.length || 0, 'suggestions');
         console.log('📍 Suggestions:', data.features);
         
-        setAddressSuggestions(data.features || []);
-        setShowSuggestions(true);
+        if (data.features && data.features.length > 0) {
+          setAddressSuggestions(data.features);
+          setShowSuggestions(true);
+          setAddressError(null);
+        } else {
+          setAddressSuggestions([]);
+          setShowSuggestions(false);
+          setAddressError('Aucune adresse trouvée');
+        }
       } catch (error) {
         console.error('❌ Erreur lors de la recherche d\'adresse:', error);
+        setAddressSuggestions([]);
+        setShowSuggestions(false);
+        if (error instanceof Error && error.name === 'AbortError') {
+          setAddressError('Recherche trop longue, veuillez réessayer');
+        } else {
+          setAddressError('Service temporairement indisponible');
+        }
+      } finally {
+        setIsLoadingAddress(false);
       }
     } else {
       console.log('⏸️ Recherche trop courte, attente de plus de 2 caractères');
       setAddressSuggestions([]);
       setShowSuggestions(false);
+      setIsLoadingAddress(false);
     }
   };
 
@@ -410,17 +440,30 @@ const RegistrationForm = () => {
           <Home className="w-4 h-4 text-primary" />
           Adresse <span className="text-destructive">*</span>
         </Label>
-        <Input
-          id="adresse"
-          type="text"
-          placeholder="12 rue de la République"
-          value={formData.adresse}
-          onChange={(e) => handleAddressChange(e.target.value)}
-          onFocus={() => addressSuggestions.length > 0 && setShowSuggestions(true)}
-          className="h-11 bg-background border-2 focus:border-primary transition-all"
-          required
-          autoComplete="off"
-        />
+        <div className="relative">
+          <Input
+            id="adresse"
+            type="text"
+            placeholder="12 rue de la République"
+            value={formData.adresse}
+            onChange={(e) => handleAddressChange(e.target.value)}
+            onFocus={() => addressSuggestions.length > 0 && setShowSuggestions(true)}
+            className="h-11 bg-background border-2 focus:border-primary transition-all pr-10"
+            required
+            autoComplete="off"
+          />
+          {isLoadingAddress && (
+            <div className="absolute right-3 top-1/2 -translate-y-1/2">
+              <Loader2 className="w-5 h-5 animate-spin text-primary" />
+            </div>
+          )}
+        </div>
+        
+        {addressError && (
+          <p className="text-xs text-destructive flex items-center gap-1">
+            <span>⚠️</span> {addressError}
+          </p>
+        )}
         
         {showSuggestions && addressSuggestions.length > 0 && (
           <div className="absolute top-full left-0 right-0 mt-1 bg-background border-2 border-border rounded-md shadow-lg z-50 max-h-60 overflow-y-auto">
