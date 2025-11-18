@@ -66,6 +66,7 @@ const BlogIndex = lazy(() => import("./pages/blog/BlogIndex"));
 const VendorListingAnalytics = lazy(() => import("./pages/dashboard/VendorListingAnalytics"));
 const LaunchChecklist = lazy(() => import("./pages/LaunchChecklist"));
 const MonitoringDashboard = lazy(() => import("./pages/admin/MonitoringDashboard"));
+const SystemHealth = lazy(() => import("./pages/admin/SystemHealth"));
 const Admin = lazy(() => import("./pages/Admin"));
 const CommentCaMarche = lazy(() => import("./pages/CommentCaMarche"));
 const Contact = lazy(() => import("./pages/Contact"));
@@ -169,6 +170,7 @@ const App = () => {
           <Route path="/test-automations" element={<TestAutomations />} />
           <Route path="/admin/cron-logs" element={<CronLogsAdmin />} />
           <Route path="/admin/monitoring" element={<MonitoringDashboard />} />
+          <Route path="/admin/health" element={<SystemHealth />} />
           <Route path="/admin" element={<Admin />} />
           <Route path="/blog" element={<BlogIndex />} />
           

@@ -27,6 +27,7 @@ import {
 import SEOHead from "@/components/SEOHead";
 import { SearchableSelect } from "@/components/SearchableSelect";
 import { SearchableRegionSelect } from "@/components/SearchableRegionSelect";
+import EnhancedSchemas from "@/components/seo/EnhancedSchemas";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -326,6 +327,7 @@ const Home = () => {
   return (
     <div className="min-h-screen bg-white">
       <SEOHead page="home" />
+      <EnhancedSchemas type="home" />
       <Header />
 
       {/* 🔥 NOTIFICATIONS EN TEMPS RÉEL - EN BAS À GAUCHE */}
