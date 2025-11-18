@@ -2,6 +2,8 @@ import { useState } from "react";
 import Header from "@/components/Header";
 import SEOHead from "@/components/SEOHead";
 import Footer from "@/components/Footer";
+import { UltraCompleteSchemas } from "@/components/seo/UltraCompleteSchemas";
+import { AutoInternalLinks } from "@/components/seo/AutoInternalLinks";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -403,6 +405,10 @@ const FAQ = () => {
           </Card>
         </div>
       </main>
+
+      {/* SEO Optimization */}
+      <UltraCompleteSchemas page="faq" />
+      <AutoInternalLinks currentPage="/faq" maxLinks={6} />
 
       <Footer />
     </div>

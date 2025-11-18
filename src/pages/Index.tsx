@@ -27,7 +27,8 @@ import {
 import SEOHead from "@/components/SEOHead";
 import { SearchableSelect } from "@/components/SearchableSelect";
 import { SearchableRegionSelect } from "@/components/SearchableRegionSelect";
-import EnhancedSchemas from "@/components/seo/EnhancedSchemas";
+import { UltraCompleteSchemas } from "@/components/seo/UltraCompleteSchemas";
+import { AutoInternalLinks } from "@/components/seo/AutoInternalLinks";
 import { OptimizedImage } from "@/components/OptimizedImage";
 import { analyticsEvents } from "@/lib/analytics";
 
@@ -329,7 +330,7 @@ const Home = () => {
   return (
     <div className="min-h-screen bg-white">
       <SEOHead page="home" />
-      <EnhancedSchemas type="home" />
+      <UltraCompleteSchemas page="home" />
       <Header />
 
       {/* 🔥 NOTIFICATIONS EN TEMPS RÉEL - EN BAS À GAUCHE */}
@@ -1560,6 +1561,9 @@ const Home = () => {
           </div>
         </div>
       </section>
+
+      {/* Liens internes automatiques pour SEO */}
+      <AutoInternalLinks currentPage="/" maxLinks={6} />
 
       <Footer />
 

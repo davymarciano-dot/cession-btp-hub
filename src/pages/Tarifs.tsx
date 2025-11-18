@@ -3,6 +3,8 @@ import { Check } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import SEOHead from "@/components/SEOHead";
+import { UltraCompleteSchemas } from "@/components/seo/UltraCompleteSchemas";
+import { AutoInternalLinks } from "@/components/seo/AutoInternalLinks";
 
 const Tarifs = () => {
   return (
@@ -372,6 +374,10 @@ const Tarifs = () => {
           </div>
         </div>
       </section>
+
+      {/* SEO Optimization */}
+      <UltraCompleteSchemas page="home" />
+      <AutoInternalLinks currentPage="/tarifs" maxLinks={6} />
 
       <Footer />
     </div>

@@ -14,6 +14,8 @@ import { BTPMetiersSelect } from "@/data/btp-metiers";
 import { useToast } from "@/hooks/use-toast";
 // import { supabase } from "@/integrations/supabase/client";
 import { analyticsEvents } from "@/lib/analytics";
+import { UltraCompleteSchemas } from "@/components/seo/UltraCompleteSchemas";
+import { AutoInternalLinks } from "@/components/seo/AutoInternalLinks";
 import SiretAutocomplete from "@/components/SiretAutocomplete";
 
 const Estimation = () => {
@@ -929,6 +931,10 @@ const Estimation = () => {
           </div>
         </div>
       </section>
+
+      {/* SEO Optimization */}
+      <UltraCompleteSchemas page="estimation" />
+      <AutoInternalLinks currentPage="/estimation" maxLinks={6} />
 
       <Footer />
     </div>

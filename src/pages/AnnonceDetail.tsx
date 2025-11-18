@@ -26,6 +26,8 @@ import {
 } from "lucide-react";
 import { exempleAnnonces } from "@/data/exemple-annonces";
 import { analyticsEvents } from "@/lib/analytics";
+import { UltraCompleteSchemas } from "@/components/seo/UltraCompleteSchemas";
+import { AutoInternalLinks } from "@/components/seo/AutoInternalLinks";
 import SEO from "@/components/SEO";
 
 const AnnonceDetail = () => {
@@ -599,6 +601,25 @@ const AnnonceDetail = () => {
           </div>
         </div>
       </section>
+
+      {/* SEO Optimization */}
+      {annonce && (
+        <UltraCompleteSchemas 
+          page="annonce"
+          annonceData={{
+            id: annonce.id,
+            title: annonce.raison_sociale || `Entreprise ${annonce.secteur_activite}`,
+            description: annonce.description_activite,
+            price: annonce.prix_vente,
+            sector: annonce.secteur_activite,
+            location: `${annonce.ville}, ${annonce.departement}`,
+            ca: annonce.ca_n1,
+            employees: annonce.nombre_salaries,
+            images: annonce.photos_entreprise || []
+          }}
+        />
+      )}
+      <AutoInternalLinks currentPage={`/entreprises/${id}`} maxLinks={6} />
 
       <Footer />
     </div>

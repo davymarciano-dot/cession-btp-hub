@@ -15,6 +15,8 @@ import ComparisonGuide from "@/components/ComparisonGuide";
 import { ListingSkeletonGrid } from "@/components/ListingSkeleton";
 import SEO from "@/components/SEO";
 import SEOHead from "@/components/SEOHead";
+import { UltraCompleteSchemas } from "@/components/seo/UltraCompleteSchemas";
+import { AutoInternalLinks } from "@/components/seo/AutoInternalLinks";
 import { SearchableSelect } from "@/components/SearchableSelect";
 import { SearchableRegionSelect } from "@/components/SearchableRegionSelect";
 
@@ -637,6 +639,10 @@ const Entreprises = () => {
           onClose={() => setSelectedForComparison([])}
         />
       )}
+
+      {/* SEO Optimization */}
+      <UltraCompleteSchemas page="entreprises" />
+      <AutoInternalLinks currentPage="/entreprises" maxLinks={6} />
     </div>
   );
 };
