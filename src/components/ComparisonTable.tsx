@@ -1,6 +1,6 @@
 const ComparisonTable = () => {
   return (
-    <section className="py-20 bg-orange-50">
+    <section className="py-20 bg-muted/40">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
           <div className="text-6xl mb-4">💎</div>
@@ -13,7 +13,7 @@ const ComparisonTable = () => {
         </div>
 
         <div className="max-w-5xl mx-auto overflow-x-auto">
-          <table className="w-full bg-white rounded-xl shadow-lg overflow-hidden">
+          <table className="w-full bg-card rounded-xl shadow-lg overflow-hidden">
             <thead className="bg-primary text-white">
               <tr>
                 <th className="px-6 py-4 text-left font-bold">Critère</th>
@@ -29,13 +29,13 @@ const ComparisonTable = () => {
                 <td className="px-6 py-4 font-semibold text-primary">290€ (3 mois)</td>
                 <td className="px-6 py-4 text-sm text-muted-foreground">BPI France Transmission, Fusacq</td>
               </tr>
-              <tr className="border-b bg-slate-50">
+              <tr className="border-b bg-muted/60">
                 <td className="px-6 py-4 font-semibold">Coût mensuel</td>
                 <td className="px-6 py-4">21€</td>
                 <td className="px-6 py-4 font-semibold text-primary">97€</td>
                 <td className="px-6 py-4 text-sm text-muted-foreground">-</td>
               </tr>
-              <tr className="border-b bg-green-50">
+              <tr className="border-b bg-muted/60">
                 <td className="px-6 py-4 font-bold">Délai moyen de vente</td>
                 <td className="px-6 py-4">
                   <span className="font-bold">18-24 mois</span> ⏳
@@ -51,7 +51,7 @@ const ComparisonTable = () => {
                 <td className="px-6 py-4 font-semibold text-primary">100% BTP & ENR</td>
                 <td className="px-6 py-4 text-sm text-muted-foreground">-</td>
               </tr>
-              <tr className="border-b bg-slate-50">
+              <tr className="border-b bg-muted/60">
                 <td className="px-6 py-4 font-semibold">Repreneurs actifs</td>
                 <td className="px-6 py-4">Grand public</td>
                 <td className="px-6 py-4 font-semibold text-primary">2000+ qualifiés BTP</td>
@@ -82,7 +82,7 @@ const ComparisonTable = () => {
           </p>
         </div>
 
-        <div className="max-w-3xl mx-auto mt-12 bg-white p-8 rounded-xl shadow-lg">
+        <div className="max-w-3xl mx-auto mt-12 bg-card p-8 rounded-xl shadow-lg">
           <h3 className="text-2xl font-bold mb-4">🧮 Le vrai calcul :</h3>
           <div className="space-y-4 text-lg">
             <p>
@@ -101,7 +101,7 @@ const ComparisonTable = () => {
           </div>
         </div>
 
-        <div className="max-w-3xl mx-auto mt-8 bg-gradient-to-r from-blue-600 to-blue-700 text-white p-8 rounded-xl shadow-xl">
+        <div className="max-w-3xl mx-auto mt-8 bg-gradient-to-r from-primary to-primary/80 text-primary-foreground p-8 rounded-xl shadow-xl">
           <blockquote className="text-lg italic mb-4">
             "J'ai d'abord essayé une plateforme généraliste à 250€. 9 mois perdus, 0 contact sérieux. 
             Avec CessionBTP, vendu en 38 jours à un repreneur parfait. Le meilleur investissement de ma vie."

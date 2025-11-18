@@ -428,7 +428,7 @@ const Home = () => {
             
             {/* BARRE DE RECHERCHE */}
             <div className="mt-12 max-w-4xl mx-auto">
-              <div className="bg-white rounded-2xl shadow-2xl p-6">
+              <div className="bg-card rounded-2xl shadow-2xl p-6">
                 <div className="flex flex-col md:flex-row gap-4">
                   <SearchableSelect
                     value={secteurFilter}
@@ -459,14 +459,14 @@ const Home = () => {
       </section>
 
       {/* SECTION OPPORTUNITÉS À SAISIR */}
-      <section className="py-16 bg-gray-50">
+      <section className="py-16 bg-muted/40">
         <div className="container mx-auto px-4">
           {/* Titre et sous-titre */}
           <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gray-900">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-foreground">
               Opportunités à Saisir
             </h2>
-            <p className="text-lg text-gray-600">
+            <p className="text-lg text-muted-foreground">
               Découvrez les dernières entreprises BTP disponibles à la reprise
             </p>
           </div>
@@ -820,7 +820,7 @@ const Home = () => {
       <section className="py-20">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <div className="inline-block bg-blue-100 text-blue-600 px-4 py-2 rounded-full text-sm font-semibold mb-4">
+            <div className="inline-block bg-primary/10 text-primary px-4 py-2 rounded-full text-sm font-semibold mb-4">
               💼 Pour les acheteurs
             </div>
             <h2 className="text-5xl font-black mb-4">Abonnements acheteurs</h2>
@@ -1109,7 +1109,7 @@ const Home = () => {
       </section>
 
       {/* TARIFS VENDEURS */}
-      <section className="py-16 bg-gradient-to-br from-orange-50 to-white">
+      <section className="py-16 bg-muted/40">
         <div className="container mx-auto px-4">
           <div className="text-center mb-4">
             <Button
@@ -1122,18 +1122,18 @@ const Home = () => {
           </div>
 
           <div className="text-center mb-12">
-            <div className="inline-block bg-orange-100 text-orange-600 px-4 py-2 rounded-full text-sm font-semibold mb-4">
+            <div className="inline-block bg-primary/10 text-primary px-4 py-2 rounded-full text-sm font-semibold mb-4">
               🏗️ Pour les vendeurs
             </div>
             <h2 className="text-5xl font-black mb-4">Abonnements vendeurs</h2>
-            <p className="text-xl text-slate-600">
+            <p className="text-xl text-muted-foreground">
               Choisissez la formule adaptée à vos besoins de transmission
             </p>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
             {/* DÉCOUVERTE */}
-            <div className="group h-full flex flex-col border-2 border-slate-200 hover:border-sky-500 hover:shadow-xl transition-all rounded-2xl p-8 bg-white relative">
+            <div className="group h-full flex flex-col border-2 border-border hover:border-sky-500 hover:shadow-xl transition-all rounded-2xl p-8 bg-card relative">
               <h3 className="text-2xl font-bold text-sky-500 mb-2">Découverte</h3>
               <div className="mb-6">
                 <span className="text-4xl font-black text-sky-500">Gratuit</span>
@@ -1171,7 +1171,7 @@ const Home = () => {
             </div>
 
             {/* ESSENTIEL */}
-            <div className="group h-full flex flex-col border-2 border-slate-200 hover:border-gray-400 hover:shadow-xl transition-all rounded-2xl p-8 bg-white relative">
+            <div className="group h-full flex flex-col border-2 border-border hover:border-gray-400 hover:shadow-xl transition-all rounded-2xl p-8 bg-card relative">
               <div className="absolute -top-3 left-1/2 -translate-x-1/2">
                 <span className="bg-gradient-to-r from-blue-500 to-blue-600 text-white px-4 py-1.5 rounded-full text-xs font-bold shadow-lg">
                   POPULAIRE
@@ -1219,7 +1219,7 @@ const Home = () => {
             </div>
 
             {/* PRIME */}
-            <div className="group h-full flex flex-col border-2 border-slate-200 hover:border-orange-500 hover:shadow-xl transition-all rounded-2xl p-8 bg-white relative">
+            <div className="group h-full flex flex-col border-2 border-border hover:border-orange-500 hover:shadow-xl transition-all rounded-2xl p-8 bg-card relative">
               <div className="absolute -top-3 left-1/2 -translate-x-1/2">
                 <span className="bg-gradient-to-r from-orange-500 to-orange-600 text-white px-3 py-1 rounded-full text-xs font-bold shadow-lg animate-pulse whitespace-nowrap">
                   ⭐ MEILLEUR CHOIX
@@ -1267,7 +1267,7 @@ const Home = () => {
             </div>
 
             {/* EXCLUSIF */}
-            <div className="group h-full flex flex-col border-2 border-slate-200 hover:border-purple-600 hover:shadow-xl transition-all rounded-2xl p-8 bg-white relative">
+            <div className="group h-full flex flex-col border-2 border-border hover:border-purple-600 hover:shadow-xl transition-all rounded-2xl p-8 bg-card relative">
               <div className="absolute -top-3 left-1/2 -translate-x-1/2">
                 <span className="bg-gradient-to-r from-purple-600 to-amber-500 text-white px-4 py-1.5 rounded-full text-xs font-bold shadow-lg">
                   👑 PREMIUM
@@ -1318,11 +1318,11 @@ const Home = () => {
       </section>
 
       {/* POURQUOI CHOISIR CESSIONBTP */}
-      <section className="py-16 bg-gradient-to-br from-green-50 to-white">
+      <section className="py-16 bg-muted/40">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">Pourquoi choisir CessionBTP</h2>
-            <p className="text-xl text-gray-600">
+            <h2 className="text-4xl font-bold text-foreground mb-4">Pourquoi choisir CessionBTP</h2>
+            <p className="text-xl text-muted-foreground">
               La plateforme la plus complète pour vendre ou acheter une entreprise BTP
             </p>
           </div>
@@ -1331,13 +1331,13 @@ const Home = () => {
             {whyChooseUs.map((item, index) => (
               <div
                 key={index}
-                className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all text-center"
+                className="bg-card rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all text-center"
               >
                 <div className="w-16 h-16 bg-gradient-to-br from-blue-100 to-orange-100 rounded-2xl flex items-center justify-center mx-auto mb-4 text-3xl">
                   {item.icon}
                 </div>
-                <h3 className="text-xl font-bold text-gray-900 mb-3">{item.title}</h3>
-                <p className="text-gray-600">{item.description}</p>
+                <h3 className="text-xl font-bold text-foreground mb-3">{item.title}</h3>
+                <p className="text-muted-foreground">{item.description}</p>
               </div>
             ))}
           </div>
@@ -1345,7 +1345,7 @@ const Home = () => {
       </section>
 
       {/* HONORAIRES DE SUCCÈS */}
-      <section className="py-16 bg-gradient-to-br from-blue-50 to-green-50">
+      <section className="py-16 bg-muted/40">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
             <div className="inline-block mb-6">
@@ -1354,24 +1354,24 @@ const Home = () => {
               </div>
             </div>
 
-            <h2 className="text-5xl font-bold text-gray-900 mb-6">Honoraires de succès transparents</h2>
+            <h2 className="text-5xl font-bold text-foreground mb-6">Honoraires de succès transparents</h2>
 
-            <div className="bg-white rounded-3xl p-12 shadow-2xl mb-8">
+            <div className="bg-card rounded-3xl p-12 shadow-2xl mb-8">
               <div className="text-center mb-8">
                 <div className="text-8xl font-bold bg-gradient-to-r from-green-500 to-blue-500 bg-clip-text text-transparent mb-4">
                   2%
                 </div>
-                <p className="text-2xl text-gray-700">Seulement en cas de vente réussie</p>
+                <p className="text-2xl text-muted-foreground">Seulement en cas de vente réussie</p>
               </div>
 
-              <div className="bg-green-50 border-2 border-green-200 rounded-2xl p-6">
-                <h3 className="text-xl font-bold text-gray-900 mb-4">Exemple concret :</h3>
+              <div className="bg-muted border border-border rounded-2xl p-6">
+                <h3 className="text-xl font-bold text-foreground mb-4">Exemple concret :</h3>
                 <div className="space-y-2 text-left max-w-2xl mx-auto">
                   <p className="text-lg">
-                    Vente <span className="font-bold text-blue-600">500 000 €</span> ={" "}
-                    <span className="font-bold text-green-600">10 000 € de commission</span>
+                    Vente <span className="font-bold text-primary">500 000 €</span> ={" "}
+                    <span className="font-bold text-success">10 000 € de commission</span>
                   </p>
-                  <p className="text-sm text-gray-600">(vs 25 000€ à 40 000€ chez les concurrents)</p>
+                  <p className="text-sm text-muted-foreground">(vs 25 000€ à 40 000€ chez les concurrents)</p>
                 </div>
               </div>
             </div>
@@ -1380,7 +1380,7 @@ const Home = () => {
       </section>
 
       {/* COMMENT ÇA MARCHE - 5 ÉTAPES */}
-      <section className="py-16 bg-white">
+      <section className="py-16 bg-muted/40">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <div className="inline-block mb-4">
@@ -1388,8 +1388,8 @@ const Home = () => {
                 <span className="text-3xl">🚀</span>
               </div>
             </div>
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">Comment ça marche</h2>
-            <p className="text-xl text-gray-600">Un processus simple et efficace en 5 étapes</p>
+            <h2 className="text-4xl font-bold text-foreground mb-4">Comment ça marche</h2>
+            <p className="text-xl text-muted-foreground">Un processus simple et efficace en 5 étapes</p>
           </div>
 
           <div className="max-w-4xl mx-auto">
