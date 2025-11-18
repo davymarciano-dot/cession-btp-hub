@@ -28,6 +28,8 @@ import SEOHead from "@/components/SEOHead";
 import { SearchableSelect } from "@/components/SearchableSelect";
 import { SearchableRegionSelect } from "@/components/SearchableRegionSelect";
 import EnhancedSchemas from "@/components/seo/EnhancedSchemas";
+import { OptimizedImage } from "@/components/OptimizedImage";
+import { analyticsEvents } from "@/lib/analytics";
 
 const Home = () => {
   const navigate = useNavigate();

@@ -30,6 +30,7 @@ import {
   Star,
 } from "lucide-react";
 import SEOHead from "@/components/SEOHead";
+import { analyticsEvents } from "@/lib/analytics";
 
 const STORAGE_KEY = "cessionBTP_form_draft";
 

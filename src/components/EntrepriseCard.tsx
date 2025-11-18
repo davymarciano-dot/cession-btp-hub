@@ -179,7 +179,8 @@ const EntrepriseCard = ({
         className={`w-full ${isOrange ? 'bg-white/10 hover:bg-white/20' : 'bg-secondary hover:bg-secondary/90'} text-white border-0`}
         onClick={() => {
           if (id) {
-            analyticsEvents.viewEnterpriseDetails(id);
+            const priceValue = price ? parseFloat(price.replace(/[^\d]/g, '')) : 0;
+            analyticsEvents.viewEnterpriseDetails(id, priceValue);
             navigate(`/entreprises/${id}`);
           }
         }}
