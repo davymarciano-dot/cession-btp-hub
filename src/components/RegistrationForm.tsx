@@ -107,18 +107,26 @@ const RegistrationForm = () => {
   const handleAddressChange = async (value: string) => {
     setFormData(prev => ({ ...prev, adresse: value }));
     
-    if (value.length > 3) {
+    console.log('🔍 Recherche adresse:', value, 'longueur:', value.length);
+    
+    if (value.length > 2) {
       try {
-        const response = await fetch(
-          `https://api-adresse.data.gouv.fr/search/?q=${encodeURIComponent(value)}&limit=5`
-        );
+        const url = `https://api-adresse.data.gouv.fr/search/?q=${encodeURIComponent(value)}&limit=5`;
+        console.log('📡 Appel API:', url);
+        
+        const response = await fetch(url);
         const data = await response.json();
+        
+        console.log('✅ Résultats API:', data.features?.length || 0, 'suggestions');
+        console.log('📍 Suggestions:', data.features);
+        
         setAddressSuggestions(data.features || []);
         setShowSuggestions(true);
       } catch (error) {
-        console.error('Erreur lors de la recherche d\'adresse:', error);
+        console.error('❌ Erreur lors de la recherche d\'adresse:', error);
       }
     } else {
+      console.log('⏸️ Recherche trop courte, attente de plus de 2 caractères');
       setAddressSuggestions([]);
       setShowSuggestions(false);
     }
