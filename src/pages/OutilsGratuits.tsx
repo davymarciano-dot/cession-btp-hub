@@ -1,5 +1,7 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import SEOHead from '@/components/SEOHead';
+import { UltraCompleteSchemas } from '@/components/seo/UltraCompleteSchemas';
+import { AutoInternalLinks } from '@/components/seo/AutoInternalLinks';
 import { ValuationCalculator } from '@/components/tools/ValuationCalculator';
 import { FinancingSimulator } from '@/components/tools/FinancingSimulator';
 import { Calculator, PiggyBank, FileText, Download, ArrowLeft } from 'lucide-react';
@@ -173,6 +175,11 @@ export default function OutilsGratuits() {
           </div>
         </div>
       </div>
+
+      {/* SEO Optimization */}
+      <UltraCompleteSchemas page="home" />
+      <AutoInternalLinks currentPage="/outils-gratuits" maxLinks={6} />
+
       <Footer />
     </>
   );
