@@ -2,6 +2,8 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { blogArticles, BlogArticle } from '@/data/blogArticles';
 import { blogPostsFullContent } from '@/data/blogPostsContent';
+import { UltraCompleteSchemas } from '@/components/seo/UltraCompleteSchemas';
+import { AutoInternalLinks } from '@/components/seo/AutoInternalLinks';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -55,6 +57,10 @@ const BlogIndex = () => {
             ))}
           </div>
         </div>
+
+        {/* SEO Optimization */}
+        <UltraCompleteSchemas page="blog" />
+        <AutoInternalLinks currentPage="/blog" maxLinks={6} />
       </div>
       <Footer />
     </>

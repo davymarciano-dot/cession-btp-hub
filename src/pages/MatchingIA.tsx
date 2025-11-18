@@ -1,5 +1,7 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { UltraCompleteSchemas } from "@/components/seo/UltraCompleteSchemas";
+import { AutoInternalLinks } from "@/components/seo/AutoInternalLinks";
 import { ArrowLeft, Brain, Target, Zap, Shield, TrendingUp, Users } from "lucide-react";
 import { Link } from "react-router-dom";
 import Footer from "@/components/Footer";
@@ -277,6 +279,11 @@ export default function MatchingIA() {
           </div>
         </section>
       </div>
+
+      {/* SEO Optimization */}
+      <UltraCompleteSchemas page="home" />
+      <AutoInternalLinks currentPage="/matching-ia" maxLinks={6} />
+
       <Footer />
     </>
   );

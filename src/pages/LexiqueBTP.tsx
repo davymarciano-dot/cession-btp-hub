@@ -1,6 +1,8 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { UltraCompleteSchemas } from "@/components/seo/UltraCompleteSchemas";
+import { AutoInternalLinks } from "@/components/seo/AutoInternalLinks";
 import { ArrowLeft, Search } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useState } from "react";
@@ -322,6 +324,11 @@ export default function LexiqueBTP() {
           </div>
         </section>
       </div>
+
+      {/* SEO Optimization */}
+      <UltraCompleteSchemas page="home" />
+      <AutoInternalLinks currentPage="/lexique-btp" maxLinks={6} />
+
       <Footer />
     </>
   );

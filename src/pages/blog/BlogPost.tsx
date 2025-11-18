@@ -1,5 +1,7 @@
 import { useParams, Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
+import { UltraCompleteSchemas } from '@/components/seo/UltraCompleteSchemas';
+import { AutoInternalLinks } from '@/components/seo/AutoInternalLinks';
 import { Facebook, Twitter, Linkedin, Mail } from 'lucide-react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
@@ -195,6 +197,20 @@ const BlogPost = () => {
             </div>
           )}
         </article>
+
+        {/* SEO Optimization */}
+        {article && fullContent && (
+          <UltraCompleteSchemas 
+            page="blog"
+            articleData={{
+              title: article.title,
+              description: article.excerpt,
+              author: article.author,
+              datePublished: article.publishedAt
+            }}
+          />
+        )}
+        <AutoInternalLinks currentPage={`/blog/${slug}`} maxLinks={6} />
         
         <Footer />
       </div>
