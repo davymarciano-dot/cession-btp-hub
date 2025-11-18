@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 import { useNavigate } from "react-router-dom";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -328,7 +329,7 @@ const Home = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-background">
       <SEOHead page="home" />
       <UltraCompleteSchemas page="home" />
       <Header />
@@ -823,38 +824,38 @@ const Home = () => {
               💼 Pour les acheteurs
             </div>
             <h2 className="text-5xl font-black mb-4">Abonnements acheteurs</h2>
-            <p className="text-xl text-slate-600">
+            <p className="text-xl text-muted-foreground">
               Accédez aux meilleures opportunités d'acquisition BTP
             </p>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
             {/* GRATUIT */}
-            <div className="h-full flex flex-col border-2 border-slate-200 hover:border-blue-600 hover:shadow-xl transition-all rounded-2xl p-8 bg-white relative">
+            <div className="h-full flex flex-col border-2 border-border hover:border-blue-600 hover:shadow-xl transition-all rounded-2xl p-8 bg-card relative">
               <h3 className="text-2xl font-bold text-blue-600 mb-2">Gratuit</h3>
               <div className="mb-6">
                 <span className="text-5xl font-black text-blue-600">0€</span>
               </div>
-              <p className="text-sm text-slate-500 mb-6">
+              <p className="text-sm text-muted-foreground mb-6">
                 Consultation - Cible : 50 000€ - CA : 0
               </p>
 
               <div className="space-y-3 mb-8 flex-1">
                 <div className="flex items-start gap-2">
                   <CheckCircle2 className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
-                  <span className="text-slate-700">Consultation des annonces</span>
+                  <span className="text-foreground">Consultation des annonces</span>
                 </div>
                 <div className="flex items-start gap-2">
                   <CheckCircle2 className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
-                  <span className="text-slate-700">Recherche basique</span>
+                  <span className="text-foreground">Recherche basique</span>
                 </div>
                 <div className="flex items-start gap-2">
                   <CheckCircle2 className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
-                  <span className="text-slate-700">Interface acheteur</span>
+                  <span className="text-foreground">Interface acheteur</span>
                 </div>
                 <div className="flex items-start gap-2">
                   <CheckCircle2 className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
-                  <span className="text-slate-700">Inscription gratuite</span>
+                  <span className="text-foreground">Inscription gratuite</span>
                 </div>
               </div>
 
@@ -864,36 +865,36 @@ const Home = () => {
             </div>
 
             {/* CONTACT */}
-            <div className="h-full flex flex-col border-2 border-slate-200 hover:border-green-600 hover:shadow-xl transition-all rounded-2xl p-8 bg-white relative">
+            <div className="h-full flex flex-col border-2 border-border hover:border-green-600 hover:shadow-xl transition-all rounded-2xl p-8 bg-card relative">
               <h3 className="text-2xl font-bold text-green-600 mb-2">Contact</h3>
               <div className="mb-6">
                 <span className="text-5xl font-black text-green-600">49€</span>
-                <span className="text-slate-500"> /5 contacts</span>
+                <span className="text-muted-foreground"> /5 contacts</span>
               </div>
-              <p className="text-sm text-slate-500 mb-6">
+              <p className="text-sm text-muted-foreground mb-6">
                 Messages directs - Cible : 10 000€ - CA : 2,5M
               </p>
 
               <div className="space-y-3 mb-8 flex-1">
                 <div className="flex items-start gap-2">
                   <CheckCircle2 className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
-                  <span className="text-slate-700">5 contacts directs</span>
+                  <span className="text-foreground">5 contacts directs</span>
                 </div>
                 <div className="flex items-start gap-2">
                   <CheckCircle2 className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
-                  <span className="text-slate-700">Messages dirigés vers vendeurs</span>
+                  <span className="text-foreground">Messages dirigés vers vendeurs</span>
                 </div>
                 <div className="flex items-start gap-2">
                   <CheckCircle2 className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
-                  <span className="text-slate-700">Coordonnées complètes</span>
+                  <span className="text-foreground">Coordonnées complètes</span>
                 </div>
                 <div className="flex items-start gap-2">
                   <CheckCircle2 className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
-                  <span className="text-slate-700">Historique des échanges</span>
+                  <span className="text-foreground">Historique des échanges</span>
                 </div>
                 <div className="flex items-start gap-2">
                   <CheckCircle2 className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
-                  <span className="text-slate-700">Accès prioritaire</span>
+                  <span className="text-foreground">Accès prioritaire</span>
                 </div>
               </div>
 
@@ -903,36 +904,39 @@ const Home = () => {
             </div>
 
             {/* PRO */}
-            <div className="h-full flex flex-col border-2 border-slate-200 hover:border-red-600 hover:shadow-xl transition-all rounded-2xl p-8 bg-white relative">
+            <div className="h-full flex flex-col border-2 border-border hover:border-red-600 hover:shadow-xl transition-all rounded-2xl p-8 bg-card relative">
+              <Badge className="absolute -top-3 left-1/2 -translate-x-1/2 bg-gradient-to-r from-red-500 to-red-600 text-white px-4 py-1.5 text-xs font-bold animate-pulse">
+                ⭐ POPULAIRE
+              </Badge>
               <h3 className="text-2xl font-bold text-red-600 mb-2">Pro</h3>
               <div className="mb-6">
                 <span className="text-5xl font-black text-red-600">99€</span>
-                <span className="text-slate-600"> /mois</span>
+                <span className="text-muted-foreground"> /mois</span>
               </div>
-              <p className="text-sm text-slate-600 mb-6">
+              <p className="text-sm text-muted-foreground mb-6">
                 Illimité + alertes - Cible : 5 000€ - CA : 6M
               </p>
 
               <div className="space-y-3 mb-8 flex-1">
                 <div className="flex items-start gap-2">
                   <CheckCircle2 className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
-                  <span className="text-slate-900 font-semibold">Contacts ILLIMITÉS</span>
+                  <span className="text-foreground font-semibold">Contacts ILLIMITÉS</span>
                 </div>
                 <div className="flex items-start gap-2">
                   <CheckCircle2 className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
-                  <span className="text-slate-900">Alertes personnalisées</span>
+                  <span className="text-foreground">Alertes personnalisées</span>
                 </div>
                 <div className="flex items-start gap-2">
                   <CheckCircle2 className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
-                  <span className="text-slate-900">Coordonnées complètes</span>
+                  <span className="text-foreground">Coordonnées complètes</span>
                 </div>
                 <div className="flex items-start gap-2">
                   <CheckCircle2 className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
-                  <span className="text-slate-900">Badge 'Acheteur Vérifié'</span>
+                  <span className="text-foreground">Badge 'Acheteur Vérifié'</span>
                 </div>
                 <div className="flex items-start gap-2">
                   <CheckCircle2 className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
-                  <span className="text-slate-900">Support prioritaire</span>
+                  <span className="text-foreground">Support prioritaire</span>
                 </div>
               </div>
 

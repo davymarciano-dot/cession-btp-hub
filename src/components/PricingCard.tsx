@@ -46,7 +46,7 @@ const PricingCard = ({
   return (
     <div 
       className={`h-full flex flex-col rounded-2xl p-8 border-2 ${
-        isPopular ? 'border-blue-500' : 'border-slate-200 hover:border-blue-500'
+        isPopular ? 'border-blue-500' : 'border-border hover:border-blue-500'
       } hover:shadow-xl hover:scale-105 bg-card relative transition-all duration-300`}
     >
       {(badgeText || isPopular) && (
