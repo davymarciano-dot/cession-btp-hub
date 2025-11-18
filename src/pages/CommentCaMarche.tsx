@@ -1,5 +1,7 @@
 import SEO from "@/components/SEO";
 import SEOHead from "@/components/SEOHead";
+import { UltraCompleteSchemas } from "@/components/seo/UltraCompleteSchemas";
+import { AutoInternalLinks } from "@/components/seo/AutoInternalLinks";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import ProcessTimeline from "@/components/ProcessTimeline";
@@ -243,6 +245,10 @@ const CommentCaMarche = () => {
           </div>
         </section>
       </main>
+
+      {/* SEO Optimization */}
+      <UltraCompleteSchemas page="home" />
+      <AutoInternalLinks currentPage="/comment-ca-marche" maxLinks={6} />
 
       <Footer />
     </>

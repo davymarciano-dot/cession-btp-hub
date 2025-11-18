@@ -30,6 +30,8 @@ import {
   Star,
 } from "lucide-react";
 import SEOHead from "@/components/SEOHead";
+import { UltraCompleteSchemas } from "@/components/seo/UltraCompleteSchemas";
+import { AutoInternalLinks } from "@/components/seo/AutoInternalLinks";
 import { analyticsEvents } from "@/lib/analytics";
 
 const STORAGE_KEY = "cessionBTP_form_draft";
@@ -1698,6 +1700,10 @@ const Vendre = () => {
           animation: fade-in 0.3s ease-out;
         }
       `}</style>
+
+      {/* SEO Optimization */}
+      <UltraCompleteSchemas page="vendre" />
+      <AutoInternalLinks currentPage="/vendre" maxLinks={6} />
     </div>
   );
 };
