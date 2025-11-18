@@ -35,7 +35,8 @@ const PricingCard = ({
   const isPrimary = variant === "primary" || isPopular;
   
   const handleClick = () => {
-    analyticsEvents.selectSubscription(title, userType);
+    const priceValue = typeof price === 'string' ? parseFloat(price.replace(/[^\d]/g, '')) : price;
+    analyticsEvents.selectSubscription(title, priceValue || 0);
   };
   
   // Déterminer la couleur du bouton selon le titre de la carte
