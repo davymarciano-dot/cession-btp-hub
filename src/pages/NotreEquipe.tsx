@@ -4,6 +4,7 @@ import { Mail, Linkedin, Phone, ArrowLeft } from "lucide-react";
 import { Link } from "react-router-dom";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
+import { OptimizedImage } from "@/components/OptimizedImage";
 
 const teamMembers = [
   {
