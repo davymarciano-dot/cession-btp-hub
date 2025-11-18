@@ -18,6 +18,8 @@ import TanStackCacheDebugger from "./components/debug/TanStackCacheDebugger";
 import Analytics from "./components/Analytics";
 import CrispWidget from "./components/chat/CrispWidget";
 import ErrorBoundary from "./components/ErrorBoundary";
+import { WebVitals } from "@/components/WebVitals";
+import { RoutePreloader } from "@/components/RoutePreloader";
 // import { PWAInstallPrompt } from "./components/PWAInstallPrompt";
 
 // Lazy load heavy pages
@@ -118,6 +120,12 @@ const App = () => {
     <ErrorBoundary>
       <QueryClientProvider client={queryClient}>
       <TooltipProvider>
+        {/* 📊 Monitoring des performances Web Vitals */}
+        <WebVitals />
+        
+        {/* ⚡ Préchargement intelligent des routes */}
+        <RoutePreloader />
+        
         <Toaster />
         <Sonner />
         <Analytics />
