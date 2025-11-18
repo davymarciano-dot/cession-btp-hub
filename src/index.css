@@ -114,25 +114,28 @@
     --shadow-card: 0 10px 30px -10px hsl(217 91% 60% / 0.1);
     --shadow-hover: 0 20px 40px -10px hsl(217 91% 60% / 0.2);
 
-    /* ===== Gradients Premium ===== */
-    --gradient-hero: linear-gradient(135deg, hsl(217 91% 60%) 0%, hsl(224 76% 48%) 50%, hsl(226 71% 40%) 100%);
+    /* ===== Gradients Premium - ULTRA ENHANCED ===== */
+    --gradient-hero: linear-gradient(135deg, hsl(217 91% 60%) 0%, hsl(224 76% 48%) 40%, hsl(25 95% 53%) 70%, hsl(21 90% 48%) 100%);
     --gradient-orange: linear-gradient(135deg, hsl(25 95% 53%) 0%, hsl(21 90% 48%) 50%, hsl(17 88% 40%) 100%);
     --gradient-blue: linear-gradient(135deg, hsl(217 91% 60%) 0%, hsl(221 83% 53%) 100%);
-    --gradient-primary: linear-gradient(135deg, hsl(221 83% 53%), hsl(224 76% 48%));
-    --gradient-card: linear-gradient(135deg, hsl(217 91% 60%), hsl(224 76% 48%));
-    --gradient-radial-primary: radial-gradient(circle at top right, hsl(217 91% 60%), hsl(224 76% 48%));
-    --gradient-radial-orange: radial-gradient(circle at top left, hsl(25 95% 53%), hsl(17 88% 40%));
-    --gradient-mesh: radial-gradient(at 40% 20%, hsl(217 91% 60%) 0px, transparent 50%),
-                     radial-gradient(at 80% 0%, hsl(25 95% 53%) 0px, transparent 50%),
-                     radial-gradient(at 0% 50%, hsl(221 83% 53%) 0px, transparent 50%),
-                     radial-gradient(at 80% 50%, hsl(224 76% 48%) 0px, transparent 50%),
-                     radial-gradient(at 0% 100%, hsl(217 91% 70%) 0px, transparent 50%),
-                     radial-gradient(at 80% 100%, hsl(25 95% 43%) 0px, transparent 50%);
+    --gradient-primary: linear-gradient(135deg, hsl(217 91% 60%), hsl(224 76% 48%), hsl(226 71% 40%));
+    --gradient-secondary: linear-gradient(135deg, hsl(25 95% 53%), hsl(21 90% 48%), hsl(17 88% 40%));
+    --gradient-card: linear-gradient(145deg, hsl(var(--card)), hsl(var(--muted) / 0.3));
+    --gradient-radial-primary: radial-gradient(circle at top right, hsl(217 91% 60%) 0%, hsl(224 76% 48%) 50%, transparent 100%);
+    --gradient-radial-orange: radial-gradient(circle at top left, hsl(25 95% 53%) 0%, hsl(17 88% 40%) 50%, transparent 100%);
+    --gradient-mesh: radial-gradient(at 40% 20%, hsl(217 91% 60% / 0.4) 0px, transparent 50%),
+                     radial-gradient(at 80% 0%, hsl(25 95% 53% / 0.3) 0px, transparent 50%),
+                     radial-gradient(at 0% 50%, hsl(221 83% 53% / 0.3) 0px, transparent 50%),
+                     radial-gradient(at 80% 50%, hsl(224 76% 48% / 0.3) 0px, transparent 50%),
+                     radial-gradient(at 0% 100%, hsl(217 91% 70% / 0.2) 0px, transparent 50%),
+                     radial-gradient(at 80% 100%, hsl(25 95% 43% / 0.2) 0px, transparent 50%);
+    --gradient-glow: radial-gradient(circle at 50% 0%, hsl(217 91% 60% / 0.2), transparent 60%);
     
-    /* ===== Glow Effects ===== */
-    --glow-primary: 0 0 20px hsl(217 91% 60% / 0.3), 0 0 40px hsl(217 91% 60% / 0.2);
-    --glow-orange: 0 0 20px hsl(25 95% 53% / 0.3), 0 0 40px hsl(25 95% 53% / 0.2);
-    --glow-intense: 0 0 30px hsl(217 91% 60% / 0.5), 0 0 60px hsl(217 91% 60% / 0.3), 0 0 90px hsl(217 91% 60% / 0.2);
+    /* ===== Glow Effects - SPECTACULAR ===== */
+    --glow-primary: 0 0 40px hsl(217 91% 60% / 0.4), 0 0 80px hsl(217 91% 60% / 0.2);
+    --glow-orange: 0 0 40px hsl(25 95% 53% / 0.4), 0 0 80px hsl(25 95% 53% / 0.2);
+    --glow-intense: 0 0 50px hsl(217 91% 60% / 0.6), 0 0 100px hsl(217 91% 60% / 0.4), 0 0 150px hsl(217 91% 60% / 0.2);
+    --glow-soft: 0 8px 32px hsl(217 91% 60% / 0.15);
 
     /* ===== Transitions ===== */
     --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
@@ -529,15 +532,32 @@
 
 @keyframes glow {
   0%, 100% {
-    box-shadow: 0 0 20px hsl(217 91% 60% / 0.3);
+    box-shadow: 0 0 30px hsl(217 91% 60% / 0.4), 0 0 60px hsl(217 91% 60% / 0.2);
   }
   50% {
-    box-shadow: 0 0 40px hsl(217 91% 60% / 0.6), 0 0 60px hsl(217 91% 60% / 0.4);
+    box-shadow: 0 0 50px hsl(217 91% 60% / 0.6), 0 0 100px hsl(217 91% 60% / 0.3);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%) translateY(0) rotate(45deg);
+  }
+  100% {
+    transform: translateX(200%) translateY(0) rotate(45deg);
   }
 }
 
 .animate-glow {
-  animation: glow 2s ease-in-out infinite;
+  animation: glow 4s ease-in-out infinite;
+}
+
+.animate-shimmer {
+  animation: shimmer 3s linear infinite;
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
 }
 
 @keyframes shimmer {
