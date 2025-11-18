@@ -14,6 +14,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
+import { OptimizedImage } from "@/components/OptimizedImage";
 
 interface PhotoGalleryProps {
   photos: string[];
@@ -34,13 +35,14 @@ const PhotoGallery = ({ photos, title = "Galerie photos" }: PhotoGalleryProps) =
         {photos.map((photo, index) => (
           <div
             key={index}
-            className="relative aspect-square cursor-pointer group overflow-hidden rounded-lg"
+            className="relative cursor-pointer group overflow-hidden rounded-lg"
             onClick={() => setSelectedIndex(index)}
           >
-            <img
+            <OptimizedImage
               src={photo}
               alt={`Photo ${index + 1}`}
-              className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+              aspectRatio="square"
+              className="transition-transform duration-300 group-hover:scale-110"
             />
             <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors duration-300 flex items-center justify-center">
               <ZoomIn className="w-8 h-8 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
@@ -103,15 +105,15 @@ const PhotoGallery = ({ photos, title = "Galerie photos" }: PhotoGalleryProps) =
                 {photos.map((photo, index) => (
                   <CarouselItem key={index} className="basis-1/6">
                     <div
-                      className={`relative aspect-square cursor-pointer rounded-md overflow-hidden ${
+                      className={`relative cursor-pointer rounded-md overflow-hidden ${
                         selectedIndex === index ? "ring-2 ring-primary" : ""
                       }`}
                       onClick={() => setSelectedIndex(index)}
                     >
-                      <img
+                      <OptimizedImage
                         src={photo}
                         alt={`Miniature ${index + 1}`}
-                        className="w-full h-full object-cover"
+                        aspectRatio="square"
                       />
                     </div>
                   </CarouselItem>
