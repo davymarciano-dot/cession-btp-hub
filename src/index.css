@@ -150,13 +150,14 @@
   }
 
   .dark {
-    --background: 222 84% 5%;
+    /* ===== Semantic Colors Dark Mode (HSL) ===== */
+    --background: 222 47% 11%;
     --foreground: 210 40% 98%;
 
-    --card: 222 84% 5%;
+    --card: 222 47% 11%;
     --card-foreground: 210 40% 98%;
 
-    --popover: 222 84% 5%;
+    --popover: 222 47% 15%;
     --popover-foreground: 210 40% 98%;
 
     --primary: 217 91% 60%;
@@ -180,6 +181,31 @@
     --border: 217 33% 18%;
     --input: 217 33% 18%;
     --ring: 217 91% 60%;
+    
+    /* ===== Extended Dark Palette ===== */
+    --gray-50: 220 18% 20%;
+    --gray-100: 220 16% 25%;
+    --gray-200: 220 14% 30%;
+    --gray-300: 216 12% 40%;
+    --gray-400: 218 11% 50%;
+    --gray-500: 220 9% 60%;
+    --gray-600: 215 14% 70%;
+    --gray-700: 217 19% 80%;
+    --gray-800: 215 28% 85%;
+    --gray-900: 221 39% 90%;
+    
+    /* ===== Gradients Dark Mode ===== */
+    --gradient-hero: linear-gradient(135deg, hsl(217 91% 50%) 0%, hsl(224 76% 38%) 50%, hsl(226 71% 30%) 100%);
+    --gradient-orange: linear-gradient(135deg, hsl(25 95% 48%) 0%, hsl(21 90% 43%) 50%, hsl(17 88% 35%) 100%);
+    --gradient-blue: linear-gradient(135deg, hsl(217 91% 50%) 0%, hsl(221 83% 45%) 100%);
+    --gradient-mesh: radial-gradient(at 40% 20%, hsl(217 91% 40%) 0px, transparent 50%),
+                     radial-gradient(at 80% 0%, hsl(25 95% 35%) 0px, transparent 50%),
+                     radial-gradient(at 0% 50%, hsl(221 83% 35%) 0px, transparent 50%),
+                     radial-gradient(at 80% 50%, hsl(224 76% 30%) 0px, transparent 50%),
+                     radial-gradient(at 0% 100%, hsl(217 91% 45%) 0px, transparent 50%),
+                     radial-gradient(at 80% 100%, hsl(25 95% 30%) 0px, transparent 50%);
+    --input: 217 33% 18%;
+    --ring: 217 91% 60%;
   }
 }
 
@@ -196,13 +222,15 @@
 /* FORCE LE MENU À ÊTRE VISIBLE - CSS CRITIQUE */
 @layer components {
   header {
-    background: white !important;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08) !important;
+    background: hsl(var(--card)) !important;
+    box-shadow: 0 2px 8px hsl(var(--foreground) / 0.08) !important;
+    border-bottom: 1px solid hsl(var(--border));
+    transition: background-color var(--transition-base), color var(--transition-base);
   }
 
-  /* TOUS LES LIENS DU MENU EN NOIR FONCÉ */
+  /* TOUS LES LIENS DU MENU */
   header nav a:not([class*="bg-gradient"]):not([class*="bg-orange"]):not([class*="bg-blue-"]):not([class*="border-blue"]) {
-    color: #111827 !important;
+    color: hsl(var(--foreground)) !important;
     font-weight: 600 !important;
     font-size: 16px !important;
     position: relative;
@@ -211,7 +239,7 @@
   }
 
   header nav a:not([class*="bg-gradient"]):not([class*="bg-orange"]):not([class*="bg-blue-"]):not([class*="border-blue"]):hover {
-    color: #2563EB !important;
+    color: hsl(var(--primary)) !important;
   }
 
   /* INDICATEUR DE PAGE ACTIVE - Ligne bleue sous le lien + style renforcé */
@@ -227,9 +255,9 @@
     left: 0;
     right: 0;
     height: 3px;
-    background: #2563EB;
+    background: hsl(var(--primary));
     border-radius: 2px 2px 0 0;
-    box-shadow: 0 2px 4px rgba(37, 99, 235, 0.3);
+    box-shadow: 0 2px 4px hsl(var(--primary) / 0.3);
   }
 
   /* LOGO OPTIMISÉ */
@@ -242,24 +270,24 @@
   /* BOUTON ORANGE ULTRA VISIBLE */
   header button[class*="bg-gradient"]:not([class*="border"]),
   header a[class*="bg-gradient"]:not([class*="border"]) {
-    background: linear-gradient(135deg, #FF6B35 0%, #F97316 100%) !important;
+    background: linear-gradient(135deg, hsl(var(--secondary)) 0%, hsl(var(--secondary-600)) 100%) !important;
     font-weight: 700 !important;
-    box-shadow: 0 4px 14px rgba(255, 107, 53, 0.4) !important;
+    box-shadow: 0 4px 14px hsl(var(--secondary) / 0.4) !important;
     color: white !important;
   }
 
   /* BOUTON "MON ESPACE" VISIBLE */
   header button[class*="border-blue"],
   header a[class*="border-blue"] {
-    border: 2px solid #2563EB !important;
-    color: #2563EB !important;
-    background: white !important;
+    border: 2px solid hsl(var(--primary)) !important;
+    color: hsl(var(--primary)) !important;
+    background: hsl(var(--card)) !important;
     font-weight: 600 !important;
   }
 
   header button[class*="border-blue"]:hover,
   header a[class*="border-blue"]:hover {
-    background: #EFF6FF !important;
+    background: hsl(var(--primary) / 0.1) !important;
   }
 
 /* Background grid pattern */
@@ -304,9 +332,9 @@
 
   /* Glassmorphism */
   .glass {
-    background: rgba(255, 255, 255, 0.1);
+    background: hsl(var(--card) / 0.7);
     backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    border: 1px solid hsl(var(--border) / 0.2);
   }
 
   /* ===== COMPONENT CLASSES ===== */
@@ -361,19 +389,19 @@
   /* Stat Card */
   .stat-card {
     @apply rounded-xl p-6 text-center;
-    background: rgba(255, 255, 255, 0.1);
+    background: hsl(var(--card) / 0.7);
     backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    border: 1px solid hsl(var(--border) / 0.2);
   }
 
   .stat-number {
     @apply text-4xl font-bold leading-none;
-    color: white;
+    color: hsl(var(--foreground));
   }
 
   .stat-label {
     @apply text-sm mt-2;
-    color: rgba(255, 255, 255, 0.8);
+    color: hsl(var(--muted-foreground));
   }
 
   /* Form Elements */
