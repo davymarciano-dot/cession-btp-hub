@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -23,10 +23,21 @@ const registrationSchema = z.object({
   pays: z.string().min(1, "Le pays est requis"),
   ville: z.string().min(1, "La ville est requise"),
   adresse: z.string().min(1, "L'adresse est requise"),
+  codePostal: z.string().min(1, "Le code postal est requis"),
   acceptCgu: z.boolean().refine(val => val === true, "Vous devez accepter les CGU"),
 });
 
 type RegistrationFormData = z.infer<typeof registrationSchema>;
+
+interface AddressSuggestion {
+  properties: {
+    label: string;
+    name: string;
+    city: string;
+    postcode: string;
+    country: string;
+  };
+}
 
 const countriesWithDialCode = [
   { code: "FR", name: "France", dial: "+33", flag: "🇫🇷" },
@@ -74,8 +85,59 @@ const RegistrationForm = () => {
     pays: "France",
     ville: "",
     adresse: "",
+    codePostal: "",
     acceptCgu: false,
   });
+  
+  const [addressSuggestions, setAddressSuggestions] = useState<AddressSuggestion[]>([]);
+  const [showSuggestions, setShowSuggestions] = useState(false);
+  const suggestionsRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (suggestionsRef.current && !suggestionsRef.current.contains(event.target as Node)) {
+        setShowSuggestions(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
+  const handleAddressChange = async (value: string) => {
+    setFormData(prev => ({ ...prev, adresse: value }));
+    
+    if (value.length > 3) {
+      try {
+        const response = await fetch(
+          `https://api-adresse.data.gouv.fr/search/?q=${encodeURIComponent(value)}&limit=5`
+        );
+        const data = await response.json();
+        setAddressSuggestions(data.features || []);
+        setShowSuggestions(true);
+      } catch (error) {
+        console.error('Erreur lors de la recherche d\'adresse:', error);
+      }
+    } else {
+      setAddressSuggestions([]);
+      setShowSuggestions(false);
+    }
+  };
+
+  const selectAddress = (suggestion: AddressSuggestion) => {
+    const props = suggestion.properties;
+    
+    setFormData(prev => ({
+      ...prev,
+      adresse: props.name || props.label,
+      ville: props.city || '',
+      codePostal: props.postcode || '',
+      pays: 'France'
+    }));
+    
+    setAddressSuggestions([]);
+    setShowSuggestions(false);
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -99,6 +161,7 @@ const RegistrationForm = () => {
             pays: formData.pays,
             ville: formData.ville,
             adresse: formData.adresse,
+            code_postal: formData.codePostal,
           },
         },
       });
@@ -310,28 +373,83 @@ const RegistrationForm = () => {
         />
       </div>
 
-      {/* Pays et Ville - 2 colonnes */}
+      {/* Pays - pleine largeur */}
+      <div className="space-y-2">
+        <Label htmlFor="pays" className="text-sm font-medium flex items-center gap-2">
+          <MapPin className="w-4 h-4 text-primary" />
+          Pays <span className="text-destructive">*</span>
+        </Label>
+        <Select
+          value={formData.pays}
+          onValueChange={(value) => setFormData(prev => ({ ...prev, pays: value }))}
+        >
+          <SelectTrigger className="h-11 bg-background border-2 hover:border-primary/50 transition-all">
+            <SelectValue placeholder="France" />
+          </SelectTrigger>
+          <SelectContent className="bg-background border-2 max-h-[300px]">
+            {countries.map((country) => (
+              <SelectItem key={country} value={country} className="cursor-pointer">
+                {country}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+      </div>
+
+      {/* Adresse - pleine largeur avec autocomplete */}
+      <div className="space-y-2 relative" ref={suggestionsRef}>
+        <Label htmlFor="adresse" className="text-sm font-medium flex items-center gap-2">
+          <Home className="w-4 h-4 text-primary" />
+          Adresse <span className="text-destructive">*</span>
+        </Label>
+        <Input
+          id="adresse"
+          type="text"
+          placeholder="12 rue de la République"
+          value={formData.adresse}
+          onChange={(e) => handleAddressChange(e.target.value)}
+          onFocus={() => addressSuggestions.length > 0 && setShowSuggestions(true)}
+          className="h-11 bg-background border-2 focus:border-primary transition-all"
+          required
+          autoComplete="off"
+        />
+        
+        {showSuggestions && addressSuggestions.length > 0 && (
+          <div className="absolute top-full left-0 right-0 mt-1 bg-background border-2 border-border rounded-md shadow-lg z-50 max-h-60 overflow-y-auto">
+            {addressSuggestions.map((suggestion, index) => (
+              <div
+                key={index}
+                onClick={() => selectAddress(suggestion)}
+                className="px-4 py-3 hover:bg-muted cursor-pointer transition-colors border-b border-border last:border-0 flex items-start gap-2"
+              >
+                <MapPin className="w-4 h-4 text-primary mt-1 shrink-0" />
+                <div className="flex-1 min-w-0">
+                  <div className="text-sm font-medium text-foreground truncate">
+                    {suggestion.properties.label}
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+
+      {/* Code Postal et Ville - 2 colonnes */}
       <div className="grid md:grid-cols-2 gap-4">
         <div className="space-y-2">
-          <Label htmlFor="pays" className="text-sm font-medium flex items-center gap-2">
+          <Label htmlFor="codePostal" className="text-sm font-medium flex items-center gap-2">
             <MapPin className="w-4 h-4 text-primary" />
-            Pays <span className="text-destructive">*</span>
+            Code postal <span className="text-destructive">*</span>
           </Label>
-          <Select
-            value={formData.pays}
-            onValueChange={(value) => setFormData(prev => ({ ...prev, pays: value }))}
-          >
-            <SelectTrigger className="h-11 bg-background border-2 hover:border-primary/50 transition-all">
-              <SelectValue placeholder="France" />
-            </SelectTrigger>
-            <SelectContent className="bg-background border-2 max-h-[300px]">
-              {countries.map((country) => (
-                <SelectItem key={country} value={country} className="cursor-pointer">
-                  {country}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
+          <Input
+            id="codePostal"
+            type="text"
+            placeholder="75001"
+            value={formData.codePostal}
+            onChange={(e) => setFormData(prev => ({ ...prev, codePostal: e.target.value }))}
+            className="h-11 bg-background border-2 focus:border-primary transition-all"
+            required
+          />
         </div>
 
         <div className="space-y-2">
@@ -349,23 +467,6 @@ const RegistrationForm = () => {
             required
           />
         </div>
-      </div>
-
-      {/* Adresse - pleine largeur */}
-      <div className="space-y-2">
-        <Label htmlFor="adresse" className="text-sm font-medium flex items-center gap-2">
-          <Home className="w-4 h-4 text-primary" />
-          Adresse <span className="text-destructive">*</span>
-        </Label>
-        <Input
-          id="adresse"
-          type="text"
-          placeholder="12 rue de la République"
-          value={formData.adresse}
-          onChange={(e) => setFormData(prev => ({ ...prev, adresse: e.target.value }))}
-          className="h-11 bg-background border-2 focus:border-primary transition-all"
-          required
-        />
       </div>
 
       {/* CGU */}
