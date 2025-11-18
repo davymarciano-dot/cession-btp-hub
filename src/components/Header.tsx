@@ -93,11 +93,11 @@ const Header = () => {
 
         {/* MENU MOBILE */}
         {mobileMenuOpen && (
-          <div className="xl:hidden mt-6 pb-6 border-t-2 border-slate-200 pt-6 animate-in slide-in-from-top bg-white/95 backdrop-blur-md rounded-2xl shadow-2xl p-6 -mx-2">
+          <div className="xl:hidden mt-6 pb-6 border-t-2 border-border pt-6 animate-in slide-in-from-top bg-card/95 backdrop-blur-md rounded-2xl shadow-2xl p-6 -mx-2">
             <nav className="flex flex-col gap-3">
               <Link
                 to="/vendre"
-                className="text-slate-800 hover:text-white hover:bg-gradient-to-r hover:from-orange-500 hover:to-pink-500 transition-all font-semibold text-lg py-3 px-4 rounded-lg"
+                className="text-foreground hover:text-white hover:bg-gradient-to-r hover:from-orange-500 hover:to-pink-500 transition-all font-semibold text-lg py-3 px-4 rounded-lg"
                 onClick={() => setMobileMenuOpen(false)}
               >
                 💼 Vendre
@@ -105,7 +105,7 @@ const Header = () => {
 
               <Link
                 to="/entreprises"
-                className="text-slate-800 hover:text-white hover:bg-gradient-to-r hover:from-orange-500 hover:to-pink-500 transition-all font-semibold text-lg py-3 px-4 rounded-lg"
+                className="text-foreground hover:text-white hover:bg-gradient-to-r hover:from-orange-500 hover:to-pink-500 transition-all font-semibold text-lg py-3 px-4 rounded-lg"
                 onClick={() => setMobileMenuOpen(false)}
               >
                 🏢 Entreprises
@@ -113,7 +113,7 @@ const Header = () => {
 
               <Link
                 to="/estimer"
-                className="text-slate-800 hover:text-white hover:bg-gradient-to-r hover:from-orange-500 hover:to-pink-500 transition-all font-semibold text-lg py-3 px-4 rounded-lg"
+                className="text-foreground hover:text-white hover:bg-gradient-to-r hover:from-orange-500 hover:to-pink-500 transition-all font-semibold text-lg py-3 px-4 rounded-lg"
                 onClick={() => setMobileMenuOpen(false)}
               >
                 📊 Estimer
@@ -121,7 +121,7 @@ const Header = () => {
 
               <Link
                 to="/tarifs"
-                className="text-slate-800 hover:text-white hover:bg-gradient-to-r hover:from-orange-500 hover:to-pink-500 transition-all font-semibold text-lg py-3 px-4 rounded-lg"
+                className="text-foreground hover:text-white hover:bg-gradient-to-r hover:from-orange-500 hover:to-pink-500 transition-all font-semibold text-lg py-3 px-4 rounded-lg"
                 onClick={() => setMobileMenuOpen(false)}
               >
                 💰 Tarifs
@@ -129,17 +129,17 @@ const Header = () => {
 
               <Link
                 to="/blog"
-                className="text-slate-800 hover:text-white hover:bg-gradient-to-r hover:from-orange-500 hover:to-pink-500 transition-all font-semibold text-lg py-3 px-4 rounded-lg"
+                className="text-foreground hover:text-white hover:bg-gradient-to-r hover:from-orange-500 hover:to-pink-500 transition-all font-semibold text-lg py-3 px-4 rounded-lg"
                 onClick={() => setMobileMenuOpen(false)}
               >
                 ✍️ Blog
               </Link>
 
-              <div className="h-px bg-gradient-to-r from-transparent via-slate-300 to-transparent my-3"></div>
+              <div className="h-px bg-gradient-to-r from-transparent via-border to-transparent my-3"></div>
 
               <Button
                 variant="outline"
-                className="w-full border-2 border-slate-400 hover:border-orange-500 hover:bg-orange-50 h-14 text-lg font-semibold"
+                className="w-full border-2 border-border hover:border-orange-500 hover:bg-orange-50 h-14 text-lg font-semibold"
                 asChild
               >
                 <Link to="/connexion" onClick={() => setMobileMenuOpen(false)}>

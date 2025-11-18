@@ -1,6 +1,6 @@
 const SuccessFeeSection = () => {
   return (
-    <section className="py-20 bg-green-50">
+    <section className="py-20 bg-muted/40">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
           <div className="text-6xl mb-4">🎉</div>
@@ -13,7 +13,7 @@ const SuccessFeeSection = () => {
           </p>
         </div>
 
-        <div className="max-w-3xl mx-auto bg-white p-8 rounded-xl shadow-lg mb-12">
+        <div className="max-w-3xl mx-auto bg-card p-8 rounded-xl shadow-lg mb-12">
           <h3 className="text-2xl font-bold mb-4 text-center">Exemple concret :</h3>
           <div className="text-center text-xl">
             <p className="mb-2">
@@ -27,7 +27,7 @@ const SuccessFeeSection = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-          <div className="bg-white p-8 rounded-xl shadow-lg text-center hover:shadow-xl transition-all duration-300">
+          <div className="bg-card p-8 rounded-xl shadow-lg text-center hover:shadow-xl transition-all duration-300">
             <div className="text-5xl mb-4">🔒</div>
             <h3 className="text-xl font-bold mb-3">Confidentialité</h3>
             <p className="text-muted-foreground">
@@ -35,7 +35,7 @@ const SuccessFeeSection = () => {
             </p>
           </div>
 
-          <div className="bg-white p-8 rounded-xl shadow-lg text-center hover:shadow-xl transition-all duration-300">
+          <div className="bg-card p-8 rounded-xl shadow-lg text-center hover:shadow-xl transition-all duration-300">
             <div className="text-5xl mb-4">⚡</div>
             <h3 className="text-xl font-bold mb-3">Rapidité</h3>
             <p className="text-muted-foreground">
@@ -43,7 +43,7 @@ const SuccessFeeSection = () => {
             </p>
           </div>
 
-          <div className="bg-white p-8 rounded-xl shadow-lg text-center hover:shadow-xl transition-all duration-300">
+          <div className="bg-card p-8 rounded-xl shadow-lg text-center hover:shadow-xl transition-all duration-300">
             <div className="text-5xl mb-4">🎯</div>
             <h3 className="text-xl font-bold mb-3">Résultats</h3>
             <p className="text-muted-foreground">
