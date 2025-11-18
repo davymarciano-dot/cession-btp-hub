@@ -72,12 +72,17 @@ const EntrepriseCard = ({
 
   return (
     <div 
-      className={`${bgClass} rounded-xl p-6 text-white relative overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 ${
-        isSelected ? 'ring-4 ring-white' : ''
+      className={`${bgClass} rounded-2xl p-6 text-white relative overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 group ${
+        isSelected ? 'ring-4 ring-white scale-105' : 'hover:scale-105'
       }`}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
+      {/* Animated gradient overlay */}
+      <div className="absolute inset-0 bg-gradient-to-br from-white/0 via-white/10 to-white/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+      
+      {/* Shimmer effect */}
+      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent opacity-0 group-hover:opacity-100 -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
       {/* Comparison Checkbox */}
       {onCompareToggle && (
         <div className={`absolute top-3 right-3 z-10 transition-opacity ${

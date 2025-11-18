@@ -1,14 +1,25 @@
 import ProcessStep from "./ProcessStep";
+import { Rocket } from "lucide-react";
 
 const ProcessTimeline = () => {
   return (
-    <section className="py-20 bg-white">
-      <div className="container mx-auto px-4">
-        <div className="text-center mb-12">
-          <div className="text-6xl mb-4">🚀</div>
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">Comment ça Marche</h2>
-          <p className="text-xl text-muted-foreground">
-            Un processus simple et efficace en 5 étapes
+    <section className="py-20 bg-gradient-to-b from-background to-muted/30 relative overflow-hidden">
+      {/* Background decoration */}
+      <div className="absolute inset-0 opacity-5">
+        <div className="absolute top-20 left-10 w-72 h-72 bg-primary rounded-full blur-3xl animate-float"></div>
+        <div className="absolute bottom-20 right-10 w-72 h-72 bg-secondary rounded-full blur-3xl animate-float" style={{ animationDelay: "2s" }}></div>
+      </div>
+      
+      <div className="container mx-auto px-4 relative z-10">
+        <div className="text-center mb-16 animate-fade-in">
+          <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-primary to-primary-700 rounded-2xl mb-6 shadow-lg animate-float">
+            <Rocket className="w-10 h-10 text-white" />
+          </div>
+          <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-primary via-primary-600 to-primary-800 bg-clip-text text-transparent">
+            Comment ça marche
+          </h2>
+          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+            Un processus simple et efficace en 5 étapes pour vendre votre entreprise rapidement
           </p>
         </div>
 
