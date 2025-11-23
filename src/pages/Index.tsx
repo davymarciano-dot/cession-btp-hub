@@ -6,6 +6,8 @@ import { useNavigate } from "react-router-dom";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { supabase } from "@/integrations/supabase/client";
+import { HeroSection } from "@/components/HeroSection";
+import ProcessTimeline from "@/components/ProcessTimeline";
 import {
   ArrowRight,
   CheckCircle2,
@@ -362,102 +364,8 @@ const Home = () => {
         ))}
       </div>
 
-      {/* NEW HERO SECTION */}
-      <section className="relative overflow-hidden" style={{ 
-        background: 'linear-gradient(135deg, #2563EB 0%, #1E40AF 100%)',
-        minHeight: '600px',
-        padding: '60px 20px'
-      }}>
-        {/* BADGE LIVE */}
-        <div className="absolute top-4 left-1/2 transform -translate-x-1/2 z-20">
-          <div className="bg-[#EF4444] text-white px-6 py-2 rounded-full text-sm font-semibold shadow-lg animate-pulse">
-            LIVE - Entreprise d'Électricité vendue pour €1,2M à Nice (06) il y a 6h
-          </div>
-        </div>
-        
-        <div className="container mx-auto max-w-6xl relative z-10 flex flex-col items-center justify-center" style={{ minHeight: '480px' }}>
-          <div className="text-center space-y-8">
-            {/* H1 */}
-            <h1 className="text-white text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
-              Cédez ou reprenez une entreprise BTP en 45 jours
-            </h1>
-            
-            {/* STATS */}
-            <p className="text-white/90 text-base md:text-lg font-medium">
-              Matching IA • 500+ transactions réalisées • 95% satisfaction • 2000+ repreneurs qualifiés
-            </p>
-            
-            {/* CTA BUTTONS */}
-            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-4">
-              <Button 
-                onClick={() => navigate('/vendre')}
-                className="w-full sm:w-auto px-8 py-6 text-lg font-bold text-white rounded-xl shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all"
-                style={{ backgroundColor: '#FF6B35' }}
-              >
-                Vendre mon entreprise
-              </Button>
-              <Button 
-                onClick={() => navigate('/entreprises')}
-                variant="outline"
-                className="w-full sm:w-auto px-8 py-6 text-lg font-bold text-white border-2 border-white bg-transparent hover:bg-white/10 rounded-xl shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all"
-              >
-                Trouver une entreprise
-              </Button>
-            </div>
-            
-            {/* RÉASSURANCE */}
-            <div className="flex flex-col sm:flex-row gap-6 justify-center items-center pt-6 text-white">
-              <div className="flex items-center gap-2">
-                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                </svg>
-                <span className="font-semibold">Résultat en 48h</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                </svg>
-                <span className="font-semibold">100% confidentiel</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                </svg>
-                <span className="font-semibold">Sans engagement</span>
-              </div>
-            </div>
-            
-            {/* BARRE DE RECHERCHE */}
-            <div className="mt-12 max-w-4xl mx-auto">
-              <div className="bg-card rounded-2xl shadow-2xl p-6">
-                <div className="flex flex-col md:flex-row gap-4">
-                  <SearchableSelect
-                    value={secteurFilter}
-                    onValueChange={setSecteurFilter}
-                    placeholder="Tous les secteurs"
-                    className="flex-1"
-                  />
-                  
-                  <SearchableRegionSelect
-                    value={regionFilter}
-                    onValueChange={setRegionFilter}
-                    placeholder="Toutes les régions"
-                    className="flex-1"
-                  />
-                  
-                  <Button 
-                    onClick={() => navigate('/entreprises')}
-                    className="px-8 py-3 text-lg font-bold text-white rounded-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-all"
-                    style={{ backgroundColor: '#FF6B35' }}
-                  >
-                    Rechercher
-                  </Button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* HERO SECTION */}
+      <HeroSection />
 
       {/* SECTION OPPORTUNITÉS À SAISIR */}
       <section className="py-16 bg-muted/40">
@@ -1380,42 +1288,8 @@ const Home = () => {
         </div>
       </section>
 
-      {/* COMMENT ÇA MARCHE - 5 ÉTAPES */}
-      <section className="py-16 bg-muted/40">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <div className="inline-block mb-4">
-              <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto">
-                <span className="text-3xl">🚀</span>
-              </div>
-            </div>
-            <h2 className="text-4xl font-bold text-foreground mb-4">Comment ça marche</h2>
-            <p className="text-xl text-muted-foreground">Un processus simple et efficace en 5 étapes</p>
-          </div>
-
-          <div className="max-w-4xl mx-auto">
-            {processSteps.map((step, index) => (
-              <div key={index} className="flex gap-6 mb-8 last:mb-0">
-                <div className="flex-shrink-0">
-                  <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center text-white text-2xl font-bold shadow-lg">
-                    {step.number}
-                  </div>
-                </div>
-
-                <div className="flex-1 bg-gradient-to-r from-blue-50 to-white rounded-2xl p-6 shadow-md hover:shadow-lg transition-all">
-                  <div className="flex items-center gap-3 mb-2">
-                    <h3 className="text-2xl font-bold text-gray-900">{step.title}</h3>
-                    <span className="bg-orange-500 text-white text-xs font-bold px-3 py-1 rounded-full">
-                      {step.duration}
-                    </span>
-                  </div>
-                  <p className="text-gray-600">{step.description}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* COMMENT ÇA MARCHE - PREMIUM */}
+      <ProcessTimeline />
 
       {/* STATS + TÉMOIGNAGES */}
       <section className="py-16 bg-gradient-to-br from-blue-600 to-blue-700 text-white">
