@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { supabase } from "@/integrations/supabase/client";
-import HeroSection from "@/components/HeroSection";
+import { HeroSection } from "@/components/HeroSection";
 import ProcessTimeline from "@/components/ProcessTimeline";
 import {
   ArrowRight,
