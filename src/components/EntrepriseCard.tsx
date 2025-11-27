@@ -1,8 +1,8 @@
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { ArrowRight } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { analyticsEvents } from "@/lib/analytics";
-import RGEBadge from "./RGEBadge";
 import { useState } from "react";
 
 interface EntrepriseCardProps {
@@ -48,10 +48,6 @@ const EntrepriseCard = ({
 }: EntrepriseCardProps) => {
   const navigate = useNavigate();
   const [isHovered, setIsHovered] = useState(false);
-  const isOrange = type === "orange";
-  const bgClass = isOrange
-    ? "bg-gradient-to-br from-secondary via-secondary-600 to-primary"
-    : "bg-gradient-to-br from-primary via-primary-600 to-secondary";
 
   const handleCompareClick = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -72,7 +68,7 @@ const EntrepriseCard = ({
 
   return (
     <div 
-      className="bg-white rounded-2xl p-6 shadow-md hover:shadow-lg transition-all duration-300 cursor-pointer border border-border group"
+      className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 cursor-pointer border-0 group"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
@@ -108,92 +104,108 @@ const EntrepriseCard = ({
         </div>
       )}
       
-      {/* RGE Badge */}
-      {certifications && <RGEBadge certifications={certifications} />}
-      
-      {/* Top Badges */}
-      <div className="flex gap-2 mb-3">
-        {status === "disponible" && (
-          <Badge className="bg-primary text-white">
-            Disponible
-          </Badge>
-        )}
-        {certification && (
-          <Badge variant="outline" className="border-border">
-            {certification}
-          </Badge>
-        )}
-        {timeAgo && (
-          <Badge variant="secondary">
-            {timeAgo}
-          </Badge>
-        )}
-      </div>
-
-      {/* Title */}
-      <h3 className="text-xl font-bold text-foreground mb-2 group-hover:text-primary transition-colors">
-        {title}
-      </h3>
-
-      {/* Location */}
-      <p className="text-muted-foreground mb-4 flex items-center gap-1">
-        <span>📍</span> {location}
-      </p>
-
-      {/* Stats Grid */}
-      <div className="grid grid-cols-2 gap-3 mb-4 text-sm">
-        <div className="bg-muted/50 p-2 rounded-lg">
-          <span className="text-muted-foreground block text-xs">Création</span> 
-          <span className="font-semibold text-foreground">{creation}</span>
+      {/* Image Placeholder */}
+      <div className="h-56 bg-gradient-to-br from-primary/10 to-primary/5 relative">
+        <div className="absolute inset-0 flex items-center justify-center">
+          <div className="text-6xl opacity-20">🏗️</div>
         </div>
-        <div className="bg-muted/50 p-2 rounded-lg">
-          <span className="text-muted-foreground block text-xs">CA</span> 
-          <span className="font-semibold text-foreground">{ca}</span>
-        </div>
-        <div className="col-span-2 bg-muted/50 p-2 rounded-lg">
-          <span className="text-muted-foreground block text-xs">Effectif</span> 
-          <span className="font-semibold text-foreground">{effectif}</span>
-        </div>
-      </div>
-
-      {/* Description (for blue cards) */}
-      {description && (
-        <p className="text-muted-foreground mb-4 text-sm leading-relaxed line-clamp-2">
-          {description}
-        </p>
-      )}
-
-      {/* Secteur Badge */}
-      <Badge className="mb-4 bg-secondary/10 text-secondary border-secondary/20">
-        {secteur}
-      </Badge>
-
-      {/* Price */}
-      {price && (
-        <div className="mb-4">
-          <p className="text-3xl font-bold text-foreground">{price}</p>
-          {financement && (
-            <Badge className="bg-success/10 text-success border-success/20 mt-2">
-              Financement possible
+        
+        {/* Badges on Image */}
+        <div className="absolute top-4 left-4 flex flex-wrap gap-2">
+          {status === "disponible" && (
+            <Badge className="bg-green-500 hover:bg-green-600 text-white rounded-lg px-3 py-1 font-medium">
+              Disponible
+            </Badge>
+          )}
+          {certifications && certifications.length > 0 && (
+            <Badge className="bg-success hover:bg-success/90 text-white rounded-lg px-3 py-1 font-medium">
+              <span className="text-xs">✓</span> RGE
             </Badge>
           )}
         </div>
-      )}
+        
+        {timeAgo && (
+          <div className="absolute top-4 right-4">
+            <Badge className="bg-white/90 backdrop-blur-sm text-[#64748B] border-0 rounded-lg px-3 py-1">
+              {timeAgo}
+            </Badge>
+          </div>
+        )}
+      </div>
 
-      {/* Button */}
-      <Button 
-        className="w-full bg-primary hover:bg-primary/90 text-white"
-        onClick={() => {
-          if (id) {
-            const priceValue = price ? parseFloat(price.replace(/[^\d]/g, '')) : 0;
-            analyticsEvents.viewEnterpriseDetails(id, priceValue);
-            navigate(`/entreprises/${id}`);
-          }
-        }}
-        disabled={!id}
-      >
-        Voir les détails
-      </Button>
+      <div className="p-6 space-y-4">
+        {/* Location */}
+        <div className="flex items-center gap-2 text-sm text-[#64748B]">
+          <span>📍</span>
+          <span>{location}</span>
+        </div>
+
+        {/* Title */}
+        <h3 className="text-xl font-bold text-[#1E293B] group-hover:text-primary transition-colors line-clamp-2">
+          {title}
+        </h3>
+
+        {/* Description */}
+        {description && (
+          <p className="text-[#64748B] text-sm leading-relaxed line-clamp-2">
+            {description}
+          </p>
+        )}
+
+        {/* Stats Row */}
+        <div className="flex items-center justify-between py-4 border-y border-gray-100 text-sm">
+          <div>
+            <p className="text-[#64748B] text-xs mb-1">CA annuel</p>
+            <p className="font-semibold text-[#1E293B]">{ca}</p>
+          </div>
+          <div>
+            <p className="text-[#64748B] text-xs mb-1">Effectif</p>
+            <p className="font-semibold text-[#1E293B]">{effectif}</p>
+          </div>
+          <div>
+            <p className="text-[#64748B] text-xs mb-1">Création</p>
+            <p className="font-semibold text-[#1E293B]">{creation}</p>
+          </div>
+        </div>
+
+        {/* Secteur Badge */}
+        <Badge className="bg-secondary/10 text-secondary border-0 hover:bg-secondary/20 rounded-lg px-3 py-1">
+          {secteur}
+        </Badge>
+
+        {/* Price & Button */}
+        <div className="flex items-center justify-between pt-2">
+          <div>
+            {price && (
+              <>
+                <p className="text-xs text-[#64748B] mb-1">Prix</p>
+                <p className="text-2xl font-bold text-primary">{price}</p>
+              </>
+            )}
+          </div>
+          
+          <Button 
+            className="bg-primary hover:bg-primary/90 text-white rounded-xl px-6"
+            onClick={() => {
+              if (id) {
+                const priceValue = price ? parseFloat(price.replace(/[^\d]/g, '')) : 0;
+                analyticsEvents.viewEnterpriseDetails(id, priceValue);
+                navigate(`/entreprises/${id}`);
+              }
+            }}
+            disabled={!id}
+          >
+            Voir
+            <ArrowRight className="w-4 h-4 ml-2" />
+          </Button>
+        </div>
+
+        {financement && (
+          <Badge className="w-full bg-success/10 text-success border-0 hover:bg-success/20 rounded-lg px-3 py-2 flex items-center justify-center gap-1">
+            <span className="text-xs">✓</span> Financement possible
+          </Badge>
+        )}
+      </div>
     </div>
   );
 };

@@ -1,156 +1,170 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Menu, X } from "lucide-react";
-import logo from "@/assets/logo-cessionbtp.png";
-import { OptimizedImage } from "@/components/OptimizedImage";
+import { Menu, X, Building2 } from "lucide-react";
+import DarkModeToggle from "./DarkModeToggle";
+import { supabase } from "@/integrations/supabase/client";
+import { useQuery } from "@tanstack/react-query";
 
 const Header = () => {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const navigate = useNavigate();
+
+  const { data: session } = useQuery({
+    queryKey: ["session"],
+    queryFn: async () => {
+      const { data: { session } } = await supabase.auth.getSession();
+      return session;
+    },
+  });
+
+  const handleLogout = async () => {
+    await supabase.auth.signOut();
+    navigate("/");
+  };
 
   return (
-    <header className="sticky top-0 z-50 bg-white border-b border-border shadow-sm">
-      <div className="container mx-auto px-6 py-4">
-        <div className="flex items-center justify-between gap-8">
-          {/* LOGO */}
-          <Link to="/" className="hover:opacity-80 transition-opacity">
-            <OptimizedImage src={logo} alt="CessionBTP" className="h-12 w-auto" />
-          </Link>
+    <header className="sticky top-0 z-50 w-full bg-white border-b border-gray-100 shadow-sm">
+      <nav className="container mx-auto px-4 h-20 flex items-center justify-between">
+        <Link to="/" className="flex items-center gap-2">
+          <Building2 className="h-7 w-7 text-primary" />
+          <span className="font-bold text-2xl text-[#1E293B]">CessionBTP</span>
+        </Link>
 
-          {/* NAVIGATION DESKTOP */}
-          <nav className="hidden lg:flex items-center gap-1 flex-1 justify-center">
+        {/* Desktop Navigation */}
+        <div className="hidden md:flex items-center gap-8">
+          <Link to="/vendre" className="text-[#64748B] hover:text-primary transition-colors font-medium">
+            Vendre
+          </Link>
+          <Link to="/entreprises" className="text-[#64748B] hover:text-primary transition-colors font-medium">
+            Entreprises à vendre
+          </Link>
+          <Link to="/estimation" className="text-[#64748B] hover:text-primary transition-colors font-medium">
+            Estimer
+          </Link>
+          <Link to="/tarifs" className="text-[#64748B] hover:text-primary transition-colors font-medium">
+            Tarifs
+          </Link>
+          <Link to="/blog" className="text-[#64748B] hover:text-primary transition-colors font-medium">
+            Blog
+          </Link>
+        </div>
+
+        <div className="flex items-center gap-4">
+          <DarkModeToggle />
+          
+          {/* Desktop Auth Buttons */}
+          <div className="hidden md:flex items-center gap-3">
+            {session ? (
+              <>
+                <Button variant="ghost" asChild className="text-[#64748B]">
+                  <Link to="/dashboard">Dashboard</Link>
+                </Button>
+                <Button variant="ghost" onClick={handleLogout} className="text-[#64748B]">
+                  Déconnexion
+                </Button>
+              </>
+            ) : (
+              <>
+                <Button variant="ghost" asChild className="text-[#64748B]">
+                  <Link to="/auth">Connexion</Link>
+                </Button>
+                <Button asChild className="bg-primary hover:bg-primary/90 rounded-xl px-6">
+                  <Link to="/auth">Inscription</Link>
+                </Button>
+              </>
+            )}
+          </div>
+
+          {/* Mobile Menu Button */}
+          <Button
+            variant="ghost"
+            size="icon"
+            className="md:hidden"
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+          >
+            {isMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+          </Button>
+        </div>
+      </nav>
+
+      {/* Mobile Menu */}
+      {isMenuOpen && (
+        <div className="md:hidden border-t bg-white">
+          <nav className="container mx-auto px-4 py-4 flex flex-col gap-4">
             <Link
               to="/vendre"
-              className="text-foreground hover:text-primary transition-colors px-4 py-2 rounded-lg text-base font-medium"
+              className="text-[#64748B] hover:text-primary transition-colors font-medium"
+              onClick={() => setIsMenuOpen(false)}
             >
               Vendre
             </Link>
-
             <Link
               to="/entreprises"
-              className="text-foreground hover:text-primary transition-colors px-4 py-2 rounded-lg text-base font-medium"
+              className="text-[#64748B] hover:text-primary transition-colors font-medium"
+              onClick={() => setIsMenuOpen(false)}
             >
-              <span className="hidden xl:inline">Entreprises à vendre</span>
-              <span className="xl:hidden">Entreprises</span>
+              Entreprises
             </Link>
-
             <Link
-              to="/estimer"
-              className="text-foreground hover:text-primary transition-colors px-4 py-2 rounded-lg text-base font-medium"
+              to="/estimation"
+              className="text-[#64748B] hover:text-primary transition-colors font-medium"
+              onClick={() => setIsMenuOpen(false)}
             >
               Estimer
             </Link>
-
             <Link
               to="/tarifs"
-              className="text-foreground hover:text-primary transition-colors px-4 py-2 rounded-lg text-base font-medium"
+              className="text-[#64748B] hover:text-primary transition-colors font-medium"
+              onClick={() => setIsMenuOpen(false)}
             >
               Tarifs
             </Link>
-
             <Link
               to="/blog"
-              className="text-foreground hover:text-primary transition-colors px-4 py-2 rounded-lg text-base font-medium"
+              className="text-[#64748B] hover:text-primary transition-colors font-medium"
+              onClick={() => setIsMenuOpen(false)}
             >
               Blog
             </Link>
+            
+            <div className="pt-4 border-t flex flex-col gap-2">
+              {session ? (
+                <>
+                  <Button variant="outline" asChild className="w-full">
+                    <Link to="/dashboard" onClick={() => setIsMenuOpen(false)}>
+                      Dashboard
+                    </Link>
+                  </Button>
+                  <Button
+                    variant="ghost"
+                    onClick={() => {
+                      handleLogout();
+                      setIsMenuOpen(false);
+                    }}
+                    className="w-full"
+                  >
+                    Déconnexion
+                  </Button>
+                </>
+              ) : (
+                <>
+                  <Button variant="outline" asChild className="w-full">
+                    <Link to="/auth" onClick={() => setIsMenuOpen(false)}>
+                      Connexion
+                    </Link>
+                  </Button>
+                  <Button asChild className="w-full bg-primary">
+                    <Link to="/auth" onClick={() => setIsMenuOpen(false)}>
+                      Inscription
+                    </Link>
+                  </Button>
+                </>
+              )}
+            </div>
           </nav>
-
-          {/* BOUTONS CTA */}
-          <div className="hidden lg:flex items-center gap-3">
-            <Button
-              variant="outline"
-              className="border-2 border-foreground/20 hover:border-primary hover:text-primary transition-all font-medium"
-              asChild
-            >
-              <Link to="/connexion">Connexion</Link>
-            </Button>
-
-            <Button
-              className="bg-primary hover:bg-primary/90 text-white font-semibold shadow-sm hover:shadow-md transition-all"
-              asChild
-            >
-              <Link to="/estimer">Estimer gratuitement</Link>
-            </Button>
-          </div>
-
-          {/* BOUTON MENU MOBILE */}
-          <button
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="lg:hidden p-2 rounded-lg hover:bg-muted transition-colors"
-          >
-            {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-          </button>
         </div>
-
-        {/* MENU MOBILE */}
-        {mobileMenuOpen && (
-          <div className="lg:hidden mt-4 py-4 border-t border-border">
-            <nav className="flex flex-col gap-2">
-              <Link
-                to="/vendre"
-                className="text-foreground hover:bg-muted py-3 px-4 rounded-lg font-medium transition-colors"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                Vendre
-              </Link>
-
-              <Link
-                to="/entreprises"
-                className="text-foreground hover:bg-muted py-3 px-4 rounded-lg font-medium transition-colors"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                Entreprises
-              </Link>
-
-              <Link
-                to="/estimer"
-                className="text-foreground hover:bg-muted py-3 px-4 rounded-lg font-medium transition-colors"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                Estimer
-              </Link>
-
-              <Link
-                to="/tarifs"
-                className="text-foreground hover:bg-muted py-3 px-4 rounded-lg font-medium transition-colors"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                Tarifs
-              </Link>
-
-              <Link
-                to="/blog"
-                className="text-foreground hover:bg-muted py-3 px-4 rounded-lg font-medium transition-colors"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                Blog
-              </Link>
-
-              <div className="h-px bg-border my-3"></div>
-
-              <Button
-                variant="outline"
-                className="w-full"
-                asChild
-              >
-                <Link to="/connexion" onClick={() => setMobileMenuOpen(false)}>
-                  Connexion
-                </Link>
-              </Button>
-
-              <Button
-                className="w-full bg-primary hover:bg-primary/90"
-                asChild
-              >
-                <Link to="/estimer" onClick={() => setMobileMenuOpen(false)}>
-                  Estimer gratuitement
-                </Link>
-              </Button>
-            </nav>
-          </div>
-        )}
-      </div>
+      )}
     </header>
   );
 };
