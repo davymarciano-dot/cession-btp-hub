@@ -9,137 +9,129 @@ const Header = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 bg-gradient-to-r from-white via-slate-50 to-white border-b-4 border-gradient-to-r from-orange-500 via-blue-500 to-orange-500 shadow-lg">
-      <div className="container mx-auto px-6 py-2">
+    <header className="sticky top-0 z-50 bg-white border-b border-border shadow-sm">
+      <div className="container mx-auto px-6 py-4">
         <div className="flex items-center justify-between gap-8">
-          {/* LOGO GÉANT - Prend toute la hauteur du menu */}
-          <Link to="/" className="hover:scale-105 transition-transform duration-300">
-            <OptimizedImage src={logo} alt="CessionBTP" className="h-auto w-full max-w-md" />
+          {/* LOGO */}
+          <Link to="/" className="hover:opacity-80 transition-opacity">
+            <OptimizedImage src={logo} alt="CessionBTP" className="h-12 w-auto" />
           </Link>
 
-          {/* NAVIGATION DESKTOP - Alignée à droite */}
-          <nav className="hidden xl:flex items-center gap-6 flex-1 justify-end">
+          {/* NAVIGATION DESKTOP */}
+          <nav className="hidden lg:flex items-center gap-1 flex-1 justify-center">
             <Link
               to="/vendre"
-              className="group relative text-slate-800 hover:text-orange-500 transition-all duration-300 font-semibold text-lg px-4 py-2"
+              className="text-foreground hover:text-primary transition-colors px-4 py-2 rounded-lg text-base font-medium"
             >
-              <span className="relative z-10">Vendre</span>
-              <span className="absolute bottom-0 left-0 w-0 h-1 bg-gradient-to-r from-orange-500 to-pink-500 group-hover:w-full transition-all duration-300"></span>
+              Vendre
             </Link>
 
             <Link
               to="/entreprises"
-              className="group relative text-slate-800 hover:text-orange-500 transition-all duration-300 font-semibold text-lg px-4 py-2"
+              className="text-foreground hover:text-primary transition-colors px-4 py-2 rounded-lg text-base font-medium"
             >
-              <span className="relative z-10">
-                <span className="hidden md:inline">Entreprises à Vendre</span>
-                <span className="md:hidden">Entreprises</span>
-              </span>
-              <span className="absolute bottom-0 left-0 w-0 h-1 bg-gradient-to-r from-orange-500 to-pink-500 group-hover:w-full transition-all duration-300"></span>
+              <span className="hidden xl:inline">Entreprises à vendre</span>
+              <span className="xl:hidden">Entreprises</span>
             </Link>
 
             <Link
               to="/estimer"
-              className="group relative text-slate-800 hover:text-orange-500 transition-all duration-300 font-semibold text-lg px-4 py-2"
+              className="text-foreground hover:text-primary transition-colors px-4 py-2 rounded-lg text-base font-medium"
             >
-              <span className="relative z-10">Estimer</span>
-              <span className="absolute bottom-0 left-0 w-0 h-1 bg-gradient-to-r from-orange-500 to-pink-500 group-hover:w-full transition-all duration-300"></span>
+              Estimer
             </Link>
 
             <Link
               to="/tarifs"
-              className="group relative text-slate-800 hover:text-orange-500 transition-all duration-300 font-semibold text-lg px-4 py-2"
+              className="text-foreground hover:text-primary transition-colors px-4 py-2 rounded-lg text-base font-medium"
             >
-              <span className="relative z-10">Tarifs</span>
-              <span className="absolute bottom-0 left-0 w-0 h-1 bg-gradient-to-r from-orange-500 to-pink-500 group-hover:w-full transition-all duration-300"></span>
+              Tarifs
             </Link>
 
             <Link
               to="/blog"
-              className="group relative text-slate-800 hover:text-orange-500 transition-all duration-300 font-semibold text-lg px-4 py-2"
+              className="text-foreground hover:text-primary transition-colors px-4 py-2 rounded-lg text-base font-medium"
             >
-              <span className="relative z-10">Blog</span>
-              <span className="absolute bottom-0 left-0 w-0 h-1 bg-gradient-to-r from-orange-500 to-pink-500 group-hover:w-full transition-all duration-300"></span>
+              Blog
             </Link>
+          </nav>
 
-            {/* Séparateur vertical */}
-            <div className="h-12 w-px bg-gradient-to-b from-transparent via-slate-300 to-transparent mx-2"></div>
-
-            {/* BOUTONS CTA */}
+          {/* BOUTONS CTA */}
+          <div className="hidden lg:flex items-center gap-3">
             <Button
               variant="outline"
-              className="border-2 border-slate-400 hover:border-orange-500 hover:bg-orange-50 hover:text-orange-600 transition-all duration-300 font-semibold text-base px-6 h-12"
+              className="border-2 border-foreground/20 hover:border-primary hover:text-primary transition-all font-medium"
               asChild
             >
               <Link to="/connexion">Connexion</Link>
             </Button>
 
             <Button
-              className="bg-gradient-to-r from-orange-500 via-orange-600 to-pink-500 hover:from-orange-600 hover:via-orange-700 hover:to-pink-600 text-white font-bold text-base px-8 h-12 shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-300"
+              className="bg-primary hover:bg-primary/90 text-white font-semibold shadow-sm hover:shadow-md transition-all"
               asChild
             >
-              <Link to="/estimer">🚀 Estimer Gratuitement</Link>
+              <Link to="/estimer">Estimer gratuitement</Link>
             </Button>
-          </nav>
+          </div>
 
           {/* BOUTON MENU MOBILE */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="xl:hidden p-3 rounded-lg bg-gradient-to-br from-orange-500 to-pink-500 text-white hover:from-orange-600 hover:to-pink-600 transition-all shadow-lg"
+            className="lg:hidden p-2 rounded-lg hover:bg-muted transition-colors"
           >
-            {mobileMenuOpen ? <X className="w-7 h-7" /> : <Menu className="w-7 h-7" />}
+            {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
         </div>
 
         {/* MENU MOBILE */}
         {mobileMenuOpen && (
-          <div className="xl:hidden mt-6 pb-6 border-t-2 border-border pt-6 animate-in slide-in-from-top bg-card/95 backdrop-blur-md rounded-2xl shadow-2xl p-6 -mx-2">
-            <nav className="flex flex-col gap-3">
+          <div className="lg:hidden mt-4 py-4 border-t border-border">
+            <nav className="flex flex-col gap-2">
               <Link
                 to="/vendre"
-                className="text-foreground hover:text-white hover:bg-gradient-to-r hover:from-orange-500 hover:to-pink-500 transition-all font-semibold text-lg py-3 px-4 rounded-lg"
+                className="text-foreground hover:bg-muted py-3 px-4 rounded-lg font-medium transition-colors"
                 onClick={() => setMobileMenuOpen(false)}
               >
-                💼 Vendre
+                Vendre
               </Link>
 
               <Link
                 to="/entreprises"
-                className="text-foreground hover:text-white hover:bg-gradient-to-r hover:from-orange-500 hover:to-pink-500 transition-all font-semibold text-lg py-3 px-4 rounded-lg"
+                className="text-foreground hover:bg-muted py-3 px-4 rounded-lg font-medium transition-colors"
                 onClick={() => setMobileMenuOpen(false)}
               >
-                🏢 Entreprises
+                Entreprises
               </Link>
 
               <Link
                 to="/estimer"
-                className="text-foreground hover:text-white hover:bg-gradient-to-r hover:from-orange-500 hover:to-pink-500 transition-all font-semibold text-lg py-3 px-4 rounded-lg"
+                className="text-foreground hover:bg-muted py-3 px-4 rounded-lg font-medium transition-colors"
                 onClick={() => setMobileMenuOpen(false)}
               >
-                📊 Estimer
+                Estimer
               </Link>
 
               <Link
                 to="/tarifs"
-                className="text-foreground hover:text-white hover:bg-gradient-to-r hover:from-orange-500 hover:to-pink-500 transition-all font-semibold text-lg py-3 px-4 rounded-lg"
+                className="text-foreground hover:bg-muted py-3 px-4 rounded-lg font-medium transition-colors"
                 onClick={() => setMobileMenuOpen(false)}
               >
-                💰 Tarifs
+                Tarifs
               </Link>
 
               <Link
                 to="/blog"
-                className="text-foreground hover:text-white hover:bg-gradient-to-r hover:from-orange-500 hover:to-pink-500 transition-all font-semibold text-lg py-3 px-4 rounded-lg"
+                className="text-foreground hover:bg-muted py-3 px-4 rounded-lg font-medium transition-colors"
                 onClick={() => setMobileMenuOpen(false)}
               >
-                ✍️ Blog
+                Blog
               </Link>
 
-              <div className="h-px bg-gradient-to-r from-transparent via-border to-transparent my-3"></div>
+              <div className="h-px bg-border my-3"></div>
 
               <Button
                 variant="outline"
-                className="w-full border-2 border-border hover:border-orange-500 hover:bg-orange-50 h-14 text-lg font-semibold"
+                className="w-full"
                 asChild
               >
                 <Link to="/connexion" onClick={() => setMobileMenuOpen(false)}>
@@ -148,11 +140,11 @@ const Header = () => {
               </Button>
 
               <Button
-                className="w-full bg-gradient-to-r from-orange-500 to-pink-500 hover:from-orange-600 hover:to-pink-600 h-14 text-lg font-bold shadow-xl"
+                className="w-full bg-primary hover:bg-primary/90"
                 asChild
               >
                 <Link to="/estimer" onClick={() => setMobileMenuOpen(false)}>
-                  🚀 Estimer Gratuitement
+                  Estimer gratuitement
                 </Link>
               </Button>
             </nav>
