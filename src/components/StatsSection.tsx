@@ -44,31 +44,37 @@ const StatsSection = () => {
   }, []);
 
   return (
-    <section className="bg-gradient-to-r from-primary to-blue-700 text-white py-16">
+    <section className="bg-muted/50 py-16">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-          <div className="text-center animate-fade-in">
+          <div className="text-center">
             <div className="flex justify-center mb-4">
-              <TrendingUp className="w-12 h-12 text-green-300" />
+              <div className="w-14 h-14 rounded-full bg-success/10 flex items-center justify-center">
+                <TrendingUp className="w-7 h-7 text-success" />
+              </div>
             </div>
-            <h3 className="text-5xl font-bold mb-2">{soldCount}</h3>
-            <p className="text-xl text-white/90">Entreprises vendues ce mois</p>
+            <h3 className="text-4xl md:text-5xl font-bold text-foreground mb-2">{soldCount}</h3>
+            <p className="text-muted-foreground">Entreprises vendues ce mois</p>
           </div>
           
-          <div className="text-center animate-fade-in" style={{ animationDelay: '0.1s' }}>
+          <div className="text-center">
             <div className="flex justify-center mb-4">
-              <Users className="w-12 h-12 text-blue-300" />
+              <div className="w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center">
+                <Users className="w-7 h-7 text-primary" />
+              </div>
             </div>
-            <h3 className="text-5xl font-bold mb-2">{buyersCount}+</h3>
-            <p className="text-xl text-white/90">Acheteurs qualifiés</p>
+            <h3 className="text-4xl md:text-5xl font-bold text-foreground mb-2">{buyersCount}+</h3>
+            <p className="text-muted-foreground">Acheteurs qualifiés</p>
           </div>
           
-          <div className="text-center animate-fade-in" style={{ animationDelay: '0.2s' }}>
+          <div className="text-center">
             <div className="flex justify-center mb-4">
-              <Target className="w-12 h-12 text-yellow-300" />
+              <div className="w-14 h-14 rounded-full bg-secondary/10 flex items-center justify-center">
+                <Target className="w-7 h-7 text-secondary" />
+              </div>
             </div>
-            <h3 className="text-5xl font-bold mb-2">{successRate}%</h3>
-            <p className="text-xl text-white/90">Taux de réussite</p>
+            <h3 className="text-4xl md:text-5xl font-bold text-foreground mb-2">{successRate}%</h3>
+            <p className="text-muted-foreground">Taux de réussite</p>
           </div>
         </div>
       </div>
