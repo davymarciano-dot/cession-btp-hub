@@ -26,26 +26,29 @@ const Header = () => {
   return (
     <header className="sticky top-0 z-50 w-full bg-white border-b border-gray-100 shadow-sm">
       <nav className="container mx-auto px-4 h-20 flex items-center justify-between">
-        <Link to="/" className="flex items-center gap-2">
-          <Building2 className="h-7 w-7 text-primary" />
-          <span className="font-bold text-2xl text-[#1E293B]">CessionBTP</span>
+        <Link to="/" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
+          <img 
+            src="/images/logo-cessionbtp.png" 
+            alt="CessionBTP Logo" 
+            className="h-14 w-auto"
+          />
         </Link>
 
         {/* Desktop Navigation */}
         <div className="hidden md:flex items-center gap-8">
-          <Link to="/vendre" className="text-[#64748B] hover:text-primary transition-colors font-medium">
+          <Link to="/vendre" className="text-gray-700 hover:text-primary transition-colors font-medium">
             Vendre
           </Link>
-          <Link to="/entreprises" className="text-[#64748B] hover:text-primary transition-colors font-medium">
+          <Link to="/entreprises" className="text-gray-700 hover:text-primary transition-colors font-medium">
             Entreprises à vendre
           </Link>
-          <Link to="/estimation" className="text-[#64748B] hover:text-primary transition-colors font-medium">
+          <Link to="/estimation" className="text-gray-700 hover:text-primary transition-colors font-medium">
             Estimer
           </Link>
-          <Link to="/tarifs" className="text-[#64748B] hover:text-primary transition-colors font-medium">
+          <Link to="/tarifs" className="text-gray-700 hover:text-primary transition-colors font-medium">
             Tarifs
           </Link>
-          <Link to="/blog" className="text-[#64748B] hover:text-primary transition-colors font-medium">
+          <Link to="/blog" className="text-gray-700 hover:text-primary transition-colors font-medium">
             Blog
           </Link>
         </div>
@@ -57,20 +60,20 @@ const Header = () => {
           <div className="hidden md:flex items-center gap-3">
             {session ? (
               <>
-                <Button variant="ghost" asChild className="text-[#64748B]">
-                  <Link to="/dashboard">Dashboard</Link>
+                <Button variant="ghost" asChild className="text-gray-700 hover:text-primary">
+                  <Link to="/dashboard">Mon espace</Link>
                 </Button>
-                <Button variant="ghost" onClick={handleLogout} className="text-[#64748B]">
+                <Button variant="ghost" onClick={handleLogout} className="text-gray-700 hover:text-primary">
                   Déconnexion
                 </Button>
               </>
             ) : (
               <>
-                <Button variant="ghost" asChild className="text-[#64748B]">
+                <Button variant="ghost" asChild className="text-gray-700 hover:text-primary font-medium">
                   <Link to="/auth">Connexion</Link>
                 </Button>
-                <Button asChild className="bg-primary hover:bg-primary/90 rounded-xl px-6">
-                  <Link to="/auth">Inscription</Link>
+                <Button asChild className="bg-primary hover:bg-primary/90 text-white rounded-xl px-6 font-medium shadow-md">
+                  <Link to="/auth">Créer mon compte</Link>
                 </Button>
               </>
             )}
@@ -80,7 +83,7 @@ const Header = () => {
           <Button
             variant="ghost"
             size="icon"
-            className="md:hidden"
+            className="md:hidden text-gray-700"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
           >
             {isMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}

@@ -68,7 +68,7 @@ const EntrepriseCard = ({
 
   return (
     <div 
-      className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 cursor-pointer border-0 group"
+      className="bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 cursor-pointer border border-gray-100 hover:border-primary/20 group relative"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
@@ -105,87 +105,64 @@ const EntrepriseCard = ({
       )}
       
       {/* Image Placeholder */}
-      <div className="h-56 bg-gradient-to-br from-primary/10 to-primary/5 relative">
+      <div className="h-56 bg-gradient-to-br from-primary/8 to-primary/3 relative overflow-hidden">
         <div className="absolute inset-0 flex items-center justify-center">
-          <div className="text-6xl opacity-20">🏗️</div>
+          <div className="text-6xl opacity-10">🏗️</div>
         </div>
         
         {/* Badges on Image */}
-        <div className="absolute top-4 left-4 flex flex-wrap gap-2">
+        <div className="absolute top-3 left-3 flex flex-wrap gap-2">
           {status === "disponible" && (
-            <Badge className="bg-green-500 hover:bg-green-600 text-white rounded-lg px-3 py-1 font-medium">
-              Disponible
+            <Badge className="bg-primary hover:bg-primary text-white rounded-md px-2.5 py-1 text-xs font-semibold shadow-sm">
+              À vendre
             </Badge>
           )}
           {certifications && certifications.length > 0 && (
-            <Badge className="bg-success hover:bg-success/90 text-white rounded-lg px-3 py-1 font-medium">
-              <span className="text-xs">✓</span> RGE
+            <Badge className="bg-primary hover:bg-primary text-white rounded-md px-2.5 py-1 text-xs font-semibold shadow-sm">
+              Certifié RGE
             </Badge>
           )}
         </div>
-        
-        {timeAgo && (
-          <div className="absolute top-4 right-4">
-            <Badge className="bg-white/90 backdrop-blur-sm text-[#64748B] border-0 rounded-lg px-3 py-1">
-              {timeAgo}
-            </Badge>
-          </div>
-        )}
       </div>
 
-      <div className="p-6 space-y-4">
+      <div className="p-5 space-y-3">
         {/* Location */}
-        <div className="flex items-center gap-2 text-sm text-[#64748B]">
-          <span>📍</span>
-          <span>{location}</span>
+        <div className="flex items-center gap-1.5 text-sm text-gray-500">
+          <span className="text-base">📍</span>
+          <span className="font-medium">{location}</span>
         </div>
 
         {/* Title */}
-        <h3 className="text-xl font-bold text-[#1E293B] group-hover:text-primary transition-colors line-clamp-2">
+        <h3 className="text-lg font-bold text-gray-900 group-hover:text-primary transition-colors line-clamp-2 min-h-[3.5rem]">
           {title}
         </h3>
 
-        {/* Description */}
-        {description && (
-          <p className="text-[#64748B] text-sm leading-relaxed line-clamp-2">
-            {description}
-          </p>
-        )}
-
         {/* Stats Row */}
-        <div className="flex items-center justify-between py-4 border-y border-gray-100 text-sm">
-          <div>
-            <p className="text-[#64748B] text-xs mb-1">CA annuel</p>
-            <p className="font-semibold text-[#1E293B]">{ca}</p>
+        <div className="flex items-center gap-4 text-sm">
+          <div className="flex items-center gap-1.5 text-gray-600">
+            <span className="text-base">💼</span>
+            <span>{effectif}</span>
           </div>
-          <div>
-            <p className="text-[#64748B] text-xs mb-1">Effectif</p>
-            <p className="font-semibold text-[#1E293B]">{effectif}</p>
+          <div className="flex items-center gap-1.5 text-gray-600">
+            <span className="text-base">📊</span>
+            <span>{ca}</span>
           </div>
-          <div>
-            <p className="text-[#64748B] text-xs mb-1">Création</p>
-            <p className="font-semibold text-[#1E293B]">{creation}</p>
+          <div className="flex items-center gap-1.5 text-gray-600">
+            <span className="text-base">📅</span>
+            <span>{creation}</span>
           </div>
         </div>
 
-        {/* Secteur Badge */}
-        <Badge className="bg-secondary/10 text-secondary border-0 hover:bg-secondary/20 rounded-lg px-3 py-1">
-          {secteur}
-        </Badge>
-
-        {/* Price & Button */}
-        <div className="flex items-center justify-between pt-2">
-          <div>
-            {price && (
-              <>
-                <p className="text-xs text-[#64748B] mb-1">Prix</p>
-                <p className="text-2xl font-bold text-primary">{price}</p>
-              </>
-            )}
-          </div>
-          
+        {/* Price */}
+        <div className="pt-2 pb-1 border-t border-gray-100 flex items-center justify-between">
+          {price && (
+            <div>
+              <p className="text-2xl font-bold text-gray-900">{price}</p>
+            </div>
+          )}
           <Button 
-            className="bg-primary hover:bg-primary/90 text-white rounded-xl px-6"
+            size="sm"
+            className="bg-primary hover:bg-primary/90 text-white rounded-lg px-5 font-medium"
             onClick={() => {
               if (id) {
                 const priceValue = price ? parseFloat(price.replace(/[^\d]/g, '')) : 0;
@@ -195,8 +172,8 @@ const EntrepriseCard = ({
             }}
             disabled={!id}
           >
-            Voir
-            <ArrowRight className="w-4 h-4 ml-2" />
+            Voir détails
+            <ArrowRight className="w-4 h-4 ml-1.5" />
           </Button>
         </div>
 
