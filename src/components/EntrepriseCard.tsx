@@ -50,8 +50,8 @@ const EntrepriseCard = ({
   const [isHovered, setIsHovered] = useState(false);
   const isOrange = type === "orange";
   const bgClass = isOrange
-    ? "bg-gradient-to-br from-orange-400 to-orange-500"
-    : "bg-gradient-to-br from-blue-500 to-blue-600";
+    ? "bg-gradient-to-br from-secondary via-secondary-600 to-primary"
+    : "bg-gradient-to-br from-primary via-primary-600 to-secondary";
 
   const handleCompareClick = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -72,17 +72,20 @@ const EntrepriseCard = ({
 
   return (
     <div 
-      className={`${bgClass} rounded-2xl p-6 text-white relative overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 group ${
-        isSelected ? 'ring-4 ring-white scale-105' : 'hover:scale-105'
+      className={`${bgClass} rounded-3xl p-8 text-white relative overflow-hidden transition-all duration-500 group ${
+        isSelected ? 'ring-4 ring-white scale-105 shadow-[0_20px_80px_hsl(262_100%_70%/0.5)]' : 'hover:scale-105 shadow-[0_20px_60px_hsl(262_100%_70%/0.3)] hover:shadow-[0_20px_80px_hsl(262_100%_70%/0.5)]'
       }`}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
       {/* Animated gradient overlay */}
-      <div className="absolute inset-0 bg-gradient-to-br from-white/0 via-white/10 to-white/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+      <div className="absolute inset-0 bg-gradient-to-br from-white/0 via-white/20 to-white/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
       
       {/* Shimmer effect */}
-      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent opacity-0 group-hover:opacity-100 -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
+      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent opacity-0 group-hover:opacity-100 -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
+      
+      {/* Glow effect */}
+      <div className="absolute -inset-1 bg-gradient-to-r from-primary/0 via-white/30 to-primary/0 rounded-3xl opacity-0 group-hover:opacity-100 blur-xl transition-opacity duration-500 -z-10"></div>
       {/* Comparison Checkbox */}
       {onCompareToggle && (
         <div className={`absolute top-3 right-3 z-10 transition-opacity ${

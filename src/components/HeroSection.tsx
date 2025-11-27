@@ -1,145 +1,143 @@
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import CountUp from "react-countup";
-import { Clock, Users, TrendingUp, Sparkles, Zap } from "lucide-react";
-import { AnimatedGradient } from "./ui/animated-gradient";
-import { GlassCard } from "./ui/glass-card";
+import { Sparkles, Zap, TrendingUp, Award, Shield } from "lucide-react";
 
 export const HeroSection = () => {
   const navigate = useNavigate();
   
   return (
-    <AnimatedGradient variant="mesh" className="text-white py-20 min-h-[90vh] flex items-center">
-      {/* Advanced Background Effects */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute w-[600px] h-[600px] bg-white/10 rounded-full blur-3xl -top-40 -right-40 animate-float"></div>
-        <div className="absolute w-[500px] h-[500px] bg-secondary/20 rounded-full blur-3xl -bottom-40 -left-40 animate-float" style={{ animationDelay: "1s" }}></div>
-        <div className="absolute w-[400px] h-[400px] bg-primary/15 rounded-full blur-3xl top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 animate-pulse"></div>
-        
-        {/* Floating particles */}
-        {[...Array(20)].map((_, i) => (
-          <div
-            key={i}
-            className="absolute w-2 h-2 bg-white/30 rounded-full animate-float"
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              animationDelay: `${Math.random() * 5}s`,
-              animationDuration: `${3 + Math.random() * 4}s`
-            }}
-          />
-        ))}
-      </div>
+    <div className="relative min-h-[95vh] overflow-hidden bg-gradient-to-br from-background via-primary-50 to-secondary-50">
+      {/* Animated mesh gradient background */}
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,hsl(262_100%_70%/0.15)_0%,transparent_50%),radial-gradient(circle_at_80%_80%,hsl(280_100%_70%/0.15)_0%,transparent_50%),radial-gradient(circle_at_40%_80%,hsl(340_100%_65%/0.1)_0%,transparent_50%)]"></div>
       
-      <div className="container mx-auto px-4 relative z-10">
-        <div className="text-center max-w-4xl mx-auto">
-          {/* Success Badge */}
-          <GlassCard className="inline-flex items-center px-6 py-3 mb-8 animate-scale-in">
-            <Sparkles className="w-4 h-4 text-yellow-300 mr-2 animate-pulse" />
-            <span className="w-2 h-2 bg-success rounded-full animate-pulse mr-3"></span>
-            <span className="text-sm font-semibold bg-gradient-to-r from-white to-white/80 bg-clip-text text-transparent">
-              127 ventes finalisées ce mois-ci
-            </span>
-          </GlassCard>
-          
-          <h1 className="text-5xl md:text-7xl font-bold mb-8 leading-tight animate-slide-up">
-            <span className="bg-gradient-to-r from-white via-white to-white/80 bg-clip-text text-transparent">
-              Vendez votre entreprise BTP en
-            </span>
-            <br />
-            <span className="relative inline-block">
-              <span className="bg-gradient-to-r from-secondary via-secondary-400 to-secondary-600 bg-clip-text text-transparent animate-glow">
-                <CountUp end={45} duration={2.5} /> jours
+      {/* Floating orbs */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute top-20 left-10 w-72 h-72 bg-gradient-to-br from-primary/20 to-secondary/20 rounded-full blur-3xl animate-float"></div>
+        <div className="absolute top-40 right-20 w-96 h-96 bg-gradient-to-br from-secondary/15 to-primary/15 rounded-full blur-3xl animate-float" style={{ animationDelay: "2s", animationDuration: "8s" }}></div>
+        <div className="absolute bottom-20 left-1/3 w-64 h-64 bg-gradient-to-br from-primary/10 to-secondary/10 rounded-full blur-3xl animate-float" style={{ animationDelay: "4s", animationDuration: "10s" }}></div>
+      </div>
+
+      <div className="container mx-auto px-4 py-20 relative z-10">
+        <div className="max-w-6xl mx-auto">
+          {/* Badge with glow */}
+          <div className="flex justify-center mb-8 animate-fade-in">
+            <div className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-gradient-to-r from-primary/10 to-secondary/10 backdrop-blur-xl border border-primary/20 shadow-[0_0_30px_hsl(262_100%_70%/0.2)]">
+              <Sparkles className="w-4 h-4 text-primary animate-pulse" />
+              <span className="text-sm font-semibold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+                127 ventes finalisées ce mois-ci
               </span>
-              <Zap className="absolute -right-12 top-0 w-10 h-10 text-yellow-300 animate-pulse" />
-            </span>
-          </h1>
-          
-          <p className="text-xl mb-6 opacity-90 max-w-2xl mx-auto">
-            La seule plateforme 100% spécialisée BTP qui connecte vendeurs et acheteurs qualifiés
-          </p>
-          
-          {/* Social Proof */}
-          <div className="flex items-center justify-center gap-3 mb-8">
-            <div className="flex -space-x-3">
-              {[1, 2, 3, 4, 5].map((i) => (
-                <div
-                  key={i}
-                  className="w-10 h-10 rounded-full border-2 border-white bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center text-white font-bold text-sm"
-                >
-                  {String.fromCharCode(64 + i)}
-                </div>
-              ))}
+              <div className="w-2 h-2 rounded-full bg-gradient-to-r from-primary to-secondary animate-pulse"></div>
             </div>
-            <p className="text-sm">
-              <strong className="font-bold">2,347 entrepreneurs</strong> nous font confiance
-            </p>
           </div>
-          
-          {/* Double CTA with Urgency */}
-          <div className="flex flex-col sm:flex-row gap-6 justify-center mb-8">
-            <button 
+
+          {/* Main heading with dramatic gradient */}
+          <h1 className="text-center mb-6 animate-slide-up">
+            <div className="text-6xl md:text-8xl font-heading font-bold tracking-tight leading-none">
+              <span className="bg-gradient-to-r from-foreground via-foreground to-foreground/80 bg-clip-text text-transparent">
+                Vendez votre
+              </span>
+            </div>
+            <div className="text-6xl md:text-8xl font-heading font-bold tracking-tight leading-none mt-2">
+              <span className="relative inline-block">
+                <span className="bg-gradient-to-r from-primary via-secondary to-primary bg-clip-text text-transparent animate-glow">
+                  entreprise BTP
+                </span>
+                <div className="absolute -inset-2 bg-gradient-to-r from-primary/20 to-secondary/20 blur-2xl -z-10"></div>
+              </span>
+            </div>
+            <div className="text-6xl md:text-8xl font-heading font-bold tracking-tight leading-none mt-2 flex items-center justify-center gap-4">
+              <span className="bg-gradient-to-r from-foreground via-foreground to-foreground/80 bg-clip-text text-transparent">
+                en
+              </span>
+              <span className="relative inline-flex items-center">
+                <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent font-black">
+                  <CountUp end={45} duration={2.5} />j
+                </span>
+                <Zap className="w-12 h-12 md:w-16 md:h-16 text-secondary ml-2 animate-pulse" fill="currentColor" />
+              </span>
+            </div>
+          </h1>
+
+          {/* Subheading */}
+          <p className="text-center text-xl md:text-2xl text-muted-foreground mb-12 max-w-3xl mx-auto animate-fade-in" style={{ animationDelay: "0.2s" }}>
+            La seule plateforme <span className="font-bold text-foreground">100% spécialisée BTP</span> qui connecte vendeurs et acheteurs qualifiés
+          </p>
+
+          {/* CTA Buttons */}
+          <div className="flex flex-col sm:flex-row gap-6 justify-center mb-16 animate-fade-in" style={{ animationDelay: "0.4s" }}>
+            <button
               onClick={() => navigate('/vendre?type=seller')}
-              className="group relative px-10 py-5 rounded-2xl text-lg font-bold shadow-2xl transform hover:scale-105 transition-all inline-flex items-center justify-center overflow-hidden"
+              className="group relative px-10 py-6 rounded-2xl text-lg font-bold overflow-hidden transform hover:scale-105 transition-all duration-300 shadow-[0_20px_60px_hsl(262_100%_70%/0.3)] hover:shadow-[0_20px_80px_hsl(262_100%_70%/0.5)]"
             >
-              <div className="absolute inset-0 bg-gradient-to-r from-secondary via-secondary-500 to-secondary-700 animate-shimmer"></div>
-              <div className="absolute inset-0 bg-gradient-to-r from-secondary-600 to-secondary-800 opacity-0 group-hover:opacity-100 transition-opacity"></div>
-              <span className="relative z-10 text-white flex items-center">
+              <div className="absolute inset-0 bg-gradient-to-r from-primary via-secondary to-primary bg-[length:200%_100%] animate-shimmer"></div>
+              <span className="relative z-10 text-primary-foreground flex items-center gap-2">
                 Je vends maintenant
-                <span className="ml-3 group-hover:translate-x-2 inline-block transition-transform">→</span>
+                <span className="group-hover:translate-x-2 transition-transform inline-block">→</span>
               </span>
-              <span className="absolute -top-3 -right-3 bg-red-500 text-white text-xs font-bold px-3 py-1.5 rounded-full animate-pulse shadow-lg">
+              <div className="absolute -top-3 -right-3 bg-gradient-to-r from-destructive to-destructive/80 text-destructive-foreground text-xs font-bold px-3 py-1.5 rounded-full animate-pulse shadow-lg">
                 -50% frais
-              </span>
-              <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-white/0 via-white/20 to-white/0 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+              </div>
             </button>
             
-            <GlassCard className="group px-10 py-5 cursor-pointer hover:scale-105 transition-all" hover onClick={() => navigate('/acheter?type=buyer')}>
-              <div className="flex items-center justify-center text-white font-bold text-lg">
+            <button
+              onClick={() => navigate('/entreprises?type=buyer')}
+              className="group relative px-10 py-6 rounded-2xl text-lg font-bold overflow-hidden border-2 border-primary/30 bg-background/80 backdrop-blur-xl hover:border-primary/60 hover:bg-primary/5 transition-all duration-300 transform hover:scale-105"
+            >
+              <span className="relative z-10 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent flex items-center gap-2">
                 Je cherche à reprendre
-              </div>
-            </GlassCard>
+                <span className="group-hover:translate-x-2 transition-transform inline-block">→</span>
+              </span>
+            </button>
           </div>
-          
-          {/* Urgency Timer */}
-          <div className="mb-12">
-            <div className="inline-flex items-center gap-2 bg-red-500 text-white px-4 py-2 rounded-full text-sm font-semibold animate-pulse">
-              <Clock className="w-4 h-4" />
-              <span>Offre limitée : Success fee 2% au lieu de 5% (encore 48h)</span>
+
+          {/* Stats cards */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto animate-fade-in" style={{ animationDelay: "0.6s" }}>
+            {[
+              { icon: TrendingUp, value: 95, suffix: "%", label: "Taux de succès", color: "from-emerald-500 to-emerald-600" },
+              { icon: Award, value: 45, suffix: "j", label: "Délai moyen", color: "from-primary to-secondary" },
+              { icon: Shield, value: 2, suffix: "%", label: "Success fee", color: "from-violet-500 to-purple-600" }
+            ].map((stat, index) => (
+              <div
+                key={index}
+                className="group relative p-8 rounded-3xl bg-gradient-to-br from-background to-muted/30 backdrop-blur-xl border border-border/50 hover:border-primary/50 transition-all duration-300 hover:shadow-[0_20px_60px_hsl(262_100%_70%/0.2)] hover:-translate-y-2"
+              >
+                <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-secondary/5 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                <div className="relative z-10">
+                  <div className={`inline-flex p-3 rounded-2xl bg-gradient-to-br ${stat.color} mb-4 shadow-lg`}>
+                    <stat.icon className="w-6 h-6 text-white" />
+                  </div>
+                  <div className="text-5xl font-heading font-bold mb-2 bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text text-transparent">
+                    <CountUp end={stat.value} duration={2.5} />
+                    {stat.suffix}
+                  </div>
+                  <div className="text-sm font-medium text-muted-foreground">{stat.label}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Trust badges */}
+          <div className="flex flex-wrap items-center justify-center gap-8 mt-16 animate-fade-in" style={{ animationDelay: "0.8s" }}>
+            <div className="flex items-center gap-3 text-sm text-muted-foreground">
+              <div className="flex -space-x-2">
+                {[1, 2, 3, 4].map((i) => (
+                  <div
+                    key={i}
+                    className="w-9 h-9 rounded-full border-2 border-background bg-gradient-to-br from-primary to-secondary flex items-center justify-center text-white font-bold text-xs"
+                  >
+                    {String.fromCharCode(64 + i)}
+                  </div>
+                ))}
+              </div>
+              <span><strong className="text-foreground">2 347</strong> entrepreneurs nous font confiance</span>
             </div>
-          </div>
-          
-          {/* Animated Statistics */}
-          <div className="grid grid-cols-3 gap-8 max-w-3xl mx-auto">
-            <GlassCard className="text-center p-6 animate-scale-in" glow>
-              <div className="text-5xl font-bold mb-2 bg-gradient-to-r from-white to-white/70 bg-clip-text text-transparent">
-                <CountUp end={95} duration={2} suffix="%" />
-              </div>
-              <div className="text-sm font-medium flex items-center justify-center gap-2 text-white/90">
-                <TrendingUp className="w-5 h-5 text-success" />
-                <span>Taux de succès</span>
-              </div>
-            </GlassCard>
-            
-            <GlassCard className="text-center p-6 animate-scale-in" glow style={{ animationDelay: "0.1s" }}>
-              <div className="text-5xl font-bold mb-2 bg-gradient-to-r from-white to-white/70 bg-clip-text text-transparent">
-                <CountUp end={45} duration={2} />j
-              </div>
-              <div className="text-sm font-medium flex items-center justify-center gap-2 text-white/90">
-                <Clock className="w-5 h-5 text-secondary" />
-                <span>Délai moyen</span>
-              </div>
-            </GlassCard>
-            
-            <GlassCard className="text-center p-6 animate-scale-in" glow style={{ animationDelay: "0.2s" }}>
-              <div className="text-5xl font-bold mb-2 bg-gradient-to-r from-white to-white/70 bg-clip-text text-transparent">2%</div>
-              <div className="text-sm font-medium flex items-center justify-center gap-2 text-white/90">
-                <Users className="w-5 h-5 text-primary-300" />
-                <span>Success fee</span>
-              </div>
-            </GlassCard>
+            <div className="h-8 w-px bg-border"></div>
+            <div className="text-sm text-muted-foreground">
+              <strong className="text-foreground">Matching IA</strong> · <strong className="text-foreground">500+</strong> transactions · <strong className="text-foreground">95%</strong> satisfaction
+            </div>
           </div>
         </div>
       </div>
-    </AnimatedGradient>
+    </div>
   );
 };

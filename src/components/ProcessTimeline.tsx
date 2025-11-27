@@ -2,63 +2,73 @@ import ProcessStep from "./ProcessStep";
 import { Rocket } from "lucide-react";
 
 const ProcessTimeline = () => {
+  const steps = [
+    {
+      number: 1,
+      badge: "Gratuit",
+      title: "Estimation en ligne",
+      description: "Remplissez notre formulaire intelligent. Notre IA analyse votre entreprise et génère une valorisation détaillée en 48h.",
+    },
+    {
+      number: 2,
+      badge: "Rapide",
+      title: "Création de l'annonce",
+      description: "Personnalisez votre annonce avec photos, détails financiers et atouts clés. Choisissez votre niveau de confidentialité.",
+    },
+    {
+      number: 3,
+      badge: "Intelligent",
+      title: "Matching IA",
+      description: "Notre algorithme de matching identifie automatiquement les repreneurs les plus qualifiés parmi 2000+ acheteurs actifs.",
+    },
+    {
+      number: 4,
+      badge: "Sécurisé",
+      title: "Mise en relation",
+      description: "Recevez des demandes de contact qualifiées. NDA automatique pour protéger vos informations sensibles.",
+    },
+    {
+      number: 5,
+      badge: "Accompagné",
+      title: "Finalisation",
+      description: "Accompagnement personnalisé jusqu'à la signature. Success fee uniquement en cas de vente réussie.",
+    },
+  ];
+
   return (
-    <section className="py-20 bg-gradient-to-b from-background to-muted/30 relative overflow-hidden">
-      {/* Background decoration */}
-      <div className="absolute inset-0 opacity-5">
-        <div className="absolute top-20 left-10 w-72 h-72 bg-primary rounded-full blur-3xl animate-float"></div>
-        <div className="absolute bottom-20 right-10 w-72 h-72 bg-secondary rounded-full blur-3xl animate-float" style={{ animationDelay: "2s" }}></div>
-      </div>
+    <section className="relative py-24 overflow-hidden">
+      {/* Modern gradient background */}
+      <div className="absolute inset-0 bg-gradient-to-br from-background via-primary-50/30 to-secondary-50/30"></div>
       
+      {/* Floating orbs */}
+      <div className="absolute inset-0 overflow-hidden opacity-60">
+        <div className="absolute top-20 left-10 w-96 h-96 bg-gradient-to-br from-primary/10 to-secondary/10 rounded-full blur-3xl animate-float"></div>
+        <div className="absolute bottom-20 right-10 w-80 h-80 bg-gradient-to-br from-secondary/10 to-primary/10 rounded-full blur-3xl animate-float" style={{ animationDelay: "2s" }}></div>
+      </div>
+
       <div className="container mx-auto px-4 relative z-10">
         <div className="text-center mb-16 animate-fade-in">
-          <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-primary to-primary-700 rounded-2xl mb-6 shadow-lg animate-float">
-            <Rocket className="w-10 h-10 text-white" />
-          </div>
-          <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-primary via-primary-600 to-primary-800 bg-clip-text text-transparent">
-            Comment ça marche
+          <h2 className="text-5xl md:text-6xl font-heading font-bold mb-6">
+            <span className="bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text text-transparent">
+              Comment ça marche
+            </span>
           </h2>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Un processus simple et efficace en 5 étapes pour vendre votre entreprise rapidement
+          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+            Un processus simple et transparent pour vendre votre entreprise BTP en toute confiance
           </p>
         </div>
 
-        <div className="max-w-3xl mx-auto">
-          <ProcessStep
-            number={1}
-            badge="48h"
-            title="Valorisation Gratuite"
-            description="Obtenez une estimation précise de votre entreprise en 48h par nos experts BTP."
-          />
-          
-          <ProcessStep
-            number={2}
-            badge="5 jours"
-            title="Préparation du Dossier"
-            description="Nous optimisons votre dossier pour maximiser la valeur et attirer les meilleurs repreneurs."
-          />
-          
-          <ProcessStep
-            number={3}
-            badge="1 semaine"
-            title="Mise en Relation"
-            description="Notre IA identifie les repreneurs parfaits parmi notre base de 2000+ acheteurs qualifiés."
-          />
-          
-          <ProcessStep
-            number={4}
-            badge="2-4 semaines"
-            title="Négociation"
-            description="Nos experts négocient pour vous les meilleures conditions de vente."
-          />
-          
-          <ProcessStep
-            number={5}
-            badge="1 semaine"
-            title="Closing Sécurisé"
-            description="Finalisation juridique et transfert en toute sécurité avec nos avocats spécialisés."
-            isLast
-          />
+        <div className="max-w-4xl mx-auto">
+          {steps.map((step, index) => (
+            <ProcessStep
+              key={step.number}
+              number={step.number}
+              badge={step.badge}
+              title={step.title}
+              description={step.description}
+              isLast={index === steps.length - 1}
+            />
+          ))}
         </div>
       </div>
     </section>
