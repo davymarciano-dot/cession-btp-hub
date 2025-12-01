@@ -17,6 +17,18 @@ import SEOHead from "@/components/SEOHead";
 import { useNavigate } from "react-router-dom";
 import LiveStatsWidget from "@/components/LiveStatsWidget";
 
+// Import métier images
+import plomberieImg from "@/assets/metiers/plomberie.jpg";
+import electriciteImg from "@/assets/metiers/electricite.jpg";
+import maconnerieImg from "@/assets/metiers/maconnerie.jpg";
+import renovationImg from "@/assets/metiers/renovation.jpg";
+import terrassementImg from "@/assets/metiers/terrassement.jpg";
+import peintureImg from "@/assets/metiers/peinture.jpg";
+import charpenteImg from "@/assets/metiers/charpente.jpg";
+import chauffageImg from "@/assets/metiers/chauffage.jpg";
+import photovoltaiqueImg from "@/assets/metiers/photovoltaique.jpg";
+import isolationImg from "@/assets/metiers/isolation.jpg";
+
 interface Annonce {
   id: string;
   raison_sociale: string | null;
@@ -48,19 +60,30 @@ const QUICK_PICKS = [
   { label: "Nouveautés", filter: "new", icon: "🆕" },
 ];
 
-// Gradients par métier
-const METIER_GRADIENTS: Record<string, { gradient: string; icon: string }> = {
-  "Plomberie": { gradient: "from-blue-400 to-cyan-500", icon: "🔧" },
-  "Plomberie sanitaire": { gradient: "from-blue-400 to-cyan-500", icon: "🔧" },
-  "Électricité": { gradient: "from-yellow-400 to-orange-500", icon: "⚡" },
-  "Maçonnerie": { gradient: "from-gray-400 to-slate-600", icon: "🏗️" },
-  "Isolation": { gradient: "from-orange-400 to-red-500", icon: "🏠" },
-  "Isolation thermique": { gradient: "from-orange-400 to-red-500", icon: "🏠" },
-  "Terrassement": { gradient: "from-amber-600 to-yellow-700", icon: "🚜" },
-  "Peinture": { gradient: "from-pink-400 to-rose-500", icon: "🎨" },
-  "Charpente": { gradient: "from-green-500 to-emerald-600", icon: "🪵" },
-  "Tous corps d'état": { gradient: "from-purple-500 to-indigo-600", icon: "🏢" },
-  "default": { gradient: "from-blue-500 to-purple-600", icon: "🏢" }
+// Images par métier
+const METIER_IMAGES: Record<string, string> = {
+  "Plomberie": plomberieImg,
+  "Plomberie sanitaire": plomberieImg,
+  "Électricité": electriciteImg,
+  "Électricité générale": electriciteImg,
+  "Maçonnerie": maconnerieImg,
+  "Gros œuvre": maconnerieImg,
+  "Isolation": isolationImg,
+  "Isolation thermique": isolationImg,
+  "Terrassement": terrassementImg,
+  "Peinture": peintureImg,
+  "Peinture intérieure": peintureImg,
+  "Peinture extérieure": peintureImg,
+  "Charpente": charpenteImg,
+  "Chauffage": chauffageImg,
+  "Installation de chauffage": chauffageImg,
+  "Climatisation": chauffageImg,
+  "Photovoltaïque": photovoltaiqueImg,
+  "Panneaux solaires": photovoltaiqueImg,
+  "Énergies renouvelables": photovoltaiqueImg,
+  "Rénovation": renovationImg,
+  "Tous corps d'état": renovationImg,
+  "default": renovationImg
 };
 
 // Badges variés
@@ -132,13 +155,13 @@ const Entreprises = () => {
     return `${price}€`;
   };
 
-  const getMetierGradient = (secteur: string) => {
-    for (const key in METIER_GRADIENTS) {
+  const getMetierImage = (secteur: string): string => {
+    for (const key in METIER_IMAGES) {
       if (secteur.toLowerCase().includes(key.toLowerCase())) {
-        return METIER_GRADIENTS[key];
+        return METIER_IMAGES[key];
       }
     }
-    return METIER_GRADIENTS.default;
+    return METIER_IMAGES.default;
   };
 
   // Exemple d'annonces pour la démo
@@ -713,14 +736,14 @@ const Entreprises = () => {
                     
                     <div className="bg-white rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300 border-2 border-orange-200">
                       <div className="md:flex">
-                        {/* Image avec gradient par métier */}
-                        <div className={`md:w-1/2 relative h-80 bg-gradient-to-br ${getMetierGradient(featuredListing.secteur_activite).gradient} flex items-center justify-center overflow-hidden group`}>
-                          <motion.div 
-                            className="text-9xl opacity-20"
-                            whileHover={{ scale: 1.1, transition: { duration: 0.3 } }}
-                          >
-                            {getMetierGradient(featuredListing.secteur_activite).icon}
-                          </motion.div>
+                        {/* Image avec photo du métier */}
+                        <div className="md:w-1/2 relative h-80 overflow-hidden group">
+                          <img 
+                            src={getMetierImage(featuredListing.secteur_activite)} 
+                            alt={featuredListing.secteur_activite}
+                            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                          />
+                          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
                           <div className="absolute top-4 right-4 flex gap-2">
                             <motion.div whileTap={{ scale: 0.95 }}>
                               <Button
@@ -825,7 +848,7 @@ const Entreprises = () => {
                   <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {regularListings.map((annonce, idx) => {
                       const badgeVariant = BADGE_VARIANTS[idx % BADGE_VARIANTS.length];
-                      const metierStyle = getMetierGradient(annonce.secteur_activite);
+                      const metierImage = getMetierImage(annonce.secteur_activite);
                       
                       return (
                         <motion.div
@@ -836,14 +859,14 @@ const Entreprises = () => {
                           whileHover={{ y: -8, transition: { duration: 0.3 } }}
                           className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 group border border-gray-100"
                         >
-                          {/* Image avec gradient par métier */}
-                          <div className={`relative h-48 bg-gradient-to-br ${metierStyle.gradient} flex items-center justify-center overflow-hidden`}>
-                            <motion.div 
-                              className="text-6xl opacity-30"
-                              whileHover={{ scale: 1.1, transition: { duration: 0.3 } }}
-                            >
-                              {metierStyle.icon}
-                            </motion.div>
+                          {/* Image avec photo du métier */}
+                          <div className="relative h-48 overflow-hidden">
+                            <img 
+                              src={metierImage}
+                              alt={annonce.secteur_activite}
+                              className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                            />
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
                             
                             {/* Badges overlay */}
                             <div className="absolute top-3 left-3">
