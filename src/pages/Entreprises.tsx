@@ -1,6 +1,5 @@
-import { useState, useEffect, useRef } from "react";
-import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
-import { useInView } from "react-intersection-observer";
+import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -17,7 +16,6 @@ import { useToast } from "@/hooks/use-toast";
 import SEOHead from "@/components/SEOHead";
 import { useNavigate } from "react-router-dom";
 import LiveStatsWidget from "@/components/LiveStatsWidget";
-import ComparisonBar from "@/components/ComparisonBar";
 
 // Import métier images
 import plomberieImg from "@/assets/metiers/plomberie.jpg";
@@ -98,134 +96,9 @@ const BADGE_VARIANTS = [
   { label: "🏆 Top", color: "bg-gradient-to-r from-yellow-400 to-orange-500", textColor: "text-white" },
 ];
 
-// Composant AnimatedCard avec useInView
-const AnimatedCard = ({ annonce, idx, badgeVariant, metierImage, favorites, toggleFavorite, toggleComparison, formatPrice, navigate }: any) => {
-  const { ref, inView } = useInView({
-    triggerOnce: true,
-    threshold: 0.1,
-  });
-
-  return (
-    <motion.div
-      ref={ref}
-      initial={{ opacity: 0, y: 40 }}
-      animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
-      transition={{ duration: 0.5, delay: idx * 0.1 }}
-      whileHover={{ 
-        y: -8, 
-        transition: { duration: 0.3 },
-        boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.25)"
-      }}
-      className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 group border border-gray-100"
-    >
-      {/* Image avec photo du métier */}
-      <div className="relative h-48 overflow-hidden">
-        <motion.img 
-          src={metierImage}
-          alt={annonce.secteur_activite}
-          className="w-full h-full object-cover"
-          whileHover={{ scale: 1.1 }}
-          transition={{ duration: 0.5 }}
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
-        
-        {/* Badges overlay */}
-        <div className="absolute top-3 left-3">
-          <Badge className={`${badgeVariant.color} ${badgeVariant.textColor} animate-pulse`}>
-            {badgeVariant.label}
-          </Badge>
-          {annonce.certifications?.includes("RGE") && (
-            <Badge className="bg-green-500 text-white mt-2 animate-pulse">
-              <Award className="w-3 h-3 mr-1" />
-              RGE
-            </Badge>
-          )}
-        </div>
-
-        <motion.div whileTap={{ scale: 0.95 }}>
-          <Button
-            size="icon"
-            variant="secondary"
-            className="absolute top-3 right-3 rounded-full bg-white/90 hover:bg-white hover-scale"
-            onClick={() => toggleFavorite(annonce.id)}
-          >
-            <Heart className={`w-4 h-4 ${favorites.includes(annonce.id) ? 'fill-red-500 text-red-500' : ''}`} />
-          </Button>
-        </motion.div>
-      </div>
-
-      {/* Contenu */}
-      <div className="p-5">
-        <h3 className="font-bold text-lg mb-2 line-clamp-2 group-hover:text-primary transition-colors duration-300">
-          {annonce.secteur_activite}
-        </h3>
-        
-        <div className="flex items-center text-sm text-gray-600 mb-3">
-          <MapPin className="w-4 h-4 mr-1" />
-          {annonce.ville} ({annonce.departement})
-        </div>
-
-        <div className="space-y-2 mb-4">
-          <div className="flex items-center justify-between text-sm">
-            <span className="text-gray-600 flex items-center">
-              <Users className="w-4 h-4 mr-1" />
-              {annonce.nombre_salaries} salariés
-            </span>
-            <span className="font-semibold">{formatPrice(annonce.ca_n1)}</span>
-          </div>
-          <div className="flex items-center text-sm text-gray-600">
-            <Clock className="w-4 h-4 mr-1" />
-            Créée en {annonce.annee_creation}
-          </div>
-        </div>
-
-        <div className="flex items-center justify-between mb-4">
-          <Badge className="bg-green-100 text-green-700">
-            <CheckCircle2 className="w-3 h-3 mr-1" />
-            Financement OK
-          </Badge>
-          <div className="text-xl font-black text-primary">
-            {formatPrice(annonce.prix_vente)}
-          </div>
-        </div>
-
-        <div className="flex gap-2">
-          <motion.div whileTap={{ scale: 0.95 }} className="flex-1">
-            <Button
-              variant="outline"
-              size="sm"
-              className="w-full"
-              onClick={() => toggleComparison(annonce.id)}
-            >
-              Comparer
-            </Button>
-          </motion.div>
-          <motion.div whileTap={{ scale: 0.95 }} className="flex-1">
-            <Button
-              size="sm"
-              className="w-full"
-              onClick={() => navigate(`/entreprises/${annonce.id}`)}
-            >
-              Détails
-            </Button>
-          </motion.div>
-        </div>
-      </div>
-    </motion.div>
-  );
-};
-
 const Entreprises = () => {
   const { toast } = useToast();
   const navigate = useNavigate();
-  const heroRef = useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: heroRef,
-    offset: ["start start", "end start"]
-  });
-  const heroY = useTransform(scrollYProgress, [0, 1], [0, 200]);
-  const heroOpacity = useTransform(scrollYProgress, [0, 1], [1, 0]);
-  
   const [annonces, setAnnonces] = useState<Annonce[]>([]);
   const [loading, setLoading] = useState(true);
   const [selectedMetier, setSelectedMetier] = useState<string>("");
@@ -274,31 +147,6 @@ const Entreprises = () => {
         variant: "destructive"
       });
     }
-  };
-
-  const handleRemoveFromComparison = (item: any) => {
-    setSelectedForComparison(prev => prev.filter(id => id !== item.id));
-  };
-
-  const handleCompare = () => {
-    toast({
-      title: "Comparaison en cours",
-      description: `Comparaison de ${selectedForComparison.length} entreprises...`
-    });
-  };
-
-  const getComparisonItems = () => {
-    return displayedAnnonces
-      .filter(a => selectedForComparison.includes(a.id))
-      .map(a => ({
-        id: a.id,
-        title: a.raison_sociale || `Entreprise ${a.secteur_activite}`,
-        price: a.prix_vente,
-        location: `${a.ville} (${a.departement})`,
-        revenue: a.ca_n1,
-        hasRGE: a.certifications?.includes("RGE"),
-        employees: a.nombre_salaries
-      }));
   };
 
   const formatPrice = (price: number) => {
@@ -370,12 +218,9 @@ const Entreprises = () => {
       <SEOHead page="entreprises" />
       <Header />
 
-      {/* HERO SECTION avec Parallax */}
-      <section ref={heroRef} className="relative overflow-hidden bg-gradient-to-br from-blue-600 via-blue-500 to-indigo-600 py-20">
-        <motion.div 
-          style={{ y: heroY, opacity: heroOpacity }}
-          className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmYiIGZpbGwtb3BhY2l0eT0iMC4wNSI+PHBhdGggZD0iTTM2IDEzNGgzNnYzNkgzNnptMC0zNmgzNnYzNkgzNnoiLz48L2c+PC9nPjwvc3ZnPg==')] opacity-20"
-        />
+      {/* HERO SECTION */}
+      <section className="relative overflow-hidden bg-gradient-to-br from-blue-600 via-blue-500 to-indigo-600 py-20">
+        <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmYiIGZpbGwtb3BhY2l0eT0iMC4wNSI+PHBhdGggZD0iTTM2IDEzNGgzNnYzNkgzNnptMC0zNmgzNnYzNkgzNnoiLz48L2c+PC9nPjwvc3ZnPg==')] opacity-20"></div>
         
         <div className="container mx-auto px-4 relative z-10">
           <motion.div
@@ -1001,25 +846,113 @@ const Entreprises = () => {
                     </div>
                   </motion.div>
 
-                  {/* GRILLE 3 COLONNES avec badges variés et animations scroll */}
+                  {/* GRILLE 3 COLONNES avec badges variés */}
                   <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {regularListings.map((annonce, idx) => {
                       const badgeVariant = BADGE_VARIANTS[idx % BADGE_VARIANTS.length];
                       const metierImage = getMetierImage(annonce.secteur_activite);
                       
                       return (
-                        <AnimatedCard
+                        <motion.div
                           key={annonce.id}
-                          annonce={annonce}
-                          idx={idx}
-                          badgeVariant={badgeVariant}
-                          metierImage={metierImage}
-                          favorites={favorites}
-                          toggleFavorite={toggleFavorite}
-                          toggleComparison={toggleComparison}
-                          formatPrice={formatPrice}
-                          navigate={navigate}
-                        />
+                          initial={{ opacity: 0, y: 20 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ delay: 0.1 * idx }}
+                          whileHover={{ y: -8, transition: { duration: 0.3 } }}
+                          className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 group border border-gray-100"
+                        >
+                          {/* Image avec photo du métier */}
+                          <div className="relative h-48 overflow-hidden">
+                            <img 
+                              src={metierImage}
+                              alt={annonce.secteur_activite}
+                              className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                            />
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
+                            
+                            {/* Badges overlay */}
+                            <div className="absolute top-3 left-3">
+                              <Badge className={`${badgeVariant.color} ${badgeVariant.textColor} animate-pulse`}>
+                                {badgeVariant.label}
+                              </Badge>
+                              {annonce.certifications?.includes("RGE") && (
+                                <Badge className="bg-green-500 text-white mt-2">
+                                  <Award className="w-3 h-3 mr-1" />
+                                  RGE
+                                </Badge>
+                              )}
+                            </div>
+
+                            <motion.div whileTap={{ scale: 0.95 }}>
+                              <Button
+                                size="icon"
+                                variant="secondary"
+                                className="absolute top-3 right-3 rounded-full bg-white/90 hover:bg-white hover-scale"
+                                onClick={() => toggleFavorite(annonce.id)}
+                              >
+                                <Heart className={`w-4 h-4 ${favorites.includes(annonce.id) ? 'fill-red-500 text-red-500' : ''}`} />
+                              </Button>
+                            </motion.div>
+                          </div>
+
+                          {/* Contenu */}
+                          <div className="p-5">
+                            <h3 className="font-bold text-lg mb-2 line-clamp-2 group-hover:text-primary transition-colors duration-300">
+                              {annonce.secteur_activite}
+                            </h3>
+                            
+                            <div className="flex items-center text-sm text-gray-600 mb-3">
+                              <MapPin className="w-4 h-4 mr-1" />
+                              {annonce.ville} ({annonce.departement})
+                            </div>
+
+                            <div className="space-y-2 mb-4">
+                              <div className="flex items-center justify-between text-sm">
+                                <span className="text-gray-600 flex items-center">
+                                  <Users className="w-4 h-4 mr-1" />
+                                  {annonce.nombre_salaries} salariés
+                                </span>
+                                <span className="font-semibold">{formatPrice(annonce.ca_n1)}</span>
+                              </div>
+                              <div className="flex items-center text-sm text-gray-600">
+                                <Clock className="w-4 h-4 mr-1" />
+                                Créée en {annonce.annee_creation}
+                              </div>
+                            </div>
+
+                            <div className="flex items-center justify-between mb-4">
+                              <Badge className="bg-green-100 text-green-700">
+                                <CheckCircle2 className="w-3 h-3 mr-1" />
+                                Financement OK
+                              </Badge>
+                              <div className="text-xl font-black text-primary">
+                                {formatPrice(annonce.prix_vente)}
+                              </div>
+                            </div>
+
+                            <div className="flex gap-2">
+                              <motion.div whileTap={{ scale: 0.95 }} className="flex-1">
+                                <Button
+                                  variant="outline"
+                                  size="sm"
+                                  className="w-full"
+                                  onClick={() => toggleComparison(annonce.id)}
+                                >
+                                  Comparer
+                                </Button>
+                              </motion.div>
+                              <motion.div whileTap={{ scale: 0.95 }} className="flex-1">
+                                <Button
+                                  size="sm"
+                                  className="w-full"
+                                  onClick={() => navigate(`/entreprises/${annonce.id}`)}
+                                >
+                                  Détails
+                                </Button>
+                              </motion.div>
+                            </div>
+                          </div>
+                        </motion.div>
                       );
                     })}
                   </div>
@@ -1035,12 +968,61 @@ const Entreprises = () => {
         </div>
       </section>
 
-      {/* COMPARATEUR BARRE FIXE avec ComparisonBar */}
-      <ComparisonBar
-        items={getComparisonItems()}
-        onRemove={handleRemoveFromComparison}
-        onCompare={handleCompare}
-      />
+      {/* COMPARATEUR BARRE FIXE */}
+      <AnimatePresence>
+        {selectedForComparison.length > 0 && (
+          <motion.div
+            initial={{ y: 100, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            exit={{ y: 100, opacity: 0 }}
+            transition={{ type: "spring", damping: 25, stiffness: 200 }}
+            className="fixed bottom-0 left-0 right-0 z-50 bg-white border-t-4 border-blue-500 py-5 shadow-2xl"
+          >
+            <div className="container mx-auto px-4">
+              <div className="flex flex-col md:flex-row items-center gap-4 md:justify-between">
+                <div className="flex items-center gap-4">
+                  <div className="font-bold text-lg text-gray-900">
+                    📊 Comparateur ({selectedForComparison.length}/3)
+                  </div>
+                  <div className="flex gap-2 flex-wrap">
+                    {selectedForComparison.map((id) => {
+                      const annonce = displayedAnnonces.find(a => a.id === id);
+                      return annonce ? (
+                        <motion.div
+                          key={id}
+                          initial={{ scale: 0 }}
+                          animate={{ scale: 1 }}
+                          exit={{ scale: 0 }}
+                        >
+                          <Badge className="bg-blue-100 text-blue-700 px-4 py-2 text-sm">
+                            {annonce.secteur_activite.substring(0, 20)}...
+                            <button
+                              onClick={() => toggleComparison(id)}
+                              className="ml-2 hover:text-red-500 transition-colors"
+                            >
+                              <X className="w-4 h-4" />
+                            </button>
+                          </Badge>
+                        </motion.div>
+                      ) : null;
+                    })}
+                  </div>
+                </div>
+                <motion.div whileTap={{ scale: 0.95 }}>
+                  <Button
+                    size="lg"
+                    className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 font-bold"
+                    disabled={selectedForComparison.length < 2}
+                  >
+                    Comparer maintenant
+                    <ChevronRight className="w-5 h-5 ml-2" />
+                  </Button>
+                </motion.div>
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* SOCIAL PROOF */}
       <section className="py-16 bg-gradient-to-br from-blue-50 to-purple-50">
