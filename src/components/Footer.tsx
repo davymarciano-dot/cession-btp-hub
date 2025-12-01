@@ -207,35 +207,39 @@ const Footer = () => {
                 Confiance
               </h4>
               <div className="bg-white/5 rounded-2xl p-6 border border-white/10">
-                <div className="space-y-4 mb-5">
-                  <div className="flex items-center gap-3 text-sm text-white/85">
-                    <span className="text-2xl">🛡️</span>
-                    <span>SSL & Cryptage</span>
-                  </div>
-                  <div className="flex items-center gap-3 text-sm text-white/85">
-                    <span className="text-2xl">⚡</span>
-                    <span>Vente rapide 45j</span>
-                  </div>
-                  <div className="flex items-center gap-3 text-sm text-white/85">
-                    <span className="text-2xl">✓</span>
-                    <span>Certifié Pro BTP</span>
-                  </div>
-                  <div className="flex items-center gap-3 text-sm text-white/85">
-                    <span className="text-2xl">🎯</span>
-                    <span>Matching IA 95%</span>
-                  </div>
-                </div>
-
-                <div className="pt-5 border-t border-white/10 space-y-3">
-                  <div className="text-sm text-white/70">
-                    <div className="text-[hsl(16,100%,60%)] text-2xl font-bold mb-1">
-                      4.9★
+                <div className="flex gap-6">
+                  {/* Trust badges à gauche */}
+                  <div className="flex-1 space-y-4">
+                    <div className="flex items-center gap-3 text-sm text-white/85">
+                      <span className="text-2xl">🛡️</span>
+                      <span>SSL & Cryptage</span>
                     </div>
-                    (234 avis)
+                    <div className="flex items-center gap-3 text-sm text-white/85">
+                      <span className="text-2xl">⚡</span>
+                      <span>Vente rapide 45j</span>
+                    </div>
+                    <div className="flex items-center gap-3 text-sm text-white/85">
+                      <span className="text-2xl">✓</span>
+                      <span>Certifié Pro BTP</span>
+                    </div>
+                    <div className="flex items-center gap-3 text-sm text-white/85">
+                      <span className="text-2xl">🎯</span>
+                      <span>Matching IA 95%</span>
+                    </div>
                   </div>
-                  <div className="text-sm text-white/70">
-                    <div className="text-[hsl(16,100%,60%)] text-2xl font-bold mb-1">187</div>
-                    ventes 2024
+
+                  {/* Stats à droite */}
+                  <div className="flex flex-col justify-center pl-6 border-l border-white/10 space-y-4">
+                    <div className="text-sm text-white/70">
+                      <div className="text-[hsl(16,100%,60%)] text-2xl font-bold mb-1">
+                        4.9★
+                      </div>
+                      (234 avis)
+                    </div>
+                    <div className="text-sm text-white/70">
+                      <div className="text-[hsl(16,100%,60%)] text-2xl font-bold mb-1">187</div>
+                      ventes 2024
+                    </div>
                   </div>
                 </div>
               </div>
