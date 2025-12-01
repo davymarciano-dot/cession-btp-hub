@@ -252,6 +252,13 @@ const Tarifs = () => {
               <Button className="w-full bg-orange-500 hover:bg-gray-400 group-hover:bg-gray-400 transition-colors">
                 Choisir Essentiel
               </Button>
+
+              {/* Comparaison Essentiel */}
+              <div className="mt-4 p-4 bg-gradient-to-br from-blue-50 to-slate-50 border border-blue-200 rounded-xl">
+                <p className="text-sm text-slate-700 leading-relaxed">
+                  <strong className="text-blue-600">Transentreprise</strong> = 250€ pour annonce seule. <strong className="text-gray-900">Nous 490€</strong> = annonce + expert BTP + valorisation + réseau acheteurs qualifiés + commission seulement si vente. <strong className="text-orange-600">240€ de différence</strong> pour un accompagnement complet qui vous fait vendre en 45j au lieu de 6 mois.
+                </p>
+              </div>
             </div>
 
             {/* PRIME - ⭐ MEILLEUR CHOIX */}
@@ -297,6 +304,13 @@ const Tarifs = () => {
               <Button className="w-full bg-orange-500 hover:bg-orange-500 group-hover:bg-orange-500 transition-colors">
                 Choisir Premium
               </Button>
+
+              {/* Comparaison Prime */}
+              <div className="mt-4 p-4 bg-gradient-to-br from-orange-50 to-amber-50 border border-orange-200 rounded-xl">
+                <p className="text-sm text-slate-700 leading-relaxed">
+                  <strong className="text-orange-600">Mise en avant prioritaire</strong> + expert dédié + photos pro = vous vendez <strong className="text-orange-600">2× plus vite</strong>. <strong className="text-gray-900">187 entreprises vendues en 2024</strong>. Si vous vendez 3 mois plus vite, ça vaut combien pour vous? <strong className="text-orange-600">Bien plus que 500€ de différence</strong>.
+                </p>
+              </div>
             </div>
 
             {/* EXCLUSIF - 👑 PREMIUM */}
@@ -342,6 +356,13 @@ const Tarifs = () => {
               <Button className="w-full bg-orange-500 hover:bg-purple-600 group-hover:bg-purple-600 transition-colors">
                 Choisir Exclusif
               </Button>
+
+              {/* Comparaison Exclusif */}
+              <div className="mt-4 p-4 bg-gradient-to-br from-purple-50 to-amber-50 border border-purple-200 rounded-xl">
+                <p className="text-sm text-slate-700 leading-relaxed">
+                  <strong className="text-purple-600">Agent personnel</strong> + conciergerie complète + confidentialité maximale. <strong className="text-gray-900">Cabinets M&A premium facturent 3,000-5,000€/mois</strong>. Nous <strong className="text-purple-600">1,990€/3 mois = 663€/mois</strong>. Vous économisez <strong className="text-purple-600">2,000-4,000€/mois</strong> vs concurrence.
+                </p>
+              </div>
             </div>
           </div>
 
