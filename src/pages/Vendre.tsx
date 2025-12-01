@@ -1703,7 +1703,7 @@ const Vendre = () => {
 
       {/* SEO Optimization */}
       <UltraCompleteSchemas page="vendre" />
-      <AutoInternalLinks currentPage="/vendre" maxLinks={6} />
+      {/* AutoInternalLinks désactivé sur la page vendre */}
     </div>
   );
 };
