@@ -46,7 +46,10 @@ export default defineConfig(({ mode }) => ({
       },
       workbox: {
         globPatterns: ['**/*.{js,css,html,ico,png,svg,webp,woff2}'],
-        navigateFallback: '/offline.html',
+        // Désactive l'affichage automatique de la page hors ligne en cas d'erreur réseau
+        // pour éviter les faux positifs dans l'éditeur Lovable. Les utilisateurs pourront
+        // toujours accéder à /offline.html directement si besoin.
+        navigateFallback: '/',
         navigateFallbackDenylist: [/^\/api\//, /^\/auth\//],
         runtimeCaching: [
           // Supabase REST API - Network First avec timeout
