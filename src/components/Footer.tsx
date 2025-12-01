@@ -60,7 +60,7 @@ const Footer = () => {
   return (
     <>
       {/* ========== STATS BAR SECTION ========== */}
-      <section className="bg-gradient-to-r from-[hsl(16,100%,60%)] to-[hsl(27,100%,63%)] py-12 md:py-16 mt-20">
+      <section className="bg-gradient-to-r from-[hsl(16,100%,60%)] to-[hsl(27,100%,63%)] py-12 md:py-16">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 text-center text-white">
             {stats.map((stat, index) => (
