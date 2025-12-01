@@ -212,19 +212,19 @@ const Footer = () => {
                   <div className="flex-1 space-y-4">
                     <div className="flex items-center gap-3 text-sm text-white/85">
                       <span className="text-2xl">🛡️</span>
-                      <span>SSL & Cryptage</span>
+                      <span className="whitespace-nowrap">SSL & Cryptage</span>
                     </div>
                     <div className="flex items-center gap-3 text-sm text-white/85">
                       <span className="text-2xl">⚡</span>
-                      <span>Vente rapide 45j</span>
+                      <span className="whitespace-nowrap">Vente rapide 45j</span>
                     </div>
                     <div className="flex items-center gap-3 text-sm text-white/85">
                       <span className="text-2xl">✓</span>
-                      <span>Certifié Pro BTP</span>
+                      <span className="whitespace-nowrap">Certifié Pro BTP</span>
                     </div>
                     <div className="flex items-center gap-3 text-sm text-white/85">
                       <span className="text-2xl">🎯</span>
-                      <span>Matching IA 95%</span>
+                      <span className="whitespace-nowrap">Matching IA 95%</span>
                     </div>
                   </div>
 
