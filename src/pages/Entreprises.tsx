@@ -542,6 +542,8 @@ const Entreprises = () => {
                         <option value="enrochement">Enrochement</option>
                         <option value="drainage">Drainage</option>
                       </optgroup>
+                      
+                      <option value="autre">🔧 Autre (activité non listée)</option>
                     </select>
                   </div>
 
