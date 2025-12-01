@@ -179,7 +179,7 @@ const Tarifs = () => {
               <h3 className="text-2xl font-bold text-sky-500 mb-2">Découverte</h3>
               <div className="mb-6">
                 <span className="text-4xl font-black text-sky-500">Gratuit</span>
-                <span className="text-slate-500 text-xl"> 30j</span>
+                <span className="text-slate-500 text-xl"> 60j</span>
               </div>
               <p className="text-sm text-slate-500 mb-6">
                 Évaluation + 10 vues - Cible : 10 000€ - CA : 0
@@ -219,7 +219,7 @@ const Tarifs = () => {
 
               <h3 className="text-2xl font-bold text-gray-400 mb-2">Essentiel</h3>
               <div className="mb-6">
-                <span className="text-4xl font-black text-gray-400">290€</span>
+                <span className="text-4xl font-black text-gray-400">490€</span>
                 <span className="text-slate-600 text-xl"> /3 mois</span>
               </div>
               <p className="text-sm text-slate-600 mb-6">
@@ -264,7 +264,7 @@ const Tarifs = () => {
 
               <h3 className="text-2xl font-bold text-orange-500 mb-2">Prime</h3>
               <div className="mb-6">
-                <span className="text-4xl font-black text-orange-500">490€</span>
+                <span className="text-4xl font-black text-orange-500">990€</span>
                 <span className="text-slate-500 text-xl"> /3 mois</span>
               </div>
               <p className="text-sm text-slate-500 mb-6">
@@ -309,7 +309,7 @@ const Tarifs = () => {
 
               <h3 className="text-2xl font-bold text-purple-600 mb-2">Exclusif</h3>
               <div className="mb-6">
-                <span className="text-4xl font-black text-purple-600">990€</span>
+                <span className="text-4xl font-black text-purple-600">1,990€</span>
                 <span className="text-slate-500 text-xl"> /3 mois</span>
               </div>
               <p className="text-sm text-slate-500 mb-6">
@@ -342,6 +342,131 @@ const Tarifs = () => {
               <Button className="w-full bg-orange-500 hover:bg-purple-600 group-hover:bg-purple-600 transition-colors">
                 Choisir Exclusif
               </Button>
+            </div>
+          </div>
+
+          {/* COMMISSION DE SUCCÈS */}
+          <div className="mt-20 max-w-6xl mx-auto">
+            <div className="text-center mb-12">
+              <h2 className="text-4xl font-black mb-4">💰 Commission de succès</h2>
+              <p className="text-xl text-slate-600">
+                Payée uniquement lors de la vente réussie - Barème progressif selon prix de vente
+              </p>
+            </div>
+
+            {/* 5 BLOCS TRANCHES */}
+            <div className="bg-white rounded-3xl p-8 shadow-lg mb-8">
+              <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
+                {/* Bloc 1 */}
+                <div className="bg-gradient-to-br from-red-50 to-red-100 rounded-2xl p-6 text-center border-2 border-red-200">
+                  <div className="text-sm font-semibold text-red-700 mb-2">{"< 300K€"}</div>
+                  <div className="text-4xl font-black text-red-600 mb-1">8%</div>
+                  <div className="text-xs text-red-600">Commission</div>
+                </div>
+
+                {/* Bloc 2 */}
+                <div className="bg-gradient-to-br from-orange-50 to-orange-100 rounded-2xl p-6 text-center border-2 border-orange-200">
+                  <div className="text-sm font-semibold text-orange-700 mb-2">300-500K€</div>
+                  <div className="text-4xl font-black text-orange-600 mb-1">6%</div>
+                  <div className="text-xs text-orange-600">Commission</div>
+                </div>
+
+                {/* Bloc 3 */}
+                <div className="bg-gradient-to-br from-yellow-50 to-yellow-100 rounded-2xl p-6 text-center border-2 border-yellow-200">
+                  <div className="text-sm font-semibold text-yellow-700 mb-2">500K-1M€</div>
+                  <div className="text-4xl font-black text-yellow-600 mb-1">5%</div>
+                  <div className="text-xs text-yellow-600">Commission</div>
+                </div>
+
+                {/* Bloc 4 */}
+                <div className="bg-gradient-to-br from-green-50 to-green-100 rounded-2xl p-6 text-center border-2 border-green-200">
+                  <div className="text-sm font-semibold text-green-700 mb-2">1-2M€</div>
+                  <div className="text-4xl font-black text-green-600 mb-1">4%</div>
+                  <div className="text-xs text-green-600">Commission</div>
+                </div>
+
+                {/* Bloc 5 */}
+                <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-2xl p-6 text-center border-2 border-blue-200">
+                  <div className="text-sm font-semibold text-blue-700 mb-2">{"> 2M€"}</div>
+                  <div className="text-4xl font-black text-blue-600 mb-1">3%</div>
+                  <div className="text-xs text-blue-600">Commission</div>
+                </div>
+              </div>
+
+              {/* Note importante */}
+              <div className="mt-8 bg-amber-50 border-2 border-amber-300 rounded-xl p-6 text-center">
+                <p className="text-lg font-bold text-amber-900">
+                  💎 Commission minimale: 8,000€
+                </p>
+                <p className="text-sm text-amber-800 mt-2">
+                  Même si le pourcentage donne un montant inférieur, la commission minimale est de 8,000€.
+                </p>
+              </div>
+            </div>
+
+            {/* 3 EXEMPLES */}
+            <div className="grid md:grid-cols-3 gap-6">
+              {/* Exemple 1 */}
+              <div className="bg-white rounded-2xl p-6 shadow-md border-2 border-slate-200">
+                <h4 className="text-lg font-bold text-slate-800 mb-3">Exemple 1: Petite PME Plomberie</h4>
+                <div className="space-y-2 text-sm">
+                  <div className="flex justify-between">
+                    <span className="text-slate-600">Prix vente:</span>
+                    <span className="font-semibold">200,000€</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-slate-600">Taux:</span>
+                    <span className="font-semibold">8% = 16,000€</span>
+                  </div>
+                  <div className="flex justify-between text-xs text-amber-700 bg-amber-50 p-2 rounded">
+                    <span>Mais minimum 8K →</span>
+                  </div>
+                  <div className="flex justify-between pt-2 border-t-2 border-slate-200">
+                    <span className="font-bold text-slate-800">Commission finale:</span>
+                    <span className="font-black text-green-600 text-lg">8,000€</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Exemple 2 */}
+              <div className="bg-white rounded-2xl p-6 shadow-md border-2 border-blue-200">
+                <h4 className="text-lg font-bold text-slate-800 mb-3">Exemple 2: Entreprise Électricité</h4>
+                <div className="space-y-2 text-sm">
+                  <div className="flex justify-between">
+                    <span className="text-slate-600">Prix vente:</span>
+                    <span className="font-semibold">450,000€</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-slate-600">Taux:</span>
+                    <span className="font-semibold">6%</span>
+                  </div>
+                  <div className="h-6"></div>
+                  <div className="flex justify-between pt-2 border-t-2 border-slate-200">
+                    <span className="font-bold text-slate-800">Commission finale:</span>
+                    <span className="font-black text-green-600 text-lg">27,000€</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Exemple 3 */}
+              <div className="bg-white rounded-2xl p-6 shadow-md border-2 border-slate-200">
+                <h4 className="text-lg font-bold text-slate-800 mb-3">Exemple 3: Grande PME Maçonnerie</h4>
+                <div className="space-y-2 text-sm">
+                  <div className="flex justify-between">
+                    <span className="text-slate-600">Prix vente:</span>
+                    <span className="font-semibold">1,500,000€</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-slate-600">Taux:</span>
+                    <span className="font-semibold">4%</span>
+                  </div>
+                  <div className="h-6"></div>
+                  <div className="flex justify-between pt-2 border-t-2 border-slate-200">
+                    <span className="font-bold text-slate-800">Commission finale:</span>
+                    <span className="font-black text-green-600 text-lg">60,000€</span>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
