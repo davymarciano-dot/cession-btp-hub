@@ -271,8 +271,62 @@ const Entreprises = () => {
                   <DialogTitle>🎯 Filtres avancés</DialogTitle>
                 </DialogHeader>
                 <div className="space-y-6 py-4">
+                  {/* Secteur */}
                   <div>
-                    <label className="font-semibold mb-3 block">💰 Budget</label>
+                    <label className="font-semibold mb-3 block flex items-center gap-2">
+                      <Building2 className="w-5 h-5 text-blue-600" />
+                      Secteur d'activité
+                    </label>
+                    <select
+                      value={selectedMetier}
+                      onChange={(e) => setSelectedMetier(e.target.value)}
+                      className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-all"
+                    >
+                      <option value="">Tous les secteurs</option>
+                      <option value="Tous corps d'état">🏗️ Tous corps d'état</option>
+                      <option value="Électricité">⚡ Électricité</option>
+                      <option value="Plomberie sanitaire">🔧 Plomberie</option>
+                      <option value="Isolation thermique">🏠 Isolation</option>
+                      <option value="Chauffage">🔥 Chauffage</option>
+                      <option value="Climatisation">❄️ Climatisation</option>
+                      <option value="Maçonnerie">🧱 Maçonnerie</option>
+                      <option value="Menuiserie">🪵 Menuiserie</option>
+                      <option value="Peinture">🎨 Peinture</option>
+                      <option value="Énergies renouvelables">☀️ Énergies renouvelables</option>
+                    </select>
+                  </div>
+
+                  {/* Région */}
+                  <div>
+                    <label className="font-semibold mb-3 block flex items-center gap-2">
+                      <MapPin className="w-5 h-5 text-green-600" />
+                      Région / Département
+                    </label>
+                    <select
+                      value={selectedRegion}
+                      onChange={(e) => setSelectedRegion(e.target.value)}
+                      className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-all"
+                    >
+                      <option value="">Toutes les régions</option>
+                      <option value="75">🗼 Paris (75)</option>
+                      <option value="69">🦁 Lyon (69)</option>
+                      <option value="13">⛵ Marseille (13)</option>
+                      <option value="06">🌴 Nice (06)</option>
+                      <option value="31">🌹 Toulouse (31)</option>
+                      <option value="33">🍷 Bordeaux (33)</option>
+                      <option value="44">⚓ Nantes (44)</option>
+                      <option value="59">🍺 Lille (59)</option>
+                      <option value="67">🥨 Strasbourg (67)</option>
+                      <option value="35">⛵ Rennes (35)</option>
+                    </select>
+                  </div>
+
+                  {/* Budget Prix de vente */}
+                  <div>
+                    <label className="font-semibold mb-3 block flex items-center gap-2">
+                      <Euro className="w-5 h-5 text-purple-600" />
+                      Prix de vente
+                    </label>
                     <div className="flex items-center gap-4">
                       <span className="text-2xl">💸</span>
                       <Slider
@@ -288,6 +342,99 @@ const Entreprises = () => {
                       <span>{formatPrice(budgetRange[0])}</span>
                       <span>{formatPrice(budgetRange[1])}</span>
                     </div>
+                  </div>
+
+                  {/* Chiffre d'affaires */}
+                  <div>
+                    <label className="font-semibold mb-3 block flex items-center gap-2">
+                      <TrendingUp className="w-5 h-5 text-orange-600" />
+                      Chiffre d'affaires annuel
+                    </label>
+                    <div className="flex items-center gap-4">
+                      <span className="text-2xl">📊</span>
+                      <Slider
+                        defaultValue={[0, 5000000]}
+                        max={5000000}
+                        step={100000}
+                        className="flex-1"
+                      />
+                      <span className="text-2xl">📈</span>
+                    </div>
+                    <div className="flex justify-between text-sm text-gray-600 mt-2">
+                      <span>0€</span>
+                      <span>5M€</span>
+                    </div>
+                  </div>
+
+                  {/* Nombre de salariés */}
+                  <div>
+                    <label className="font-semibold mb-3 block flex items-center gap-2">
+                      <Users className="w-5 h-5 text-indigo-600" />
+                      Nombre de salariés
+                    </label>
+                    <div className="flex items-center gap-4">
+                      <span className="text-2xl">👤</span>
+                      <Slider
+                        defaultValue={[0, 100]}
+                        max={100}
+                        step={5}
+                        className="flex-1"
+                      />
+                      <span className="text-2xl">👥</span>
+                    </div>
+                    <div className="flex justify-between text-sm text-gray-600 mt-2">
+                      <span>0</span>
+                      <span>100+</span>
+                    </div>
+                  </div>
+
+                  {/* Critères supplémentaires */}
+                  <div>
+                    <label className="font-semibold mb-3 block">✅ Critères supplémentaires</label>
+                    <div className="space-y-3">
+                      <label className="flex items-center gap-3 p-3 rounded-xl border border-gray-200 hover:bg-blue-50 cursor-pointer transition-colors">
+                        <input type="checkbox" className="w-5 h-5 text-blue-600 rounded" />
+                        <div className="flex items-center gap-2">
+                          <Award className="w-5 h-5 text-green-600" />
+                          <span>Certification RGE uniquement</span>
+                        </div>
+                      </label>
+                      <label className="flex items-center gap-3 p-3 rounded-xl border border-gray-200 hover:bg-blue-50 cursor-pointer transition-colors">
+                        <input type="checkbox" className="w-5 h-5 text-blue-600 rounded" />
+                        <div className="flex items-center gap-2">
+                          <CheckCircle2 className="w-5 h-5 text-blue-600" />
+                          <span>Financement possible</span>
+                        </div>
+                      </label>
+                      <label className="flex items-center gap-3 p-3 rounded-xl border border-gray-200 hover:bg-blue-50 cursor-pointer transition-colors">
+                        <input type="checkbox" className="w-5 h-5 text-blue-600 rounded" />
+                        <div className="flex items-center gap-2">
+                          <Zap className="w-5 h-5 text-orange-600" />
+                          <span>Vente rapide (moins de 3 mois)</span>
+                        </div>
+                      </label>
+                    </div>
+                  </div>
+
+                  {/* Boutons d'action */}
+                  <div className="flex gap-3 pt-4">
+                    <Button
+                      variant="outline"
+                      className="flex-1"
+                      onClick={() => {
+                        setSelectedMetier("");
+                        setSelectedRegion("");
+                        setBudgetRange([0, 5000000]);
+                      }}
+                    >
+                      Réinitialiser
+                    </Button>
+                    <Button
+                      className="flex-1 bg-gradient-to-r from-blue-600 to-purple-600"
+                      onClick={() => setShowFiltersModal(false)}
+                    >
+                      Appliquer les filtres
+                    </Button>
                   </div>
                 </div>
               </DialogContent>
