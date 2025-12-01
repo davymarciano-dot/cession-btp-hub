@@ -190,6 +190,19 @@
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
     
+    <script>
+      // Désactive les anciens Service Workers qui peuvent afficher la page hors ligne
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.getRegistrations().then((registrations) => {
+          registrations.forEach((registration) => {
+            registration.unregister();
+          });
+        }).catch(() => {
+          // ignore errors
+        });
+      }
+    </script>
+    
     <!-- Crisp Chat Widget - Configuré via les components -->
     <!-- Le widget Crisp est chargé dynamiquement via src/components/chat/CrispWidget.tsx -->
   </body>
