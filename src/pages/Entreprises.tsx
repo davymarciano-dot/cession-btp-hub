@@ -166,7 +166,7 @@ const Entreprises = () => {
   };
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen flex flex-col">
       <SEOHead page="entreprises" />
       <SEO
         title="Entreprises BTP à vendre - Trouvez votre opportunité"
@@ -231,7 +231,7 @@ const Entreprises = () => {
         </div>
       </section>
 
-      <main className="py-12 bg-slate-50 min-h-screen">
+      <main className="py-12 bg-slate-50 flex-1">
         <div className="container mx-auto px-4">
           <div className="mb-8">
             <p className="text-xl text-muted-foreground">
