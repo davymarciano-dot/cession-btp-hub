@@ -15,6 +15,7 @@ export default defineConfig(({ mode }) => ({
     react(), 
     mode === "development" && componentTagger(),
     VitePWA({
+      disable: true,
       registerType: 'autoUpdate',
       includeAssets: ['favicon.png', 'logo-hd.png', 'robots.txt', 'offline.html'],
       manifest: {
@@ -46,13 +47,9 @@ export default defineConfig(({ mode }) => ({
       },
       workbox: {
         globPatterns: ['**/*.{js,css,html,ico,png,svg,webp,woff2}'],
-        // Désactive l'affichage automatique de la page hors ligne en cas d'erreur réseau
-        // pour éviter les faux positifs dans l'éditeur Lovable. Les utilisateurs pourront
-        // toujours accéder à /offline.html directement si besoin.
         navigateFallback: '/',
         navigateFallbackDenylist: [/^\/api\//, /^\/auth\//],
         runtimeCaching: [
-          // Supabase REST API - Network First avec timeout
           {
             urlPattern: /^https:\/\/xfxfblhxdlzivowodpeg\.supabase\.co\/rest\/.*/i,
             handler: 'NetworkFirst',
@@ -60,7 +57,7 @@ export default defineConfig(({ mode }) => ({
               cacheName: 'supabase-api-rest',
               expiration: {
                 maxEntries: 100,
-                maxAgeSeconds: 5 * 60 // 5 minutes
+                maxAgeSeconds: 5 * 60
               },
               networkTimeoutSeconds: 10,
               cacheableResponse: {
@@ -68,7 +65,6 @@ export default defineConfig(({ mode }) => ({
               }
             }
           },
-          // Supabase Edge Functions - Network Only
           {
             urlPattern: /^https:\/\/xfxfblhxdlzivowodpeg\.supabase\.co\/functions\/.*/i,
             handler: 'NetworkOnly',
@@ -76,7 +72,6 @@ export default defineConfig(({ mode }) => ({
               cacheName: 'supabase-functions'
             }
           },
-          // Google Fonts CSS - Cache First longue durée
           {
             urlPattern: /^https:\/\/fonts\.googleapis\.com\/.*/i,
             handler: 'CacheFirst',
@@ -84,11 +79,10 @@ export default defineConfig(({ mode }) => ({
               cacheName: 'google-fonts-stylesheets',
               expiration: {
                 maxEntries: 10,
-                maxAgeSeconds: 60 * 60 * 24 * 365 // 1 an
+                maxAgeSeconds: 60 * 60 * 24 * 365
               }
             }
           },
-          // Google Fonts fichiers - Cache First longue durée
           {
             urlPattern: /^https:\/\/fonts\.gstatic\.com\/.*/i,
             handler: 'CacheFirst',
@@ -96,14 +90,13 @@ export default defineConfig(({ mode }) => ({
               cacheName: 'google-fonts-webfonts',
               expiration: {
                 maxEntries: 30,
-                maxAgeSeconds: 60 * 60 * 24 * 365 // 1 an
+                maxAgeSeconds: 60 * 60 * 24 * 365
               },
               cacheableResponse: {
                 statuses: [0, 200]
               }
             }
           },
-          // Images - Cache First
           {
             urlPattern: /\.(?:png|jpg|jpeg|svg|gif|webp|ico)$/i,
             handler: 'CacheFirst',
@@ -111,14 +104,13 @@ export default defineConfig(({ mode }) => ({
               cacheName: 'images-cache',
               expiration: {
                 maxEntries: 200,
-                maxAgeSeconds: 60 * 60 * 24 * 30 // 30 jours
+                maxAgeSeconds: 60 * 60 * 24 * 30
               },
               cacheableResponse: {
                 statuses: [0, 200]
               }
             }
           },
-          // JS/CSS - Stale While Revalidate pour mise à jour progressive
           {
             urlPattern: /\.(?:js|css)$/i,
             handler: 'StaleWhileRevalidate',
@@ -126,11 +118,10 @@ export default defineConfig(({ mode }) => ({
               cacheName: 'static-resources',
               expiration: {
                 maxEntries: 60,
-                maxAgeSeconds: 60 * 60 * 24 * 7 // 7 jours
+                maxAgeSeconds: 60 * 60 * 24 * 7
               }
             }
           },
-          // Pages HTML - Network First
           {
             urlPattern: /\.html$/i,
             handler: 'NetworkFirst',
@@ -138,7 +129,7 @@ export default defineConfig(({ mode }) => ({
               cacheName: 'html-pages',
               expiration: {
                 maxEntries: 50,
-                maxAgeSeconds: 60 * 60 * 24 // 24 heures
+                maxAgeSeconds: 60 * 60 * 24
               }
             }
           }
