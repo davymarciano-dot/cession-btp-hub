@@ -1,24 +1,20 @@
 import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Badge } from "@/components/ui/badge";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Slider } from "@/components/ui/slider";
-import { Filter, ChevronLeft, ChevronRight } from "lucide-react";
+import { 
+  Building2, MapPin, Users, TrendingUp, Heart, Share2, 
+  Zap, Award, Clock, Euro, ChevronRight, Filter, X,
+  Star, Sparkles, Flame, CheckCircle2, AlertCircle
+} from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import EntrepriseCard from "@/components/EntrepriseCard";
-import SafeListingsMap from "@/components/SafeListingsMap";
 import { useToast } from "@/hooks/use-toast";
-import { analyticsEvents } from "@/lib/analytics";
-import { CompanyComparator } from "@/components/CompanyComparator";
-import ComparisonGuide from "@/components/ComparisonGuide";
-import { ListingSkeletonGrid } from "@/components/ListingSkeleton";
-import SEO from "@/components/SEO";
 import SEOHead from "@/components/SEOHead";
-import { UltraCompleteSchemas } from "@/components/seo/UltraCompleteSchemas";
-import { AutoInternalLinks } from "@/components/seo/AutoInternalLinks";
-import { SearchableSelect } from "@/components/SearchableSelect";
-import { SearchableRegionSelect } from "@/components/SearchableRegionSelect";
+import { useNavigate } from "react-router-dom";
 
 interface Annonce {
   id: string;
@@ -35,614 +31,571 @@ interface Annonce {
   created_at: string;
 }
 
-const ITEMS_PER_PAGE = 9;
+const METIERS_CARDS = [
+  { icon: "🏗️", label: "Gros œuvre", color: "from-blue-500 to-blue-600", count: 42 },
+  { icon: "⚡", label: "Électricité", color: "from-yellow-500 to-orange-500", count: 38 },
+  { icon: "🔧", label: "Plomberie", color: "from-cyan-500 to-blue-500", count: 27 },
+  { icon: "🎨", label: "Finitions", color: "from-purple-500 to-pink-500", count: 19 },
+  { icon: "☀️", label: "Énergies", color: "from-green-500 to-emerald-600", count: 31 },
+  { icon: "❄️", label: "Climatisation", color: "from-indigo-500 to-blue-600", count: 24 },
+];
+
+const QUICK_PICKS = [
+  { label: "< 300K€", filter: "budget-low", icon: "💸" },
+  { label: "Deals rapides", filter: "quick", icon: "⚡" },
+  { label: "Premium", filter: "premium", icon: "💎" },
+  { label: "Nouveautés", filter: "new", icon: "🆕" },
+];
 
 const Entreprises = () => {
   const { toast } = useToast();
-  const [showFilters, setShowFilters] = useState(true);
-  const [showMap, setShowMap] = useState(false);
+  const navigate = useNavigate();
   const [annonces, setAnnonces] = useState<Annonce[]>([]);
   const [loading, setLoading] = useState(true);
-  const [secteurFilter, setSecteurFilter] = useState<string>("");
-  const [regionFilter, setRegionFilter] = useState<string>("");
-  const [caRange, setCARange] = useState<number[]>([0, 5000000]);
-  const [priceRange, setPriceRange] = useState<number[]>([0, 5000000]);
-  const [sortBy, setSortBy] = useState<string>("recent");
-  const [selectedForComparison, setSelectedForComparison] = useState<Annonce[]>([]);
-  const [showGuide, setShowGuide] = useState(true);
-  const [currentPage, setCurrentPage] = useState(1);
-
-  const toggleComparison = (listing: any) => {
-    if (selectedForComparison.find(item => item.id === listing.id)) {
-      setSelectedForComparison(selectedForComparison.filter(item => item.id !== listing.id));
-    } else if (selectedForComparison.length < 3) {
-      setSelectedForComparison([...selectedForComparison, listing]);
-      
-      // Première sélection : masquer le guide
-      if (selectedForComparison.length === 0) {
-        setShowGuide(false);
-      }
-    } else {
-      toast({
-        title: "Limite atteinte",
-        description: "Maximum 3 entreprises pour la comparaison",
-        variant: "destructive"
-      });
-    }
-  };
+  const [selectedMetier, setSelectedMetier] = useState<string>("");
+  const [selectedRegion, setSelectedRegion] = useState<string>("");
+  const [budgetRange, setBudgetRange] = useState<number[]>([0, 5000000]);
+  const [selectedForComparison, setSelectedForComparison] = useState<string[]>([]);
+  const [favorites, setFavorites] = useState<string[]>([]);
+  const [showFiltersModal, setShowFiltersModal] = useState(false);
+  const [activeQuickPick, setActiveQuickPick] = useState<string>("");
 
   useEffect(() => {
     fetchAnnonces();
   }, []);
 
-  useEffect(() => {
-    setCurrentPage(1); // Reset to page 1 when filters change
-  }, [secteurFilter, regionFilter, caRange, priceRange, sortBy]);
-
   const fetchAnnonces = async () => {
     try {
       setLoading(true);
-      let query = supabase
+      const { data, error } = await supabase
         .from("annonces_public")
         .select("*");
 
-      // Apply filters
-      if (secteurFilter && secteurFilter !== "all") {
-        query = query.eq("secteur_activite", secteurFilter);
-      }
-      if (regionFilter && regionFilter !== "all") {
-        query = query.eq("departement", regionFilter);
-      }
-
-      const { data, error } = await query;
-
       if (error) throw error;
-
-      // Client-side filtering for ranges
-      let filtered = data || [];
-      filtered = filtered.filter(
-        (a) =>
-          a.ca_n1 >= caRange[0] &&
-          a.ca_n1 <= caRange[1] &&
-          a.prix_vente >= priceRange[0] &&
-          a.prix_vente <= priceRange[1]
-      );
-
-      // Sorting
-      filtered.sort((a, b) => {
-        switch (sortBy) {
-          case "price-asc":
-            return a.prix_vente - b.prix_vente;
-          case "price-desc":
-            return b.prix_vente - a.prix_vente;
-          case "ca-desc":
-            return b.ca_n1 - a.ca_n1;
-          case "recent":
-          default:
-            return new Date(b.created_at).getTime() - new Date(a.created_at).getTime();
-        }
-      });
-
-      setAnnonces(filtered);
-    } catch (error: any) {
-      console.error("Error fetching annonces:", error);
-      toast({
-        title: "Erreur de chargement",
-        description: "Nous n'avons pas pu charger les annonces. Veuillez réessayer.",
-        variant: "destructive",
-      });
+      setAnnonces(data || []);
+    } catch (error) {
+      console.error("Error:", error);
     } finally {
       setLoading(false);
     }
   };
 
-  // Pagination calculations
-  const totalPages = Math.ceil(annonces.length / ITEMS_PER_PAGE);
-  const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
-  const endIndex = startIndex + ITEMS_PER_PAGE;
-  const currentAnnonces = annonces.slice(startIndex, endIndex);
-
-  const goToPage = (page: number) => {
-    setCurrentPage(page);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+  const toggleFavorite = (id: string) => {
+    setFavorites(prev =>
+      prev.includes(id) ? prev.filter(f => f !== id) : [...prev, id]
+    );
   };
 
-  const applyFilters = () => {
-    fetchAnnonces();
-  };
-
-  const formatCurrency = (value: number) => {
-    if (value >= 1000000) {
-      return `${(value / 1000000).toFixed(1)}M€`;
+  const toggleComparison = (id: string) => {
+    if (selectedForComparison.includes(id)) {
+      setSelectedForComparison(prev => prev.filter(c => c !== id));
+    } else if (selectedForComparison.length < 3) {
+      setSelectedForComparison(prev => [...prev, id]);
+    } else {
+      toast({
+        title: "Limite atteinte",
+        description: "Maximum 3 entreprises pour comparaison",
+        variant: "destructive"
+      });
     }
-    if (value >= 1000) {
-      return `${(value / 1000).toFixed(0)}K€`;
-    }
-    return `${value}€`;
   };
 
-  const formatCurrencyDetailed = (value: number) => {
-    return `${value.toLocaleString('fr-FR')} €`;
+  const formatPrice = (price: number) => {
+    if (price >= 1000000) return `${(price / 1000000).toFixed(1)}M€`;
+    if (price >= 1000) return `${(price / 1000).toFixed(0)}K€`;
+    return `${price}€`;
   };
+
+  // Exemple d'annonces pour la démo
+  const displayedAnnonces = annonces.length > 0 ? annonces : [
+    {
+      id: "exemple-1",
+      raison_sociale: "Entreprise Générale du Bâtiment",
+      secteur_activite: "Tous corps d'état",
+      ville: "Nice",
+      departement: "06",
+      annee_creation: 1995,
+      ca_n1: 2800000,
+      nombre_salaries: 22,
+      prix_vente: 1850000,
+      description_activite: "Entreprise générale spécialisée rénovation haut de gamme",
+      certifications: ["RGE", "Qualibat"],
+      created_at: new Date().toISOString()
+    },
+    {
+      id: "exemple-2",
+      raison_sociale: "Isolation Pro",
+      secteur_activite: "Isolation thermique",
+      ville: "Lyon",
+      departement: "69",
+      annee_creation: 2010,
+      ca_n1: 542000,
+      nombre_salaries: 8,
+      prix_vente: 420000,
+      description_activite: "Spécialiste isolation thermique et acoustique",
+      certifications: ["RGE"],
+      created_at: new Date(Date.now() - 86400000).toISOString()
+    },
+    {
+      id: "exemple-3",
+      raison_sociale: "Plomberie Services Plus",
+      secteur_activite: "Plomberie sanitaire",
+      ville: "Paris",
+      departement: "75",
+      annee_creation: 2008,
+      ca_n1: 1200000,
+      nombre_salaries: 12,
+      prix_vente: 980000,
+      description_activite: "Plomberie, chauffage et climatisation",
+      certifications: [],
+      created_at: new Date(Date.now() - 172800000).toISOString()
+    }
+  ];
+
+  const featuredListing = displayedAnnonces[0];
+  const regularListings = displayedAnnonces.slice(1);
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
       <SEOHead page="entreprises" />
-      <SEO
-        title="Entreprises BTP à vendre - Trouvez votre opportunité"
-        description={`Découvrez ${annonces.length} entreprises BTP à vendre en France. Filtres avancés par secteur, région, prix et CA. Carte interactive et comparateur intégré pour faire le bon choix.`}
-        keywords="entreprise BTP à vendre, rachat entreprise construction, cession société bâtiment, reprise PME BTP, vente fonds de commerce BTP"
-        url="https://cessionbtp.fr/entreprises"
-      />
       <Header />
 
-      {/* Hero Header avec recherche */}
-      <section className="bg-gradient-to-br from-primary/5 via-background to-secondary/5 py-16 border-b">
-        <div className="container mx-auto px-4 max-w-5xl text-center">
-          <h1 className="text-5xl font-bold mb-4 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
-            {loading ? "Chargement..." : `${annonces.length} Entreprise${annonces.length > 1 ? 's' : ''} BTP à Vendre`}
-          </h1>
-          <p className="text-xl text-muted-foreground mb-8">
-            Trouvez l'entreprise parfaite à reprendre
-          </p>
+      {/* HERO SECTION */}
+      <section className="relative overflow-hidden bg-gradient-to-br from-blue-600 via-blue-500 to-indigo-600 py-20">
+        <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmYiIGZpbGwtb3BhY2l0eT0iMC4wNSI+PHBhdGggZD0iTTM2IDEzNGgzNnYzNkgzNnptMC0zNmgzNnYzNkgzNnoiLz48L2c+PC9nPjwvc3ZnPg==')] opacity-20"></div>
+        
+        <div className="container mx-auto px-4 relative z-10">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="text-center mb-12"
+          >
+            <h1 className="text-6xl font-black text-white mb-4">
+              🏗️ Trouvez VOTRE Entreprise BTP
+            </h1>
+            <p className="text-xl text-blue-100 mb-8">
+              Des opportunités exceptionnelles vous attendent
+            </p>
 
-          {/* Barre de recherche proéminente */}
-          <div className="bg-card rounded-xl shadow-xl p-6 mb-8 max-w-3xl mx-auto">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              <div className="md:col-span-1">
-                <SearchableSelect
-                  value={secteurFilter}
-                  onValueChange={setSecteurFilter}
-                  placeholder="Secteur d'activité"
-                />
-              </div>
-              <div className="md:col-span-1">
-                <SearchableRegionSelect
-                  value={regionFilter}
-                  onValueChange={setRegionFilter}
-                  placeholder="Toutes les régions"
-                />
-              </div>
-              <Button 
-                size="lg" 
-                className="w-full md:col-span-1"
-                onClick={applyFilters}
+            {/* Chiffres animés */}
+            <div className="flex justify-center gap-12 mb-12">
+              <motion.div
+                initial={{ scale: 0 }}
+                animate={{ scale: 1 }}
+                transition={{ delay: 0.2 }}
+                className="text-center"
               >
-                Rechercher →
-              </Button>
+                <div className="text-5xl font-black text-white">187</div>
+                <div className="text-blue-200">opportunités</div>
+              </motion.div>
+              <motion.div
+                initial={{ scale: 0 }}
+                animate={{ scale: 1 }}
+                transition={{ delay: 0.4 }}
+                className="text-center"
+              >
+                <div className="text-5xl font-black text-white">45j</div>
+                <div className="text-blue-200">délai moyen</div>
+              </motion.div>
+              <motion.div
+                initial={{ scale: 0 }}
+                animate={{ scale: 1 }}
+                transition={{ delay: 0.6 }}
+                className="text-center"
+              >
+                <div className="text-5xl font-black text-white">95%</div>
+                <div className="text-blue-200">satisfaction</div>
+              </motion.div>
             </div>
-          </div>
+          </motion.div>
 
-          {/* Stats rassurantes */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-sm">
-            <div className="flex items-center justify-center gap-2 text-muted-foreground">
-              <span className="text-green-500 text-lg">✅</span>
-              <span>Délai moyen vente : 45 jours</span>
-            </div>
-            <div className="flex items-center justify-center gap-2 text-muted-foreground">
-              <span className="text-green-500 text-lg">💰</span>
-              <span>Financement jusqu'à 90%</span>
-            </div>
-            <div className="flex items-center justify-center gap-2 text-muted-foreground">
-              <span className="text-green-500 text-lg">🤝</span>
-              <span>Accompagnement gratuit</span>
-            </div>
+          {/* Cards métiers */}
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 max-w-6xl mx-auto">
+            {METIERS_CARDS.map((metier, idx) => (
+              <motion.button
+                key={metier.label}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.1 * idx }}
+                whileHover={{ scale: 1.05, y: -5 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={() => setSelectedMetier(metier.label)}
+                className={`relative p-6 rounded-2xl bg-white shadow-lg hover:shadow-2xl transition-all group ${
+                  selectedMetier === metier.label ? 'ring-4 ring-white' : ''
+                }`}
+              >
+                <div className={`absolute inset-0 bg-gradient-to-br ${metier.color} opacity-0 group-hover:opacity-10 rounded-2xl transition-opacity`}></div>
+                <div className="text-5xl mb-2">{metier.icon}</div>
+                <div className="font-bold text-gray-900 text-sm">{metier.label}</div>
+                <Badge className="mt-2 bg-blue-100 text-blue-700 hover:bg-blue-200">
+                  {metier.count}
+                </Badge>
+              </motion.button>
+            ))}
           </div>
         </div>
       </section>
 
-      <main className="py-12 bg-slate-50 flex-1">
-        <div className="container mx-auto px-4">
-          <div className="mb-8">
-            <p className="text-xl text-muted-foreground">
-              {loading ? "Chargement..." : `${annonces.length > 0 ? annonces.length : (secteurFilter === "all" && regionFilter === "all") || annonces.length === 0 ? 3 : 0} ${annonces.length === 1 ? "entreprise disponible" : "entreprises disponibles"}`}
-            </p>
-          </div>
-
-          <div className="flex flex-col lg:flex-row gap-8">
-            {/* Filters Sidebar */}
-            <aside className={`lg:w-80 ${showFilters ? 'block' : 'hidden lg:block'}`}>
-              <div className="bg-white p-6 rounded-xl shadow-lg sticky top-24">
-                <div className="flex items-center justify-between mb-6">
-                  <h2 className="text-xl font-bold">Filtres</h2>
-                  <Button 
-                    variant="ghost" 
-                    size="sm"
-                    onClick={() => setShowFilters(!showFilters)}
-                    className="lg:hidden"
-                  >
-                    ✕
-                  </Button>
-                </div>
-
-                <div className="space-y-6">
-                  <div>
-                    <label className="block text-sm font-medium mb-2">Secteur</label>
-                    <SearchableSelect
-                      value={secteurFilter}
-                      onValueChange={setSecteurFilter}
-                      placeholder="Tous les secteurs"
-                      className="w-full"
-                    />
-                  </div>
-
-                  <div>
-                    <label className="block text-sm font-medium mb-2">Région</label>
-                    <SearchableRegionSelect
-                      value={regionFilter}
-                      onValueChange={setRegionFilter}
-                      placeholder="Toutes les régions"
-                      className="w-full"
-                    />
-                  </div>
-
-                  <div>
-                    <label className="block text-sm font-medium mb-2">
-                      Chiffre d'affaires
-                    </label>
-                    <div className="text-xs text-muted-foreground mb-2 font-medium">
-                      Min: {formatCurrencyDetailed(caRange[0])} - Max: {formatCurrencyDetailed(caRange[1])}
-                    </div>
-                    <Slider 
-                      value={caRange}
-                      onValueChange={setCARange}
-                      max={5000000} 
-                      step={100000}
-                      className="mb-2"
-                    />
-                    <div className="flex justify-between text-xs text-muted-foreground">
-                      <span>{formatCurrency(caRange[0])}</span>
-                      <span>{formatCurrency(caRange[1])}</span>
-                    </div>
-                  </div>
-
-                  <div>
-                    <label className="block text-sm font-medium mb-2">
-                      Prix de vente
-                    </label>
-                    <div className="text-xs text-muted-foreground mb-2 font-medium">
-                      Min: {formatCurrencyDetailed(priceRange[0])} - Max: {formatCurrencyDetailed(priceRange[1])}
-                    </div>
-                    <Slider 
-                      value={priceRange}
-                      onValueChange={setPriceRange}
-                      max={5000000} 
-                      step={100000}
-                      className="mb-2"
-                    />
-                    <div className="flex justify-between text-xs text-muted-foreground">
-                      <span>{formatCurrency(priceRange[0])}</span>
-                      <span>{formatCurrency(priceRange[1])}</span>
-                    </div>
-                  </div>
-
-                  <Button onClick={applyFilters} className="w-full bg-primary hover:bg-primary/90">
-                    Appliquer les filtres
-                  </Button>
-                </div>
-              </div>
-            </aside>
-
-            {/* Main Content */}
-            <div className="flex-1">
-              {/* Comparison Guide */}
-              {showGuide && selectedForComparison.length === 0 && (
-                <ComparisonGuide onClose={() => setShowGuide(false)} />
-              )}
-              
-              <div className="flex items-center justify-between mb-6">
-                <div className="flex gap-2">
-                  <Button
-                    variant="outline"
-                    onClick={() => setShowFilters(!showFilters)}
-                    className="lg:hidden"
-                  >
-                    <Filter className="mr-2 h-4 w-4" />
-                    Filtres
-                  </Button>
-
-                  <Button
-                    variant={showMap ? "default" : "outline"}
-                    onClick={() => setShowMap(!showMap)}
-                  >
-                    {showMap ? "📋 Vue Liste" : "🗺️ Vue Carte"}
-                  </Button>
-                </div>
-
-                <div className="flex gap-2">
-                  <Select value={sortBy} onValueChange={setSortBy}>
-                    <SelectTrigger className="w-48">
-                      <SelectValue />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="recent">Plus récentes</SelectItem>
-                      <SelectItem value="price_asc">Prix croissant</SelectItem>
-                      <SelectItem value="price_desc">Prix décroissant</SelectItem>
-                      <SelectItem value="ca_desc">CA décroissant</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
-              </div>
-
-              {/* Vue Carte */}
-              {showMap ? (
-                <div className="w-full">
-                  {loading ? (
-                    <div className="text-center py-12">
-                      <p className="text-muted-foreground">Chargement de la carte...</p>
-                    </div>
-                  ) : (
-                    <SafeListingsMap
-                      listings={annonces.length > 0 ? annonces : [
-                        {
-                          id: "exemple-1",
-                          secteur_activite: "Tous corps d'état",
-                          ville: "Nice",
-                          departement: "06",
-                          prix_vente: 1850000,
-                          ca_n1: 2800000,
-                          nombre_salaries: 22
-                        },
-                        {
-                          id: "exemple-2",
-                          secteur_activite: "Isolation thermique",
-                          ville: "Lyon",
-                          departement: "69",
-                          prix_vente: 542000,
-                          ca_n1: 542000,
-                          nombre_salaries: 8
-                        },
-                        {
-                          id: "exemple-3",
-                          secteur_activite: "Plomberie sanitaire",
-                          ville: "Paris",
-                          departement: "75",
-                          prix_vente: 980000,
-                          ca_n1: 1200000,
-                          nombre_salaries: 12
-                        }
-                      ]}
-                      onError={() => {
-                        setShowMap(false);
-                        toast({
-                          title: "Carte indisponible",
-                          description: "La carte a rencontré un problème. Retour à la vue liste.",
-                          variant: "destructive",
-                        });
-                      }}
-                    />
-                  )}
-                </div>
-              ) : (
-                /* Vue Liste */
-                <div>
-                  {loading ? (
-                    <ListingSkeletonGrid count={9} />
-                  ) : annonces.length === 0 ? (
-                    <div className="text-center py-12">
-                      <p className="text-muted-foreground text-lg">
-                        Aucune entreprise ne correspond à vos critères.
-                      </p>
-                      <Button
-                        variant="outline"
-                        className="mt-4"
-                        onClick={() => {
-                          setSecteurFilter("");
-                          setRegionFilter("");
-                          setCARange([0, 5000000]);
-                          setPriceRange([0, 5000000]);
-                        }}
-                      >
-                        Réinitialiser les filtres
-                      </Button>
-                    </div>
-                  ) : (
-                    <>
-                      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-                        {currentAnnonces.map((annonce) => {
-                      const certifications = annonce.certifications || [];
-                      const hasCertif = certifications.length > 0;
-                      
-                      return (
-                        <EntrepriseCard
-                          key={annonce.id}
-                          id={annonce.id}
-                          type="blue"
-                          certification={hasCertif ? certifications[0] : "ENTREPRISE BTP"}
-                          status="disponible"
-                          timeAgo={`Ajoutée le ${new Date(annonce.created_at).toLocaleDateString("fr-FR")}`}
-                          title={annonce.raison_sociale || "Entreprise anonyme"}
-                          location={`${annonce.ville}, ${annonce.departement}`}
-                          creation={annonce.annee_creation.toString()}
-                          ca={formatCurrency(annonce.ca_n1)}
-                          effectif={`${annonce.nombre_salaries} salarié${annonce.nombre_salaries > 1 ? "s" : ""}`}
-                          secteur={annonce.secteur_activite}
-                          description={annonce.description_activite}
-                          price={formatCurrency(annonce.prix_vente)}
-                          financement={true}
-                          certifications={certifications}
-                          onCompareToggle={toggleComparison}
-                          isSelected={selectedForComparison.some(item => item.id === annonce.id)}
-                          compareCount={selectedForComparison.length}
-                        />
-                      );
-                    })}
-
-                    {/* Annonces d'exemple (affichées si aucune annonce réelle ou si filtre "all") */}
-                    {(annonces.length === 0 || (secteurFilter === "all" && regionFilter === "all")) && (
-                      <>
-                        <EntrepriseCard
-                          id="exemple-1"
-                          type="blue"
-                          certification="QUALIBAT"
-                          status="disponible"
-                          timeAgo="Il y a 5h"
-                          title="Entreprise Générale du Bâtiment"
-                          location="Nice, PACA (06)"
-                          creation="2005"
-                          ca="2,8M€"
-                          effectif="22 salariés"
-                          secteur="Tous corps d'état"
-                          description="Entreprise générale tous corps d'état. Marchés publics 60%, privés 40%."
-                          price="1 850 000 €"
-                          financement={true}
-                          certifications={["QUALIBAT"]}
-                          onCompareToggle={toggleComparison}
-                          isSelected={selectedForComparison.some(item => item.id === "exemple-1")}
-                          compareCount={selectedForComparison.length}
-                        />
-
-                        <EntrepriseCard
-                          id="exemple-2"
-                          type="orange"
-                          certification="CERTIFIÉE RGE"
-                          status="vendu"
-                          title="Société d'Isolation Thermique"
-                          location="Lyon, Rhône (69)"
-                          creation="2020"
-                          ca="542K€"
-                          effectif="8 salariés"
-                          secteur="Isolation et ITE"
-                        />
-
-                        <EntrepriseCard
-                          id="exemple-3"
-                          type="orange"
-                          certification="RGE QUALIPAC"
-                          status="vendu"
-                          title="Entreprise Chauffage & Climatisation"
-                          location="Toulouse, Haute-Garonne (31)"
-                          creation="2018"
-                          ca="890K€"
-                          effectif="6 salariés"
-                          secteur="Pompes à chaleur"
-                        />
-
-                        <EntrepriseCard
-                          id="exemple-4"
-                          type="blue"
-                          certification="QUALIBAT"
-                          status="disponible"
-                          timeAgo="Il y a 2 jours"
-                          title="Entreprise de Plomberie"
-                          location="Paris, Île-de-France (75)"
-                          creation="2010"
-                          ca="1,2M€"
-                          effectif="12 salariés"
-                          secteur="Plomberie sanitaire"
-                          description="Clientèle fidèle, contrats d'entretien récurrents."
-                          price="980 000 €"
-                          financement={true}
-                          certifications={["QUALIBAT"]}
-                          onCompareToggle={toggleComparison}
-                          isSelected={selectedForComparison.some(item => item.id === "exemple-4")}
-                          compareCount={selectedForComparison.length}
-                        />
-
-                        <EntrepriseCard
-                          id="exemple-5"
-                          type="blue"
-                          certification="RGE"
-                          status="disponible"
-                          timeAgo="Il y a 1 semaine"
-                          title="Électricité Générale"
-                          location="Bordeaux, Nouvelle-Aquitaine (33)"
-                          creation="2015"
-                          ca="750K€"
-                          effectif="5 salariés"
-                          secteur="Électricité"
-                          description="Spécialisée en rénovation électrique et domotique."
-                          price="620 000 €"
-                          certifications={["RGE"]}
-                          onCompareToggle={toggleComparison}
-                          isSelected={selectedForComparison.some(item => item.id === "exemple-5")}
-                          compareCount={selectedForComparison.length}
-                        />
-
-                        <EntrepriseCard
-                          id="exemple-6"
-                          type="blue"
-                          certification="QUALIBAT"
-                          status="disponible"
-                          timeAgo="Il y a 3 jours"
-                          title="Maçonnerie Traditionnelle"
-                          location="Lille, Hauts-de-France (59)"
-                          creation="2008"
-                          ca="1,5M€"
-                          effectif="18 salariés"
-                          secteur="Maçonnerie & Gros Œuvre"
-                          description="Marchés publics et privés. Forte notoriété locale."
-                          price="1 250 000 €"
-                          financement={true}
-                          certifications={["QUALIBAT"]}
-                          onCompareToggle={toggleComparison}
-                          isSelected={selectedForComparison.some(item => item.id === "exemple-6")}
-                          compareCount={selectedForComparison.length}
-                        />
-                      </>
-                    )}
-                      </div>
-
-                      {/* Pagination */}
-                      {totalPages > 1 && (
-                        <div className="flex items-center justify-center gap-2 mt-12">
-                          <Button
-                            variant="outline"
-                            size="sm"
-                            onClick={() => goToPage(currentPage - 1)}
-                            disabled={currentPage === 1}
-                          >
-                            <ChevronLeft className="h-4 w-4" />
-                            Précédent
-                          </Button>
-                          
-                          <div className="flex gap-1">
-                            {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
-                              <Button
-                                key={page}
-                                variant={currentPage === page ? "default" : "outline"}
-                                size="sm"
-                                onClick={() => goToPage(page)}
-                                className="w-10"
-                              >
-                                {page}
-                              </Button>
-                            ))}
-                          </div>
-
-                          <Button
-                            variant="outline"
-                            size="sm"
-                            onClick={() => goToPage(currentPage + 1)}
-                            disabled={currentPage === totalPages}
-                          >
-                            Suivant
-                            <ChevronRight className="h-4 w-4" />
-                          </Button>
-                        </div>
-                      )}
-                    </>
-                  )}
-                </div>
-              )}
+      {/* FILTRES HORIZONTAUX */}
+      <section className="sticky top-0 z-40 bg-white border-b shadow-md">
+        <div className="container mx-auto px-4 py-4">
+          <div className="flex flex-wrap items-center gap-3">
+            {/* Quick Picks */}
+            <div className="flex gap-2 flex-wrap">
+              {QUICK_PICKS.map((pick) => (
+                <Button
+                  key={pick.filter}
+                  variant={activeQuickPick === pick.filter ? "default" : "outline"}
+                  size="sm"
+                  onClick={() => setActiveQuickPick(pick.filter === activeQuickPick ? "" : pick.filter)}
+                  className="rounded-full"
+                >
+                  <span className="mr-1">{pick.icon}</span>
+                  {pick.label}
+                </Button>
+              ))}
             </div>
+
+            <div className="flex-1"></div>
+
+            {/* Bouton filtres avancés */}
+            <Dialog open={showFiltersModal} onOpenChange={setShowFiltersModal}>
+              <DialogTrigger asChild>
+                <Button variant="outline" size="sm">
+                  <Filter className="w-4 h-4 mr-2" />
+                  Filtres avancés
+                </Button>
+              </DialogTrigger>
+              <DialogContent className="max-w-4xl max-h-[80vh] overflow-y-auto">
+                <DialogHeader>
+                  <DialogTitle>🎯 Filtres avancés</DialogTitle>
+                </DialogHeader>
+                <div className="space-y-6 py-4">
+                  <div>
+                    <label className="font-semibold mb-3 block">💰 Budget</label>
+                    <div className="flex items-center gap-4">
+                      <span className="text-2xl">💸</span>
+                      <Slider
+                        value={budgetRange}
+                        onValueChange={setBudgetRange}
+                        max={5000000}
+                        step={100000}
+                        className="flex-1"
+                      />
+                      <span className="text-2xl">🏆</span>
+                    </div>
+                    <div className="flex justify-between text-sm text-gray-600 mt-2">
+                      <span>{formatPrice(budgetRange[0])}</span>
+                      <span>{formatPrice(budgetRange[1])}</span>
+                    </div>
+                  </div>
+                </div>
+              </DialogContent>
+            </Dialog>
           </div>
         </div>
-      </main>
+      </section>
+
+      {/* RÉSULTATS */}
+      <section className="py-12">
+        <div className="container mx-auto px-4">
+          {loading ? (
+            <div className="text-center py-20">
+              <div className="inline-block animate-spin rounded-full h-12 w-12 border-4 border-primary border-t-transparent"></div>
+              <p className="mt-4 text-gray-600">Chargement des opportunités...</p>
+            </div>
+          ) : displayedAnnonces.length === 0 ? (
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              className="text-center py-20 bg-gradient-to-br from-blue-50 to-purple-50 rounded-3xl p-12"
+            >
+              <div className="text-8xl mb-6">🔍</div>
+              <h3 className="text-3xl font-bold mb-4">Aucun résultat</h3>
+              <p className="text-gray-600 mb-8">Essayez de modifier vos critères de recherche</p>
+              <Button size="lg" onClick={() => {
+                setSelectedMetier("");
+                setActiveQuickPick("");
+              }}>
+                Réinitialiser les filtres
+              </Button>
+            </motion.div>
+          ) : (
+            <div className="space-y-8">
+              {/* COUP DE CŒUR - Grande Card */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="relative group"
+              >
+                <div className="absolute -top-4 left-8 z-10">
+                  <Badge className="bg-gradient-to-r from-orange-500 to-red-500 text-white px-6 py-2 text-lg font-bold shadow-lg">
+                    💎 COUP DE CŒUR
+                  </Badge>
+                </div>
+                
+                <div className="bg-white rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-all border-2 border-orange-200">
+                  <div className="md:flex">
+                    {/* Image avec gradient */}
+                    <div className="md:w-1/2 relative h-80 bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
+                      <div className="text-9xl opacity-20">🏢</div>
+                      <div className="absolute top-4 right-4 flex gap-2">
+                        <Button
+                          size="icon"
+                          variant="secondary"
+                          className="rounded-full bg-white/90 hover:bg-white"
+                          onClick={() => toggleFavorite(featuredListing.id)}
+                        >
+                          <Heart className={`w-5 h-5 ${favorites.includes(featuredListing.id) ? 'fill-red-500 text-red-500' : ''}`} />
+                        </Button>
+                        <Button size="icon" variant="secondary" className="rounded-full bg-white/90 hover:bg-white">
+                          <Share2 className="w-5 h-5" />
+                        </Button>
+                      </div>
+                      {featuredListing.certifications?.includes("RGE") && (
+                        <Badge className="absolute top-4 left-4 bg-green-500 text-white">
+                          <Award className="w-4 h-4 mr-1" />
+                          RGE
+                        </Badge>
+                      )}
+                      <Badge className="absolute bottom-4 left-4 bg-orange-500 text-white px-4 py-2 text-sm">
+                        <Flame className="w-4 h-4 mr-1" />
+                        12 acheteurs intéressés
+                      </Badge>
+                    </div>
+
+                    {/* Contenu */}
+                    <div className="md:w-1/2 p-8">
+                      <div className="flex items-start justify-between mb-4">
+                        <div>
+                          <h3 className="text-3xl font-black mb-2">
+                            {featuredListing.secteur_activite}
+                          </h3>
+                          <div className="flex items-center text-gray-600 mb-2">
+                            <MapPin className="w-4 h-4 mr-1" />
+                            {featuredListing.ville} ({featuredListing.departement})
+                          </div>
+                        </div>
+                        <Badge className="bg-gradient-to-r from-green-500 to-emerald-600 text-white text-xl px-4 py-2">
+                          {formatPrice(featuredListing.prix_vente)}
+                        </Badge>
+                      </div>
+
+                      <p className="text-gray-700 mb-6 line-clamp-3">
+                        {featuredListing.description_activite}
+                      </p>
+
+                      {/* Statistiques */}
+                      <div className="grid grid-cols-3 gap-4 mb-6">
+                        <div className="text-center p-3 bg-blue-50 rounded-xl">
+                          <Users className="w-5 h-5 mx-auto mb-1 text-blue-600" />
+                          <div className="font-bold text-lg">{featuredListing.nombre_salaries}</div>
+                          <div className="text-xs text-gray-600">salariés</div>
+                        </div>
+                        <div className="text-center p-3 bg-green-50 rounded-xl">
+                          <TrendingUp className="w-5 h-5 mx-auto mb-1 text-green-600" />
+                          <div className="font-bold text-lg">{formatPrice(featuredListing.ca_n1)}</div>
+                          <div className="text-xs text-gray-600">CA annuel</div>
+                        </div>
+                        <div className="text-center p-3 bg-purple-50 rounded-xl">
+                          <Clock className="w-5 h-5 mx-auto mb-1 text-purple-600" />
+                          <div className="font-bold text-lg">{new Date().getFullYear() - featuredListing.annee_creation}</div>
+                          <div className="text-xs text-gray-600">ans</div>
+                        </div>
+                      </div>
+
+                      <div className="flex items-center gap-2 mb-6">
+                        <CheckCircle2 className="w-5 h-5 text-green-600" />
+                        <span className="text-green-700 font-semibold">✅ Financement possible</span>
+                      </div>
+
+                      {/* Boutons */}
+                      <div className="flex gap-3">
+                        <Button
+                          variant="outline"
+                          className="flex-1"
+                          onClick={() => toggleComparison(featuredListing.id)}
+                        >
+                          📊 Comparer
+                        </Button>
+                        <Button
+                          className="flex-1 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700"
+                          onClick={() => navigate(`/entreprises/${featuredListing.id}`)}
+                        >
+                          Voir détails
+                          <ChevronRight className="w-4 h-4 ml-1" />
+                        </Button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+
+              {/* GRILLE 3 COLONNES */}
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {regularListings.map((annonce, idx) => (
+                  <motion.div
+                    key={annonce.id}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.1 * idx }}
+                    className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all group border border-gray-100"
+                  >
+                    {/* Image */}
+                    <div className="relative h-48 bg-gradient-to-br from-blue-400 to-indigo-500 flex items-center justify-center">
+                      <div className="text-6xl opacity-30">🏗️</div>
+                      
+                      {/* Badges overlay */}
+                      <div className="absolute top-3 left-3">
+                        {idx === 0 && (
+                          <Badge className="bg-red-500 text-white">
+                            <Sparkles className="w-3 h-3 mr-1" />
+                            🆕 Nouveau
+                          </Badge>
+                        )}
+                        {annonce.certifications?.includes("RGE") && (
+                          <Badge className="bg-green-500 text-white mt-2">
+                            <Award className="w-3 h-3 mr-1" />
+                            RGE
+                          </Badge>
+                        )}
+                      </div>
+
+                      <Button
+                        size="icon"
+                        variant="secondary"
+                        className="absolute top-3 right-3 rounded-full bg-white/90 hover:bg-white"
+                        onClick={() => toggleFavorite(annonce.id)}
+                      >
+                        <Heart className={`w-4 h-4 ${favorites.includes(annonce.id) ? 'fill-red-500 text-red-500' : ''}`} />
+                      </Button>
+                    </div>
+
+                    {/* Contenu */}
+                    <div className="p-5">
+                      <h3 className="font-bold text-lg mb-2 line-clamp-2 group-hover:text-primary transition-colors">
+                        {annonce.secteur_activite}
+                      </h3>
+                      
+                      <div className="flex items-center text-sm text-gray-600 mb-3">
+                        <MapPin className="w-4 h-4 mr-1" />
+                        {annonce.ville} ({annonce.departement})
+                      </div>
+
+                      <div className="space-y-2 mb-4">
+                        <div className="flex items-center justify-between text-sm">
+                          <span className="text-gray-600 flex items-center">
+                            <Users className="w-4 h-4 mr-1" />
+                            {annonce.nombre_salaries} salariés
+                          </span>
+                          <span className="font-semibold">{formatPrice(annonce.ca_n1)}</span>
+                        </div>
+                        <div className="flex items-center text-sm text-gray-600">
+                          <Clock className="w-4 h-4 mr-1" />
+                          Créée en {annonce.annee_creation}
+                        </div>
+                      </div>
+
+                      <div className="flex items-center justify-between mb-4">
+                        <Badge className="bg-green-100 text-green-700">
+                          <CheckCircle2 className="w-3 h-3 mr-1" />
+                          Financement OK
+                        </Badge>
+                        <div className="text-xl font-black text-primary">
+                          {formatPrice(annonce.prix_vente)}
+                        </div>
+                      </div>
+
+                      <div className="flex gap-2">
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          className="flex-1"
+                          onClick={() => toggleComparison(annonce.id)}
+                        >
+                          Comparer
+                        </Button>
+                        <Button
+                          size="sm"
+                          className="flex-1"
+                          onClick={() => navigate(`/entreprises/${annonce.id}`)}
+                        >
+                          Détails
+                        </Button>
+                      </div>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+      </section>
+
+      {/* COMPARATEUR BARRE FIXE */}
+      <AnimatePresence>
+        {selectedForComparison.length > 0 && (
+          <motion.div
+            initial={{ y: 100 }}
+            animate={{ y: 0 }}
+            exit={{ y: 100 }}
+            className="fixed bottom-0 left-0 right-0 z-50 bg-gradient-to-r from-blue-600 to-purple-600 text-white py-4 shadow-2xl"
+          >
+            <div className="container mx-auto px-4">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-4">
+                  <div className="font-bold text-lg">
+                    📊 Comparateur ({selectedForComparison.length}/3)
+                  </div>
+                  <div className="flex gap-2">
+                    {selectedForComparison.map((id) => {
+                      const annonce = displayedAnnonces.find(a => a.id === id);
+                      return annonce ? (
+                        <Badge key={id} variant="secondary" className="px-4 py-2">
+                          {annonce.secteur_activite}
+                          <button
+                            onClick={() => toggleComparison(id)}
+                            className="ml-2 hover:text-red-500"
+                          >
+                            <X className="w-4 h-4" />
+                          </button>
+                        </Badge>
+                      ) : null;
+                    })}
+                  </div>
+                </div>
+                <Button
+                  size="lg"
+                  variant="secondary"
+                  className="font-bold"
+                  disabled={selectedForComparison.length < 2}
+                >
+                  Comparer maintenant
+                  <ChevronRight className="w-5 h-5 ml-2" />
+                </Button>
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* SOCIAL PROOF */}
+      <section className="py-16 bg-gradient-to-br from-blue-50 to-purple-50">
+        <div className="container mx-auto px-4 text-center">
+          <h3 className="text-3xl font-black mb-8">Ce qu'ils en pensent</h3>
+          <div className="flex justify-center items-center gap-3 mb-8">
+            <div className="flex">
+              {[1, 2, 3, 4, 5].map((star) => (
+                <Star key={star} className="w-8 h-8 fill-yellow-400 text-yellow-400" />
+              ))}
+            </div>
+            <span className="text-2xl font-bold">4.9</span>
+            <span className="text-gray-600">(234 avis)</span>
+          </div>
+        </div>
+      </section>
 
       <Footer />
-      
-      {/* Comparateur flottant */}
-      {selectedForComparison.length >= 2 && (
-        <CompanyComparator 
-          companies={selectedForComparison as any[]} 
-          onClose={() => setSelectedForComparison([])}
-        />
-      )}
-
-      {/* SEO Optimization */}
-      <UltraCompleteSchemas page="entreprises" />
-      <AutoInternalLinks currentPage="/entreprises" maxLinks={6} />
     </div>
   );
 };
