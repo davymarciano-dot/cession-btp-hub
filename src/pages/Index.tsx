@@ -34,6 +34,7 @@ import { SearchableRegionSelect } from "@/components/SearchableRegionSelect";
 import { UltraCompleteSchemas } from "@/components/seo/UltraCompleteSchemas";
 import { AutoInternalLinks } from "@/components/seo/AutoInternalLinks";
 import { OptimizedImage } from "@/components/OptimizedImage";
+import { ReviewSchema } from "@/components/seo/ReviewSchema";
 import { analyticsEvents } from "@/lib/analytics";
 
 const Home = () => {
@@ -333,8 +334,15 @@ const Home = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <SEOHead page="home" />
+      <Helmet>
+        <title>CessionBTP - Plateforme n°1 Cession & Reprise Entreprises BTP France | Vente en 45j</title>
+        <meta name="description" content="1ère plateforme 100% BTP : vendez en 45 jours vs 18 mois. Matching IA, 2000+ repreneurs, 500+ transactions. Estimation IA gratuite. Success fee 2%." />
+        <meta name="keywords" content="cession entreprise BTP, vendre entreprise construction, acheter entreprise bâtiment, reprise BTP France, transmission construction, plateforme BTP" />
+        <link rel="canonical" href="https://cessionbtp.fr" />
+      </Helmet>
+      
       <UltraCompleteSchemas page="home" />
+      <ReviewSchema itemName="CessionBTP - Plateforme de Cession d'Entreprises BTP" />
       <Header />
 
       {/* 🔥 NOTIFICATIONS EN TEMPS RÉEL - EN BAS À GAUCHE */}
