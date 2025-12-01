@@ -280,19 +280,210 @@ const Entreprises = () => {
                     <select
                       value={selectedMetier}
                       onChange={(e) => setSelectedMetier(e.target.value)}
-                      className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-all"
+                      className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-all max-h-[400px]"
                     >
                       <option value="">Tous les secteurs</option>
-                      <option value="Tous corps d'état">🏗️ Tous corps d'état</option>
-                      <option value="Électricité">⚡ Électricité</option>
-                      <option value="Plomberie sanitaire">🔧 Plomberie</option>
-                      <option value="Isolation thermique">🏠 Isolation</option>
-                      <option value="Chauffage">🔥 Chauffage</option>
-                      <option value="Climatisation">❄️ Climatisation</option>
-                      <option value="Maçonnerie">🧱 Maçonnerie</option>
-                      <option value="Menuiserie">🪵 Menuiserie</option>
-                      <option value="Peinture">🎨 Peinture</option>
-                      <option value="Énergies renouvelables">☀️ Énergies renouvelables</option>
+                      
+                      <optgroup label="🏗️ GROS ŒUVRE & STRUCTURE">
+                        <option value="maconnerie-generale">Maçonnerie générale</option>
+                        <option value="maconnerie-pierre">Maçonnerie de pierre</option>
+                        <option value="maconnerie-refractaire">Maçonnerie réfractaire</option>
+                        <option value="terrassement">Terrassement</option>
+                        <option value="fondations-speciales">Fondations spéciales</option>
+                        <option value="demolition">Démolition</option>
+                        <option value="genie-civil">Génie civil</option>
+                        <option value="construction-metallique">Construction métallique</option>
+                        <option value="charpente-bois">Charpente bois</option>
+                        <option value="charpente-metallique">Charpente métallique</option>
+                        <option value="ossature-bois">Ossature bois</option>
+                        <option value="construction-bois">Construction bois</option>
+                      </optgroup>
+                      
+                      <optgroup label="⚡ ÉLECTRICITÉ & COURANTS FAIBLES">
+                        <option value="electricite-generale">Électricité générale</option>
+                        <option value="installation-electrique">Installation électrique</option>
+                        <option value="electricite-industrielle">Électricité industrielle</option>
+                        <option value="eclairage-public">Éclairage public</option>
+                        <option value="domotique">Domotique</option>
+                        <option value="automatismes">Automatismes</option>
+                        <option value="alarmes-securite">Alarmes & sécurité</option>
+                        <option value="videosurveillance">Vidéosurveillance</option>
+                        <option value="controle-acces">Contrôle d'accès</option>
+                        <option value="reseaux-informatiques">Réseaux informatiques</option>
+                        <option value="fibre-optique">Fibre optique</option>
+                        <option value="telephonie">Téléphonie</option>
+                      </optgroup>
+                      
+                      <optgroup label="💧 PLOMBERIE & SANITAIRE">
+                        <option value="plomberie-generale">Plomberie générale</option>
+                        <option value="plomberie-sanitaire">Plomberie sanitaire</option>
+                        <option value="installation-sanitaire">Installation sanitaire</option>
+                        <option value="salle-bains-cle-main">Salle de bains clé en main</option>
+                        <option value="plomberie-industrielle">Plomberie industrielle</option>
+                        <option value="canalisations">Canalisations</option>
+                        <option value="assainissement">Assainissement</option>
+                        <option value="assainissement-individuel">Assainissement individuel</option>
+                        <option value="fosse-septique">Fosse septique</option>
+                        <option value="debouchage-canalisations">Débouchage canalisations</option>
+                        <option value="zinguerie-plomberie">Zinguerie plomberie</option>
+                        <option value="arrosage-automatique">Arrosage automatique</option>
+                      </optgroup>
+                      
+                      <optgroup label="🌡️ CHAUFFAGE & CLIMATISATION">
+                        <option value="chauffage-general">Chauffage général</option>
+                        <option value="installation-chauffage-central">Installation chauffage central</option>
+                        <option value="chauffage-gaz">Chauffage au gaz</option>
+                        <option value="chauffage-fioul">Chauffage au fioul</option>
+                        <option value="chauffage-electrique">Chauffage électrique</option>
+                        <option value="plancher-chauffant">Plancher chauffant</option>
+                        <option value="chaudiere-gaz">Chaudière gaz</option>
+                        <option value="chaudiere-fioul">Chaudière fioul</option>
+                        <option value="chaudiere-bois">Chaudière bois</option>
+                        <option value="chaudiere-granules">Chaudière granulés</option>
+                        <option value="chaudiere-condensation">Chaudière condensation</option>
+                        <option value="poele-bois">Poêle à bois</option>
+                        <option value="poele-granules">Poêle à granulés</option>
+                        <option value="insert-cheminee">Insert cheminée</option>
+                        <option value="ramonage">Ramonage</option>
+                        <option value="climatisation">Climatisation</option>
+                        <option value="climatisation-reversible">Climatisation réversible</option>
+                        <option value="climatisation-gainable">Climatisation gainable</option>
+                        <option value="climatisation-split">Climatisation split</option>
+                        <option value="ventilation-vmc">Ventilation VMC</option>
+                        <option value="vmc-simple-flux">VMC simple flux</option>
+                        <option value="vmc-double-flux">VMC double flux</option>
+                      </optgroup>
+                      
+                      <optgroup label="♻️ ÉNERGIES RENOUVELABLES">
+                        <option value="panneaux-solaires-photovoltaiques">Panneaux solaires photovoltaïques</option>
+                        <option value="installation-photovoltaique">Installation photovoltaïque</option>
+                        <option value="photovoltaique-autoconsommation">Photovoltaïque en autoconsommation</option>
+                        <option value="pac-air-eau">Pompe à chaleur air/eau</option>
+                        <option value="pac-air-air">Pompe à chaleur air/air</option>
+                        <option value="pac-eau-eau">Pompe à chaleur eau/eau</option>
+                        <option value="pac-geothermique">Pompe à chaleur géothermique</option>
+                        <option value="geothermie">Géothermie</option>
+                        <option value="chauffe-eau-solaire">Chauffe-eau solaire</option>
+                        <option value="chauffe-eau-thermodynamique">Chauffe-eau thermodynamique</option>
+                        <option value="ballon-thermodynamique">Ballon thermodynamique</option>
+                      </optgroup>
+                      
+                      <optgroup label="🏠 COUVERTURE, TOITURE & ÉTANCHÉITÉ">
+                        <option value="couverture">Couverture</option>
+                        <option value="couverture-tuiles">Couverture tuiles</option>
+                        <option value="couverture-ardoises">Couverture ardoises</option>
+                        <option value="couverture-zinc">Couverture zinc</option>
+                        <option value="couverture-bac-acier">Couverture bac acier</option>
+                        <option value="toiture-terrasse">Toiture terrasse</option>
+                        <option value="toiture-vegetalisee">Toiture végétalisée</option>
+                        <option value="zinguerie">Zinguerie</option>
+                        <option value="gouttieres">Gouttières</option>
+                        <option value="etancheite">Étanchéité</option>
+                        <option value="etancheite-toiture-terrasse">Étanchéité toiture terrasse</option>
+                        <option value="bardage">Bardage</option>
+                        <option value="bardage-bois">Bardage bois</option>
+                        <option value="bardage-metallique">Bardage métallique</option>
+                        <option value="isolation-toiture">Isolation toiture</option>
+                        <option value="demoussage-toiture">Démoussage toiture</option>
+                        <option value="velux">Velux</option>
+                      </optgroup>
+                      
+                      <optgroup label="🪟 MENUISERIE & FERMETURES">
+                        <option value="menuiserie-generale">Menuiserie générale</option>
+                        <option value="menuiserie-bois">Menuiserie bois</option>
+                        <option value="menuiserie-aluminium">Menuiserie aluminium</option>
+                        <option value="menuiserie-pvc">Menuiserie PVC</option>
+                        <option value="fenetres">Fenêtres</option>
+                        <option value="portes-fenetres">Portes-fenêtres</option>
+                        <option value="baies-vitrees">Baies vitrées</option>
+                        <option value="volets-roulants">Volets roulants</option>
+                        <option value="volets-battants">Volets battants</option>
+                        <option value="stores">Stores</option>
+                        <option value="portails">Portails</option>
+                        <option value="portes-entree">Portes d'entrée</option>
+                        <option value="portes-garage">Portes de garage</option>
+                        <option value="verriere">Verrière</option>
+                        <option value="garde-corps">Garde-corps</option>
+                      </optgroup>
+                      
+                      <optgroup label="🏠 ISOLATION THERMIQUE & ACOUSTIQUE">
+                        <option value="isolation-generale">Isolation générale</option>
+                        <option value="isolation-combles">Isolation des combles</option>
+                        <option value="isolation-combles-perdus">Isolation des combles perdus</option>
+                        <option value="isolation-combles-amenages">Isolation des combles aménagés</option>
+                        <option value="isolation-murs-interieur">Isolation des murs par l'intérieur (ITI)</option>
+                        <option value="isolation-murs-exterieur">Isolation des murs par l'extérieur (ITE)</option>
+                        <option value="isolation-planchers">Isolation des planchers</option>
+                        <option value="isolation-sous-sol">Isolation sous-sol</option>
+                        <option value="isolation-cave">Isolation cave</option>
+                        <option value="isolation-acoustique">Isolation acoustique</option>
+                        <option value="isolation-phonique">Isolation phonique</option>
+                      </optgroup>
+                      
+                      <optgroup label="🎨 REVÊTEMENTS & FINITIONS">
+                        <option value="peinture-generale">Peinture générale</option>
+                        <option value="peinture-interieure">Peinture intérieure</option>
+                        <option value="peinture-exterieure">Peinture extérieure</option>
+                        <option value="peinture-batiment">Peinture en bâtiment</option>
+                        <option value="peinture-decorative">Peinture décorative</option>
+                        <option value="ravalement-facades">Ravalement de façades</option>
+                        <option value="enduits-facades">Enduits de façades</option>
+                        <option value="platrier-plaquiste">Plâtrier-plaquiste</option>
+                        <option value="placo">Placo</option>
+                        <option value="cloisons-seches">Cloisons sèches</option>
+                        <option value="faux-plafonds">Faux plafonds</option>
+                        <option value="plafonds-suspendus">Plafonds suspendus</option>
+                        <option value="carrelage">Carrelage</option>
+                        <option value="faience">Faïence</option>
+                        <option value="mosaique">Mosaïque</option>
+                        <option value="parquet">Parquet</option>
+                        <option value="parquet-massif">Parquet massif</option>
+                        <option value="parquet-flottant">Parquet flottant</option>
+                        <option value="sol-vinyl">Sol vinyle</option>
+                        <option value="moquette">Moquette</option>
+                        <option value="revetement-sols-souples">Revêtement de sols souples</option>
+                        <option value="papier-peint">Papier peint</option>
+                        <option value="staff">Staff</option>
+                        <option value="moulures">Moulures</option>
+                      </optgroup>
+                      
+                      <optgroup label="🏊 PISCINES & SPA">
+                        <option value="construction-piscines">Construction de piscines</option>
+                        <option value="piscines-enterrees">Piscines enterrées</option>
+                        <option value="piscines-hors-sol">Piscines hors-sol</option>
+                        <option value="piscines-beton">Piscines béton</option>
+                        <option value="piscines-coque">Piscines coque</option>
+                        <option value="piscines-naturelles">Piscines naturelles</option>
+                        <option value="piscines-biologiques">Piscines biologiques</option>
+                        <option value="spa-jacuzzi">Spa & Jacuzzi</option>
+                        <option value="abris-piscines">Abris de piscines</option>
+                        <option value="traitement-eau-piscine">Traitement de l'eau de piscine</option>
+                      </optgroup>
+                      
+                      <optgroup label="🔍 DIAGNOSTIC & ÉTUDES">
+                        <option value="diagnostic-immobilier">Diagnostic immobilier</option>
+                        <option value="diagnostic-amiante">Diagnostic amiante</option>
+                        <option value="diagnostic-plomb">Diagnostic plomb</option>
+                        <option value="diagnostic-termites">Diagnostic termites</option>
+                        <option value="diagnostic-performance-energetique">Diagnostic de performance énergétique (DPE)</option>
+                        <option value="audit-energetique">Audit énergétique</option>
+                        <option value="bureau-etudes-thermiques">Bureau d'études thermiques (BET)</option>
+                        <option value="bureau-etudes-structure">Bureau d'études structure</option>
+                        <option value="maitrise-oeuvre">Maîtrise d'œuvre</option>
+                        <option value="economiste-construction">Économiste de la construction</option>
+                      </optgroup>
+                      
+                      <optgroup label="🌳 EXTÉRIEUR & AMÉNAGEMENT">
+                        <option value="paysagiste">Paysagiste</option>
+                        <option value="terrassement-vrd">Terrassement VRD</option>
+                        <option value="amenagement-exterieur">Aménagement extérieur</option>
+                        <option value="clotures">Clôtures</option>
+                        <option value="terrasses-bois">Terrasses bois</option>
+                        <option value="terrasses-composite">Terrasses composite</option>
+                        <option value="allees-jardins">Allées de jardins</option>
+                        <option value="enrochement">Enrochement</option>
+                        <option value="drainage">Drainage</option>
+                      </optgroup>
                     </select>
                   </div>
 
