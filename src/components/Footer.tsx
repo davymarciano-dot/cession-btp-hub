@@ -81,33 +81,6 @@ const Footer = () => {
       <footer className="bg-gradient-to-br from-[hsl(214,56%,10%)] to-[hsl(214,48%,25%)] text-white">
         <div className="container mx-auto px-4 pt-20 pb-8 max-w-[1200px]">
           
-          {/* ========== NEWSLETTER SECTION ========== */}
-          <div className="bg-[hsl(16,100%,60%)]/10 border-2 border-[hsl(16,100%,60%)]/20 rounded-2xl p-6 md:p-8 mb-16">
-            <h3 className="text-xl md:text-2xl font-bold mb-2">🔔 Alertes Nouvelles Annonces</h3>
-            <p className="text-white/70 mb-5 text-sm md:text-base">
-              Recevez les meilleures opportunités BTP directement dans votre boîte mail
-            </p>
-            <form onSubmit={handleNewsletterSubmit} className="flex flex-col sm:flex-row gap-0 mb-3">
-              <input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="Votre email professionnel"
-                required
-                className="flex-1 px-5 py-4 border-2 border-white/10 bg-white/5 rounded-xl sm:rounded-r-none sm:rounded-l-xl text-white placeholder:text-white/50 focus:border-[hsl(16,100%,60%)]/50 focus:bg-white/8 outline-none"
-              />
-              <button
-                type="submit"
-                className="px-8 py-4 bg-gradient-to-r from-[hsl(16,100%,60%)] to-[hsl(27,100%,63%)] rounded-xl sm:rounded-l-none sm:rounded-r-xl text-white font-semibold hover:scale-105 transition-transform"
-              >
-                S'abonner →
-              </button>
-            </form>
-            <p className="text-xs text-white/60">
-              ✓ Gratuit • ✓ 1 email/semaine • ✓ Désinscription en 1 clic
-            </p>
-          </div>
-
           {/* ========== FOOTER GRID ========== */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-[2fr_1fr_1fr_1fr_1.5fr] gap-12 md:gap-16 lg:gap-[60px] mb-16">
             
