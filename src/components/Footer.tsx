@@ -65,7 +65,7 @@ const Footer = () => {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 text-center text-white">
             {stats.map((stat, index) => (
               <div key={index}>
-                <div className="text-5xl md:text-[56px] font-montserrat font-black mb-3 drop-shadow-lg">
+                <div className="text-5xl md:text-[56px] font-black mb-3 drop-shadow-lg">
                   {stat.number}
                 </div>
                 <div className="text-base md:text-lg font-medium opacity-95">
