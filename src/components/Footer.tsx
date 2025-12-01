@@ -82,7 +82,7 @@ const Footer = () => {
         <div className="container mx-auto px-4 pt-20 pb-8 max-w-[1200px]">
           
           {/* ========== FOOTER GRID ========== */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-[2fr_1fr_1fr_1fr_1.5fr] gap-12 md:gap-16 lg:gap-[60px] mb-16">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-[2fr_1fr_1fr_1fr_1.5fr_1fr] gap-12 md:gap-16 lg:gap-[60px] mb-16">
             
             {/* ========== BRAND SECTION ========== */}
             <div className="lg:pr-10">
@@ -112,36 +112,6 @@ const Footer = () => {
                   <span>187 entreprises vendues en 2024</span>
                 </li>
               </ul>
-
-              <div className="space-y-3 mb-6">
-                <div className="flex items-center gap-3 text-white/75">
-                  <Mail className="w-5 h-5" />
-                  <span>contact@cessionbtp.fr</span>
-                </div>
-                <div className="flex items-center gap-3 text-white/75">
-                  <Phone className="w-5 h-5" />
-                  <span>01 23 45 67 89</span>
-                </div>
-                <div className="flex items-center gap-3 text-white/75">
-                  <MapPin className="w-5 h-5" />
-                  <span>Paris, France</span>
-                </div>
-              </div>
-
-              <div className="flex items-center gap-4">
-                {socialLinks.map((social) => (
-                  <a
-                    key={social.label}
-                    href={social.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-11 h-11 bg-white/10 hover:bg-gradient-to-br hover:from-[hsl(16,100%,60%)] hover:to-[hsl(27,100%,63%)] rounded-full flex items-center justify-center transition-all hover:-translate-y-1"
-                    aria-label={social.label}
-                  >
-                    <social.icon className="w-5 h-5" />
-                  </a>
-                ))}
-              </div>
             </div>
 
             {/* ========== ENTREPRISE COLUMN ========== */}
@@ -242,10 +212,46 @@ const Footer = () => {
                     </div>
                   </div>
                 </div>
+                </div>
+              </div>
+            </div>
+
+            {/* ========== CONTACT COLUMN ========== */}
+            <div>
+              <h4 className="text-sm font-bold uppercase tracking-wider text-[hsl(16,100%,60%)] mb-6">
+                Contact
+              </h4>
+              <div className="space-y-4 mb-6">
+                <div className="flex items-center gap-3 text-white/75 hover:text-white transition-colors">
+                  <Mail className="w-5 h-5 flex-shrink-0" />
+                  <span className="text-sm">contact@cessionbtp.fr</span>
+                </div>
+                <div className="flex items-center gap-3 text-white/75 hover:text-white transition-colors">
+                  <Phone className="w-5 h-5 flex-shrink-0" />
+                  <span className="text-sm">01 23 45 67 89</span>
+                </div>
+                <div className="flex items-center gap-3 text-white/75">
+                  <MapPin className="w-5 h-5 flex-shrink-0" />
+                  <span className="text-sm">Paris, France</span>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-3">
+                {socialLinks.map((social) => (
+                  <a
+                    key={social.label}
+                    href={social.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-11 h-11 bg-white/10 hover:bg-gradient-to-br hover:from-[hsl(16,100%,60%)] hover:to-[hsl(27,100%,63%)] rounded-full flex items-center justify-center transition-all hover:-translate-y-1"
+                    aria-label={social.label}
+                  >
+                    <social.icon className="w-5 h-5" />
+                  </a>
+                ))}
               </div>
             </div>
           </div>
-        </div>
 
         {/* ========== FOOTER BOTTOM ========== */}
         <div className="border-t border-white/10">
