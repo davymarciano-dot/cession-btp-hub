@@ -25,34 +25,56 @@ const Tarifs = () => {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
+          <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
             {/* GRATUIT */}
             <div className="h-full flex flex-col border-2 border-slate-200 hover:border-blue-600 hover:shadow-xl transition-all rounded-2xl p-8 bg-white relative">
               <h3 className="text-2xl font-bold text-blue-600 mb-2">Gratuit</h3>
               <div className="mb-6">
                 <span className="text-5xl font-black text-blue-600">0€</span>
               </div>
-              <p className="text-sm text-slate-500 mb-6">
-                Consultation - Cible : 50 000€ - CA : 0
+              <p className="text-sm text-slate-600 mb-6">
+                Explorez les opportunités BTP et testez la plateforme
               </p>
 
-              <div className="space-y-3 mb-8 flex-1">
+              <div className="space-y-3 mb-6 flex-1">
                 <div className="flex items-start gap-2">
                   <Check className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
-                  <span className="text-slate-700">Consultation des annonces</span>
+                  <span className="text-slate-700">Consultation illimitée des annonces</span>
                 </div>
                 <div className="flex items-start gap-2">
                   <Check className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
-                  <span className="text-slate-700">Recherche basique</span>
+                  <span className="text-slate-700">Recherche avancée par métier/ville/CA</span>
                 </div>
                 <div className="flex items-start gap-2">
                   <Check className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
-                  <span className="text-slate-700">Interface acheteur</span>
+                  <span className="text-slate-700">Filtres détaillés (CA, effectif, prix, RGE)</span>
                 </div>
                 <div className="flex items-start gap-2">
                   <Check className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
-                  <span className="text-slate-700">Inscription gratuite</span>
+                  <span className="text-slate-700">Sauvegarde favoris</span>
                 </div>
+                <div className="flex items-start gap-2">
+                  <Check className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
+                  <span className="text-slate-700">Accès entreprises RGE certifiées</span>
+                </div>
+                <div className="flex items-start gap-2">
+                  <Check className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
+                  <span className="text-slate-700">Demandes de mise en relation (3/mois max)</span>
+                </div>
+                <div className="flex items-start gap-2">
+                  <Check className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
+                  <span className="text-slate-700">Traitement sous 2-3 jours</span>
+                </div>
+                <div className="flex items-start gap-2">
+                  <Check className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
+                  <span className="text-slate-700">Alertes email basiques</span>
+                </div>
+              </div>
+
+              <div className="bg-amber-50 border border-amber-200 rounded-lg p-4 mb-6">
+                <p className="text-sm text-amber-800">
+                  <strong>Note importante :</strong> Les mises en relation sont contrôlées par CessionBTP pour protéger vendeurs et garantir qualité. Pas de contact direct.
+                </p>
               </div>
 
               <Button className="w-full bg-orange-500 hover:bg-blue-600 transition-colors">
@@ -60,128 +82,78 @@ const Tarifs = () => {
               </Button>
             </div>
 
-            {/* CONTACT - POPULAIRE */}
-            <div className="h-full flex flex-col border-2 border-slate-200 hover:border-green-600 hover:shadow-xl transition-all rounded-2xl p-8 bg-white relative">
-
-              <h3 className="text-2xl font-bold text-green-600 mb-2">Contact</h3>
-              <div className="mb-6">
-                <span className="text-5xl font-black text-green-600">49€</span>
-                <span className="text-slate-500"> /5 contacts</span>
-              </div>
-              <p className="text-sm text-slate-500 mb-6">
-                Messages directs - Cible : 10 000€ - CA : 2,5M
-              </p>
-
-              <div className="space-y-3 mb-8 flex-1">
-                <div className="flex items-start gap-2">
-                  <Check className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
-                  <span className="text-slate-700">5 contacts directs</span>
-                </div>
-                <div className="flex items-start gap-2">
-                  <Check className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
-                  <span className="text-slate-700">Messages dirigés vers vendeurs</span>
-                </div>
-                <div className="flex items-start gap-2">
-                  <Check className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
-                  <span className="text-slate-700">Coordonnées complètes</span>
-                </div>
-                <div className="flex items-start gap-2">
-                  <Check className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
-                  <span className="text-slate-700">Historique des échanges</span>
-                </div>
-                <div className="flex items-start gap-2">
-                  <Check className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
-                  <span className="text-slate-700">Accès prioritaire</span>
-                </div>
-              </div>
-
-              <Button className="w-full bg-orange-500 hover:bg-green-600 transition-colors">
-                Acheter des contacts
-              </Button>
-            </div>
-
-            {/* PRO - 🔥 MEILLEUR RAPPORT */}
-            <div className="h-full flex flex-col border-2 border-slate-200 hover:border-red-600 hover:shadow-xl transition-all rounded-2xl p-8 bg-white relative">
-
-              <h3 className="text-2xl font-bold text-red-600 mb-2">Pro</h3>
-              <div className="mb-6">
-                <span className="text-5xl font-black text-red-600">99€</span>
-                <span className="text-slate-600"> /mois</span>
-              </div>
-              <p className="text-sm text-slate-600 mb-6">
-                Illimité + alertes - Cible : 5 000€ - CA : 6M
-              </p>
-
-              <div className="space-y-3 mb-8 flex-1">
-                <div className="flex items-start gap-2">
-                  <Check className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
-                  <span className="text-slate-900 font-semibold">Contacts ILLIMITÉS</span>
-                </div>
-                <div className="flex items-start gap-2">
-                  <Check className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
-                  <span className="text-slate-900">Alertes personnalisées</span>
-                </div>
-                <div className="flex items-start gap-2">
-                  <Check className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
-                  <span className="text-slate-900">Coordonnées complètes</span>
-                </div>
-                <div className="flex items-start gap-2">
-                  <Check className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
-                  <span className="text-slate-900">Badge 'Acheteur Vérifié'</span>
-                </div>
-                <div className="flex items-start gap-2">
-                  <Check className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
-                  <span className="text-slate-900">Support prioritaire</span>
-                </div>
-              </div>
-
-              <Button className="w-full bg-orange-500 hover:bg-red-600 transition-colors">
-                Choisir Pro
-              </Button>
-            </div>
-
-            {/* ENTREPRISE - 👑 PREMIUM */}
-            <div className="h-full flex flex-col border-2 border-slate-200 hover:border-amber-500 hover:shadow-xl transition-all rounded-2xl p-8 bg-white relative">
+            {/* PREMIUM - ⭐ RECOMMANDÉ */}
+            <div className="h-full flex flex-col border-2 border-blue-500 hover:border-blue-600 hover:shadow-2xl transition-all rounded-2xl p-8 bg-white relative">
               <div className="absolute -top-3 left-1/2 -translate-x-1/2">
-                <span className="bg-gradient-to-r from-purple-600 to-amber-500 text-white px-4 py-1.5 rounded-full text-xs font-bold shadow-lg">
-                  👑 PREMIUM
+                <span className="bg-gradient-to-r from-blue-500 to-blue-600 text-white px-4 py-1.5 rounded-full text-xs font-bold shadow-lg">
+                  ⭐ RECOMMANDÉ
                 </span>
               </div>
 
-              <h3 className="text-2xl font-bold text-amber-500 mb-2">Entreprise</h3>
+              <h3 className="text-2xl font-bold text-blue-600 mb-2">Premium</h3>
               <div className="mb-6">
-                <span className="text-5xl font-black text-amber-500">299€</span>
-                <span className="text-slate-500"> /mois</span>
+                <span className="text-5xl font-black text-blue-600">199€</span>
+                <span className="text-slate-600 text-sm ml-2">paiement unique</span>
               </div>
-              <p className="text-sm text-slate-500 mb-6">
-                Multi-utilisateurs + API - Cible : 500€ - CA : 1,8M
+              <p className="text-sm text-slate-600 mb-6">
+                Accédez en priorité et soyez pris au sérieux par les vendeurs
               </p>
 
-              <div className="space-y-3 mb-8 flex-1">
+              <div className="space-y-3 mb-6 flex-1">
                 <div className="flex items-start gap-2">
                   <Check className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
-                  <span className="text-slate-700">Accès multi-utilisateurs</span>
+                  <span className="text-slate-900 font-semibold">Tout du plan Gratuit, plus :</span>
                 </div>
                 <div className="flex items-start gap-2">
                   <Check className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
-                  <span className="text-slate-700">API d'intégration</span>
+                  <span className="text-slate-900 font-semibold">Mises en relation ILLIMITÉES</span>
                 </div>
                 <div className="flex items-start gap-2">
                   <Check className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
-                  <span className="text-slate-700">Rapports avancés</span>
+                  <span className="text-slate-900 font-semibold">Traitement PRIORITAIRE (24h au lieu de 3 jours)</span>
                 </div>
                 <div className="flex items-start gap-2">
                   <Check className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
-                  <span className="text-slate-700">Gestionnaire dédié</span>
+                  <span className="text-slate-900">Badge "Acheteur Vérifié" (vendeurs vous privilégient)</span>
                 </div>
                 <div className="flex items-start gap-2">
                   <Check className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
-                  <span className="text-slate-700">Formation équipe</span>
+                  <span className="text-slate-900">Accès annonces 48h AVANT public</span>
+                </div>
+                <div className="flex items-start gap-2">
+                  <Check className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
+                  <span className="text-slate-900">Matching IA personnalisé automatique</span>
+                </div>
+                <div className="flex items-start gap-2">
+                  <Check className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
+                  <span className="text-slate-900">Dossier financement pré-qualifié (qualification accélérée)</span>
+                </div>
+                <div className="flex items-start gap-2">
+                  <Check className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
+                  <span className="text-slate-900">Consultation expert 30min</span>
+                </div>
+                <div className="flex items-start gap-2">
+                  <Check className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
+                  <span className="text-slate-900">Support prioritaire téléphone/email</span>
+                </div>
+                <div className="flex items-start gap-2">
+                  <Check className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
+                  <span className="text-slate-900">Statistiques marché BTP exclusives</span>
+                </div>
+                <div className="flex items-start gap-2">
+                  <Check className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
+                  <span className="text-slate-900">Groupe privé acheteurs BTP</span>
                 </div>
               </div>
 
-              <Button className="w-full bg-orange-500 hover:bg-amber-500 transition-colors">
-                Choisir Entreprise
+              <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6">
+                <p className="text-sm text-blue-800">
+                  <strong>Les vendeurs répondent 3× plus vite aux profils Premium vérifiés</strong>
+                </p>
+              </div>
+
+              <Button className="w-full bg-blue-600 hover:bg-blue-700 transition-colors">
+                Passer Premium - 199€
               </Button>
             </div>
           </div>
