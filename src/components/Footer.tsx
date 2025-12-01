@@ -1,10 +1,8 @@
 import { Link } from "react-router-dom";
-import { Mail, Phone, MapPin, Linkedin, Facebook, Twitter, Instagram, CheckCircle2, Shield, Zap, Award, Star } from "lucide-react";
-import { motion } from "framer-motion";
+import { Mail, Phone, MapPin, Linkedin, Facebook, Twitter, Instagram, CheckCircle2 } from "lucide-react";
 import { useState } from "react";
 
 const Footer = () => {
-  const currentYear = new Date().getFullYear();
   const [email, setEmail] = useState("");
 
   const handleNewsletterSubmit = (e: React.FormEvent) => {
@@ -52,67 +50,39 @@ const Footer = () => {
     { icon: Instagram, url: "https://instagram.com/cessionbtp", label: "Instagram" },
   ];
 
+  const stats = [
+    { number: "187", label: "Entreprises vendues 2024" },
+    { number: "45j", label: "Délai moyen de vente" },
+    { number: "95%", label: "Taux matching IA" },
+    { number: "2%", label: "Success Fee seulement" },
+  ];
+
   return (
     <>
       {/* ========== STATS BAR SECTION ========== */}
-      <section className="bg-gradient-to-r from-[#FF6B35] to-[#FF8C42] py-12 md:py-16 mt-20">
+      <section className="bg-gradient-to-r from-[hsl(16,100%,60%)] to-[hsl(27,100%,63%)] py-12 md:py-16 mt-20">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 text-center text-white">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              viewport={{ once: true }}
-            >
-              <div className="text-5xl md:text-6xl font-black mb-3 drop-shadow-lg">187</div>
-              <div className="text-base md:text-lg font-medium opacity-95">Entreprises vendues 2024</div>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-              viewport={{ once: true }}
-            >
-              <div className="text-5xl md:text-6xl font-black mb-3 drop-shadow-lg">45j</div>
-              <div className="text-base md:text-lg font-medium opacity-95">Délai moyen de vente</div>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              viewport={{ once: true }}
-            >
-              <div className="text-5xl md:text-6xl font-black mb-3 drop-shadow-lg">95%</div>
-              <div className="text-base md:text-lg font-medium opacity-95">Taux matching IA</div>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.3 }}
-              viewport={{ once: true }}
-            >
-              <div className="text-5xl md:text-6xl font-black mb-3 drop-shadow-lg">2%</div>
-              <div className="text-base md:text-lg font-medium opacity-95">Success Fee seulement</div>
-            </motion.div>
+            {stats.map((stat, index) => (
+              <div key={index}>
+                <div className="text-5xl md:text-[56px] font-black mb-3 drop-shadow-lg">
+                  {stat.number}
+                </div>
+                <div className="text-base md:text-lg font-medium opacity-95">
+                  {stat.label}
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
       {/* ========== FOOTER PRINCIPAL ========== */}
-      <footer className="bg-gradient-to-br from-[#0a1628] to-[#1e3a5f] text-white">
-        <div className="container mx-auto px-4 pt-20 pb-8">
+      <footer className="bg-gradient-to-br from-[hsl(214,56%,10%)] to-[hsl(214,48%,25%)] text-white">
+        <div className="container mx-auto px-4 pt-20 pb-8 max-w-[1200px]">
           
           {/* ========== NEWSLETTER SECTION ========== */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            viewport={{ once: true }}
-            className="bg-[#FF6B35]/10 border-2 border-[#FF6B35]/20 rounded-2xl p-6 md:p-8 mb-16"
-          >
+          <div className="bg-[hsl(16,100%,60%)]/10 border-2 border-[hsl(16,100%,60%)]/20 rounded-2xl p-6 md:p-8 mb-16">
             <h3 className="text-xl md:text-2xl font-bold mb-2">🔔 Alertes Nouvelles Annonces</h3>
             <p className="text-white/70 mb-5 text-sm md:text-base">
               Recevez les meilleures opportunités BTP directement dans votre boîte mail
@@ -124,11 +94,11 @@ const Footer = () => {
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="Votre email professionnel"
                 required
-                className="flex-1 px-5 py-4 border-2 border-white/10 bg-white/5 rounded-xl sm:rounded-r-none sm:rounded-l-xl text-white placeholder:text-white/50 focus:border-[#FF6B35]/50 focus:bg-white/8 outline-none"
+                className="flex-1 px-5 py-4 border-2 border-white/10 bg-white/5 rounded-xl sm:rounded-r-none sm:rounded-l-xl text-white placeholder:text-white/50 focus:border-[hsl(16,100%,60%)]/50 focus:bg-white/8 outline-none"
               />
               <button
                 type="submit"
-                className="px-8 py-4 bg-gradient-to-r from-[#FF6B35] to-[#FF8C42] rounded-xl sm:rounded-l-none sm:rounded-r-xl text-white font-semibold hover:scale-105 transition-transform"
+                className="px-8 py-4 bg-gradient-to-r from-[hsl(16,100%,60%)] to-[hsl(27,100%,63%)] rounded-xl sm:rounded-l-none sm:rounded-r-xl text-white font-semibold hover:scale-105 transition-transform"
               >
                 S'abonner →
               </button>
@@ -136,86 +106,76 @@ const Footer = () => {
             <p className="text-xs text-white/60">
               ✓ Gratuit • ✓ 1 email/semaine • ✓ Désinscription en 1 clic
             </p>
-          </motion.div>
+          </div>
 
           {/* ========== FOOTER GRID ========== */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 mb-16">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-[2fr_1fr_1fr_1fr_1.5fr] gap-12 md:gap-16 lg:gap-[60px] mb-16">
             
             {/* ========== BRAND SECTION ========== */}
-            <div className="lg:col-span-2 pr-0 lg:pr-10">
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5 }}
-                viewport={{ once: true }}
-              >
-                <div className="text-3xl font-black mb-5 bg-gradient-to-r from-[#FF6B35] to-[#FFB347] bg-clip-text text-transparent">
-                  🏗️ CessionBTP
+            <div className="lg:pr-10">
+              <div className="text-3xl font-black mb-5 bg-gradient-to-r from-[hsl(16,100%,60%)] to-[hsl(35,100%,63%)] bg-clip-text text-transparent">
+                🏗️ CessionBTP
+              </div>
+              
+              <p className="text-white/85 font-medium mb-6 leading-relaxed">
+                La plateforme n°1 pour acheter et vendre des entreprises du BTP en France
+              </p>
+
+              <ul className="space-y-3 mb-8">
+                <li className="flex items-center gap-3 text-white/80">
+                  <CheckCircle2 className="w-5 h-5 text-green-500 flex-shrink-0" />
+                  <span>Matching IA 95%</span>
+                </li>
+                <li className="flex items-center gap-3 text-white/80">
+                  <CheckCircle2 className="w-5 h-5 text-green-500 flex-shrink-0" />
+                  <span>Success Fee 2% seulement</span>
+                </li>
+                <li className="flex items-center gap-3 text-white/80">
+                  <CheckCircle2 className="w-5 h-5 text-green-500 flex-shrink-0" />
+                  <span>Accompagnement personnalisé</span>
+                </li>
+                <li className="flex items-center gap-3 text-white/80">
+                  <CheckCircle2 className="w-5 h-5 text-green-500 flex-shrink-0" />
+                  <span>187 entreprises vendues en 2024</span>
+                </li>
+              </ul>
+
+              <div className="space-y-3 mb-6">
+                <div className="flex items-center gap-3 text-white/75">
+                  <Mail className="w-5 h-5" />
+                  <span>contact@cessionbtp.fr</span>
                 </div>
-                
-                <p className="text-white/85 font-medium mb-6 leading-relaxed">
-                  La plateforme n°1 pour acheter et vendre des entreprises du BTP en France
-                </p>
+                <div className="flex items-center gap-3 text-white/75">
+                  <Phone className="w-5 h-5" />
+                  <span>01 23 45 67 89</span>
+                </div>
+                <div className="flex items-center gap-3 text-white/75">
+                  <MapPin className="w-5 h-5" />
+                  <span>Paris, France</span>
+                </div>
+              </div>
 
-                <ul className="space-y-3 mb-8">
-                  <li className="flex items-center gap-3 text-white/80">
-                    <CheckCircle2 className="w-5 h-5 text-green-500 flex-shrink-0" />
-                    <span>Matching IA 95%</span>
-                  </li>
-                  <li className="flex items-center gap-3 text-white/80">
-                    <CheckCircle2 className="w-5 h-5 text-green-500 flex-shrink-0" />
-                    <span>Success Fee 2% seulement</span>
-                  </li>
-                  <li className="flex items-center gap-3 text-white/80">
-                    <CheckCircle2 className="w-5 h-5 text-green-500 flex-shrink-0" />
-                    <span>Accompagnement personnalisé</span>
-                  </li>
-                  <li className="flex items-center gap-3 text-white/80">
-                    <CheckCircle2 className="w-5 h-5 text-green-500 flex-shrink-0" />
-                    <span>187 entreprises vendues en 2024</span>
-                  </li>
-                </ul>
-
-                <div className="space-y-3 mb-6">
-                  <a href="mailto:contact@cessionbtp.fr" className="flex items-center gap-3 text-white/75 hover:text-white/95 transition-colors">
-                    <Mail className="w-5 h-5" />
-                    <span>contact@cessionbtp.fr</span>
+              <div className="flex items-center gap-4">
+                {socialLinks.map((social) => (
+                  <a
+                    key={social.label}
+                    href={social.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-11 h-11 bg-white/10 hover:bg-gradient-to-br hover:from-[hsl(16,100%,60%)] hover:to-[hsl(27,100%,63%)] rounded-full flex items-center justify-center transition-all hover:-translate-y-1"
+                    aria-label={social.label}
+                  >
+                    <social.icon className="w-5 h-5" />
                   </a>
-                  <a href="tel:+33123456789" className="flex items-center gap-3 text-white/75 hover:text-white/95 transition-colors">
-                    <Phone className="w-5 h-5" />
-                    <span>01 23 45 67 89</span>
-                  </a>
-                  <div className="flex items-center gap-3 text-white/75">
-                    <MapPin className="w-5 h-5" />
-                    <span>Paris, France</span>
-                  </div>
-                </div>
-
-                <div className="flex items-center gap-4">
-                  {socialLinks.map((social) => (
-                    <a
-                      key={social.label}
-                      href={social.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="w-11 h-11 bg-white/10 hover:bg-gradient-to-br hover:from-[#FF6B35] hover:to-[#FF8C42] rounded-full flex items-center justify-center transition-all hover:-translate-y-1"
-                      aria-label={social.label}
-                    >
-                      <social.icon className="w-5 h-5" />
-                    </a>
-                  ))}
-                </div>
-              </motion.div>
+                ))}
+              </div>
             </div>
 
             {/* ========== ENTREPRISE COLUMN ========== */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-              viewport={{ once: true }}
-            >
-              <h4 className="text-sm font-bold uppercase tracking-wider text-[#FF6B35] mb-6">Entreprise</h4>
+            <div>
+              <h4 className="text-sm font-bold uppercase tracking-wider text-[hsl(16,100%,60%)] mb-6">
+                Entreprise
+              </h4>
               <ul className="space-y-3.5">
                 {footerLinks.entreprise.map((link) => (
                   <li key={link.path}>
@@ -228,16 +188,13 @@ const Footer = () => {
                   </li>
                 ))}
               </ul>
-            </motion.div>
+            </div>
 
             {/* ========== VENDEURS COLUMN ========== */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              viewport={{ once: true }}
-            >
-              <h4 className="text-sm font-bold uppercase tracking-wider text-[#FF6B35] mb-6">Vendeurs</h4>
+            <div>
+              <h4 className="text-sm font-bold uppercase tracking-wider text-[hsl(16,100%,60%)] mb-6">
+                Vendeurs
+              </h4>
               <ul className="space-y-3.5">
                 {footerLinks.vendeurs.map((link) => (
                   <li key={link.path}>
@@ -250,16 +207,13 @@ const Footer = () => {
                   </li>
                 ))}
               </ul>
-            </motion.div>
+            </div>
 
             {/* ========== ACHETEURS COLUMN ========== */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.3 }}
-              viewport={{ once: true }}
-            >
-              <h4 className="text-sm font-bold uppercase tracking-wider text-[#FF6B35] mb-6">Acheteurs</h4>
+            <div>
+              <h4 className="text-sm font-bold uppercase tracking-wider text-[hsl(16,100%,60%)] mb-6">
+                Acheteurs
+              </h4>
               <ul className="space-y-3.5">
                 {footerLinks.acheteurs.map((link) => (
                   <li key={link.path}>
@@ -272,57 +226,53 @@ const Footer = () => {
                   </li>
                 ))}
               </ul>
-            </motion.div>
+            </div>
 
-            {/* ========== TRUST COLUMN (replaces Ressources) ========== */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.4 }}
-              viewport={{ once: true }}
-              className="lg:col-span-1"
-            >
-              <h4 className="text-sm font-bold uppercase tracking-wider text-[#FF6B35] mb-6">Confiance</h4>
+            {/* ========== CONFIANCE COLUMN ========== */}
+            <div>
+              <h4 className="text-sm font-bold uppercase tracking-wider text-[hsl(16,100%,60%)] mb-6">
+                Confiance
+              </h4>
               <div className="bg-white/5 rounded-2xl p-6 border border-white/10">
                 <div className="space-y-4 mb-5">
                   <div className="flex items-center gap-3 text-sm text-white/85">
-                    <Shield className="w-6 h-6 text-white" />
+                    <span className="text-2xl">🛡️</span>
                     <span>SSL & Cryptage</span>
                   </div>
                   <div className="flex items-center gap-3 text-sm text-white/85">
-                    <Zap className="w-6 h-6 text-white" />
+                    <span className="text-2xl">⚡</span>
                     <span>Vente rapide 45j</span>
                   </div>
                   <div className="flex items-center gap-3 text-sm text-white/85">
-                    <CheckCircle2 className="w-6 h-6 text-white" />
+                    <span className="text-2xl">✓</span>
                     <span>Certifié Pro BTP</span>
                   </div>
                   <div className="flex items-center gap-3 text-sm text-white/85">
-                    <Award className="w-6 h-6 text-white" />
+                    <span className="text-2xl">🎯</span>
                     <span>Matching IA 95%</span>
                   </div>
                 </div>
 
                 <div className="pt-5 border-t border-white/10 space-y-3">
                   <div className="text-sm text-white/70">
-                    <div className="text-[#FF6B35] text-2xl font-bold mb-1 flex items-center gap-1">
-                      4.9<Star className="w-5 h-5 fill-current" />
+                    <div className="text-[hsl(16,100%,60%)] text-2xl font-bold mb-1">
+                      4.9★
                     </div>
                     (234 avis)
                   </div>
                   <div className="text-sm text-white/70">
-                    <div className="text-[#FF6B35] text-2xl font-bold mb-1">187</div>
+                    <div className="text-[hsl(16,100%,60%)] text-2xl font-bold mb-1">187</div>
                     ventes 2024
                   </div>
                 </div>
               </div>
-            </motion.div>
+            </div>
           </div>
         </div>
 
         {/* ========== FOOTER BOTTOM ========== */}
         <div className="border-t border-white/10">
-          <div className="container mx-auto px-4 py-8">
+          <div className="container mx-auto px-4 py-8 max-w-[1200px]">
             <div className="text-center mb-4">
               <p className="text-white/60 text-sm">
                 © 2025 CessionBTP • Spécialiste #1 Cession Entreprises BTP France
