@@ -42,7 +42,7 @@ const Header = () => {
           <Link to="/entreprises" className="text-gray-700 hover:text-primary transition-colors font-medium">
             Entreprises à vendre
           </Link>
-          <Link to="/estimation" className="text-gray-700 hover:text-primary transition-colors font-medium">
+          <Link to="/estimer" className="text-gray-700 hover:text-primary transition-colors font-medium">
             Estimer
           </Link>
           <Link to="/tarifs" className="text-gray-700 hover:text-primary transition-colors font-medium">
@@ -110,7 +110,7 @@ const Header = () => {
               Entreprises
             </Link>
             <Link
-              to="/estimation"
+              to="/estimer"
               className="text-[#64748B] hover:text-primary transition-colors font-medium"
               onClick={() => setIsMenuOpen(false)}
             >
