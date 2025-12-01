@@ -8,13 +8,14 @@ import { Slider } from "@/components/ui/slider";
 import { 
   Building2, MapPin, Users, TrendingUp, Heart, Share2, 
   Zap, Award, Clock, Euro, ChevronRight, Filter, X,
-  Star, Sparkles, Flame, CheckCircle2, AlertCircle
+  Star, Sparkles, Flame, CheckCircle2, AlertCircle, Activity
 } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { useToast } from "@/hooks/use-toast";
 import SEOHead from "@/components/SEOHead";
 import { useNavigate } from "react-router-dom";
+import LiveStatsWidget from "@/components/LiveStatsWidget";
 
 interface Annonce {
   id: string;
@@ -45,6 +46,31 @@ const QUICK_PICKS = [
   { label: "Deals rapides", filter: "quick", icon: "⚡" },
   { label: "Premium", filter: "premium", icon: "💎" },
   { label: "Nouveautés", filter: "new", icon: "🆕" },
+];
+
+// Gradients par métier
+const METIER_GRADIENTS: Record<string, { gradient: string; icon: string }> = {
+  "Plomberie": { gradient: "from-blue-400 to-cyan-500", icon: "🔧" },
+  "Plomberie sanitaire": { gradient: "from-blue-400 to-cyan-500", icon: "🔧" },
+  "Électricité": { gradient: "from-yellow-400 to-orange-500", icon: "⚡" },
+  "Maçonnerie": { gradient: "from-gray-400 to-slate-600", icon: "🏗️" },
+  "Isolation": { gradient: "from-orange-400 to-red-500", icon: "🏠" },
+  "Isolation thermique": { gradient: "from-orange-400 to-red-500", icon: "🏠" },
+  "Terrassement": { gradient: "from-amber-600 to-yellow-700", icon: "🚜" },
+  "Peinture": { gradient: "from-pink-400 to-rose-500", icon: "🎨" },
+  "Charpente": { gradient: "from-green-500 to-emerald-600", icon: "🪵" },
+  "Tous corps d'état": { gradient: "from-purple-500 to-indigo-600", icon: "🏢" },
+  "default": { gradient: "from-blue-500 to-purple-600", icon: "🏢" }
+};
+
+// Badges variés
+const BADGE_VARIANTS = [
+  { label: "🆕 Nouveau", color: "bg-red-500", textColor: "text-white" },
+  { label: "🔥 Tendance", color: "bg-orange-500", textColor: "text-white" },
+  { label: "💎 Premium", color: "bg-purple-600", textColor: "text-white" },
+  { label: "⚡ Rapide", color: "bg-yellow-500", textColor: "text-white" },
+  { label: "💰 Deal", color: "bg-green-500", textColor: "text-white" },
+  { label: "🏆 Top", color: "bg-gradient-to-r from-yellow-400 to-orange-500", textColor: "text-white" },
 ];
 
 const Entreprises = () => {
@@ -104,6 +130,15 @@ const Entreprises = () => {
     if (price >= 1000000) return `${(price / 1000000).toFixed(1)}M€`;
     if (price >= 1000) return `${(price / 1000).toFixed(0)}K€`;
     return `${price}€`;
+  };
+
+  const getMetierGradient = (secteur: string) => {
+    for (const key in METIER_GRADIENTS) {
+      if (secteur.toLowerCase().includes(key.toLowerCase())) {
+        return METIER_GRADIENTS[key];
+      }
+    }
+    return METIER_GRADIENTS.default;
   };
 
   // Exemple d'annonces pour la démo
@@ -637,236 +672,274 @@ const Entreprises = () => {
       {/* RÉSULTATS */}
       <section className="py-12">
         <div className="container mx-auto px-4">
-          {loading ? (
-            <div className="text-center py-20">
-              <div className="inline-block animate-spin rounded-full h-12 w-12 border-4 border-primary border-t-transparent"></div>
-              <p className="mt-4 text-gray-600">Chargement des opportunités...</p>
-            </div>
-          ) : displayedAnnonces.length === 0 ? (
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              className="text-center py-20 bg-gradient-to-br from-blue-50 to-purple-50 rounded-3xl p-12"
-            >
-              <div className="text-8xl mb-6">🔍</div>
-              <h3 className="text-3xl font-bold mb-4">Aucun résultat</h3>
-              <p className="text-gray-600 mb-8">Essayez de modifier vos critères de recherche</p>
-              <Button size="lg" onClick={() => {
-                setSelectedMetier("");
-                setActiveQuickPick("");
-              }}>
-                Réinitialiser les filtres
-              </Button>
-            </motion.div>
-          ) : (
-            <div className="space-y-8">
-              {/* COUP DE CŒUR - Grande Card */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                className="relative group"
-              >
-                <div className="absolute -top-4 left-8 z-10">
-                  <Badge className="bg-gradient-to-r from-orange-500 to-red-500 text-white px-6 py-2 text-lg font-bold shadow-lg">
-                    💎 COUP DE CŒUR
-                  </Badge>
+          <div className="lg:grid lg:grid-cols-12 lg:gap-8">
+            {/* Colonne principale */}
+            <div className="lg:col-span-9">
+              {loading ? (
+                <div className="text-center py-20">
+                  <div className="inline-block animate-spin rounded-full h-12 w-12 border-4 border-primary border-t-transparent"></div>
+                  <p className="mt-4 text-gray-600">Chargement des opportunités...</p>
                 </div>
-                
-                <div className="bg-white rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-all border-2 border-orange-200">
-                  <div className="md:flex">
-                    {/* Image avec gradient */}
-                    <div className="md:w-1/2 relative h-80 bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
-                      <div className="text-9xl opacity-20">🏢</div>
-                      <div className="absolute top-4 right-4 flex gap-2">
-                        <Button
-                          size="icon"
-                          variant="secondary"
-                          className="rounded-full bg-white/90 hover:bg-white"
-                          onClick={() => toggleFavorite(featuredListing.id)}
-                        >
-                          <Heart className={`w-5 h-5 ${favorites.includes(featuredListing.id) ? 'fill-red-500 text-red-500' : ''}`} />
-                        </Button>
-                        <Button size="icon" variant="secondary" className="rounded-full bg-white/90 hover:bg-white">
-                          <Share2 className="w-5 h-5" />
-                        </Button>
-                      </div>
-                      {featuredListing.certifications?.includes("RGE") && (
-                        <Badge className="absolute top-4 left-4 bg-green-500 text-white">
-                          <Award className="w-4 h-4 mr-1" />
-                          RGE
-                        </Badge>
-                      )}
-                      <Badge className="absolute bottom-4 left-4 bg-orange-500 text-white px-4 py-2 text-sm">
-                        <Flame className="w-4 h-4 mr-1" />
-                        12 acheteurs intéressés
-                      </Badge>
-                    </div>
-
-                    {/* Contenu */}
-                    <div className="md:w-1/2 p-8">
-                      <div className="flex items-start justify-between mb-4">
-                        <div>
-                          <h3 className="text-3xl font-black mb-2">
-                            {featuredListing.secteur_activite}
-                          </h3>
-                          <div className="flex items-center text-gray-600 mb-2">
-                            <MapPin className="w-4 h-4 mr-1" />
-                            {featuredListing.ville} ({featuredListing.departement})
-                          </div>
-                        </div>
-                        <Badge className="bg-gradient-to-r from-green-500 to-emerald-600 text-white text-xl px-4 py-2">
-                          {formatPrice(featuredListing.prix_vente)}
-                        </Badge>
-                      </div>
-
-                      <p className="text-gray-700 mb-6 line-clamp-3">
-                        {featuredListing.description_activite}
-                      </p>
-
-                      {/* Statistiques */}
-                      <div className="grid grid-cols-3 gap-4 mb-6">
-                        <div className="text-center p-3 bg-blue-50 rounded-xl">
-                          <Users className="w-5 h-5 mx-auto mb-1 text-blue-600" />
-                          <div className="font-bold text-lg">{featuredListing.nombre_salaries}</div>
-                          <div className="text-xs text-gray-600">salariés</div>
-                        </div>
-                        <div className="text-center p-3 bg-green-50 rounded-xl">
-                          <TrendingUp className="w-5 h-5 mx-auto mb-1 text-green-600" />
-                          <div className="font-bold text-lg">{formatPrice(featuredListing.ca_n1)}</div>
-                          <div className="text-xs text-gray-600">CA annuel</div>
-                        </div>
-                        <div className="text-center p-3 bg-purple-50 rounded-xl">
-                          <Clock className="w-5 h-5 mx-auto mb-1 text-purple-600" />
-                          <div className="font-bold text-lg">{new Date().getFullYear() - featuredListing.annee_creation}</div>
-                          <div className="text-xs text-gray-600">ans</div>
-                        </div>
-                      </div>
-
-                      <div className="flex items-center gap-2 mb-6">
-                        <CheckCircle2 className="w-5 h-5 text-green-600" />
-                        <span className="text-green-700 font-semibold">✅ Financement possible</span>
-                      </div>
-
-                      {/* Boutons */}
-                      <div className="flex gap-3">
-                        <Button
-                          variant="outline"
-                          className="flex-1"
-                          onClick={() => toggleComparison(featuredListing.id)}
-                        >
-                          📊 Comparer
-                        </Button>
-                        <Button
-                          className="flex-1 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700"
-                          onClick={() => navigate(`/entreprises/${featuredListing.id}`)}
-                        >
-                          Voir détails
-                          <ChevronRight className="w-4 h-4 ml-1" />
-                        </Button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </motion.div>
-
-              {/* GRILLE 3 COLONNES */}
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {regularListings.map((annonce, idx) => (
+              ) : displayedAnnonces.length === 0 ? (
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  className="text-center py-20 bg-gradient-to-br from-blue-50 to-purple-50 rounded-3xl p-12"
+                >
+                  <div className="text-8xl mb-6">🔍</div>
+                  <h3 className="text-3xl font-bold mb-4">Aucun résultat</h3>
+                  <p className="text-gray-600 mb-8">Essayez de modifier vos critères de recherche</p>
+                  <Button size="lg" onClick={() => {
+                    setSelectedMetier("");
+                    setActiveQuickPick("");
+                  }}>
+                    Réinitialiser les filtres
+                  </Button>
+                </motion.div>
+              ) : (
+                <div className="space-y-8">
+                  {/* COUP DE CŒUR - Grande Card */}
                   <motion.div
-                    key={annonce.id}
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.1 * idx }}
-                    className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all group border border-gray-100"
+                    whileHover={{ y: -8, transition: { duration: 0.3 } }}
+                    className="relative group"
                   >
-                    {/* Image */}
-                    <div className="relative h-48 bg-gradient-to-br from-blue-400 to-indigo-500 flex items-center justify-center">
-                      <div className="text-6xl opacity-30">🏗️</div>
-                      
-                      {/* Badges overlay */}
-                      <div className="absolute top-3 left-3">
-                        {idx === 0 && (
-                          <Badge className="bg-red-500 text-white">
-                            <Sparkles className="w-3 h-3 mr-1" />
-                            🆕 Nouveau
-                          </Badge>
-                        )}
-                        {annonce.certifications?.includes("RGE") && (
-                          <Badge className="bg-green-500 text-white mt-2">
-                            <Award className="w-3 h-3 mr-1" />
-                            RGE
-                          </Badge>
-                        )}
-                      </div>
-
-                      <Button
-                        size="icon"
-                        variant="secondary"
-                        className="absolute top-3 right-3 rounded-full bg-white/90 hover:bg-white"
-                        onClick={() => toggleFavorite(annonce.id)}
-                      >
-                        <Heart className={`w-4 h-4 ${favorites.includes(annonce.id) ? 'fill-red-500 text-red-500' : ''}`} />
-                      </Button>
+                    <div className="absolute -top-4 left-8 z-10">
+                      <Badge className="bg-gradient-to-r from-orange-500 to-red-500 text-white px-6 py-2 text-lg font-bold shadow-lg animate-pulse">
+                        💎 COUP DE CŒUR
+                      </Badge>
                     </div>
-
-                    {/* Contenu */}
-                    <div className="p-5">
-                      <h3 className="font-bold text-lg mb-2 line-clamp-2 group-hover:text-primary transition-colors">
-                        {annonce.secteur_activite}
-                      </h3>
-                      
-                      <div className="flex items-center text-sm text-gray-600 mb-3">
-                        <MapPin className="w-4 h-4 mr-1" />
-                        {annonce.ville} ({annonce.departement})
-                      </div>
-
-                      <div className="space-y-2 mb-4">
-                        <div className="flex items-center justify-between text-sm">
-                          <span className="text-gray-600 flex items-center">
-                            <Users className="w-4 h-4 mr-1" />
-                            {annonce.nombre_salaries} salariés
-                          </span>
-                          <span className="font-semibold">{formatPrice(annonce.ca_n1)}</span>
+                    
+                    <div className="bg-white rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300 border-2 border-orange-200">
+                      <div className="md:flex">
+                        {/* Image avec gradient par métier */}
+                        <div className={`md:w-1/2 relative h-80 bg-gradient-to-br ${getMetierGradient(featuredListing.secteur_activite).gradient} flex items-center justify-center overflow-hidden group`}>
+                          <motion.div 
+                            className="text-9xl opacity-20"
+                            whileHover={{ scale: 1.1, transition: { duration: 0.3 } }}
+                          >
+                            {getMetierGradient(featuredListing.secteur_activite).icon}
+                          </motion.div>
+                          <div className="absolute top-4 right-4 flex gap-2">
+                            <motion.div whileTap={{ scale: 0.95 }}>
+                              <Button
+                                size="icon"
+                                variant="secondary"
+                                className="rounded-full bg-white/90 hover:bg-white hover-scale"
+                                onClick={() => toggleFavorite(featuredListing.id)}
+                              >
+                                <Heart className={`w-5 h-5 ${favorites.includes(featuredListing.id) ? 'fill-red-500 text-red-500' : ''}`} />
+                              </Button>
+                            </motion.div>
+                            <motion.div whileTap={{ scale: 0.95 }}>
+                              <Button size="icon" variant="secondary" className="rounded-full bg-white/90 hover:bg-white hover-scale">
+                                <Share2 className="w-5 h-5" />
+                              </Button>
+                            </motion.div>
+                          </div>
+                          {featuredListing.certifications?.includes("RGE") && (
+                            <Badge className="absolute top-4 left-4 bg-green-500 text-white animate-pulse">
+                              <Award className="w-4 h-4 mr-1" />
+                              RGE
+                            </Badge>
+                          )}
+                          <Badge className="absolute bottom-4 left-4 bg-orange-500 text-white px-4 py-2 text-sm">
+                            <Flame className="w-4 h-4 mr-1" />
+                            12 acheteurs intéressés
+                          </Badge>
                         </div>
-                        <div className="flex items-center text-sm text-gray-600">
-                          <Clock className="w-4 h-4 mr-1" />
-                          Créée en {annonce.annee_creation}
-                        </div>
-                      </div>
 
-                      <div className="flex items-center justify-between mb-4">
-                        <Badge className="bg-green-100 text-green-700">
-                          <CheckCircle2 className="w-3 h-3 mr-1" />
-                          Financement OK
-                        </Badge>
-                        <div className="text-xl font-black text-primary">
-                          {formatPrice(annonce.prix_vente)}
-                        </div>
-                      </div>
+                        {/* Contenu */}
+                        <div className="md:w-1/2 p-8">
+                          <div className="flex items-start justify-between mb-4">
+                            <div>
+                              <h3 className="text-3xl font-black mb-2">
+                                {featuredListing.secteur_activite}
+                              </h3>
+                              <div className="flex items-center text-gray-600 mb-2">
+                                <MapPin className="w-4 h-4 mr-1" />
+                                {featuredListing.ville} ({featuredListing.departement})
+                              </div>
+                            </div>
+                            <Badge className="bg-gradient-to-r from-green-500 to-emerald-600 text-white text-xl px-4 py-2">
+                              {formatPrice(featuredListing.prix_vente)}
+                            </Badge>
+                          </div>
 
-                      <div className="flex gap-2">
-                        <Button
-                          variant="outline"
-                          size="sm"
-                          className="flex-1"
-                          onClick={() => toggleComparison(annonce.id)}
-                        >
-                          Comparer
-                        </Button>
-                        <Button
-                          size="sm"
-                          className="flex-1"
-                          onClick={() => navigate(`/entreprises/${annonce.id}`)}
-                        >
-                          Détails
-                        </Button>
+                          <p className="text-gray-700 mb-6 line-clamp-3">
+                            {featuredListing.description_activite}
+                          </p>
+
+                          {/* Statistiques */}
+                          <div className="grid grid-cols-3 gap-4 mb-6">
+                            <div className="text-center p-3 bg-blue-50 rounded-xl hover-scale">
+                              <Users className="w-5 h-5 mx-auto mb-1 text-blue-600" />
+                              <div className="font-bold text-lg">{featuredListing.nombre_salaries}</div>
+                              <div className="text-xs text-gray-600">salariés</div>
+                            </div>
+                            <div className="text-center p-3 bg-green-50 rounded-xl hover-scale">
+                              <TrendingUp className="w-5 h-5 mx-auto mb-1 text-green-600" />
+                              <div className="font-bold text-lg">{formatPrice(featuredListing.ca_n1)}</div>
+                              <div className="text-xs text-gray-600">CA annuel</div>
+                            </div>
+                            <div className="text-center p-3 bg-purple-50 rounded-xl hover-scale">
+                              <Clock className="w-5 h-5 mx-auto mb-1 text-purple-600" />
+                              <div className="font-bold text-lg">{new Date().getFullYear() - featuredListing.annee_creation}</div>
+                              <div className="text-xs text-gray-600">ans</div>
+                            </div>
+                          </div>
+
+                          <div className="flex items-center gap-2 mb-6">
+                            <CheckCircle2 className="w-5 h-5 text-green-600" />
+                            <span className="text-green-700 font-semibold">✅ Financement possible</span>
+                          </div>
+
+                          {/* Boutons */}
+                          <div className="flex gap-3">
+                            <motion.div whileTap={{ scale: 0.95 }} className="flex-1">
+                              <Button
+                                variant="outline"
+                                className="w-full"
+                                onClick={() => toggleComparison(featuredListing.id)}
+                              >
+                                📊 Comparer
+                              </Button>
+                            </motion.div>
+                            <motion.div whileTap={{ scale: 0.95 }} className="flex-1">
+                              <Button
+                                className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700"
+                                onClick={() => navigate(`/entreprises/${featuredListing.id}`)}
+                              >
+                                Voir détails
+                                <ChevronRight className="w-4 h-4 ml-1" />
+                              </Button>
+                            </motion.div>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </motion.div>
-                ))}
-              </div>
+
+                  {/* GRILLE 3 COLONNES avec badges variés */}
+                  <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {regularListings.map((annonce, idx) => {
+                      const badgeVariant = BADGE_VARIANTS[idx % BADGE_VARIANTS.length];
+                      const metierStyle = getMetierGradient(annonce.secteur_activite);
+                      
+                      return (
+                        <motion.div
+                          key={annonce.id}
+                          initial={{ opacity: 0, y: 20 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ delay: 0.1 * idx }}
+                          whileHover={{ y: -8, transition: { duration: 0.3 } }}
+                          className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 group border border-gray-100"
+                        >
+                          {/* Image avec gradient par métier */}
+                          <div className={`relative h-48 bg-gradient-to-br ${metierStyle.gradient} flex items-center justify-center overflow-hidden`}>
+                            <motion.div 
+                              className="text-6xl opacity-30"
+                              whileHover={{ scale: 1.1, transition: { duration: 0.3 } }}
+                            >
+                              {metierStyle.icon}
+                            </motion.div>
+                            
+                            {/* Badges overlay */}
+                            <div className="absolute top-3 left-3">
+                              <Badge className={`${badgeVariant.color} ${badgeVariant.textColor} animate-pulse`}>
+                                {badgeVariant.label}
+                              </Badge>
+                              {annonce.certifications?.includes("RGE") && (
+                                <Badge className="bg-green-500 text-white mt-2">
+                                  <Award className="w-3 h-3 mr-1" />
+                                  RGE
+                                </Badge>
+                              )}
+                            </div>
+
+                            <motion.div whileTap={{ scale: 0.95 }}>
+                              <Button
+                                size="icon"
+                                variant="secondary"
+                                className="absolute top-3 right-3 rounded-full bg-white/90 hover:bg-white hover-scale"
+                                onClick={() => toggleFavorite(annonce.id)}
+                              >
+                                <Heart className={`w-4 h-4 ${favorites.includes(annonce.id) ? 'fill-red-500 text-red-500' : ''}`} />
+                              </Button>
+                            </motion.div>
+                          </div>
+
+                          {/* Contenu */}
+                          <div className="p-5">
+                            <h3 className="font-bold text-lg mb-2 line-clamp-2 group-hover:text-primary transition-colors duration-300">
+                              {annonce.secteur_activite}
+                            </h3>
+                            
+                            <div className="flex items-center text-sm text-gray-600 mb-3">
+                              <MapPin className="w-4 h-4 mr-1" />
+                              {annonce.ville} ({annonce.departement})
+                            </div>
+
+                            <div className="space-y-2 mb-4">
+                              <div className="flex items-center justify-between text-sm">
+                                <span className="text-gray-600 flex items-center">
+                                  <Users className="w-4 h-4 mr-1" />
+                                  {annonce.nombre_salaries} salariés
+                                </span>
+                                <span className="font-semibold">{formatPrice(annonce.ca_n1)}</span>
+                              </div>
+                              <div className="flex items-center text-sm text-gray-600">
+                                <Clock className="w-4 h-4 mr-1" />
+                                Créée en {annonce.annee_creation}
+                              </div>
+                            </div>
+
+                            <div className="flex items-center justify-between mb-4">
+                              <Badge className="bg-green-100 text-green-700">
+                                <CheckCircle2 className="w-3 h-3 mr-1" />
+                                Financement OK
+                              </Badge>
+                              <div className="text-xl font-black text-primary">
+                                {formatPrice(annonce.prix_vente)}
+                              </div>
+                            </div>
+
+                            <div className="flex gap-2">
+                              <motion.div whileTap={{ scale: 0.95 }} className="flex-1">
+                                <Button
+                                  variant="outline"
+                                  size="sm"
+                                  className="w-full"
+                                  onClick={() => toggleComparison(annonce.id)}
+                                >
+                                  Comparer
+                                </Button>
+                              </motion.div>
+                              <motion.div whileTap={{ scale: 0.95 }} className="flex-1">
+                                <Button
+                                  size="sm"
+                                  className="w-full"
+                                  onClick={() => navigate(`/entreprises/${annonce.id}`)}
+                                >
+                                  Détails
+                                </Button>
+                              </motion.div>
+                            </div>
+                          </div>
+                        </motion.div>
+                      );
+                    })}
+                  </div>
+                </div>
+              )}
             </div>
-          )}
+
+            {/* Sidebar droite - LiveStats Widget */}
+            <div className="hidden lg:block lg:col-span-3">
+              <LiveStatsWidget />
+            </div>
+          </div>
         </div>
       </section>
 
@@ -874,43 +947,52 @@ const Entreprises = () => {
       <AnimatePresence>
         {selectedForComparison.length > 0 && (
           <motion.div
-            initial={{ y: 100 }}
-            animate={{ y: 0 }}
-            exit={{ y: 100 }}
-            className="fixed bottom-0 left-0 right-0 z-50 bg-gradient-to-r from-blue-600 to-purple-600 text-white py-4 shadow-2xl"
+            initial={{ y: 100, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            exit={{ y: 100, opacity: 0 }}
+            transition={{ type: "spring", damping: 25, stiffness: 200 }}
+            className="fixed bottom-0 left-0 right-0 z-50 bg-white border-t-4 border-blue-500 py-5 shadow-2xl"
           >
             <div className="container mx-auto px-4">
-              <div className="flex items-center justify-between">
+              <div className="flex flex-col md:flex-row items-center gap-4 md:justify-between">
                 <div className="flex items-center gap-4">
-                  <div className="font-bold text-lg">
+                  <div className="font-bold text-lg text-gray-900">
                     📊 Comparateur ({selectedForComparison.length}/3)
                   </div>
-                  <div className="flex gap-2">
+                  <div className="flex gap-2 flex-wrap">
                     {selectedForComparison.map((id) => {
                       const annonce = displayedAnnonces.find(a => a.id === id);
                       return annonce ? (
-                        <Badge key={id} variant="secondary" className="px-4 py-2">
-                          {annonce.secteur_activite}
-                          <button
-                            onClick={() => toggleComparison(id)}
-                            className="ml-2 hover:text-red-500"
-                          >
-                            <X className="w-4 h-4" />
-                          </button>
-                        </Badge>
+                        <motion.div
+                          key={id}
+                          initial={{ scale: 0 }}
+                          animate={{ scale: 1 }}
+                          exit={{ scale: 0 }}
+                        >
+                          <Badge className="bg-blue-100 text-blue-700 px-4 py-2 text-sm">
+                            {annonce.secteur_activite.substring(0, 20)}...
+                            <button
+                              onClick={() => toggleComparison(id)}
+                              className="ml-2 hover:text-red-500 transition-colors"
+                            >
+                              <X className="w-4 h-4" />
+                            </button>
+                          </Badge>
+                        </motion.div>
                       ) : null;
                     })}
                   </div>
                 </div>
-                <Button
-                  size="lg"
-                  variant="secondary"
-                  className="font-bold"
-                  disabled={selectedForComparison.length < 2}
-                >
-                  Comparer maintenant
-                  <ChevronRight className="w-5 h-5 ml-2" />
-                </Button>
+                <motion.div whileTap={{ scale: 0.95 }}>
+                  <Button
+                    size="lg"
+                    className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 font-bold"
+                    disabled={selectedForComparison.length < 2}
+                  >
+                    Comparer maintenant
+                    <ChevronRight className="w-5 h-5 ml-2" />
+                  </Button>
+                </motion.div>
               </div>
             </div>
           </motion.div>
