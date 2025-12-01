@@ -375,7 +375,7 @@ const Tarifs = () => {
           </div>
 
           {/* COMMISSION DE SUCCÈS */}
-          <div className="mt-40 max-w-6xl mx-auto">
+          <div className="mt-64 max-w-6xl mx-auto">
             <div className="text-center mb-12">
               <h2 className="text-4xl font-black mb-4">💰 Commission de succès</h2>
               <p className="text-xl text-slate-600">
