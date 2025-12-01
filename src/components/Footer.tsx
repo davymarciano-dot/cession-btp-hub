@@ -255,22 +255,22 @@ const Footer = () => {
 
         {/* ========== FOOTER BOTTOM ========== */}
         <div className="border-t border-white/10">
-          <div className="container mx-auto px-4 py-8 max-w-[1200px]">
-            <div className="text-center mb-4">
+          <div className="container mx-auto px-4 py-6 max-w-[1200px]">
+            <div className="flex flex-col md:flex-row items-center justify-between gap-4">
               <p className="text-white/60 text-sm">
                 © 2025 CessionBTP • Spécialiste #1 Cession Entreprises BTP France
               </p>
-            </div>
-            <div className="flex flex-wrap items-center justify-center gap-4 md:gap-8">
-              {footerLinks.legal.map((link) => (
-                <Link
-                  key={link.path}
-                  to={link.path}
-                  className="text-white/60 hover:text-white text-xs md:text-sm transition-colors"
-                >
-                  {link.label}
-                </Link>
-              ))}
+              <div className="flex items-center gap-6">
+                {footerLinks.legal.map((link) => (
+                  <Link
+                    key={link.path}
+                    to={link.path}
+                    className="text-white/60 hover:text-white text-sm transition-colors whitespace-nowrap"
+                  >
+                    {link.label}
+                  </Link>
+                ))}
+              </div>
             </div>
           </div>
         </div>
