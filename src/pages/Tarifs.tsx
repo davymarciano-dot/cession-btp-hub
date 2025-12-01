@@ -175,83 +175,87 @@ const Tarifs = () => {
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
             {/* DÉCOUVERTE */}
-            <div className="group h-full flex flex-col border-2 border-slate-200 hover:border-sky-500 hover:shadow-xl transition-all rounded-2xl p-8 bg-white relative">
-              <h3 className="text-2xl font-bold text-sky-500 mb-2">Découverte</h3>
-              <div className="mb-6">
-                <span className="text-4xl font-black text-sky-500">Gratuit</span>
-                <span className="text-slate-500 text-xl"> 60j</span>
-              </div>
-              <p className="text-sm text-slate-500 mb-6">
-                Évaluation + 10 vues - Cible : 10 000€ - CA : 0
-              </p>
+            <div>
+              <div className="group h-full flex flex-col border-2 border-slate-200 hover:border-sky-500 hover:shadow-xl transition-all rounded-2xl p-8 bg-white relative">
+                <h3 className="text-2xl font-bold text-sky-500 mb-2">Découverte</h3>
+                <div className="mb-6">
+                  <span className="text-4xl font-black text-sky-500">Gratuit</span>
+                  <span className="text-slate-500 text-xl"> 60j</span>
+                </div>
+                <p className="text-sm text-slate-500 mb-6">
+                  Évaluation + 10 vues - Cible : 10 000€ - CA : 0
+                </p>
 
-              <div className="space-y-3 mb-8 flex-1">
-                <div className="flex items-start gap-2">
-                  <Check className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
-                  <span className="text-slate-700">Évaluation incluse</span>
+                <div className="space-y-3 mb-8 flex-1">
+                  <div className="flex items-start gap-2">
+                    <Check className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
+                    <span className="text-slate-700">Évaluation incluse</span>
+                  </div>
+                  <div className="flex items-start gap-2">
+                    <Check className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
+                    <span className="text-slate-700">10 vues d'annonce</span>
+                  </div>
+                  <div className="flex items-start gap-2">
+                    <Check className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
+                    <span className="text-slate-700">Interface spécialisée BTP</span>
+                  </div>
+                  <div className="flex items-start gap-2">
+                    <Check className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
+                    <span className="text-slate-700">Expert en soutien métier</span>
+                  </div>
                 </div>
-                <div className="flex items-start gap-2">
-                  <Check className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
-                  <span className="text-slate-700">10 vues d'annonce</span>
-                </div>
-                <div className="flex items-start gap-2">
-                  <Check className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
-                  <span className="text-slate-700">Interface spécialisée BTP</span>
-                </div>
-                <div className="flex items-start gap-2">
-                  <Check className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
-                  <span className="text-slate-700">Expert en soutien métier</span>
-                </div>
-              </div>
 
-              <Button className="w-full bg-orange-500 hover:bg-sky-500 group-hover:bg-sky-500 transition-colors">
-                Commencer Gratuitement
-              </Button>
+                <Button className="w-full bg-orange-500 hover:bg-sky-500 group-hover:bg-sky-500 transition-colors">
+                  Commencer Gratuitement
+                </Button>
+              </div>
             </div>
 
             {/* ESSENTIEL - POPULAIRE */}
-            <div className="group h-full flex flex-col border-2 border-slate-200 hover:border-gray-400 hover:shadow-xl transition-all rounded-2xl p-8 bg-white relative">
-              <div className="absolute -top-3 left-1/2 -translate-x-1/2">
-                <span className="bg-gradient-to-r from-blue-500 to-blue-600 text-white px-4 py-1.5 rounded-full text-xs font-bold shadow-lg">
-                  POPULAIRE
-                </span>
-              </div>
+            <div>
+              <div className="group h-full flex flex-col border-2 border-slate-200 hover:border-gray-400 hover:shadow-xl transition-all rounded-2xl p-8 bg-white relative">
+                <div className="absolute -top-3 left-1/2 -translate-x-1/2">
+                  <span className="bg-gradient-to-r from-blue-500 to-blue-600 text-white px-4 py-1.5 rounded-full text-xs font-bold shadow-lg">
+                    POPULAIRE
+                  </span>
+                </div>
 
-              <h3 className="text-2xl font-bold text-gray-400 mb-2">Essentiel</h3>
-              <div className="mb-6">
-                <span className="text-4xl font-black text-gray-400">490€</span>
-                <span className="text-slate-600 text-xl"> /3 mois</span>
-              </div>
-              <p className="text-sm text-slate-600 mb-6">
-                Annonce simple - Cible : 5 000€ - CA : 5,9M
-              </p>
+                <h3 className="text-2xl font-bold text-gray-400 mb-2">Essentiel</h3>
+                <div className="mb-6">
+                  <span className="text-4xl font-black text-gray-400">490€</span>
+                  <span className="text-slate-600 text-xl"> /3 mois</span>
+                </div>
+                <p className="text-sm text-slate-600 mb-6">
+                  Annonce simple - Cible : 5 000€ - CA : 5,9M
+                </p>
 
-              <div className="space-y-3 mb-8 flex-1">
-                <div className="flex items-start gap-2">
-                  <Check className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
-                  <span className="text-slate-900">Annonce simple optimisée</span>
+                <div className="space-y-3 mb-8 flex-1">
+                  <div className="flex items-start gap-2">
+                    <Check className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
+                    <span className="text-slate-900">Annonce simple optimisée</span>
+                  </div>
+                  <div className="flex items-start gap-2">
+                    <Check className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
+                    <span className="text-slate-900">Contacts qualifiés BTP</span>
+                  </div>
+                  <div className="flex items-start gap-2">
+                    <Check className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
+                    <span className="text-slate-900">Interface professionnelle</span>
+                  </div>
+                  <div className="flex items-start gap-2">
+                    <Check className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
+                    <span className="text-slate-900">Expert en soutien</span>
+                  </div>
+                  <div className="flex items-start gap-2">
+                    <Check className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
+                    <span className="text-slate-900">Réseau artisans entrepreneurs</span>
+                  </div>
                 </div>
-                <div className="flex items-start gap-2">
-                  <Check className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
-                  <span className="text-slate-900">Contacts qualifiés BTP</span>
-                </div>
-                <div className="flex items-start gap-2">
-                  <Check className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
-                  <span className="text-slate-900">Interface professionnelle</span>
-                </div>
-                <div className="flex items-start gap-2">
-                  <Check className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
-                  <span className="text-slate-900">Expert en soutien</span>
-                </div>
-                <div className="flex items-start gap-2">
-                  <Check className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
-                  <span className="text-slate-900">Réseau artisans entrepreneurs</span>
-                </div>
-              </div>
 
-              <Button className="w-full bg-orange-500 hover:bg-gray-400 group-hover:bg-gray-400 transition-colors">
-                Choisir Essentiel
-              </Button>
+                <Button className="w-full bg-orange-500 hover:bg-gray-400 group-hover:bg-gray-400 transition-colors">
+                  Choisir Essentiel
+                </Button>
+              </div>
 
               {/* Comparaison Essentiel */}
               <div className="mt-4 p-4 bg-gradient-to-br from-blue-50 to-slate-50 border border-blue-200 rounded-xl">
@@ -262,48 +266,50 @@ const Tarifs = () => {
             </div>
 
             {/* PRIME - ⭐ MEILLEUR CHOIX */}
-            <div className="group h-full flex flex-col border-2 border-slate-200 hover:border-orange-500 hover:shadow-xl transition-all rounded-2xl p-8 bg-white relative">
-              <div className="absolute -top-3 left-1/2 -translate-x-1/2">
-                <span className="bg-gradient-to-r from-orange-500 to-orange-600 text-white px-3 py-1 rounded-full text-xs font-bold shadow-lg animate-pulse whitespace-nowrap">
-                  ⭐ MEILLEUR CHOIX
-                </span>
-              </div>
+            <div>
+              <div className="group h-full flex flex-col border-2 border-slate-200 hover:border-orange-500 hover:shadow-xl transition-all rounded-2xl p-8 bg-white relative">
+                <div className="absolute -top-3 left-1/2 -translate-x-1/2">
+                  <span className="bg-gradient-to-r from-orange-500 to-orange-600 text-white px-3 py-1 rounded-full text-xs font-bold shadow-lg animate-pulse whitespace-nowrap">
+                    ⭐ MEILLEUR CHOIX
+                  </span>
+                </div>
 
-              <h3 className="text-2xl font-bold text-orange-500 mb-2">Prime</h3>
-              <div className="mb-6">
-                <span className="text-4xl font-black text-orange-500">990€</span>
-                <span className="text-slate-500 text-xl"> /3 mois</span>
-              </div>
-              <p className="text-sm text-slate-500 mb-6">
-                Mise en avant + stats - Cible : 2 000€ - CA : 3,9M
-              </p>
+                <h3 className="text-2xl font-bold text-orange-500 mb-2">Prime</h3>
+                <div className="mb-6">
+                  <span className="text-4xl font-black text-orange-500">990€</span>
+                  <span className="text-slate-500 text-xl"> /3 mois</span>
+                </div>
+                <p className="text-sm text-slate-500 mb-6">
+                  Mise en avant + stats - Cible : 2 000€ - CA : 3,9M
+                </p>
 
-              <div className="space-y-3 mb-8 flex-1">
-                <div className="flex items-start gap-2">
-                  <Check className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
-                  <span className="text-slate-700">Mise en avant prioritaire</span>
+                <div className="space-y-3 mb-8 flex-1">
+                  <div className="flex items-start gap-2">
+                    <Check className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
+                    <span className="text-slate-700">Mise en avant prioritaire</span>
+                  </div>
+                  <div className="flex items-start gap-2">
+                    <Check className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
+                    <span className="text-slate-700">Statistiques détaillées</span>
+                  </div>
+                  <div className="flex items-start gap-2">
+                    <Check className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
+                    <span className="text-slate-700">Valorisation BTP incluse</span>
+                  </div>
+                  <div className="flex items-start gap-2">
+                    <Check className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
+                    <span className="text-slate-700">Accompagnement expert dédié</span>
+                  </div>
+                  <div className="flex items-start gap-2">
+                    <Check className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
+                    <span className="text-slate-700">Vendez 2x plus vite</span>
+                  </div>
                 </div>
-                <div className="flex items-start gap-2">
-                  <Check className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
-                  <span className="text-slate-700">Statistiques détaillées</span>
-                </div>
-                <div className="flex items-start gap-2">
-                  <Check className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
-                  <span className="text-slate-700">Valorisation BTP incluse</span>
-                </div>
-                <div className="flex items-start gap-2">
-                  <Check className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
-                  <span className="text-slate-700">Accompagnement expert dédié</span>
-                </div>
-                <div className="flex items-start gap-2">
-                  <Check className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
-                  <span className="text-slate-700">Vendez 2x plus vite</span>
-                </div>
-              </div>
 
-              <Button className="w-full bg-orange-500 hover:bg-orange-500 group-hover:bg-orange-500 transition-colors">
-                Choisir Premium
-              </Button>
+                <Button className="w-full bg-orange-500 hover:bg-orange-500 group-hover:bg-orange-500 transition-colors">
+                  Choisir Premium
+                </Button>
+              </div>
 
               {/* Comparaison Prime */}
               <div className="mt-4 p-4 bg-gradient-to-br from-orange-50 to-amber-50 border border-orange-200 rounded-xl">
@@ -314,48 +320,50 @@ const Tarifs = () => {
             </div>
 
             {/* EXCLUSIF - 👑 PREMIUM */}
-            <div className="group h-full flex flex-col border-2 border-slate-200 hover:border-purple-600 hover:shadow-xl transition-all rounded-2xl p-8 bg-white relative">
-              <div className="absolute -top-3 left-1/2 -translate-x-1/2">
-                <span className="bg-gradient-to-r from-purple-600 to-amber-500 text-white px-4 py-1.5 rounded-full text-xs font-bold shadow-lg">
-                  👑 PREMIUM
-                </span>
-              </div>
+            <div>
+              <div className="group h-full flex flex-col border-2 border-slate-200 hover:border-purple-600 hover:shadow-xl transition-all rounded-2xl p-8 bg-white relative">
+                <div className="absolute -top-3 left-1/2 -translate-x-1/2">
+                  <span className="bg-gradient-to-r from-purple-600 to-amber-500 text-white px-4 py-1.5 rounded-full text-xs font-bold shadow-lg">
+                    👑 PREMIUM
+                  </span>
+                </div>
 
-              <h3 className="text-2xl font-bold text-purple-600 mb-2">Exclusif</h3>
-              <div className="mb-6">
-                <span className="text-4xl font-black text-purple-600">1,990€</span>
-                <span className="text-slate-500 text-xl"> /3 mois</span>
-              </div>
-              <p className="text-sm text-slate-500 mb-6">
-                Top position + agent - Cible : 500€ - CA : 2M
-              </p>
+                <h3 className="text-2xl font-bold text-purple-600 mb-2">Exclusif</h3>
+                <div className="mb-6">
+                  <span className="text-4xl font-black text-purple-600">1,990€</span>
+                  <span className="text-slate-500 text-xl"> /3 mois</span>
+                </div>
+                <p className="text-sm text-slate-500 mb-6">
+                  Top position + agent - Cible : 500€ - CA : 2M
+                </p>
 
-              <div className="space-y-3 mb-8 flex-1">
-                <div className="flex items-start gap-2">
-                  <Check className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
-                  <span className="text-slate-700">Position top garantie</span>
+                <div className="space-y-3 mb-8 flex-1">
+                  <div className="flex items-start gap-2">
+                    <Check className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
+                    <span className="text-slate-700">Position top garantie</span>
+                  </div>
+                  <div className="flex items-start gap-2">
+                    <Check className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
+                    <span className="text-slate-700">Agent dédié personnel</span>
+                  </div>
+                  <div className="flex items-start gap-2">
+                    <Check className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
+                    <span className="text-slate-700">Mémorandum professionnel</span>
+                  </div>
+                  <div className="flex items-start gap-2">
+                    <Check className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
+                    <span className="text-slate-700">Garantie mise en relation</span>
+                  </div>
+                  <div className="flex items-start gap-2">
+                    <Check className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
+                    <span className="text-slate-700">Conciergerie complète</span>
+                  </div>
                 </div>
-                <div className="flex items-start gap-2">
-                  <Check className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
-                  <span className="text-slate-700">Agent dédié personnel</span>
-                </div>
-                <div className="flex items-start gap-2">
-                  <Check className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
-                  <span className="text-slate-700">Mémorandum professionnel</span>
-                </div>
-                <div className="flex items-start gap-2">
-                  <Check className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
-                  <span className="text-slate-700">Garantie mise en relation</span>
-                </div>
-                <div className="flex items-start gap-2">
-                  <Check className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
-                  <span className="text-slate-700">Conciergerie complète</span>
-                </div>
-              </div>
 
-              <Button className="w-full bg-orange-500 hover:bg-purple-600 group-hover:bg-purple-600 transition-colors">
-                Choisir Exclusif
-              </Button>
+                <Button className="w-full bg-orange-500 hover:bg-purple-600 group-hover:bg-purple-600 transition-colors">
+                  Choisir Exclusif
+                </Button>
+              </div>
 
               {/* Comparaison Exclusif */}
               <div className="mt-4 p-4 bg-gradient-to-br from-purple-50 to-amber-50 border border-purple-200 rounded-xl">
