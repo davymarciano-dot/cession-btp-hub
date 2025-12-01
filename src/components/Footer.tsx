@@ -212,7 +212,6 @@ const Footer = () => {
                     </div>
                   </div>
                 </div>
-                </div>
               </div>
             </div>
 
@@ -252,6 +251,7 @@ const Footer = () => {
               </div>
             </div>
           </div>
+        </div>
 
         {/* ========== FOOTER BOTTOM ========== */}
         <div className="border-t border-white/10">
