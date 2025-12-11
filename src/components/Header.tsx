@@ -37,26 +37,30 @@ const Header = () => {
 
   return (
     <header 
-      className={`sticky top-0 z-50 w-full transition-all duration-300 border-b border-white/10 ${
-        isScrolled 
-          ? "bg-primary/95 backdrop-blur-md" 
-          : "bg-primary"
-      }`}
+      className="sticky top-0 z-50 w-full border-b transition-all duration-300"
+      style={{
+        backdropFilter: 'blur(12px)',
+        background: 'rgba(15,23,42,0.95)',
+        borderBottomColor: 'rgba(255,255,255,0.1)'
+      }}
     >
       <nav className="container mx-auto px-4 h-20 flex items-center justify-between">
         <Link 
           to="/" 
-          className="flex items-center gap-2 transition-transform duration-300 hover:scale-105"
+          className="flex items-center gap-2"
+          style={{ transition: 'transform 0.3s' }}
+          onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.05)'}
+          onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}
         >
           <img 
             src="/images/logo-cessionbtp.png" 
             alt="CessionBTP Logo" 
-            className="h-10 w-auto"
+            style={{ height: '40px', width: 'auto' }}
           />
         </Link>
 
         {/* Desktop Navigation */}
-        <div className="hidden md:flex items-center gap-8">
+        <div className="hidden md:flex items-center" style={{ gap: '32px' }}>
           {[
             { to: "/vendre", label: t("header.sell") },
             { to: "/entreprises", label: t("header.companies") },
@@ -68,10 +72,17 @@ const Header = () => {
             <Link 
               key={link.to}
               to={link.to} 
-              className="relative text-[#E2E8F0] hover:text-white text-sm font-medium transition-colors duration-300 group"
+              className="nav-link-header"
+              style={{
+                fontWeight: 500,
+                fontSize: '14px',
+                color: '#E2E8F0',
+                transition: 'color 0.2s'
+              }}
+              onMouseEnter={(e) => e.currentTarget.style.color = '#FFFFFF'}
+              onMouseLeave={(e) => e.currentTarget.style.color = '#E2E8F0'}
             >
               {link.label}
-              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full" />
             </Link>
           ))}
         </div>
@@ -86,21 +97,39 @@ const Header = () => {
                 <Button 
                   variant="ghost" 
                   asChild 
-                  className="text-[#E2E8F0] hover:text-white hover:bg-white/10 border border-white/30 transition-all duration-300"
+                  className="text-white transition-all duration-200"
+                  style={{
+                    border: '1px solid rgba(255,255,255,0.3)',
+                    background: 'transparent'
+                  }}
+                  onMouseEnter={(e) => e.currentTarget.style.background = 'rgba(255,255,255,0.1)'}
+                  onMouseLeave={(e) => e.currentTarget.style.background = 'transparent'}
                 >
                   <Link to="/dashboard">{t("header.dashboard")}</Link>
                 </Button>
                 <Button 
                   variant="ghost" 
                   asChild 
-                  className="text-[#E2E8F0] hover:text-white hover:bg-white/10 border border-white/30 transition-all duration-300"
+                  className="text-white transition-all duration-200"
+                  style={{
+                    border: '1px solid rgba(255,255,255,0.3)',
+                    background: 'transparent'
+                  }}
+                  onMouseEnter={(e) => e.currentTarget.style.background = 'rgba(255,255,255,0.1)'}
+                  onMouseLeave={(e) => e.currentTarget.style.background = 'transparent'}
                 >
                   <Link to="/messages">{t("header.messages")}</Link>
                 </Button>
                 <Button 
                   variant="ghost" 
                   onClick={handleLogout} 
-                  className="text-[#E2E8F0] hover:text-white hover:bg-white/10 border border-white/30 transition-all duration-300"
+                  className="text-white transition-all duration-200"
+                  style={{
+                    border: '1px solid rgba(255,255,255,0.3)',
+                    background: 'transparent'
+                  }}
+                  onMouseEnter={(e) => e.currentTarget.style.background = 'rgba(255,255,255,0.1)'}
+                  onMouseLeave={(e) => e.currentTarget.style.background = 'transparent'}
                 >
                   {t("header.logout")}
                 </Button>
@@ -110,13 +139,31 @@ const Header = () => {
                 <Button 
                   variant="ghost" 
                   asChild 
-                  className="text-[#E2E8F0] hover:text-white hover:bg-white/10 border border-white/30 font-medium transition-all duration-300"
+                  className="text-white font-medium transition-all duration-200"
+                  style={{
+                    border: '1px solid rgba(255,255,255,0.3)',
+                    background: 'transparent'
+                  }}
+                  onMouseEnter={(e) => e.currentTarget.style.background = 'rgba(255,255,255,0.1)'}
+                  onMouseLeave={(e) => e.currentTarget.style.background = 'transparent'}
                 >
                   <Link to="/auth">{t("header.login")}</Link>
                 </Button>
                 <Button 
                   asChild 
-                  className="bg-gradient-to-r from-[#2563EB] to-[#3B82F6] text-white rounded-xl px-6 font-medium shadow-lg hover:scale-105 hover:shadow-xl transition-all duration-300"
+                  className="text-white rounded-xl px-6 font-medium transition-all duration-300"
+                  style={{
+                    background: 'linear-gradient(135deg, #2563EB, #3B82F6)',
+                    boxShadow: '0 4px 15px rgba(37,99,235,0.4)'
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.transform = 'scale(1.05)';
+                    e.currentTarget.style.boxShadow = '0 6px 20px rgba(37,99,235,0.6)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.transform = 'scale(1)';
+                    e.currentTarget.style.boxShadow = '0 4px 15px rgba(37,99,235,0.4)';
+                  }}
                 >
                   <Link to="/auth">{t("header.createAccount")}</Link>
                 </Button>
