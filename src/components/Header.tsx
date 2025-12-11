@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
@@ -9,18 +9,8 @@ import { useLanguage } from "@/contexts/LanguageContext";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
   const navigate = useNavigate();
   const { t } = useLanguage();
-
-  // Track scroll for backdrop effect
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 10);
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
 
   const { data: session } = useQuery({
     queryKey: ["session"],
@@ -72,15 +62,7 @@ const Header = () => {
             <Link 
               key={link.to}
               to={link.to} 
-              className="nav-link-header"
-              style={{
-                fontWeight: 500,
-                fontSize: '14px',
-                color: '#E2E8F0',
-                transition: 'color 0.2s'
-              }}
-              onMouseEnter={(e) => e.currentTarget.style.color = '#FFFFFF'}
-              onMouseLeave={(e) => e.currentTarget.style.color = '#E2E8F0'}
+              className="header-nav-link relative"
             >
               {link.label}
             </Link>
