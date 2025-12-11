@@ -503,7 +503,7 @@ const Home = () => {
       </section>
 
       {/* Opportunités à saisir */}
-      <section className="py-24 bg-background">
+      <section className="py-24 bg-[#F8FAFC]">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <Badge variant="outline" className="mb-4 px-4 py-2 text-sm font-semibold">
