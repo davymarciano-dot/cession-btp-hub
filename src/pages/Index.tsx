@@ -406,7 +406,7 @@ const Home = () => {
             <Badge variant="outline" className="mb-4 px-4 py-2 text-sm font-semibold">
               Pourquoi nous choisir
             </Badge>
-            <h2 className="text-4xl md:text-5xl font-black mb-4">
+            <h2 className="text-4xl md:text-5xl font-black mb-4 text-[#2563EB]">
               La différence CessionBTP
             </h2>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
@@ -427,7 +427,7 @@ const Home = () => {
                 <div className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${feature.color} flex items-center justify-center mb-6 group-hover:scale-110 transition-transform`}>
                   <feature.icon className="w-8 h-8 text-white" />
                 </div>
-                <h3 className="text-2xl font-bold mb-3">{feature.title}</h3>
+                <h3 className="text-2xl font-bold mb-3 text-[#2563EB]">{feature.title}</h3>
                 <p className="text-muted-foreground leading-relaxed">{feature.description}</p>
               </motion.div>
             ))}
@@ -439,10 +439,10 @@ const Home = () => {
       <section className="py-24 bg-muted/30">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <Badge variant="outline" className="mb-4 px-4 py-2 text-sm font-semibold">
+            <Badge variant="outline" className="mb-4 px-4 py-2 text-sm font-semibold text-[#2563EB]">
               Process simplifié
             </Badge>
-            <h2 className="text-4xl md:text-5xl font-black mb-4">
+            <h2 className="text-4xl md:text-5xl font-black mb-4 text-[#2563EB]">
               Comment ça marche ?
             </h2>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
@@ -475,7 +475,7 @@ const Home = () => {
                       <div className="flex items-start justify-between mb-3">
                         <div className="flex items-center gap-3">
                           <step.icon className="w-6 h-6 text-primary" />
-                          <h3 className="text-2xl font-bold">{step.title}</h3>
+                          <h3 className="text-2xl font-bold text-[#2563EB]">{step.title}</h3>
                         </div>
                         <Badge variant="secondary" className="font-semibold">
                           {step.duration}
@@ -506,10 +506,10 @@ const Home = () => {
       <section className="py-24 bg-background">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <Badge variant="outline" className="mb-4 px-4 py-2 text-sm font-semibold">
+            <Badge variant="outline" className="mb-4 px-4 py-2 text-sm font-semibold text-[#2563EB]">
               Dernières opportunités
             </Badge>
-            <h2 className="text-4xl md:text-5xl font-black mb-4">
+            <h2 className="text-4xl md:text-5xl font-black mb-4 text-[#2563EB]">
               Entreprises BTP à reprendre
             </h2>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
@@ -559,7 +559,7 @@ const Home = () => {
                       </div>
 
                       {/* Title */}
-                      <h3 className="text-2xl font-bold mb-4 line-clamp-2 group-hover:text-primary transition-colors">
+                      <h3 className="text-2xl font-bold mb-4 line-clamp-2 text-[#2563EB] group-hover:text-primary transition-colors">
                         {annonce.raison_sociale || "Entreprise BTP"}
                       </h3>
 
