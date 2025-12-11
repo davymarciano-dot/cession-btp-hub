@@ -355,10 +355,12 @@ const Home = () => {
               <Button 
                 onClick={() => navigate('/vendre')}
                 size="lg"
-                className="font-bold px-10 py-7 text-lg rounded-xl shadow-xl border-none"
+                className="font-bold text-lg rounded-xl shadow-xl border-none transition-all duration-300 hover:scale-105 hover:shadow-2xl"
                 style={{
                   background: '#FFFFFF',
-                  color: '#2563EB'
+                  color: '#2563EB',
+                  padding: '24px 48px',
+                  minWidth: '280px'
                 }}
               >
                 {t("home.hero.sellCta")}
@@ -368,11 +370,13 @@ const Home = () => {
                 onClick={() => navigate('/entreprises')}
                 size="lg"
                 variant="outline"
-                className="font-bold px-10 py-7 text-lg rounded-xl"
+                className="font-bold text-lg rounded-xl transition-all duration-300 hover:scale-105 hover:bg-white/10"
                 style={{
                   background: 'transparent',
                   border: '2px solid #FFFFFF',
-                  color: '#FFFFFF'
+                  color: '#FFFFFF',
+                  padding: '24px 48px',
+                  minWidth: '280px'
                 }}
               >
                 {language === 'en' ? 'View companies' : 'Voir les entreprises'}
@@ -660,10 +664,12 @@ const Home = () => {
               <Button 
                 onClick={() => navigate('/vendre')}
                 size="lg"
-                className="font-bold px-12 py-8 text-xl rounded-xl shadow-2xl border-none"
+                className="font-bold text-xl rounded-xl shadow-2xl border-none transition-all duration-300 hover:scale-105 hover:shadow-[0_8px_30px_rgba(0,0,0,0.3)]"
                 style={{
                   background: '#FFFFFF',
-                  color: '#2563EB'
+                  color: '#2563EB',
+                  padding: '28px 56px',
+                  minWidth: '320px'
                 }}
               >
                 <Crown className="w-6 h-6 mr-2" />
@@ -673,11 +679,13 @@ const Home = () => {
                 onClick={() => navigate('/estimer')}
                 size="lg"
                 variant="outline"
-                className="font-bold px-12 py-8 text-xl rounded-xl"
+                className="font-bold text-xl rounded-xl transition-all duration-300 hover:scale-105 hover:bg-white/10"
                 style={{
                   background: 'transparent',
                   border: '2px solid #FFFFFF',
-                  color: '#FFFFFF'
+                  color: '#FFFFFF',
+                  padding: '28px 56px',
+                  minWidth: '320px'
                 }}
               >
                 <Sparkles className="w-6 h-6 mr-2" />
