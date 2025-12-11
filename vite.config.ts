@@ -153,16 +153,86 @@ export default defineConfig(({ mode }) => ({
     minify: "esbuild",
     rollupOptions: {
       output: {
-        manualChunks: {
-          vendor: ["react", "react-dom", "react-router-dom"],
-          supabase: ["@supabase/supabase-js"],
-          ui: ["@radix-ui/react-dialog", "@radix-ui/react-dropdown-menu", "@radix-ui/react-select"],
+        manualChunks: (id) => {
+          // Core vendor - toujours chargé
+          if (id.includes('node_modules/react/') || 
+              id.includes('node_modules/react-dom/') ||
+              id.includes('node_modules/react-router-dom/')) {
+            return 'vendor-core';
+          }
+          
+          // Supabase - chargé à la demande
+          if (id.includes('@supabase/')) {
+            return 'vendor-supabase';
+          }
+          
+          // UI Components (Radix) - chargé avec les pages
+          if (id.includes('@radix-ui/')) {
+            return 'vendor-ui';
+          }
+          
+          // Charts & visualizations
+          if (id.includes('recharts') || id.includes('d3-')) {
+            return 'vendor-charts';
+          }
+          
+          // Animation libraries
+          if (id.includes('framer-motion')) {
+            return 'vendor-animation';
+          }
+          
+          // Form libraries
+          if (id.includes('react-hook-form') || id.includes('@hookform/') || id.includes('zod')) {
+            return 'vendor-forms';
+          }
+          
+          // Map libraries (heavy)
+          if (id.includes('leaflet') || id.includes('react-leaflet')) {
+            return 'vendor-maps';
+          }
+          
+          // PDF generation (heavy)
+          if (id.includes('jspdf') || id.includes('html2canvas')) {
+            return 'vendor-pdf';
+          }
+          
+          // Markdown & content
+          if (id.includes('react-markdown')) {
+            return 'vendor-content';
+          }
+          
+          // TanStack Query
+          if (id.includes('@tanstack/')) {
+            return 'vendor-query';
+          }
+          
+          // Pages SEO (lazy loaded)
+          if (id.includes('/pages/seo/') || id.includes('/pages/secteur/')) {
+            return 'pages-seo';
+          }
+          
+          // Pages Admin (lazy loaded)
+          if (id.includes('/pages/admin/')) {
+            return 'pages-admin';
+          }
+          
+          // Pages Dashboard (lazy loaded)
+          if (id.includes('/pages/dashboard/') || id.includes('Dashboard')) {
+            return 'pages-dashboard';
+          }
+          
+          // Blog pages
+          if (id.includes('/pages/blog/')) {
+            return 'pages-blog';
+          }
         },
       },
     },
     reportCompressedSize: false,
-    chunkSizeWarningLimit: 1000,
+    chunkSizeWarningLimit: 500,
     sourcemap: mode !== "production",
+    // Target modern browsers for smaller bundle
+    target: 'es2020',
   },
   optimizeDeps: {
     include: ["react", "react-dom", "react-router-dom"],
