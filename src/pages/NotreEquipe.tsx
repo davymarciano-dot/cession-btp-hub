@@ -1,10 +1,10 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Mail, Linkedin, Phone, ArrowLeft } from "lucide-react";
+import { Mail, Linkedin, ArrowLeft, Phone } from "lucide-react";
 import { Link } from "react-router-dom";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
-import { OptimizedImage } from "@/components/OptimizedImage";
+import { SEOImage } from "@/components/SEOImage";
 
 const teamMembers = [
   {
@@ -116,13 +116,12 @@ export default function NotreEquipe() {
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
             {teamMembers.map((member, index) => (
               <Card key={index} className="overflow-hidden hover:shadow-lg transition-shadow">
-                <div className="aspect-square overflow-hidden bg-muted">
-                  <img 
-                    src={member.image} 
-                    alt={member.name}
-                    className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
-                  />
-                </div>
+                <SEOImage 
+                  src={member.image} 
+                  alt={`${member.name} - ${member.role}`}
+                  aspectRatio="square"
+                  className="hover:scale-105 transition-transform duration-300"
+                />
                 <CardContent className="p-6">
                   <h3 className="text-xl font-bold mb-1">{member.name}</h3>
                   <p className="text-primary font-semibold mb-3">{member.role}</p>

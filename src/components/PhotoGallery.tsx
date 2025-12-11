@@ -14,7 +14,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-import { OptimizedImage } from "@/components/OptimizedImage";
+import { SEOImage, GalleryImage } from "@/components/SEOImage";
 
 interface PhotoGalleryProps {
   photos: string[];
@@ -38,7 +38,7 @@ const PhotoGallery = ({ photos, title = "Galerie photos" }: PhotoGalleryProps) =
             className="relative cursor-pointer group overflow-hidden rounded-lg"
             onClick={() => setSelectedIndex(index)}
           >
-            <OptimizedImage
+            <GalleryImage
               src={photo}
               alt={`Photo ${index + 1}`}
               aspectRatio="square"
@@ -110,7 +110,7 @@ const PhotoGallery = ({ photos, title = "Galerie photos" }: PhotoGalleryProps) =
                       }`}
                       onClick={() => setSelectedIndex(index)}
                     >
-                      <OptimizedImage
+                      <GalleryImage
                         src={photo}
                         alt={`Miniature ${index + 1}`}
                         aspectRatio="square"
