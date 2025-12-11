@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Mail, Phone, MapPin, Linkedin, Facebook, Twitter } from "lucide-react";
+import { Mail, MapPin, Linkedin, Facebook, Twitter } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import LanguageSelector from "@/components/LanguageSelector";
 
@@ -122,13 +122,6 @@ const Footer = () => {
               >
                 <Mail className="w-4 h-4" />
                 contact@cessionbtp.fr
-              </a>
-              <a 
-                href="tel:+33123456789" 
-                className="flex items-center gap-2 text-white/70 hover:text-white text-sm transition-colors"
-              >
-                <Phone className="w-4 h-4" />
-                01 23 45 67 89
               </a>
               <div className="flex items-center gap-2 text-white/70 text-sm">
                 <MapPin className="w-4 h-4" />
