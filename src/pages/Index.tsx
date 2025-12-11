@@ -35,9 +35,11 @@ import { SearchableRegionSelect } from "@/components/SearchableRegionSelect";
 import { UltraCompleteSchemas } from "@/components/seo/UltraCompleteSchemas";
 import { ReviewSchema } from "@/components/seo/ReviewSchema";
 import { motion } from "framer-motion";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const Home = () => {
   const navigate = useNavigate();
+  const { t, language } = useLanguage();
   const [secteurFilter, setSecteurFilter] = useState<string>("");
   const [regionFilter, setRegionFilter] = useState<string>("");
   const [totalAnnonces, setTotalAnnonces] = useState(0);
@@ -122,13 +124,38 @@ const Home = () => {
   };
 
   const stats = [
-    { value: "500+", label: "Transactions réalisées", icon: TrendingUp },
-    { value: "95%", label: "Taux de satisfaction", icon: Star },
-    { value: "45j", label: "Délai moyen de vente", icon: Clock },
-    { value: "2000+", label: "Repreneurs qualifiés", icon: Users },
+    { value: "500+", labelKey: "home.stats.companies", icon: TrendingUp },
+    { value: "95%", labelKey: "home.stats.satisfaction", icon: Star },
+    { value: "45", labelKey: "home.stats.avgTime", icon: Clock },
+    { value: "2000+", labelKey: "home.stats.buyers", icon: Users },
   ];
 
-  const features = [
+  const features = language === 'en' ? [
+    {
+      icon: Sparkles,
+      title: "AI Matching",
+      description: "Our intelligent algorithm connects sellers and buyers with 95% compatibility.",
+      color: "from-purple-500 to-pink-500",
+    },
+    {
+      icon: Shield,
+      title: "100% Confidential",
+      description: "Guaranteed anonymity, secure dataroom and systematic NDA to protect your data.",
+      color: "from-blue-500 to-cyan-500",
+    },
+    {
+      icon: Zap,
+      title: "Ultra-fast process",
+      description: "Sell your business in 45 days vs 18 months on generalist platforms.",
+      color: "from-orange-500 to-red-500",
+    },
+    {
+      icon: Award,
+      title: "2% Success fee",
+      description: "You only pay on success. Our interests are perfectly aligned.",
+      color: "from-green-500 to-emerald-500",
+    },
+  ] : [
     {
       icon: Sparkles,
       title: "Matching IA",
@@ -253,7 +280,7 @@ const Home = () => {
               className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-6 py-3 text-white"
             >
               <Sparkles className="w-5 h-5" />
-              <span className="font-semibold">Plateforme n°1 pour la cession d'entreprises BTP</span>
+              <span className="font-semibold">{language === 'en' ? "#1 Platform for BTP business transfers" : "Plateforme n°1 pour la cession d'entreprises BTP"}</span>
             </motion.div>
 
             {/* Titre principal */}
@@ -263,10 +290,11 @@ const Home = () => {
               transition={{ duration: 0.6, delay: 0.1 }}
               className="text-5xl md:text-6xl lg:text-7xl font-black text-white leading-tight"
             >
-              Vendez ou reprenez une entreprise BTP<br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-pink-400">
-                en 45 jours
-              </span>
+              {language === 'en' ? (
+                <>Buy or sell a BTP company<br /><span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-pink-400">in 45 days</span></>
+              ) : (
+                <>Vendez ou reprenez une entreprise BTP<br /><span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-pink-400">en 45 jours</span></>
+              )}
             </motion.h1>
 
             {/* Sous-titre */}
@@ -276,7 +304,10 @@ const Home = () => {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="text-xl md:text-2xl text-white/90 max-w-3xl mx-auto"
             >
-              La seule plateforme 100% spécialisée BTP avec matching IA, valorisation gratuite et accompagnement expert
+              {language === 'en' 
+                ? "The only 100% specialized BTP platform with AI matching, free valuation and expert support"
+                : "La seule plateforme 100% spécialisée BTP avec matching IA, valorisation gratuite et accompagnement expert"
+              }
             </motion.p>
 
             {/* Barre de recherche */}
@@ -309,7 +340,7 @@ const Home = () => {
                   className="bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white font-bold px-8 rounded-xl shadow-lg"
                 >
                   <Rocket className="w-5 h-5 mr-2" />
-                  Rechercher
+                  {language === 'en' ? 'Search' : 'Rechercher'}
                 </Button>
               </div>
             </motion.div>
@@ -326,7 +357,7 @@ const Home = () => {
                 size="lg"
                 className="bg-white text-primary hover:bg-gray-100 font-bold px-10 py-7 text-lg rounded-xl shadow-xl"
               >
-                Vendre mon entreprise
+                {t("home.hero.sellCta")}
                 <ArrowRight className="w-5 h-5 ml-2" />
               </Button>
               <Button 
@@ -335,7 +366,7 @@ const Home = () => {
                 variant="outline"
                 className="border-2 border-white text-white hover:bg-white/10 font-bold px-10 py-7 text-lg rounded-xl"
               >
-                Voir les entreprises
+                {language === 'en' ? 'View companies' : 'Voir les entreprises'}
                 <ChevronRight className="w-5 h-5 ml-2" />
               </Button>
             </motion.div>
@@ -353,7 +384,7 @@ const Home = () => {
                     <stat.icon className="w-8 h-8 text-orange-400" />
                   </div>
                   <div className="text-4xl font-black text-white mb-1">{stat.value}</div>
-                  <div className="text-sm text-white/70">{stat.label}</div>
+                  <div className="text-sm text-white/70">{t(stat.labelKey)}</div>
                 </div>
               ))}
             </motion.div>

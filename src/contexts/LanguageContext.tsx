@@ -19,7 +19,6 @@ export const LanguageProvider: React.FC<{ children: ReactNode }> = ({ children }
       if (stored && (stored === 'fr' || stored === 'en')) {
         return stored;
       }
-      // Detect browser language
       const browserLang = navigator.language.split('-')[0];
       return browserLang === 'en' ? 'en' : 'fr';
     }
@@ -44,13 +43,12 @@ export const LanguageProvider: React.FC<{ children: ReactNode }> = ({ children }
       if (value && typeof value === 'object' && k in value) {
         value = value[k];
       } else {
-        // Fallback to French if key not found
         value = translations.fr;
         for (const fallbackKey of keys) {
           if (value && typeof value === 'object' && fallbackKey in value) {
             value = value[fallbackKey];
           } else {
-            return key; // Return key if not found
+            return key;
           }
         }
         break;
@@ -75,10 +73,8 @@ export const useLanguage = (): LanguageContextType => {
   return context;
 };
 
-// Translations object
 const translations: Record<Language, Record<string, any>> = {
   fr: {
-    // Header
     header: {
       sell: "Vendre",
       companies: "Entreprises à vendre",
@@ -86,11 +82,11 @@ const translations: Record<Language, Record<string, any>> = {
       pricing: "Tarifs",
       blog: "Blog",
       login: "Connexion",
-      dashboard: "Dashboard",
+      createAccount: "Créer mon compte",
+      dashboard: "Mon espace",
       messages: "Messages",
       logout: "Déconnexion",
     },
-    // Footer
     footer: {
       tagline: "La plateforme n°1 pour acheter et vendre des entreprises du BTP en France",
       features: {
@@ -145,7 +141,6 @@ const translations: Record<Language, Record<string, any>> = {
       copyright: "© 2025 CessionBTP • Spécialiste #1 Cession Entreprises BTP France",
       language: "Langue",
     },
-    // Home page
     home: {
       hero: {
         title: "Cédez ou reprenez une entreprise BTP en toute confiance",
@@ -159,8 +154,65 @@ const translations: Record<Language, Record<string, any>> = {
         avgTime: "jours délai moyen",
         satisfaction: "satisfaction client",
       },
+      whyChoose: {
+        title: "Pourquoi choisir CessionBTP ?",
+        subtitle: "La plateforme spécialisée dans la transmission d'entreprises du BTP",
+      },
+      howItWorks: {
+        title: "Comment ça marche ?",
+        subtitle: "Un processus simple en 4 étapes",
+        step1Title: "Créez votre annonce",
+        step1Desc: "Décrivez votre entreprise en quelques minutes",
+        step2Title: "Validation",
+        step2Desc: "Notre équipe valide votre annonce sous 24h",
+        step3Title: "Matching IA",
+        step3Desc: "Notre IA trouve les repreneurs idéaux",
+        step4Title: "Transaction",
+        step4Desc: "Nous vous accompagnons jusqu'à la signature",
+      },
+      cta: {
+        sellTitle: "Vous vendez ?",
+        sellDescription: "Estimez gratuitement la valeur de votre entreprise",
+        sellButton: "Estimer mon entreprise",
+        buyTitle: "Vous achetez ?",
+        buyDescription: "Découvrez les entreprises BTP à reprendre",
+        buyButton: "Voir les annonces",
+      },
+      latestListings: "Dernières annonces",
+      viewAll: "Voir toutes les annonces",
+      trustedBy: "Ils nous font confiance",
+      successFee: "Honoraires de succès",
+      successFeeDesc: "Seulement 2% à la vente réussie",
     },
-    // Common
+    enterprises: {
+      title: "Entreprises BTP à vendre",
+      subtitle: "Trouvez l'entreprise parfaite pour votre projet",
+      filters: {
+        sector: "Secteur d'activité",
+        region: "Région",
+        budget: "Budget",
+        size: "Taille",
+        turnover: "Chiffre d'affaires",
+        allSectors: "Tous les secteurs",
+        allRegions: "Toutes les régions",
+        apply: "Appliquer",
+        reset: "Réinitialiser",
+      },
+      noResults: "Aucune entreprise ne correspond à vos critères",
+      opportunities: "opportunités à saisir",
+      viewDetails: "Voir les détails",
+      contactSeller: "Contacter le vendeur",
+      employees: "salariés",
+      turnover: "CA",
+      price: "Prix",
+      featured: "Coup de cœur",
+      new: "Nouveau",
+      trending: "Tendance",
+      premium: "Premium",
+      fast: "Rapide",
+      deal: "Deal",
+      top: "Top",
+    },
     common: {
       learnMore: "En savoir plus",
       contact: "Contacter",
@@ -180,24 +232,13 @@ const translations: Record<Language, Record<string, any>> = {
       none: "Aucun",
       yes: "Oui",
       no: "Non",
-    },
-    // Enterprises page
-    enterprises: {
-      title: "Entreprises BTP à vendre",
-      subtitle: "Trouvez l'entreprise parfaite pour votre projet",
-      filters: {
-        sector: "Secteur d'activité",
-        region: "Région",
-        budget: "Budget",
-        size: "Taille",
-        turnover: "Chiffre d'affaires",
-      },
-      noResults: "Aucune entreprise ne correspond à vos critères",
-      opportunities: "opportunités à saisir",
+      or: "ou",
+      and: "et",
+      from: "de",
+      to: "à",
     },
   },
   en: {
-    // Header
     header: {
       sell: "Sell",
       companies: "Companies for sale",
@@ -205,11 +246,11 @@ const translations: Record<Language, Record<string, any>> = {
       pricing: "Pricing",
       blog: "Blog",
       login: "Login",
-      dashboard: "Dashboard",
+      createAccount: "Create account",
+      dashboard: "My space",
       messages: "Messages",
       logout: "Logout",
     },
-    // Footer
     footer: {
       tagline: "The #1 platform for buying and selling construction companies in France",
       features: {
@@ -264,7 +305,6 @@ const translations: Record<Language, Record<string, any>> = {
       copyright: "© 2025 CessionBTP • #1 Specialist BTP Business Transfer France",
       language: "Language",
     },
-    // Home page
     home: {
       hero: {
         title: "Buy or sell a construction company with confidence",
@@ -278,8 +318,65 @@ const translations: Record<Language, Record<string, any>> = {
         avgTime: "days average time",
         satisfaction: "client satisfaction",
       },
+      whyChoose: {
+        title: "Why choose CessionBTP?",
+        subtitle: "The platform specialized in construction business transfers",
+      },
+      howItWorks: {
+        title: "How it works?",
+        subtitle: "A simple 4-step process",
+        step1Title: "Create your listing",
+        step1Desc: "Describe your company in minutes",
+        step2Title: "Validation",
+        step2Desc: "Our team validates your listing within 24h",
+        step3Title: "AI Matching",
+        step3Desc: "Our AI finds the ideal buyers",
+        step4Title: "Transaction",
+        step4Desc: "We support you until signing",
+      },
+      cta: {
+        sellTitle: "Selling?",
+        sellDescription: "Get a free estimate of your company's value",
+        sellButton: "Estimate my company",
+        buyTitle: "Buying?",
+        buyDescription: "Discover BTP companies available for acquisition",
+        buyButton: "View listings",
+      },
+      latestListings: "Latest listings",
+      viewAll: "View all listings",
+      trustedBy: "They trust us",
+      successFee: "Success fees",
+      successFeeDesc: "Only 2% on successful sale",
     },
-    // Common
+    enterprises: {
+      title: "Construction companies for sale",
+      subtitle: "Find the perfect company for your project",
+      filters: {
+        sector: "Business sector",
+        region: "Region",
+        budget: "Budget",
+        size: "Size",
+        turnover: "Turnover",
+        allSectors: "All sectors",
+        allRegions: "All regions",
+        apply: "Apply",
+        reset: "Reset",
+      },
+      noResults: "No companies match your criteria",
+      opportunities: "opportunities available",
+      viewDetails: "View details",
+      contactSeller: "Contact seller",
+      employees: "employees",
+      turnover: "Revenue",
+      price: "Price",
+      featured: "Featured",
+      new: "New",
+      trending: "Trending",
+      premium: "Premium",
+      fast: "Fast",
+      deal: "Deal",
+      top: "Top",
+    },
     common: {
       learnMore: "Learn more",
       contact: "Contact",
@@ -299,20 +396,10 @@ const translations: Record<Language, Record<string, any>> = {
       none: "None",
       yes: "Yes",
       no: "No",
-    },
-    // Enterprises page
-    enterprises: {
-      title: "Construction companies for sale",
-      subtitle: "Find the perfect company for your project",
-      filters: {
-        sector: "Business sector",
-        region: "Region",
-        budget: "Budget",
-        size: "Size",
-        turnover: "Turnover",
-      },
-      noResults: "No companies match your criteria",
-      opportunities: "opportunities available",
+      or: "or",
+      and: "and",
+      from: "from",
+      to: "to",
     },
   },
 };
