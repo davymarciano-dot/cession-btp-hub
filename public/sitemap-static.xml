@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
-        xmlns:video="http://www.google.com/schemas/sitemap-video/1.1"
-        xmlns:news="http://www.google.com/schemas/sitemap-news/0.9">
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   
   <!-- PAGE D'ACCUEIL - PRIORITÉ MAXIMALE -->
   <url>
@@ -52,12 +50,118 @@
     <priority>0.8</priority>
   </url>
   
-  <!-- AUTHENTIFICATION -->
+  <!-- PAGES RESSOURCES -->
   <url>
-    <loc>https://cessionbtp.fr/auth</loc>
+    <loc>https://cessionbtp.fr/faq</loc>
+    <lastmod>2025-01-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <url>
+    <loc>https://cessionbtp.fr/contact</loc>
     <lastmod>2025-01-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://cessionbtp.fr/equipe</loc>
+    <lastmod>2025-01-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://cessionbtp.fr/success-stories</loc>
+    <lastmod>2025-01-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://cessionbtp.fr/matching-ia</loc>
+    <lastmod>2025-01-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <url>
+    <loc>https://cessionbtp.fr/outils-gratuits</loc>
+    <lastmod>2025-01-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  
+  <url>
+    <loc>https://cessionbtp.fr/lexique-btp</loc>
+    <lastmod>2025-01-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://cessionbtp.fr/ressources</loc>
+    <lastmod>2025-01-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://cessionbtp.fr/comment-ca-marche</loc>
+    <lastmod>2025-01-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <url>
+    <loc>https://cessionbtp.fr/entreprises-rge</loc>
+    <lastmod>2025-01-17</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+  </url>
+  
+  <!-- PAGES SECTEUR ÉNERGIE - HAUTE PRIORITÉ SEO -->
+  <url>
+    <loc>https://cessionbtp.fr/secteur/energies-renouvelables</loc>
+    <lastmod>2025-01-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  
+  <url>
+    <loc>https://cessionbtp.fr/secteur/photovoltaique</loc>
+    <lastmod>2025-01-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  
+  <url>
+    <loc>https://cessionbtp.fr/secteur/panneaux-solaires</loc>
+    <lastmod>2025-01-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  
+  <url>
+    <loc>https://cessionbtp.fr/secteur/pompe-a-chaleur</loc>
+    <lastmod>2025-01-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  
+  <url>
+    <loc>https://cessionbtp.fr/secteur/isolation-thermique</loc>
+    <lastmod>2025-01-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  
+  <url>
+    <loc>https://cessionbtp.fr/secteur/installation-chauffage</loc>
+    <lastmod>2025-01-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
   </url>
   
   <!-- PAGES LÉGALES -->
@@ -75,28 +179,12 @@
     <priority>0.3</priority>
   </url>
   
-  <!-- FAQ -->
+  <!-- AUTHENTIFICATION -->
   <url>
-    <loc>https://cessionbtp.fr/faq</loc>
+    <loc>https://cessionbtp.fr/auth</loc>
     <lastmod>2025-01-17</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  
-  <!-- OUTILS GRATUITS -->
-  <url>
-    <loc>https://cessionbtp.fr/outils-gratuits</loc>
-    <lastmod>2025-01-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.75</priority>
-  </url>
-  
-  <!-- ENTREPRISES RGE -->
-  <url>
-    <loc>https://cessionbtp.fr/entreprises-rge</loc>
-    <lastmod>2025-01-17</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.9</priority>
+    <priority>0.5</priority>
   </url>
   
 </urlset>
