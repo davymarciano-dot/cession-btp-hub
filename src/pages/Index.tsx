@@ -221,7 +221,7 @@ const Home = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-[#F8FAFC]">
       <Helmet>
         <title>CessionBTP - Plateforme n°1 Cession & Reprise Entreprises BTP France | Vente en 45j</title>
         <meta name="description" content="1ère plateforme 100% BTP : vendez en 45 jours vs 18 mois. Matching IA, 2000+ repreneurs, 500+ transactions. Estimation IA gratuite. Success fee 2%." />
@@ -400,7 +400,7 @@ const Home = () => {
       </section>
 
       {/* Pourquoi CessionBTP */}
-      <section className="py-24 bg-background">
+      <section className="py-24 bg-[#F8FAFC]">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <Badge variant="outline" className="mb-4 px-4 py-2 text-sm font-semibold">
@@ -436,7 +436,7 @@ const Home = () => {
       </section>
 
       {/* Comment ça marche */}
-      <section className="py-24 bg-muted/30">
+      <section className="py-24 bg-[#F8FAFC]">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <Badge variant="outline" className="mb-4 px-4 py-2 text-sm font-semibold">
