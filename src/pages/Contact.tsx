@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
-import { Mail, Phone, MapPin, Send } from "lucide-react";
+import { Mail, MapPin, Send } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
 const Contact = () => {
@@ -158,21 +158,6 @@ const Contact = () => {
                         </a>
                         <p className="text-sm text-muted-foreground mt-1">
                           Réponse sous 24h
-                        </p>
-                      </div>
-                    </div>
-
-                    <div className="flex items-start gap-4">
-                      <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center flex-shrink-0">
-                        <Phone className="h-6 w-6 text-primary" />
-                      </div>
-                      <div>
-                        <h3 className="font-semibold mb-1">Téléphone</h3>
-                        <a href="tel:+33123456789" className="text-primary hover:underline">
-                          01 23 45 67 89
-                        </a>
-                        <p className="text-sm text-muted-foreground mt-1">
-                          Lun-Ven: 9h-18h
                         </p>
                       </div>
                     </div>
