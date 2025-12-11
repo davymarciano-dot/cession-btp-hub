@@ -1,14 +1,16 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Menu, X, Building2 } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import DarkModeToggle from "./DarkModeToggle";
 import { supabase } from "@/integrations/supabase/client";
 import { useQuery } from "@tanstack/react-query";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const navigate = useNavigate();
+  const { t } = useLanguage();
 
   const { data: session } = useQuery({
     queryKey: ["session"],
@@ -37,22 +39,19 @@ const Header = () => {
         {/* Desktop Navigation */}
         <div className="hidden md:flex items-center gap-8">
           <Link to="/vendre" className="text-gray-700 hover:text-primary transition-colors font-medium">
-            Vendre
-          </Link>
-          <Link to="/acheter" className="text-gray-700 hover:text-primary transition-colors font-medium">
-            Acheter
+            {t("header.sell")}
           </Link>
           <Link to="/entreprises" className="text-gray-700 hover:text-primary transition-colors font-medium">
-            Entreprises à vendre
+            {t("header.companies")}
           </Link>
           <Link to="/estimer" className="text-gray-700 hover:text-primary transition-colors font-medium">
-            Estimer
+            {t("header.estimate")}
           </Link>
           <Link to="/tarifs" className="text-gray-700 hover:text-primary transition-colors font-medium">
-            Tarifs
+            {t("header.pricing")}
           </Link>
           <Link to="/blog" className="text-gray-700 hover:text-primary transition-colors font-medium">
-            Blog
+            {t("header.blog")}
           </Link>
         </div>
 
@@ -64,19 +63,22 @@ const Header = () => {
             {session ? (
               <>
                 <Button variant="ghost" asChild className="text-gray-700 hover:text-primary">
-                  <Link to="/dashboard">Mon espace</Link>
+                  <Link to="/dashboard">{t("header.dashboard")}</Link>
+                </Button>
+                <Button variant="ghost" asChild className="text-gray-700 hover:text-primary">
+                  <Link to="/messages">{t("header.messages")}</Link>
                 </Button>
                 <Button variant="ghost" onClick={handleLogout} className="text-gray-700 hover:text-primary">
-                  Déconnexion
+                  {t("header.logout")}
                 </Button>
               </>
             ) : (
               <>
                 <Button variant="ghost" asChild className="text-gray-700 hover:text-primary font-medium">
-                  <Link to="/auth">Connexion</Link>
+                  <Link to="/auth">{t("header.login")}</Link>
                 </Button>
                 <Button asChild className="bg-primary hover:bg-primary/90 text-white rounded-xl px-6 font-medium shadow-md">
-                  <Link to="/auth">Créer mon compte</Link>
+                  <Link to="/auth">{t("header.createAccount")}</Link>
                 </Button>
               </>
             )}
@@ -103,42 +105,35 @@ const Header = () => {
               className="text-[#64748B] hover:text-primary transition-colors font-medium"
               onClick={() => setIsMenuOpen(false)}
             >
-              Vendre
-            </Link>
-            <Link
-              to="/acheter"
-              className="text-[#64748B] hover:text-primary transition-colors font-medium"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Acheter
+              {t("header.sell")}
             </Link>
             <Link
               to="/entreprises"
               className="text-[#64748B] hover:text-primary transition-colors font-medium"
               onClick={() => setIsMenuOpen(false)}
             >
-              Entreprises
+              {t("header.companies")}
             </Link>
             <Link
               to="/estimer"
               className="text-[#64748B] hover:text-primary transition-colors font-medium"
               onClick={() => setIsMenuOpen(false)}
             >
-              Estimer
+              {t("header.estimate")}
             </Link>
             <Link
               to="/tarifs"
               className="text-[#64748B] hover:text-primary transition-colors font-medium"
               onClick={() => setIsMenuOpen(false)}
             >
-              Tarifs
+              {t("header.pricing")}
             </Link>
             <Link
               to="/blog"
               className="text-[#64748B] hover:text-primary transition-colors font-medium"
               onClick={() => setIsMenuOpen(false)}
             >
-              Blog
+              {t("header.blog")}
             </Link>
             
             <div className="pt-4 border-t flex flex-col gap-2">
@@ -146,7 +141,12 @@ const Header = () => {
                 <>
                   <Button variant="outline" asChild className="w-full">
                     <Link to="/dashboard" onClick={() => setIsMenuOpen(false)}>
-                      Dashboard
+                      {t("header.dashboard")}
+                    </Link>
+                  </Button>
+                  <Button variant="outline" asChild className="w-full">
+                    <Link to="/messages" onClick={() => setIsMenuOpen(false)}>
+                      {t("header.messages")}
                     </Link>
                   </Button>
                   <Button
@@ -157,19 +157,19 @@ const Header = () => {
                     }}
                     className="w-full"
                   >
-                    Déconnexion
+                    {t("header.logout")}
                   </Button>
                 </>
               ) : (
                 <>
                   <Button variant="outline" asChild className="w-full">
                     <Link to="/auth" onClick={() => setIsMenuOpen(false)}>
-                      Connexion
+                      {t("header.login")}
                     </Link>
                   </Button>
                   <Button asChild className="w-full bg-primary">
                     <Link to="/auth" onClick={() => setIsMenuOpen(false)}>
-                      Inscription
+                      {t("header.createAccount")}
                     </Link>
                   </Button>
                 </>
