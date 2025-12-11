@@ -400,7 +400,7 @@ const Home = () => {
       </section>
 
       {/* Pourquoi CessionBTP */}
-      <section className="py-24 bg-background">
+      <section className="py-24 bg-[#F8FAFC]">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <Badge variant="outline" className="mb-4 px-4 py-2 text-sm font-semibold">
@@ -422,7 +422,7 @@ const Home = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 viewport={{ once: true }}
-                className="group relative bg-card border border-border rounded-2xl p-8 hover:shadow-2xl transition-all duration-300"
+                className="group relative bg-white border border-gray-200 rounded-2xl p-8 hover:shadow-2xl transition-all duration-300"
               >
                 <div className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${feature.color} flex items-center justify-center mb-6 group-hover:scale-110 transition-transform`}>
                   <feature.icon className="w-8 h-8 text-white" />
@@ -436,7 +436,7 @@ const Home = () => {
       </section>
 
       {/* Comment ça marche */}
-      <section className="py-24 bg-muted/30">
+      <section className="py-24 bg-[#F8FAFC]">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <Badge variant="outline" className="mb-4 px-4 py-2 text-sm font-semibold text-[#2563EB]">
@@ -471,7 +471,7 @@ const Home = () => {
                     </div>
 
                     {/* Content */}
-                    <div className="flex-1 bg-card border border-border rounded-2xl p-6 hover:shadow-xl transition-all">
+                    <div className="flex-1 bg-white border border-gray-200 rounded-2xl p-6 hover:shadow-xl transition-all">
                       <div className="flex items-start justify-between mb-3">
                         <div className="flex items-center gap-3">
                           <step.icon className="w-6 h-6 text-primary" />
@@ -503,7 +503,7 @@ const Home = () => {
       </section>
 
       {/* Opportunités à saisir */}
-      <section className="py-24 bg-background">
+      <section className="py-24 bg-[#F8FAFC]">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <Badge variant="outline" className="mb-4 px-4 py-2 text-sm font-semibold text-[#2563EB]">
@@ -542,7 +542,7 @@ const Home = () => {
                     transition={{ duration: 0.5, delay: index * 0.1 }}
                     viewport={{ once: true }}
                     onClick={() => navigate(`/annonce/${annonce.id}`)}
-                    className="group relative bg-card border border-border rounded-2xl p-6 hover:shadow-2xl hover:border-primary transition-all cursor-pointer overflow-hidden"
+                    className="group relative bg-white border border-gray-200 rounded-2xl p-6 hover:shadow-2xl hover:border-primary transition-all cursor-pointer overflow-hidden"
                   >
                     {/* Gradient overlay on hover */}
                     <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-orange-500/5 opacity-0 group-hover:opacity-100 transition-opacity" />
