@@ -355,7 +355,11 @@ const Home = () => {
               <Button 
                 onClick={() => navigate('/vendre')}
                 size="lg"
-                className="bg-white text-primary hover:bg-gray-100 font-bold px-10 py-7 text-lg rounded-xl shadow-xl"
+                className="font-bold px-10 py-7 text-lg rounded-xl shadow-xl border-none"
+                style={{
+                  background: '#FFFFFF',
+                  color: '#2563EB'
+                }}
               >
                 {t("home.hero.sellCta")}
                 <ArrowRight className="w-5 h-5 ml-2" />
@@ -364,7 +368,12 @@ const Home = () => {
                 onClick={() => navigate('/entreprises')}
                 size="lg"
                 variant="outline"
-                className="border-2 border-white text-white hover:bg-white/10 font-bold px-10 py-7 text-lg rounded-xl"
+                className="font-bold px-10 py-7 text-lg rounded-xl"
+                style={{
+                  background: 'transparent',
+                  border: '2px solid #FFFFFF',
+                  color: '#FFFFFF'
+                }}
               >
                 {language === 'en' ? 'View companies' : 'Voir les entreprises'}
                 <ChevronRight className="w-5 h-5 ml-2" />
@@ -651,7 +660,11 @@ const Home = () => {
               <Button 
                 onClick={() => navigate('/vendre')}
                 size="lg"
-                className="bg-white text-primary hover:bg-gray-100 font-bold px-12 py-8 text-xl rounded-xl shadow-2xl"
+                className="font-bold px-12 py-8 text-xl rounded-xl shadow-2xl border-none"
+                style={{
+                  background: '#FFFFFF',
+                  color: '#2563EB'
+                }}
               >
                 <Crown className="w-6 h-6 mr-2" />
                 Vendre mon entreprise
@@ -660,7 +673,12 @@ const Home = () => {
                 onClick={() => navigate('/estimer')}
                 size="lg"
                 variant="outline"
-                className="border-2 border-white text-white hover:bg-white/10 font-bold px-12 py-8 text-xl rounded-xl"
+                className="font-bold px-12 py-8 text-xl rounded-xl"
+                style={{
+                  background: 'transparent',
+                  border: '2px solid #FFFFFF',
+                  color: '#FFFFFF'
+                }}
               >
                 <Sparkles className="w-6 h-6 mr-2" />
                 Estimation gratuite
