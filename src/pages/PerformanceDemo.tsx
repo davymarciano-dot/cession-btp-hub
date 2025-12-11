@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import { OptimizedImage } from "@/components/OptimizedImage";
+import { SEOImage } from "@/components/SEOImage";
 import { LazySection } from "@/components/LazySection";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -82,17 +82,17 @@ const PerformanceDemo = () => {
 
             {showImages && (
               <div className="grid md:grid-cols-3 gap-4">
-                <OptimizedImage
+                <SEOImage
                   src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5"
                   alt="Construction site"
                   aspectRatio="square"
                 />
-                <OptimizedImage
+                <SEOImage
                   src="https://images.unsplash.com/photo-1504307651254-35680f356dfd"
                   alt="Building"
                   aspectRatio="square"
                 />
-                <OptimizedImage
+                <SEOImage
                   src="https://images.unsplash.com/photo-1513467535987-fd81bc7d62f8"
                   alt="Tools"
                   aspectRatio="square"
@@ -178,9 +178,9 @@ const PerformanceDemo = () => {
             <h2 className="text-2xl font-bold mb-4">Comment utiliser</h2>
             <div className="space-y-4 text-sm">
               <div>
-                <h3 className="font-semibold mb-2">1. Images optimisées:</h3>
+                <h3 className="font-semibold mb-2">1. Images optimisées SEO:</h3>
                 <code className="block bg-background p-2 rounded">
-                  {`<OptimizedImage src="url" alt="description" aspectRatio="square" />`}
+                  {`<SEOImage src="url" alt="description" aspectRatio="square" priority={false} />`}
                 </code>
               </div>
 
