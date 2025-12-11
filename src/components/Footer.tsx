@@ -33,7 +33,7 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="bg-gradient-to-br from-[hsl(214,56%,10%)] to-[hsl(214,48%,20%)] text-white">
+    <footer className="bg-[#2563EB] text-white">
       <div className="container mx-auto px-4 py-12 md:py-16">
         
         {/* ========== MAIN FOOTER GRID - 4 COLUMNS ========== */}
