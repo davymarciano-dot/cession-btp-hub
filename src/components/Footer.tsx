@@ -1,45 +1,47 @@
 import { Link } from "react-router-dom";
 import { Mail, Phone, MapPin, Linkedin, Facebook, Twitter, Instagram, CheckCircle2 } from "lucide-react";
 import { useState } from "react";
+import { useLanguage } from "@/contexts/LanguageContext";
+import LanguageSelector from "@/components/LanguageSelector";
 
 const Footer = () => {
   const [email, setEmail] = useState("");
+  const { t } = useLanguage();
 
   const handleNewsletterSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     console.log("Newsletter subscription:", email);
-    // TODO: Implement newsletter subscription
     setEmail("");
   };
 
   const footerLinks = {
     entreprise: [
-      { label: "Comment ça marche", path: "/comment-ca-marche" },
-      { label: "Notre équipe", path: "/equipe" },
-      { label: "Contact", path: "/contact" },
-      { label: "Blog", path: "/blog" },
-      { label: "Carrières", path: "/contact" },
+      { labelKey: "footer.links.howItWorks", path: "/comment-ca-marche" },
+      { labelKey: "footer.links.team", path: "/equipe" },
+      { labelKey: "footer.links.contact", path: "/contact" },
+      { labelKey: "footer.links.blog", path: "/blog" },
+      { labelKey: "footer.links.careers", path: "/contact" },
     ],
     vendeurs: [
-      { label: "Vendre mon entreprise", path: "/vendre" },
-      { label: "Estimer gratuitement", path: "/estimer" },
-      { label: "Tarifs vendeurs", path: "/tarifs" },
-      { label: "Success stories", path: "/success-stories" },
-      { label: "FAQ Vendeurs", path: "/faq" },
+      { labelKey: "footer.links.sellBusiness", path: "/vendre" },
+      { labelKey: "footer.links.freeEstimate", path: "/estimer" },
+      { labelKey: "footer.links.sellerPricing", path: "/tarifs" },
+      { labelKey: "footer.links.successStories", path: "/success-stories" },
+      { labelKey: "footer.links.sellerFaq", path: "/faq" },
     ],
     acheteurs: [
-      { label: "Parcourir annonces", path: "/entreprises" },
-      { label: "Entreprises RGE", path: "/entreprises-rge" },
-      { label: "Matching IA", path: "/matching-ia" },
-      { label: "Mes matchs", path: "/mes-matchs" },
-      { label: "FAQ Acheteurs", path: "/faq" },
+      { labelKey: "footer.links.browseListings", path: "/entreprises" },
+      { labelKey: "footer.links.rgeCompanies", path: "/entreprises-rge" },
+      { labelKey: "footer.links.aiMatching", path: "/matching-ia" },
+      { labelKey: "footer.links.myMatches", path: "/mes-matchs" },
+      { labelKey: "footer.links.buyerFaq", path: "/faq" },
     ],
     legal: [
-      { label: "Mentions légales", path: "/mentions-legales" },
-      { label: "CGV", path: "/cgv" },
-      { label: "Confidentialité", path: "/mentions-legales" },
-      { label: "Cookies", path: "/mentions-legales" },
-      { label: "Plan du site", path: "/sitemap" },
+      { labelKey: "footer.links.legalNotice", path: "/mentions-legales" },
+      { labelKey: "footer.links.terms", path: "/cgv" },
+      { labelKey: "footer.links.privacy", path: "/mentions-legales" },
+      { labelKey: "footer.links.cookies", path: "/mentions-legales" },
+      { labelKey: "footer.links.sitemap", path: "/sitemap" },
     ],
   };
 
@@ -51,10 +53,10 @@ const Footer = () => {
   ];
 
   const stats = [
-    { number: "187", label: "Entreprises vendues 2024" },
-    { number: "45j", label: "Délai moyen de vente" },
-    { number: "95%", label: "Taux matching IA" },
-    { number: "2%", label: "Success Fee seulement" },
+    { number: "187", labelKey: "footer.stats.soldCompanies" },
+    { number: "45j", labelKey: "footer.stats.avgTime" },
+    { number: "95%", labelKey: "footer.stats.matchingRate" },
+    { number: "2%", labelKey: "footer.stats.successFee" },
   ];
 
   return (
@@ -69,7 +71,7 @@ const Footer = () => {
                   {stat.number}
                 </div>
                 <div className="text-base md:text-lg font-medium opacity-95">
-                  {stat.label}
+                  {t(stat.labelKey)}
                 </div>
               </div>
             ))}
@@ -91,25 +93,25 @@ const Footer = () => {
               </div>
               
               <p className="text-white/85 font-medium mb-6 leading-relaxed">
-                La plateforme n°1 pour acheter et vendre des entreprises du BTP en France
+                {t("footer.tagline")}
               </p>
 
               <ul className="space-y-3 mb-8">
                 <li className="flex items-center gap-3 text-white/80">
                   <CheckCircle2 className="w-5 h-5 text-green-500 flex-shrink-0" />
-                  <span>Matching IA 95%</span>
+                  <span>{t("footer.features.matching")}</span>
                 </li>
                 <li className="flex items-center gap-3 text-white/80">
                   <CheckCircle2 className="w-5 h-5 text-green-500 flex-shrink-0" />
-                  <span>Success Fee 2% seulement</span>
+                  <span>{t("footer.features.fee")}</span>
                 </li>
                 <li className="flex items-center gap-3 text-white/80">
                   <CheckCircle2 className="w-5 h-5 text-green-500 flex-shrink-0" />
-                  <span>Accompagnement personnalisé</span>
+                  <span>{t("footer.features.support")}</span>
                 </li>
                 <li className="flex items-center gap-3 text-white/80">
                   <CheckCircle2 className="w-5 h-5 text-green-500 flex-shrink-0" />
-                  <span>187 entreprises vendues en 2024</span>
+                  <span>{t("footer.features.sales")}</span>
                 </li>
               </ul>
             </div>
@@ -117,7 +119,7 @@ const Footer = () => {
             {/* ========== ENTREPRISE COLUMN ========== */}
             <div>
               <h4 className="text-sm font-bold uppercase tracking-wider text-[hsl(16,100%,60%)] mb-6">
-                Entreprise
+                {t("footer.sections.company")}
               </h4>
               <ul className="space-y-3.5">
                 {footerLinks.entreprise.map((link) => (
@@ -126,7 +128,7 @@ const Footer = () => {
                       to={link.path}
                       className="text-white/70 hover:text-white transition-colors inline-block hover:translate-x-1 duration-200"
                     >
-                      {link.label}
+                      {t(link.labelKey)}
                     </Link>
                   </li>
                 ))}
@@ -136,7 +138,7 @@ const Footer = () => {
             {/* ========== VENDEURS COLUMN ========== */}
             <div>
               <h4 className="text-sm font-bold uppercase tracking-wider text-[hsl(16,100%,60%)] mb-6">
-                Vendeurs
+                {t("footer.sections.sellers")}
               </h4>
               <ul className="space-y-3.5">
                 {footerLinks.vendeurs.map((link) => (
@@ -145,7 +147,7 @@ const Footer = () => {
                       to={link.path}
                       className="text-white/70 hover:text-white transition-colors inline-block hover:translate-x-1 duration-200"
                     >
-                      {link.label}
+                      {t(link.labelKey)}
                     </Link>
                   </li>
                 ))}
@@ -155,7 +157,7 @@ const Footer = () => {
             {/* ========== ACHETEURS COLUMN ========== */}
             <div>
               <h4 className="text-sm font-bold uppercase tracking-wider text-[hsl(16,100%,60%)] mb-6">
-                Acheteurs
+                {t("footer.sections.buyers")}
               </h4>
               <ul className="space-y-3.5">
                 {footerLinks.acheteurs.map((link) => (
@@ -164,7 +166,7 @@ const Footer = () => {
                       to={link.path}
                       className="text-white/70 hover:text-white transition-colors inline-block hover:translate-x-1 duration-200"
                     >
-                      {link.label}
+                      {t(link.labelKey)}
                     </Link>
                   </li>
                 ))}
@@ -174,7 +176,7 @@ const Footer = () => {
             {/* ========== CONFIANCE COLUMN ========== */}
             <div>
               <h4 className="text-sm font-bold uppercase tracking-wider text-[hsl(16,100%,60%)] mb-6">
-                Confiance
+                {t("footer.sections.trust")}
               </h4>
               <div className="bg-white/5 rounded-2xl p-6 border border-white/10">
                 <div className="flex gap-6">
@@ -182,19 +184,19 @@ const Footer = () => {
                   <div className="flex-1 space-y-4">
                     <div className="flex items-center gap-3 text-sm text-white/85">
                       <span className="text-2xl">🛡️</span>
-                      <span className="whitespace-nowrap">SSL & Cryptage</span>
+                      <span className="whitespace-nowrap">{t("footer.trust.ssl")}</span>
                     </div>
                     <div className="flex items-center gap-3 text-sm text-white/85">
                       <span className="text-2xl">⚡</span>
-                      <span className="whitespace-nowrap">Vente rapide 45j</span>
+                      <span className="whitespace-nowrap">{t("footer.trust.fastSale")}</span>
                     </div>
                     <div className="flex items-center gap-3 text-sm text-white/85">
                       <span className="text-2xl">✓</span>
-                      <span className="whitespace-nowrap">Certifié Pro BTP</span>
+                      <span className="whitespace-nowrap">{t("footer.trust.certified")}</span>
                     </div>
                     <div className="flex items-center gap-3 text-sm text-white/85">
                       <span className="text-2xl">🎯</span>
-                      <span className="whitespace-nowrap">Matching IA 95%</span>
+                      <span className="whitespace-nowrap">{t("footer.trust.matching")}</span>
                     </div>
                   </div>
 
@@ -204,11 +206,11 @@ const Footer = () => {
                       <div className="text-[hsl(16,100%,60%)] text-2xl font-bold mb-1">
                         4.9★
                       </div>
-                      (234 avis)
+                      (234 {t("footer.trust.reviews")})
                     </div>
                     <div className="text-sm text-white/70">
                       <div className="text-[hsl(16,100%,60%)] text-2xl font-bold mb-1">187</div>
-                      ventes 2024
+                      {t("footer.trust.sales")}
                     </div>
                   </div>
                 </div>
@@ -218,7 +220,7 @@ const Footer = () => {
             {/* ========== CONTACT COLUMN ========== */}
             <div>
               <h4 className="text-sm font-bold uppercase tracking-wider text-[hsl(16,100%,60%)] mb-6">
-                Contact
+                {t("footer.sections.contact")}
               </h4>
               <div className="space-y-4 mb-6">
                 <div className="flex items-center gap-3 text-white/75 hover:text-white transition-colors">
@@ -235,7 +237,7 @@ const Footer = () => {
                 </div>
               </div>
 
-              <div className="flex items-center gap-3">
+              <div className="flex items-center gap-3 mb-6">
                 {socialLinks.map((social) => (
                   <a
                     key={social.label}
@@ -249,6 +251,12 @@ const Footer = () => {
                   </a>
                 ))}
               </div>
+
+              {/* ========== LANGUAGE SELECTOR ========== */}
+              <div className="pt-4 border-t border-white/10">
+                <p className="text-xs text-white/50 mb-2 uppercase tracking-wider">{t("footer.language")}</p>
+                <LanguageSelector variant="footer" />
+              </div>
             </div>
           </div>
         </div>
@@ -258,7 +266,7 @@ const Footer = () => {
           <div className="container mx-auto px-4 py-8 max-w-[1200px]">
             <div className="text-center mb-4">
               <p className="text-white/60 text-sm">
-                © 2025 CessionBTP • Spécialiste #1 Cession Entreprises BTP France
+                {t("footer.copyright")}
               </p>
             </div>
             <div className="flex flex-wrap items-center justify-center gap-4 md:gap-8">
@@ -268,7 +276,7 @@ const Footer = () => {
                   to={link.path}
                   className="text-white/60 hover:text-white text-xs md:text-sm transition-colors"
                 >
-                  {link.label}
+                  {t(link.labelKey)}
                 </Link>
               ))}
             </div>
