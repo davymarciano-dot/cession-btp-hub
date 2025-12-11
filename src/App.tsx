@@ -20,6 +20,7 @@ import CrispWidget from "./components/chat/CrispWidget";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { WebVitals } from "@/components/WebVitals";
 import { RoutePreloader } from "@/components/RoutePreloader";
+import { LanguageProvider } from "@/contexts/LanguageContext";
 // import { PWAInstallPrompt } from "./components/PWAInstallPrompt";
 
 // Lazy load heavy pages
@@ -118,6 +119,7 @@ const App = () => {
   return (
   <BrowserRouter>
     <ErrorBoundary>
+      <LanguageProvider>
       <QueryClientProvider client={queryClient}>
       <TooltipProvider>
         {/* 📊 Monitoring des performances Web Vitals */}
@@ -230,6 +232,7 @@ const App = () => {
         )}
       </TooltipProvider>
     </QueryClientProvider>
+    </LanguageProvider>
     </ErrorBoundary>
   </BrowserRouter>
   );
