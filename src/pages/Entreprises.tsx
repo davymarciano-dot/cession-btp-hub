@@ -214,7 +214,7 @@ const Entreprises = () => {
   const regularListings = displayedAnnonces.slice(1);
 
   return (
-    <div className="min-h-screen bg-[#F8FAFC]">
+    <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
       <SEOHead page="entreprises" />
       <Header />
 
@@ -736,7 +736,7 @@ const Entreprises = () => {
                       </Badge>
                     </div>
                     
-                    <div className="bg-white rounded-3xl overflow-hidden shadow-md hover:shadow-lg transition-all duration-300 border-2 border-orange-200">
+                    <div className="bg-white rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300 border-2 border-orange-200">
                       <div className="md:flex">
                         {/* Image avec photo du métier */}
                         <div className="md:w-1/2 relative h-80 overflow-hidden group">
@@ -859,7 +859,7 @@ const Entreprises = () => {
                           animate={{ opacity: 1, y: 0 }}
                           transition={{ delay: 0.1 * idx }}
                           whileHover={{ y: -8, transition: { duration: 0.3 } }}
-                          className="bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-lg transition-all duration-300 group border border-gray-100"
+                          className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 group border border-gray-100"
                         >
                           {/* Image avec photo du métier */}
                           <div className="relative h-48 overflow-hidden">

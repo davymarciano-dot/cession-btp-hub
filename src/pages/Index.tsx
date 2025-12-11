@@ -221,7 +221,7 @@ const Home = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-[#F8FAFC]">
+    <div className="min-h-screen bg-background">
       <Helmet>
         <title>CessionBTP - Plateforme n°1 Cession & Reprise Entreprises BTP France | Vente en 45j</title>
         <meta name="description" content="1ère plateforme 100% BTP : vendez en 45 jours vs 18 mois. Matching IA, 2000+ repreneurs, 500+ transactions. Estimation IA gratuite. Success fee 2%." />
@@ -400,13 +400,13 @@ const Home = () => {
       </section>
 
       {/* Pourquoi CessionBTP */}
-      <section className="py-24 bg-[#F8FAFC]">
+      <section className="py-24 bg-background">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <Badge variant="outline" className="mb-4 px-4 py-2 text-sm font-semibold">
               Pourquoi nous choisir
             </Badge>
-            <h2 className="text-4xl md:text-5xl font-black mb-4 text-[#0033FF]">
+            <h2 className="text-4xl md:text-5xl font-black mb-4">
               La différence CessionBTP
             </h2>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
@@ -427,7 +427,7 @@ const Home = () => {
                 <div className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${feature.color} flex items-center justify-center mb-6 group-hover:scale-110 transition-transform`}>
                   <feature.icon className="w-8 h-8 text-white" />
                 </div>
-                <h3 className="text-2xl font-bold mb-3 text-[#0033FF]">{feature.title}</h3>
+                <h3 className="text-2xl font-bold mb-3">{feature.title}</h3>
                 <p className="text-muted-foreground leading-relaxed">{feature.description}</p>
               </motion.div>
             ))}
@@ -436,13 +436,13 @@ const Home = () => {
       </section>
 
       {/* Comment ça marche */}
-      <section className="py-24 bg-[#F8FAFC]">
+      <section className="py-24 bg-muted/30">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <Badge variant="outline" className="mb-4 px-4 py-2 text-sm font-semibold">
               Process simplifié
             </Badge>
-            <h2 className="text-4xl md:text-5xl font-black mb-4 text-[#0033FF]">
+            <h2 className="text-4xl md:text-5xl font-black mb-4">
               Comment ça marche ?
             </h2>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
@@ -475,7 +475,7 @@ const Home = () => {
                       <div className="flex items-start justify-between mb-3">
                         <div className="flex items-center gap-3">
                           <step.icon className="w-6 h-6 text-primary" />
-                          <h3 className="text-2xl font-bold text-[#0033FF]">{step.title}</h3>
+                          <h3 className="text-2xl font-bold">{step.title}</h3>
                         </div>
                         <Badge variant="secondary" className="font-semibold">
                           {step.duration}
@@ -503,13 +503,13 @@ const Home = () => {
       </section>
 
       {/* Opportunités à saisir */}
-      <section className="py-24 bg-[#F8FAFC]">
+      <section className="py-24 bg-background">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <Badge variant="outline" className="mb-4 px-4 py-2 text-sm font-semibold">
               Dernières opportunités
             </Badge>
-            <h2 className="text-4xl md:text-5xl font-black mb-4 text-[#0033FF]">
+            <h2 className="text-4xl md:text-5xl font-black mb-4">
               Entreprises BTP à reprendre
             </h2>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
@@ -559,7 +559,7 @@ const Home = () => {
                       </div>
 
                       {/* Title */}
-                      <h3 className="text-2xl font-bold mb-4 line-clamp-2 text-[#0033FF] group-hover:text-[#0033FF]/80 transition-colors">
+                      <h3 className="text-2xl font-bold mb-4 line-clamp-2 group-hover:text-primary transition-colors">
                         {annonce.raison_sociale || "Entreprise BTP"}
                       </h3>
 
@@ -590,12 +590,12 @@ const Home = () => {
 
                       {/* Price */}
                       <div className="pt-4 border-t border-border flex items-center justify-between">
-                        <div className="text-3xl font-black text-[#0033FF]">
+                        <div className="text-3xl font-black text-primary">
                           {annonce.prix_vente
                             ? `${parseInt(annonce.prix_vente).toLocaleString("fr-FR")} €`
                             : "Prix sur demande"}
                         </div>
-                        <ArrowRight className="w-6 h-6 text-[#0033FF] group-hover:translate-x-2 transition-transform" />
+                        <ArrowRight className="w-6 h-6 text-primary group-hover:translate-x-2 transition-transform" />
                       </div>
                     </div>
                   </motion.div>
