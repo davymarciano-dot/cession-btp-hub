@@ -53,6 +53,9 @@ const Header = () => {
           <Link to="/blog" className="text-gray-700 hover:text-primary transition-colors font-medium">
             {t("header.blog")}
           </Link>
+          <Link to="/contact" className="text-gray-700 hover:text-primary transition-colors font-medium">
+            {t("header.contact")}
+          </Link>
         </div>
 
         <div className="flex items-center gap-4">
@@ -134,6 +137,13 @@ const Header = () => {
               onClick={() => setIsMenuOpen(false)}
             >
               {t("header.blog")}
+            </Link>
+            <Link
+              to="/contact"
+              className="text-[#64748B] hover:text-primary transition-colors font-medium"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              {t("header.contact")}
             </Link>
             
             <div className="pt-4 border-t flex flex-col gap-2">
