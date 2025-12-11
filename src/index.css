@@ -14,6 +14,35 @@
   }
 }
 
+/* Header Navigation Link with animated underline */
+.header-nav-link {
+  font-weight: 500;
+  font-size: 14px;
+  color: #E2E8F0;
+  transition: color 0.2s ease;
+  position: relative;
+  text-decoration: none;
+}
+
+.header-nav-link:hover {
+  color: #FFFFFF;
+}
+
+.header-nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: #FFFFFF;
+  transition: width 0.3s ease;
+}
+
+.header-nav-link:hover::after {
+  width: 100%;
+}
+
 @layer base {
   :root {
     /* ===== Semantic Colors (HSL) ===== */
