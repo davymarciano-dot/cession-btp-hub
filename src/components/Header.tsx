@@ -2,7 +2,6 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
-import DarkModeToggle from "./DarkModeToggle";
 import { supabase } from "@/integrations/supabase/client";
 import { useQuery } from "@tanstack/react-query";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -70,8 +69,6 @@ const Header = () => {
         </div>
 
         <div className="flex items-center gap-4">
-          <DarkModeToggle />
-          
           {/* Desktop Auth Buttons */}
           <div className="hidden md:flex items-center gap-3">
             {session ? (
