@@ -439,7 +439,7 @@ const Home = () => {
       <section className="py-24 bg-[#F8FAFC]">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <Badge variant="outline" className="mb-4 px-4 py-2 text-sm font-semibold text-[#2563EB]">
+            <Badge variant="outline" className="mb-4 px-4 py-2 text-sm font-semibold text-orange-500 border-orange-500">
               Process simplifié
             </Badge>
             <h2 className="text-4xl md:text-5xl font-black mb-4 text-[#2563EB]">
@@ -506,7 +506,7 @@ const Home = () => {
       <section className="py-24 bg-[#F8FAFC]">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <Badge variant="outline" className="mb-4 px-4 py-2 text-sm font-semibold text-[#2563EB]">
+            <Badge variant="outline" className="mb-4 px-4 py-2 text-sm font-semibold text-orange-500 border-orange-500">
               Dernières opportunités
             </Badge>
             <h2 className="text-4xl md:text-5xl font-black mb-4 text-[#2563EB]">
