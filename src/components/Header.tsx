@@ -38,22 +38,22 @@ const Header = () => {
 
         {/* Desktop Navigation */}
         <div className="hidden md:flex items-center gap-8">
-          <Link to="/vendre" className="text-gray-700 hover:text-primary transition-colors font-medium">
+          <Link to="/vendre" className="text-[#2563EB] hover:text-primary/80 transition-colors font-medium">
             {t("header.sell")}
           </Link>
-          <Link to="/entreprises" className="text-gray-700 hover:text-primary transition-colors font-medium">
+          <Link to="/entreprises" className="text-[#2563EB] hover:text-primary/80 transition-colors font-medium">
             {t("header.companies")}
           </Link>
-          <Link to="/estimer" className="text-gray-700 hover:text-primary transition-colors font-medium">
+          <Link to="/estimer" className="text-[#2563EB] hover:text-primary/80 transition-colors font-medium">
             {t("header.estimate")}
           </Link>
-          <Link to="/tarifs" className="text-gray-700 hover:text-primary transition-colors font-medium">
+          <Link to="/tarifs" className="text-[#2563EB] hover:text-primary/80 transition-colors font-medium">
             {t("header.pricing")}
           </Link>
-          <Link to="/blog" className="text-gray-700 hover:text-primary transition-colors font-medium">
+          <Link to="/blog" className="text-[#2563EB] hover:text-primary/80 transition-colors font-medium">
             {t("header.blog")}
           </Link>
-          <Link to="/contact" className="text-gray-700 hover:text-primary transition-colors font-medium">
+          <Link to="/contact" className="text-[#2563EB] hover:text-primary/80 transition-colors font-medium">
             {t("header.contact")}
           </Link>
         </div>
@@ -65,19 +65,19 @@ const Header = () => {
           <div className="hidden md:flex items-center gap-3">
             {session ? (
               <>
-                <Button variant="ghost" asChild className="text-gray-700 hover:text-primary">
+                <Button variant="ghost" asChild className="text-[#2563EB] hover:text-primary/80">
                   <Link to="/dashboard">{t("header.dashboard")}</Link>
                 </Button>
-                <Button variant="ghost" asChild className="text-gray-700 hover:text-primary">
+                <Button variant="ghost" asChild className="text-[#2563EB] hover:text-primary/80">
                   <Link to="/messages">{t("header.messages")}</Link>
                 </Button>
-                <Button variant="ghost" onClick={handleLogout} className="text-gray-700 hover:text-primary">
+                <Button variant="ghost" onClick={handleLogout} className="text-[#2563EB] hover:text-primary/80">
                   {t("header.logout")}
                 </Button>
               </>
             ) : (
               <>
-                <Button variant="ghost" asChild className="text-gray-700 hover:text-primary font-medium">
+                <Button variant="ghost" asChild className="text-[#2563EB] hover:text-primary/80 font-medium">
                   <Link to="/auth">{t("header.login")}</Link>
                 </Button>
                 <Button asChild className="bg-primary hover:bg-primary/90 text-white rounded-xl px-6 font-medium shadow-md">
@@ -105,42 +105,42 @@ const Header = () => {
           <nav className="container mx-auto px-4 py-4 flex flex-col gap-4">
             <Link
               to="/vendre"
-              className="text-[#64748B] hover:text-primary transition-colors font-medium"
+              className="text-[#2563EB] hover:text-primary/80 transition-colors font-medium"
               onClick={() => setIsMenuOpen(false)}
             >
               {t("header.sell")}
             </Link>
             <Link
               to="/entreprises"
-              className="text-[#64748B] hover:text-primary transition-colors font-medium"
+              className="text-[#2563EB] hover:text-primary/80 transition-colors font-medium"
               onClick={() => setIsMenuOpen(false)}
             >
               {t("header.companies")}
             </Link>
             <Link
               to="/estimer"
-              className="text-[#64748B] hover:text-primary transition-colors font-medium"
+              className="text-[#2563EB] hover:text-primary/80 transition-colors font-medium"
               onClick={() => setIsMenuOpen(false)}
             >
               {t("header.estimate")}
             </Link>
             <Link
               to="/tarifs"
-              className="text-[#64748B] hover:text-primary transition-colors font-medium"
+              className="text-[#2563EB] hover:text-primary/80 transition-colors font-medium"
               onClick={() => setIsMenuOpen(false)}
             >
               {t("header.pricing")}
             </Link>
             <Link
               to="/blog"
-              className="text-[#64748B] hover:text-primary transition-colors font-medium"
+              className="text-[#2563EB] hover:text-primary/80 transition-colors font-medium"
               onClick={() => setIsMenuOpen(false)}
             >
               {t("header.blog")}
             </Link>
             <Link
               to="/contact"
-              className="text-[#64748B] hover:text-primary transition-colors font-medium"
+              className="text-[#2563EB] hover:text-primary/80 transition-colors font-medium"
               onClick={() => setIsMenuOpen(false)}
             >
               {t("header.contact")}
