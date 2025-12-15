@@ -27,8 +27,8 @@ const Footer = () => {
   ];
 
   const bottomLinks = [
-    { label: language === 'fr' ? "Confidentialité" : "Privacy", path: "/mentions-legales" },
-    { label: "Cookies", path: "/mentions-legales" },
+    { label: language === 'fr' ? "Confidentialité" : "Privacy", path: "/confidentialite" },
+    { label: "Cookies", path: "/cookies" },
     { label: language === 'fr' ? "Plan du site" : "Sitemap", path: "/sitemap" },
   ];
 
