@@ -168,7 +168,7 @@ Coefficient : 0,6x (bon secteur)
               <ul class="list-disc pl-6 space-y-1 text-sm">
                 <li>Audience : 100% BTP qualifiée</li>
                 <li>Délai moyen : 45 jours</li>
-                <li>Commission : 2% au succès</li>
+                <li>Commission : 3% à 8% au succès</li>
                 <li>Valorisation incluse</li>
               </ul>
             </div>

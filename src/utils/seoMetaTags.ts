@@ -12,14 +12,14 @@ export const generateMetaTags = (page: string, params?: Record<string, string>):
   const metaTags: Record<string, MetaTags> = {
     home: {
       title: "CessionBTP - Plateforme n°1 de Cession d'Entreprises BTP en France",
-      description: "Vendez ou achetez votre entreprise BTP en toute sécurité. Plus de 500 sociétés disponibles. Success Fee 2%, Matching IA, accompagnement personnalisé. Estimation gratuite en 48h.",
+      description: "Vendez ou achetez votre entreprise BTP en toute sécurité. Plus de 500 sociétés disponibles. Success Fee à partir de 3%, Matching IA, accompagnement personnalisé. Estimation gratuite en 48h.",
       keywords: "cession entreprise btp, vendre société construction, acheter entreprise bâtiment, reprise btp, transmission entreprise",
       url: baseUrl,
     },
     
     vendre: {
       title: "Vendre son Entreprise BTP - Estimation Gratuite en 48h | CessionBTP",
-      description: "Vendez votre entreprise BTP rapidement et au meilleur prix. Estimation gratuite, matching IA avec acheteurs qualifiés, Success Fee 2%. Accompagnement personnalisé.",
+      description: "Vendez votre entreprise BTP rapidement et au meilleur prix. Estimation gratuite, matching IA avec acheteurs qualifiés, Success Fee à partir de 3%. Accompagnement personnalisé.",
       keywords: "vendre entreprise btp, céder société construction, vente fonds commerce bâtiment, transmission entreprise",
       url: `${baseUrl}/vendre`,
     },
@@ -47,7 +47,7 @@ export const generateMetaTags = (page: string, params?: Record<string, string>):
     
     tarifs: {
       title: "Nos Tarifs - Formules d'Accompagnement à la Cession | CessionBTP",
-      description: "Choisissez la formule adaptée à votre projet : Success Fee 2%, Pack Essentiel 4900€, ou Pack Premium 9900€. Transparence garantie.",
+      description: "Choisissez la formule adaptée à votre projet : Success Fee à partir de 3%, Pack Essentiel 4900€, ou Pack Premium 9900€. Transparence garantie.",
       keywords: "tarifs accompagnement cession, prix transmission entreprise btp, formules vente société",
       url: `${baseUrl}/tarifs`,
     },

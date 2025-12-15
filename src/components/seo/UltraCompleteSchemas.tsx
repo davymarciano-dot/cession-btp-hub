@@ -335,7 +335,7 @@ export const UltraCompleteSchemas = ({ page, annonceData, articleData }: UltraCo
         "name": "Quels sont les frais de transaction ?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "CessionBTP applique une success fee de seulement 2% du montant de la transaction, contre 5-10% chez les cabinets traditionnels. Pas de frais cachés."
+          "text": "CessionBTP applique une success fee de 3% à 8% selon le montant de la transaction (barème progressif), contre 5-10% chez les cabinets traditionnels. Pas de frais cachés."
         }
       },
       {
