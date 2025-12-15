@@ -84,7 +84,7 @@ const NDADialog = ({ open, onAccept, onCancel, buyerName, listingTitle }: NDADia
               <p className="mb-2">L'Acheteur s'engage à :</p>
               <ul className="list-disc pl-5 space-y-1">
                 <li>Informer CessionBTP de toute offre d'achat formulée</li>
-                <li>Verser une commission de 2% du prix de vente en cas de transaction réussie</li>
+                <li>Verser une commission de 3% à 8% du prix de vente selon le barème en vigueur en cas de transaction réussie</li>
                 <li>Cette commission est due même si la transaction se finalise après la fin de cet accord</li>
                 <li>Le paiement intervient au moment de la signature de l'acte de cession</li>
               </ul>

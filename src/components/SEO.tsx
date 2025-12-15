@@ -14,7 +14,7 @@ interface SEOProps {
 
 export default function SEO({
   title = "CessionBTP - Achat et Vente d'Entreprises BTP",
-  description = "Plateforme n°1 pour acheter et vendre des entreprises du BTP en France. Plus de 500 sociétés de construction à reprendre. Success Fee 2%, Matching IA, 543 entreprises vendues.",
+  description = "Plateforme n°1 pour acheter et vendre des entreprises du BTP en France. Plus de 500 sociétés de construction à reprendre. Success Fee à partir de 3%, Matching IA, 543 entreprises vendues.",
   image = "/logo-hd.png",
   url = "https://cessionbtp.fr",
   type = "website",

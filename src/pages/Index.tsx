@@ -151,7 +151,7 @@ const Home = () => {
     },
     {
       icon: Award,
-      title: "2% Success fee",
+      title: "3-8% Success fee",
       description: "You only pay on success. Our interests are perfectly aligned.",
       color: "from-green-500 to-emerald-500",
     },
@@ -176,7 +176,7 @@ const Home = () => {
     },
     {
       icon: Award,
-      title: "Success fee 2%",
+      title: "Success fee 3-8%",
       description: "Vous ne payez qu'en cas de succès. Nos intérêts sont parfaitement alignés.",
       color: "from-green-500 to-emerald-500",
     },

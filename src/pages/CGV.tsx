@@ -45,9 +45,19 @@ const CGV = () => {
                 <h2 className="text-2xl font-bold mb-4">3. Tarifs et paiement</h2>
                 
                 <h3 className="text-xl font-semibold mb-3 mt-6">3.1 Formule Success Fee</h3>
-                <p className="text-muted-foreground">
+                <p className="text-muted-foreground mb-4">
                   La formule Success Fee est gratuite jusqu'à la vente effective de l'entreprise. En cas de 
-                  transaction réussie, une commission de 3% du prix de vente est facturée au vendeur.
+                  transaction réussie, une commission est facturée au vendeur selon le barème progressif suivant :
+                </p>
+                <ul className="list-disc pl-6 text-muted-foreground space-y-2 mb-4">
+                  <li><strong>Moins de 300 000€ :</strong> 8% du prix de vente</li>
+                  <li><strong>De 300 000€ à 500 000€ :</strong> 6% du prix de vente</li>
+                  <li><strong>De 500 000€ à 1 000 000€ :</strong> 5% du prix de vente</li>
+                  <li><strong>De 1 000 000€ à 2 000 000€ :</strong> 4% du prix de vente</li>
+                  <li><strong>Plus de 2 000 000€ :</strong> 3% du prix de vente</li>
+                </ul>
+                <p className="text-muted-foreground font-semibold">
+                  Commission minimum : 8 000€ HT
                 </p>
 
                 <h3 className="text-xl font-semibold mb-3 mt-6">3.2 Formules d'abonnement</h3>

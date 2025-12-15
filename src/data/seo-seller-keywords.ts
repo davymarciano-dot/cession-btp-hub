@@ -21,10 +21,10 @@ export const sellerKeywords: SellerKeyword[] = [
     mainKeyword: 'vendre mon entreprise btp',
     relatedKeywords: ['vendre entreprise batiment', 'cession entreprise btp', 'vente société btp'],
     heroTitle: 'Vendez votre entreprise BTP en 45 jours',
-    heroDescription: 'La plateforme n°1 pour vendre votre entreprise de bâtiment rapidement et au meilleur prix. Success fee 2% uniquement si vente réussie.',
+    heroDescription: 'La plateforme n°1 pour vendre votre entreprise de bâtiment rapidement et au meilleur prix. Success fee à partir de 3% uniquement si vente réussie.',
     benefits: [
       'Vente en 45 jours en moyenne (record: 12 jours)',
-      'Commission 2% seulement à la vente',
+      'Commission à partir de 3% à la vente',
       'Acheteurs vérifiés et qualifiés',
       'Estimation gratuite en 48h',
       'Accompagnement juridique complet',
@@ -43,7 +43,7 @@ export const sellerKeywords: SellerKeyword[] = [
       },
       {
         question: 'Quels sont vos frais pour vendre mon entreprise ?',
-        answer: 'Success fee de 2% uniquement en cas de vente réussie. Aucun frais d\'inscription, d\'estimation ou de publication d\'annonce.'
+        answer: 'Success fee de 3% à 8% selon le montant, uniquement en cas de vente réussie. Aucun frais d\'inscription, d\'estimation ou de publication d\'annonce.'
       },
       {
         question: 'Comment est calculée la valeur de mon entreprise BTP ?',
@@ -86,7 +86,7 @@ export const sellerKeywords: SellerKeyword[] = [
       },
       {
         question: 'L\'estimation est-elle vraiment gratuite ?',
-        answer: 'Oui, 100% gratuite et sans engagement. Aucune carte bancaire requise. Nous sommes rémunérés uniquement si vous vendez via notre plateforme (2% de success fee).'
+        answer: 'Oui, 100% gratuite et sans engagement. Aucune carte bancaire requise. Nous sommes rémunérés uniquement si vous vendez via notre plateforme (3% à 8% de success fee selon montant).'
       },
       {
         question: 'Quelle est la précision de l\'estimation ?',

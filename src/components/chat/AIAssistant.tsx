@@ -46,7 +46,7 @@ const AIAssistant = () => {
     // Prix/Tarifs
     if (msg.includes('prix') || msg.includes('coût') || msg.includes('tarif') || msg.includes('commission')) {
       return {
-        text: "Notre modèle est simple : GRATUIT jusqu'à la vente, puis seulement 2% de commission (vs 5-10% ailleurs). L'estimation et la mise en ligne sont 100% gratuites.",
+        text: "Notre modèle est simple : GRATUIT jusqu'à la vente, puis seulement 3% à 8% de commission selon le montant (vs 5-10% ailleurs). L'estimation et la mise en ligne sont 100% gratuites.",
         actions: [
           { label: 'Voir les tarifs détaillés', link: '/tarifs' }
         ]

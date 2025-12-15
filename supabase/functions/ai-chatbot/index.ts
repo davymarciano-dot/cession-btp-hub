@@ -172,7 +172,7 @@ Tu utilises des émojis de manière appropriée. Tu tutoyez l'utilisateur.`;
     'vendre': `${basePrompt}
 L'utilisateur veut vendre son entreprise BTP. Guide-le vers l'estimation gratuite.
 Demande son secteur d'activité et encourage-le à remplir le formulaire.
-Mentionne que la vente prend en moyenne 45 jours et que les frais sont de 2% au succès.`,
+Mentionne que la vente prend en moyenne 45 jours et que les frais sont de 3% à 8% au succès selon le montant de la transaction.`,
 
     'acheter': `${basePrompt}
 L'utilisateur cherche à reprendre une entreprise BTP. Aide-le à définir ses critères.
