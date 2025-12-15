@@ -24,19 +24,20 @@ const MentionsLegales = () => {
                   Le site CessionBTP.fr est édité par :
                 </p>
                 <ul className="list-disc pl-6 text-muted-foreground space-y-2">
-                  <li><strong>Raison sociale :</strong> CessionBTP SAS</li>
-                  <li><strong>Capital social :</strong> 50 000 €</li>
-                  <li><strong>Siège social :</strong> 123 Avenue des Champs-Élysées, 75008 Paris</li>
-                  <li><strong>SIRET :</strong> 123 456 789 00012</li>
+                  <li><strong>Raison sociale :</strong> VERIFDECENNALE SAS (marque CessionBTP)</li>
+                  <li><strong>Capital social :</strong> 770 €</li>
+                  <li><strong>Siège social :</strong> 28 rue Georges Ferrand, 94380 Bonneuil-sur-Marne</li>
+                  <li><strong>SIRET :</strong> 993 536 358 00019</li>
+                  <li><strong>RCS :</strong> Créteil</li>
+                  <li><strong>N° TVA intracommunautaire :</strong> FR70993536358</li>
                   <li><strong>Email :</strong> contact@cessionbtp.fr</li>
-                  <li><strong>Téléphone :</strong> 01 23 45 67 89</li>
                 </ul>
               </section>
 
               <section>
                 <h2 className="text-2xl font-bold mb-4">2. Directeur de la publication</h2>
                 <p className="text-muted-foreground">
-                  Le directeur de la publication est M. Jean Dupont, en qualité de Président de CessionBTP SAS.
+                  Le directeur de la publication est M. Davy Marciano, en qualité de Président de VERIFDECENNALE SAS.
                 </p>
               </section>
 
