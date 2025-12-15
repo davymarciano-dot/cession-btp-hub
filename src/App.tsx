@@ -74,6 +74,9 @@ const CommentCaMarche = lazy(() => import("./pages/CommentCaMarche"));
 const Contact = lazy(() => import("./pages/Contact"));
 const MentionsLegales = lazy(() => import("./pages/MentionsLegales"));
 const CGV = lazy(() => import("./pages/CGV"));
+const Confidentialite = lazy(() => import("./pages/Confidentialite"));
+const Cookies = lazy(() => import("./pages/Cookies"));
+const BuyerDashboard = lazy(() => import("./pages/dashboard/BuyerDashboard"));
 const NotreEquipe = lazy(() => import("./pages/NotreEquipe"));
 const SuccessStories = lazy(() => import("./pages/SuccessStories"));
 const MatchingIA = lazy(() => import("./pages/MatchingIA"));
@@ -167,6 +170,9 @@ const App = () => {
             <Route path="/lexique-btp" element={<LexiqueBTP />} />
           <Route path="/mentions-legales" element={<MentionsLegales />} />
           <Route path="/cgv" element={<CGV />} />
+          <Route path="/confidentialite" element={<Confidentialite />} />
+          <Route path="/cookies" element={<Cookies />} />
+          <Route path="/dashboard-acheteur" element={<BuyerDashboard />} />
           <Route path="/sitemap" element={<Sitemap />} />
           <Route path="/launch-checklist" element={<LaunchChecklist />} />
           <Route path="/seo-stats" element={<SeoStats />} />
