@@ -1,14 +1,19 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Heart, Search, Bell, Eye } from "lucide-react";
+import { Heart, Search, Eye, Loader2 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { toast } from "sonner";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 
 const BuyerDashboard = () => {
+  const navigate = useNavigate();
+  const [user, setUser] = useState<any>(null);
   const [favorites, setFavorites] = useState<any[]>([]);
   const [listings, setListings] = useState<any[]>([]);
   const [filters, setFilters] = useState({
@@ -20,14 +25,33 @@ const BuyerDashboard = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetchFavorites();
-    fetchListings();
+    checkAuth();
   }, []);
+
+  useEffect(() => {
+    if (user) {
+      fetchFavorites();
+      fetchListings();
+    }
+  }, [user]);
+
+  const checkAuth = async () => {
+    const { data: { user } } = await supabase.auth.getUser();
+    
+    if (!user) {
+      toast.error("Accès refusé", {
+        description: "Vous devez être connecté pour accéder au dashboard"
+      });
+      navigate("/auth");
+      return;
+    }
+    
+    setUser(user);
+  };
 
   const fetchFavorites = async () => {
     try {
-      const { data: { session } } = await supabase.auth.getSession();
-      if (!session) return;
+      if (!user) return;
 
       const { data, error } = await supabase
         .from("favorites")
@@ -35,7 +59,7 @@ const BuyerDashboard = () => {
           *,
           annonces (*)
         `)
-        .eq("user_id", session.user.id);
+        .eq("user_id", user.id);
 
       if (error) throw error;
       setFavorites(data || []);
@@ -66,8 +90,7 @@ const BuyerDashboard = () => {
 
   const toggleFavorite = async (listingId: string) => {
     try {
-      const { data: { session } } = await supabase.auth.getSession();
-      if (!session) return;
+      if (!user) return;
 
       const isFavorite = favorites.some(f => f.listing_id === listingId);
 
@@ -75,7 +98,7 @@ const BuyerDashboard = () => {
         const { error } = await supabase
           .from("favorites")
           .delete()
-          .eq("user_id", session.user.id)
+          .eq("user_id", user.id)
           .eq("listing_id", listingId);
 
         if (error) throw error;
@@ -84,7 +107,7 @@ const BuyerDashboard = () => {
         const { error } = await supabase
           .from("favorites")
           .insert({
-            user_id: session.user.id,
+            user_id: user.id,
             listing_id: listingId
           });
 
@@ -100,16 +123,26 @@ const BuyerDashboard = () => {
   };
 
   if (loading) {
-    return <div className="min-h-screen flex items-center justify-center">Chargement...</div>;
+    return (
+      <div className="min-h-screen bg-background">
+        <Header />
+        <div className="flex items-center justify-center min-h-[60vh]">
+          <Loader2 className="w-8 h-8 animate-spin text-primary" />
+        </div>
+        <Footer />
+      </div>
+    );
   }
 
   return (
-    <div className="min-h-screen bg-muted/30">
-      <div className="max-w-7xl mx-auto p-6 space-y-6">
-        <div>
-          <h1 className="text-3xl font-bold">Dashboard Acheteur</h1>
-          <p className="text-muted-foreground">Trouvez l'entreprise de vos rêves</p>
-        </div>
+    <div className="min-h-screen bg-background">
+      <Header />
+      <div className="min-h-screen bg-muted/30">
+        <div className="max-w-7xl mx-auto p-6 space-y-6">
+          <div>
+            <h1 className="text-3xl font-bold">Dashboard Acheteur</h1>
+            <p className="text-muted-foreground">Trouvez l'entreprise de vos rêves</p>
+          </div>
 
         {/* Search Filters */}
         <Card>
@@ -250,7 +283,9 @@ const BuyerDashboard = () => {
             </div>
           </CardContent>
         </Card>
+        </div>
       </div>
+      <Footer />
     </div>
   );
 };
