@@ -128,24 +128,22 @@ const Header = () => {
                 >
                   <Link to="/auth">{t("header.login")}</Link>
                 </Button>
-                <Button 
-                  asChild 
-                  className="text-white rounded-xl px-6 font-medium transition-all duration-300"
+                <Link 
+                  to="/auth"
+                  className="inline-flex items-center justify-center rounded-xl px-6 py-2 font-medium text-white transition-all duration-300 hover:scale-105"
                   style={{
                     background: 'linear-gradient(135deg, #2563EB, #3B82F6)',
                     boxShadow: '0 4px 15px rgba(37,99,235,0.4)'
                   }}
                   onMouseEnter={(e) => {
-                    e.currentTarget.style.transform = 'scale(1.05)';
                     e.currentTarget.style.boxShadow = '0 6px 20px rgba(37,99,235,0.6)';
                   }}
                   onMouseLeave={(e) => {
-                    e.currentTarget.style.transform = 'scale(1)';
                     e.currentTarget.style.boxShadow = '0 4px 15px rgba(37,99,235,0.4)';
                   }}
                 >
-                  <Link to="/auth">{t("header.createAccount")}</Link>
-                </Button>
+                  {t("header.createAccount")}
+                </Link>
               </>
             )}
           </div>
@@ -227,14 +225,13 @@ const Header = () => {
                       {t("header.login")}
                     </Link>
                   </Button>
-                  <Button 
-                    asChild 
-                    className="w-full bg-gradient-to-r from-[#2563EB] to-[#3B82F6] shadow-lg"
+                  <Link 
+                    to="/auth" 
+                    onClick={() => setIsMenuOpen(false)}
+                    className="w-full inline-flex items-center justify-center rounded-md px-4 py-2 font-medium text-white bg-gradient-to-r from-[#2563EB] to-[#3B82F6] shadow-lg"
                   >
-                    <Link to="/auth" onClick={() => setIsMenuOpen(false)}>
-                      {t("header.createAccount")}
-                    </Link>
-                  </Button>
+                    {t("header.createAccount")}
+                  </Link>
                 </>
               )}
             </div>
