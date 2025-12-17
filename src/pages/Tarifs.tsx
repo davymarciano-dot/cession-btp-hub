@@ -25,15 +25,21 @@ const Tarifs = () => {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-            {/* GRATUIT */}
-            <div className="h-full flex flex-col border-2 border-slate-200 hover:border-blue-600 hover:shadow-xl transition-all rounded-2xl p-8 bg-white relative">
-              <h3 className="text-2xl font-bold text-blue-600 mb-2">Gratuit</h3>
-              <div className="mb-6">
-                <span className="text-5xl font-black text-blue-600">0€</span>
+          <div className="max-w-lg mx-auto">
+            {/* ACCÈS ACHETEUR - GRATUIT */}
+            <div className="h-full flex flex-col border-2 border-blue-500 hover:border-blue-600 hover:shadow-2xl transition-all rounded-2xl p-8 bg-white relative">
+              <div className="absolute -top-3 left-1/2 -translate-x-1/2">
+                <span className="bg-gradient-to-r from-blue-500 to-blue-600 text-white px-4 py-1.5 rounded-full text-xs font-bold shadow-lg">
+                  ✨ ACCÈS COMPLET
+                </span>
+              </div>
+
+              <h3 className="text-2xl font-bold text-blue-600 mb-2">Accès Acheteur</h3>
+              <div className="mb-4">
+                <span className="text-5xl font-black text-blue-600">Gratuit</span>
               </div>
               <p className="text-sm text-slate-600 mb-6">
-                Explorez les opportunités BTP et testez la plateforme
+                Accédez à toutes les opportunités BTP
               </p>
 
               <div className="space-y-3 mb-6 flex-1">
@@ -59,101 +65,34 @@ const Tarifs = () => {
                 </div>
                 <div className="flex items-start gap-2">
                   <Check className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
-                  <span className="text-slate-700">Demandes de mise en relation (3/mois max)</span>
+                  <span className="text-slate-700">Demandes de mise en relation illimitées</span>
                 </div>
                 <div className="flex items-start gap-2">
                   <Check className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
-                  <span className="text-slate-700">Traitement sous 2-3 jours</span>
+                  <span className="text-slate-700">Traitement prioritaire (24h)</span>
                 </div>
                 <div className="flex items-start gap-2">
                   <Check className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
-                  <span className="text-slate-700">Alertes email basiques</span>
-                </div>
-              </div>
-
-              <div className="bg-amber-50 border border-amber-200 rounded-lg p-4 mb-6">
-                <p className="text-sm text-amber-800">
-                  <strong>Note importante :</strong> Les mises en relation sont contrôlées par CessionBTP pour protéger vendeurs et garantir qualité. Pas de contact direct.
-                </p>
-              </div>
-
-              <Button className="w-full bg-orange-500 hover:bg-blue-600 transition-colors">
-                S'inscrire gratuitement
-              </Button>
-            </div>
-
-            {/* PREMIUM - ⭐ RECOMMANDÉ */}
-            <div className="h-full flex flex-col border-2 border-blue-500 hover:border-blue-600 hover:shadow-2xl transition-all rounded-2xl p-8 bg-white relative">
-              <div className="absolute -top-3 left-1/2 -translate-x-1/2">
-                <span className="bg-gradient-to-r from-blue-500 to-blue-600 text-white px-4 py-1.5 rounded-full text-xs font-bold shadow-lg">
-                  ⭐ RECOMMANDÉ
-                </span>
-              </div>
-
-              <h3 className="text-2xl font-bold text-blue-600 mb-2">Premium</h3>
-              <div className="mb-6">
-                <span className="text-5xl font-black text-blue-600">199€</span>
-                <span className="text-slate-600 text-sm ml-2">paiement unique</span>
-              </div>
-              <p className="text-sm text-slate-600 mb-6">
-                Accédez en priorité et soyez pris au sérieux par les vendeurs
-              </p>
-
-              <div className="space-y-3 mb-6 flex-1">
-                <div className="flex items-start gap-2">
-                  <Check className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
-                  <span className="text-slate-900 font-semibold">Tout du plan Gratuit, plus :</span>
+                  <span className="text-slate-700">Badge "Acheteur Vérifié"</span>
                 </div>
                 <div className="flex items-start gap-2">
                   <Check className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
-                  <span className="text-slate-900 font-semibold">Mises en relation ILLIMITÉES</span>
+                  <span className="text-slate-700">Matching IA personnalisé automatique</span>
                 </div>
                 <div className="flex items-start gap-2">
                   <Check className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
-                  <span className="text-slate-900 font-semibold">Traitement PRIORITAIRE (24h au lieu de 3 jours)</span>
-                </div>
-                <div className="flex items-start gap-2">
-                  <Check className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
-                  <span className="text-slate-900">Badge "Acheteur Vérifié" (vendeurs vous privilégient)</span>
-                </div>
-                <div className="flex items-start gap-2">
-                  <Check className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
-                  <span className="text-slate-900">Accès annonces 48h AVANT public</span>
-                </div>
-                <div className="flex items-start gap-2">
-                  <Check className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
-                  <span className="text-slate-900">Matching IA personnalisé automatique</span>
-                </div>
-                <div className="flex items-start gap-2">
-                  <Check className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
-                  <span className="text-slate-900">Dossier financement pré-qualifié (qualification accélérée)</span>
-                </div>
-                <div className="flex items-start gap-2">
-                  <Check className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
-                  <span className="text-slate-900">Consultation expert 30min</span>
-                </div>
-                <div className="flex items-start gap-2">
-                  <Check className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
-                  <span className="text-slate-900">Support prioritaire téléphone/email</span>
-                </div>
-                <div className="flex items-start gap-2">
-                  <Check className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
-                  <span className="text-slate-900">Statistiques marché BTP exclusives</span>
-                </div>
-                <div className="flex items-start gap-2">
-                  <Check className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
-                  <span className="text-slate-900">Groupe privé acheteurs BTP</span>
+                  <span className="text-slate-700">Alertes email personnalisées</span>
                 </div>
               </div>
 
               <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6">
                 <p className="text-sm text-blue-800">
-                  <strong>Les vendeurs répondent 3× plus vite aux profils Premium vérifiés</strong>
+                  <strong>Note :</strong> Les mises en relation sont contrôlées par CessionBTP pour protéger vendeurs et acheteurs. Pas de contact direct.
                 </p>
               </div>
 
-              <Button className="w-full bg-blue-600 hover:bg-blue-700 transition-colors">
-                Passer Premium - 199€
+              <Button className="w-full bg-orange-500 hover:bg-orange-600 transition-colors text-white font-semibold">
+                S'inscrire gratuitement
               </Button>
             </div>
           </div>
