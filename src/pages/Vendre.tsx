@@ -215,7 +215,7 @@ const Vendre = () => {
     // Section 7
     formuleAbonnement: "essentiel",
     montantAbonnement: 290,
-    stripePriceId: "price_1SS7lN2ItaOC3ukRjM2C8ZTd",
+    stripePriceId: "price_1Sf8UlR9dt3iHhIfJsIEjS2w",
     accepteCGU: false,
     certifieExactitude: false,
   });
@@ -1270,7 +1270,7 @@ const Vendre = () => {
                         onClick={() => {
                           handleInputChange("formuleAbonnement", "essentiel");
                           handleInputChange("montantAbonnement", 290);
-                          handleInputChange("stripePriceId", "price_1SS7lN2ItaOC3ukRjM2C8ZTd");
+                          handleInputChange("stripePriceId", "price_1Sf8UlR9dt3iHhIfJsIEjS2w");
                         }}
                         className={`relative p-6 rounded-2xl border-2 transition-all duration-200 text-left ${
                           formData.formuleAbonnement === "essentiel"
@@ -1338,7 +1338,7 @@ const Vendre = () => {
                         onClick={() => {
                           handleInputChange("formuleAbonnement", "premium");
                           handleInputChange("montantAbonnement", 490);
-                          handleInputChange("stripePriceId", "price_premium_example");
+                          handleInputChange("stripePriceId", "price_1Sf8g6R9dt3iHhIf5X70GRVd");
                         }}
                         className={`relative p-6 rounded-2xl border-2 transition-all duration-200 text-left ${
                           formData.formuleAbonnement === "premium"

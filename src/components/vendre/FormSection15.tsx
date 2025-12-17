@@ -11,9 +11,9 @@ interface FormSection15Props {
 
 // Stripe Price IDs
 const STRIPE_PRICES = {
-  essentiel: "price_1SS7lN2ItaOC3ukRjM2C8ZTd",
-  prime: "price_1SS7lf2ItaOC3ukRyxbpaDvi",
-  exclusif: "price_1SS7lt2ItaOC3ukRtBT2yFtM",
+  essentiel: "price_1Sf8UlR9dt3iHhIfJsIEjS2w",
+  prime: "price_1Sf8g6R9dt3iHhIf5X70GRVd",
+  exclusif: "price_1Sf8h4R9dt3iHhIfEKJkGT3q",
 };
 
 const FormSection15 = ({ formData, handleInputChange }: FormSection15Props) => {
