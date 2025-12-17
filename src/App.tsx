@@ -7,7 +7,6 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { lazy, Suspense, useEffect } from "react";
 import { Skeleton } from "@/components/ui/skeleton";
 import AIAssistant from "@/components/chat/AIAssistant";
-import { ThirdPartyChat } from "@/components/chat/ThirdPartyChat";
 import ProactiveChat from "./components/ProactiveChat";
 import CartTrackingService from "./services/cartTrackingService";
 import Index from "./pages/Index";
@@ -15,7 +14,6 @@ import NotFound from "./pages/NotFound";
 import { queryClient, prefetchCriticalData } from "./lib/queryClient";
 import TanStackCacheDebugger from "./components/debug/TanStackCacheDebugger";
 import Analytics from "./components/Analytics";
-import CrispWidget from "./components/chat/CrispWidget";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { WebVitals } from "@/components/WebVitals";
 import { RoutePreloader } from "@/components/RoutePreloader";
@@ -133,7 +131,6 @@ const App = () => {
         <Toaster />
         <Sonner />
         <Analytics />
-        <CrispWidget />
         {/* <PWAInstallPrompt /> */}
         <Suspense fallback={<PageLoader />}>
           <ProactiveChat />
@@ -221,7 +218,6 @@ const App = () => {
           </Routes>
         </Suspense>
         <AIAssistant />
-        <ThirdPartyChat />
         
         {/* Debug tools - Dev only */}
         {import.meta.env.DEV && (
